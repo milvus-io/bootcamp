@@ -1,10 +1,10 @@
 - [硬件推荐配置](#硬件推荐配置)
 - [测试数据准备](#测试数据准备)
+  * [L2 正则化（归一化）](#l2-正则化归一化)
   * [数据文件](#数据文件)
   * [数据导入](#数据导入)
   * [保存向量 ID](#保存向量-id)
 - [附录](#附录)
-  * [L2 正则化（归一化）](#l2-正则化归一化)
   * [计算向量相似度](#计算向量相似度)
     + [内积（点积）](#内积点积)
     + [余弦相似度](#余弦相似度)
@@ -26,7 +26,26 @@
 
 # 测试数据准备
 
-**请按照附录中的说明对数据进行归一化。**
+## L2 正则化（归一化）
+开始之前，建议先对测试数据进行归一化处理。
+
+假设 n 维原始向量空间：<img src="http://latex.codecogs.com/gif.latex?\\R^n(n>0)" title="\\R^n(n>0)" />
+
+原始向量：<img src="http://latex.codecogs.com/gif.latex?\\X&space;=&space;(x_1,&space;x_2,&space;...,&space;x_n),X&space;\in&space;\reals^n" title="\\X = (x_1, x_2, ..., x_n),X \in \reals^n" />
+
+向量<img src="http://latex.codecogs.com/gif.latex?$$X$$" title="$$X$$" />的 L2 范数（模长）：
+
+<img src="http://latex.codecogs.com/gif.latex?\\\|&space;X&space;\|&space;=&space;\sqrt{\displaystyle\sum_{i=1}^n&space;(x_i)&space;^2}" title="\\| X \| = \sqrt{\displaystyle\sum_{i=1}^n (x_i) ^2}" /><img src="http://latex.codecogs.com/gif.latex?\\\|&space;X&space;\|&space;=&space;\sqrt{\displaystyle\sum_{i=1}^n&space;(x_i)&space;^2}" title="\\\| X \| = \sqrt{\displaystyle\sum_{i=1}^n (x_i) ^2}" />
+
+归一化后的向量：<img src="http://latex.codecogs.com/gif.latex?X'&space;=&space;(x_1',&space;x_2',&space;...,&space;x_n'),X'&space;\in&space;\reals^n" title="X' = (x_1', x_2', ..., x_n'),X' \in \reals^n" />
+
+其中每一维的 L2 正则化算法：
+
+<img src="http://latex.codecogs.com/gif.latex?x_i'&space;=&space;\frac{x_i}{\|&space;X&space;\|}&space;=&space;\frac{x_i}{\sqrt{\displaystyle\sum_{i=1}^n&space;(x_i)&space;^2}}" title="x_i' = \frac{x_i}{\| X \|} = \frac{x_i}{\sqrt{\displaystyle\sum_{i=1}^n (x_i) ^2}}" />
+
+归一化后，向量模长等于 1：<img src="http://latex.codecogs.com/gif.latex?\|&space;X'&space;\|&space;=&space;1" title="\| X' \| = 1" />
+
+
 
 ## 数据文件
 
@@ -58,26 +77,6 @@
 
 
 # 附录
-## L2 正则化（归一化）
-n 维原始向量空间：<img src="http://latex.codecogs.com/gif.latex?\\R^n(n>0)" title="\\R^n(n>0)" />
-
-原始向量：<img src="http://latex.codecogs.com/gif.latex?\\X&space;=&space;(x_1,&space;x_2,&space;...,&space;x_n),X&space;\in&space;\reals^n" title="\\X = (x_1, x_2, ..., x_n),X \in \reals^n" />
-
-向量<img src="http://latex.codecogs.com/gif.latex?$$X$$" title="$$X$$" />的 L2 范数（模长）：
-
-<img src="http://latex.codecogs.com/gif.latex?\\\|&space;X&space;\|&space;=&space;\sqrt{\displaystyle\sum_{i=1}^n&space;(x_i)&space;^2}" title="\\| X \| = \sqrt{\displaystyle\sum_{i=1}^n (x_i) ^2}" /><img src="http://latex.codecogs.com/gif.latex?\\\|&space;X&space;\|&space;=&space;\sqrt{\displaystyle\sum_{i=1}^n&space;(x_i)&space;^2}" title="\\\| X \| = \sqrt{\displaystyle\sum_{i=1}^n (x_i) ^2}" />
-
-归一化后的向量：<img src="http://latex.codecogs.com/gif.latex?X'&space;=&space;(x_1',&space;x_2',&space;...,&space;x_n'),X'&space;\in&space;\reals^n" title="X' = (x_1', x_2', ..., x_n'),X' \in \reals^n" />
-
-其中每一维的 L2 正则化算法：
-
-<img src="http://latex.codecogs.com/gif.latex?x_i'&space;=&space;\frac{x_i}{\|&space;X&space;\|}&space;=&space;\frac{x_i}{\sqrt{\displaystyle\sum_{i=1}^n&space;(x_i)&space;^2}}" title="x_i' = \frac{x_i}{\| X \|} = \frac{x_i}{\sqrt{\displaystyle\sum_{i=1}^n (x_i) ^2}}" />
-
-归一化后，向量模长等于 1：<img src="http://latex.codecogs.com/gif.latex?\|&space;X'&space;\|&space;=&space;1" title="\| X' \| = 1" />
-
-
-
-
 ## 计算向量相似度
 
 近似最近邻搜索（approximate nearest neighbor searching, ANNS）是目前针对向量搜索的主流思路。其核心理念在于只在原始向量空间的子集中进行计算和搜索，从而加快整体搜索速度。 
