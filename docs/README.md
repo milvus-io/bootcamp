@@ -1,6 +1,6 @@
 # Milvus 在线训练营
 - **Milvus 101**
-  * [硬件平台](#----)
+  * [硬件平台](milvus101/hardware_platform.md)
   * [Milvus 快速上手](#milvus-----)
 - **准备数据**
   * [数据归一化](data_preparation/data_normalization.md)
@@ -14,4 +14,3 @@
 # Milvus 解决方案原型
 
 - [点击查看](solutions/README.md)
-
