@@ -1,42 +1,37 @@
-# 准备数据文件
+# Prepare Data Files
 
-  * [数据文件](#数据文件)
-  * [数据导入](#数据导入)
-  * [保存向量 ID](#保存向量-id)
+- [Data Files](https://github.com/milvus-io/bootcamp/blob/master/docs/data_preparation/data_file_consideration.md#数据文件)
+- [Import Data](https://github.com/milvus-io/bootcamp/blob/master/docs/data_preparation/data_file_consideration.md#数据导入)
+- [Save Vector ID](https://github.com/milvus-io/bootcamp/blob/master/docs/data_preparation/data_file_consideration.md#保存向量-id)
 
-## 数据文件
+## Data Files
 
-请以 csv 格式生成向量数据，每个文件建议不超过 10 万条向量。为加快数据的导入速度，建议事先为 csv 文件生成相应的 npy 二进制文件：
+Prepare vectors in CSV file format . It is recommended to set the file size limit of 0.1 million vectors. To speed up data insertion, try converting the CSV file into binary files in .npy format in advance.
 
-1. 通过 pandas.read_csv 方法读入一个 csv 文件，生成 pandas.dataframe 数据类型
-2. 通过 numpy.array 方法，将上述 pandas.dataframe 转换成 numpy.array 数据类型
-3. 将 numpy.array 数据类型，通过 numpy.save 方法存入一个 npy 二进制文件。
+1. Read the CSV file through `pandas.read_csv`, and generate `pandas.DataFrame` data structure.
+2. Through `numpy.array`, convert `pandas.DataFrame` to `numpy.array` data structure.
+3. Through `numpy.save`, save the array to a binary file in .npy format.
 
-以 512 维单精度向量为例，10 万条向量的 csv 文件约 800 MB。而转换为 npy 后，文件大小不足 400 MB。
+Converting the CSV file into .npy file could largely reduce the file size. Take the single-precision 512-dimensional vectors as an example, saving 0.1 million such vectors in CSV file takes about 800 MB, while in .npy file, the file size is reduced to < 400 MB.
 
-由于 npy 是二进制文件，因此不建议删除原始的 csv 文件，后续可能用到 csv 文件来核对向量查询的结果。
+Don't remove the original CSV file after the conversion, as it might be used later to check the vector query results. 
 
+## Import Data
 
+Currently, Milvus provides Python SDK. Follow below steps to import vector data through Python scripts: 
 
-## 数据导入
+1. Read the CSV file through `pandas.read_csv`, and generate `pandas.DataFrame` data structure.
+2. Through `numpy.array`, convert `pandas.DataFrame` to `numpy.array` data structure.
+3. Through `numpy.array.tolist`, convert the `numpy.array` to a 2-dimensional list (in the form of [[],[]...[]]).
+4. Import the 2-dimensional list into Milvus through the Python scripts. **A list of vector IDs** will be returned instantly. 
 
-目前 Milvus 数据库提供了一个 Python 客户端。当通过 Python 脚本导入向量数据的时候：
+> **Note**: To verify the search precision, please prepare the ground truth set yourself.
 
-1. 通过 pandas.read_csv 方法读入一个 csv 文件，生成 pandas.dataframe 数据类型
-2. 通过 numpy.array 方法，将上述 pandas.dataframe 转换成 numpy.array 数据类型
-3. 通过 numpy.array.tolist 方法将 numpy.array 数据导转换成 2 维列表（形如，[[],[]...[]]）。
-4. 通过 Milvus 提供的 Python API 将 2 维列表数据导入 Milvus 数据库，同时返回**向量 ID 列表**。
+## Save Vector ID
 
-**Note**：
+To reduce memory usage, in vector querying, Milvus returns only the vector IDs. As the current Milvus version does not support the storage of initial vector data, you need to manually store your vectors and their corresponding vector IDs.
 
-- 如果想验证查询精度，请自行生成每个查询向量的 ground truth 结果，以供后续核对。
+If you want vector-based mixed queries, you can import vector IDs, initial vectors and their related attributes into a relational database. For detailed example, you may refer to:
 
+***How to Realize Vector-based Mixed Query Through Combined Application of Milvus and PG***
 
-
-## 保存向量 ID
-
-在后续向量查询的时候，为降低内存占用 Milvus 只返回向量 ID。Milvus 当前版本暂时没有保存原始向量数据，因此需要用户自行保存向量数据和所返回的向量 ID。
-
-如果您想实现基于向量搜索的混合查询，可以将向量 ID ，原始向量，以及向量的其他相关属性导入关系型数据库。具体的示例可以参考：
-
-***如何结合Milvus与PG实现基于向量的混合查询。（待完成）***
