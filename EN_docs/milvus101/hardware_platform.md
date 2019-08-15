@@ -9,14 +9,14 @@
 
 ## Test 1: One Million Vector Search (Data source: SIFT1B)
 
-| Component  | Minimum Config                  |
-| ---------- | ------------------------------- |
-| OS         | Ubuntu LTS 18.04                |
-| CPU        | Intel Core i5-8250U             |
-| GPU        | Nvidia GeForce MX150, 2GB GDDR5 |
-| GPU Driver | CUDA 10.1, Driver 418.74        |
-| Memory     | 4 GB DDR4 ( 2400 Mhz ) x 2      |
-| Storage    | NVMe SSD 256 GB                 |
+| Component           | Minimum Config                |
+| ------------------ | -------------------------- |
+| OS            | Ubuntu LTS 18.04 |
+| CPU           | Intel Core i5-8250U           |
+| GPU           | Nvidia GeForce MX150, 2GB GDDR5  |
+| GPU Driver    | CUDA 10.1, Driver 418.74 |
+| Memory        | 4 GB DDR4 ( 2400 Mhz ) x 2          |
+| Storage       | NVMe SSD 256 GB             |
 
 <a name="lab2"></a>
 
