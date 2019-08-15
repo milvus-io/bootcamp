@@ -13,4 +13,4 @@
 
 # Milvus 解决方案原型
 
-- [点击查看](solutions/README.md)
+- [点击查看](../solutions/README.md)
