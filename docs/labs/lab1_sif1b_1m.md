@@ -14,11 +14,11 @@
 | Memory        | 8 GB DDR4          |
 | Storage       | NVMe SSD 256 GB             |
 
-100 万测试数据集下载地址：（优先考虑github)
+100 万测试数据集下载地址：https://pan.baidu.com/s/1nVIIxO8MnOle339iYs2dUw
 
-查询向量集下载地址：
+查询向量集下载地址：https://pan.baidu.com/s/1mBRM1cJZ6QWehDuddOYl4A
 
-搜索结果对照 （ gound truth ）下载地址：
+搜索结果对照 （ gound truth ）下载地址：https://pan.baidu.com/s/1-95nJvW3vx2Cq9wqBWOFaA
 
 测试脚本下载地址：
 
