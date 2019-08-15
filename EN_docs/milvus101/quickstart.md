@@ -10,12 +10,27 @@ In this guide, we will walk you through installing Milvus and your very first ve
    | :----------------------- | :---------- |
    | CentOS                   | 7.5 or later   |
    | Ubuntu LTS               | 18.04 or later |
+   
+2. Hardware requirements:
 
-2. Make sure following software packages are installed so that Milvus can deployed through Docker:
+   | Component |   Minimum Config         |
+   | -------- | ---------------- |
+   | CPU      | Intel CPU Haswell or later            |
+   | GPU      | Nvidia Pascal series or later |
+   | GPU Driver    | CUDA 10.1, Driver 418.74 or later |
+   | Memory     | 8 GB + (depends on data volume)      |
+   | Storage | SATA 3.0 SSD or later       |
 
-   - [CUDA 9.0 and higher]( https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html)
-   - [Docker CE]( https://docs.docker.com/install/)
+3. Client browser requirements:
+
+   Milvus provides GUI monitoring dashboard based on Prometheus and Grafana, which visualizes performance metrics of the database. It is compatible with the mainstream web browsers such as Microsoft IE, Google Chrome, Mozilla Firefox and Safari, etc.
+
+4. Make sure following software packages are installed so that Milvus can deployed through Docker:
+
+   - [CUDA 10.1及以上](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html)
+   - [Docker CE](https://docs.docker.com/install/)
    - [NVIDIA-Docker2](https://github.com/NVIDIA/nvidia-docker)
+
 
 ## Installing Milvus Docker
 
