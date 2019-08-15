@@ -6,10 +6,10 @@ In this guide, we will walk you through installing Milvus and your very first ve
 
 1. Milvus installation is currently supported on Linux systems, make sure one of the following Linux distributions is used:
 
-   | Linux operation system | Supported versions          |
-   | :--------------------- | :--------------- |
-   | CentOS                 | 7.5 and higher   |
-   | Ubuntu LTS             | 16.04 and higher |
+   | Linux        | Version        |
+   | :----------------------- | :---------- |
+   | CentOS                   | 7.5 or later   |
+   | Ubuntu LTS               | 18.04 or later |
 
 2. Make sure following software packages are installed so that Milvus can deployed through Docker:
 
