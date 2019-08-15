@@ -38,7 +38,7 @@ password="zilliz123"
 database="postgres"
 
 FOLDER_NAME ='/data/lcl/ann/100_ann_test/bvecs_data'
-PG_FLAG = True
+PG_FLAG = False
 
 nq_scope = [1,50,100,150,200,250,300,350,400,450,500,550,600,650,700,750,800]
 topk_scope = [1,20,50,100,300,500,800,1000]
