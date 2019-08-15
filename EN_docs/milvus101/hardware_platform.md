@@ -9,14 +9,14 @@
 
 ## Test 1: One Million Vector Search (Data source: SIFT1B)
 
-| Component  | Minimum Config                  |
-| ---------- | ------------------------------- |
-| OS         | Ubuntu LTS 18.04                |
-| CPU        | Intel Core i5-8250U             |
-| GPU        | Nvidia GeForce MX150, 2GB GDDR5 |
-| GPU Driver | CUDA 10.1, Driver 418.74        |
-| Memory     | 4 GB DDR4 ( 2400 Mhz ) x 2      |
-| Storage    | NVMe SSD 256 GB                 |
+| Component           | Minimum Config                |
+| ------------------ | -------------------------- |
+| OS            | Ubuntu LTS 18.04 |
+| CPU           | Intel Core i5-8250U           |
+| GPU           | Nvidia GeForce MX150, 2GB GDDR5  |
+| GPU Driver    | CUDA 10.1, Driver 418.74 |
+| Memory        | 4 GB DDR4 ( 2400 Mhz ) x 2          |
+| Storage       | NVMe SSD 256 GB             |
 
 <a name="lab2"></a>
 
@@ -52,7 +52,7 @@ About 140 GB memory is needed in this test.
 
 ## Edge Deployment: ARM Platform
 
-Edge deployment is tested on MS-Celeb-1M (512-dimensional vectors, FP32) 
+Edge deployment was tested on face search in a million-face library (512-dimensional vectors, FP32) 
 
 | Component | Minimum Config                            |
 | --------- | ----------------------------------------- |
