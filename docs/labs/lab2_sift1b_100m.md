@@ -141,7 +141,7 @@ $ python3 milvus_bootcamp.py --table=ann_100m_sq8 -q 10 -k 20 -s
 
 （2）验证准确性测试结果
 
-上述脚本运行完成后，将会生成一个名为 accuracy 的文件夹，在该文件夹下面会有一个名为 10_20_result.csv 的文件，文件里的内容如下图所示：
+上述脚本运行完成后，将会生成一个名为 accuracy_results 的文件夹，在该文件夹下面会有一个名为 10_20_result.csv 的文件，文件里的内容如下图所示：
 
 ![100m_accu_10_20](pic/100m_accu_10_20.png)
 
@@ -164,7 +164,7 @@ $ python3 milvus_bootcamp.py --table=ann_100m_sq8 -s
 
 ```
 
-运行结束后，将会生成一个名为 performance 的文件夹，在该文件夹下会有一个名为 xxx_results.csv 的文件，'xxx' 代表执行命令的时间。文件内容如下图所示（未完全展示）：
+运行结束后，将会生成一个名为 performance_results 的文件夹，在该文件夹下会有一个名为 xxx_results.csv 的文件，'xxx' 代表执行命令的时间。文件内容如下图所示（未完全展示）：
 
 ![100m_per](pic/100m_per.png)
 
