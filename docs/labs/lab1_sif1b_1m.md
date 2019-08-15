@@ -149,4 +149,3 @@ $ python3 milvus_bootcamp.py --table=ann_1m_sq8 -s
 2. Milvus 启动后，进行第一次向量检索时，需要花部分时间加载数据到内存，所以进行性能测试时一般从第二次查询开始。
 
 
-测试结束
