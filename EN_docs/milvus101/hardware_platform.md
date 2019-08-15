@@ -52,7 +52,7 @@ About 140 GB memory is needed in this test.
 
 ## Edge Deployment: ARM Platform
 
-Edge deployment is tested on MS-Celeb-1M (512-dimensional vectors, FP32) 
+Edge deployment was tested on face search in a million-face library (512-dimensional vectors, FP32) 
 
 | Component | Minimum Config                            |
 | --------- | ----------------------------------------- |
