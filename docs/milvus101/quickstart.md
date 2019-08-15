@@ -37,7 +37,7 @@
 
    ```shell
    # Download Milvus Docker image
-   $ docker pull milvusdb/milvus:0.3.1
+   $ docker pull milvusdb/milvus:0.3.1-cw4
    ```
 
 2. 创建 Milvus 文件夹，并添加 server_config 和 log_config
