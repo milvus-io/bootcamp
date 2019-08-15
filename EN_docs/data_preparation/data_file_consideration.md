@@ -1,8 +1,8 @@
 # Prepare Data Files
 
-- [Data Files](https://github.com/milvus-io/bootcamp/blob/master/docs/data_preparation/data_file_consideration.md#Data Files)
-- [Import Data](https://github.com/milvus-io/bootcamp/blob/master/docs/data_preparation/data_file_consideration.md#Import Data)
-- [Save Vector ID](https://github.com/milvus-io/bootcamp/blob/master/docs/data_preparation/data_file_consideration.md#Save Vector ID)
+- [Data Files](https://github.com/milvus-io/bootcamp/blob/master/docs/data_preparation/data_file_consideration.md#DataFiles)
+- [Import Data](https://github.com/milvus-io/bootcamp/blob/master/docs/data_preparation/data_file_consideration.md#ImportData)
+- [Save Vector ID](https://github.com/milvus-io/bootcamp/blob/master/docs/data_preparation/data_file_consideration.md#SaveVectorID)
 
 ## Data Files
 
