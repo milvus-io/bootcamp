@@ -1,10 +1,10 @@
 # Data Normalization
 
-- [L2 Normalization](#L2 Normalization)
-- [Compute Vector Similarity](#Compute Vector Similarity)
-  - [Inner Product (Dot Product)](#Inner Product)
-  - [Cosine Simialrity](#Cosine Similarity)
-  - [Euclidean Distance](#Euclidean Distance)
+- [L2 Normalization](#L2Normalization)
+- [Compute Vector Similarity](#ComputeVectorSimilarity)
+  - [Inner Product (Dot Product)](#InnerProduct)
+  - [Cosine Simialrity](#CosineSimilarity)
+  - [Euclidean Distance](#EuclideanDistance)
 
 ## L2 Normalization
 
