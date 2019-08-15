@@ -129,6 +129,8 @@ sqlite>.schema
 
 准确性测试是根据 Milvus 查询结果跟 ANN_SIFT_1B 提供的 groundtruth 进行比较得出查询的准确率。比如从 10000 条查询向量中随机取出 10 条向量，在 milvus 中查询跟这 10 条向量最相近的 top20 个向量，并且将查询结果与groundtruth对比计算出召回率。在 milvus_sift100M 目录下执行以下脚本可以完成准确性测试：
 
+（1）执行准确性测试脚本
+
 ```bash
 $ python3 milvus_bootcamp.py --table=ann_100m_sq8 -q 10 -k 20 -s
 ```
@@ -140,15 +142,18 @@ $ python3 milvus_bootcamp.py --table=ann_100m_sq8 -q 10 -k 20 -s
 首先需要安装 postgres 数据库，安装方法请参考：https://www.postgresql.org/docs/11/installation.html。
 
 在 postgres 数据中建立一张名为 idmap_ann_100m 的表，包含两个字段 ids和idoffset，两个字段的数据类型分别为 bigint 和 text。
-将 ann_100m_sq8_idmap.txt 中的数据导入表 idmap_ann_100m 中，字段 ids 建立索引。最后你需要将测试脚本 milvus_bootcamp.py 中的 PG_FLAG 变量值由默认的 False 修改为 True ，并且根据你自己的设置将脚本中的 postgres 参数 host 、port 、user 、password 、 database 进行修改。修改完毕后再次执行上面的准确性测试命令，查询速度将会有显著提升。
+将 ann_100m_sq8_idmap.txt 中的数据导入表 idmap_ann_100m 中，在字段 ids 上建立索引。
+将测试脚本 milvus_bootcamp.py 中的 PG_FLAG 变量值由默认的 False 修改为 True ，并且设置相应 postgres 参数 host 、port 、user 、password 、 database 等。修改完毕后再次执行上面的准确性测试命令，查询速度将会有显著提升。
 
-上述指令执行完成之后，将会生成一个名为 accuracy 的文件夹，在该文件夹下面会有一个名为 10_20_result.csv 的文件，文件里的内容如下图所示：
+（2）验证准确性测试结果
+
+测试命令执行完成之后，将会生成一个名为 accuracy 的文件夹，在该文件夹下面会有一个名为 10_20_result.csv 的文件，内容如下图所示：
 
 ![1565800689052](/home/zilliz/.config/Typora/typora-user-images/1565800689052.png)
 
-nq 这一列代表的是第几个查询向量，topk 代表的是查询该向量的前 k 个相似的向量，total_time 代表整个查询花费的总时间，avg_time 代表每一条向量的平均查询时间，recall 代表 milvus 的查询结果与 groundtruth 对比后的准确率。
+nq 代表的是第几个查询向量，topk 代表的是查询该向量的前 k 个相似的向量，total_time 代表整个查询花费的总时间，avg_time 代表每一条向量的平均查询时间，recall 代表 milvus 的查询结果与 groundtruth 对比后的准确率。
 
-​       milvus的查询准确率与 /home/$USER/milvus/conf/server_config.yaml 中的 nprobe 参数关系较大，本次测试设置的 nprobe 值为32，milvus的查询准确率已经可以达到 90% 以上。如果你需要更高的准确率，你可以通过增大 nprobe 值来实现。值得注意的是，nprobe 值设得过大会降低 milvus 的查询性能。
+milvus的查询准确率与 nprobe 参数有很大关系，本次测试设置的 nprobe 值为32，milvus的查询准确率已经可以达到 90% 以上。可以通过增大 nprobe 值来实现更高的准确率但同时也会降低 milvus 的查询性能。因此需要根据实际数据的分布和业务要求调整 nprob 值以达到性能和准确性平衡。
 
 ## 5、性能测试
 
