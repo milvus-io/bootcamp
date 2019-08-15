@@ -17,7 +17,7 @@
 - 100 万测试数据集下载地址：https://pan.baidu.com/s/1nVIIxO8MnOle339iYs2dUw
 - 查询向量集下载地址：https://pan.baidu.com/s/1mBRM1cJZ6QWehDuddOYl4A
 - 搜索结果对照 （ gound truth ）下载地址：https://pan.baidu.com/s/1-95nJvW3vx2Cq9wqBWOFaA
-- 测试脚本下载路径：[/bootcamp/scripts/](/bootcamp/scripts/)
+- 测试脚本下载路径：[/bootcamp/scripts/](/scripts/)
 
 ​为方便存放测试数据和脚本，请创建名为 milvus_sift1m 的文件夹。利用前文提供的下载链接，将测试数据集下载到 milvus_sift1m 目录下：
 
