@@ -120,7 +120,7 @@ SIFT1B 提供了10,000 条向量的查询向量集，并且对于每条查询向
 $ python3 milvus_bootcamp.py --table=ann_1m_sq8 -q 10 -k 20 -s
 ```
 
-上述脚本运行完成后，将会生成一个名为 accuracy 的文件夹，在该文件夹下面会有一个名为 10_20_result.csv 的文件，文件里的内容如下图所示：
+上述脚本运行完成后，将会生成一个名为 accuracy_results 的文件夹，在该文件夹下面会有一个名为 10_20_result.csv 的文件，文件里的内容如下图所示：
 
 ![1m_accu_10_20](pic/1m_accu_10_20.png)
 
@@ -142,7 +142,7 @@ Milvus 查询准确率与搜索子空间（ nprobe 参数）有很大关系。�
 $ python3 milvus_bootcamp.py --table=ann_1m_sq8 -s
 ```
 
-运行结束后，将会生成一个名为 performance 的文件夹，在该文件夹下会有一个名为 xxx_results.csv 的文件，'xxx' 代表执行命令的时间。文件内容如下图所示（未完全展示）：
+运行结束后，将会生成一个名为 performance_results 的文件夹，在该文件夹下会有一个名为 xxx_results.csv 的文件，'xxx' 代表执行命令的时间。文件内容如下图所示（未完全展示）：
 
 ![1m_per_10_20](pic/1m_per_10_20.png)
 
