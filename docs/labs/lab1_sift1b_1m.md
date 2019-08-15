@@ -1,8 +1,8 @@
 # 实验一：百万向量检索
 
-## 1、获取测试数据集
+## 1、准备测试数据和脚本
 
-​本实验所使用的原始数据集为 SIFT1B ，关于该数据集的详细信息请参考：[http://corpus-texmex.irisa.fr/](http://corpus-texmex.irisa.fr/)。在本次测试中，我们提取了原始数据集中的 100 万条数据。以下是推荐的测试环境配置：
+本实验所使用的原始数据集为 SIFT1B ，关于该数据集的详细信息请参考：[http://corpus-texmex.irisa.fr/](http://corpus-texmex.irisa.fr/)。在本次测试中，我们提取了原始数据集中的 100 万条数据。以下是推荐的测试环境配置：
 
 | Component           | Minimum Config                |
 | ------------------ | -------------------------- |
@@ -19,12 +19,12 @@
 - 搜索结果对照 （ gound truth ）下载地址：https://pan.baidu.com/s/1-95nJvW3vx2Cq9wqBWOFaA
 - 测试脚本下载路径：[/bootcamp/scripts/](/scripts/)
 
-​为方便存放测试数据和脚本，请创建名为 milvus_sift1m 的文件夹。利用前文提供的下载链接，将测试数据集下载到 milvus_sift1m 目录下：
+为方便存放测试数据和脚本，请创建名为 milvus_sift1m 的文件夹。利用前文提供的下载链接，将测试数据集下载到 milvus_sift1m 目录下：
 
 - 测试数据集下载并解压完成之后，你将会看到一个名为 bvecs_data 的文件夹。该文件夹里面存放了 10 个 npy 文件，每个 npy 文件中存放了10 万条 uint8 格式的向量数据。
 - 查询向量集下载完成之后，你会看到一个 query.npy 的文件，该文件里存放了 10,000 条实验中需要查询的向量。
-- 对照数据（ groundtruth ）下载完成之后，你会看到一个名为 ground_truth.txt 的文本文件，该文件里存放的是查询向量集中的每条向量的 top1000 相似的向量的位置。
-- 测试脚本下载完成之后，你会看到一个名为 milvus_bootcamp.py 的 python 脚本和一个名为 get_id.sh 的shell 脚本。
+- 对照数据（ groundtruth ）包含一个名为 ground_truth.txt 的文本文件，该文件里存放的是查询向量集中的每条向量的 top1000 相似向量的位置。
+- 测试脚本会包含一个 python 程序 milvus_bootcamp.py 和一个 shell 脚本 get_id.sh。
 
 获取完测试需要的数据和脚本后， milvus_sift1m 目录下应该存放有以下内容：
 1. 100 万测试数据： bvecs_data 文件夹
@@ -34,11 +34,13 @@
 
 **注意**
 
-使用脚本 milvus_bootcamp.py 进行测试之前，请仔细阅读该脚本的 README 。并根据你自己的情况，对脚本中的相关变量值进行修改。
+使用脚本 milvus_bootcamp.py 进行测试之前，请仔细阅读该脚本的 README 。并根据实际情况，对脚本中的相关变量值进行修改。
 
-## 2、 设置配置文件
+## 2、 配置 Milvus 参数
 
-为了获得最佳测试性能，建议将 **/home/$USER/milvus/conf/server_config.yaml** 的其中4个参数按照如下表格进行配置：
+Milvus 可以根据数据分布和性能、准确性的要求灵活调整相关系统参数，以发挥产品的最佳性能。在此实验中，采用如下表所示的参数配置，就可以实现90%以上召回率。
+
+配置文件： **/home/$USER/milvus/conf/server_config.yaml**
 
 |         参数名称         | 推荐值 |
 | ---------------------- | ---- |
@@ -55,7 +57,7 @@ $ docker restart <container id>
 
 ## 3、 数据导入
 
-​导入数据之前，首先确保 bvecs_data 文件夹与测试脚本 milvus_bootcamp.py 都放在 milvus_sift1m 目录下，然后确认 Milvus 已经正常启动。（ Milvus 安装及启动方法参见：[Milvus 快速上手](../milvus101/quickstart.md) ）
+导入数据之前，首先确保 bvecs_data 文件夹与测试脚本 milvus_bootcamp.py 都放在 milvus_sift1m 目录下，然后确认 Milvus 已经正常启动。（ Milvus 安装及启动方法参见：[Milvus 快速上手](../milvus101/quickstart.md) ）
 
 进入 milvus_sift1m 目录，运行如下脚本：
 
@@ -63,7 +65,7 @@ $ docker restart <container id>
 $ python3 milvus_bootcamp.py --table=ann_1m_sq8 --index=ivfsq8 -t
 ```
 
-执行完上述命令以后，会创建一张名为 ann_1m_sq8 的表，它采用的索引类型为 ivfsq8  。数据导入过程如下图所示：
+脚本会创建一张名为 ann_1m_sq8 的表，它采用的索引类型为 ivfsq8  ，并导入数据：
 
 ![1m_import](pic/1m_import.png)
 
@@ -74,7 +76,7 @@ $ python3 milvus_bootcamp.py --show
 $ python3 milvus_bootcamp.py --table=ann_1m_sq8 --rows
 ```
 
-数据导入完成后，还会在 milvus_sift1m 目录下产生一个名为 ann_100m_sq8_idmap.txt 的文件，该文件中存放的是 Milvus 为每一条向量分配的向量编号（ ids ）以及该向量的具体位置。
+数据导入完成后，会在 milvus_sift1m 目录下产生一个名为 ann_1m_sq8_idmap.txt 的文件，该文件中存放的是 Milvus 为每一条向量分配的向量编号（ ids ）以及该向量的具体位置。
 
 为了确保导入 Milvus 的数据已经全部建好索引，请进入  **/home/$USER/milvus/db** 目录，在终端输入如下命令：
 
@@ -94,7 +96,7 @@ sqlite> select * from TableFiles where table_id='ann_1m_sq8';
 35|ann_1m_sq8|3|1565599521132604000|3|51200000|1565599524843984|1565599521132605|1190712
 ```
 
-Milvus 会将一个向量数据表分成若干数据分片进行存储，因此查询命令会返回多条记录。其中第三列数字代表数据表采用的索引类型，数字 3 代表采用的是 ivfsq8 索引。第五列数字代表索引构建的情况，当这列数字为 3 时，代表相应的数据表分片上的索引以构建完毕。如果某个分片上的索引还没有构建完成，可以手动为这个数据分片建立索引。进入 milvus_sift1m 目录，运行如下脚本：
+Milvus 会将一个向量数据表分成若干数据分片进行存储，因此查询命令会返回多条记录。其中第三列数字代表数据表采用的索引类型，数字 3 代表采用的是 ivfsq8 索引。第五列数字代表索引构建的情况，当这列数字为 3 时，代表相应的数据表分片上的索引已构建完毕。如果某个分片上的索引还没有构建完成，可以手动为这个数据分片建立索引。进入 milvus_sift1m 目录，运行如下脚本：
 
 ```bash
 $ python3 milvus_bootcamp.py --table=ann_1m_sq8 --build
@@ -108,7 +110,7 @@ sqlite>.schema
 
 ## 4、准确性测试
 
-​SIFT1B 提供了10,000 条向量的查询向量集，并且对于每条查询向量都给出了该向量在不同规模数据集上的 top1000 ground truth。因此，可以方便地对 Milvus 查询结果的准确率进行计算。
+SIFT1B 提供了10,000 条向量的查询向量集，并且对于每条查询向量都给出了该向量在不同规模数据集上的 top1000 ground truth。因此，可以方便地对 Milvus 查询结果的准确率进行计算。
 
 从 10,000 条查询向量中随机取出 10 条向量，然后测试 Milvus 针对这 10 条向量的 top20 结果的准确率。进入 milvus_sift1m 目录，运行如下脚本：
 
@@ -116,15 +118,23 @@ sqlite>.schema
 $ python3 milvus_bootcamp.py --table=ann_1m_sq8 -q 10 -k 20 -s
 ```
 
-上述指令执行完成之后，将会生成一个名为 accuracy 的文件夹，在该文件夹下面会有一个名为 10_20_result.csv 的文件，文件里的内容如下图所示：
+上述脚本运行完成后，将会生成一个名为 accuracy 的文件夹，在该文件夹下面会有一个名为 10_20_result.csv 的文件，文件里的内容如下图所示：
 
 ![1m_accu_10_20](pic/1m_accu_10_20.png)
 
 - nq: 代表的是第几个查询向量
+
 - topk: 代表的是查询该向量的前 k 个相似的向量
+
 - total_time: 代表整个查询花费的总时间
+
 - avg_time: 代表每一条向量的平均查询时间
+
 - recall: 代表 milvus 的查询结果与 ground truth 对比后的准确率
+
+Milvus 查询准确率与搜索子空间（ nprobe 参数）有很大关系。本次测试中 nprobe 设置为32，Milvus 查询准确率可以达到 90% 以上。可以通过增大 nprobe 值来实现更高的准确率但同时也会降低 Milvus 的查询性能。
+
+因此，需要结合实际数据分布和业务SLA，调整搜索子空间大小以达到性能和准确性的平衡。
 
 ## 5、性能测试
 
