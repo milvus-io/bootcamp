@@ -10,11 +10,11 @@
 | GPU      | GeForce GTX 1060 6GB                    |
 | 内存     | 64GB                                    |
 
-1 亿测试数据集下载地址：（百度云盘)
+1 亿测试数据集下载地址：https://pan.baidu.com/s/1N5jGKHYTGchye3qR31aNnA
 
-查询向量集下载地址：
+查询向量集下载地址：https://pan.baidu.com/s/1l9_lDItU2dPBPIYZ7oV0NQ
 
-groundtruth下载地址：
+groundtruth下载地址：https://pan.baidu.com/s/15dPvxxrfslairyUEBJgk-g
 
 测试脚本下载地址：
 
