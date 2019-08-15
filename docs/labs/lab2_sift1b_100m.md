@@ -147,8 +147,8 @@ $ python3 milvus_bootcamp.py --table=ann_100m_sq8 -q 10 -k 20 -s
 
 - nq: 代表的是第几个查询向量
 - topk: 代表的是查询该向量的前 k 个相似的向量
-- total_time: 代表整个查询花费的总时间
-- avg_time: 代表每一条向量的平均查询时间
+- total_time: 代表整个查询花费的总时间，单位：秒
+- avg_time: 代表每一条向量的平均查询时间，单位：秒
 - recall: 代表 milvus 的查询结果与 ground truth 对比后的准确率
 
 Milvus 查询准确率与搜索子空间（ nprobe 参数）有很大关系。本次测试中 nprobe 设置为32，Milvus 查询准确率可以达到 90% 以上。可以通过增大 nprobe 值来实现更高的准确率但同时也会降低 Milvus 的查询性能。
