@@ -10,11 +10,11 @@
 | GPU      | GeForce GTX 1060 6GB                    |
 | 内存     | 64GB                                    |
 
-1 亿测试数据集下载地址：（百度云盘)
+1 亿测试数据集下载地址：https://pan.baidu.com/s/1N5jGKHYTGchye3qR31aNnA
 
-查询向量集下载地址：
+查询向量集下载地址：https://pan.baidu.com/s/1l9_lDItU2dPBPIYZ7oV0NQ
 
-groundtruth下载地址：
+groundtruth下载地址：https://pan.baidu.com/s/15dPvxxrfslairyUEBJgk-g
 
 测试脚本下载地址：
 
@@ -136,6 +136,8 @@ $ python3 milvus_bootcamp.py --table=ann_100m_sq8 -q 10 -k 20 -s
 ![1565800689052](/home/zilliz/.config/Typora/typora-user-images/1565800689052.png)
 
 nq 这一列代表的是第几个查询向量，topk 代表的是查询该向量的前 k 个相似的向量，total_time 代表整个查询花费的总时间，avg_time 代表每一条向量的平均查询时间，recall 代表 milvus 的查询结果与 groundtruth 对比后的准确率。
+
+​       milvus的查询准确率与 /home/$USER/milvus/conf/server_config.yaml 中的 nprobe 参数关系较大，本次测试设置的 nprobe 值为32，milvus的查询准确率已经可以达到 90% 以上。如果你需要更高的准确率，你可以通过增大 nprobe 值来实现。值得注意的是，nprobe 值设得过大会降低 milvus 的查询性能。
 
 ## 5、性能测试
 
