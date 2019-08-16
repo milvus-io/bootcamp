@@ -24,9 +24,9 @@
 
 ## 脚本测试说明
 
-本示例包含了两个脚本：mixe_load.py, mixe_query.py. mixe_load将数据导入milvus和postgres中，mixe_query.py自定义条件查询。
+本示例包含了两个脚本：mixed_import.py, mixed_query.py. mixed_import将数据导入milvus和postgres中，mixed_query.py自定义条件查询。
 
-### mixe_load.py
+### mixed_import.py
 
 在执行该脚本之前，需要查看脚本里的一些变量，根据运行环境和数据进行修改，以保证代码的正常运行。
 
@@ -63,12 +63,12 @@ PG_DATABASE ：该变量定义了在postgres使用的数据库名称
 修改完上述变量后，可以进行数据导入，执行;
 
 ```shell
-python3 mixe_load.py
+python3 mixed_import.py
 ```
 
 该脚本中，除了原始向量的导入，pg中还存入了milvus返回的向量对应的id值，以及每条向量的属性，包括性别，向量产生时间，是否戴眼镜。（该脚本以人脸图片特征为例子，为每条向量随机分配相应的属性）
 
-### mixe_query.py
+### mixed_query.py
 
 完成数据的导入之后，就可以自定义条件进行查询了，在查询之前需要根据查询环境修改脚本中定义的变量。
 
@@ -114,25 +114,25 @@ DISTANCE_THRESHOLD：该变量定义了在取得的前TOP_K个向量中选择与
 查询与向量集中的第０条向量相似的向量，且性别为男，且时间在2019-05-01到2019-07-12
 
 ```shell
-python3 mixe_query.py -n 0 -s male -t '[2019-05-01 00:00:00, 2019-07-12 00:00:00]' -q
+python3 mixed_query.py -n 0 -s male -t '[2019-05-01 00:00:00, 2019-07-12 00:00:00]' -q
 ```
 
 查询与向量集中的第20条向量相似的向量，且性别为女，未戴眼镜。
 
 ```shell
-python3 mixe_query.py -n 20 -s female -g False
+python3 mixed_query.py -n 20 -s female -g False
 ```
 
 查询与向量集中的第100条向量相似的向量，且性别为女，戴眼镜，时间在2019-05-01 15:15:05到2019-07-30 11:00:00
 
 ```shell
-python3 mixe_query.py -n 100 -s female -g True -t '[2019-05-01 15:15:05, 2019-07-30 11:00:00]' -q
+python3 mixed_query.py -n 100 -s female -g True -t '[2019-05-01 15:15:05, 2019-07-30 11:00:00]' -q
 ```
 
 查询得到的id对应的原始向量
 
 ```shell
-python3 mixe_query.py -v 237434787867
+python3 mixed_query.py -v 237434787867
 ```
 
 本项目仅展示了基于milvus混合查询的一个示例，milvus也可以与其他关系型数据库进行各种场景的混合查询。
