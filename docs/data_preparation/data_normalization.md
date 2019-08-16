@@ -16,7 +16,7 @@
 
 向量<img src="http://latex.codecogs.com/gif.latex?$$X$$" title="$$X$$" />的 L2 范数（模长）：
 
-<img src="http://latex.codecogs.com/gif.latex?\\\|&space;X&space;\|&space;=&space;\sqrt{\displaystyle\sum_{i=1}^n&space;(x_i)&space;^2}" title="\\| X \| = \sqrt{\displaystyle\sum_{i=1}^n (x_i) ^2}" /><img src="http://latex.codecogs.com/gif.latex?\\\|&space;X&space;\|&space;=&space;\sqrt{\displaystyle\sum_{i=1}^n&space;(x_i)&space;^2}" title="\\\| X \| = \sqrt{\displaystyle\sum_{i=1}^n (x_i) ^2}" />
+<img src="http://latex.codecogs.com/gif.latex?\\\|&space;X&space;\|&space;=&space;\sqrt{\displaystyle\sum_{i=1}^n&space;(x_i)&space;^2}" title="\\| X \| = \sqrt{\displaystyle\sum_{i=1}^n (x_i) ^2}" />
 
 归一化后的向量：<img src="http://latex.codecogs.com/gif.latex?X'&space;=&space;(x_1',&space;x_2',&space;...,&space;x_n'),X'&space;\in&space;\reals^n" title="X' = (x_1', x_2', ..., x_n'),X' \in \reals^n" />
 
