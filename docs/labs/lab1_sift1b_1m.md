@@ -112,9 +112,13 @@ sqlite>.schema
 
 ## 4、准确性测试
 
-SIFT1B 提供了10,000 条向量的查询向量集，并且对于每条查询向量都给出了该向量在不同规模数据集上的 top1000 ground truth。因此，可以方便地对 Milvus 查询结果的准确率进行计算。
+SIFT1B 提供了10,000 条向量的查询向量集，并且对于每条查询向量都给出了该向量在不同规模数据集上的 top1000 ground truth。因此，可以方便地对 Milvus 查询结果的准确率进行计算。其中，准确率计算公式为：
 
-从 10,000 条查询向量中随机取出 10 条向量，然后测试 Milvus 针对这 10 条向量的 top20 结果的准确率。进入 milvus_sift1m 目录，运行如下脚本：
+准确率＝ ( Milvus 查询结果与 Groundtruth 一致的向量个数 ) / ( query_records 的向量个数 * top_k )
+
+比如：从 10,000 条查询向量中随机取出 10 条向量，然后测试 Milvus 针对这 10 条向量的 top20 结果的准确率。
+
+进入 milvus_sift1m 目录下，运行如下脚本：
 
 ```bash
 $ python3 milvus_bootcamp.py --table=ann_1m_sq8 -q 10 -k 20 -s
