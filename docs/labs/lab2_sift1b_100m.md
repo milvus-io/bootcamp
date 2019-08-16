@@ -58,7 +58,7 @@ $ docker restart <container id>
 
 ## 3、 数据导入
 
-导入数据之前，首先确保 bvecs_data 文件夹与测试脚本 milvus_bootcamp.py 都放在 milvus_sift1m 目录下，然后确认 Milvus 已经正常启动。（ Milvus 安装及启动方法参见：[Milvus 快速上手](../milvus101/quickstart.md) ）
+导入数据之前，首先确保 bvecs_data 文件夹与测试脚本 milvus_bootcamp.py 都放在 milvus_sift100m 目录下，然后确认 Milvus 已经正常启动。（ Milvus 安装及启动方法参见：[Milvus 快速上手](../milvus101/quickstart.md) ）
 
 进入 milvus_sift100m 目录，运行如下脚本：
 
@@ -115,7 +115,9 @@ sqlite>.schema
 
 ## 4、准确性测试
 
-SIFT1B 提供了10,000 条向量的查询向量集，并且对于每条查询向量都给出了该向量在不同规模数据集上的 top1000 ground truth。因此，可以方便地对 Milvus 查询结果的准确率进行计算。
+SIFT1B 提供了10,000 条向量的查询向量集，并且对于每条查询向量都给出了该向量在不同规模数据集上的 top1000 ground truth。因此，可以方便地对 Milvus 查询结果的准确率进行计算。准确率计算公式为：
+
+准确率＝ ( Milvus 查询结果与 Groundtruth 一致的向量个数 ) / ( query_records 的向量个数 * top_k )
 
 （1）执行准确性测试脚本
 
@@ -157,7 +159,7 @@ Milvus 查询准确率与搜索子空间（ nprobe 参数）有很大关系。�
 
 ## 5、性能测试
 
-为评估 Milvus 的查询性能，进入 milvus_sift1m 目录，运行如下脚本：
+为评估 Milvus 的查询性能，进入 milvus_sift100m 目录，运行如下脚本：
 
 ```bash
 $ python3 milvus_bootcamp.py --table=ann_100m_sq8 -s
