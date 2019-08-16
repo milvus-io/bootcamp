@@ -24,7 +24,8 @@
 
 ## 脚本测试说明
 
-本示例包含了两个脚本：mixed_import.py, mixed_query.py. mixed_import将数据导入milvus和postgres中，mixed_query.py自定义条件查询。
+本示例包含了两个脚本：mixed_import.py 和 mixed_query.py。
+mixed_import 将数据导入milvus和postgres中，mixed_query.py 实现自定义条件的混合查询。
 
 ### mixed_import.py
 
