@@ -12,6 +12,4 @@ Milvus 是 Zilliz 公司为了解决海量特征向量处理中存在的主要�
 
 
 
-- [**在线训练营**](docs/README.md)
-- [**Milvus 解决方案原型**](docs/solutions/README.md)
-
+# 点击进入：  [**在线训练营**](docs/README.md)

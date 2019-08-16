@@ -8,7 +8,7 @@
 
 ## L2 正则化（归一化）
 
-开始之前，建议先对测试数据进行归一化处理。
+开始之前，建议先对测试数据进行归一化处理。归一后处理后，点积、余弦相似度，欧氏距离之间有等价关系。
 
 假设 n 维原始向量空间：<img src="http://latex.codecogs.com/gif.latex?\\R^n(n>0)" title="\\R^n(n>0)" />
 
@@ -30,7 +30,7 @@
 
 ## 计算向量相似度
 
-近似最近邻搜索（approximate nearest neighbor searching, ANNS）是目前针对向量搜索的主流思路。其核心理念在于只在原始向量空间的子集中进行计算和搜索，从而加快整体搜索速度。 
+近似最近邻搜索（approximate nearest neighbor searching, ANNS）是目前针对向量搜索的主流思路。其核心理念在于只在原始向量空间的子集中进行计算和搜索，从而加快整体搜索速度。
 
 假设搜索空间（即原始向量空间的子集）：<img src="http://latex.codecogs.com/gif.latex?\gamma,&space;\gamma&space;\subset&space;R^n" title="\gamma, \gamma \subset R^n" />
 
@@ -73,7 +73,7 @@
 
 <img src="http://latex.codecogs.com/gif.latex?$$d(A,B)&space;=&space;\sqrt{\displaystyle\sum_{i=1}^n&space;(a_i-b_i)&space;^2}$$" title="$$d(A,B) = \sqrt{\displaystyle\sum_{i=1}^n (a_i-b_i) ^2}$$" />
 
-通过欧氏距离判断相似度：欧式距离越小，相似度越高。即 
+通过欧氏距离判断相似度：欧式距离越小，相似度越高。即
 
 <img src="http://latex.codecogs.com/gif.latex?$$TopK(A)&space;=&space;\underset{B&space;\in\&space;\gamma}{\operatorname{argmin}}&space;\big&space;(&space;d(A,B)&space;\big&space;)$$" title="$$TopK(A) = \underset{B \in\ \gamma}{\operatorname{argmin}} \big ( d(A,B) \big )$$" />
 
