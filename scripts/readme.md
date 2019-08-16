@@ -1,3 +1,5 @@
+### milvus_bootcamp.py 使用说明
+
 milvus_bootcamp.py中需要用到的python包有(使用脚本前请自行安装）：
 - numpy
 - psycopg2
