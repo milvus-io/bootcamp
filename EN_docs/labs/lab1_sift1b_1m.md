@@ -22,7 +22,7 @@ Download the following data and scripts, and save them to a file named *milvlus_
 - [One million vectors dataset](https://pan.baidu.com/s/1nVIIxO8MnOle339iYs2dUw)
 - [Query vector dataset](https://pan.baidu.com/s/1mBRM1cJZ6QWehDuddOYl4A)
 - [Search ground truth](https://pan.baidu.com/s/1-95nJvW3vx2Cq9wqBWOFaA) 
-- [Test scripts][/bootcamp/scripts/]
+- [Test scripts](/bootcamp/scripts/)
 
 When it is done, there should be the following files in *milvus_sift1m*:
 
