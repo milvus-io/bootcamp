@@ -1,7 +1,7 @@
 # Hardware Requirements
 
 - [Lab Test 1: One Million Vector Search (Data source: SIFT1B)](#lab1)
-- [Lab Test 2: 100 Million Vector Search (Data source: SIFT1B)](#lab2)
+- [Lab Test 2: 100-Million-Scale Vector Search (Data source: SIFT1B)](#lab2)
 - [Extended Test: 1000 Million Vector Search (Data source: SIFT1B)](#labx)
 - [Edge Deployment: ARM Platform](#arm)
 
