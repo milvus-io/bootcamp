@@ -7,7 +7,7 @@
   * [Data Files](data_preparation/data_file_consideration.md)
 - **Vector Search Lab Tests**
   * [Lab Test 1: One Million Vector Search](labs/lab1_sift1b_1m.md)
-  * [Lab Test 2: 100 Million Vector Search](labs/lab1_sift1b_100m.md)
+  * [Lab Test 2: 100 Million Vector Search](labs/lab2_sift1b_100m.md)
 
 
 
