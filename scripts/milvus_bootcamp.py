@@ -605,8 +605,8 @@ def main():
             connect_server()
             delete_table(table_name=table_name);
             import os
-            if os.path.exists(table_name + 'mapid.txt'):
-                os.remove(table_name + 'mapid.txt')
+            if os.path.exists(table_name + '_idmap.txt'):
+                os.remove(table_name + '_idmap.txt')
         elif opt_name in ("-l", "--list"):    #test.py -q <nq> -k <topk> -l
             ground_truth_process(nq,topk)
             sys.exit()
