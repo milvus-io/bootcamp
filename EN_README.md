@@ -1,17 +1,15 @@
-# 关于 Milvus 在线训练营
-Milvus 是 Zilliz 公司为了解决海量特征向量处理中存在的主要瓶颈，而研发的高速智能向量检索引擎。旨在帮助用户轻松应对海量非结构化数据挑战：实现高性能、高精度、可扩展的海量特征向量检索，实现对非结构化数据的近似查询和分析。
+# About Milvus Bootcamp
+Milvus, designed by ZILLIZ, is an intelligent vector search engine which makes incredibly fast querying speed enhancement over current solutions of massive vector processing. It is intended to provide enterprises with high-performance, high-precision and scalable similarity search and analysis of feature vectors and unstructured data. 
 
-本在线训练营的目的是：
+Goals of the bootcamp:
 
-1. 帮助用户快速熟悉 Milvus 产品的安装、使用
-
-2. 提供对 Milvus 性能测试的相关指导
-
-3. 展示 Milvus 如何赋能非结构化数据相关的解决方案
+1. Help you quickly get familiar with the installation and use of Milvus.
+2. Walk you through the procedures to carry out performance tests about Milvus.
+3. Demonstrate Milvus solutions about unstructured data.
 
 
 
 
-# 点击进入：  [**在线训练营**](docs/README.md)
+# Try the [**Bootcamp**](docs/README.md)
 
-# 查看更多： [Milvus 解决方案原型](solutions/README.md)
+# Learn more about [Milvus Solutions](solutions/README.md)
