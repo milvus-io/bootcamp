@@ -154,7 +154,7 @@ When the execution is completed, you will see the test results in the file *xxx_
 
 ![1m_per_10_20](pic/1m_per_10_20.png)
 
-- nq - the ordinal number of query vectors
+- nq - the number of query vectors
 - topk - the top k most similar vectors for the query vectors 
 - total_time - the total query elapsed time (in seconds)
 - avg_time - the average time to query one vector (in seconds)
