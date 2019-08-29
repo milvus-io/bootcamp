@@ -38,19 +38,19 @@ Before executing this script, edit the following parameters in the script to mat
 
 | Parameter | Description |
 | --- | --- |
-| MILVUS_TABLE |The name of the table to create in Milvus.|
-| PG_TABLE_NAME |The name of the table to create in PostgreSQL.|
-| FILE_PATH |The path of local storage of base vectors.|
-| VEC_NUM |The total number of vectors to import into Milvus.|
-| BASE_LEN |The number of vectors batch imported into the table.|
-| VEC_DIM |The dimension set in the table in Milvus. It should be set to the dimension of the data to be imported|
-| SERVER_ADDR |The address of Milvus server.|
-| SERVER_PORT |The port of Milvus server.|
-| PG_HOST |The address of PostgreSQL server.|
-| PG_PORT |The port of PostgreSQL server.|
-| PG_USER |The username to use in PostgreSQL.|
-| PG_PASSWORD |The password to use in PostgreSQL.|
-| PG_DATABASE |The database to use in PostgreSQL. |
+| `MILVUS_TABLE` |Name of the table to create in Milvus.|
+| `PG_TABLE_NAME` |Name of the table to create in PostgreSQL.|
+| `FILE_PATH` |Path of local storage of base vectors.|
+| `VEC_NUM` |Total number of vectors to import into Milvus.|
+| `BASE_LEN` |Number of vectors batch imported into the table.|
+| `VEC_DIM` |Dimension set in the table in Milvus. It should be set to the dimension of the data to be imported|
+| `SERVER_ADDR` |Address of Milvus server.|
+| `SERVER_PORT` |Port of Milvus server.|
+| `PG_HOST` |Address of PostgreSQL server.|
+| `PG_PORT` |Port of PostgreSQL server.|
+| `PG_USER` |Username to use in PostgreSQL.|
+| `PG_PASSWORD` |Password to use in PostgreSQL.|
+| `PG_DATABASE` |Database to use in PostgreSQL. |
 
 ##### Execute the script
 
@@ -70,44 +70,44 @@ Before searching vectors, edit the following parameters in the script to match y
 
 | Parameter | Description |
 | --- | --- |
-|QUERY_PATH |The path for the local storage of query vectors.|
-|MILVUS_TABLE |The name of the table to create in Milvus. Use the same table name set for Milvus in *mixed_import.py*.|
-|PG_TABLE_NAME |The name of the table to create in PostgreSQL. Use the same table name set for PostgreSQL in *mixed_import.py*.|
-|SERVER_ADDR |The address of Milvus server.|
-|SERVER_PORT |The port of Milvus server.|
-|PG_HOST |The address of PostgreSQL server.|
-|PG_PORT |The port of PostgreSQL server.|
-|PG_USER |The username to use in PostgreSQL.|
-|PG_PASSWORD |The password to use in PostgreSQL.|
-|PG_DATABASE |The database to use in PostgreSQL.|
-|TOP_K |The top k most similar result vectors.|
-|DISTANCE_THRESHOLD |The threshold to filter the top k result vectors. Default value is 1. Vectors with a Euclidean distances smaller than this threshold will be selected out.|
+|`QUERY_PATH` |Path for the local storage of query vectors.|
+|`MILVUS_TABLE` |Name of the table to create in Milvus. Use the same table name set for Milvus in `mixed_import.py`.|
+|`PG_TABLE_NAME` |Name of the table to create in PostgreSQL. Use the same table name set for PostgreSQL in `mixed_import.py`.|
+|`SERVER_ADDR` |Address of Milvus server.|
+|`SERVER_PORT` |Port of Milvus server.|
+|`PG_HOST` |Address of PostgreSQL server.|
+|`PG_PORT` |Port of PostgreSQL server.|
+|`PG_USER` |Username to use in PostgreSQL.|
+|`PG_PASSWORD` |Password to use in PostgreSQL.|
+|`PG_DATABASE` |Database to use in PostgreSQL.|
+|`TOP_K` |The top k most similar result vectors.|
+|`DISTANCE_THRESHOLD` |Threshold to filter the top k result vectors. Default value is 1. Vectors with a Euclidean distances smaller than this threshold will be selected out.|
 
 
 ##### Variables
 
 | Variable       | Description                                                  |
 | -------------- | ------------------------------------------------------------ |
-| -n / --num     | Defines the ordinal rank of the query vector in the vector base set. |
-| -s / --sex     | Define the gender of the human face: 'male' or 'female'.     |
-| -t / --time    | Specifies the query time range, e.g. ’[2019-04-05 00:10:21, 2019-05-20 10:54:12]' |
-| -g / --glasses | Defines if the human face wears glasses: 'True' or 'False'.  |
-| -q / --query   | Starts the query execution.                                  |
-| -v / --vector  | The vectors corresponding with the ids entered.              |
+| `-n` / `--num`     | Defines the ordinal rank of the query vector in the vector base set. |
+| `-s` / `--sex`     | Define the gender of the human face: `male` or `female`.     |
+| `-t` / `--time`    | Specifies the query time range, e.g. `[2019-04-05 00:10:21, 2019-05-20 10:54:12]` |
+| `-g` / `--glasses` | Defines if the human face wears glasses: `True` or `False`.  |
+| `-q` / `--query`   | Starts the query execution.                                  |
+| `-v` / `--vector`  | The vectors corresponding with the ids entered.              |
 
-To search the top k most similar vectors of the vector which ranks 0 in the query vector set, meanwhile, the result vectors must match conditions that the gender is 'male', and that the vectors were generated during the time range of ''[2019-05-01,  2019-07-12]'':
+To search the top k most similar vectors of the vector which ranks `0` in the query vector set, meanwhile, the result vectors must match conditions that the gender is `male`, and that the vectors were generated during the time range of `[2019-05-01,  2019-07-12]`:
 
 ```shell
 python3 mixed_query.py -n 0 -s male -t '[2019-05-01 00:00:00, 2019-07-12 00:00:00]' -q
 ```
 
-To search the top k most similar vectors of the 20th vector in the query vector set, meanwhile, the result vectors must match conditions that the gender is 'female' who wears no glasses:
+To search the top k most similar vectors of the 20th vector in the query vector set, meanwhile, the result vectors must match conditions that the gender is `female` who wears no glasses:
 
 ```shell
 python3 mixed_query.py -n 20 -s female -g False
 ```
 
-To search the top k most similar vectors of the 100th vector in the query vector set, with gender 'female' who wears glasses, and during the time range of '[2019-05-01 15:15:05, 2019-07-30 11:00:00]':
+To search the top k most similar vectors of the 100th vector in the query vector set, with gender `female` who wears glasses, and during the time range of `[2019-05-01 15:15:05, 2019-07-30 11:00:00]`:
 
 ```shell
 python3 mixed_query.py -n 100 -s female -g True -t '[2019-05-01 15:15:05, 2019-07-30 11:00:00]' -q
