@@ -21,7 +21,7 @@ The data used in this test are from [ANN_SIFT1B](http://corpus-texmex.irisa.fr/)
 - Base vectors: ANN_SIFT1B Base_set
 - Query vectors: ANN_SIFIT1B Query_set
 
-> Note: You can also use data in bvecs format. 
+> Note: You can also use data in `bvecs` format. 
 
 ## Test scripts
 
