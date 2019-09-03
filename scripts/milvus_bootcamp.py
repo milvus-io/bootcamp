@@ -68,7 +68,7 @@ def load_vec_list(file_name,num=0):
         vec_list.append(data[i].tolist())
     return vec_list
 
-# Calculate the European distance
+# Calculate the Euclidean distance
 def calEuclideanDistance(vec1,vec2):
         vec1 = np.array(vec1)
         vec2 = np.array(vec2)
