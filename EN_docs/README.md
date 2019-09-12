@@ -1,4 +1,5 @@
 # Milvus Online Boot Camp
+[中文版](../README.md) | [English](README.md)
 - **Milvus Basics**
   * [Milvus Quick Start](milvus101/quickstart.md)
   * [Hardware Requirements](milvus101/hardware_platform.md)
