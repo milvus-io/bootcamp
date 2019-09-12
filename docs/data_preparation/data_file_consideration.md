@@ -20,7 +20,7 @@ npy 格式准备向量数据，每个文件建议不超过 10 万条向量。以
 目前 Milvus 数据库提供了一个 Python 客户端。通过 Python 脚本导入向量数据的过程：
 ### 针对 npy 文件
 1. 通过 numpy.load 方法读入一个 npy 文件，生成 numpy.array 类型的数据
-2. 通过 numpy.array.tolist 方法将 numpy.array 数据导转换成 2 维列表（形如，[[],[]...[]]）
+2. 通过 numpy.array.tolist 方法将 numpy.array 数据转换成 2 维列表（形如，[[],[]...[]]）
 3. 通过 Milvus 提供的 Python API 将 2 维列表数据导入 Milvus 数据库，同时返回向量 ID 列表
 
 ### 针对 csv 文件

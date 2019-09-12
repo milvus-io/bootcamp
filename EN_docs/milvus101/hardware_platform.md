@@ -1,7 +1,7 @@
 # Hardware Requirements
 
 - [Lab Test 1: One Million Vector Search (Data source: SIFT1B)](#lab1)
-- [Lab Test 2: 100 Million Vector Search (Data source: SIFT1B)](#lab2)
+- [Lab Test 2: 100-Million-Scale Vector Search (Data source: SIFT1B)](#lab2)
 - [Extended Test: 1000 Million Vector Search (Data source: SIFT1B)](#labx)
 - [Edge Deployment: ARM Platform](#arm)
 
@@ -27,8 +27,8 @@ About 15 GB memory is needed in this test.
 | Component  | Minimum Config                     |
 | ---------- | ---------------------------------- |
 | OS         | Ubuntu LTS 18.04                   |
-| CPU        | Intel Core i7-7700K                |
-| GPU        | Nvidia GeForce GTX 1050, 4GB GDDR5 |
+| CPU        | Intel Core i7-8700                |
+| GPU        | Nvidia GeForce GTX 1060, 6GB GDDR5 |
 | GPU Driver | CUDA 10.1, Driver 418.74           |
 | Memory     | 16 GB DDR4 ( 2400 Mhz ) x 2        |
 | Storage    | SATA 3.0 SSD 256 GB                |
