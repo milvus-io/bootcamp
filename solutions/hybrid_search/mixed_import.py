@@ -15,34 +15,24 @@ fake = Faker()
 
 MILVUS_TABLE = 'mixe_query'
 PG_TABLE_NAME = 'mixe_query'
-FILE_PATH = '/data/lcl/200_ann_test/raw_data/bigann_base.bvecs'
 
+FILE_PATH = '/data/lcl/200_ann_test/raw_data/bigann_base.bvecs'
 
 VEC_NUM = 100000000 
 BASE_LEN = 100000
 
+VEC_DIM = 128
 
 SERVER_ADDR = "127.0.0.1"
 SERVER_PORT = 19530
+
+PG_HOST = "192.168.1.10"
+PG_PORT = 5432
+PG_USER = "postgres"
+PG_PASSWORD = "zilliz123"
+PG_DATABASE = "postgres"
+
 milvus = Milvus()
-
-def load_picture_vec():
-    path = '{}/image'.format(os.getcwd())
-    filenames = os.listdir(path)
-    filenames.sort()
-    vec = []
-    vectors = []
-    for filename in filenames:
-        print(filename)
-        filepath = path + '/' + filename
-        img = face_recognition.load_image_file(filepath)
-        face_locations = face_recognition.face_locations(img)
-        face_encodings = face_recognition.face_encodings(img, face_locations)
-        for face_location, face_encoding in zip(face_locations, face_encodings):
-            vec = list(face_encoding)
-        vectors.append(vec)
-    return vectors
-
 
 def load_bvecs_data(fname,base_len,idx):
     begin_num = base_len * idx
@@ -67,21 +57,19 @@ def connect_milvus_server():
     return status
 
 
-def create_milvus_table(milvus,table_name):
+def create_milvus_table():
     if not milvus.has_table(table_name):
         param = {
-            'table_name': table_name,
-            'dimension': 128,
+            'table_name': MILVUS_TABLE,
+            'dimension': VEC_DIM,
             'index_type': IndexType.IVF_SQ8
         }
         milvus.create_table(param)
 
 
-
-
 def connect_postgres_server():
-    try:
-        conn = psycopg2.connect(host="192.168.1.10",port=5432,user="postgres",password="zilliz123",database="postgres")
+    try: 
+        conn = psycopg2.connect(host=PG_HOST, port=PG_PORT, user=PG_USER, password=PG_PASSWORD,database=PG_DATABASE)
         return conn
     except:
         print ("unable to connect to the database")
@@ -150,32 +138,28 @@ def record_txt(ids,vectors):
 
 def main():
     connect_milvus_server()
-    create_milvus_table(milvus,MILVUS_TABLE)
+    create_milvus_table()
     conn = connect_postgres_server()
     cur = conn.cursor()
     create_pg_table(conn,cur)
     count = 0
     while count < (VEC_NUM // BASE_LEN):
         vectors = load_bvecs_data(FILE_PATH,BASE_LEN,count)
-
         time_start = time.time()    
         status, ids = milvus.add_vectors(table_name=MILVUS_TABLE, records=vectors)
         time_end = time.time()
         print(count, "insert milvue time: ", time_end-time_start)
         # print(count)
-
         time_start = time.time()
         record_txt(ids,vectors)
         copy_data_to_pg(conn, cur)
         time_end = time.time()
         print(count, "insert pg time: ", time_end-time_start)
 
-        #     i = i + 1
 
         count = count + 1
 
     build_pg_index(conn,cur)
-
 
 
 if __name__ == '__main__':
