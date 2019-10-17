@@ -24,7 +24,7 @@ Download the following data and scripts, and save them to a file named *milvlus_
 
 - [Search ground truth](https://pan.baidu.com/s/15dPvxxrfslairyUEBJgk-g)
 
-- [Test scripts](../../bootcamp/scripts/)
+- [Test scripts](../../scripts/)
 
 When it is done, there should be the following files in *milvus_sift100m*:
 
