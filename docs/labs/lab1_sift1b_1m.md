@@ -37,6 +37,10 @@
 **注意**
 
 使用脚本 milvus_bootcamp.py 进行测试之前，请仔细阅读该脚本的 README 。并根据实际情况，对脚本中的相关变量值进行修改。
+使用脚本 get_id.sh 测试之前需要为它添加可执行权限，执行下述指令：
+```bash
+$ chmod +x get_id.sh
+```
 
 ## 2、 配置 Milvus 参数
 
