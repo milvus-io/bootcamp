@@ -17,7 +17,7 @@ The one million vectors used in this test are extracted from the dataset [SIFT1B
 
 #### Download test tools
 
-Download the following data and scripts, and save them to a file named *milvlus_sift1m*.
+Download the following data and scripts, and save them to a file named *milvus_sift1m*.
 
 - [One million vectors dataset](https://pan.baidu.com/s/1nVIIxO8MnOle339iYs2dUw)
 - [Query vector dataset](https://pan.baidu.com/s/1mBRM1cJZ6QWehDuddOYl4A)
