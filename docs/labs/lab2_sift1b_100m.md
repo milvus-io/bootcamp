@@ -97,9 +97,7 @@ $ python3 milvus_toolkit.py --table ann_100m_sq8h --desc_index
 $ python3 milvus_load.py --table=ann_100m_sq8h -n
 ```
 
-数据导入过程中，可以看到本项目一次性导入一个文本的数据量，运行过程如图：
-
-![1573464961979](C:\Users\37790\AppData\Roaming\Typora\typora-user-images\1573464961979.png)
+数据导入过程中，可以看到本项目一次性导入一个文本的数据量。
 
 上述过程完成之后，运行如下命令以查看 Milvus 表中的向量条数：
 
