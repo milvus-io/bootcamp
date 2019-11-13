@@ -1,4 +1,4 @@
-# Lab Test 2: 100-Million-Scale Vector Search
+# Lab Test 2: 100-Million-Scale Vector Similarity Search
 
 ## 1. Prepare test data and scripts
 
@@ -15,7 +15,7 @@ The 100 million vectors used in this test are extracted from the dataset [SIFT1B
 | Memory        | 16 GB DDR4 ( 2400 Mhz ) x 2                |
 | Storage       | SATA 3.0 SSD 256 GB                  |
 
-Download the following data and scripts, and save them to a file named *milvlus_sift100m*. 
+Download the following data and scripts, and save them to a file named **milvlus_sift100m**. 
 - [100 million vector dataset](https://pan.baidu.com/s/1N5jGKHYTGchye3qR31aNnA)
 
   Download the dataset and extract the data to **milvus_sift100M/bvecs_data/**. When the extraction is completed, there will be 1000 .npy files, each containing 100,000 vectors, in file **bvecs_data**.
@@ -24,16 +24,16 @@ Download the following data and scripts, and save them to a file named *milvlus_
 
 - [Search ground truth](https://pan.baidu.com/s/15dPvxxrfslairyUEBJgk-g)
 
-- [Test scripts](/bootcamp/scripts/)
+- [Test scripts](../../scripts/)
 
-When it is done, there should be the following files in *milvus_sift100m*:
+When it is done, there should be the following files in **milvus_sift100m**:
 
-1. The *bvecs_data* file containing 100 million vectors
-2. The *query.npy* file that has 10,000 query vectors
-3. The ground_truth.txt file with the top 1000 most similar results for each query vector
-4. The test script files : *milvus_bootcamp.py* and *get_id.sh*
+1. The **bvecs_data** file containing 100 million vectors
+2. The **query.npy** file that has 10,000 query vectors
+3. The **ground_truth.txt** file with the top 1000 most similar results for each query vector
+4. The test script files : **milvus_bootcamp.py** and **get_id.sh**
 
-> **Note：** Please go through the README carefully before testing with script *milvus_bootcamp.py*. Make changes to the parameters in the script to match your scenario.
+> **Note:** Please go through the README carefully before testing with script **milvus_bootcamp.py**. Make changes to the parameters in the script to match your scenario.
 
 ## 2. Configure Milvus parameters
 
@@ -48,7 +48,7 @@ Configuration file: **/home/$USER/milvus/conf/server_config.yaml**
 |    use_blas_threshold    |  801   |
 |          nprobe          |   32   |
 
-After the parameter configuration, restart Milvus Docker apply them.
+After you have configured these parameters, restart Milvus to apply them.
 
 ```bash
 $ docker restart <container id>
@@ -58,18 +58,18 @@ $ docker restart <container id>
 
 #### Before the data import
 
-- Make sure the files *bvecs_data* and *milvus_bootcamp.py* are both placed under the directory *milvus_sift1m*. 
+- Make sure the files **bvecs_data** and **milvus_bootcamp.py** are both placed under the directory **milvus_sift1m**. 
 - Make sure Milvus is already installed and started. (For details of Milvus installation, please read [Milvus Quick Start](../milvus101/quickstart.md) )
 
 #### Import data
 
-Go to *milvus_sift100m*, and run the following command:
+Go to **milvus_sift100m**, and run the following command:
 
 ```bash
 $ python3 milvus_bootcamp.py --table=ann_100m_sq8 --index=ivfsq8 -t
 ```
 
-You will see vectors inserted into a table named *ann_100m_sq8*, with the index_type of `IVF_SQ8`. 
+You will see vectors inserted into a table named `ann_100m_sq8`, with the index_type of `IVF_SQ8`. 
 
 ![100m_import](pic/100m_import.png)
 
@@ -80,7 +80,7 @@ $ python3 milvus_bootcamp.py --show
 $ python3 milvus_bootcamp.py --table=ann_100m_sq8 --rows
 ```
 
-When the import is completed, a file *an_100m_sq8_idmap.txt* will be created under *milvus_sift100m*. The file stores the vector ids and the metadata such as from which .npy file each vector comes from.   
+When the import is completed, a file **an_100m_sq8_idmap.txt** will be created under **milvus_sift100m**. The file stores the vector ids and the metadata such as from which .npy file each vector comes from.   
 
 To ensure that index is built for all imported data, go to directory  **/home/$USER/milvus/db**, and run the following statement:
 
@@ -105,7 +105,7 @@ sqlite> select * from TableFiles where table_id='ann_100m_sq8';
 
 When you examine the verification results, you will notice that multiple records are returned with the status verification. That's due to the fact that the data in the table will be automatically divided into multiple ranges to optimize the query performance. 
 
-The 3rd column represents the index type built for the table (`3` represents index type `IVF_SQ8`), while the 5th column shows if index is built for a particular range (`3` represents that index is already built for the range). If there are any ranges for which the index is not yet built, you can build index manually by running below statement under directory *milvus_sift100m*:
+The 3rd column represents the index type built for the table (`3` represents index type `IVF_SQ8`), while the 5th column shows if index is built for a particular range (`3` represents that index is already built for the range). If there are any ranges for which the index is not yet built, you can build index manually by running below statement under directory **milvus_sift100m**:
 
 ```bash
 $ python3 milvus_bootcamp.py --table=ann_100m_sq8 --build
@@ -125,32 +125,32 @@ Accuracy = Number of shared vectors (between Milvus search results and Ground tr
 
 #### Step 1: Run accuracy test scripts
 
-To test the search precision for top 20 results of 10 vectors randomly chosen from the 10,000 query vectors, go to directory *milvus_sift100m*, and run this script:
+To test the search precision for top 20 results of 10 vectors randomly chosen from the 10,000 query vectors, go to directory **milvus_sift100m**, and run this script:
 
 ```bash
 $ python3 milvus_bootcamp.py --table=ann_100m_sq8 -q 10 -k 20 -s
 ```
 
-When comparing Milvus search results with ground truth, the default option of *milvus_bootcamp.py* is to use vector ids returned by Milvus to find the vector location in file *ann_100m_sq8_idmap.txt*. 
+When comparing Milvus search results with ground truth, the default option of **milvus_bootcamp.py** is to use vector ids returned by Milvus to find the vector location in file **ann_100m_sq8_idmap.txt**. 
 
-In addition, *milvus_bootcamp.py* provides a faster way to find vector location by using PostgresSQL database.
+In addition, **milvus_bootcamp.py** provides a faster way to find vector location by using PostgresSQL database.
 
 1. [Install PostgresSQL database](https://www.postgresql.org/docs/11/installation.html). 
 
-2. Create a table named 'idmap_ann_100m' in PostgresSQL, and add the following strings:
+2. Create a table named `idmap_ann_100m` in PostgresSQL, and add the following strings:
 
    | String   | Type   |
    | -------- | ------ |
    | ids      | bigint |
    | idoffset | text   |
 
-3. Import the data from *ann_100m_sq8_idmap.txt* into table 'idmap_ann_100m', and build index for `ids`
+3. Import the data from **ann_100m_sq8_idmap.txt** into table `idmap_ann_100m`, and build index for `ids`
 
-4. In test script file *milvus_bootcamp.py*, change parameter `PG_FLAG` to *True*, and edit PostgresSQL parameters: host, port, user, password and database, etc. 
+4. In test script file **milvus_bootcamp.py**, change parameter `PG_FLAG` to `True`, and edit PostgresSQL parameters: host, port, user, password and database, etc. 
 
 #### Step 2: Verify test results
 
-When the test script is completed, you will see the following test results in the file *10_20_result.csv* in *accuracy_results*. 
+When the test script is completed, you will see the following test results in the file **10_20_result.csv** in **accuracy_results**. 
 
 ![100m_accu_10_20](pic/100m_accu_10_20.png)
 
@@ -166,14 +166,14 @@ Therefore, based on your data distribution and business scenario, you need to ed
 
 ## 5. Performance test
 
-To test search performance, go to directory *milvus_sift100m*, and run the following script: 
+To test search performance, go to directory **milvus_sift100m**, and run the following script: 
 
 ```bash
 $ python3 milvus_bootcamp.py --table=ann_100m_sq8 -s
 
 ```
 
-When the execution is completed, you will see the test results in the file *xxx_results.csv* ('xxx' represents the execution time) in *performance_results*. Below is a partial display of the results:
+When the execution is completed, you will see the test results in the file **xxx_results.csv** (**xxx** represents the execution time) in **performance_results**. Below is a partial display of the results:
 
 ![100m_per](pic/100m_per.png)
 

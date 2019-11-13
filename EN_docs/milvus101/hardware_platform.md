@@ -2,7 +2,7 @@
 
 - [Lab Test 1: One Million Vector Search (Data source: SIFT1B)](#lab1)
 - [Lab Test 2: 100-Million-Scale Vector Search (Data source: SIFT1B)](#lab2)
-- [Extended Test: 1000 Million Vector Search (Data source: SIFT1B)](#labx)
+- [Extended Test: One Billion Vector Search (Data source: SIFT1B)](#labx)
 - [Edge Deployment: ARM Platform](#arm)
 
 <a name="lab1"></a>
@@ -35,7 +35,7 @@ About 15 GB memory is needed in this test.
 
 <a name="labx"></a>
 
-## Extended Test: 1000 Million Vector Search (Data source: SIFT1B)
+## Extended Test: One Billion Vector Search (Data source: SIFT1B)
 
 About 140 GB memory is needed in this test.
 
