@@ -4,7 +4,7 @@
 
 系统架构图如下所示：
 
-<img src="pic/demo.jpg" width = "450" height = "600" alt="系统架构图" align=center />
+<img src="pic/demo.jpg" width = "650" height = "500" alt="系统架构图" align=center />
 
 ### 数据来源
 
