@@ -14,7 +14,7 @@
 
 下载地址：http://host.robots.ox.ac.uk/pascal/VOC/voc2012/VOCtrainval_11-May-2012.tar
 
-> 说明：您也可以使用其他的图片数据进行测试。
+> 说明：您也可以使用其他的图片数据进行测试。经过测试，可以进行加载的图片格式有.jpg格式、.png格式。
 
 ### 部署流程
 
@@ -25,7 +25,7 @@
 ##### 2、启动 pic_search_demo docker
 
 ```bash
-$ docker run --rm --gpus all --name zilliz_search_images_demo \
+$ docker run -d --rm --gpus all --name zilliz_search_images_demo \
 -v /your/data/path:/tmp/images-data \
 -p 35000:5000 \
 -e "DATA_PATH=/tmp/images-data" \
@@ -38,7 +38,7 @@ chenglong555/pic_search_demo:0.1.0
 ##### 3、启动 pic_search_demo_web docker
 
 ```bash
-$ docker run  -p 80:80 \
+$ docker run -d  -p 80:80 \
 -e API_URL=http://192.168.1.85:35000/api/v1 \
 chenglong555/pic_search_demo_web:0.1.0
 ```
