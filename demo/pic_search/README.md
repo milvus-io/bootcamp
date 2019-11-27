@@ -30,7 +30,7 @@ $ docker run -d --rm --gpus all --name zilliz_search_images_demo \
 -p 35000:5000 \
 -e "DATA_PATH=/tmp/images-data" \
 -e "MILVUS_HOST=192.168.1.85" \
-chenglong555/pic_search_demo:0.1.0
+chenglong555/pic_search_demo:0.2.0
 ```
 
 上述启动命令中，“ /your/data/path ” 表示你存放图片数据的目录，“ MILVUS_HOST “ 表示启动 Milvus docker 的服务器地址，命令其他部分保持不变即可。
@@ -54,6 +54,8 @@ chenglong555/pic_search_demo_web:0.1.0
 进行第一次搜索之前，需要点击 “ Load Picture " 的按钮将图片数据转换成 512 维的向量加载到 Milvus，加载完一次之后，以后查询就可以不用加载了，加载完成之后的搜索界面下图所示：
 
 <img src="pic/web2.png" width = "650" height = "500" alt="系统架构图" align=center />
+
+加载过程中会在网页上端显示加载进度，如果没有显示，刷新一下网页即可看到。
 
 选择一张图片进行搜索：
 
