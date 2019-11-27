@@ -55,7 +55,7 @@ chenglong555/pic_search_demo_web:0.1.0
 
 <img src="pic/web2.png" width = "650" height = "500" alt="系统架构图" align=center />
 
-> 加载过程中会在网页上端显示加载进度，如果没有显示，刷新一下网页即可看到。
+> 加载过程中会在界面上端显示加载进度，如果没有显示，刷新一下网页即可看到。
 
 选择一张图片进行搜索：
 
