@@ -1,4 +1,6 @@
 # 关于 Milvus 在线训练营
+[中文版](README.md) | [English](EN_docs/README.md)
+
 Milvus 是 Zilliz 公司为了解决海量特征向量处理中存在的主要瓶颈，而研发的高速智能向量检索引擎。旨在帮助用户轻松应对海量非结构化数据挑战：实现高性能、高精度、可扩展的海量特征向量检索，实现对非结构化数据的近似查询和分析。
 
 本在线训练营的目的是：
@@ -13,3 +15,10 @@ Milvus 是 Zilliz 公司为了解决海量特征向量处理中存在的主要�
 
 
 # 点击进入：  [**在线训练营**](docs/README.md)
+
+# 点击进入：  [**Milvus Demo**](demo/README.md)
+
+# 查看更多： [Milvus 解决方案原型](solutions/README.md)
+
+
+如需帮助，请联系我们：community@zilliz.com
