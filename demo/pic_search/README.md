@@ -30,7 +30,7 @@ $ docker run -d --rm --gpus all --name zilliz_search_images_demo \
 -p 35000:5000 \
 -e "DATA_PATH=/tmp/images-data" \
 -e "MILVUS_HOST=192.168.1.85" \
-chenglong555/pic_search_demo:0.2.0
+chenglong555/pic_search_demo:0.3.0
 ```
 
 上述启动命令中，“ /your/data/path ” 表示你存放图片数据的目录，“ MILVUS_HOST “ 表示启动 Milvus docker 的服务器地址，命令其他部分保持不变即可。
