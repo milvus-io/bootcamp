@@ -14,7 +14,7 @@
 
 下载地址：http://host.robots.ox.ac.uk/pascal/VOC/voc2012/VOCtrainval_11-May-2012.tar
 
-> 说明：您也可以使用其他的图片数据进行测试。
+> 说明：您也可以使用其他的图片数据进行测试。经过测试，可以进行加载的图片格式有.jpg格式、.png格式。
 
 ### 部署流程
 
@@ -25,12 +25,12 @@
 ##### 2、启动 pic_search_demo docker
 
 ```bash
-$ docker run --rm --gpus all --name zilliz_search_images_demo \
+$ docker run -d --rm --gpus all --name zilliz_search_images_demo \
 -v /your/data/path:/tmp/images-data \
 -p 35000:5000 \
 -e "DATA_PATH=/tmp/images-data" \
 -e "MILVUS_HOST=192.168.1.85" \
-chenglong555/pic_search_demo:0.1.0
+chenglong555/pic_search_demo:0.3.0
 ```
 
 上述启动命令中，“ /your/data/path ” 表示你存放图片数据的目录，“ MILVUS_HOST “ 表示启动 Milvus docker 的服务器地址，命令其他部分保持不变即可。
@@ -38,7 +38,7 @@ chenglong555/pic_search_demo:0.1.0
 ##### 3、启动 pic_search_demo_web docker
 
 ```bash
-$ docker run  -p 80:80 \
+$ docker run -d  -p 80:80 \
 -e API_URL=http://192.168.1.85:35000/api/v1 \
 chenglong555/pic_search_demo_web:0.1.0
 ```
@@ -55,10 +55,22 @@ chenglong555/pic_search_demo_web:0.1.0
 
 <img src="pic/web2.png" width = "650" height = "500" alt="系统架构图" align=center />
 
+> 加载过程中会在界面上端显示加载进度，如果没有显示，刷新一下网页即可看到。
+
 选择一张图片进行搜索：
 
 <img src="pic/web3.png" width = "650" height = "500" alt="系统架构图" align=center />
 
+经实测，在如下机器配置下，整个 demo 系统的端到端查询时间可以达到 1 秒以内。
+
+| Component           | Minimum Config                |
+| ------------------ | -------------------------- |
+| OS            | Ubuntu LTS 18.04 |
+| CPU           | Intel Core i7-7700K           |
+| GPU           | Nvidia GeForce GTX1050Ti, 4GB z  |
+| GPU Driver    | CUDA 10.1, Driver 430.26 |
+| Memory        | 16 GB DDR4 ( 2400 Mhz ) x 2          |
+| Storage       | NVMe SSD 256 GB             |
 
 
  		 				
