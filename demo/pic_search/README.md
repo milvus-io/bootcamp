@@ -62,6 +62,7 @@ chenglong555/pic_search_demo_web:0.1.0
 <img src="pic/web3.png" width = "650" height = "500" alt="系统架构图" align=center />
 
 经实测，在如下机器配置下，整个 demo 系统的端到端查询时间可以达到 1 秒以内。
+
 | Component           | Minimum Config                |
 | ------------------ | -------------------------- |
 | OS            | Ubuntu LTS 18.04 |
