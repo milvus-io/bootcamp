@@ -60,8 +60,16 @@ chenglong555/pic_search_demo_web:0.1.0
 选择一张图片进行搜索：
 
 <img src="pic/web3.png" width = "650" height = "500" alt="系统架构图" align=center />
-经实测，在如下机器配置下，整个 demo 系统的端到端查询时间可以达到 1 秒以内。
 
+经实测，在如下机器配置下，整个 demo 系统的端到端查询时间可以达到 1 秒以内。
+| Component           | Minimum Config                |
+| ------------------ | -------------------------- |
+| OS            | Ubuntu LTS 18.04 |
+| CPU           | Intel Core i7-7700K           |
+| GPU           | Nvidia GeForce GTX1050Ti, 4GB z  |
+| GPU Driver    | CUDA 10.1, Driver 430.26 |
+| Memory        | 16 GB DDR4 ( 2400 Mhz ) x 2          |
+| Storage       | NVMe SSD 256 GB             |
 
 
  		 				
