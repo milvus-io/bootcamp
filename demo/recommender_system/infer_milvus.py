@@ -183,7 +183,7 @@ def main(argv, use_cuda, age=0, gender=1, job=10, mov_features=None, ids=None, I
         if opt_name in ("-a", "--age"):
             age = opt_value
         if opt_name in ("-g", "--gender"):
-            gander = opt_value
+            gender = opt_value
         if opt_name in ("-j", "--job"):
             job = opt_value
         if opt_name in ("-i", "--infer"):
