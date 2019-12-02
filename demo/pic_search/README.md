@@ -30,7 +30,7 @@ $ docker run -d --rm --gpus all --name zilliz_search_images_demo \
 -p 35000:5000 \
 -e "DATA_PATH=/tmp/images-data" \
 -e "MILVUS_HOST=192.168.1.85" \
-chenglong555/pic_search_demo:0.3.0
+chenglong555/pic_search_demo:0.4.0
 ```
 
 上述启动命令中，“ /your/data/path ” 表示你存放图片数据的目录，“ MILVUS_HOST “ 表示启动 Milvus docker 的服务器地址，命令其他部分保持不变即可。
@@ -65,11 +65,11 @@ chenglong555/pic_search_demo_web:0.1.0
 
 | Component           | Minimum Config                |
 | ------------------ | -------------------------- |
-| OS            | Ubuntu LTS 18.04 |
-| CPU           | Intel Core i7-7700K           |
-| GPU           | Nvidia GeForce GTX1050Ti, 4GB z  |
-| GPU Driver    | CUDA 10.1, Driver 430.26 |
-| Memory        | 16 GB DDR4 ( 2400 Mhz ) x 2          |
+| OS            | Ubuntu LTS 16.04 |
+| CPU           | Intel Core i7-8700           |
+| GPU           | Nvidia GeForce GTX1060, 6GB   |
+| GPU Driver    | CUDA 10.0, Driver 430.26 |
+| Memory        | 16 GB DDR4 ( 2400 Mhz ) x 4          |
 | Storage       | NVMe SSD 256 GB             |
 
 
