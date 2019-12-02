@@ -1,10 +1,10 @@
-# 搭建 Milvus 个性化推荐系统
+# Milvus 个性化推荐系统
 
 ## 环境与数据说明
 
 1. 硬件要求：支持在CPU、GPU下运行
 2. 系统要求：CentOS 7.5 / Ubuntu LTS 18.04 或以上 
-4. 软件要求：[Milvus](https://milvus.io/docs/zh-CN/userguide/install_milvus/) / [PaddlePaddle](https://www.paddlepaddle.org.cn/documentation/docs/zh/1.6/beginners_guide/quick_start_cn.html)
+4. 软件要求：[Milvus](https://milvus.io/docs/zh-CN/userguide/install_milvus/) ， [PaddlePaddle](https://www.paddlepaddle.org.cn/documentation/docs/zh/1.6/beginners_guide/quick_start_cn.html)
 4. 数据来源： [MovieLens 百万数据集 (ml-1m) ](http://files.grouplens.org/datasets/movielens/ml-1m.zip), 由 GroupLens Research 实验室搜集整理，参考 [ml-1m-README](http://files.grouplens.org/datasets/movielens/ml-1m-README.txt)。
 
 > Milvus 0.6.0之前的版本都采用 GPU 加速，若要使用 CPU 版请安装 Milvus 0.6.0。
