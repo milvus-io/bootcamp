@@ -36,7 +36,7 @@
 
    ```bash
    # 下载原始电影数据movies_origin.txt到同一目录
-   $ wget 
+   $ wget https://raw.githubusercontent.com/milvus-io/bootcamp/master/demo/recommender_system/movies_origin.txt
    # 生成测试所用数据, -f 后接参数原始电影数据文件名
    $ python3 get_movies_data.py -f movies_origin.txt
    ```
@@ -49,20 +49,21 @@
    # Milvus 根据用户情况做个性化推荐
    $ python3 infer_milvus.py -a <age> -g <gender> -j <job> [-i]
    # 示例运行代码
-   $ python3 infer_milvus.py -a 1 -g 1 -j 10 -i
-   $ python3 infer_milvus.py -a 56 -g 0 -j 16
+   $ python3 infer_milvus.py -a 0 -g 1 -j 10 -i
+   # 或者
+   $ python3 infer_milvus.py -a 6 -g 0 -j 16
    ```
-
+   
    代码运行参数说明：
 
    | 参数        | 说明                                                         |
    | ----------- | ------------------------------------------------------------ |
-   | -a/--age    | 年龄分布<br />1: "Under 18" <br />18: "18-24" <br />25: "25-34" <br />35: "35-44" <br />45: "45-49" <br />50: "50-55" <br />56: "56+" |
+   | -a/--age    | 年龄分布<br />0: "Under 18" <br />1: "18-24" <br />2: "25-34" <br />3: "35-44" <br />4: "45-49" <br />5: "50-55" <br />6: "56+" |
    | -g/--gender | 0:male<br />1:female                                         |
    | -j/--job    | 职业选项<br />0: "other" or not specified <br />1: "academic/educator" <br />2: "artist" <br />3: "clerical/admin" <br />4: "college/grad student" <br />5: "customer service" <br />6: "doctor/health care" <br />7: "executive/managerial" <br />8: "farmer" <br />9: "homemaker" <br />10: "K-12 student" <br />11: "lawyer" <br />12: "programmer" <br />13: "retired" <br />14: "sales/marketing" <br />15: "scientist" <br />16: "self-employed" <br />17: "technician/engineer" <br />18: "tradesman/craftsman" <br />19: "unemployed" <br />20: "writer" |
    | -i/--infer  | [可选] 将测试数据通过模型转换为预测向量数据，并导入 Milvus。<br />**首次**用 Milvus 做个性化推荐要求添加<br />再次训练，**重新生成模型**时要求添加。 |
 
-   执行此命令将对指定用户做个性化推荐，预测出该用户感兴趣的前五部电影结果：
+    执行此命令将对指定用户做个性化推荐，预测出该用户感兴趣的前五部电影结果：
 
    ```bash
    get infer vectors finshed!
