@@ -50,6 +50,7 @@
    $ python3 infer_milvus.py -a <age> -g <gender> -j <job> [-i]
    # 示例运行代码
    $ python3 infer_milvus.py -a 1 -g 1 -j 10 -i
+   $ python3 infer_milvus.py -a 56 -g 0 -j 16
    ```
 
    代码运行参数说明：
