@@ -131,7 +131,7 @@ def milvus_test(usr_features, mov_features, ids):
     insert_vectors = normaliz_data([usr_features.tolist()])
     status, ids = milvus.insert(table_name=table_name, records=insert_vectors, ids = ids)
 
-    time.sleep(6)
+    time.sleep(1)
 
     status, result = milvus.count_table(table_name)
     print("rows in table paddle_demo1:", result)
