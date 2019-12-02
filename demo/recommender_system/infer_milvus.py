@@ -142,7 +142,7 @@ def milvus_test(usr_features, IS_INFER, mov_features=None, ids=None):
         insert_vectors = normaliz_data(mov_features)
         status, ids = milvus.insert(table_name=table_name, records=insert_vectors, ids = ids)
 
-        time.sleep(6)
+        time.sleep(1)
 
     status, result = milvus.count_table(table_name)
     print("rows in table recommender_demo:", result)
