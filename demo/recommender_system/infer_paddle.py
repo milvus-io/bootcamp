@@ -147,7 +147,7 @@ def milvus_test(usr_features, mov_features, ids):
     }
     status, results = milvus.search_vectors(**param)
     print("Searched ids:", results[0][0].id)
-    print("Distance:", float(results[0][0].distance)*5)
+    print("Score:", float(results[0][0].distance)*5)
 
     status = milvus.drop_table(table_name)
 
