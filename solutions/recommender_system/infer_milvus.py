@@ -31,7 +31,7 @@ def get_movies_data(file):
     return movies_data
 
 
-def get_infer_verctors(use_cuda, params_dirname, gender, age, job):
+def get_infer_vectors(use_cuda, params_dirname, gender, age, job):
     ids = []
     mov_vectors = []
     mov_data = get_movies_data(file)
@@ -174,10 +174,10 @@ def main(argv, use_cuda, age=0, gender=1, job=10, mov_features=None, ids=None, I
         opts, args = getopt.getopt(
             sys.argv[1:],
             "g:a:j:i",
-            ["gander=", "age=", "job=", "infer"],
+            ["gender=", "age=", "job=", "infer"],
         )
     except getopt.GetoptError:
-        print("Usage: test.py -a age -g gander -j job --infer")
+        print("Usage: test.py -a age -g gender -j job --infer")
         sys.exit(2)
     for opt_name, opt_value in opts:
         if opt_name in ("-a", "--age"):
@@ -190,9 +190,9 @@ def main(argv, use_cuda, age=0, gender=1, job=10, mov_features=None, ids=None, I
             IS_INFER = True
 
     if IS_INFER:
-        usr_features, mov_features, ids = get_infer_verctors(use_cuda, params_dirname, gender, age, job)
+        usr_features, mov_features, ids = get_infer_vectors(use_cuda, params_dirname, gender, age, job)
         ids = list(map(int, ids))
-        print("get infer vectors finshed!")
+        print("get infer vectors finished!")
     else:
         usr_features, _, _ = infer(use_cuda, params_dirname, gender, age, job)
     milvus_test([usr_features.tolist()], IS_INFER, mov_features, ids)
