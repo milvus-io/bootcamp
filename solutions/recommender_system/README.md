@@ -11,11 +11,13 @@
 
 本文测试环境如下：
 
-| 要求 | 配置                                 |
-| ---- | ------------------------------------ |
-| 硬件 | CPU + GPU                            |
-| 系统 | Ubuntu 18.04                         |
-| 软件 | Milvus 0.5.3<br />PaddlePaddle 1.6.1 |
+| Component | Config                                   |
+| --------- | ---------------------------------------- |
+| CPU       | Intel(R) Core(TM) i7-7700K CPU @ 4.20GHz |
+| GPU       | GeForce GTX 1050 Ti 4GB                  |
+| Memory    | 32GB                                     |
+| OS        | Ubuntu 18.04                             |
+| Software  | Milvus 0.5.3<br />PaddlePaddle 1.6.1     |
 
 
 
