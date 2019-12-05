@@ -1,25 +1,23 @@
-# 关于 Milvus 在线训练营
-[中文版](README.md) | [English](EN_docs/README.md)
+# About Milvus Bootcamp
 
-Milvus 是一款高速智能向量检索引擎。旨在通过以下方式帮助用户轻松应对海量非结构化数据挑战：
-- 实现高性能、高精度、可扩展的海量特征向量检索。
-- 实现对非结构化数据的近似查询和分析。
+[English](README.md) | [中文版](CN_README.md)  
 
-本在线训练营的目的是：
+Milvus is an intelligent, high-speed vector search engine. It is intended to help users deal with challenges of massive-scale unstructured data by the following methods:
 
-1. 帮助用户快速熟悉 Milvus 产品的安装、使用。
+- High-performance, high-precision and scalable search of feature vectors.
+- Similarity search and analysis of unstructured data.
 
-2. 提供对 Milvus 性能测试的相关指导。
+The goals of the bootcamp are as follows:
 
-3. 展示 Milvus 如何赋能非结构化数据相关的解决方案。
-
-
+1. Help you quickly get familiar with the installation and use of Milvus.
+2. Walk you through the procedures to carry out performance tests about Milvus.
+3. Demonstrate Milvus solutions about unstructured data.
 
 
-# 点击进入：  [**在线训练营**](docs)
-
-# 查看更多： [Milvus 解决方案原型](solutions)
 
 
-与其他用户和贡献者联系，欢迎加入： [Slack channel](https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk).
+# Try the [**Bootcamp**](docs)
 
+# Learn more about [Milvus Solutions](solutions)
+
+To connect with other users and contributors, welcome to join our [Slack channel](https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk).
