@@ -2,7 +2,7 @@
 
 ## 1、准备测试数据和脚本
 
-本实验所使用的原始数据集为 SIFT1B ，关于该数据集的详细信息请参考：[http://corpus-texmex.irisa.fr/](http://corpus-texmex.irisa.fr/)。在本次测试中，我们提取了原始数据集中的 100 万条数据。
+本实验所使用的原始数据集为 SIFT1B ，关于该数据集的详细信息请参考：[http://corpus-texmex.irisa.fr/](http://corpus-texmex.irisa.fr/)。在本次测试中，我们提取了原始数据集中的 100 万条数据。测试使用的 Milvus 版本为 0.3.1。
 
 经实测，以下硬件配置可顺利完成实验：
 
