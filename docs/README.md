@@ -1,5 +1,9 @@
 # Milvus 在线训练营
+
+[中文版](README.md) | [English](../EN_docs/README.md)
+
 - **Milvus 基础**
+
   * [Milvus 快速上手](milvus101/quickstart.md)
   * [硬件平台](milvus101/hardware_platform.md)
 
