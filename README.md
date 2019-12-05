@@ -1,6 +1,6 @@
 # About Milvus Bootcamp
 
-[English](README.md) | [中文版](CN_README.md)  
+[English](README.md) | [中文版](CN_README.md)
 
 Milvus is an intelligent, high-speed vector search engine. It is intended to help users deal with challenges of massive-scale unstructured data by the following methods:
 
@@ -16,8 +16,8 @@ The goals of the bootcamp are as follows:
 
 
 
-# Try the [**Bootcamp**](docs)
+# Try the [**Bootcamp**](EN_docs)
 
-# Learn more about [Milvus Solutions](solutions)
+# Learn more about [Milvus Solutions](EN_solutions)
 
 To connect with other users and contributors, welcome to join our [Slack channel](https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk).
