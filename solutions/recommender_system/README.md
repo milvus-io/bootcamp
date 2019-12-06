@@ -37,7 +37,7 @@
 
    ```bash
    # 下载原始电影数据movies_origin.txt到同一目录
-   $ wget https://raw.githubusercontent.com/milvus-io/bootcamp/master/demo/recommender_system/movies_origin.txt
+   $ wget https://raw.githubusercontent.com/milvus-io/bootcamp/0.5.3/demo/recommender_system/movies_origin.txt
    # 生成测试所用数据, -f 后接参数原始电影数据文件名
    $ python3 get_movies_data.py -f movies_origin.txt
    ```
