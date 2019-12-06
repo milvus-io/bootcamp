@@ -1,6 +1,6 @@
 # Milvus 快速上手
 
-该指南主要包含 Milvus Docker 版的快速安装，以及相关 Python 示例代码的运行。如果想进一步了解 Milvus 的使用，请访问 [Milvus 用户指南](https://github.com/milvus-io/docs/blob/0.5.2/zh-CN/userguide/install_milvus.md)。
+该指南主要包含 Milvus Docker 版的快速安装，以及相关 Python 示例代码的运行。如果想进一步了解 Milvus 的使用，请访问 [Milvus 用户指南](https://github.com/milvus-io/docs/blob/0.5.3/zh-CN/userguide/install_milvus.md)。
 
 ## 安装前提
 1. Milvus Docker 版目前仅在 Linux 系统上运行，请确保您的 Linux 系统符合以下版本：
@@ -36,7 +36,7 @@
 
    ```shell
    # Download Milvus Docker image
-   $ docker pull milvusdb/milvus:0.5.2-d110719-ea505c
+   $ docker pull milvusdb/milvus:0.5.3-d111319-75998b
    ```
 
 2. 创建 Milvus 文件夹，并添加 server_config 和 log_config
@@ -47,8 +47,8 @@
    $ cd /home/$USER/milvus
    $ mkdir conf
    $ cd conf
-   $ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/server_config.yaml
-   $ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/log_config.conf
+   $ wget https://github.com/milvus-io/docs/blob/0.5.3/assets/server_config.yaml
+   $ wget https://github.com/milvus-io/docs/blob/0.5.3/assets/log_config.conf
    ```
 
 3. 启动 Milvus server
@@ -82,12 +82,12 @@
 
    ```shell
    # Install Milvus Python SDK
-   $ pip install pymilvus==0.2.3
+   $ pip install pymilvus==0.2.5
    ```
 
    > 提示：如果需要进一步了解Milvus Python SDK，请阅读 [Milvus Python SDK 使用手册](https://pypi.org/project/pymilvus)。
 
-3. 创建 *example.py* 文件，并向文件中加入 [Python 示例代码](https://github.com/milvus-io/pymilvus/blob/master/examples/advanced_example.py)。
+3. 创建 *example.py* 文件，并向文件中加入 [Python 示例代码](https://github.com/milvus-io/pymilvus/blob/master/examples/example.py)。
 
 4. 运行示例代码。
 
