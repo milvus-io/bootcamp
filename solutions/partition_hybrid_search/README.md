@@ -76,7 +76,7 @@ $ python3 partition_import.py
 
 **运行示例**
 
-查询与向量集中第0条向量相似top10的向量，且性别为女、没戴眼镜、图片获取时间2019-11-18：
+查询与向量集中第0条向量相似top10的向量，且性别为男、没戴眼镜、图片获取时间2019-11-24：
 
 ```shell
 $ python3 partition_query.py -n 0 -s male -g False -t 2019-11-24 -q
@@ -86,16 +86,16 @@ $ python3 partition_query.py -n 0 -s male -g False -t 2019-11-24 -q
 
 上图查询结果中，id表示插入库中的第几条向量，distance是被检索向量与检索出的向量间的欧氏距离。
 
-查询与向量集中第10条向量相似top10的向量，且性别为男、图片获取时间2019-11-18：
+查询与向量集中第10条向量相似top10的向量，且性别为男、图片获取时间2019-12-07：
 
 ```shell
-$ python3 partition_query.py -n 10 -s male -t 2019-11-18 -q
+$ python3 partition_query.py -n 10 -s male -t 2019-12-07 -q
 ```
 
-查询与向量集中第50条向量相似top10的向量，且没有戴眼镜、图片获取时间2019-11-28：
+查询与向量集中第50条向量相似top10的向量，且没有戴眼镜、图片获取时间2019-11-29：
 
 ```shell
-$ python3 partition_query.py -n 50 -g False -t 2019-11-28 -q
+$ python3 partition_query.py -n 50 -g False -t 2019-11-29 -q
 ```
 
 查询与向量集中第306条向量相似top10的向量，且性别为女、戴眼镜：
