@@ -1,5 +1,7 @@
 # Milvus Online Boot Camp
-[中文版](../README.md) | [English](README.md)
+
+[中文版](../docs/README.md) | [English](README.md)
+
 - **Milvus Basics**
   * [Milvus Quick Start](milvus101/quickstart.md)
   * [Hardware Requirements](milvus101/hardware_platform.md)
@@ -10,4 +12,3 @@
   * [Lab Test 1: One Million Vector Search](labs/lab1_sift1b_1m.md)
   * [Lab Test 2: 100-Million-Scale Vector Search](labs/lab2_sift1b_100m.md)
 
-If you need any help, please open and Issue or send email to us: community@zilliz.com
