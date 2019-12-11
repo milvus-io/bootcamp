@@ -79,7 +79,7 @@ $ python3 partition_import.py
 查询与向量集中第0条向量相似top10的向量，且性别为女、没戴眼镜、图片获取时间2019-11-18：
 
 ```shell
-$ python3 partition_query.py -n 0 -s male -g False -t 2019-11-18 -q
+$ python3 partition_query.py -n 0 -s male -g False -t 2019-11-24 -q
 ```
 
 ![search](pic/search.PNG)
