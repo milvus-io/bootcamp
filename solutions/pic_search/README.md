@@ -6,6 +6,33 @@
 
 <img src="pic/demo.jpg" width = "450" height = "600" alt="系统架构图" align=center />
 
+
+
+本文将介绍GPU部署和CPU部署两种方案，用户可以自行选择。使用GPU部署，性能会优于CPU部署方案。
+
+### 环境要求
+
+下表列出了搭建以图搜图系统的推荐配置，这些配置已经经过测试。
+
+#### GPU部署
+
+| 组件     | 推荐配置                                                     |
+| -------- | ------------------------------------------------------------ |
+| CPU      | Intel(R) Core(TM) i7-7700K CPU @ 4.20GHz                     |
+| GPU      | GeForce GTX 1050 Ti 4GB                                      |
+| Memory   | 32GB                                                         |
+| OS       | Ubuntu 18.04                                                 |
+| Software | Milvus 0.6.0(GPU版）<br />pic_search_demo 0.5.0<br />pic_search_demo_web 0.2.0 |
+
+#### CPU部署
+| 组件     | 推荐配置                                                     |
+| -------- | ------------------------------------------------------------ |
+| CPU      | Intel(R) Core(TM) i7-7700K CPU @ 4.20GHz                     |
+| Memory   | 32GB                                                         |
+| OS       | Ubuntu 18.04                                                 |
+| Software | Milvus 0.6.0(CPU版）<br />pic_search_demo 0.5.1<br />pic_search_demo_web 0.2.0 |
+
+
 ### 数据来源
 
 本次测试使用的图片数据集为 PASCAL VOC 图片集，包含 17125 张图片，涵盖 20 个目录：人类；动物（鸟、猫、牛、狗、马、羊）；交通工具（飞机、自行车、船、公共汽车、小轿车、摩托车、火车）；室内（瓶子、椅子、餐桌、盆栽植物、沙发、电视）。
@@ -18,59 +45,88 @@
 
 ### 部署流程
 
+#### GPU部署
+
 ##### 1、启动 Milvus docker
 
-本实验建议使用 Milvus0.5.3 版本，启动方法参考链接：https://github.com/milvus-io/docs/blob/0.5.3/userguide/install_milvus.md
+本实验使用 Milvus0.6.0 GPU 版本，启动方法参考链接：https://github.com/milvus-io/docs/blob/0.6.0/userguide/install_milvus.md
 
 ##### 2、启动 pic_search_demo docker
 
 ```bash
-$ docker run -d --rm --gpus all --name zilliz_search_images_demo \
--v /your/data/path:/tmp/images-data \
+$ docker run -d --name zilliz_search_images_demo \
+-v /your/image/path1:/tmp/pic1 \
+-v /your/image/path2:/tmp/pic2 \
 -p 35000:5000 \
 -e "DATA_PATH=/tmp/images-data" \
--e "MILVUS_HOST=192.168.1.85" \
-chenglong555/pic_search_demo:0.3.0
+-e "MILVUS_HOST=192.168.1.123" \
+chenglong555/pic_search_demo:0.5.0
 ```
 
-上述启动命令中，“ /your/data/path ” 表示你存放图片数据的目录，“ MILVUS_HOST “ 表示启动 Milvus docker 的服务器地址，命令其他部分保持不变即可。
+上述启动命令中，“ /your/data/path1 ” 、“ /your/data/path2” 表示你存放图片数据的目录。启动时将这些路径映射到 docker 容器里面，系统搭建好以后，可以直接在前端界面上输入 docker 容器中的图片路径 “ /tmp/pic1 ” 、“ /tmp/pic2” 去加载图片。“ MILVUS_HOST “ 表示启动 Milvus docker 的服务器地址，注意不要使用回环地址 “127.0.0.1” 。命令其他部分保持不变即可。
 
 ##### 3、启动 pic_search_demo_web docker
 
 ```bash
-$ docker run -d  -p 80:80 \
--e API_URL=http://192.168.1.85:35000/api/v1 \
-chenglong555/pic_search_demo_web:0.1.0
+$ docker run --name zilliz_search_images_demo_web -d --rm -p 8001:80 \
+-e API_URL=http://192.168.1.123:35000 \
+chenglong555/pic_search_demo_web:0.2.0
 ```
 
-上述启动命令中，" 192.168.1.85 " 表示启动 Milvus docker 的服务器地址。
+上述启动命令中，" 192.168.1.123 " 表示启动 Milvus docker 的服务器地址。
+
+#### CPU部署
+
+##### 1、启动 Milvus docker
+
+本实验使用 Milvus0.6.0 CPU 版本，启动方法参考链接：https://github.com/milvus-io/docs/blob/0.6.0/userguide/install_milvus.md
+
+##### 2、启动 pic_search_demo docker
+
+```bash
+$ docker run -d --name zilliz_search_images_demo \
+-v /your/image/path1:/tmp/pic1 \
+-v /your/image/path2:/tmp/pic2 \
+-p 35000:5000 \
+-e "DATA_PATH=/tmp/images-data" \
+-e "MILVUS_HOST=192.168.1.123" \
+chenglong555/pic_search_demo:0.5.1
+```
+
+上述启动命令中，“ /your/data/path1 ” 、“ /your/data/path2” 表示你存放图片数据的目录。启动时将这些路径映射到 docker 容器里面，系统搭建好以后，可以直接在前端界面上输入 docker 容器中的图片路径 “ /tmp/pic1 ” 、“ /tmp/pic2” 去加载图片。“ MILVUS_HOST “ 表示启动 Milvus docker 的服务器地址，注意不要使用回环地址 “127.0.0.1” 。命令其他部分保持不变即可。
+
+##### 3、启动 pic_search_demo_web docker
+
+```bash
+$ docker run --name zilliz_search_images_demo_web -d --rm -p 8001:80 \
+-e API_URL=http://192.168.1.123:35000 \
+chenglong555/pic_search_demo_web:0.2.0
+```
+
+上述启动命令中，" 192.168.1.123 " 表示启动 Milvus docker 的服务器地址。
+
 
 ### 界面展示
 
-按照上述部署流程部署完成之后，在浏览器输入 " localhost " 就可以访问以图搜图的界面了。
+按照上述部署流程部署完成之后，在浏览器输入 " localhost:8001 " 就可以访问以图搜图的界面了。
 
 <img src="pic/web4.png" width = "650" height = "500" alt="系统架构图" align=center />
 
-进行第一次搜索之前，需要点击 “ Load Picture " 的按钮将图片数据转换成 512 维的向量加载到 Milvus，加载完一次之后，以后查询就可以不用加载了，加载完成之后的搜索界面下图所示：
+首先，我们在界面路径框中输入一个 pic_search_demo docker 容器中存放图片的路径，比如，/tmp/pic1。然后点击右边的加载按钮进行图片加载。加载过程中的界面下图所示：
 
 <img src="pic/web2.png" width = "650" height = "500" alt="系统架构图" align=center />
 
-> 加载过程中会在界面上端显示加载进度，如果没有显示，刷新一下网页即可看到。
+> 注意：点击加载按钮之后约有1到2秒的响应延迟，请勿重复点击。
 
-选择一张图片进行搜索：
+等待几分钟后，可以看到图片加载完成后的界面如下图所示：
 
 <img src="pic/web3.png" width = "650" height = "500" alt="系统架构图" align=center />
 
-经实测，在如下机器配置下，整个 demo 系统的端到端查询时间可以达到 1 秒以内。
+接着选择一张图片进行搜索：
 
-| Component           | Minimum Config                |
-| ------------------ | -------------------------- |
-| OS            | Ubuntu LTS 18.04 |
-| CPU           | Intel Core i7-7700K           |
-| GPU           | Nvidia GeForce GTX1050Ti, 4GB z  |
-| GPU Driver    | CUDA 10.1, Driver 430.26 |
-| Memory        | 16 GB DDR4 ( 2400 Mhz ) x 2          |
-| Storage       | NVMe SSD 256 GB             |
+<img src="pic/web5.png" width = "650" height = "500" alt="系统架构图" align=center />
 
 
- 		 				
+
+经实测，在推荐机器配置下，整个以图搜图系统的端到端查询时间可以达到 1 秒以内。如果你想加载 pic_search_demo docker 容器中其他路径下的图片，可以继续在路径框中输入图片数据的路径。
+
