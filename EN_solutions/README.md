@@ -5,3 +5,4 @@
 - [High availability (HA) solution based on Milvus](Milvus_HA/README.md)
 - [Reverse image search based on Milvus and VGG](pic_search/README.md)
 - [Personalized recommender system based on Milvus](recommender_system/README.md)
+- [Hybrid search based on Milvus partitions](partition_hybrid_search/README.md)
