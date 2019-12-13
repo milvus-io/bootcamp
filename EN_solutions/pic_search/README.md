@@ -91,7 +91,7 @@ $ docker run -d --name zilliz_search_images_demo \
 chenglong555/pic_search_demo:0.5.1
 ```
 
-In the previous command, `/your/data/path1` and `/your/data/path2` specifies the path of the images. These locations are mapped to the docker container. After deployment, you can use `/tmp/pic1` and `/tmp/pic2` to load images. `MILVUS_HOST` specifies the IP address of the Milvus Docker host. Do not use backloop address "127.0.0.1". You do not have to modify other parts of the command.
+In the previous command, `/your/data/path1` and `/your/data/path2` specify the path of the images. These locations are mapped to the docker container. After deployment, you can use `/tmp/pic1` and `/tmp/pic2` to load images. `MILVUS_HOST` specifies the IP address of the Milvus Docker host. Do not use backloop address "127.0.0.1". You do not have to modify other parts of the command.
 
 ##### 3. Run pic_search_demo_web docker
 
