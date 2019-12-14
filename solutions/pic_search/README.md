@@ -55,15 +55,15 @@
 
 ```bash
 $ docker run -d --name zilliz_search_images_demo \
--v /your/image/path1:/tmp/pic1 \
--v /your/image/path2:/tmp/pic2 \
+-v IMAGE_PATH1:/tmp/pic1 \
+-v IMAGE_PATH2:/tmp/pic2 \
 -p 35000:5000 \
 -e "DATA_PATH=/tmp/images-data" \
 -e "MILVUS_HOST=192.168.1.123" \
 chenglong555/pic_search_demo:0.5.0
 ```
 
-上述启动命令中，“ /your/data/path1 ” 、“ /your/data/path2” 表示你存放图片数据的目录。启动时将这些路径映射到 docker 容器里面，系统搭建好以后，可以直接在前端界面上输入 docker 容器中的图片路径 “ /tmp/pic1 ” 、“ /tmp/pic2” 去加载图片。“ MILVUS_HOST “ 表示启动 Milvus docker 的服务器地址，注意不要使用回环地址 “127.0.0.1” 。命令其他部分保持不变即可。
+上述启动命令中，“ IMAGE_PATH1 ” 、“ IMAGE_PATH2” 表示你存放图片数据的目录。启动时将这些路径映射到 docker 容器里面，系统搭建好以后，可以直接在前端界面上输入 docker 容器中的图片路径 “ /tmp/pic1 ” 、“ /tmp/pic2” 去加载图片。“ MILVUS_HOST “ 表示启动 Milvus docker 的服务器地址，注意不要使用回环地址 “127.0.0.1” 。命令其他部分保持不变即可。
 
 ##### 3、启动 pic_search_demo_web docker
 
@@ -85,15 +85,15 @@ chenglong555/pic_search_demo_web:0.2.0
 
 ```bash
 $ docker run -d --name zilliz_search_images_demo \
--v /your/image/path1:/tmp/pic1 \
--v /your/image/path2:/tmp/pic2 \
+-v IMAGE_PATH1:/tmp/pic1 \
+-v IMAGE_PATH2:/tmp/pic2 \
 -p 35000:5000 \
 -e "DATA_PATH=/tmp/images-data" \
 -e "MILVUS_HOST=192.168.1.123" \
 chenglong555/pic_search_demo:0.5.1
 ```
 
-上述启动命令中，“ /your/data/path1 ” 、“ /your/data/path2” 表示你存放图片数据的目录。启动时将这些路径映射到 docker 容器里面，系统搭建好以后，可以直接在前端界面上输入 docker 容器中的图片路径 “ /tmp/pic1 ” 、“ /tmp/pic2” 去加载图片。“ MILVUS_HOST “ 表示启动 Milvus docker 的服务器地址，注意不要使用回环地址 “127.0.0.1” 。命令其他部分保持不变即可。
+上述启动命令中，“ IMAGE_PATH1 ” 、“ IMAGE_PATH2” 表示你存放图片数据的目录。启动时将这些路径映射到 docker 容器里面，系统搭建好以后，可以直接在前端界面上输入 docker 容器中的图片路径 “ /tmp/pic1 ” 、“ /tmp/pic2” 去加载图片。“ MILVUS_HOST “ 表示启动 Milvus docker 的服务器地址，注意不要使用回环地址 “127.0.0.1” 。命令其他部分保持不变即可。
 
 ##### 3、启动 pic_search_demo_web docker
 
