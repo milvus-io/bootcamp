@@ -27,7 +27,7 @@
 4. 请确保您已经安装以下软件包，以便 Milvus Docker 版能正常运行：
 
    - [NVIDIA driver](https://www.nvidia.com/Download/index.aspx)(418 或以上)
-   - [Docker ](https://docs.docker.com/install/)（19.03或以上）
+   - [Docker](https://docs.docker.com/install/)（19.03或以上）
 
 
 ## 安装 Milvus Docker 版
@@ -39,7 +39,7 @@
    $ docker pull milvusdb/milvus:0.5.3-d111319-75998b
    ```
 
-2. 创建 Milvus 文件夹，并添加 server_config 和 log_config
+2. 创建 Milvus 文件夹，并添加 server_config.yaml 和 log_config.conf。
 
    ```shell
    # Create Milvus file
@@ -55,7 +55,7 @@
 
    ```shell
    # Start Milvus
-   $ nvidia-docker run -td --runtime=nvidia -p 19530:19530 -p 8080:8080 -v /home/$USER/milvus/db:/opt/milvus/db -v /home/$USER/milvus/conf:/opt/milvus/conf -v /home/$USER/milvus/logs:/opt/milvus/logs milvusdb/milvus:0.5.2-d110719-ea505c
+   $ nvidia-docker run -td --runtime=nvidia -p 19530:19530 -p 8080:8080 -v /home/$USER/milvus/db:/opt/milvus/db -v /home/$USER/milvus/conf:/opt/milvus/conf -v /home/$USER/milvus/logs:/opt/milvus/logs milvusdb/milvus:0.5.3-d111319-75998b
    ```
 
 4. 获得 Milvus container id
@@ -85,7 +85,7 @@
    $ pip install pymilvus==0.2.5
    ```
 
-   > 提示：如果需要进一步了解Milvus Python SDK，请阅读 [Milvus Python SDK 使用手册](https://pypi.org/project/pymilvus)。
+   > 提示：如果需要进一步了解 Milvus Python SDK，请阅读 [Milvus Python SDK 使用手册](https://pypi.org/project/pymilvus)。
 
 3. 创建 *example.py* 文件，并向文件中加入 [Python 示例代码](https://github.com/milvus-io/pymilvus/blob/0.5.3/examples/example.py)。
 
