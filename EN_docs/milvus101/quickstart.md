@@ -1,6 +1,6 @@
 #  Milvus Quick Start
 
-In this guide, we will walk you through installing Milvus and your very first vector search Python codes with it. .
+In this guide, we will walk you through installing Milvus and your very first vector search Python codes with it.
 
 ## Installing Milvus Docker
 
