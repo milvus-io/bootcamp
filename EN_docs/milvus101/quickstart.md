@@ -1,6 +1,6 @@
 #  Milvus Quick Start
 
-In this guide, we will walk you through installing Milvus and your very first vector search Python codes with it. To learn more about how to use Milvus, please visit [Milvus Docker User Guide](https://github.com/milvus-io/docs/blob/0.5.2/zh-CN/userguide/install_milvus.md).
+In this guide, we will walk you through installing Milvus and your very first vector search Python codes with it. To learn more about how to use Milvus, please visit [Milvus Docker User Guide](https://github.com/milvus-io/docs/blob/0.6.0/zh-CN/userguide/install_milvus.md).
 
 ## Prerequisites
 
@@ -20,6 +20,8 @@ In this guide, we will walk you through installing Milvus and your very first ve
    | GPU Driver    | CUDA 10.1, Driver 418.74 or later |
    | Memory     | 8 GB + (depends on data volume)      |
    | Storage | SATA 3.0 SSD or later       |
+   
+   > Note: GPU is not required if you use CPU-only Milvus.
 
 3. Client browser requirements:
 
@@ -28,19 +30,21 @@ In this guide, we will walk you through installing Milvus and your very first ve
 4. Make sure following software packages are installed so that Milvus can deployed through Docker:
 
    - [NVIDIA driver](https://www.nvidia.com/Download/index.aspx)(418 或以上)
-   - [Docker ](https://docs.docker.com/install/)（19.03或以上）
+   - [Docker](https://docs.docker.com/install/)（19.03或以上）
 
 
 ## Installing Milvus Docker
 
-1. Download Milvus Docker image.
+1. Download CPU-only or GPU-supported Milvus Docker image.
 
    ```shell
-   # Download Milvus Docker image
-   $ docker pull milvusdb/milvus:0.5.2-d110719-ea505c
+   # Download CPU-only Milvus Docker image
+   $ docker pull milvusdb/milvus:0.6.0-cpu-d120719-2b40dd
+   # Download GPU-supported Milvus Docker image
+   $ docker pull milvusdb/milvus:0.6.0-gpu-d120719-2b40dd
    ```
 
-2. Create Milvus file, and add server_cofig and log_config to it.
+2. Create a Milvus folder, and add `server_cofig.yaml` and `log_config.conf` to it.
 
    ```shell
    # Create Milvus file
@@ -48,16 +52,22 @@ In this guide, we will walk you through installing Milvus and your very first ve
    $ cd /home/$USER/milvus
    $ mkdir conf
    $ cd conf
-   $ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/server_config.yaml
-   $ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/log_config.conf
+   # Get config files for CPU-only Milvus
+   $ wget https://raw.githubusercontent.com/milvus-io/docs/0.6.0/assets/server_config.yaml
+   $ wget https://raw.githubusercontent.com/milvus-io/docs/0.6.0/assets/config/log_config.conf
+   # Get config files for GPU-supported Milvus
+   $ wget https://raw.githubusercontent.com/milvus-io/docs/0.6.0/assets/config/server_config.yaml
+   $ wget https://raw.githubusercontent.com/milvus-io/docs/0.6.0/assets/config/log_config.conf
    ```
    
 3. Start Milvus server.
 
    ```shell
-   # Start Milvus
-   $ nvidia-docker run -td --runtime=nvidia -p 19530:19530 -p 8080:8080 -v /home/$USER/milvus/db:/opt/milvus/db -v /home/$USER/milvus/conf:/opt/milvus/conf -v /home/$USER/milvus/logs:/opt/milvus/logs milvusdb/milvus:0.5.2-d110719-ea505c
-```
+   # Start CPU-only Milvus
+   $ docker run -d --name milvus_cpu -e "TZ=Asia/Shanghai" -p 19530:19530 -p 8080:8080 -v /home/$USER/milvus/db:/var/lib/milvus/db -v /home/$USER/milvus/conf:/var/lib/milvus/conf -v /home/$USER/milvus/logs:/var/lib/milvus/logs milvusdb/milvus:cpu-latest
+   # Start GPU-supported Milvus
+   $ docker run -d --name milvus_gpu --gpus all -e "TZ=Asia/Shanghai" -p 19530:19530 -p 8080:8080 -v /home/$USER/milvus/db:/var/lib/milvus/db -v /home/$USER/milvus/conf:/var/lib/milvus/conf -v /home/$USER/milvus/logs:/var/lib/milvus/logs milvusdb/milvus:latest
+   ```
    
 4. Get Milvus container id.
 
@@ -83,12 +93,12 @@ Now, let's run a Python example program. You will need to create a vector data t
 
    ```shell
    # Install Milvus Python SDK
-   $ pip install pymilvus==0.2.3
+   $ pip install pymilvus==0.2.6
    ```
 
    > Note: To learn more about Milvus Python SDK, go to [Milvus Python SDK Playbook](https://pypi.org/project/pymilvus). 
 
-3. Create a new file *example.py*, and add [Python example code](https://github.com/milvus-io/pymilvus/blob/master/examples/advanced_example.py) to it.
+3. Create a new file *example.py*, and add [Python example code](https://github.com/milvus-io/pymilvus/0.6.0/examples/example.py) to it.
 
 4. Run the example code.
 
