@@ -10,4 +10,4 @@
 
 - [Milvus 个性化推荐系统](recommender_system/README.md)
 
-- [基于milvus partition的混合查询方案](partition_hybrid_search/README.md)
+- [基于 Milvus partition 的混合查询方案](partition_hybrid_search/README.md)
