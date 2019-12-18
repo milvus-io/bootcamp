@@ -48,8 +48,8 @@ In this guide, we will walk you through installing Milvus and your very first ve
    $ cd /home/$USER/milvus
    $ mkdir conf
    $ cd conf
-   $ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/server_config.yaml
-   $ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/log_config.conf
+   $ wget https://raw.githubusercontent.com/milvus-io/docs/0.5.3/assets/server_config.yaml
+   $ wget https://raw.githubusercontent.com/milvus-io/docs/0.5.3/assets/log_config.conf
    ```
    
 3. Start Milvus server.
@@ -88,7 +88,7 @@ Now, let's run a Python example program. You will need to create a vector data t
 
    > Note: To learn more about Milvus Python SDK, go to [Milvus Python SDK Playbook](https://pypi.org/project/pymilvus). 
 
-3. Create a new file *example.py*, and add [Python example code](https://github.com/milvus-io/pymilvus/blob/master/examples/advanced_example.py) to it.
+3. Create a new file *example.py*, and add [Python example code](https://github.com/milvus-io/pymilvus/blob/0.5.3/examples/example.py) to it.
 
 4. Run the example code.
 
