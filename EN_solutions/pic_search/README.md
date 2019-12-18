@@ -53,15 +53,15 @@ This demo uses GPU-supported Milvus 0.6.0. Refer to the [Install Milvus](https:/
 
 ```bash
 $ docker run -d --name zilliz_search_images_demo \
--v /your/image/path1:/tmp/pic1 \
--v /your/image/path2:/tmp/pic2 \
+-v IMAGE_PATH1:/tmp/pic1 \
+-v IMAGE_PATH2:/tmp/pic2 \
 -p 35000:5000 \
 -e "DATA_PATH=/tmp/images-data" \
 -e "MILVUS_HOST=192.168.1.123" \
 chenglong555/pic_search_demo:0.5.0
 ```
 
-In the previous command, `/your/data/path1` and `/your/data/path2` specifies the path where images are located. These locations are mapped to the docker container. After deployment, you can use `/tmp/pic1` and `/tmp/pic2` to load images. `MILVUS_HOST` specifies the IP address of the Milvus Docker host. Do not use backloop address "127.0.0.1". You do not have to modify other parts of the command.
+In the previous command, `IMAGE_PATH1` and `IMAGE_PATH2` specify the path where images are located. These locations are mapped to the docker container. After deployment, you can use `/tmp/pic1` and `/tmp/pic2` to load images. `MILVUS_HOST` specifies the IP address of the Milvus Docker host. Do not use backloop address "127.0.0.1". You do not have to modify other parts of the command.
 
 ##### 3. Run pic_search_demo_web docker
 
@@ -83,15 +83,15 @@ This demo uses CPU-only Milvus 0.6.0. Refer to the [Install Milvus](https://gith
 
 ```bash
 $ docker run -d --name zilliz_search_images_demo \
--v /your/image/path1:/tmp/pic1 \
--v /your/image/path2:/tmp/pic2 \
+-v IMAGE_PATH1:/tmp/pic1 \
+-v IMAGE_PATH2:/tmp/pic2 \
 -p 35000:5000 \
 -e "DATA_PATH=/tmp/images-data" \
 -e "MILVUS_HOST=192.168.1.123" \
 chenglong555/pic_search_demo:0.5.1
 ```
 
-In the previous command, `/your/data/path1` and `/your/data/path2` specifies the path where images are located. These locations are mapped to the docker container. After deployment, you can use `/tmp/pic1` and `/tmp/pic2` to load images. `MILVUS_HOST` specifies the IP address of the Milvus Docker host. Do not use backloop address "127.0.0.1". You do not have to modify other parts of the command.
+In the previous command, `IMAGE_PATH1` and `IMAGE_PATH2` specify the path of the images. These locations are mapped to the docker container. After deployment, you can use `/tmp/pic1` and `/tmp/pic2` to load images. `MILVUS_HOST` specifies the IP address of the Milvus Docker host. Do not use backloop address "127.0.0.1". You do not have to modify other parts of the command.
 
 ##### 3. Run pic_search_demo_web docker
 
