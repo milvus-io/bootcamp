@@ -87,7 +87,7 @@
 
    > 提示：如果需要进一步了解Milvus Python SDK，请阅读 [Milvus Python SDK 使用手册](https://pypi.org/project/pymilvus)。
 
-3. 创建 *example.py* 文件，并向文件中加入 [Python 示例代码](https://github.com/milvus-io/pymilvus/blob/master/examples/example.py)。
+3. 创建 *example.py* 文件，并向文件中加入 [Python 示例代码](https://github.com/milvus-io/pymilvus/blob/0.5.3/examples/example.py)。
 
 4. 运行示例代码。
 
