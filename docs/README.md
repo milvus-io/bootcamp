@@ -20,6 +20,3 @@
   * [实验一：百万向量检索](labs/lab1_sift1b_1m.md)
   * [实验二：亿级向量检索](labs/lab2_sift1b_100m.md)
 
-- **Milvus版本**
-
-  0.6.0
