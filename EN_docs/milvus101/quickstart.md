@@ -1,6 +1,6 @@
 #  Milvus Quick Start
 
-In this guide, we will walk you through installing Milvus and your very first vector search Python codes with it. To learn more about how to use Milvus, please visit [Milvus Docker User Guide](https://github.com/milvus-io/docs/blob/0.5.2/zh-CN/userguide/install_milvus.md).
+In this guide, we will walk you through installing Milvus and your very first vector search Python codes with it. To learn more about how to use Milvus, please visit [Milvus Docker User Guide](https://github.com/milvus-io/docs/blob/0.5.3/zh-CN/userguide/install_milvus.md).
 
 ## Prerequisites
 
@@ -37,7 +37,7 @@ In this guide, we will walk you through installing Milvus and your very first ve
 
    ```shell
    # Download Milvus Docker image
-   $ docker pull milvusdb/milvus:0.5.2-d110719-ea505c
+   $ docker pull milvusdb/milvus:0.5.3-d111319-75998b
    ```
 
 2. Create Milvus file, and add server_cofig and log_config to it.
@@ -56,7 +56,7 @@ In this guide, we will walk you through installing Milvus and your very first ve
 
    ```shell
    # Start Milvus
-   $ nvidia-docker run -td --runtime=nvidia -p 19530:19530 -p 8080:8080 -v /home/$USER/milvus/db:/opt/milvus/db -v /home/$USER/milvus/conf:/opt/milvus/conf -v /home/$USER/milvus/logs:/opt/milvus/logs milvusdb/milvus:0.5.2-d110719-ea505c
+   $ nvidia-docker run -td --runtime=nvidia -p 19530:19530 -p 8080:8080 -v /home/$USER/milvus/db:/opt/milvus/db -v /home/$USER/milvus/conf:/opt/milvus/conf -v /home/$USER/milvus/logs:/opt/milvus/logs milvusdb/milvus:0.5.3-d111319-75998b
 ```
    
 4. Get Milvus container id.
@@ -83,7 +83,7 @@ Now, let's run a Python example program. You will need to create a vector data t
 
    ```shell
    # Install Milvus Python SDK
-   $ pip install pymilvus==0.2.3
+   $ pip install pymilvus==0.2.5
    ```
 
    > Note: To learn more about Milvus Python SDK, go to [Milvus Python SDK Playbook](https://pypi.org/project/pymilvus). 
