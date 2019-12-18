@@ -1,6 +1,6 @@
 #  Milvus Quick Start
 
-In this guide, we will walk you through installing Milvus and your very first vector search Python codes with it. To learn more about how to use Milvus, please visit [Milvus Docker User Guide](https://github.com/milvus-io/docs/blob/0.5.3/zh-CN/userguide/install_milvus.md).
+In this guide, we will walk you through installing Milvus and your very first vector search Python codes with it. To learn more about how to use Milvus, please visit [Milvus Docker User Guide](https://github.com/milvus-io/docs/blob/0.5.3/userguide/install_milvus.md).
 
 ## Prerequisites
 
@@ -27,8 +27,8 @@ In this guide, we will walk you through installing Milvus and your very first ve
 
 4. Make sure following software packages are installed so that Milvus can deployed through Docker:
 
-   - [NVIDIA driver](https://www.nvidia.com/Download/index.aspx)(418 或以上)
-   - [Docker ](https://docs.docker.com/install/)（19.03或以上）
+   - [NVIDIA driver](https://www.nvidia.com/Download/index.aspx)(418 or higher)
+   - [Docker ](https://docs.docker.com/install/)（19.03 or higher）
 
 
 ## Installing Milvus Docker
