@@ -141,7 +141,7 @@ docker start <docker id>
 fi
 ```
 
-该 <docker id>表示备机的 milvus server docker id。
+该`<docker id>`表示备机的 Milvus server docker id。
 
 `stop_docker.sh` 脚本包含以下代码：
 
@@ -153,7 +153,7 @@ docker start <docker id>
 fi
 ```
 
- 该<docker id>表示备机的 milvus server docker id
+该`<docker id>`表示备机的 Milvus server docker id
 
 注：上述三个脚本创建后，需要增加其可执行权限。
 
@@ -179,17 +179,17 @@ service keepalived status
 
 ## 验证
 
-上述步骤安装完成后，在主机上输入命令 ip a，可以看见虚拟 IP 地址192.168.1.104出现在了主机中。
+上述步骤安装完成后，在主机上输入命令 `ip a`，可以看见虚拟 IP 地址192.168.1.104出现在了主机中。
 
 ![1575010275666](pic/1575010275666.png)
 
 此时客户端，可通过地址192.168.1.104连接 Milvus server, 进行建表、插入、查询等相关操作了。
 
-关闭主机电源或停止主机的 Milvus server，再次用 ip a 查看，可以看见虚拟 IP 已从主机自动移除了。
+关闭主机电源或停止主机的 Milvus server，再次用 `ip a` 查看，可以看见虚拟 IP 已从主机自动移除了。
 
 ![1575015544553](pic/1575015544553.png)
 
-此时，在备机输入 ip a，可以看见虚拟地址转移到了备机上。
+此时，在备机输入 `ip a`，可以看见虚拟地址转移到了备机上。
 
 ![1575016581429](pic/1575016581429.png)
 
