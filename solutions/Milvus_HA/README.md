@@ -14,7 +14,7 @@
 
 在主备机上安装 Milvus server。主备机的 Milvus `db` 目录均指向共享存储的位置。
 
-安装方法：参考 https://milvus.io/docs/zh-CN/userguide/install_milvus/
+安装方法：参考 https://github.com/milvus-io/docs/blob/0.5.3/zh-CN/userguide/install_milvus.md
 
 安装完成后，启动主机的 Milvus server，停止备机的 Milvus server。
 
