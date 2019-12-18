@@ -141,7 +141,7 @@ docker start <docker id>
 fi
 ```
 
-<docker id> specifies the milvus server docker id of the backup server.
+`<docker id>` specifies the milvus server docker id of the backup server.
 
 Use the following code for `stop_docker.sh`:
 
@@ -153,7 +153,7 @@ docker start <docker id>
 fi
 ```
 
-<docker id> specifies the milvus server docker id of the backup server.
+`<docker id>` specifies the milvus server docker id of the backup server.
 
 > Note: You must add execute permission to the previously created scripts.
 
