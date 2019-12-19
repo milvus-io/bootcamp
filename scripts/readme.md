@@ -104,17 +104,17 @@ $ python3 milvus_load.py --table <table_name> -b
 
 | 参数             | 描述                       | 默认设置       |
 | ---------------- | -------------------------- | -------------- |
-| SERVER_ADDR      | Milvus的IP设置             | "127.0.0.1"    |
-| SERVER_PORT      | Milvus的端口设置           | 19530          |
+| SERVER_ADDR      | Milvus 的 IP 设置             | "127.0.0.1"    |
+| SERVER_PORT      | Milvus 的端口设置           | 19530          |
 | NQ_FOLDER_NAME   | 查询向量集的路径           | '/data/milvus' |
 | SE_FOLDER_NAME   | 查询结果保存的路径         | 'search'       |
 | SE_FILE_NAME     | 查询结果保存的文件         | '_output.txt'  |
 | BASE_FOLDER_NAME | 源向量数据集的路径         | '/data/milvus' |
 | TOFILE           | 是否存储查询后的文件信息   | True           |
 | **GT_NQ**        | **ground truth中的nq数值** | **0**          |
-| CSV              | 查询向量文件格式是否为.csv | False          |
-| UINT8            | 查询向量是否为uint8格式    | False          |
-| NPROBE           | Milvus参数nprobe           | 1              |
+| CSV              | 查询向量文件格式是否为 .csv | False          |
+| UINT8            | 查询向量是否为 uint8 格式    | False          |
+| NPROBE           | Milvus 参数 nprobe           | 1              |
 
 ### 使用说明：
 
