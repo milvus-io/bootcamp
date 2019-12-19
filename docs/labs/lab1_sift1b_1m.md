@@ -4,14 +4,14 @@
 
 本实验所使用的原始数据集为 SIFT1B ，关于该数据集的详细信息请参考：[http://corpus-texmex.irisa.fr/](http://corpus-texmex.irisa.fr/)。在本次测试中，我们提取了原始数据集中的 100 万条数据。
 
-经实测，以下硬件配置可顺利完成实验：
+经实测，以下配置可顺利完成实验：
 
 | 组件          | 最低配置                |
 | ------------------ | -------------------------- |
 | 操作系统            | Ubuntu LTS 18.04 |
 | CPU           | Intel Core i5-8250U           |
-| GPU           | Nvidia GeForce MX150, 2GB GDDR5  |
-| GPU 驱动软件    | CUDA 10.1, Driver 418.74 |
+| GPU           | NVIDIA GeForce MX150, 2GB GDDR5  |
+| GPU 驱动软件    | Driver 418.74 |
 | 内存        | 8 GB DDR4          |
 | 硬盘       | NVMe SSD 256 GB             |
 | Milvus     |  0.6.0   |
