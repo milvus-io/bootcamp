@@ -6,13 +6,13 @@
 
 The following table lists recommended configurations, which have been tested:
 
-| Component | Recommended Configuration                |
-| --------- | ---------------------------------------- |
-| CPU       | Intel(R) Core(TM) i7-7700K CPU @ 4.20GHz |
-| GPU       | GeForce GTX 1050 Ti 4GB                  |
-| Memory    | 32GB                                     |
-| OS        | Ubuntu 18.04                             |
-| Software  | [Milvus 0.5.3](https://milvus.io/docs/en/userguide/install_milvus/) <br /> [pymilvus 0.2.5](https://pypi.org/project/pymilvus/)  <br /> [PaddlePaddle 1.6.1](https://www.paddlepaddle.org.cn/documentation/docs/en/beginners_guide/install/index_en.html)   |
+| Component | Recommended Configuration                                    |
+| --------- | ------------------------------------------------------------ |
+| CPU       | Intel(R) Core(TM) i7-7700K CPU @ 4.20GHz                     |
+| GPU       | GeForce GTX 1050 Ti 4GB                                      |
+| Memory    | 32GB                                                         |
+| OS        | Ubuntu 18.04                                                 |
+| Software  | [Milvus 0.5.3](https://github.com/milvus-io/docs/blob/0.5.3/userguide/install_milvus.md) <br /> [pymilvus 0.2.5](https://github.com/milvus-io/pymilvus/tree/0.5.3) <br /> [PaddlePaddle 1.6.1](https://www.paddlepaddle.org.cn/documentation/docs/zh/1.6/beginners_guide/quick_start_cn.html) |
 
 > For versions before Milvus 0.6.0, GPU is required. For CPU-only version, please use Milvus 0.6.0.
 
