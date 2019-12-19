@@ -6,7 +6,7 @@
 
 ## 运行要求：
 
-1. [安装 Milvus](https://github.com/milvus-io/docs/blob/master/zh-CN/userguide/install_milvus.md)
+1. [安装 Milvus](https://github.com/milvus-io/docs/blob/0.5.3/zh-CN/userguide/install_milvus.md)
 2. [安装 Postgres](https://www.postgresql.org/download/)
 3. pip install numpy
 4. pip install psycopg2
