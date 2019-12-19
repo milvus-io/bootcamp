@@ -14,6 +14,8 @@
 | GPU 驱动软件    | CUDA 10.1, Driver 418.74 |
 | 内存        | 8 GB DDR4          |
 | 硬盘       | NVMe SSD 256 GB             |
+| Milvus     |  0.6.0   |
+| pymilvus    |   0.2.6     |
 
 测试工具下载：
 - 100 万测试数据集下载地址：https://pan.baidu.com/s/19fj1FUHfYZwn9huhgX4rQQ
@@ -29,7 +31,7 @@
 - 测试脚本会包含四个 Python 脚本 `milvus_load.py`、`milvus_toolkit.py`、`milvus_search.py`、`milvus_compare.py`。
 
 获取完测试需要的数据和脚本后， `milvus_sift1m` 目录下应该存放有以下内容：
-1. 1M测试数据： `bvecs_data` 文件夹
+1. 1,000,000 测试数据： `bvecs_data` 文件夹
 2. 10,000 条查询向量集：`query_data` 文件夹
 3. 10,000 条查询向量集的 ground truth：`gnd` 文件夹
 4. 四个测试脚本：`milvus_load.py`、`milvus_toolkit.py`、`milvus_search.py`、`milvus_compare.py`
@@ -47,14 +49,12 @@ Milvus 可以根据数据分布和性能、准确性的要求灵活调整相关�
 |         参数名称         | 推荐值 |
 | ---------------------- | ---- |
 | `cpu_cache_capacity` |   4   |
-|    `gpu_resource_config`.`cache_capacity`    |   4    |
+|    `gpu_resource_config`.`cache_capacity`    |   1    |
 |    `use_blas_threshold`    |  801   |
 | `gpu_search_threshold` | 1001         |
-| `search_resources`     | -cpu   -gpu0 |
+| `search_resources`     | -gpu0 |
 
-`gpu_search_threshold`, 该参数决定是否使用纯gpu版本查询。当nq值>`use_blas_threshold`，将使用纯gpu查询，当nq值较大时，使用纯gpu查询更优。本实验中建议使用cpu与gpu混合查询。
-
-`search_resources`决定查询时使用的资源，参数中至少需要包含cpu和一块gpu。若主机有多个gpu也可以同时使用多个gpu。
+关于参数设置的详细信息请参考[Milvus 配置](https://www.milvus.io/docs/zh-CN/reference/milvus_config/)。
 
 其余参数保持默认即可。配置文件参数修改完毕后，重启 Milvus Docker 使配置生效。
 
@@ -73,7 +73,7 @@ $ python3 milvus_toolkit.py --table ann_1m_sq8h --dim 128 -c
 $ python3 milvus_toolkit.py --table ann_1m_sq8h --index sq8h --build 
 ```
 
-运行上述命令后，会创建一个名为ann_1m_sq8的表，其索引类型为IVF_SQ8H。可通过如下命令查看该表的相关信息：
+运行上述命令后，会创建一个名为 ann_1m_sq8 的表，其索引类型为 IVF_SQ8H。可通过如下命令查看该表的相关信息：
 
 ```shell
 #查看库中有哪些表
@@ -102,7 +102,7 @@ $ python3 milvus_load.py --table=ann_1m_sq8h -n
 $ python3 milvus_toolkit.py --table=ann_1m_sq8h --rows
 ```
 
-为了确保导入 Milvus 的数据已经全部建好索引，请进入  **/home/$USER/milvus/db** 目录，在终端输入如下命令：
+为了确保导入 Milvus 的数据已经全部建好索引，请进入  `/home/$USER/milvus/db` 目录，在终端输入如下命令：
 
 ```bash
 $ sqlite3 meta.sqlite
@@ -128,7 +128,7 @@ sqlite> .quit
 $ python3 milvus_toolkit.py --table=ann_1m_sq8h --index=sq8h --build 
 ```
 
-手动建立索引后，再次进入 sqlite 交互界面，确认所有数据分片都已经建好索引。如果想了解其他列数据代表的含义，请进入  **/home/$USER/milvus/db** 目录，在 sqlite 交互界面输入如下命令进行查看。
+手动建立索引后，再次进入 sqlite 交互界面，确认所有数据分片都已经建好索引。如果想了解其他列数据代表的含义，请进入  `/home/$USER/milvus/db` 目录，在 sqlite 交互界面输入如下命令进行查看。
 
 ```sqlite
 $ sqlite3 meta.sqlite
@@ -137,13 +137,13 @@ sqlite>.schema
 
 ## 5、准确性测试
 
-SIFT1m 提供了10,000 条向量的查询向量集，并且对于每条查询向量都给出了该向量在不同规模数据集上的 top1000 ground truth。因此，可以方便地对 Milvus 查询结果的准确率进行计算。准确率计算公式为：
+SIFT1m 提供了10,000条向量的查询向量集，并且对于每条查询向量都给出了该向量在不同规模数据集上的 top 1000 ground truth。因此，可以方便地对 Milvus 查询结果的准确率进行计算。准确率计算公式为：
 
-准确率＝ ( Milvus 查询结果与 Groundtruth 一致的向量个数 ) / ( query_records 的向量个数 * top_k )
+准确率＝ ( Milvus 查询结果与 ground truth 一致的向量个数 ) / ( query_records 的向量个数 * top_k )
 
 （1）执行查询脚本
 
-从 10,000 条查询向量中随机取出 10 条向量，查询这10条向量各自的top20。查询前需要保证query_data文件夹和脚本在同一级目录下（也可在milvus_search.py脚本中修改参数NQ_FOLDER_NAME指定待查询向量集query_data的路径）。执行如下命令：
+从 10,000 条查询向量中随机取出10条向量，查询这10条向量各自的 top 20。查询前需要保证 `query_data` 文件夹和脚本在同一级目录下（也可在`milvus_search.py` 脚本中修改参数 `NQ_FOLDER_NAME` 指定待查询向量集 `query_data` 的路径）。执行如下命令：
 
 ```bash
 $ python3 milvus_search.py --table ann_1m_sq8h --nq 10 --topk 20 --nprobe 64 -s
@@ -151,7 +151,7 @@ $ python3 milvus_search.py --table ann_1m_sq8h --nq 10 --topk 20 --nprobe 64 -s
 
 (注：nprobe值影响这查询结果准确率和查询性能，nprobe越大，准确率越高，性能越差。本项目中建议使用nprobe=32)
 
-执行上述命令后，将会产生一个search_output文件夹,该文件夹下有一个名为 `ann_1m_sq8h_32_output.txt` 的文本，该文本中记录了10向量各自对应的top20。文本中没20行为一组，对应一个query的查询结果。第一列表示待查询的向量在query.npy中对应的向量位置；第二列表示查询结果对应的 `bvecs_data` 中的向量(例如80006099349,第一个8无意义，8后面的四位0006表示对应 `bvecs_data` 中的第6个文本，最后六位099349表示对应第六个文本中的第099349条向量即为查询结果对应的向量)；第三列表示查询的向量和查询结果对应的欧氏距离。
+执行上述命令后，将会产生一个search_output文件夹,该文件夹下有一个名为 `ann_1m_sq8h_32_output.txt` 的文本，该文本中记录了10条向量各自对应的top 20。文本中每20行为一组，对应一个query的查询结果。第一列表示待查询的向量在 `query.npy` 中对应的向量位置；第二列表示查询结果对应的 `bvecs_data` 中的向量(例如80006099349,第一个8无意义，8后面的四位0006表示对应 `bvecs_data` 中的第6个文本，最后六位099349表示对应第六个文本中的第099349条向量即为查询结果对应的向量)；第三列表示查询的向量和查询结果对应的欧氏距离。
 
 （2）执行准确率测试脚本
 
@@ -165,7 +165,7 @@ $ python3 milvus_compare.py --table ann_1m_sq8h --nprobe 64 -p
 
 上述脚本运行完成后，将会生成一个名为 `compare` 的文件夹，在该文件夹下面会有一个名为 `64_ann_1m_sq8h_10_20_output.csv` 的文件.
 
-- nq: 代表的是第几个查询向量
+- nq: 代表要查询的向量数
 - topk: 代表的是查询该向量的前 k 个相似的向量
 - total_time: 代表整个查询花费的总时间，单位：秒
 - avg_time: 代表每一条向量的平均查询时间，单位：秒
@@ -187,7 +187,7 @@ $ python3 milvus_toolkit.py --table=ann_1m_sq8h --nprobe 64 -s
 
 - nq: 代表要查询的向量数
 - topk: 代表的是查询某个向量的前 k 个相似的向量
-- total_time: 代表的是查询 nq个向量的前 k 个相似向量一共花费的时间，单位：秒
+- total_time: 代表的是查询 nq 个向量的前 k 个相似向量一共花费的时间，单位：秒
 - avg_time: 代表的是查询一个向量的 topk 个相似向量的平均时间，单位：秒
 
 **注意**
