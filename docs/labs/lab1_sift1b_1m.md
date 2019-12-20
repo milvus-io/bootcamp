@@ -70,9 +70,9 @@ $ python3 milvus_toolkit.py --table ann_1m_sq8h --index sq8h --build
 ```shell
 #查看库中有哪些表
 $ python3 milvus_toolkit.py --show
-#查看表ann_1m_sq8的行数
+#查看表ann_1m_sq8h的行数
 $ python3 milvus_toolkit.py --table ann_1m_sq8h --rows
-#查看表ann_1m_sq8的索引类型
+#查看表ann_1m_sq8h的索引类型
 $ python3 milvus_toolkit.py --table ann_1m_sq8h --desc_index
 ```
 
