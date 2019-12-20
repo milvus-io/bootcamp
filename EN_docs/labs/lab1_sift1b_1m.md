@@ -94,7 +94,7 @@ Run the following command to import 1,000,000 rows of data:
 $ python3 milvus_load.py --table=ann_1m_sq8h -n
 ```
 
-You can see that all data is imported from the text file for once.
+You can see that all data is imported from the file for once.
 
 Run the following command to check the number of rows in the table:
 
@@ -151,7 +151,7 @@ $ python3 milvus_search.py --table ann_1m_sq8h --nq 10 --topk 20 --nprobe 64 -s
 
 > Note: nprobe affects search accuracy and performance. The greater the value, the higher the accuracy, but the lower the performance. In this experiment, you are recommended to use 32 for nprobe.
 
-After running the command above, a `search_output` folder is created and includes `ann_1m_sq8h_32_output.txt`, which records top 20 similar vectors for the 10 vectors. In the text file, each 20 rows are formatted as one group that corresponds to the result of one query. The first column specifies the location of the vector to query in `query.npy`; the second column specifies the vectors correspond to the query result in `bvecs_data` (e.g. in 80006099349, the first `8` does not have a meaning, but `0006` after the first `8` stands for the 6th text file in `bvecs_data`, the last `099349` indicates that the 099349th vector in the 6th text file is the vector corresponding to the query result); the third column specifies the vector to query and the Euclidean distance.
+After running the command above, a `search_output` folder is created and includes `ann_1m_sq8h_32_output.txt`, which records top 20 similar vectors for the 10 vectors. In the text file, each 20 rows are formatted as one group that corresponds to the result of one query. The first column specifies the location of the vector to query in `query.npy`; the second column specifies the vectors correspond to the query result in `bvecs_data` (e.g. in 80006099349, the first `8` does not have a meaning, but `0006` after the first `8` stands for the 6th file in `bvecs_data`, the last `099349` indicates that the 099349th vector in the 6th file is the vector corresponding to the query result); the third column specifies the vector to query and the Euclidean distance.
 
 
 #### Step 2: Run accuracy test script
