@@ -6,7 +6,7 @@
 
 经实测，以下配置可顺利完成实验：
 
-| 组件          | 最低配置                |
+| 组件          | 配置                |
 | ------------------ | -------------------------- |
 | 操作系统            | Ubuntu LTS 18.04 |
 | CPU           | Intel Core i5-8250U           |
@@ -27,18 +27,10 @@
 
 - 测试数据集下载并解压完成之后，你将会看到一个名为 `bvecs_data` 的文件夹。该文件夹里面存放了 10 个 `npy` 文件，每个 `npy` 文件中存放了10 万条 uint8 格式的向量数据。
 - 查询向量集下载并解压完成之后，你将会看到一个名为 `query_data` 的文件夹。该文件夹里面存放了一个 `query.npy` 文件，该文件里存放了10,000 条需要查询的向量。
-- 对照数据（ groundtruth ）下载并解压完成之后，是一个名为 `gnd` 的文件夹，该文件夹下有一个 `ground_truth_1M.txt` 的文本文件，该文件里存放的是查询向量集中的每条向量的 top1000 相似向量的位置。
+- 对照数据下载并解压完成之后，是一个名为 `gnd` 的文件夹，该文件夹下有一个 `ground_truth_1M.txt` 的文本文件，该文件里存放的是查询向量集中的每条向量的 top1000 相似向量的位置。
 - 测试脚本会包含四个 Python 脚本 `milvus_load.py`、`milvus_toolkit.py`、`milvus_search.py`、`milvus_compare.py`。
 
-获取完测试需要的数据和脚本后， `milvus_sift1m` 目录下应该存放有以下内容：
-1. 1,000,000 测试数据： `bvecs_data` 文件夹
-2. 10,000 条查询向量集：`query_data` 文件夹
-3. 10,000 条查询向量集的 ground truth：`gnd` 文件夹
-4. 四个测试脚本：`milvus_load.py`、`milvus_toolkit.py`、`milvus_search.py`、`milvus_compare.py`
-
-**注意**
-
-使用脚本进行测试之前，请对照该脚本的 [README](/scripts/) 。并根据实际情况，对脚本中的相关变量值进行修改。
+> 注意：请保证 `bvecs_data` 文件夹、`query_data` 文件夹、`gnd` 文件夹、以及测试脚本都在同一个目录层级下。
 
 ## 2、 配置 Milvus 参数
 
@@ -52,7 +44,7 @@ Milvus 可以根据数据分布和性能、准确性的要求灵活调整相关�
 |    `gpu_resource_config`.`cache_capacity`    |   1    |
 |    `use_blas_threshold`    |  801   |
 | `gpu_search_threshold` | 1001         |
-| `search_resources`     | -gpu0 |
+| `search_resources`     | gpu0 |
 
 关于参数设置的详细信息请参考[Milvus 配置](https://www.milvus.io/docs/zh-CN/reference/milvus_config/)。
 
@@ -86,7 +78,7 @@ $ python3 milvus_toolkit.py --table ann_1m_sq8h --desc_index
 
 ## 4、 数据导入
 
-导入数据之前，确保已成功建立表 ann_1m_sq8，同时确保待导入数据所在文件夹 `bvecs_data` 和脚本在同一级目录下。（如果数据文件在其他目录下，请参考 readme 修改脚本中 `FILE_NPY_PATH` 参数）
+导入数据之前，确保已成功建立表 ann_1m_sq8。
 
 运行如下命令导入1,000,000行数据：
 
@@ -143,7 +135,7 @@ SIFT1m 提供了10,000条向量的查询向量集，并且对于每条查询向�
 
 （1）执行查询脚本
 
-从 10,000 条查询向量中随机取出10条向量，查询这10条向量各自的 top 20。查询前需要保证 `query_data` 文件夹和脚本在同一级目录下（也可在`milvus_search.py` 脚本中修改参数 `NQ_FOLDER_NAME` 指定待查询向量集 `query_data` 的路径）。执行如下命令：
+从 10,000 条查询向量中随机取出10条向量，查询这10条向量各自的 top 20。执行如下命令：
 
 ```bash
 $ python3 milvus_search.py --table ann_1m_sq8h --nq 10 --topk 20 --nprobe 64 -s
@@ -155,7 +147,7 @@ $ python3 milvus_search.py --table ann_1m_sq8h --nq 10 --topk 20 --nprobe 64 -s
 
 （2）执行准确率测试脚本
 
-将上述查询的结果与 ground truth 进行比较，计算 Milvus 查询结果准确率，比较前请确保 `gnd` 文件夹和脚本在同一级目录下（也可在 `milvus_compare.py` 脚本中修改参数 `GT_FOLDER_NAME`指定 `gnd` 所在路径），执行如下命令：
+将上述查询的结果与 ground truth 进行比较，计算 Milvus 查询结果准确率，执行如下命令：
 
 ```bash
 $ python3 milvus_compare.py --table ann_1m_sq8h --nprobe 64 -p
