@@ -31,10 +31,10 @@
 - 测试脚本会包含四个 Python 脚本 `milvus_load.py`、`milvus_toolkit.py`、`milvus_search.py`、`milvus_compare.py`。
 
 获取完测试需要的数据和脚本后， `milvus_sift1m` 目录下应该存放有以下内容：
-1. 1,000,000 测试数据： `bvecs_data` 文件夹
-2. 10,000 条查询向量集：`query_data` 文件夹
-3. 10,000 条查询向量集的 ground truth：`gnd` 文件夹
-4. 四个测试脚本：`milvus_load.py`、`milvus_toolkit.py`、`milvus_search.py`、`milvus_compare.py`
+- 1,000,000 测试数据： `bvecs_data` 文件夹
+- 10,000 条查询向量集：`query_data` 文件夹
+- 10,000 条查询向量集的 ground truth：`gnd` 文件夹
+- 四个测试脚本：`milvus_load.py`、`milvus_toolkit.py`、`milvus_search.py`、`milvus_compare.py`
 
 > 注意：请保证 `bvecs_data` 文件夹、`query_data` 文件夹、`gnd` 文件夹、以及测试脚本都在同一个目录下。
 
