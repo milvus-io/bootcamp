@@ -65,14 +65,14 @@ $ python3 milvus_toolkit.py --table ann_1m_sq8h --dim 128 -c
 $ python3 milvus_toolkit.py --table ann_1m_sq8h --index sq8h --build 
 ```
 
-运行上述命令后，会创建一个名为 ann_1m_sq8 的表，其索引类型为 IVF_SQ8H。可通过如下命令查看该表的相关信息：
+运行上述命令后，会创建一个名为 ann_1m_sq8h 的表，其索引类型为 IVF_SQ8H。可通过如下命令查看该表的相关信息：
 
 ```shell
 #查看库中有哪些表
 $ python3 milvus_toolkit.py --show
-#查看表ann_1m_sq8的行数
+#查看表ann_1m_sq8h的行数
 $ python3 milvus_toolkit.py --table ann_1m_sq8h --rows
-#查看表ann_1m_sq8的索引类型
+#查看表ann_1m_sq8h的索引类型
 $ python3 milvus_toolkit.py --table ann_1m_sq8h --desc_index
 ```
 
