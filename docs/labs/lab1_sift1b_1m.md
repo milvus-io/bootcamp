@@ -44,7 +44,7 @@ Milvus 可以根据数据分布和性能、准确性的要求灵活调整相关�
 |    `gpu_resource_config`.`cache_capacity`    |   1    |
 |    `use_blas_threshold`    |  801   |
 | `gpu_search_threshold` | 1001         |
-| `search_resources`     | -gpu0 |
+| `search_resources`     | - gpu0 |
 
 关于参数设置的详细信息请参考[Milvus 配置](https://www.milvus.io/docs/zh-CN/reference/milvus_config/)。
 
