@@ -27,7 +27,7 @@
 
 - 测试数据集下载并解压完成之后，你将会看到一个名为 `bvecs_data` 的文件夹。该文件夹里面存放了 10 个 `npy` 文件，每个 `npy` 文件中存放了10 万条 uint8 格式的向量数据。
 - 查询向量集下载并解压完成之后，你将会看到一个名为 `query_data` 的文件夹。该文件夹里面存放了一个 `query.npy` 文件，该文件里存放了10,000 条需要查询的向量。
-- 对照数据下载并解压完成之后，是一个名为 `gnd` 的文件夹，该文件夹下有一个 `ground_truth_1M.txt` 的文本文件，该文件里存放的是查询向量集中的每条向量的 top1000 相似向量的位置。
+- 对照数据下载并解压完成之后，是一个名为 `gnd` 的文件夹，该文件夹下有一个 `ground_truth_1M.txt` 的文本文件，该文件里存放的是查询向量集中的每条向量的 top 1000 相似向量的位置。
 - 测试脚本会包含四个 Python 脚本 `milvus_load.py`、`milvus_toolkit.py`、`milvus_search.py`、`milvus_compare.py`。
 
 > 注意：请保证 `bvecs_data` 文件夹、`query_data` 文件夹、`gnd` 文件夹、以及测试脚本都在同一个目录层级下。
@@ -65,14 +65,14 @@ $ python3 milvus_toolkit.py --table ann_1m_sq8h --dim 128 -c
 $ python3 milvus_toolkit.py --table ann_1m_sq8h --index sq8h --build 
 ```
 
-运行上述命令后，会创建一个名为 ann_1m_sq8 的表，其索引类型为 IVF_SQ8H。可通过如下命令查看该表的相关信息：
+运行上述命令后，会创建一个名为 ann_1m_sq8h 的表，其索引类型为 IVF_SQ8H。可通过如下命令查看该表的相关信息：
 
 ```shell
 #查看库中有哪些表
 $ python3 milvus_toolkit.py --show
-#查看表ann_1m_sq8的行数
+#查看表ann_1m_sq8h的行数
 $ python3 milvus_toolkit.py --table ann_1m_sq8h --rows
-#查看表ann_1m_sq8的索引类型
+#查看表ann_1m_sq8h的索引类型
 $ python3 milvus_toolkit.py --table ann_1m_sq8h --desc_index
 ```
 
@@ -86,7 +86,7 @@ $ python3 milvus_toolkit.py --table ann_1m_sq8h --desc_index
 $ python3 milvus_load.py --table=ann_1m_sq8h -n
 ```
 
-数据导入过程中，可以看到本项目一次性导入一个文本的数据量。
+数据导入过程中，可以看到本项目一次性导入一个文件的数据量。
 
 上述过程完成之后，运行如下命令以查看 Milvus 表中的向量条数：
 
@@ -143,7 +143,7 @@ $ python3 milvus_search.py --table ann_1m_sq8h --nq 10 --topk 20 --nprobe 64 -s
 
 (注：nprobe 值影响这查询结果准确率和查询性能，nprobe 越大，准确率越高，性能越差。本项目中建议使用 nprobe=32)
 
-执行上述命令后，将会产生一个 `search_output` 文件夹,该文件夹下有一个名为 `ann_1m_sq8h_32_output.txt` 的文本，该文本中记录了10条向量各自对应的 top 20。文本中每20行为一组，对应一个 query 的查询结果。第一列表示待查询的向量在 `query.npy` 中对应的向量位置；第二列表示查询结果对应的 `bvecs_data` 中的向量(例如80006099349,第一个8无意义，8后面的四位0006表示对应 `bvecs_data` 中的第6个文本，最后六位099349表示对应第六个文本中的第099349条向量即为查询结果对应的向量)；第三列表示查询的向量和查询结果对应的欧氏距离。
+执行上述命令后，将会产生一个 `search_output` 文件夹,该文件夹下有一个名为 `ann_1m_sq8h_32_output.txt` 的文本文件，该文本文件中记录了10条向量各自对应的 top 20。文本文件中每20行为一组，对应一个 query 的查询结果。第一列表示待查询的向量在 `query.npy` 中对应的向量位置；第二列表示查询结果对应的 `bvecs_data` 中的向量(例如80006099349,第一个8无意义，8后面的四位0006表示对应 `bvecs_data` 中的第6个文件，最后六位099349表示对应第6个文件中的第099349条向量即为查询结果对应的向量)；第三列表示查询的向量和查询结果对应的欧氏距离。
 
 （2）执行准确率测试脚本
 
