@@ -6,131 +6,165 @@ The one million vectors used in this test are extracted from the dataset [SIFT1B
 
 #### Hardware requirements
 
-| Component           | Minimum Config                |
+The following configuration has been tested:
+
+| Component           |  Configuration                |
 | ------------------ | -------------------------- |
-| OS            | Ubuntu LTS 18.04 |
+| Operating System           | Ubuntu LTS 18.04 |
 | CPU           | Intel Core i5-8250U           |
-| GPU           | Nvidia GeForce MX150, 2GB GDDR5  |
-| GPU Driver    | CUDA 10.1, Driver 418.74 |
+| GPU           | NVIDIA GeForce MX150, 2GB GDDR5  |
+| GPU Driver    | Driver 418.74 |
 | Memory        | 8 GB DDR4          |
 | Storage       | NVMe SSD 256 GB             |
+| Milvus       | 0.6.0            |
+| pymilvus       | 0.2.6            |
 
 #### Download test tools
 
-Download the following data and scripts, and save them to a file named *milvus_sift1m*.
+Download the following data and scripts:
 
-- [One million vectors dataset](https://pan.baidu.com/s/1nVIIxO8MnOle339iYs2dUw)
-- [Query vector dataset](https://pan.baidu.com/s/1mBRM1cJZ6QWehDuddOYl4A)
-- [Search ground truth](https://pan.baidu.com/s/1-95nJvW3vx2Cq9wqBWOFaA) 
-- [Test scripts](/bootcamp/scripts/)
+- 1 million test data: [https://pan.baidu.com/s/19fj1FUHfYZwn9huhgX4rQQ](https://pan.baidu.com/s/19fj1FUHfYZwn9huhgX4rQQ)
+- Query data: [https://pan.baidu.com/s/1nVAFi5_DBZS2eazA7SN0VQ](https://pan.baidu.com/s/1nVAFi5_DBZS2eazA7SN0VQ)
+- Ground truth: [https://pan.baidu.com/s/1KGlBiJvuGpqjbZOIpobPUg](https://pan.baidu.com/s/1KGlBiJvuGpqjbZOIpobPUg)
+- Test scripts: [/bootcamp/scripts/](/scripts/)
 
-When it is done, there should be the following files in *milvus_sift1m*:
+Create a folder named `milvus_sift1m` and move all downloaded files to the folder:
 
-1. The *bvecs_data* file containing one million vectors
-2. The *query.npy* file that has 10,000 query vectors
-3. The ground_truth.txt file with the top 1000 most similar results for each query vector
-4. The test script files : *milvus_bootcamp.py* and *get_id.sh*
+- Unzip the 1 million test data to get the `bvecs_data` folder that contains 10 `npy` files. Each `npy` file contains 100,000 vectors.
+- Unzip the query data to get the `query_data` folder that contains `query.npy`, which contains 10,000 vectors to query.
+- Unzip the ground truth data to get the gnd folder with `ground_truth_1M.txt`, which contains the locations of top 1000 similar vectors in the query data.
+- The test script files contain the following Python scripts: `milvus_load.py`, `milvus_toolkit.py`, `milvus_search.py`, and `milvus_compare.py`.
 
-> **Note：** Please go through the README carefully before testing with script *milvus_bootcamp.py*. Make changes to the parameters in the script to match your scenario.
+> Note: Make sure that `bvecs_data`, `query_data`, `gnd`, and test scripts are in the same folder level.
 
 ## 2. Configure Milvus parameters
 
-To optimize Milvus's performance, you can change system parameters to suit your requirements. In this test, 90% recall rate can be achieved by using the recommended values in below table. 
+To optimize the performance of Milvus, you can change Milvus parameters based on data distribution, performance, and accuracy requirements. In this test, 90% or higher recall rate can be achieved by using the recommended values in the following table.
 
-Configuration file: **/home/$USER/milvus/conf/server_config.yaml**
+Configuration file: `/home/$USER/milvus/conf/server_config.yaml`
 
 |         Parameter         | Recommended value |
 | ---------------------- | ---- |
-| index_building_threshold |   64   |
-|    cpu_cache_capacity    |   4    |
-|    use_blas_threshold    |  801   |
-|          nprobe          |   32   |
+|       `cpu_cache_capacity`   |   4   |
+|         `gpu_resource_config`.`cache_capacity`      |  1    |
+|         `use_blas_threshold`	                |   801     |
+|         `gpu_search_threshold`	                |   1001     |
+|         `search_resources`	                |   gpu0     |
 
-After the parameter configuration, restart Milvus Docker apply them.
+Refer to [Milvus Configuration](https://github.com/milvus-io/docs/blob/0.6.0/reference/milvus_config.md) for more information.
+
+Use default values for other parameters. After setting parameter values, restart Milvus Docker to apply all changes.
 
 ```bash
 $ docker restart <container id>
 ```
 
-## 3. Import data
+## 3. Create a table and build indexes
 
-#### Before the data import
+Make sure Milvus is already installed and started. (For details of Milvus installation, please read [Milvus Quick Start](../milvus101/quickstart.md) )
 
-- Make sure the files *bvecs_data* and *milvus_bootcamp.py* are both placed under the directory *milvus_sift1m*. 
-- Make sure Milvus is already installed and started. (For details of Milvus installation, please read [Milvus Quick Start](../milvus101/quickstart.md) )
 
-#### Import data
-
-Go to *milvus_sift1m*, and run the following command:
+Go to `milvus_sift1m`, and run the following command to create a table and build indexes:
 
 ```bash
-$ python3 milvus_bootcamp.py --table=ann_1m_sq8 --index=ivfsq8 -t
+$ python3 milvus_toolkit.py --table ann_1m_sq8h --dim 128 -c
+$ python3 milvus_toolkit.py --table ann_1m_sq8h --index sq8h --build
 ```
 
-You will see vectors inserted into a table named *ann_1m_sq8*, with the index_type of `IVF_SQ8`. 
-
-![1m_import](pic/1m_import.png)
+Vectors are then inserted into a table named `ann_1m_sq8h`, with the index_type of `IVF_SQ8H`. 
 
 To show the available tables and number of vectors in each table, use the following command:
 
 ```bash
-$ python3 milvus_bootcamp.py --show
-$ python3 milvus_bootcamp.py --table=ann_1m_sq8 --rows
+#Show available tables
+$ python3 milvus_toolkit.py --show
+#Show the number of rows in ann_1m_sq8h
+$ python3 milvus_toolkit.py --table ann_1m_sq8h --rows
+#Show the index type of ann_1m_sq8h
+$ python3 milvus_toolkit.py --table ann_1m_sq8h --desc_index
 ```
 
-When the import is completed, a file *ann_1m_sq8_idmap.txt* will be created under *milvus_sift1m*. The file stores the vector ids and the metadata such as from which .npy file each vector comes from.   
+## 4.  Import data
 
-To ensure that index is built for all imported data, go to directory  **/home/$USER/milvus/db**, and run the following statement:
+Make sure table ann_1m_sq8 is successfully created.
+
+Run the following command to import 1,000,000 rows of data:
+
+```bash
+$ python3 milvus_load.py --table=ann_1m_sq8h -n
+```
+
+You can see that all data is imported from the file for once.
+
+Run the following command to check the number of rows in the table:
+
+```bash
+$ python3 milvus_toolkit.py --table=ann_1m_sq8h --rows
+```
+
+To make sure that all data imported to Milvus has indexes built. Navigate to `/home/$USER/milvus/db` and enter the following command:
 
 ```bash
 $ sqlite3 meta.sqlite
 ```
 
-Use below command to verify if index is built for all data:
+In sqlite3 CLI, enter the following command to check the current status:
 
-```sqlite
-sqlite> select * from TableFiles where table_id='ann_1m_sq8';
-30|ann_1m_sq8|3|1565599487052367000|3|102400000|1565599495009366|1565599487052372|1190712
-31|ann_1m_sq8|3|1565599495107862000|3|102400000|1565599502559292|1565599495107863|1190712
-32|ann_1m_sq8|3|1565599502656466000|3|102400000|1565599510079453|1565599502656467|1190712
-33|ann_1m_sq8|3|1565599510129972000|3|51200000|1565599513555987|1565599510129973|1190712
-34|ann_1m_sq8|3|1565599513650120000|3|102400000|1565599521067974|1565599513650121|1190712
-35|ann_1m_sq8|3|1565599521132604000|3|51200000|1565599524843984|1565599521132605|1190712
+```sql
+sqlite> select * from TableFiles where table_id='ann_1m_sq8h';
 ```
 
-When you examine the verification results, you will notice that multiple records are returned with the status verification. That's due to the fact that the data in the table will be automatically divided into multiple ranges to optimize the query performance. 
+Milvus divides a vector table into shards for storage. So, a query returns multiple records. The third column specifies the index type and 5 stands for IVF_SQ8H. The fifth column specifies the build status of the index and 3 indicates that index building is complete for the shard. If index building is not complete for a specific shard, you can manually build indexes for the shard.
 
-The 3rd column represents the index type built for the table (`3` represents index type `IVF_SQ8`), while the 5th column shows if index is built for a particular range (`3` represents that index is already built for the range). If there are any ranges for which the index is not yet built, you can build index manually by running below statement under directory *milvus_sift1m*:
+Exit sqlite CLI:
+
+```sql
+sqlite> .quit
+```
+
+Enter `milvus_sift1m` and run the following command:
 
 ```bash
-$ python3 milvus_bootcamp.py --table=ann_1m_sq8 --build
+$ python3 milvus_toolkit.py --table=ann_1m_sq8h --index=sq8h --build 
 ```
 
-Go to `sqlite` interface to check that index is built for all ranges. To learn the meaning of remaining columns in table status verification results, use `.schema` under directory **/home/$USER/milvus/db**:
+After manually building indexes, enter sqlite CLI again and make sure that index building has been completed for all shards. To understand the meanings of other columns, navigate to `/home/$USER/milvus/db` and enter the following command in the sqlite CLI:
 
-```sqlite
+```bash
+$ sqlite3 meta.sqlite
 sqlite>.schema
 ```
 
-## 4. Accuracy test
+## 5. Accuracy test
 
-SIFT1B provides not only the vector dataset to search 10,000 vectors, but also the top 1000 ground truth for each vector, which allows convenient calculation of precision rate. The vector search precision of Milvus can be represented as follows:
+SIFT1B provides not only the vector dataset to search 10,000 vectors, but also the top 1000 ground truth for each vector, which allows convenient calculation of precision rate. The vector search accuracy of Milvus can be represented as follows:
 
 Accuracy = Number of shared vectors (between Milvus search results and Ground truth) / (query_records * top_k)
 
-#### Step 1: Run accuracy test scripts
+#### Step 1: Run query script
 
-To test the search precision for top 20 results of 10 vectors randomly chosen from the 10,000 query vectors, go to directory *milvus_sift1m*, and run this script:
+To test the search precision for top 20 results of 10 vectors randomly chosen from the 10,000 query vectors, go to directory `milvus_sift1m`, and run this command:
 
 ```bash
-$ python3 milvus_bootcamp.py --table=ann_1m_sq8 -q 10 -k 20 -s
+$ python3 milvus_search.py --table ann_1m_sq8h --nq 10 --topk 20 --nprobe 64 -s
 ```
 
-#### Step 2: Verify test results
+> Note: nprobe affects search accuracy and performance. The greater the value, the higher the accuracy, but the lower the performance. In this experiment, you are recommended to use 32 for nprobe.
 
-When the test script is completed, you will see the following test results in the file *10_20_result.csv* in *accuracy_results*. 
+After running the command above, a `search_output` folder is created and includes `ann_1m_sq8h_32_output.txt`, which records top 20 similar vectors for the 10 vectors. In the text file, each 20 rows are formatted as one group that corresponds to the result of one query. The first column specifies the location of the vector to query in `query.npy`; the second column specifies the vectors correspond to the query result in `bvecs_data` (e.g. in 80006099349, the first `8` does not have a meaning, but `0006` after the first `8` stands for the 6th file in `bvecs_data`, the last `099349` indicates that the 099349th vector in the 6th file is the vector corresponding to the query result); the third column specifies the vector to query and the Euclidean distance.
 
-![1m_accu_10_20](pic/1m_accu_10_20.png)
+
+#### Step 2: Run accuracy test script
+
+Use the following command to compare the query result with ground truth and calculate the search accuracy of Milvus:
+
+```bash
+$ python3 milvus_compare.py --table ann_1m_sq8h --nprobe 64 -p
+```
+
+#### Step 3: Verify test results
+
+When the test script is completed, a `compare` folder is generated and includes `64_ann_1m_sq8h_10_20_output.csv`.
 
 - nq - the ordinal number of query vectors
 - topk - the top k most similar result vectors for the query vectors 
@@ -138,7 +172,7 @@ When the test script is completed, you will see the following test results in th
 - avg_time - the average time to query one vector (in seconds)
 - recall - the accuracy calculated by comparing Milvus search results and ground truth
 
-The accuracy rate has a positive correlation with search parameter `nprobe` (number of sub-spaces searched). In this test, when the `nprobe` = 32, the accuracy can reach > 90%.  However, as the `nprobe` gets bigger, the search time will be longer. 
+The accuracy rate has a positive correlation with search parameter `nprobe` (number of sub-spaces searched). In this test, when the `nprobe` = 64, the accuracy can reach > 90%.  However, as the `nprobe` gets bigger, the search time will be longer. 
 
 Therefore, based on your data distribution and business scenario, you need to edit `nprobe` to optimize the trade-off between accuracy and search time. 
 
@@ -147,20 +181,20 @@ Therefore, based on your data distribution and business scenario, you need to ed
 To test search performance, go to directory *milvus_sift1m*, and run the following script: 
 
 ```bash
-$ python3 milvus_bootcamp.py --table=ann_1m_sq8 -s
+$ python3 milvus_toolkit.py --table=ann_1m_sq8h --nprobe 64 -s
 ```
 
-When the execution is completed, you will see the test results in the file *xxx_results.csv* ('xxx' represents the execution time) in *performance_results*. Below is a partial display of the results:
-
-![1m_per_10_20](pic/1m_per_10_20.png)
+When the execution is completed, a `performance` folder is generated and includes `ann_1m_sq8h_32_output.csv`, which includes the running time for topk values with different nq values.
 
 - nq - the number of query vectors
 - topk - the top k most similar vectors for the query vectors 
 - total_time - the total query elapsed time (in seconds)
 - avg_time - the average time to query one vector (in seconds)
 
-> **Note:** 1. In milvus_bootcamp.py, `nq` is set to be 1, 50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800 respectively, and `topk` is set to be 1, 20, 50, 100, 300, 500, 800, 1000. 
+**Note:**
+
+> 1. In milvus_toolkit.py, `nq` is set to be 1, 50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, respectively, and `topk` is set to be 1, 20, 50, 100, 300, 500, 800, 1000, respectively.
 >
 > 2. To run the first vector search, some extra time is needed to load the data (from the disk) to the memory.
-
-> **Tip:** It is recommended to run several performance tests continuously, and use the search time of the second run. If the tests are executed intermittently, Intel CPU may downgrade to base clock speed.
+>
+> 3. It is recommended to run several performance tests continuously, and use the search time of the second run. If the tests are executed intermittently, Intel CPU may downgrade to base clock speed.
