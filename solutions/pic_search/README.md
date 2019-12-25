@@ -60,7 +60,7 @@ $ docker run -d --name zilliz_search_images_demo \
 -p 35000:5000 \
 -e "DATA_PATH=/tmp/images-data" \
 -e "MILVUS_HOST=192.168.1.123" \
-chenglong555/pic_search_demo:0.5.0
+milvusbootcamp/pic-search-webserver:0.1.0
 ```
 
 上述启动命令中，“ IMAGE_PATH1 ” 、“ IMAGE_PATH2” 表示你存放图片数据的目录。启动时将这些路径映射到 docker 容器里面，系统搭建好以后，可以直接在前端界面上输入 docker 容器中的图片路径 “ /tmp/pic1 ” 、“ /tmp/pic2” 去加载图片。“ MILVUS_HOST “ 表示启动 Milvus docker 的服务器地址，注意不要使用回环地址 “127.0.0.1” 。命令其他部分保持不变即可。
@@ -70,7 +70,7 @@ chenglong555/pic_search_demo:0.5.0
 ```bash
 $ docker run --name zilliz_search_images_demo_web -d --rm -p 8001:80 \
 -e API_URL=http://192.168.1.123:35000 \
-chenglong555/pic_search_demo_web:0.2.0
+milvusbootcamp/pic-search-webclient:0.1.0
 ```
 
 上述启动命令中，" 192.168.1.123 " 表示启动 Milvus docker 的服务器地址。
