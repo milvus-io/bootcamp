@@ -67,7 +67,7 @@ $ docker restart <container id>
 
 ## 3、 建表并建立索引
 
-建表之前，首先确保 bvecs_data 文件夹与四个测试脚本都放在 milvus_sift100m 目录下，然后确认 Milvus 已经正常启动。（ Milvus 安装及启动方法参见：[Milvus 快速上手](../milvus101/quickstart.md) ）
+建表之前，首先确保 bvecs_data 文件夹与四个测试脚本都放在 milvus_sift100m 目录下，然后确认 Milvus 已经正常启动。（ Milvus 安装及启动方法参见：[Milvus 快速上手](../getting_started/basics/quickstart.md) ）
 
 进入 milvus_sift1m 目录，运行如下脚本在Milvus中建表并建立索引：
 

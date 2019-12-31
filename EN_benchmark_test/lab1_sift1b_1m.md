@@ -61,7 +61,7 @@ $ docker restart <container id>
 
 ## 3. Create a table and build indexes
 
-Make sure Milvus is already installed and started. (For details of Milvus installation, please read [Milvus Quick Start](../milvus101/quickstart.md) )
+Make sure Milvus is already installed and started. (For details of Milvus installation, please read [Milvus Quick Start](../EN_getting_started/basics/quickstart.md)).
 
 
 Go to `milvus_sift1m`, and run the following command to create a table and build indexes:
