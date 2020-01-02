@@ -58,11 +58,11 @@ def connect_milvus_server():
 
 
 def create_milvus_table():
-    if not milvus.has_table(MILVUS_TABLE):
+    if not milvus.has_table(MILVUS_TABLE)[1]:
         param = {
             'table_name': MILVUS_TABLE,
             'dimension': VEC_DIM,
-            'index_file_size':1024，
+            'index_file_size':1024,
             'metric_type':MetricType.L2
         }
         milvus.create_table(param)
