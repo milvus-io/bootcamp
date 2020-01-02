@@ -26,7 +26,7 @@ Download the following data and scripts:
 - 1 million test data: [https://pan.baidu.com/s/19fj1FUHfYZwn9huhgX4rQQ](https://pan.baidu.com/s/19fj1FUHfYZwn9huhgX4rQQ)
 - Query data: [https://pan.baidu.com/s/1nVAFi5_DBZS2eazA7SN0VQ](https://pan.baidu.com/s/1nVAFi5_DBZS2eazA7SN0VQ)
 - Ground truth: [https://pan.baidu.com/s/1KGlBiJvuGpqjbZOIpobPUg](https://pan.baidu.com/s/1KGlBiJvuGpqjbZOIpobPUg)
-- Test scripts: [/bootcamp/scripts/](/scripts/)
+- Test scripts: [/bootcamp/benchmark_test/scripts/](/benchmark_test/scripts/)
 
 Create a folder named `milvus_sift1m` and move all downloaded files to the folder:
 

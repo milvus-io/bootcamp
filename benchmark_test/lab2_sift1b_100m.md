@@ -19,7 +19,7 @@
 - 1亿测试数据集下载地址：https://pan.baidu.com/s/1N5jGKHYTGchye3qR31aNnA
 - 查询向量集下载地址：https://pan.baidu.com/s/1nVAFi5_DBZS2eazA7SN0VQ
 - 搜索结果对照 （ ground truth ）下载地址：https://pan.baidu.com/s/17xkZo1kpi3A0wIg8Q7CJ8A
-- 测试脚本下载地址：[/bootcamp/benchmark_test/scripts/](/bootcamp/benchmark_test/scripts/)
+- 测试脚本下载地址：[/bootcamp/benchmark_test/scripts/](/benchmark_test/scripts/)
 
 为方便存放测试数据和脚本，请创建名为 milvus_sift100m 的文件夹。利用前文提供的下载链接，将测试数据集下载到 milvus_sift100m 目录下：
 - 测试数据集会包含 000_to_299  、 300_to_599 、600_to_999 三个文件夹分别存放约 3,000 万测试数据。将这三个文件夹中的数据文件都解压到 **milvus_sift100M/bvecs_data/** 文件夹下。解压完成后 **milvus_sift100M/bvecs_data/** 文件夹里将会有 1,000 个 npy 文件，每个 npy 文件中存放 10 万条向量数据，共 1 亿条。
