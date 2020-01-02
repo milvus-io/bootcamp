@@ -21,7 +21,7 @@
 - 100 万测试数据集下载地址：https://pan.baidu.com/s/19fj1FUHfYZwn9huhgX4rQQ
 - 查询向量集下载地址：https://pan.baidu.com/s/1nVAFi5_DBZS2eazA7SN0VQ
 - 搜索结果对照 （ ground truth ）下载地址：https://pan.baidu.com/s/1KGlBiJvuGpqjbZOIpobPUg
-- 测试脚本下载路径：[/bootcamp/scripts/](/scripts/)
+- 测试脚本下载路径：[/bootcamp/benchmark_test/scripts/](/benchmark_test/scripts/)
 
 为方便存放测试数据和脚本，请创建名为 `milvus_sift1m` 的文件夹。利用前文提供的下载链接，将测试数据集下载到 `milvus_sift1m` 目录下：
 
@@ -56,7 +56,7 @@ $ docker restart <container id>
 
 ## 3、 建表并建立索引
 
-建表之前，首先确认 Milvus 已经正常启动。（ Milvus 安装及启动方法参见：[Milvus 快速上手](../milvus101/quickstart.md) ）
+建表之前，首先确认 Milvus 已经正常启动。（ Milvus 安装及启动方法参见：[Milvus 快速上手](../getting_started/basics/quickstart.md) ）
 
 进入 `milvus_sift1m` 目录，运行如下脚本在 Milvus 中建表并建立索引：
 

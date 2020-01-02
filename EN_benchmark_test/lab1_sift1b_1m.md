@@ -26,7 +26,7 @@ Download the following data and scripts:
 - 1 million test data: [https://pan.baidu.com/s/19fj1FUHfYZwn9huhgX4rQQ](https://pan.baidu.com/s/19fj1FUHfYZwn9huhgX4rQQ)
 - Query data: [https://pan.baidu.com/s/1nVAFi5_DBZS2eazA7SN0VQ](https://pan.baidu.com/s/1nVAFi5_DBZS2eazA7SN0VQ)
 - Ground truth: [https://pan.baidu.com/s/1KGlBiJvuGpqjbZOIpobPUg](https://pan.baidu.com/s/1KGlBiJvuGpqjbZOIpobPUg)
-- Test scripts: [/bootcamp/scripts/](/scripts/)
+- Test scripts: [/bootcamp/benchmark_test/scripts/](/benchmark_test/scripts/)
 
 Create a folder named `milvus_sift1m` and move all downloaded files to the folder:
 
@@ -61,7 +61,7 @@ $ docker restart <container id>
 
 ## 3. Create a table and build indexes
 
-Make sure Milvus is already installed and started. (For details of Milvus installation, please read [Milvus Quick Start](../milvus101/quickstart.md) )
+Make sure Milvus is already installed and started. (For details of Milvus installation, please read [Milvus Quick Start](../EN_getting_started/basics/quickstart.md)).
 
 
 Go to `milvus_sift1m`, and run the following command to create a table and build indexes:
