@@ -1,0 +1,13 @@
+version: "2.3"
+services:
+    milvus_ro:
+        runtime: nvidia
+        restart: always
+        image: milvusdb/milvus:latest
+        ports:
+            - "0.0.0.0:19530:19530"
+        volumes:
+            - /test/solution/milvus/db:/var/lib/milvus/db
+            - ./cluster_ro_server.yml:/var/lib/milvus/conf/server_config.yaml
+
+
