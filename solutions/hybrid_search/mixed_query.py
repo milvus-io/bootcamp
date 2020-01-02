@@ -243,7 +243,7 @@ def search_in_pg_7(conn,cur,result_ids,result_distance):
         print(len(rows))
         j = 0
         for row in rows:
-            print(row[0], " ", row[2], row[3], row[4], " ", result_distance[j])
+            print(row[0], " ", row[1], " ", row[2], " ", row[3], " ", result_distance[j])
             j = j + 1
     except:
         print("search faild!")
