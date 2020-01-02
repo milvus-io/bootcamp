@@ -69,7 +69,7 @@ def create_milvus_table():
 
 def build_table():
     index_param = {'index_type': IndexType.IVF_SQ8H, 'nlist': 16384}
-    status = MILVUS.create_index(MILVUS_TABLE,index_param)
+    status = milvus.create_index(MILVUS_TABLE,index_param)
     print(status)
 
 def connect_postgres_server():
