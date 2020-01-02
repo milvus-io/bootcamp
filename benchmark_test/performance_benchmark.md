@@ -14,7 +14,7 @@
 
 （注：测试性能与nprobe值相关，性能随着nprobe增大而降低，但是精确率会随之增加。用户可根据具体场景要求设置nprobe. 本次测试nprobe设置为32）
 
-各类型索引如何选择可参考：https://milvus.io/blog/2019/12/03/select-index
+各类型索引如何选择可参考：https://milvus.io/cn/blogs/2019-12-03-select-index.md
 
 ### 索引：IVF_FLAT
 
