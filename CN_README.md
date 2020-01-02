@@ -11,6 +11,6 @@ Milvus 是一款高速智能向量检索引擎，旨在通过以下方式帮助�
 
 - [Milvus 入门教程](getting_started)
 - [基准性能测试](benchmark_test)
-- [解决方案原型](solutions)
+- [解决方案和应用场景](solutions)
 
 欢迎加入： [Slack channel](https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk) 与其他用户和贡献者联系。
