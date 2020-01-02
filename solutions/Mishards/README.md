@@ -50,13 +50,13 @@ $ docker ps
 
 cluster_wr_server.yml：
 
-![1577780602167](pic\1577780602167.png)
+![1577780602167](pic/1577780602167.png)
 
 在该配置文件中，参数deploy_mode决定了milvus是只读还是可写。此处选择cluster_writable表示为该milvus可写。参数backend_url应修改为mysql所安装的设备的地址。其余配置参照milvus单机版时的配置。
 
 cluster_wr.yml：
 
-![1577931601864](pic\1577931601864.png)
+![1577931601864](pic/1577931601864.png)
 
 此处volumes下的路径/test/solution/milvus/db是数据存储位置，该路径需指向一个共享存储，集群中的所有设备数据存储位置均设置为同一个共享存储。其余参数使用默认设置即可。
 
@@ -72,13 +72,13 @@ $ docker-compose -f cluster_wr.yml up -d
 
 cluster_ro_server.yml：
 
-![1577782332404](pic\1577782332404.png)
+![1577782332404](pic/1577782332404.png)
 
 此处deploy_mode设置为cluster_readonly表示为该milvus只可读（即只有在search时才会启用该服务）。参数backend_url应修改为mysql所安装的设备的地址。其余配置参照milvus单机版时的配置。
 
 cluster_ro.yml:
 
-![1577931719030](pic\1577931719030.png)
+![1577931719030](pic/1577931719030.png)
 
 该处路径同上。
 
@@ -96,7 +96,7 @@ mishards服务只需在集群中**任意一台**设备上启动即可。
 
 本项目目录中有一个cluster_mishards.yml文件，如图：
 
-![1577783243935](pic\1577783243935.png)
+![1577783243935](pic/1577783243935.png)
 
 在脚本中需要注意修改的参数：
 
