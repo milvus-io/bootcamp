@@ -2,7 +2,7 @@
 
 Milvus aims to achieve efficient similarity search and analytics for massive-scale vectors. A standalone Milvus instance can easily handle vector search among billion-scale vectors. However, for 10 billion, 100 billion or even larger datasets, a Milvus cluster is needed.
 
-This topic displays how to use Mishards to build a Milvus cluster. Refer to [https://github.com/milvus-io/milvus/blob/0.6.0/shards/README.md] for more information.
+This topic displays how to use Mishards to build a Milvus cluster. Refer to https://github.com/milvus-io/milvus/blob/0.6.0/shards/README.md for more information.
 
 This topic assumes you can install and use Milvus in a standalone server. Refer to the following content to learn how to build a Milvus cluster.
 
@@ -26,7 +26,7 @@ In this solution, we use two servers to build a small Milvus cluster, with one w
 
 You only need to run MySQL in either of the two servers.
 
-Run MySQL using docker with `mysqld.cnf` and `mysql_dc.yml`. You can find these files in [bootcamp/solutions/Mishards](../solutions/Mishards).
+Run MySQL using docker with `mysqld.cnf` and `mysql_dc.yml`. You can find these files in [bootcamp/solutions/Mishards](../../solutions/Mishards).
 
 ```shell
 $ docker-compose -f mysql_dc.yml up -d
