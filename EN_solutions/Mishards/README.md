@@ -10,7 +10,7 @@ This topic assumes you can install and use Milvus in a standalone server. Refer 
 
 A Milvus cluster needs at least two servers and one shared storage device.
 
-1. Install [Nvidia-driver](https://www.nvidia.com/Download/index.aspx) 418 or higher.
+1. Install [NVIDIA driver](https://www.nvidia.com/Download/index.aspx) 418 or higher.
 
 2. Install [docker](https://docs.docker.com/install/linux/docker-ce/ubuntu/).
 
