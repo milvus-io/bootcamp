@@ -44,7 +44,7 @@ Milvus must be installed in both servers. Different servers can have different a
 
 #### Configure Milvus with write access
 
-Use `cluster_wr_server.yml` and `cluster_wr.yml` for Milvus with write access. You can find these files in [bootcamp/solutions/Mishards](../solutions/Mishards). Update the configurations per the actual environment.
+Use `cluster_wr_server.yml` and `cluster_wr.yml` for Milvus with write access. You can find these files in [bootcamp/solutions/Mishards](../../solutions/Mishards). Update the configurations per the actual environment.
 
 `cluster_wr_server.yml`:
 
@@ -66,7 +66,7 @@ $ docker-compose -f cluster_wr.yml up -d
 
 #### Configure Milvus with read-only access
 
-Use `cluster_ro_server.yml` and `cluster_ro.yml` for Milvus with read-only access. You can find these files in [bootcamp/solutions/Mishards](../solutions/Mishards). Update the configurations per the actual environment.
+Use `cluster_ro_server.yml` and `cluster_ro.yml` for Milvus with read-only access. You can find these files in [bootcamp/solutions/Mishards](../../solutions/Mishards). Update the configurations per the actual environment.
 
 `cluster_ro_server.yml`:
 
@@ -90,7 +90,7 @@ $ docker-compose -f cluster_ro.yml up -d
 
 ### 3.Run Mishards
 
-You can run Mishards in either of the two servers. In the server to run Mishards, configure `cluster_mishards.yml`. You can find this file in [bootcamp/solutions/Mishards](../solutions/Mishards).
+You can run Mishards in either of the two servers. In the server to run Mishards, configure `cluster_mishards.yml`. You can find this file in [bootcamp/solutions/Mishards](../../solutions/Mishards).
 
 ![1577783243935](pic/1577783243935.png)
 
