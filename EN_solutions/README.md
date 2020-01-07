@@ -6,6 +6,7 @@
 - [Build Milvus from source in Windows](./Milvus_with_Windows.md)
 - [High availability (HA) solution based on Milvus](Milvus_HA/README.md)
 - [Hybrid search based on Milvus partitions](partition_hybrid_search/README.md)
+- [Distributed solution based on Mishards, a sharding middleware for Milvus clusters](Mishards/README.md)
 
 ## Application Scenarios
 
