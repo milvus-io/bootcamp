@@ -1,6 +1,6 @@
 # 基准测试
 
-[English](../EN_benchmark_test/README.md) | [中文版](CN_README.md)
+[English](../EN_benchmark_test/README.md) | [中文版](README.md)
 
 基准测试部分包含以下内容：
 
