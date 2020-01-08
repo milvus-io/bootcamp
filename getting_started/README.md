@@ -1,6 +1,6 @@
 # 快速入门
 
-[English](../EN_getting_started/README.md) | [中文版](README_CN.md)
+[English](../EN_getting_started/README.md) | [中文版](README.md)
 
 快速入门部分包含以下内容：
 
