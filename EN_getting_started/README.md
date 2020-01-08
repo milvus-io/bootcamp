@@ -1,6 +1,6 @@
 # About Getting Started
 
-[English](README.md) | [中文版](../getting_started/README_CN.md)
+[English](README.md) | [中文版](../getting_started/README.md)
 
 The getting started section includes the following content:
 
