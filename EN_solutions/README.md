@@ -1,5 +1,7 @@
 # Solutions and Application Scenarios
 
+[English](README.md) | [中文版](../solutions/README.md)
+
 ## Solutions
 
 - [Milvus-Based hybrid search solution](hybrid_search/readme.md)
