@@ -1,5 +1,7 @@
 # 解决方案与应用场景
 
+[English](../EN_solutions/README.md) | [中文版](README.md)
+
 ## 解决方案
 
 - [基于 Milvus 的混合查询方案](hybrid_search/readme.md)
