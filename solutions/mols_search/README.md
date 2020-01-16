@@ -54,10 +54,10 @@ $ docker run -d -v <DATAPATH>:/tmp/data -p 35001:5000 -e "MILVUS_HOST=192.168.1.
 
 | 参数                          | 说明                                                         |
 | ----------------------------- | ------------------------------------------------------------ |
-| -v DATAPATH:/tmp/data       | -v 表示宿主机和 image 之间的目录映射<br />请将DATAPATH修改为你存放 test_1w.smi 数据的目录。 |
+| -v DATAPATH:/tmp/data         | -v 表示宿主机和 image 之间的目录映射<br />请将DATAPATH修改为你存放 test_1w.smi 数据的目录。 |
 | -p 35001:5000                 | -p 表示宿主机和 image 之间的端口映射                         |
 | -e "MILVUS_HOST=192.168.1.25" | -e 表示宿主机和 image 之间的系统参数映射<br />请修改`192.168.1.25`为启动 Milvus docker 的服务器 IP 地址 |
-| -e "MILVUS_POST=19530"        | 请修改`19530`为启动 Milvus docker 的服务器端口号             |
+| -e "MILVUS_PORT=19530"        | 请修改`19530`为启动 Milvus docker 的服务器端口号             |
 
 
 
