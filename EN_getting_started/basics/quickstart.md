@@ -4,8 +4,8 @@ In this guide, we will walk you through installing Milvus and your very first ve
 
 ## Installing Milvus Docker
 
-Refer to [Installation Overview](https://milvus.io/docs/en/userguide/install_milvus/) to learn how to install Milvus Docker.
+Refer to [Installation Overview](https://www.milvus.io/docs/guides/get_started/install_milvus/install_milvus.md) to learn how to install Milvus Docker.
 
 ## Running Python example program
 
-Refer to [Try an Example Program](https://milvus.io/docs/en/userguide/example_code/) to learn how to run a Python example program.
+Refer to [Try an Example Program](https://www.milvus.io/docs/guides/get_started/example_code.md) to learn how to run a Python example program.
