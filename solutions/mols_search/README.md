@@ -7,7 +7,7 @@
 | CPU      | Intel(R) Core(TM) i7-7700K CPU @ 4.20GHz                     |
 | Memory   | 32GB                                                         |
 | OS       | Ubuntu 18.04                                                 |
-| Software | Milvus 0.7.0 (CPU版） <br />pymilvus-test 0.2.44<br />mols-search-webserver 0.3.1 <br />mols-search-webserver 0.3.0 |
+| Software | Milvus test (CPU版） <br />pymilvus-test 0.2.44<br />mols-search-webserver 0.3.1 <br />mols-search-webserver 0.3.0 |
 
 以上配置已经通过测试，并且 Windows 系统也可以运行本次实验，以下步骤 Windows 系统通用。
 
@@ -34,7 +34,7 @@ $ wget https://raw.githubusercontent.com/milvus-io/bootcamp/0.7.0_alpha/solution
 #### 2. 启动 mols-search-webserver docker
 
 ```bash
-$ docker run -d --rm -v <DATAPATH>:/tmp/data -p 35001:5000 -e "MILVUS_HOST=192.168.1.25" -e "MILVUS_PORT=19530" xiaomi1/search-mols-webserver:0.3.1
+$ docker run -d --rm -v <DATAPATH>:/tmp/data -p 35001:5000 -e "MILVUS_HOST=192.168.1.25" -e "MILVUS_PORT=19530" milvusbootcamp/mols-search-webserver:0.3.1
 ```
 
 上述启动命令相关参数说明：
@@ -51,7 +51,7 @@ $ docker run -d --rm -v <DATAPATH>:/tmp/data -p 35001:5000 -e "MILVUS_HOST=192.1
 #### 3. 启动 mols-search-webclient docker
 
 ```bash
-$ docker run -d --rm -p 8001:80 -e API_URL=http://192.168.1.25:35001 xiaomi1/search-mols-webclient:0.3.0
+$ docker run -d --rm -p 8001:80 -e API_URL=http://192.168.1.25:35001 milvusbootcamp/mols-search-webclient:0.3.0
 ```
 
 > 参数 -e API_URL=http://192.168.1.25:35001 与本节第二部分相对应，请修改`192.168.1.25`为启动 Milvus docker 的服务器 IP 地址。
@@ -111,4 +111,4 @@ Milvus 内存占用情况如下：
 
 可以看出，Milvus 在大规模化学式检索时有较快的检索性能和较低的内存占用。
 
-本文搭建的化合物检索系统提供公共访问的 web 链接 http://40.73.24.85 ,欢迎访问并检索您指定的 “种子” 化合物！
+本文搭建的化合物检索系统提供公共访问的 web 链接 http://40.73.24.85 ，欢迎访问并检索您指定的化合物！

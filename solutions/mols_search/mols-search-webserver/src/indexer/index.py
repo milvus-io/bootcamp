@@ -1,6 +1,7 @@
 import logging as log
 from milvus import *
 from common.config import MILVUS_HOST, MILVUS_PORT, VECTOR_DIMENSION
+import traceback
 
 
 def milvus_client():
@@ -10,6 +11,8 @@ def milvus_client():
         return milvus
     except Exception as e:
         log.error(e)
+        log.error(traceback.format_exc())
+        return None
 
 
 def create_table(client, table_name=None, dimension=VECTOR_DIMENSION,
