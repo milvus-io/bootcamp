@@ -94,14 +94,14 @@ http://192.168.1.25:8001
 ![](./assert/load_data.PNG)
 
 - 化学式检索
-  1. 输入待检索的**化学式**并按**回车**，如：COclccc2c(c1)c(CC(=O)O)c(n2Cc1ccccc1)C
+  1. 输入待检索的**化学式**并按**回车**，如：Cc1ccc(cc1)S(=O)(=O)N
   2. 选择 TopK 值，将在右侧返回相似度最高的前 TopK 个化学式
 
 ![](./assert/search_data.PNG)
 
 - 清除化学式数据
 
-  点击`CLEAR ALL`按钮，清楚所有化学式数据
+  点击`CLEAR ALL`按钮，将清楚所有化学式数据
 
 ![](./assert/delete_data.PNG)
 
