@@ -47,7 +47,7 @@ milvusdb/milvus:0.6.0-cpu-d120719-2b40dd
 #### 2. 启动 mols-search-webserver docker
 
 ```bash
-$ docker run -d --rm -v <DATAPATH>:/tmp/data -p 35001:5000 -e "MILVUS_HOST=192.168.1.25" -e "MILVUS_PORT=19530" milvusbootcamp/mols-search-webserver:0.3.1
+$ docker run -d -v <DATAPATH>:/tmp/data -p 35001:5000 -e "MILVUS_HOST=192.168.1.25" -e "MILVUS_PORT=19530" milvusbootcamp/mols-search-webserver:0.3.1
 ```
 
 上述启动命令相关参数说明：
