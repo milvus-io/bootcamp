@@ -5,9 +5,9 @@
 | Component     | Recommended Configuration                                                     |
 | -------- | ------------------------------------------------------------ |
 | CPU      | Intel(R) Core(TM) i7-7700K CPU @ 4.20GHz                     |
-| Memory   | 32GB                                                         |
+| Memory   | 32 GB                                                         |
 | OS       | Ubuntu 18.04                                                 |
-| Software | Milvus (latest)  <br />pymilvus-test 0.2.44<br />mols-search-webserver 0.3.1 <br />mols-search-webclient 0.3.0 |
+| Software | [Milvus daily-build:ubuntu18.04-cpu-d011620](https://hub.docker.com/repository/docker/milvusdb/daily-build/tags?page=1)  <br />[pymilvus 0.2.7](https://pypi.org/project/pymilvus/)<br />mols-search-webserver 0.3.1 <br />mols-search-webclient 0.3.0 |
 
 The previous configuration has been tested and this scenario is also supported in Windows.
 
@@ -23,19 +23,32 @@ $ wget https://raw.githubusercontent.com/milvus-io/bootcamp/0.7.0_alpha/solution
 
 #### 1. Run Milvus Docker
 
-This solution uses the latest version of Milvus.
+This demo uses [Milvus daily-build](https://hub.docker.com/repository/docker/milvusdb/daily-build/tags?page=1). Refer to https://milvus.io/docs/v0.6.0/guides/get_started/install_milvus/cpu_milvus_docker.md to learn how to install and run Milvus. Because this version is not officially released, it is not recommended for production. If you have any questions, please file [issues](https://github.com/milvus-io/milvus/issues).
+
+**Note：Please use the following command to run Milvus:**
+
+```bash
+# Start Milvus
+$ docker run -d --name milvus_cpu \
+-p 19530:19530 \
+-p 8080:8080 \
+-v /home/$USER/milvus/db:/var/lib/milvus/db \
+-v /home/$USER/milvus/conf:/var/lib/milvus/conf \
+-v /home/$USER/milvus/logs:/var/lib/milvus/logs \
+milvusdb/daily-build:ubuntu18.04-cpu-d011620
+```
 
 #### 2. Run mols-search-webserver docker
 
 ```bash
-$ docker run -d --rm -v <DATAPATH>:/tmp/data -p 35001:5000 -e "MILVUS_HOST=192.168.1.25" -e "MILVUS_PORT=19530" xiaomi1/search-mols-webserver:0.3.1
+$ docker run -d -v <DATAPATH>:/tmp/data -p 35001:5000 -e "MILVUS_HOST=192.168.1.25" -e "MILVUS_PORT=19530" milvusbootcamp/mols-search-webserver:0.3.1
 ```
 
 Refer to the following table for detailed parameter description:
 
 | Parameter                     | Description                                                      |
 | ----------------------------- | ------------------------------------------------------------ |
-| -v \<DATAPATH\>:/tmp/data       | -v specifies directory mapping between the host and the docker image. Please change \<DATAPATH\> to the location of test_1w.smi. |
+| -v DATAPATH:/tmp/data       | -v specifies directory mapping between the host and the docker image. Please change DATAPATH to the location of test_1w.smi. |
 | -p 35001:5000                 | -p specifies pot mapping between the host and the image.                        |
 | -e "MILVUS_HOST=192.168.1.25" | -e specifies the system parameter mapping between the host and the image. Pease update `192.168.1.25` to the IP address of the Milvus docker.|
 | -e "MILVUS_POST=19530"        | Update `19530` to the port of Milvus docker.           |
@@ -45,7 +58,7 @@ Refer to the following table for detailed parameter description:
 #### 3. Run mols-search-webclient docker
 
 ```bash
-$ docker run -d --rm -p 8001:80 -e API_URL=http://192.168.1.25:35001 xiaomi1/search-mols-webclient:0.3.0
+$ docker run -d --rm -p 8001:80 -e API_URL=http://192.168.1.25:35001 milvusbootcamp/mols-search-webclient:0.3.0
 ```
 
 > Note: Please update `192.168.1.25` to the IP address of the Milvus docker.
@@ -72,7 +85,7 @@ http://192.168.1.25:8001
 ![](../../solutions/mols_search/assert/load_data.PNG)
 
 - Search chemical structures
-  1. Enter the chemical structure to search, such as `COclccc2c(c1)c(CC(=O)O)c(n2Cc1ccccc1)C`, and press \<ENTER\>.
+  1. Enter the chemical structure to search, such as `Cc1ccc(cc1)S(=O)(=O)N`, and press \<ENTER\>.
   2. Set the value of topk. This demo returns topk most similar chemical structures.
 
 ![](../../solutions/mols_search/assert/search_data.PNG)
@@ -100,3 +113,5 @@ The following table shows memory usage:
 | Memory Usage | 2.6 G               | 6 G             |
 
 We can see that Milvus has faster search speed and lower memory usage for massive-scale chemical structure search.
+
+We have built a chemical structure similarity search system (http://40.73.24.85) based on Milvus. Welcome to search for your own chemical structure.
