@@ -27,7 +27,7 @@ $ wget https://raw.githubusercontent.com/milvus-io/bootcamp/0.7.0_alpha/solution
 
 #### 1. 启动 Milvus Docker
 
-本次实验使用 [Milvus daily-build版本](https://hub.docker.com/repository/docker/milvusdb/daily-build/tags?page=1)，安装启动方法参考https://milvus.io/docs/v0.6.0/guides/get_started/install_milvus/cpu_milvus_docker.md，由于该版本还未正式发布，建议不在生产环境中使用，若有问题和疑问欢迎提交 [ISSUE](https://github.com/milvus-io/milvus/issues)。
+本次实验使用 [Milvus daily-build版本](https://hub.docker.com/repository/docker/milvusdb/daily-build/tags?page=1)，安装启动方法参考https://milvus.io/docs/v0.6.0/guides/get_started/install_milvus/cpu_milvus_docker.md ，由于该版本还未正式发布，建议不在生产环境中使用，若有问题和疑问欢迎提交 [ISSUE](https://github.com/milvus-io/milvus/issues)。
 
 **注意：请在`第四步 启动 Milvus Docker 容器`时命令修改为：**
 
@@ -124,4 +124,4 @@ Milvus 内存占用情况如下：
 
 可以看出，Milvus 在大规模化学式检索时有较快的检索性能和较低的内存占用。
 
-本文搭建的化合物检索系统提供公共访问的 web 链接 http://40.73.24.85 ，欢迎访问并检索您指定的化合物！
+基于 Milvus 搭建了九千多万的化学式检索系统 http://40.73.24.85 ，欢迎访问并检索您指定的化合物！
