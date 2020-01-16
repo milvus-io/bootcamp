@@ -7,7 +7,7 @@
 | CPU      | Intel(R) Core(TM) i7-7700K CPU @ 4.20GHz                     |
 | Memory   | 32GB                                                         |
 | OS       | Ubuntu 18.04                                                 |
-| Software | [Milvus daily-build:ubuntu18.04-cpu-d011620](https://hub.docker.com/repository/docker/milvusdb/daily-build/tags?page=1) <br />[pymilvus 0.2.7](https://pypi.org/project/pymilvus/)<br />mols-search-webserver 0.3.1 <br />mols-search-webserver 0.3.0 |
+| Software | [Milvus daily-build:ubuntu18.04-cpu-d011620](https://hub.docker.com/repository/docker/milvusdb/daily-build/tags?page=1) <br />[pymilvus 0.2.7](https://pypi.org/project/pymilvus/)<br />mols-search-webserver 0.3.1 <br />mols-search-webclient 0.3.0 |
 
 以上配置已经通过测试，并且 Windows 系统也可以运行本次实验，以下步骤 Windows 系统通用。
 
@@ -29,7 +29,7 @@ $ wget https://raw.githubusercontent.com/milvus-io/bootcamp/0.7.0_alpha/solution
 
 本次实验使用 [Milvus daily-build版本](https://hub.docker.com/repository/docker/milvusdb/daily-build/tags?page=1)，安装启动方法参考https://milvus.io/docs/v0.6.0/guides/get_started/install_milvus/cpu_milvus_docker.md ，由于该版本还未正式发布，建议不在生产环境中使用，若有问题和疑问欢迎提交 [ISSUE](https://github.com/milvus-io/milvus/issues)。
 
-**注意：请在`第四步 启动 Milvus Docker 容器`时命令修改为：**
+**注意：请使用以下命令启动 Milvus Docker**
 
 ```bash
 # Start Milvus
