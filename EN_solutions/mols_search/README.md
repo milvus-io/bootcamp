@@ -51,7 +51,7 @@ Refer to the following table for detailed parameter description:
 | -v DATAPATH:/tmp/data       | -v specifies directory mapping between the host and the docker image. Please change DATAPATH to the location of test_1w.smi. |
 | -p 35001:5000                 | -p specifies pot mapping between the host and the image.                        |
 | -e "MILVUS_HOST=192.168.1.25" | -e specifies the system parameter mapping between the host and the image. Pease update `192.168.1.25` to the IP address of the Milvus docker.|
-| -e "MILVUS_POST=19530"        | Update `19530` to the port of Milvus docker.           |
+| -e "MILVUS_PORT=19530"        | Update `19530` to the port of Milvus docker.           |
 
 
 
