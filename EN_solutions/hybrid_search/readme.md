@@ -8,7 +8,7 @@ In below example, feature vectors and structured data are used to represent huma
 
 Before executing the hybrid search, make sure you have completed the following steps:
 
-1. [Install Milvus](https://github.com/milvus-io/docs/blob/master/install_milvus.md)
+1. [Install Milvus](https://www.milvus.io/docs/v0.6.0/guides/get_started/install_milvus/install_milvus.md)
 2. [Install PostgreSQL](https://www.postgresql.org/download/)
 3. Use `pip install numpy` to download numpy.
 4. Use `pip install psycopg2` to download psycopg2.
@@ -27,8 +27,8 @@ The data used in this test are from [ANN_SIFT1B](http://corpus-texmex.irisa.fr/)
 
 The following test scripts are used in this example:
 
-- [mixed_import.py](https://github.com/milvus-io/bootcamp/blob/master/EN_solutions/hybrid_search/mixed_import.py) for importing data into Milvus and PostgreSQL.
-- [mixed_query.py](https://github.com/milvus-io/bootcamp/blob/master/EN_solutions/hybrid_search/mixed_query.py) for executing customized hybrid search.
+- `mixed_import.py` for importing data into Milvus and PostgreSQL.
+- `mixed_query.py` for executing customized hybrid search.
 
 ### mixed_import.py
 
