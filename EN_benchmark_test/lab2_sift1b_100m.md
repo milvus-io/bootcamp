@@ -24,7 +24,7 @@ Download the following data and scripts, and save them to a file named **milvlus
 
 - [Search ground truth](https://pan.baidu.com/s/15dPvxxrfslairyUEBJgk-g)
 
-- [Test scripts](../../scripts/)
+- [Test scripts](/benchmark_test/scripts/)
 
 When it is done, there should be the following files in **milvus_sift100m**:
 
@@ -59,7 +59,7 @@ $ docker restart <container id>
 #### Before the data import
 
 - Make sure the files **bvecs_data** and **milvus_bootcamp.py** are both placed under the directory **milvus_sift1m**. 
-- Make sure Milvus is already installed and started. (For details of Milvus installation, please read [Milvus Quick Start](../milvus101/quickstart.md) )
+- Make sure Milvus is already installed and started. (For details of Milvus installation, please read [Milvus Quick Start](../EN_getting_started/basics/quickstart.md) )
 
 #### Import data
 
