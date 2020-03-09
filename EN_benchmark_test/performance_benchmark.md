@@ -14,7 +14,7 @@ The following table displays the terms used in this topic:
 
 Performance is correlated with nprobe. The greater the value of nprobe, the lower the performance, but the higher the accuracy. You can set nprobe per specific scenarios. In this topic, nprobe is set to 32.
 
-Refer to [https://milvus.io/blog/2019/12/03/select-index](https://milvus.io/blog/2019/12/03/select-index) to learn how to choose indexes.
+Refer to [https://medium.com/@milvusio/how-to-choose-an-index-in-milvus-4f3d15259212](https://medium.com/@milvusio/how-to-choose-an-index-in-milvus-4f3d15259212) to learn how to choose indexes.
 
 ### IVF_FLAT
 
