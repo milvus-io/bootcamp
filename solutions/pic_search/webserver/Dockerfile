@@ -1,4 +1,4 @@
-From tensorflow/tensorflow:latest-gpu
+From tensorflow/tensorflow
 
 WORKDIR /app/src
 COPY . /app
