@@ -58,7 +58,7 @@ $ docker run --name zilliz_search_images_demo_web -d --rm -p 8001:80 \
 milvusbootcamp/pic-search-webclient:0.1.0
 ```
 
-上述启动命令中，" 192.168.1.123 " 表示启动 Milvus docker 的服务器地址。
+上述启动命令中，" 192.168.1.123 " 表示启动 pic-search-webserver docker 的服务器地址。
 
 
 ### 界面展示
@@ -84,5 +84,7 @@ milvusbootcamp/pic-search-webclient:0.1.0
 
 
 经实测，在推荐机器配置下，整个以图搜图系统的端到端查询时间可以达到 1 秒以内。如果你想加载 pic_search_webserver docker 容器中其他路径下的图片，可以继续在路径框中输入图片数据的路径。
+
+> 说明：如果发现在界面上无法进行正常的图片加载或者图片搜索，可以利用 docker exec 命令进入到 pic-search-webserver docker 的内部查看名为 app.log 的日志文件，里面会有报错信息。
 
 我们还利用 open image dataset 数据集搭建了一个 100 万图片的以图搜图系统，并提供了公共访问的 web 链接 http://40.73.38.81/ ，欢迎访问并搜索您的图片！
