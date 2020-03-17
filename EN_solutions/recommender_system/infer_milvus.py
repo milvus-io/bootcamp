@@ -125,7 +125,7 @@ def milvus_test(usr_features, IS_INFER, mov_features=None, ids=None):
         status = milvus.drop_collection(table_name)
         time.sleep(3)
 
-    status, ok = milvus.drop_collection(table_name)
+    status, ok = milvus.has_collection(table_name)
     if not ok :
         if mov_features is None:
             print("Insert vectors is none!")
