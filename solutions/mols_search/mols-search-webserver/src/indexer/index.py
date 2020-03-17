@@ -54,7 +54,7 @@ def delete_table(client, table_name):
 
 
 def search_vectors(client, table_name, vectors, top_k):
-    status, res = client.search(collection_name=table_name, query_records=vectors, top_k=top_k, params={nprobe:64})
+    status, res = client.search(collection_name=table_name, query_records=vectors, top_k=top_k, params={'nprobe':64})
     return status, res
 
 
