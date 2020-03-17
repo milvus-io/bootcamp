@@ -7,7 +7,7 @@
 | CPU      | Intel(R) Core(TM) i7-7700K CPU @ 4.20GHz                     |
 | Memory   | 32 GB                                                         |
 | OS       | Ubuntu 18.04                                                 |
-| Software | [Milvus daily-build:ubuntu18.04-cpu-d011620](https://hub.docker.com/repository/docker/milvusdb/daily-build/tags?page=1)  <br />[pymilvus 0.2.7](https://pypi.org/project/pymilvus/)<br />mols-search-webserver 0.3.1 <br />mols-search-webclient 0.3.0 |
+| Software | [Milvus 0.7.0](https://milvus.io/cn/docs/v0.7.0/guides/get_started/install_milvus/cpu_milvus_docker.md) <br />mols-search-webserver 0.3.1 <br />mols-search-webclient 0.3.0 |
 
 The previous configuration has been tested and this scenario is also supported in Windows.
 
@@ -23,7 +23,7 @@ $ wget https://raw.githubusercontent.com/milvus-io/bootcamp/0.7.0_alpha/solution
 
 #### 1. Run Milvus Docker
 
-This demo uses [Milvus daily-build](https://hub.docker.com/repository/docker/milvusdb/daily-build/tags?page=1). Refer to https://milvus.io/docs/v0.6.0/guides/get_started/install_milvus/cpu_milvus_docker.md to learn how to install and run Milvus. Because this version is not officially released, it is not recommended for production. If you have any questions, please file [issues](https://github.com/milvus-io/milvus/issues).
+This demo uses Milvus 0.7.0 CPU version. Refer to https://milvus.io/cn/docs/v0.7.0/guides/get_started/install_milvus/cpu_milvus_docker.md to learn how to install and run Milvus. 
 
 **Note：Please use the following command to run Milvus:**
 
@@ -31,11 +31,13 @@ This demo uses [Milvus daily-build](https://hub.docker.com/repository/docker/mil
 # Start Milvus
 $ docker run -d --name milvus_cpu \
 -p 19530:19530 \
--p 8080:8080 \
+-p 19121:19121 \
+-p 9091:9091 \
 -v /home/$USER/milvus/db:/var/lib/milvus/db \
 -v /home/$USER/milvus/conf:/var/lib/milvus/conf \
 -v /home/$USER/milvus/logs:/var/lib/milvus/logs \
-milvusdb/daily-build:ubuntu18.04-cpu-d011620
+-v /home/$USER/milvus/wal:/var/lib/milvus/wal \
+milvusdb/milvus:0.7.0-cpu-d031120-de409b
 ```
 
 #### 2. Run mols-search-webserver docker
