@@ -140,7 +140,7 @@ def milvus_test(usr_features, mov_features, ids):
 
     search_vectors = normaliz_data([mov_features.tolist()])
     param = {
-        'table_name': table_name,
+        'collection_name': table_name,
         'query_records': search_vectors,
         'top_k': 1,
         'params': {'nprobe': 16}
@@ -149,7 +149,7 @@ def milvus_test(usr_features, mov_features, ids):
     print("Searched ids:", results[0][0].id)
     print("Score:", float(results[0][0].distance)*5)
 
-    status = milvus.drop_table(table_name)
+    status = milvus.drop_collection(table_name)
 
 
 def main(use_cuda):
