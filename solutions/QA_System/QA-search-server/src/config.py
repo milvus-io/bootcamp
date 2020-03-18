@@ -10,4 +10,4 @@ PG_USER = os.getenv("PG_USER", "postgres")
 PG_PASSWORD = os.getenv("PG_PASSWORD", "postgres")
 PG_DATABASE = os.getenv("PG_DATABASE", "postgres")
 
-DEFAULT_TABLE = os.getenv("DEFAULT_TABLE", "qa_bert")
+DEFAULT_TABLE = os.getenv("DEFAULT_TABLE", "milvus_qa")
