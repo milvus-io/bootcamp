@@ -15,3 +15,5 @@
 - [基于 Milvus 和 VGG 实现以图搜图](pic_search/README.md)
 - [Milvus 个性化推荐系统](recommender_system/README.md)
 - [Milvus 化学式检索系统](mols_search/README.md)
+- [Milvus智能问答系统](QA_System/README.md)
+
