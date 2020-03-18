@@ -18,53 +18,53 @@ def milvus_client():
 def create_table(client, table_name=None, dimension=VECTOR_DIMENSION,
                  index_file_size=256, metric_type=MetricType.JACCARD):
     table_param = {
-        'table_name': table_name,
+        'collection_name': table_name,
         'dimension': dimension,
         'index_file_size':index_file_size,
         'metric_type': metric_type
     }
     try:
-        status = client.create_table(table_param)
+        status = client.create_collection(table_param)
         return status
     except Exception as e:
         log.error(e)
 
 
 def insert_vectors(client, table_name, vectors):
-    if not client.has_table(table_name=table_name):
+    if not client.has_collection(collection_name=table_name):
         log.error("table %s not exist", table_name)
         return
     try:
-        status, ids = client.insert(table_name=table_name, records=vectors)
+        status, ids = client.insert(collection_name=table_name, records=vectors)
         return status, ids
     except Exception as e:
         log.error(e)
 
 
 def create_index(client, table_name):
-    param = {'index_type': IndexType.IVFLAT, 'nlist': 2048}
-    status = client.create_index(table_name, param)
+    index_param = {'nlist': 2048}
+    status = client.create_index(table_name, IndexType.IVFLAT, index_param)
     return status
 
 
 def delete_table(client, table_name):
-    status = client.delete_table(table_name=table_name)
+    status = client.drop_collection(table_name)
     print(status)
     return status
 
 
 def search_vectors(client, table_name, vectors, top_k):
-    status, res = client.search_vectors(table_name=table_name, query_records=vectors, top_k=top_k, nprobe=512)
+    status, res = client.search(collection_name=table_name, query_records=vectors, top_k=top_k, params={'nprobe':64})
     return status, res
 
 
 def has_table(client, table_name):
-    status = client.has_table(table_name=table_name)
+    status = client.has_collection(collection_name=table_name)
     return status
 
 
 def count_table(client, table_name):
-    status, num = client.get_table_row_count(table_name=table_name)
+    status, num = client.count_collection(collection_name=table_name)
     print(status)
     # status, num = client.count_table(table_name=table_name)
     return num
