@@ -1,0 +1,8 @@
+flask-cors
+numpy
+flask
+flask_restful
+pymilvus==0.2.9
+psycopg2-binary
+bert-serving-server
+bert-serving-client
