@@ -132,7 +132,7 @@ def search_in_milvus(collection_name, query_sentence):
     try:
         logging.info("start search in milvus...")
         search_params = {'nprobe': 64}
-        status,results = milvus.search_vectors(collection_name=collection_name, query_records=query_list, top_k=1, nprobe=32)
+        status,results = milvus.search_vectors(collection_name=collection_name, query_records=query_list, top_k=1, params=search_params)
         if results[0][0].distance < 0.9:
             return "对不起，我暂时无法为您解答该问题"
     except:
