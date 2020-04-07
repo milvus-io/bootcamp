@@ -17,8 +17,9 @@ def main():
         print("Usage: test.py -t <table>  -l -s")
         sys.exit(2)
     
+    table_name = config.DEFAULT_TABLE
     for opt_name, opt_value in opts:
-        table_name = config.DEFAULT_TABLE
+        
         if opt_name in ("-t", "--table"):
             table_name = opt_value
         elif opt_name in ("-q", "--question"):
