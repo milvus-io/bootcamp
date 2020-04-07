@@ -6,11 +6,12 @@
 
 ## 运行要求：
 
-1. [安装 Milvus](https://www.milvus.io/cn/docs/v0.6.0/guides/get_started/install_milvus/install_milvus.md)
+1. [安装 Milvus](https://www.milvus.io/cn/docs/v0.7.0/guides/get_started/install_milvus/install_milvus.md)
 2. [安装 Postgres](https://www.postgresql.org/download/)
-3. pip install numpy
-4. pip install psycopg2
-5. pip install faker
+3. pip install pymilvus==0.2.9
+4. pip install numpy
+5. pip install psycopg2
+6. pip install faker
 
 ## 数据来源
 
