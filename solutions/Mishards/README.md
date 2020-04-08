@@ -88,7 +88,7 @@ $ docker-compose -f cluster_wr.yml up -d
 $ docker-compose -f cluster_ro.yml up -d
 ```
 
-（注意：集群中每台设备的 Milvus 安装与启动也可参考[Milvus 官网]https://milvus.io/cn/docs/v0.7.1/guides/get_started/install_milvus/gpu_milvus_docker.md的安装步骤执行。但是需要修改 `conf` 文件夹下的配置文件 `server_config.yml`，可写设备按照 `cluster_wr_server.yml` 修改参数 `deploy_mode` 和 `backend_url`，只读设备按照 `cluster_ro_server.yml` 修改参数 `deploy_mode` 和 `backend_url`。且启动时，所有设备数据存储路径均需要映射到同一个共享存储。）
+（注意：集群中每台设备的 Milvus 安装与启动也可参考[Milvus 官网](https://milvus.io/cn/docs/v0.7.1/guides/get_started/install_milvus/gpu_milvus_docker.md)的安装步骤执行。但是需要修改 `conf` 文件夹下的配置文件 `server_config.yml`，可写设备按照 `cluster_wr_server.yml` 修改参数 `deploy_mode` 和 `backend_url`，只读设备按照 `cluster_ro_server.yml` 修改参数 `deploy_mode` 和 `backend_url`。且启动时，所有设备数据存储路径均需要映射到同一个共享存储。）
 
 ### 3.启动 Mishards
 
