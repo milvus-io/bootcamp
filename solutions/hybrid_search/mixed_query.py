@@ -9,7 +9,7 @@ import numpy as np
 QUERY_PATH = 'bigann_query.bvecs'
 # query_location = 0
 
-MILVUS_TABLE = 'mixe_query'
+MILVUS_collection = 'mixe_query'
 PG_TABLE_NAME = 'mixe_query'
 
 
@@ -68,7 +68,8 @@ def load_query_list(fname, query_location):
 def search_in_milvus(vector):
     output_ids = []
     output_distance = []
-    status, results = milvus.search_vectors(table_name = MILVUS_TABLE,query_records=vector, top_k=TOP_K, nprobe=64)
+    _param = {'nprobe': 64}
+    status, results = milvus.search_vectors(collection_name = MILVUS_collection,query_records=vector, top_k=TOP_K, params=_param)
     for result in results:
         # print(result)
         for i in range(TOP_K):

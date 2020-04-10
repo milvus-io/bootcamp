@@ -14,7 +14,7 @@
 
 在主备机上安装 Milvus server。主备机的 Milvus `db` 目录均指向共享存储的位置。
 
-安装方法：参考 https://www.milvus.io/cn/docs/v0.6.0/guides/get_started/install_milvus/install_milvus.md
+安装方法：参考 https://www.milvus.io/cn/docs/v0.7.0/guides/get_started/install_milvus/install_milvus.md
 
 安装完成后，启动主机的 Milvus server，停止备机的 Milvus server。
 
@@ -196,3 +196,4 @@ service keepalived status
 输入命令 docker ps,可以看见备机中的 docker 已经自动启动完成了。客户端通过192.168.1.104连接的 Milvus server 实际已从主机转移到备机。由于主备机的 Milvus server 共享一个存储设备，所以两边的 Milvus 数据都是同步的。在主机出现异常的情况下，上述方案可保证客户在实际操作时，可以在秒级的时间 server 连接恢复正常。
 
 重新恢复主机端 Milvus server 后，虚拟地址会自动转移到主机上，此时客户端连接的 server 又变回主机 server 了。备机上的 Milvus server 也将自动停止。
+
