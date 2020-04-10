@@ -57,8 +57,8 @@ config.py：该脚本是配置文件，需要根据具体环境做出相应修�
 3. 安装所需要的python包
 
 ```shell
-pip install -r requriment.txt
 pip install --ignore-installed --upgrade tensorflow==1.10
+pip install -r requriment.txt
 ```
 
 4. 启动bert服务(更多[bert](https://github.com/hanxiao/bert-as-service#building-a-qa-semantic-search-engine-in-3-minutes)相关)
