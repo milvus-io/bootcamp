@@ -9,7 +9,7 @@ from faker import Faker
 fake = Faker()
 milvus = Milvus()
 
-MILVUS_TABLE = 'partition_query'
+milvus_collection = 'partition_query'
 
 FILE_PATH = '/data/workspace/milvus_data/sift_data/bigann_base.bvecs'
 
@@ -47,27 +47,27 @@ def connect_milvus_server():
     return status
 
 
-def create_milvus_table():
-    if not milvus.has_table(MILVUS_TABLE)[1]:
+def create_milvus_collection():
+    if not milvus.has_collection(milvus_collection)[1]:
         param = {
-            'table_name': MILVUS_TABLE,
+            'collection_name': milvus_collection,
             'dimension': VEC_DIM,
             'index_file_size':1024,
             'metric_type':MetricType.L2
         }
-        status = milvus.create_table(param)
+        status = milvus.create_collection(param)
         print(status)
-        build_table()
+        build_collection()
 
 
-def build_table():
-    index_param = {'index_type': IndexType.IVF_SQ8H, 'nlist': 16384}
-    status = milvus.create_index(MILVUS_TABLE,index_param)
+def build_collection():
+    index_param = { 'nlist': 16384}
+    status = milvus.create_index(milvus_collection, 'index_type':IndexType.IVF_SQ8H, index_param)
     print(status)
 
 
 def create_partition(partition_name,partition_tag):
-    milvus.create_partition(MILVUS_TABLE, partition_name=partition_name, partition_tag=partition_tag)
+    milvus.create_partition(milvus_collection, partition_name=partition_name, partition_tag=partition_tag)
 
 
 def get_partition_tag():
@@ -91,14 +91,14 @@ def get_partition_tag():
 
 def add_vectors(vectors,vectors_ids,partition_tag):
     time_start = time.time()    
-    status, ids = milvus.add_vectors(table_name=MILVUS_TABLE, records=vectors, ids=vectors_ids, partition_tag=partition_tag)
+    status, ids = milvus.add_vectors(collection_name=milvus_collection, records=vectors, ids=vectors_ids, partition_tag=partition_tag)
     time_end = time.time()
     print(status, "insert milvue time: ", time_end-time_start)
 
 
 def main():
     connect_milvus_server()
-    create_milvus_table()
+    create_milvus_collection()
     partition_tag, partition_name = get_partition_tag()
     count = 0
     while count < (VEC_NUM // BASE_LEN):       
