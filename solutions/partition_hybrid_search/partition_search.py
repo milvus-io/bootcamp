@@ -8,7 +8,7 @@ import numpy as np
 QUERY_PATH = '/data/workspace/milvus_data/sift_data/bigann_query.bvecs'
 # query_location = 0
 
-MILVUS_TABLE = 'partition_query'
+milvus_collection = 'partition_query'
 
 
 SERVER_ADDR = "0.0.0.0"
@@ -50,7 +50,8 @@ def load_query_list(query_location):
 
 def search_in_milvus(vector,partition_tag):
     time_start = time.time()
-    status, results = milvus.search_vectors(MILVUS_TABLE, query_records=vector, top_k=10, nprobe=64, partition_tags=[partition_tag])
+    _param = {'nprobe': 64}
+    status, results = milvus.search_vectors(milvus_collection, query_records=vector, top_k=10, params=_param, partition_tags=[partition_tag])
     time_end = time.time()
     if len(results) == 0:
         print("No vector satisfies the condition!")
@@ -126,7 +127,8 @@ def main(argv):
                         search_in_milvus(query_vec,partition_tag)
                     else:
                         time_start = time.time()
-                        status, results = milvus.search_vectors(MILVUS_TABLE, query_records=query_vec, top_k=10, nprobe=64)
+                        _param = {'nprobe': 64}
+                        status, results = milvus.search_vectors(milvus_collection, query_records=query_vec, top_k=10, params=_param)
                         time_end = time.time()
                         print(results)
                         print("search time: ", time_end-time_start)

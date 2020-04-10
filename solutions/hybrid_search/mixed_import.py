@@ -13,7 +13,7 @@ fake = Faker()
 
 
 
-MILVUS_TABLE = 'mixe_query'
+MILVUS_collection = 'mixe_query'
 PG_TABLE_NAME = 'mixe_query'
 
 FILE_PATH = 'bigann_base.bvecs'
@@ -57,19 +57,19 @@ def connect_milvus_server():
     return status
 
 
-def create_milvus_table():
-    if not milvus.has_table(MILVUS_TABLE)[1]:
+def create_milvus_collection():
+    if not milvus.has_collection(MILVUS_collection)[1]:
         param = {
-            'table_name': MILVUS_TABLE,
+            'collection_name': MILVUS_collection,
             'dimension': VEC_DIM,
             'index_file_size':1024,
             'metric_type':MetricType.L2
         }
-        milvus.create_table(param)
+        milvus.create_collection(param)
 
-def build_table():
-    index_param = {'index_type': IndexType.IVF_SQ8H, 'nlist': 16384}
-    status = milvus.create_index(MILVUS_TABLE,index_param)
+def build_collection():
+    index_param = { 'nlist': 16384}
+    status = milvus.create_index(MILVUS_collection,'index_type': IndexType.IVF_SQ8H,index_param)
     print(status)
 
 def connect_postgres_server():
@@ -138,8 +138,8 @@ def record_txt(ids):
 
 def main():
     connect_milvus_server()
-    create_milvus_table()
-    build_table()
+    create_milvus_collection()
+    build_collection()
     conn = connect_postgres_server()
     cur = conn.cursor()
     create_pg_table(conn,cur)
@@ -148,7 +148,7 @@ def main():
         vectors = load_bvecs_data(FILE_PATH,BASE_LEN,count)
         vectors_ids = [id for id in range(count*BASE_LEN,(count+1)*BASE_LEN)]
         time_start = time.time()    
-        status, ids = milvus.add_vectors(table_name=MILVUS_TABLE, records=vectors, ids=vectors_ids)
+        status, ids = milvus.add_vectors(collection_name=MILVUS_collection, records=vectors, ids=vectors_ids)
         time_end = time.time()
         print(count, "insert milvue time: ", time_end-time_start)
         # print(count)
