@@ -1,0 +1,24 @@
+version: "2.3"
+services:
+    mishards:
+        restart: always
+        image: milvusdb/mishards
+        ports:
+            - "0.0.0.0:19531:19531"
+            - "0.0.0.0:19532:19532"
+              #volumes:
+              #- /tmp/milvus/db:/tmp/milvus/db
+            # - /tmp/mishards_env:/source/mishards/.env
+        command: ["python", "mishards/main.py"]
+        environment:
+            FROM_EXAMPLE: 'true'
+            SQLALCHEMY_DATABASE_URI: mysql+pymysql://root:milvusroot@192.168.1.85:3306/milvus?charset=utf8mb4
+            DEBUG: 'true'
+            SERVER_PORT: 19531
+            WOSERVER: tcp://192.168.1.85:19530
+            DISCOVERY_PLUGIN_PATH: static
+            DISCOVERY_STATIC_HOSTS: 192.168.1.85,192.168.1.38
+            DISCOVERY_STATIC_PORT: 19530
+
+
+
