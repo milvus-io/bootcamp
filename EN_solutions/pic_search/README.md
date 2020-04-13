@@ -29,7 +29,7 @@ The following tables show recommended configurations for reverse image search. T
 | CPU      | Intel(R) Core(TM) i7-7700K CPU @ 4.20GHz                     |
 | Memory   | 32GB                                                         |
 | OS       | Ubuntu 18.04                                                 |
-| Software | Milvus 0.6.0 (CPU-only）<br />pic_search_demo 0.5.1<br />pic_search_demo_web 0.2.0 |
+| Software | Milvus 0.7.1 (CPU-only）<br />pic_search_demo 0.5.1<br />pic_search_demo_web 0.2.0 |
 
 ### Data source
 
@@ -47,7 +47,7 @@ Download location: http://host.robots.ox.ac.uk/pascal/VOC/voc2012/VOCtrainval_11
 
 ##### 1. Run Milvus Docker
 
-This demo uses GPU-supported Milvus 0.6.0. Refer to the [Install Milvus](https://github.com/milvus-io/docs/blob/0.6.0/userguide/install_milvus.md) for how to run Milvus docker.
+This demo uses GPU-supported Milvus 0.6.0. Refer to the [Install Milvus](https://github.com/milvus-io/docs/blob/0.7.1/userguide/install_milvus.md) for how to run Milvus docker.
 
 ##### 2. Run pic_search_demo docker
 
@@ -77,7 +77,7 @@ In the previous command, `192.168.1.123` specifies the server IP address that ru
 
 ##### 1. Run Milvus Docker
 
-This demo uses CPU-only Milvus 0.6.0. Refer to the [Install Milvus](https://github.com/milvus-io/docs/blob/0.6.0/userguide/install_milvus.md) for how to run Milvus docker.
+This demo uses CPU-only Milvus 0.6.0. Refer to the [Install Milvus](https://github.com/milvus-io/docs/blob/0.7.1/userguide/install_milvus.md) for how to run Milvus docker.
 
 ##### 2. Run pic_search_demo docker
 
@@ -125,3 +125,4 @@ Select an image to search.
 <img src="pic/web5.png" width = "650" height = "500" alt="arch" align=center />
 
 It has been tested tha the system can complete reverse image search within 1 second using the recommended configuration. To load images in other directories of the pic_search_demo docker, specify the path in the textbox.
+
