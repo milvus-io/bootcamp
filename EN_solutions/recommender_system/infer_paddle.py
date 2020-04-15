@@ -117,39 +117,39 @@ def milvus_test(usr_features, mov_features, ids):
 
     table_name = 'paddle_demo1'
 
-    status, ok = milvus.has_table(table_name)
+    status, ok = milvus.has_collection(table_name)
     if not ok:
         param = {
-            'table_name': table_name,
+            'collection_name': table_name,
             'dimension': 200,
             'index_file_size': 1024,  # optional
             'metric_type': MetricType.IP  # optional
         }
 
-        milvus.create_table(param)
+        milvus.create_collection(param)
 
     insert_vectors = normaliz_data([usr_features.tolist()])
-    status, ids = milvus.insert(table_name=table_name, records=insert_vectors, ids = ids)
+    status, ids = milvus.insert(collection_name=table_name, records=insert_vectors, ids = ids)
 
     time.sleep(1)
 
-    status, result = milvus.count_table(table_name)
+    status, result = milvus.count_collection(table_name)
     print("rows in table paddle_demo1:", result)
 
-    status, table = milvus.describe_table(table_name)
+    status, table = milvus.count_collection(table_name)
 
     search_vectors = normaliz_data([mov_features.tolist()])
     param = {
-        'table_name': table_name,
+        'collection_name': table_name,
         'query_records': search_vectors,
         'top_k': 1,
-        'nprobe': 16
+        'params': {'nprobe': 16}
     }
-    status, results = milvus.search_vectors(**param)
+    status, results = milvus.search(**param)
     print("Searched ids:", results[0][0].id)
     print("Score:", float(results[0][0].distance)*5)
 
-    status = milvus.drop_table(table_name)
+    status = milvus.drop_collection(table_name)
 
 
 def main(use_cuda):

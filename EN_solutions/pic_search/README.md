@@ -6,30 +6,17 @@ The system architecture is displayed as follows:
 
 <img src="pic/demo.jpg" width = "450" height = "600" alt="system_arch" align=center />
 
-This demo introduces two methods: GPU and CPU. The performance of the GPU method is better than that of the CPU method.
-
 ### Environment requirements
 
 The following tables show recommended configurations for reverse image search. These configurations haven been tested.
 
-#### GPU method
-
-| Component     | Recommended Configuration                                                     |
-| -------- | ------------------------------------------------------------ |
-| CPU      | Intel(R) Core(TM) i7-7700K CPU @ 4.20GHz                     |
-| GPU      | GeForce GTX 1050 Ti 4GB                                      |
-| Memory   | 32GB                                                         |
-| OS       | Ubuntu 18.04                                                 |
-| Software | Milvus 0.6.0 (GPU-supported) <br />pic_search_demo 0.5.0<br />pic_search_demo_web 0.2.0 |
-
-#### CPU method
 
 | Component     | Recommended Configuration                                                    |
 | -------- | ------------------------------------------------------------ |
 | CPU      | Intel(R) Core(TM) i7-7700K CPU @ 4.20GHz                     |
 | Memory   | 32GB                                                         |
 | OS       | Ubuntu 18.04                                                 |
-| Software | Milvus 0.6.0 (CPU-only）<br />pic_search_demo 0.5.1<br />pic_search_demo_web 0.2.0 |
+| Software | Milvus 0.7.0<br />pic_search_webclient <br />pic_search_webserver |
 
 ### Data source
 
@@ -43,13 +30,13 @@ Download location: http://host.robots.ox.ac.uk/pascal/VOC/voc2012/VOCtrainval_11
 
 ### How to deploy the system
 
-#### GPU method
+### GPU method
 
-##### 1. Run Milvus Docker
+#### 1. Run Milvus Docker
 
-This demo uses GPU-supported Milvus 0.6.0. Refer to the [Install Milvus](https://github.com/milvus-io/docs/blob/0.6.0/userguide/install_milvus.md) for how to run Milvus docker.
+This demo uses Milvus 0.7.0. Refer to the [Install Milvus](https://github.com/milvus-io/docs/blob/v0.7.0/site/zh-CN/guides/get_started/install_milvus/install_milvus.md) for how to run Milvus docker.
 
-##### 2. Run pic_search_demo docker
+#### 2. Run pic_search_demo docker
 
 ```bash
 $ docker run -d --name zilliz_search_images_demo \
@@ -58,51 +45,20 @@ $ docker run -d --name zilliz_search_images_demo \
 -p 35000:5000 \
 -e "DATA_PATH=/tmp/images-data" \
 -e "MILVUS_HOST=192.168.1.123" \
-chenglong555/pic_search_demo:0.5.0
+milvusbootcamp/pic-search-webserver:0.3.0
 ```
 
 In the previous command, `$IMAGE_PATH1` and `$IMAGE_PATH2` specify the path where images are located. These locations are mapped to the docker container. After deployment, you can use `/tmp/pic1` and `/tmp/pic2` to load images. `MILVUS_HOST` specifies the IP address of the Milvus Docker host. Do not use backloop address "127.0.0.1". You do not have to modify other parts of the command.
 
-##### 3. Run pic_search_demo_web docker
+#### 3. Run pic-search-webclient docker
 
 ```bash
 $ docker run --name zilliz_search_images_demo_web -d --rm -p 8001:80 \
 -e API_URL=http://192.168.1.123:35000 \
-chenglong555/pic_search_demo_web:0.2.0
+milvusbootcamp/pic-search-webserver:0.3.0
 ```
 
-In the previous command, `192.168.1.123` specifies the server IP address that runs the Milvus docker.
-
-#### CPU method
-
-##### 1. Run Milvus Docker
-
-This demo uses CPU-only Milvus 0.6.0. Refer to the [Install Milvus](https://github.com/milvus-io/docs/blob/0.6.0/userguide/install_milvus.md) for how to run Milvus docker.
-
-##### 2. Run pic_search_demo docker
-
-```bash
-$ docker run -d --name zilliz_search_images_demo \
--v IMAGE_PATH1:/tmp/pic1 \
--v IMAGE_PATH2:/tmp/pic2 \
--p 35000:5000 \
--e "DATA_PATH=/tmp/images-data" \
--e "MILVUS_HOST=192.168.1.123" \
-chenglong555/pic_search_demo:0.5.1
-```
-
-In the previous command, `IMAGE_PATH1` and `IMAGE_PATH2` specify the path of the images. These locations are mapped to the docker container. After deployment, you can use `/tmp/pic1` and `/tmp/pic2` to load images. `MILVUS_HOST` specifies the IP address of the Milvus Docker host. Do not use backloop address "127.0.0.1". You do not have to modify other parts of the command.
-
-##### 3. Run pic_search_demo_web docker
-
-```bash
-$ docker run --name zilliz_search_images_demo_web -d --rm -p 8001:80 \
--e API_URL=http://192.168.1.123:35000 \
-chenglong555/pic_search_demo_web:0.2.0
-```
-
-In the previous command, `192.168.1.123` specifies the server IP address that runs the Milvus docker.
-
+In the previous command, `192.168.1.123` specifies the server IP address that runs pic-search-webserver docker.
 
 ### How to perform reverse image search
 
@@ -110,7 +66,7 @@ After deployment, enter `localhost:8001` in the browser to open the interface fo
 
 <img src="pic/web4.png" width = "650" height = "500" alt="arch" align=center />
 
-Enter the path of an image folder in the pic_search_demo docker container, such as /tmp/pic1. Click Load to load the pictures. The following screenshot shows the loading process:
+Enter the path of an image folder in the pic_search_webserver docker container, such as /tmp/pic1. Click Load to load the pictures. The following screenshot shows the loading process:
 
 <img src="pic/web2.png" width = "650" height = "500" alt="arch" align=center />
 
@@ -124,4 +80,5 @@ Select an image to search.
 
 <img src="pic/web5.png" width = "650" height = "500" alt="arch" align=center />
 
-It has been tested tha the system can complete reverse image search within 1 second using the recommended configuration. To load images in other directories of the pic_search_demo docker, specify the path in the textbox.
+It has been tested tha the system can complete reverse image search within 1 second using the recommended configuration. To load images in other directories of the pic_search_webserver docker, specify the path in the textbox.
+
