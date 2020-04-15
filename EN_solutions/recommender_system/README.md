@@ -12,7 +12,7 @@ The following table lists recommended configurations, which have been tested:
 | GPU       | GeForce GTX 1050 Ti 4GB                  |
 | Memory    | 32GB                                     |
 | OS        | Ubuntu 18.04                             |
-| Software  | [Milvus 0.5.3](https://github.com/milvus-io/docs/blob/0.5.3/userguide/install_milvus.md) <br /> [pymilvus 0.2.5](https://pypi.org/project/pymilvus/)  <br /> [PaddlePaddle 1.6.1](https://www.paddlepaddle.org.cn/documentation/docs/en/beginners_guide/install/index_en.html)   |
+| Software  | [Milvus 0.7.0](https://milvus.io/cn/docs/v0.7.0/guides/get_started/install_milvus/install_milvus.md) <br /> [pymilvus 0.2.8](https://pypi.org/project/pymilvus/)  <br /> [PaddlePaddle 1.6.1](https://www.paddlepaddle.org.cn/documentation/docs/en/beginners_guide/install/index_en.html)   |
 
 > For versions before Milvus 0.6.0, GPU is required. For CPU-only version, please use Milvus 0.6.0.
 
