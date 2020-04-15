@@ -100,10 +100,10 @@ Open the browser and enter 192.168.1.38:8001 to see the interface of searching v
 
 Click the settings icon in the upper right corner, you can see the video in the bottom library:
 
-![img](https://qqadapt.qpic.cn/txdocpic/0/de5ec25888c70c5fd720494141bc1a29/0?w=3840&h=1876)
+<img src="pic/pic1.png" width = "800" height = "450" alt="系统架构图" align=center />
 
 Click the upload box on the left, you can upload a picture you want to search, and then search for videos containing similar shots on the right interface:
 
-![img](https://qqadapt.qpic.cn/txdocpic/0/2ba508df33ccb69d02fdd52a7f446ae5/0?w=3840&h=1876)
+<img src="pic/pic2.png" width = "800" height = "450" alt="系统架构图" align=center />
 
 Next, let's enjoy the fun of searching video with pictures!
