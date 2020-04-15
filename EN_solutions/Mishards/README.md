@@ -2,7 +2,7 @@
 
 Milvus aims to achieve efficient similarity search and analytics for massive-scale vectors. A standalone Milvus instance can easily handle vector search among billion-scale vectors. However, for 10 billion, 100 billion or even larger datasets, a Milvus cluster is needed.
 
-This topic displays how to use Mishards to build a Milvus cluster. Refer to https://github.com/milvus-io/milvus/blob/0.6.0/shards/README.md for more information.
+This topic displays how to use Mishards to build a Milvus cluster. Refer to https://github.com/milvus-io/milvus/blob/0.7.1/shards/README.md for more information.
 
 This topic assumes you can install and use Milvus in a standalone server. Refer to the following content to learn how to build a Milvus cluster.
 
@@ -26,7 +26,7 @@ In this solution, we use two servers to build a small Milvus cluster, with one w
 
 You only need to run MySQL in either of the two servers.
 
-Run MySQL using docker with `mysqld.cnf` and `mysql_dc.yml`. You can find these files in [bootcamp/solutions/Mishards](../../solutions/Mishards).
+Run MySQL using docker with `mysqld.cnf` and `mysql_dc.yml`.
 
 ```shell
 $ docker-compose -f mysql_dc.yml up -d
@@ -44,7 +44,7 @@ Milvus must be installed in both servers. Different servers can have different a
 
 #### Configure Milvus with write access
 
-Use `cluster_wr_server.yml` and `cluster_wr.yml` for Milvus with write access. You can find these files in [bootcamp/solutions/Mishards](../../solutions/Mishards). Update the configurations per the actual environment.
+Use `cluster_wr_server.yml` and `cluster_wr.yml` for Milvus with write access. Update the configurations per the actual environment.
 
 `cluster_wr_server.yml`:
 
@@ -66,7 +66,7 @@ $ docker-compose -f cluster_wr.yml up -d
 
 #### Configure Milvus with read-only access
 
-Use `cluster_ro_server.yml` and `cluster_ro.yml` for Milvus with read-only access. You can find these files in [bootcamp/solutions/Mishards](../../solutions/Mishards). Update the configurations per the actual environment.
+Use `cluster_ro_server.yml` and `cluster_ro.yml` for Milvus with read-only access. Update the configurations per the actual environment.
 
 `cluster_ro_server.yml`:
 
@@ -86,11 +86,11 @@ Run the following command to start Milvus:
 $ docker-compose -f cluster_ro.yml up -d
 ```
 
-> Note: You can also refer to the [installation guide](https://milvus.io/docs/v0.6.0/guides/get_started/install_milvus/gpu_milvus_docker.md) to learn how to install and run Milvus. However, you must edit `server_config.yml` per the config files for Milvus with write access or read-only access. Also, all data storage locations in the cluster must map to the same shared storage device.
+> Note: You can also refer to the [installation guide](https://milvus.io/docs/v0.7.1/guides/get_started/install_milvus/gpu_milvus_docker.md) to learn how to install and run Milvus. However, you must edit `server_config.yml` per the config files for Milvus with write access or read-only access. Also, all data storage locations in the cluster must map to the same shared storage device.
 
 ### 3.Run Mishards
 
-You can run Mishards in either of the two servers. In the server to run Mishards, configure `cluster_mishards.yml`. You can find this file in [bootcamp/solutions/Mishards](../../solutions/Mishards).
+You can run Mishards in either of the two servers. In the server to run Mishards, configure `cluster_mishards.yml`. 
 
 ![1577783243935](pic/1577783243935.png)
 
