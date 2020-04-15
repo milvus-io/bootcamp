@@ -1,4 +1,4 @@
-# Use Milvus to build a video search system
+# Building a video search system based on Milvus
 
 This article shows how to use the image feature extraction model VGG and the vector search engine Milvus to build an video search system.
 
