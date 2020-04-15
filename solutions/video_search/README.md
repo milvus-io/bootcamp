@@ -92,7 +92,8 @@ $ python3 import_data.py
 
 打开浏览器，输入 192.168.1.38:8001 即可看到以图搜视频的界面，如下图所示：            ![img](https://qqadapt.qpic.cn/txdocpic/0/4c560007d4a03b3bb6095db901e9d66f/0?w=3840&h=1876)            
 
-点击右上角的设置图标，可以看到底库里的视频： ![img](https://qqadapt.qpic.cn/txdocpic/0/de5ec25888c70c5fd720494141bc1a29/0?w=3840&h=1876)
+点击右上角的设置图标，可以看到底库里的视频：             ![img](https://qqadapt.qpic.cn/txdocpic/0/de5ec25888c70c5fd720494141bc1a29/0?w=3840&h=1876)            
+
 点击左边的上传框，可以上传一张你想搜索的图片，然后会在右边界面搜索出包含相似镜头的视频：            ![img](https://qqadapt.qpic.cn/txdocpic/0/2ba508df33ccb69d02fdd52a7f446ae5/0?w=3840&h=1876)            
 
 接下来就尽情享受以图搜视频的乐趣吧！
