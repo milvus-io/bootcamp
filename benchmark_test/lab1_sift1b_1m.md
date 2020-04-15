@@ -14,8 +14,8 @@
 | GPU 驱动软件    | Driver 418.74 |
 | 内存        | 8 GB DDR4          |
 | 硬盘       | NVMe SSD 256 GB             |
-| Milvus     |  0.6.0   |
-| pymilvus    |   0.2.6     |
+| Milvus     |  0.7.1  |
+| pymilvus    |   0.2.9    |
 
 测试工具下载：
 - 100 万测试数据集下载地址：https://pan.baidu.com/s/19fj1FUHfYZwn9huhgX4rQQ
@@ -28,9 +28,9 @@
 - 测试数据集下载并解压完成之后，你将会看到一个名为 `bvecs_data` 的文件夹。该文件夹里面存放了 10 个 `npy` 文件，每个 `npy` 文件中存放了10 万条 uint8 格式的向量数据。
 - 查询向量集下载并解压完成之后，你将会看到一个名为 `query_data` 的文件夹。该文件夹里面存放了一个 `query.npy` 文件，该文件里存放了10,000 条需要查询的向量。
 - 对照数据下载并解压完成之后，是一个名为 `gnd` 的文件夹，该文件夹下有一个 `ground_truth_1M.txt` 的文本文件，该文件里存放的是查询向量集中的每条向量的 top 1000 相似向量的位置。
-- 测试脚本会包含四个 Python 脚本 `milvus_load.py`、`milvus_toolkit.py`、`milvus_search.py`、`milvus_compare.py`。
+- 测试脚本会包含四个 Python 脚本 `main.py`、`milvus_toolkit.py`、`milvus_load.py`、`config.py`。
 
-> 注意：请保证 `bvecs_data` 文件夹、`query_data` 文件夹、`gnd` 文件夹、以及测试脚本都在同一个目录层级下。
+
 
 ## 2、 配置 Milvus 参数
 
@@ -58,32 +58,32 @@ $ docker restart <container id>
 
 建表之前，首先确认 Milvus 已经正常启动。（ Milvus 安装及启动方法参见：[Milvus 快速上手](../getting_started/basics/quickstart.md) ）
 
-进入 `milvus_sift1m` 目录，运行如下脚本在 Milvus 中建表并建立索引：
+进入 `milvus_sift1m` 目录，运行如下脚本在 Milvus 中创建集合并建立索引：
 
 ```shell
-$ python3 milvus_toolkit.py --table ann_1m_sq8h --dim 128 -c
-$ python3 milvus_toolkit.py --table ann_1m_sq8h --index sq8h --build 
+$ python3 main.py --collection ann_1m_sq8 --dim 128 -c
+$ python3 main.py --collection ann_1m_sq8 --index sq8 --build 
 ```
 
-运行上述命令后，会创建一个名为 ann_1m_sq8h 的表，其索引类型为 IVF_SQ8H。可通过如下命令查看该表的相关信息：
+运行上述命令后，会创建一个名为 ann_1m_sq8h 的集合，其索引类型为 IVF_SQ8。可通过如下命令查看该表的相关信息：
 
 ```shell
 #查看库中有哪些表
-$ python3 milvus_toolkit.py --show
+$ python3 main.py --show
 #查看表ann_1m_sq8h的行数
-$ python3 milvus_toolkit.py --table ann_1m_sq8h --rows
+$ python3 main.py --collection ann_1m_sq8 --rows
 #查看表ann_1m_sq8h的索引类型
-$ python3 milvus_toolkit.py --table ann_1m_sq8h --desc_index
+$ python3 main.py --collection ann_1m_sq8 --describe_index
 ```
 
 ## 4、 数据导入
 
-导入数据之前，确保已成功建立表 ann_1m_sq8。
+导入数据之前，确保已成功建立集合 ann_1m_sq8。
 
 运行如下命令导入1,000,000行数据：
 
 ```bash
-$ python3 milvus_load.py --table=ann_1m_sq8h -n
+$ python3 main.py --collection=ann_1m_sq8 --load
 ```
 
 数据导入过程中，可以看到本项目一次性导入一个文件的数据量。
@@ -91,7 +91,7 @@ $ python3 milvus_load.py --table=ann_1m_sq8h -n
 上述过程完成之后，运行如下命令以查看 Milvus 表中的向量条数：
 
 ```bash
-$ python3 milvus_toolkit.py --table=ann_1m_sq8h --rows
+$ python3 main.py --collection=ann_1m_sq8 --rows
 ```
 
 为了确保导入 Milvus 的数据已经全部建好索引，请进入  `/home/$USER/milvus/db` 目录，在终端输入如下命令：
@@ -103,10 +103,10 @@ $ sqlite3 meta.sqlite
 进入交互式命令行之后，输入如下命令，检查向量数据表当前的状态：
 
 ```sqlite
-sqlite> select * from TableFiles where table_id='ann_1m_sq8h';
+sqlite> select * from TableFiles where table_id='ann_1m_sq8';
 ```
 
-Milvus 会将一个向量数据表分成若干数据分片进行存储，因此查询命令会返回多条记录。其中第三列数字代表数据表采用的索引类型，数字 5 代表采用的是IVF_SQ8H 索引。第五列数字代表索引构建的情况，当这列数字为 3 时，代表相应的数据表分片上的索引已构建完毕。如果某个分片上的索引还没有构建完成，可以再次手动为这个数据分片建立索引。
+Milvus 会将一个向量数据表分成若干数据分片进行存储，因此查询命令会返回多条记录。其中第三列数字代表数据表采用的索引类型，数字 4 代表采用的是IVF_SQ8H索引。第五列数字代表索引构建的情况，当这列数字为 3 时，代表相应的数据表分片上的索引已构建完毕。如果某个分片上的索引还没有构建完成，可以再次手动为这个数据分片建立索引。
 
 退出 sqlite 交互式命令行:
 
@@ -117,7 +117,7 @@ sqlite> .quit
 进入 `milvus_sift1m` 目录，运行如下脚本：
 
 ```bash
-$ python3 milvus_toolkit.py --table=ann_1m_sq8h --index=sq8h --build 
+$ python3 main.py --collection=ann_1m_sq8 --index=sq8 --build 
 ```
 
 手动建立索引后，再次进入 sqlite 交互界面，确认所有数据分片都已经建好索引。如果想了解其他列数据代表的含义，请进入  `/home/$USER/milvus/db` 目录，在 sqlite 交互界面输入如下命令进行查看。
@@ -138,22 +138,14 @@ SIFT1m 提供了10,000条向量的查询向量集，并且对于每条查询向�
 从 10,000 条查询向量中随机取出10条向量，查询这10条向量各自的 top 20。执行如下命令：
 
 ```bash
-$ python3 milvus_search.py --table ann_1m_sq8h --nq 10 --topk 20 --nprobe 64 -s
+$ python3 main.py --collection=ann_1m_sq8 --search_param 64 --recall
 ```
 
-(注：nprobe 值影响这查询结果准确率和查询性能，nprobe 越大，准确率越高，性能越差。本项目中建议使用 nprobe=32)
+(注：search_param代表nprobe值，nprobe 值影响这查询结果准确率和查询性能，nprobe 越大，准确率越高，性能越差。本项目中建议使用 nprobe=32)
 
 执行上述命令后，将会产生一个 `search_output` 文件夹,该文件夹下有一个名为 `ann_1m_sq8h_32_output.txt` 的文本文件，该文本文件中记录了10条向量各自对应的 top 20。文本文件中每20行为一组，对应一个 query 的查询结果。第一列表示待查询的向量在 `query.npy` 中对应的向量位置；第二列表示查询结果对应的 `bvecs_data` 中的向量(例如80006099349,第一个8无意义，8后面的四位0006表示对应 `bvecs_data` 中的第6个文件，最后六位099349表示对应第6个文件中的第099349条向量即为查询结果对应的向量)；第三列表示查询的向量和查询结果对应的欧氏距离。
 
-（2）执行准确率测试脚本
-
-将上述查询的结果与 ground truth 进行比较，计算 Milvus 查询结果准确率，执行如下命令：
-
-```bash
-$ python3 milvus_compare.py --table ann_1m_sq8h --nprobe 64 -p
-```
-
-（3）查看准确性测试结果
+(2）查看准确性测试结果
 
 上述脚本运行完成后，将会生成一个名为 `compare` 的文件夹，在该文件夹下面会有一个名为 `64_ann_1m_sq8h_10_20_output.csv` 的文件.
 
@@ -172,7 +164,7 @@ Milvus 查询准确率与搜索子空间（ nprobe 参数）有很大关系。�
 为评估 Milvus 的查询性能，进入 `milvus_sift1m` 目录，运行如下脚本：
 
 ```bash
-$ python3 milvus_toolkit.py --table=ann_1m_sq8h --nprobe 64 -s
+$ python3 main.py --collection=ann_1m_sq8 --search_param 64 --performance
 ```
 
 运行结束后，将会生成一个名为 `performance` 的文件夹，在该文件夹下会有一个名为 `ann_1m_sq8h_32_output.csv` 的文件，该文件保存了各个 nq 值不同的topk值运行所耗时间。

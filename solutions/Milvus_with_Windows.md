@@ -1,4 +1,4 @@
-# Windows 环境源码编译 Milvus 0.6.0
+# Windows 环境源码编译 Milvus
 
 ## Windows Docker 安装
 
@@ -15,10 +15,10 @@ Windows Docker 安装参考 https://www.runoob.com/docker/windows-docker-install
 
 ## 在 Docker 容器中编译运行 Milvus
 
-成功安装 Windows Docker 后，可以在 Docker 容器中编译运行 Milvus，参考 https://milvus.io/blog/2019/11/25/docker-compilation/ , 但是由于 Windows Docker 无法使用 nvidia-docker，即无法使用 GPU，所以在 Windows 下只能使用 Milvus 0.6.0 CPU 版本，在参考文章中应注意步骤一和步骤二。
+成功安装 Windows Docker 后，可以在 Docker 容器中编译运行 Milvus，参考 https://www.milvus.io/cn/blogs/2019-11-25-docker-compilation.md , 但是由于 Windows Docker 无法使用 nvidia-docker，即无法使用 GPU，所以在 Windows 下只能使用 Milvus CPU 版本，在参考文章中应注意步骤一和步骤二。
 
 
 
 ## Milvus 运行示例程序
 
-Milvus 编译完成后，可以运行示例程序 https://github.com/milvus-io/docs/blob/0.6.0/userguide/example_code.md , 当出现 `Query result is correct`，表示在 Windows 环境成功编译运行 Milvus ！
+Milvus 编译完成后，可以运行[示例程序](https://github.com/milvus-io/docs/blob/v0.7.1/site/zh-CN/guides/get_started/example_code.md)  , 当出现 `Query result is correct`，表示在 Windows 环境成功编译运行 Milvus ！
