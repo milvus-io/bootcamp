@@ -122,40 +122,40 @@ def milvus_test(usr_features, IS_INFER, mov_features=None, ids=None):
         sys.exit(1)
 
     if IS_INFER:
-        status = milvus.drop_table(table_name)
+        status = milvus.drop_collection(table_name)
         time.sleep(3)
 
-    status, ok = milvus.has_table(table_name)
+    status, ok = milvus.has_collection(table_name)
     if not ok :
         if mov_features is None:
             print("Insert vectors is none!")
             sys.exit(1)
         param = {
-            'table_name': table_name,
+            'collection_name': table_name,
             'dimension': 200,
             'index_file_size': 1024,  # optional
             'metric_type': MetricType.IP  # optional
         }
 
-        print(milvus.create_table(param))
+        print(milvus.create_collection(param))
 
         insert_vectors = normaliz_data(mov_features)
-        status, ids = milvus.insert(table_name=table_name, records=insert_vectors, ids = ids)
+        status, ids = milvus.insert(collection_name=table_name, records=insert_vectors, ids = ids)
 
         time.sleep(1)
 
-    status, result = milvus.count_table(table_name)
+    status, result = milvus.count_collection(table_name)
     print("rows in table recommender_demo:", result)
 
     search_vectors = normaliz_data(usr_features)
     param = {
-        'table_name': table_name,
+        'collection_name': table_name,
         'query_records': search_vectors,
         'top_k': 5,
-        'nprobe': 16
+        'params':{'nprobe': 16}
     }
     time1 = time.time()
-    status, results = milvus.search_vectors(**param)
+    status, results = milvus.search(**param)
     time2 = time.time()
 
     print("Top\t", "Ids\t","Title\t","Score")
