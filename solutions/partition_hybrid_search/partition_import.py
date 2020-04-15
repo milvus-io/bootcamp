@@ -66,27 +66,23 @@ def build_collection():
     print(status)
 
 
-def create_partition(partition_name,partition_tag):
-    milvus.create_partition(milvus_collection, partition_name=partition_name, partition_tag=partition_tag)
+def create_partition(partition_tag):
+    milvus.create_partition(milvus_collection, partition_tag=partition_tag)
 
 
 def get_partition_tag():
     partition_tag=[]
-    partition_name = []
     count = 0
     while count<NUM:
         sex = random.choice(['female','male'])
         get_time = fake.date_between(start_date="-30d", end_date="today")
         is_glasses = random.choice(['True','False'])
         p_tag = str(get_time) + "/" + sex + "/" + str(is_glasses)
-        p_name = "partition" + str(count)
         if p_tag not in partition_tag:
             partition_tag.append(p_tag)
-            partition_name.append(p_name)
             count = count + 1
     print(partition_tag)
-    print(partition_name)
-    return partition_tag, partition_name
+    return partition_tag
 
 
 def add_vectors(vectors,vectors_ids,partition_tag):
@@ -99,12 +95,12 @@ def add_vectors(vectors,vectors_ids,partition_tag):
 def main():
     connect_milvus_server()
     create_milvus_collection()
-    partition_tag, partition_name = get_partition_tag()
+    partition_tag = get_partition_tag()
     count = 0
     while count < (VEC_NUM // BASE_LEN):       
         vectors = load_bvecs_data(FILE_PATH,BASE_LEN,count)
         vectors_ids = [id for id in range(count*BASE_LEN,(count+1)*BASE_LEN)]
-        create_partition(partition_name[count],partition_tag[count])
+        create_partition(partition_tag[count])
         add_vectors(vectors,vectors_ids,partition_tag[count])
 
         count = count + 1

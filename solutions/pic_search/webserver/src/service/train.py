@@ -15,7 +15,6 @@ def do_train(table_name, database_path):
     cache = Cache(default_cache_dir)
     try:
         vectors, names = feature_extract(database_path, VGGNet())
-        print("start connetc to milvus")
         index_client = milvus_client()
         # delete_table(index_client, table_name=table_name)
         # time.sleep(1)

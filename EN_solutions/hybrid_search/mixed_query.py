@@ -6,34 +6,33 @@ import psycopg2
 import numpy as np
 
 
-QUERY_PATH = '/data/lym/anna_test/bigann_query.bvecs'
+QUERY_PATH = 'bigann_query.bvecs'
 # query_location = 0
 
-MILVUS_TABLE = 'mixe_query'
+MILVUS_collection = 'mixe_query'
 PG_TABLE_NAME = 'mixe_query'
 
 
-SERVER_ADDR = "127.0.0.1"
+SERVER_ADDR = "0.0.0.0"
 SERVER_PORT = 19530
 
 
 PG_HOST = "192.168.1.10"
 PG_PORT = 5432
 PG_USER = "postgres"
-PG_PASSWORD = "zilliz123"
+PG_PASSWORD = "postgres"
 PG_DATABASE = "postgres"
 
 TOP_K = 10
 DISTANCE_THRESHOLD = 1
 
 
-
 milvus = Milvus()
+
 
 sex_flag = False
 time_flag = False
 glasses_flag = False
-
 
 def handle_status(status):
     if status.code != Status.SUCCESS:
@@ -69,7 +68,8 @@ def load_query_list(fname, query_location):
 def search_in_milvus(vector):
     output_ids = []
     output_distance = []
-    status, results = milvus.search_vectors(table_name = MILVUS_TABLE,query_records=vector, top_k=TOP_K)
+    _param = {'nprobe': 64}
+    status, results = milvus.search_vectors(collection_name = MILVUS_collection,query_records=vector, top_k=TOP_K, params=_param)
     for result in results:
         # print(result)
         for i in range(TOP_K):
@@ -244,7 +244,7 @@ def search_in_pg_7(conn,cur,result_ids,result_distance):
         print(len(rows))
         j = 0
         for row in rows:
-            print(row[0], " ", row[2], row[3], row[4], " ", result_distance[j])
+            print(row[0], " ", row[1], " ", row[2], " ", row[3], " ", result_distance[j])
             j = j + 1
     except:
         print("search faild!")
