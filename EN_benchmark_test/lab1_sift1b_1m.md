@@ -23,9 +23,9 @@ The following configuration has been tested:
 
 Download the following data and scripts:
 
-- 1 million test data: [https://pan.baidu.com/s/19fj1FUHfYZwn9huhgX4rQQ](https://pan.baidu.com/s/19fj1FUHfYZwn9huhgX4rQQ)
-- Query data: [https://pan.baidu.com/s/1nVAFi5_DBZS2eazA7SN0VQ](https://pan.baidu.com/s/1nVAFi5_DBZS2eazA7SN0VQ)
-- Ground truth: [https://pan.baidu.com/s/1KGlBiJvuGpqjbZOIpobPUg](https://pan.baidu.com/s/1KGlBiJvuGpqjbZOIpobPUg)
+- 1 million test data: https://pan.baidu.com/s/1XB0u4zDJoF-2E9T5HmoWJQ  Extraction code : zvs4 
+- Query data: https://pan.baidu.com/s/1LSB167UzUtm1H5Fk91bQfA   Extraction code : imnw 
+- Ground truth: https://pan.baidu.com/s/1OlFKFoi3zVTr8DZQMoGkJQ Extraction code : 49lg
 - Test scripts: [/bootcamp/benchmark_test/scripts/](/benchmark_test/scripts/)
 
 Create a folder named `milvus_sift1m` and move all downloaded files to the folder:
@@ -33,9 +33,9 @@ Create a folder named `milvus_sift1m` and move all downloaded files to the folde
 - Unzip the 1 million test data to get the `bvecs_data` folder that contains 10 `npy` files. Each `npy` file contains 100,000 vectors.
 - Unzip the query data to get the `query_data` folder that contains `query.npy`, which contains 10,000 vectors to query.
 - Unzip the ground truth data to get the gnd folder with `ground_truth_1M.txt`, which contains the locations of top 1000 similar vectors in the query data.
-- The test script files contain the following Python scripts: `milvus_load.py`, `milvus_toolkit.py`, `milvus_search.py`, and `milvus_compare.py`.
+- The test script files contain the following Python scripts: `main.py`、`milvus_toolkit.py`、`milvus_load.py`、`config.py`。
 
-> Note: Make sure that `bvecs_data`, `query_data`, `gnd`, and test scripts are in the same folder level.
+> **Note:** Please go through the README carefully before testing with script . Make changes to the parameters in the script to match your scenario.
 
 ## 2. Configure Milvus parameters
 
@@ -51,7 +51,7 @@ Configuration file: `/home/$USER/milvus/conf/server_config.yaml`
 |         `gpu_search_threshold`	                |   1001     |
 |         `search_resources`	                |   gpu0     |
 
-Refer to [Milvus Configuration](https://github.com/milvus-io/docs/blob/0.6.0/reference/milvus_config.md) for more information.
+Refer to [Milvus Configuration](https://github.com/milvus-io/docs/blob/0.7.1/reference/milvus_config.md) for more information.
 
 Use default values for other parameters. After setting parameter values, restart Milvus Docker to apply all changes.
 
@@ -63,12 +63,14 @@ $ docker restart <container id>
 
 Make sure Milvus is already installed and started. (For details of Milvus installation, please read [Milvus Quick Start](../EN_getting_started/basics/quickstart.md)).
 
+>  Before testing, please modify the corresponding parameters according to the [script instructions](/benchmark_test/scripts/README.md)
+
 
 Go to `milvus_sift1m`, and run the following command to create a table and build indexes:
 
 ```bash
-$ python3 milvus_toolkit.py --table ann_1m_sq8h --dim 128 -c
-$ python3 milvus_toolkit.py --table ann_1m_sq8h --index sq8h --build
+$ python3 main.py --collection ann_1m_sq8 --dim 128 -c
+$ python3 main.py --collection ann_1m_sq8 --index sq8 --build 
 ```
 
 Vectors are then inserted into a table named `ann_1m_sq8h`, with the index_type of `IVF_SQ8H`. 
@@ -76,12 +78,12 @@ Vectors are then inserted into a table named `ann_1m_sq8h`, with the index_type 
 To show the available tables and number of vectors in each table, use the following command:
 
 ```bash
-#Show available tables
-$ python3 milvus_toolkit.py --show
-#Show the number of rows in ann_1m_sq8h
-$ python3 milvus_toolkit.py --table ann_1m_sq8h --rows
-#Show the index type of ann_1m_sq8h
-$ python3 milvus_toolkit.py --table ann_1m_sq8h --desc_index
+#查看库中有哪些表
+$ python3 main.py --show
+#查看表ann_1m_sq8h的行数
+$ python3 main.py --collection ann_1m_sq8 --rows
+#查看表ann_1m_sq8h的索引类型
+$ python3 main.py --collection ann_1m_sq8 --describe_index
 ```
 
 ## 4.  Import data
@@ -91,7 +93,7 @@ Make sure table ann_1m_sq8 is successfully created.
 Run the following command to import 1,000,000 rows of data:
 
 ```bash
-$ python3 milvus_load.py --table=ann_1m_sq8h -n
+$ python3 main.py --collection=ann_1m_sq8 --load
 ```
 
 You can see that all data is imported from the file for once.
@@ -99,7 +101,7 @@ You can see that all data is imported from the file for once.
 Run the following command to check the number of rows in the table:
 
 ```bash
-$ python3 milvus_toolkit.py --table=ann_1m_sq8h --rows
+$ python3 main.py --collection=ann_1m_sq8 --rows
 ```
 
 To make sure that all data imported to Milvus has indexes built. Navigate to `/home/$USER/milvus/db` and enter the following command:
@@ -125,7 +127,7 @@ sqlite> .quit
 Enter `milvus_sift1m` and run the following command:
 
 ```bash
-$ python3 milvus_toolkit.py --table=ann_1m_sq8h --index=sq8h --build 
+$ python3 main.py --collection=ann_1m_sq8 --index=sq8 --build 
 ```
 
 After manually building indexes, enter sqlite CLI again and make sure that index building has been completed for all shards. To understand the meanings of other columns, navigate to `/home/$USER/milvus/db` and enter the following command in the sqlite CLI:
@@ -141,47 +143,28 @@ SIFT1B provides not only the vector dataset to search 10,000 vectors, but also t
 
 Accuracy = Number of shared vectors (between Milvus search results and Ground truth) / (query_records * top_k)
 
-#### Step 1: Run query script
+####  Run query script
 
-To test the search precision for top 20 results of 10 vectors randomly chosen from the 10,000 query vectors, go to directory `milvus_sift1m`, and run this command:
-
-```bash
-$ python3 milvus_search.py --table ann_1m_sq8h --nq 10 --topk 20 --nprobe 64 -s
-```
-
-> Note: nprobe affects search accuracy and performance. The greater the value, the higher the accuracy, but the lower the performance. In this experiment, you are recommended to use 32 for nprobe.
-
-After running the command above, a `search_output` folder is created and includes `ann_1m_sq8h_32_output.txt`, which records top 20 similar vectors for the 10 vectors. In the text file, each 20 rows are formatted as one group that corresponds to the result of one query. The first column specifies the location of the vector to query in `query.npy`; the second column specifies the vectors correspond to the query result in `bvecs_data` (e.g. in 80006099349, the first `8` does not have a meaning, but `0006` after the first `8` stands for the 6th file in `bvecs_data`, the last `099349` indicates that the 099349th vector in the 6th file is the vector corresponding to the query result); the third column specifies the vector to query and the Euclidean distance.
-
-
-#### Step 2: Run accuracy test script
-
-Use the following command to compare the query result with ground truth and calculate the search accuracy of Milvus:
+Before the accuracy test, you need to manually create the directory `recall_result / recall_compare_out` to save the test results. To test the search precision for  top1(top10, top100, top200) results of 500 vectors randomly chosen from the 10,000 query vectors, go to directory `milvus_sift1m`, and run this command:
 
 ```bash
-$ python3 milvus_compare.py --table ann_1m_sq8h --nprobe 64 -p
+$ python3 main.py --collection=ann_1m_sq8 --search_param 128 --recall
 ```
 
-#### Step 3: Verify test results
+> Note: search_param is nprobe value. nprobe affects search accuracy and performance. The greater the value, the higher the accuracy, but the lower the performance. In this experiment.
 
-When the test script is completed, a `compare` folder is generated and includes `64_ann_1m_sq8h_10_20_output.csv`.
-
-- nq - the ordinal number of query vectors
-- topk - the top k most similar result vectors for the query vectors 
-- total_time - the total query elapsed time (in seconds)
-- avg_time - the average time to query one vector (in seconds)
-- recall - the accuracy calculated by comparing Milvus search results and ground truth
+After executing the above command, an `ann_sift1m_sq8_128_500_recall.txt` text file will be generated in the` recall_result` folder. The text file records the id and distance of the most similar first 200 vectors corresponding to 500 vectors,Every 200 lines in the text file correspond to a query result of a query. At the same time, multiple texts will be generated under the `recall_compare_out` file. Taking ` ann_sift1m_sq8_128_500_100` as an example, this text records the respective corresponding accuracy rates and the total average accuracy rate of the 500 vectors queried when topk = 100.
 
 The accuracy rate has a positive correlation with search parameter `nprobe` (number of sub-spaces searched). In this test, when the `nprobe` = 64, the accuracy can reach > 90%.  However, as the `nprobe` gets bigger, the search time will be longer. 
 
 Therefore, based on your data distribution and business scenario, you need to edit `nprobe` to optimize the trade-off between accuracy and search time. 
 
-## 5. Performance test
+## 6. Performance test
 
 To test search performance, go to directory *milvus_sift1m*, and run the following script: 
 
 ```bash
-$ python3 milvus_toolkit.py --table=ann_1m_sq8h --nprobe 64 -s
+$ python3 main.py --collection=ann_1m_sq8 --search_param 128 --performance
 ```
 
 When the execution is completed, a `performance` folder is generated and includes `ann_1m_sq8h_32_output.csv`, which includes the running time for topk values with different nq values.
