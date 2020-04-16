@@ -33,8 +33,9 @@ def normaliz_data(vec_list):
 
 def load_npy_data(filename):
     filename = config.FILE_NPY_PATH + "/" + filename
-    data = np.load(filename) 
-    # data = (data+0.5)/255
+    data = np.load(filename)
+    if config.IS_UINT8:
+        data = (data+0.5)/255
     if config.if_normaliz:
         data = normaliz_data(data)
     data = data.tolist()
