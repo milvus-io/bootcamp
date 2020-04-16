@@ -125,8 +125,8 @@ def load_vec_list(file_name):
         data = np.array(data)
     else:
         data = np.load(file_name)
-    if config.IS_UINT8:
-        data = (data + 0.5) / 255
+    # if config.IS_UINT8:
+    #     data = (data + 0.5) / 255
     vec_list = data.tolist()
     return vec_list
 
@@ -190,7 +190,7 @@ def compute_recall(collection_name,nq,results,search_param,rand):
                 f.write(line + '\n')
             f.write("max, avarage, min\n")
             f.write( str(max(recalls) * 100) + "%," + str(round(count_all / nq / top_k, 3) * 100) + "%," + str(min(recalls) * 100) + "%\n")
-        print("total accuracy", round(count_all / nq / top_k, 3) * 100, "%")           
+        print("top_k=", top_k, ", total accuracy", round(count_all / nq / top_k, 3) * 100, "%")           
 
 
 
