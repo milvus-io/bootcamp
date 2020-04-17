@@ -20,7 +20,7 @@ This article builds the code of the video search video has been uploaded to the 
 
 #### Step1 image build
 
-The entire video search system needs to use Milvus0.7.1 docker, Redis docker, Minio docker, front-end interface docker and background API docker. The front-end interface docker and background API docker need to be built by the reader, and the remaining three dockers can be directly pulled from the docker hub.
+The entire video search system needs to use Milvus0.8.0 docker, Redis docker, Minio docker, front-end interface docker and background API docker. The front-end interface docker and background API docker need to be built by the reader, and the remaining three dockers can be directly pulled from the docker hub.
 
 ```bash
 # Get the video search code
@@ -53,7 +53,7 @@ Milvus, Redis and Minio require users to manually create storage directories and
 
 So the configuration part of Milvus, Redis and Minio in docker-compose.yml can be configured according to the following figure:
 
-![img](https://qqadapt.qpic.cn/txdocpic/0/33f477bf0a4c247c1f40dfe0f0a070ee/0?w=949&h=852)
+![image-20200417180928307](C:\Users\24156\AppData\Roaming\Typora\typora-user-images\image-20200417180928307.png)
 
 #### Step3 system startup
 
