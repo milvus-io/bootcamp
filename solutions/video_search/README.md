@@ -22,7 +22,7 @@
 
 #### **Step1 镜像构建**
 
-整个以图搜视频系统需要使用到 Milvus0.7.1 docker、Redis docker、Minio docker、前端界面 docker 和后台 api docker。前端界面 docker 和后台 api docker 需要读者自己构建，其余三个 docker 可以直接从 docker hub 拉取。
+整个以图搜视频系统需要使用到 Milvus0.8.0 docker、Redis docker、Minio docker、前端界面 docker 和后台 api docker。前端界面 docker 和后台 api docker 需要读者自己构建，其余三个 docker 可以直接从 docker hub 拉取。
 
 ```bash
 # 获取以图搜视频代码
@@ -53,7 +53,11 @@ Milvus、Redis 和 Minio 需用户手动创建存储目录，然后在 docker-co
 /mnt/redis/data /mnt/minio/data /mnt/milvus/db
 ```
 
-所以在 docker-compose.yml 的 Milvus、Redis 和 Minio 的配置部分可以按照下图配置：            ![img](https://qqadapt.qpic.cn/txdocpic/0/33f477bf0a4c247c1f40dfe0f0a070ee/0?w=949&h=852)            
+所以在 docker-compose.yml 的 Milvus、Redis 和 Minio 的配置部分可以按照下图配置：
+
+![image-20200417180928307](C:\Users\24156\AppData\Roaming\Typora\typora-user-images\image-20200417180928307.png) 
+
+​              
 
 #### **Step3 系统启动**
 
