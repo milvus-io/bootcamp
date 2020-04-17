@@ -16,7 +16,7 @@ The following tables show recommended configurations for reverse image search. T
 | CPU      | Intel(R) Core(TM) i7-7700K CPU @ 4.20GHz                     |
 | Memory   | 32GB                                                         |
 | OS       | Ubuntu 18.04                                                 |
-| Software | Milvus 0.7.0<br />pic_search_webclient <br />pic_search_webserver |
+| Software | Milvus 0.8.0<br />pic_search_webclient <br />pic_search_webserver |
 
 ### Data source
 
@@ -34,7 +34,7 @@ Download location: http://host.robots.ox.ac.uk/pascal/VOC/voc2012/VOCtrainval_11
 
 #### 1. Run Milvus Docker
 
-This demo uses Milvus 0.7.0. Refer to the [Install Milvus](https://github.com/milvus-io/docs/blob/v0.7.0/site/zh-CN/guides/get_started/install_milvus/install_milvus.md) for how to run Milvus docker.
+This demo uses Milvus 0.8.0. Refer to the [Install Milvus](https://github.com/milvus-io/docs/blob/v0.8.0/site/zh-CN/guides/get_started/install_milvus/install_milvus.md) for how to run Milvus docker.
 
 #### 2. Run pic_search_demo docker
 
