@@ -24,7 +24,7 @@ The entire video search system needs to use Milvus0.8.0 docker, Redis docker, Mi
 
 ```bash
 # Get the video search code
-$ git clone https://github.com/JackLCL/search-video-demo.git
+$ git clone -b 0.8.0 https://github.com/JackLCL/search-video-demo.git
 
 # Build front-end interface docker and api docker images
 $ cd search-video-demo & make all
