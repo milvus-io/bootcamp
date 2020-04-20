@@ -26,7 +26,7 @@
 
 ```bash
 # 获取以图搜视频代码
-$ git clone https://github.com/JackLCL/search-video-demo.git
+$ git clone -b 0.8.0 https://github.com/JackLCL/search-video-demo.git
 
 # 构建前端界面 docker 和 api docker 镜像
 $ cd search-video-demo & make all
