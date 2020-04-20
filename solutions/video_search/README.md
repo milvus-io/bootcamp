@@ -18,15 +18,15 @@
 
 ## **3 系统部署**
 
-​		本文搭建以图搜视频的代码已经上传到了GitHub仓库，仓库地址为：https://github.com/JackLCL/search-video-demo。
+​		本文搭建以图搜视频的代码已经上传到了GitHub仓库，仓库地址为：https://github.com/JackLCL/search-video-demo 。
 
 #### **Step1 镜像构建**
 
-整个以图搜视频系统需要使用到 Milvus0.7.1 docker、Redis docker、Minio docker、前端界面 docker 和后台 api docker。前端界面 docker 和后台 api docker 需要读者自己构建，其余三个 docker 可以直接从 docker hub 拉取。
+整个以图搜视频系统需要使用到 Milvus0.8.0 docker、Redis docker、Minio docker、前端界面 docker 和后台 api docker。前端界面 docker 和后台 api docker 需要读者自己构建，其余三个 docker 可以直接从 docker hub 拉取。
 
 ```bash
 # 获取以图搜视频代码
-$ git clone https://github.com/JackLCL/search-video-demo.git
+$ git clone -b 0.8.0 https://github.com/JackLCL/search-video-demo.git
 
 # 构建前端界面 docker 和 api docker 镜像
 $ cd search-video-demo & make all
@@ -53,7 +53,9 @@ Milvus、Redis 和 Minio 需用户手动创建存储目录，然后在 docker-co
 /mnt/redis/data /mnt/minio/data /mnt/milvus/db
 ```
 
-所以在 docker-compose.yml 的 Milvus、Redis 和 Minio 的配置部分可以按照下图配置：            ![img](https://qqadapt.qpic.cn/txdocpic/0/33f477bf0a4c247c1f40dfe0f0a070ee/0?w=949&h=852)            
+所以在 docker-compose.yml 的 Milvus、Redis 和 Minio 的配置部分可以按照下图配置：
+
+<img src="pic/pic3.png" width = "700" height = "650" alt="系统架构图" align=center /> 
 
 #### **Step3 系统启动**
 
