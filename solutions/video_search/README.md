@@ -18,7 +18,7 @@
 
 ## **3 系统部署**
 
-​		本文搭建以图搜视频的代码已经上传到了GitHub仓库，仓库地址为：https://github.com/JackLCL/search-video-demo。
+​		本文搭建以图搜视频的代码已经上传到了GitHub仓库，仓库地址为：https://github.com/JackLCL/search-video-demo 。
 
 #### **Step1 镜像构建**
 
