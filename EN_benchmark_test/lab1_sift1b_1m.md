@@ -61,7 +61,7 @@ $ docker restart <container id>
 
 ## 3. Create a table and build indexes
 
-Make sure Milvus is already installed and started. (For details of Milvus installation, please read [Milvus Quick Start](../EN_getting_started/basics/quickstart.md)).
+Make sure Milvus is already installed and started. (For details of Milvus installation, please read [Milvus Quick Start](https://milvus.io/cn/docs/v0.8.0/about_milvus/overview.md)).
 
 >  Before testing, please modify the corresponding parameters according to the [script instructions](/benchmark_test/scripts/README.md)
 
