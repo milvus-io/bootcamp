@@ -53,7 +53,7 @@ Milvus, Redis and Minio require users to manually create storage directories and
 
 So the configuration part of Milvus, Redis and Minio in docker-compose.yml can be configured according to the following figure:
 
-![image-20200417180928307](C:\Users\24156\AppData\Roaming\Typora\typora-user-images\image-20200417180928307.png)
+<img src="pic/pic3.png" width = "700" height = "650" alt="系统架构图" align=center />
 
 #### Step3 system startup
 
