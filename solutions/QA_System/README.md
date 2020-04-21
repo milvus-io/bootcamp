@@ -75,7 +75,7 @@ bert-serving-start -model_dir chinese_L-12_H-768_A-12/ -num_worker=12 -max_seq_l
 
 ```shell
 cd QA-search-server
-python main.py --table milvus_qa --question data/finance_question.txt --answer data/finance_answer.txt --load
+python main.py --collection milvus_qa --question data/finance_question.txt --answer data/finance_answer.txt --load
 ```
 
 > 注：data/finance_question.txt 是导入的问题集所在的路径
