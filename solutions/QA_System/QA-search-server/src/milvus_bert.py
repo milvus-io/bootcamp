@@ -68,7 +68,7 @@ def import_to_milvus(data,collection_name):
 
 def create_milvus_table(collection_name):
     param = {'collection_name': collection_name, 'dimension': 768, 'index_file_size':index_file_size, 'metric_type':metric_type}
-    status = milvus.create_table(param)
+    status = milvus.create_collection(param)
     print(status)
     # index_param = {'index_type': IndexType.IVF_SQ8, 'nlist': nlist}
     # milvus.create_index(collection_name,index_param)
