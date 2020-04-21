@@ -75,7 +75,7 @@ def create_milvus_table(collection_name):
 
 
 def has_table(collection_name):
-    status, ok = milvus.has_table(collection_name)
+    status, ok = milvus.has_collection(collection_name)
     if not ok:
         # print("create table.")
         create_milvus_table(collection_name)
