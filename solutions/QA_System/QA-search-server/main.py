@@ -1,6 +1,6 @@
 import src.milvus_bert as milvus_bert
 import sys, getopt
-import config
+import src.config as config
 
 TOP_K = 1
 
