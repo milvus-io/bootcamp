@@ -1,2 +1,2 @@
-pymilvus==0.2.9
+pymilvus==0.2.10
 numpy
