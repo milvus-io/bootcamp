@@ -18,7 +18,7 @@
 本次实验数据来源：[ftp://ftp.ncbi.nlm.nih.gov/pubchem/Compound/CURRENT-Full/SDF](ftp://ftp.ncbi.nlm.nih.gov/pubchem/Compound/CURRENT-Full/SDF)，该数据集是压缩的 SDF 文件，需要使用工具将其转换为 SMILES 文件，我们准备了转换后的一万条 SMILES 化学式文件 [test_1w.smi](./smiles-data)，下载该文件到本地：
 
 ```bash
-$ wget https://raw.githubusercontent.com/milvus-io/bootcamp/0.7.0_alpha/solutions/mols_search/smiles-data/test_1w.smi
+$ wget https://raw.githubusercontent.com/milvus-io/bootcamp/0.8.0/solutions/mols_search/smiles-data/test_1w.smi
 ```
 
 
