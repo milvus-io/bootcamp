@@ -1,6 +1,6 @@
 import src.milvus_bert as milvus_bert
 import sys, getopt
-import config
+import src.config as config
 
 TOP_K = 1
 
@@ -11,7 +11,7 @@ def main():
         opts, args = getopt.getopt(
             sys.argv[1:],
             "t:q:a:ls",
-            ["table=", "question=", "answer=", "load", "sentence=", "search"],
+            ["collection=", "question=", "answer=", "load", "sentence=", "search"],
         )
     except:
         print("Usage: test.py -t <table>  -l -s")
@@ -20,7 +20,7 @@ def main():
     table_name = config.DEFAULT_TABLE
     for opt_name, opt_value in opts:
         
-        if opt_name in ("-t", "--table"):
+        if opt_name in ("-t", "--collection"):
             table_name = opt_value
         elif opt_name in ("-q", "--question"):
             question_dir = opt_value
