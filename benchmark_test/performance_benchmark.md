@@ -25,7 +25,7 @@
 
 各类型索引如何选择可参考：https://milvus.io/cn/blogs/2019-12-03-select-index.md
 
-本次测试过程中，数据每10万为一个批次导入milvus中，10万条128维的向量**导入约耗时**：0.8S。
+测试参数设置：nlist=16384, index_file_size=2048
 
 ## 测试结果
 
@@ -34,6 +34,8 @@
 [sift10m测试结果](performance_benchmark.md#sift10m): 该测试中，选取了sift1B数据集中的前10,000,000条向量。
 
 [sift100m测试结果](performance_benchmark.md#sift100m): 该测试中，选取了sift1B数据集中的前100,000,000条向量。
+
+本次测试过程中，数据每10万为一个批次导入milvus中，10万条128维的向量**导入约耗时**：0.8S。
 
 ## sift1m
 
