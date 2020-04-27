@@ -4,7 +4,7 @@
 
 **CPU**: Intel(R) Core(TM) i7-8700 CPU @ 3.20GHz  (12 Cores)
 
-**GPU**: (双卡)GeForce GTX 1060 6GB      GeForce GTX 1660 6GB
+**GPU**: (双卡)GeForce GTX 1060 6GB          GeForce GTX 1660 6GB
 
 ## 数据
 
