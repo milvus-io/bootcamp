@@ -31,9 +31,9 @@
 
 [sift1m测试结果](performance_benchmark.md#sift1m): 该测试中，选取了sift1B数据集中的前1,000,000条向量。
 
-[sift10m测试结果](performance_benchmark.md#sift1m): 该测试中，选取了sift1B数据集中的前10,000,000条向量。
+[sift10m测试结果](performance_benchmark.md#sift10m): 该测试中，选取了sift1B数据集中的前10,000,000条向量。
 
-[sift100m测试结果](performance_benchmark.md#sift1m): 该测试中，选取了sift1B数据集中的前100,000,000条向量。
+[sift100m测试结果](performance_benchmark.md#sift100m): 该测试中，选取了sift1B数据集中的前100,000,000条向量。
 
 ## sift1m
 
