@@ -18,14 +18,15 @@
 | pymilvus    |   0.2.9    |
 
 测试工具下载：
-- 100 万测试数据集下载地址：https://pan.baidu.com/s/19fj1FUHfYZwn9huhgX4rQQ
-- 查询向量集下载地址：https://pan.baidu.com/s/1nVAFi5_DBZS2eazA7SN0VQ
-- 搜索结果对照 （ ground truth ）下载地址：https://pan.baidu.com/s/1KGlBiJvuGpqjbZOIpobPUg
+- 100 万测试数据集下载地址：链接：https://pan.baidu.com/s/1XB0u4zDJoF-2E9T5HmoWJQ   提取码：zvs4 
+- 查询向量集下载地址：链接：https://pan.baidu.com/s/1LSB167UzUtm1H5Fk91bQfA   提取码：imnw 
+- 搜索结果对照 （ ground truth ）下载地址：链接：https://pan.baidu.com/s/1OlFKFoi3zVTr8DZQMoGkJQ 
+  提取码：49lg
 - 测试脚本下载路径：[/bootcamp/benchmark_test/scripts/](/benchmark_test/scripts/)
 
 为方便存放测试数据和脚本，请创建名为 `milvus_sift1m` 的文件夹。利用前文提供的下载链接，将测试数据集下载到 `milvus_sift1m` 目录下：
 
-- 测试数据集下载并解压完成之后，你将会看到一个名为 `bvecs_data` 的文件夹。该文件夹里面存放了 10 个 `npy` 文件，每个 `npy` 文件中存放了10 万条 uint8 格式的向量数据。
+- 测试数据集下载并解压完成之后，你将会看到一个名为 `bvecs_data` 的文件夹。该文件夹里面存放了 10 个 `npy` 文件，每个 `npy` 文件中存放了10 万条 的向量数据。
 - 查询向量集下载并解压完成之后，你将会看到一个名为 `query_data` 的文件夹。该文件夹里面存放了一个 `query.npy` 文件，该文件里存放了10,000 条需要查询的向量。
 - 对照数据下载并解压完成之后，是一个名为 `gnd` 的文件夹，该文件夹下有一个 `ground_truth_1M.txt` 的文本文件，该文件里存放的是查询向量集中的每条向量的 top 1000 相似向量的位置。
 - 测试脚本会包含四个 Python 脚本 `main.py`、`milvus_toolkit.py`、`milvus_load.py`、`config.py`。
@@ -56,7 +57,9 @@ $ docker restart <container id>
 
 ## 3、 建表并建立索引
 
-建表之前，首先确认 Milvus 已经正常启动。（ Milvus 安装及启动方法参见：[Milvus 快速上手](../getting_started/basics/quickstart.md) ）
+建表之前，首先确认 Milvus 已经正常启动。（ Milvus 安装及启动方法参见：[Milvus 快速上手](https://milvus.io/cn/docs/v0.8.0/guides/get_started/install_milvus/gpu_milvus_docker.md) ）
+
+>  测试之前请根据脚本[说明](/benchmark_test/scripts/README.md)修改相应参数！
 
 进入 `milvus_sift1m` 目录，运行如下脚本在 Milvus 中创建集合并建立索引：
 
@@ -114,7 +117,7 @@ Milvus 会将一个向量数据表分成若干数据分片进行存储，因此�
 sqlite> .quit
 ```
 
-进入 `milvus_sift1m` 目录，运行如下脚本：
+由于本项目数据较小，未达到自动建立索引的阈值，所以需要再次建立索引。进入 `milvus_sift1m` 目录，运行如下脚本：
 
 ```bash
 $ python3 main.py --collection=ann_1m_sq8 --index=sq8 --build 
@@ -133,27 +136,17 @@ SIFT1m 提供了10,000条向量的查询向量集，并且对于每条查询向�
 
 准确率＝ ( Milvus 查询结果与 ground truth 一致的向量个数 ) / ( query_records 的向量个数 * top_k )
 
-（1）执行查询脚本
+执行查询脚本
 
-从 10,000 条查询向量中随机取出10条向量，查询这10条向量各自的 top 20。执行如下命令：
+准确率测试之前，需要手动建立目录`recall_result/recall_compare_out`来保存测试结果，从 10,000 条查询向量中随机取出500条向量，查询这500条向量各自的 top1, top10, top100, top200。执行如下命令：
 
 ```bash
-$ python3 main.py --collection=ann_1m_sq8 --search_param 64 --recall
+$ python3 main.py --collection=ann_1m_sq8 --search_param 128 --recall
 ```
 
-(注：search_param代表nprobe值，nprobe 值影响这查询结果准确率和查询性能，nprobe 越大，准确率越高，性能越差。本项目中建议使用 nprobe=32)
+(注：search_param代表nprobe值，nprobe 值影响这查询结果准确率和查询性能，nprobe 越大，准确率越高，性能越差。)
 
-执行上述命令后，将会产生一个 `search_output` 文件夹,该文件夹下有一个名为 `ann_1m_sq8h_32_output.txt` 的文本文件，该文本文件中记录了10条向量各自对应的 top 20。文本文件中每20行为一组，对应一个 query 的查询结果。第一列表示待查询的向量在 `query.npy` 中对应的向量位置；第二列表示查询结果对应的 `bvecs_data` 中的向量(例如80006099349,第一个8无意义，8后面的四位0006表示对应 `bvecs_data` 中的第6个文件，最后六位099349表示对应第6个文件中的第099349条向量即为查询结果对应的向量)；第三列表示查询的向量和查询结果对应的欧氏距离。
-
-(2）查看准确性测试结果
-
-上述脚本运行完成后，将会生成一个名为 `compare` 的文件夹，在该文件夹下面会有一个名为 `64_ann_1m_sq8h_10_20_output.csv` 的文件.
-
-- nq: 代表要查询的向量数
-- topk: 代表的是查询该向量的前 k 个相似的向量
-- total_time: 代表整个查询花费的总时间，单位：秒
-- avg_time: 代表每一条向量的平均查询时间，单位：秒
-- recall: 代表 Milvus 的查询结果与 ground truth 对比后的准确率
+执行上述命令后，在`recall_result`文件夹下会生成一个`ann_sift1m_sq8_128_500_recall.txt`的文本文件，该文本文件中记录了500条向量各自对应的 top 200的id和distance, 第一列的序号表示查询的那一条向量。文本文件中每200行为一组，对应一个 query 的查询结果。同时在`recall_compare_out`文件下会生成多个文本，以`ann_sift1m_sq8_128_500_100`为例，该文本中记录了topk=100时，查询的500条向量的各自对应的准确率及总的平均准确率。
 
 Milvus 查询准确率与搜索子空间（ nprobe 参数）有很大关系。本次测试中 nprobe 设置为64，Milvus 查询准确率可以达到 90% 以上。可以通过增大 nprobe 值来实现更高的准确率但同时也会降低 Milvus 的查询性能。
 
@@ -164,10 +157,10 @@ Milvus 查询准确率与搜索子空间（ nprobe 参数）有很大关系。�
 为评估 Milvus 的查询性能，进入 `milvus_sift1m` 目录，运行如下脚本：
 
 ```bash
-$ python3 main.py --collection=ann_1m_sq8 --search_param 64 --performance
+$ python3 main.py --collection=ann_1m_sq8 --search_param 128 --performance
 ```
 
-运行结束后，将会生成一个名为 `performance` 的文件夹，在该文件夹下会有一个名为 `ann_1m_sq8h_32_output.csv` 的文件，该文件保存了各个 nq 值不同的topk值运行所耗时间。
+运行结束后，将会生成一个名为 `performance` 的文件夹，在该文件夹下会有一个名为 `ann_1m_sq8h_128_output.csv` 的文件，该文件保存了各个 nq 值不同的topk值运行所耗时间。
 
 - nq: 代表要查询的向量数
 - topk: 代表的是查询某个向量的前 k 个相似的向量
