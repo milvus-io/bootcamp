@@ -68,8 +68,8 @@ def create_milvus_collection():
         milvus.create_collection(param)
 
 def build_collection():
-    index_param = { 'nlist': 16384}
-    status = milvus.create_index(MILVUS_collection,'index_type': IndexType.IVF_SQ8H,index_param)
+    index_param = {'nlist': 16384}
+    status = milvus.create_index(MILVUS_collection,IndexType.IVF_SQ8H,index_param)
     print(status)
 
 def connect_postgres_server():
