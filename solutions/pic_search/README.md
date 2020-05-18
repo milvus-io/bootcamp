@@ -17,7 +17,7 @@
 | CPU      | Intel(R) Core(TM) i7-7700K CPU @ 4.20GHz                     |
 | Memory   | 32GB                                                         |
 | OS       | Ubuntu 18.04                                                 |
-| Software | Milvus 0.7.0<br />pic_search_webclient <br />pic_search_webserver |
+| Software | Milvus 0.8.0<br />pic_search_webclient <br />pic_search_webserver |
 
 
 ### 数据来源
@@ -34,7 +34,7 @@
 
 ##### 1、启动 Milvus docker
 
-本实验使用 Milvus0.7.0 版本，启动方法参考链接：https://github.com/milvus-io/docs/blob/v0.7.0/site/zh-CN/guides/get_started/install_milvus/install_milvus.md
+本实验使用 Milvus0.8.0 版本，启动方法参考链接：https://github.com/milvus-io/docs/blob/v0.8.0/site/zh-CN/guides/get_started/install_milvus/install_milvus.md
 
 ##### 2、启动 pic-search-webserver docker
 
@@ -45,7 +45,7 @@ $ docker run -d --name zilliz_search_images_demo \
 -p 35000:5000 \
 -e "DATA_PATH=/tmp/images-data" \
 -e "MILVUS_HOST=192.168.1.123" \
-milvusbootcamp/pic-search-webserver:0.3.0
+milvusbootcamp/pic-search-webserver:0.6.0
 ```
 
 上述启动命令中，“ $IMAGE_PATH1 ” 、“ $IMAGE_PATH2” 表示你存放图片数据的目录。启动时将这些路径映射到 docker 容器里面，系统搭建好以后，可以直接在前端界面上输入 docker 容器中的图片路径 “ /tmp/pic1 ” 、“ /tmp/pic2” 去加载图片。“ MILVUS_HOST “ 表示启动 Milvus docker 的服务器地址，注意不要使用回环地址 “127.0.0.1” 。命令其他部分保持不变即可。
@@ -87,4 +87,4 @@ milvusbootcamp/pic-search-webclient:0.1.0
 
 > 说明：如果发现在界面上无法进行正常的图片加载或者图片搜索，可以利用 docker exec 命令进入到 pic-search-webserver docker 的内部查看名为 app.log 的日志文件，里面会有报错信息。
 
-我们还利用 open image dataset 数据集搭建了一个 100 万图片的以图搜图系统，并提供了公共访问的 web 链接 http://40.73.38.81/ ，欢迎访问并搜索您的图片！
+我们还利用 open image dataset 数据集搭建了一个 100 万图片的以图搜图系统，并提供了公共访问的 web 链接 http://116.228.99.250:8004/#/ ，欢迎访问并搜索您的图片！

@@ -12,9 +12,9 @@
 | GPU       | GeForce GTX 1050 Ti 4GB                  |
 | Memory    | 32GB                                     |
 | OS        | Ubuntu 18.04                             |
-| Software  | [Milvus 0.7.0](https://milvus.io/cn/docs/v0.7.0/guides/get_started/install_milvus/install_milvus.md) <br /> [pymilvus 0.2.8](https://pypi.org/project/pymilvus/) <br /> [PaddlePaddle 1.6.1](https://www.paddlepaddle.org.cn/documentation/docs/zh/1.6/beginners_guide/quick_start_cn.html)     |
+| Software  | [Milvus 0.8.0](https://milvus.io/cn/docs/v0.8.0/guides/get_started/install_milvus/install_milvus.md) <br /> [pymilvus 0.2.10](https://pypi.org/project/pymilvus/) <br /> [PaddlePaddle 1.6.1](https://www.paddlepaddle.org.cn/documentation/docs/zh/1.6/beginners_guide/quick_start_cn.html) |
 
-> Milvus 0.6.0之前的版本都采用 GPU 加速，若要使用 CPU 版请安装 Milvus 0.6.0。
+
 
 ### 数据要求
 
