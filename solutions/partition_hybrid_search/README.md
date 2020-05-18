@@ -6,7 +6,7 @@
 
 ## 运行要求
 
-- [安装 Milvus](https://www.milvus.io/cn/docs/v0.6.0/guides/get_started/install_milvus/install_milvus.md)
+- [安装 Milvus](https://www.milvus.io/cn/docs/v0.8.0/guides/get_started/install_milvus/install_milvus.md)
 - pip3 install numpy
 - pip3 install faker
 
