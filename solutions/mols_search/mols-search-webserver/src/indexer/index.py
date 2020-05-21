@@ -6,8 +6,7 @@ import traceback
 
 def milvus_client():
     try:
-        milvus = Milvus()
-        status = milvus.connect(MILVUS_HOST, MILVUS_PORT, timeout=60)
+        milvus = Milvus(MILVUS_HOST, MILVUS_PORT)
         return milvus
     except Exception as e:
         log.error(e)
@@ -64,7 +63,6 @@ def has_table(client, table_name):
 
 
 def count_table(client, table_name):
-    status, num = client.count_collection(collection_name=table_name)
+    status, num = client.count_entities(collection_name=table_name)
     print(status)
-    # status, num = client.count_table(table_name=table_name)
     return num
