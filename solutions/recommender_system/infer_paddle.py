@@ -105,15 +105,7 @@ def normaliz_data(vec_list):
 def milvus_test(usr_features, mov_features, ids):
     _HOST = '127.0.0.1'
     _PORT = '19530'  # default value
-    milvus = Milvus()
-
-    param = {'host': _HOST, 'port': _PORT}
-    status = milvus.connect(**param)
-    if status.OK():
-        print("\nServer connected.")
-    else:
-        print("\nServer connect fail.")
-        sys.exit(1)
+    milvus = Milvus(_HOST, _PORT)
 
     table_name = 'paddle_demo1'
 
@@ -136,7 +128,7 @@ def milvus_test(usr_features, mov_features, ids):
     status, result = milvus.count_collection(table_name)
     print("rows in table paddle_demo1:", result)
 
-    status, table = milvus.count_collection(table_name)
+    status, table = milvus.count_entities(table_name)
 
     search_vectors = normaliz_data([mov_features.tolist()])
     param = {
