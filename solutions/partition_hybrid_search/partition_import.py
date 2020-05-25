@@ -7,20 +7,20 @@ import random
 from faker import Faker
 
 fake = Faker()
-milvus = Milvus()
+# milvus = Milvus()
 
 milvus_collection = 'partition_query'
 
-FILE_PATH = '/data/workspace/milvus_data/sift_data/bigann_base.bvecs'
+FILE_PATH = 'bigann_base.bvecs'
 
-VEC_NUM = 1000000
+VEC_NUM = 10000000
 BASE_LEN = 100000
 NUM = VEC_NUM // BASE_LEN
 
 VEC_DIM = 128
 
 SERVER_ADDR = "0.0.0.0"
-SERVER_PORT = 19534
+SERVER_PORT = 19530
 
 
 def load_bvecs_data(fname,base_len,idx):
@@ -34,20 +34,9 @@ def load_bvecs_data(fname,base_len,idx):
     return data
 
 
-def handle_status(status):
-    if status.code != Status.SUCCESS:
-        print(status)
-        sys.exit(2)
 
 
-def connect_milvus_server():
-    print("connect to milvus")
-    status =  milvus.connect(host=SERVER_ADDR, port=SERVER_PORT,timeout = 1000 * 1000 * 20 )
-    handle_status(status=status)
-    return status
-
-
-def create_milvus_collection():
+def create_milvus_collection(milvus):
     if not milvus.has_collection(milvus_collection)[1]:
         param = {
             'collection_name': milvus_collection,
@@ -57,16 +46,16 @@ def create_milvus_collection():
         }
         status = milvus.create_collection(param)
         print(status)
-        build_collection()
+        build_collection(milvus)
 
 
-def build_collection():
+def build_collection(milvus):
     index_param = { 'nlist': 16384}
-    status = milvus.create_index(milvus_collection, 'index_type':IndexType.IVF_SQ8H, index_param)
+    status = milvus.create_index(milvus_collection, IndexType.IVF_SQ8H, index_param)
     print(status)
 
 
-def create_partition(partition_tag):
+def create_partition(partition_tag,milvus):
     milvus.create_partition(milvus_collection, partition_tag=partition_tag)
 
 
@@ -85,23 +74,23 @@ def get_partition_tag():
     return partition_tag
 
 
-def add_vectors(vectors,vectors_ids,partition_tag):
+def add_vectors(vectors,vectors_ids,partition_tag,milvus):
     time_start = time.time()    
-    status, ids = milvus.add_vectors(collection_name=milvus_collection, records=vectors, ids=vectors_ids, partition_tag=partition_tag)
+    status, ids = milvus.insert(collection_name=milvus_collection, records=vectors, ids=vectors_ids, partition_tag=partition_tag)
     time_end = time.time()
     print(status, "insert milvue time: ", time_end-time_start)
 
 
 def main():
-    connect_milvus_server()
-    create_milvus_collection()
+    milvus = Milvus(host=SERVER_ADDR, port=SERVER_PORT)
+    create_milvus_collection(milvus)
     partition_tag = get_partition_tag()
     count = 0
     while count < (VEC_NUM // BASE_LEN):       
         vectors = load_bvecs_data(FILE_PATH,BASE_LEN,count)
         vectors_ids = [id for id in range(count*BASE_LEN,(count+1)*BASE_LEN)]
-        create_partition(partition_tag[count])
-        add_vectors(vectors,vectors_ids,partition_tag[count])
+        create_partition(partition_tag[count],milvus)
+        add_vectors(vectors,vectors_ids,partition_tag[count],milvus)
 
         count = count + 1
 
