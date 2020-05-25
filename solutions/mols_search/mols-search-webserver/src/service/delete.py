@@ -17,7 +17,4 @@ def do_delete(table_name):
     except Exception as e:
         logging.error(e)
         return "Error with {}".format(e)
-    finally:
-        if index_client:
-            index_client.disconnect()
 
