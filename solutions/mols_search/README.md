@@ -7,7 +7,7 @@
 | CPU      | Intel(R) Core(TM) i7-7700K CPU @ 4.20GHz                     |
 | Memory   | 32GB                                                         |
 | OS       | Ubuntu 18.04                                                 |
-| Software | [Milvus 0.9.0](https://milvus.io/cn/docs/v0.9.0/guides/get_started/install_milvus/cpu_milvus_docker.md) <br />mols-search-webserver 0.6.0 <br />mols-search-webclient 0.3.0 |
+| Software | [Milvus 0.8.0](https://milvus.io/cn/docs/v0.8.0/guides/get_started/install_milvus/cpu_milvus_docker.md) <br />mols-search-webserver 0.5.0 <br />mols-search-webclient 0.3.0 |
 
 以上配置已经通过测试，并且 Windows 系统也可以运行本次实验，以下步骤 Windows 系统通用。
 
@@ -18,7 +18,7 @@
 本次实验数据来源：[ftp://ftp.ncbi.nlm.nih.gov/pubchem/Compound/CURRENT-Full/SDF](ftp://ftp.ncbi.nlm.nih.gov/pubchem/Compound/CURRENT-Full/SDF)，该数据集是压缩的 SDF 文件，需要使用工具将其转换为 SMILES 文件，我们准备了转换后的一万条 SMILES 化学式文件 [test_1w.smi](./smiles-data)，下载该文件到本地：
 
 ```bash
-$ wget https://raw.githubusercontent.com/milvus-io/bootcamp/0.9.0/solutions/mols_search/smiles-data/test_1w.smi
+$ wget https://raw.githubusercontent.com/milvus-io/bootcamp/0.8.0/solutions/mols_search/smiles-data/test_1w.smi
 ```
 
 
@@ -27,13 +27,13 @@ $ wget https://raw.githubusercontent.com/milvus-io/bootcamp/0.9.0/solutions/mols
 
 #### 1. 启动 Milvus Docker
 
-本次实验使用 Milvus 0.9.0CPU 版，安装启动方法参考https://milvus.io/cn/docs/v0.9.0/guides/get_started/install_milvus/cpu_milvus_docker.md 。
+本次实验使用 Milvus 0.8.0CPU 版，安装启动方法参考https://milvus.io/cn/docs/v0.8.0/guides/get_started/install_milvus/cpu_milvus_docker.md 。
 
 **注意：请使用以下命令启动 Milvus Docker**
 
 ```bash
 # Start Milvus
-$ docker run -d --name milvus_cpu_0.9.0 \
+$ docker run -d --name milvus_cpu \
 -p 19530:19530 \
 -p 19121:19121 \
 -p 9091:9091 \
@@ -41,7 +41,7 @@ $ docker run -d --name milvus_cpu_0.9.0 \
 -v /home/$USER/milvus/conf:/var/lib/milvus/conf \
 -v /home/$USER/milvus/logs:/var/lib/milvus/logs \
 -v /home/$USER/milvus/wal:/var/lib/milvus/wal \
-milvusdb/milvus:0.9.0-cpu-d051520-cb92b1
+milvusdb/milvus:0.8.0-cpu-d041520-464400
 ```
 
 
@@ -49,7 +49,7 @@ milvusdb/milvus:0.9.0-cpu-d051520-cb92b1
 #### 2. 启动 mols-search-webserver docker
 
 ```bash
-$ docker run -d -v <DATAPATH>:/tmp/data -p 35001:5000 -e "MILVUS_HOST=192.168.1.25" -e "MILVUS_PORT=19530" milvusbootcamp/mols-search-webserver:0.6.0
+$ docker run -d -v <DATAPATH>:/tmp/data -p 35001:5000 -e "MILVUS_HOST=192.168.1.25" -e "MILVUS_PORT=19530" milvusbootcamp/mols-search-webserver:0.5.0
 ```
 
 上述启动命令相关参数说明：
@@ -126,4 +126,4 @@ Milvus 内存占用情况如下：
 
 可以看出，Milvus 在大规模化学式检索时有较快的检索性能和较低的内存占用。
 
-基于 Milvus 我们搭建了九千多万的化学式检索系统 https://milvus.io/cn/scenarios ，欢迎访问并检索您指定的化合物！
+基于 Milvus 我们搭建了九千多万的化学式检索系统 http://40.73.24.85 ，欢迎访问并检索您指定的化合物！
