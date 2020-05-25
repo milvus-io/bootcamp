@@ -51,7 +51,7 @@ def create_milvus_collection(milvus):
 
 def build_collection(milvus):
     index_param = { 'nlist': 16384}
-    status = milvus.create_index(milvus_collection, 'index_type':IndexType.IVF_SQ8H, index_param)
+    status = milvus.create_index(milvus_collection, IndexType.IVF_SQ8H, index_param)
     print(status)
 
 
