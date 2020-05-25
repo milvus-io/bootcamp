@@ -7,7 +7,7 @@
 | CPU      | Intel(R) Core(TM) i7-7700K CPU @ 4.20GHz                     |
 | Memory   | 32 GB                                                         |
 | OS       | Ubuntu 18.04                                                 |
-| Software | [Milvus 0.9.0](https://milvus.io/cn/docs/v0.9.0/guides/get_started/install_milvus/cpu_milvus_docker.md) <br />mols-search-webserver 0.6.0 <br />mols-search-webclient 0.3.0 |
+| Software | [Milvus 0.8.0](https://milvus.io/cn/docs/v0.8.0/guides/get_started/install_milvus/cpu_milvus_docker.md) <br />mols-search-webserver 0.5.0 <br />mols-search-webclient 0.3.0 |
 
 The previous configuration has been tested and this scenario is also supported in Windows.
 
@@ -16,20 +16,20 @@ The previous configuration has been tested and this scenario is also supported i
 Data source: [ftp://ftp.ncbi.nlm.nih.gov/pubchem/Compound/CURRENT-Full/SDF](ftp://ftp.ncbi.nlm.nih.gov/pubchem/Compound/CURRENT-Full/SDF). The data source contains compressed SDF files. You need to convert these files to SMILES files. We already prepared a SMILE file containing 10,000 chemical structures [test_1w.smi](../../solutions/mols_search/smiles-data). You can use wget to download the file:
 
 ```bash
-$ wget https://raw.githubusercontent.com/milvus-io/bootcamp/0.9.0/solutions/mols_search/smiles-data/test_1w.smi
+$ wget https://raw.githubusercontent.com/milvus-io/bootcamp/0.8.0/solutions/mols_search/smiles-data/test_1w.smi
 ```
 
 ## Deploy
 
 #### 1. Run Milvus Docker
 
-This demo uses Milvus 0.9.0 CPU version. Refer to https://milvus.io/cn/docs/v0.9.0/guides/get_started/install_milvus/cpu_milvus_docker.md to learn how to install and run Milvus. 
+This demo uses Milvus 0.8.0 CPU version. Refer to https://milvus.io/cn/docs/v0.8.0/guides/get_started/install_milvus/cpu_milvus_docker.md to learn how to install and run Milvus. 
 
 **Note：Please use the following command to run Milvus:**
 
 ```bash
 # Start Milvus
-$ docker run -d --name milvus_cpu_0.9.0 \
+$ docker run -d --name milvus_cpu \
 -p 19530:19530 \
 -p 19121:19121 \
 -p 9091:9091 \
@@ -37,13 +37,13 @@ $ docker run -d --name milvus_cpu_0.9.0 \
 -v /home/$USER/milvus/conf:/var/lib/milvus/conf \
 -v /home/$USER/milvus/logs:/var/lib/milvus/logs \
 -v /home/$USER/milvus/wal:/var/lib/milvus/wal \
-milvusdb/milvus:0.9.0-cpu-d051520-cb92b1
+milvusdb/milvus:0.8.0-cpu-d041520-464400
 ```
 
 #### 2. Run mols-search-webserver docker
 
 ```bash
-$ docker run -d -v <DATAPATH>:/tmp/data -p 35001:5000 -e "MILVUS_HOST=192.168.1.25" -e "MILVUS_PORT=19530" milvusbootcamp/mols-search-webserver:0.6.0
+$ docker run -d -v <DATAPATH>:/tmp/data -p 35001:5000 -e "MILVUS_HOST=192.168.1.25" -e "MILVUS_PORT=19530" milvusbootcamp/mols-search-webserver:0.5.0
 ```
 
 Refer to the following table for detailed parameter description:
