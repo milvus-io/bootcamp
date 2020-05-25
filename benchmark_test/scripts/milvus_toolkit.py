@@ -10,7 +10,6 @@ import logging
 import random
 
 
-milvus = Milvus()
 
 def is_normalized():
     filenames = os.listdir(NL_FOLDER_NAME)
@@ -23,14 +22,14 @@ def is_normalized():
 
 def connect_server():
     try:
-        status = milvus.connect(host=config.MILVUS_HOST, port=config.MILVUS_PORT)
-        # print(status)
+        milvus = Milvus(host=config.MILVUS_HOST, port=config.MILVUS_PORT)
+        return milvus
     except Exception as e:
         logging.error(e)
 
 
 def build_collection(collection_name,it):
-    connect_server()
+    milvus = connect_server()
     if it == 'flat':
         index_type = IndexType.FLAT
         index_param = {'nlist': config.NLIST}
@@ -63,16 +62,15 @@ def build_collection(collection_name,it):
 
 
 
-
 def search(collection_name,search_param):
-    connect_server()
+    milvus = connect_server()
     performance_file = config.PERFORMANCE_FILE_NAME
     nq_scope = config.nq_scope
     topk_scope = config.topk_scope
     if not os.path.exists(performance_file):
         os.mkdir(performance_file)
     filename = performance_file + '/' + collection_name + '_' + str(search_param) + '_performance.csv'
-    search_params = get_search_params(collection_name,search_param)
+    search_params = get_search_params(collection_name,search_param,milvus)
     with open(filename,'w+') as f:
         f.write("nq,topk,total_time,avg_time"+'\n')
         for nq in nq_scope:
@@ -83,16 +81,16 @@ def search(collection_name,search_param):
                 time_start = time.time()
                 status,result = milvus.search(collection_name=collection_name, query_records=query_list, top_k=topk, params=search_params)
                 time_cost = time.time() - time_start
+                print(nq, topk, time_cost)
                 line = str(nq) + ',' + str(topk) + ',' + str(round(time_cost, 4)) + ',' + str(round(time_cost / nq, 4)) + '\n'
                 f.write(line)
-                print(nq, topk, time_cost)
             f.write('\n')
     # file.close()
     print("search_vec_list done !")
 
 
-def get_search_params(collection_name,search_param):
-    index_type = str(milvus.describe_index(collection_name)[1]._index_type)
+def get_search_params(collection_name,search_param,milvus):
+    index_type = str(milvus.get_index_info(collection_name)[1]._index_type)
     if index_type == 'RNSG':
         search_params = {'search_length':search_param}
     elif index_type == 'HNSW':
@@ -125,15 +123,13 @@ def load_vec_list(file_name):
         data = np.array(data)
     else:
         data = np.load(file_name)
-    # if config.IS_UINT8:
-    #     data = (data + 0.5) / 255
     vec_list = data.tolist()
     return vec_list
 
 
 
 def recall_test(collection_name,search_param):
-    connect_server()
+    milvus = connect_server()
     vectors = load_vec_list(config.recall_vec_fname)
     # for nq in config.nq_scope:
     nq = config.recall_nq
@@ -142,10 +138,11 @@ def recall_test(collection_name,search_param):
     for i in rand:
         query_list.append(vectors[i])
     # print("load query:", len(query_list))
-    search_params = get_search_params(collection_name,search_param)
+    #rand=[0,1,2,3,4,5,6,7,8,9]
+    search_params = get_search_params(collection_name,search_param,milvus)
     print("collection name:", collection_name, "query list:", len(query_list), "topk:", config.recall_topk, "search_params:", search_params)
     time_start = time.time()
-    status, results = milvus.search_vectors(collection_name=collection_name, query_records=query_list, top_k=config.recall_topk, params=search_params)
+    status, results = milvus.search(collection_name=collection_name, query_records=query_list, top_k=config.recall_topk, params=search_params)
     # time_end = time.time()
     time_cost = time.time() - time_start
     print("time_search = ", time_cost)
@@ -190,7 +187,7 @@ def compute_recall(collection_name,nq,results,search_param,rand):
                 f.write(line + '\n')
             f.write("max, avarage, min\n")
             f.write( str(max(recalls) * 100) + "%," + str(round(count_all / nq / top_k, 3) * 100) + "%," + str(min(recalls) * 100) + "%\n")
-        print("top_k=", top_k, ", total accuracy", round(count_all / nq / top_k, 3) * 100, "%")           
+        print("topk=", top_k,", total accuracy", round(count_all / nq / top_k, 3) * 100, "%")           
 
 
 
