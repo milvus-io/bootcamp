@@ -5,14 +5,14 @@ from milvus import *
 import numpy as np
 
 
-QUERY_PATH = '/data/workspace/milvus_data/sift_data/bigann_query.bvecs'
+QUERY_PATH = 'bigann_base.bvecs'
 # query_location = 0
 
 milvus_collection = 'partition_query'
 
 
 SERVER_ADDR = "0.0.0.0"
-SERVER_PORT = 19534
+SERVER_PORT = 19530
 
 
 TOP_K = 10
@@ -41,6 +41,7 @@ def load_query_list(query_location):
 def search_in_milvus(vector,partition_tag,milvus):
     time_start = time.time()
     _param = {'nprobe': 64}
+    print(milvus_collection, partition_tag)
     status, results = milvus.search(milvus_collection, query_records=vector, top_k=10, params=_param, partition_tags=[partition_tag])
     time_end = time.time()
     if len(results) == 0:
@@ -56,8 +57,8 @@ def main(argv):
     try:
         opts, args = getopt.getopt(
             sys.argv[1:],
-            "n:s:t:g:v:q",
-            ["num=", "sex=", "time=", "glasses=", "query","vector="],
+            "n:s:t:g:v:ql",
+            ["num=", "sex=", "time=", "glasses=", "query","vector=", "list"],
         )
         # print(opts)
     except getopt.GetoptError:
@@ -85,6 +86,10 @@ def main(argv):
             glasses = opt_value
             glasses_flag = True
 
+        elif opt_name in ("-l","--list"):
+            milvus = Milvus(host=SERVER_ADDR, port=SERVER_PORT)
+            print(milvus.list_partitions(milvus_collection)[1])
+
         elif opt_name in ("-q", "--query"):
             milvus = Milvus(host=SERVER_ADDR, port=SERVER_PORT)
 
@@ -94,14 +99,14 @@ def main(argv):
                         partition_tag = get_time + "/" + sex + "/" + glasses
                         search_in_milvus(query_vec,partition_tag,milvus)
                     else:
-                        partition_tag = get_time + "/" + sex + "/"
+                        partition_tag = get_time + "/" + sex + ".*"
                         search_in_milvus(query_vec,partition_tag,milvus)
                 else:
                     if glasses_flag:
-                        partition_tag = "/" + sex + "/" + glasses
+                        partition_tag = ".*/" + sex + "/" + glasses
                         search_in_milvus(query_vec,partition_tag,milvus)
                     else:
-                        partition_tag = "/" + sex + "/"
+                        partition_tag = ".*/" + sex + "/.*"
                         search_in_milvus(query_vec,partition_tag,milvus)
             else:
                 if time_flag:
@@ -109,11 +114,11 @@ def main(argv):
                         partition_tag = get_time + "/.+" + glasses
                         search_in_milvus(query_vec,partition_tag,milvus)
                     else:
-                        partition_tag =  glasses
+                        partition_tag = get_time  + ".*"
                         search_in_milvus(query_vec,partition_tag,milvus)
                 else:
                     if glasses_flag:
-                        partition_tag =  get_time
+                        partition_tag =  ".*" + glasses
                         search_in_milvus(query_vec,partition_tag,milvus)
                     else:
                         time_start = time.time()
