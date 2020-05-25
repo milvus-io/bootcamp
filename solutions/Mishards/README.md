@@ -42,6 +42,8 @@ $ docker ps
 
 ### 2.启动Milvus
 
+> 注意：本教程中启动的是gpu版的milvus
+
 集群中的每一台设备均需要安装 Milvus,不同的设备可给 Milvus 配置不同的读写权限。（这里建议给集群中的一台设备配置为可写，其他均为只读）
 
 #### 可写
@@ -64,6 +66,12 @@ $ docker ps
 
 ```shell
 $ docker-compose -f cluster_wr.yml up -d
+```
+
+查看可写的Milvus 服务是否启动成功
+
+```shell
+$ docker ps
 ```
 
 #### 只读
