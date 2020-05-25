@@ -44,7 +44,7 @@ server_config:
 #                      | 0 means disable the regular flush.                         |            |                 |
 #----------------------+------------------------------------------------------------+------------+-----------------+
 db_config:
-  backend_url: ysql://root:milvusroot@192.168.1.85:3306/milvus
+  backend_url: mysql://root:milvusroot@192.168.1.85:3306/milvus
   preload_collection:
   auto_flush_interval: 1
 
