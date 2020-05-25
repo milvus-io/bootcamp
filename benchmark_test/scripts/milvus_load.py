@@ -9,12 +9,11 @@ from milvus import *
 import config
 
 
-milvus = Milvus()
 
 def connect_server():
     try:
-        status = milvus.connect(host=config.MILVUS_HOST, port=config.MILVUS_PORT)
-        # print(status)
+        milvus = Milvus(host=config.MILVUS_HOST, port=config.MILVUS_PORT)
+        return milvus
     except Exception as e:
         logging.error(e)
 
@@ -33,7 +32,7 @@ def normaliz_data(vec_list):
 
 def load_npy_data(filename):
     filename = config.FILE_NPY_PATH + "/" + filename
-    data = np.load(filename)
+    data = np.load(filename) 
     if config.IS_UINT8:
         data = (data+0.5)/255
     if config.if_normaliz:
@@ -47,7 +46,8 @@ def load_csv_data(filename):
     filename = config.FILE_CSV_PATH + "/" + filename
     data = pd.read_csv(filename, header=None)
     data = np.array(data)
-    # data = (data+0.5)/255
+    if config.IS_UINT8:
+        data = (data+0.5)/255
     if config.if_normaliz:
         data = normaliz_data(data)
     data = data.tolist()
@@ -82,7 +82,7 @@ def load_fvecs_data(base_len, idx):
 
 
 
-def npy_to_milvus(collection_name,collection_rows):
+def npy_to_milvus(collection_name,collection_rows,milvus):
     filenames = os.listdir(config.FILE_NPY_PATH)
     filenames.sort()
     # file_index = 0
@@ -91,7 +91,8 @@ def npy_to_milvus(collection_name,collection_rows):
         vectors = load_npy_data(filename)
         vectors_ids = [id for id in range(collection_rows,collection_rows+len(vectors))]
         time_add_start = time.time()
-        status, ids = milvus.insert(collection_name=collection_name, records=vectors, ids=vectors_ids)
+        #status, ids = milvus.insert(collection_name=collection_name, records=vectors, ids=vectors_ids)
+        status, ids = milvus.insert(collection_name=collection_name, records=vectors,ids=vectors_ids)
         # time_add_end = time.time()
         total_insert_time = total_insert_time + time.time() - time_add_start
         print(filename, " insert milvus time: ", time.time() - time_add_start)                
@@ -100,7 +101,7 @@ def npy_to_milvus(collection_name,collection_rows):
 
 
 
-def csv_to_milvus(collection_name,collection_rows):
+def csv_to_milvus(collection_name,collection_rows,milvus):
     filenames = os.listdir(config.FILE_CSV_PATH)
     filenames.sort()
     total_insert_time = 0
@@ -116,22 +117,24 @@ def csv_to_milvus(collection_name,collection_rows):
 
 
 
-def bvecs_to_milvus(collection_name):
+def bvecs_to_milvus(collection_name,milvus):
     count = 0
     total_insert_time = 0
     while count < (config.VECS_VEC_NUM // config.VECS_BASE_LEN):
         vectors = load_bvecs_data(config.VECS_BASE_LEN, count)
-        vectors_ids = [id for id in range(count*config.VECS_BASE_LEN,(count+1)*config.VECS_BASE_LEN)]                
+        #vectors_ids = [id for id in range(count*config.VECS_BASE_LEN,(count+1)*config.VECS_BASE_LEN)]                
+        collection_rows = milvus.count_entities(collection_name)[1]
+        vectors_ids = [id for id in range(collection_rows,collection_rows+len(vectors))]
         time_add_start = time.time()
         status, ids = milvus.insert(collection_name=collection_name, records=vectors, ids=vectors_ids)
-        total_insert_time = total_insert_time + time.time() - time_add_start
         print(status,count*config.VECS_BASE_LEN,(count+1)*config.VECS_BASE_LEN,'time:', time.time() - time_add_start)
+        total_insert_time = total_insert_time + time.time() - time_add_start
         count = count + 1
     print("total insert time: ", total_insert_time)
 
 
 
-def fvecs_to_milvus(collection_name):
+def fvecs_to_milvus(collection_name,milvus):
     count = 0
     total_insert_time = 0
     while count < (config.VECS_VEC_NUM // config.VECS_BASE_LEN):
@@ -147,17 +150,17 @@ def fvecs_to_milvus(collection_name):
 
 
 def load(collection_name):
-    connect_server()
-    collection_rows = milvus.count_collection(collection_name)[1]
+    milvus = connect_server()
+    collection_rows = milvus.count_entities(collection_name)[1]
     file_type = config.FILE_TYPE
     if file_type == 'npy':
-        npy_to_milvus(collection_name,collection_rows)
+        npy_to_milvus(collection_name,collection_rows,milvus)
     if file_type == 'csv':
-        csv_to_milvus(collection_name,collection_rows)
+        csv_to_milvus(collection_name,collection_rows,milvus)
     if file_type == 'bvecs':
-        bvecs_to_milvus(collection_name)
+        bvecs_to_milvus(collection_name,milvus)
     if file_type == 'fvecs':
-        fvecs_to_milvus(collection_name)
+        fvecs_to_milvus(collection_name,milvus)
 
 
 

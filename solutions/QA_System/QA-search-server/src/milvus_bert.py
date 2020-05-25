@@ -10,7 +10,7 @@ import traceback
 
 
 
-milvus = Milvus()
+# milvus = Milvus()
 bc = BertClient()
 
 
@@ -55,10 +55,10 @@ def normaliz_vec(vec_list):
 
 
 
-def import_to_milvus(data,collection_name):
+def import_to_milvus(data,collection_name,milvus):
     vectors = bc.encode(data)
     question_vectors = normaliz_vec(vectors.tolist())
-    status, ids = milvus.add_vectors(collection_name=collection_name, records=question_vectors)
+    status, ids = milvus.insert(collection_name=collection_name, records=question_vectors)
     print(status)
     # index_param = {'index_type': IndexType.IVF_SQ8, 'nlist': nlist}
     # status = milvus.create_index(collection_name,index_param)
@@ -66,7 +66,7 @@ def import_to_milvus(data,collection_name):
     return ids
 
 
-def create_milvus_table(collection_name):
+def create_milvus_table(collection_name,milvus):
     param = {'collection_name': collection_name, 'dimension': 768, 'index_file_size':index_file_size, 'metric_type':metric_type}
     status = milvus.create_collection(param)
     print(status)
@@ -74,26 +74,17 @@ def create_milvus_table(collection_name):
     # milvus.create_index(collection_name,index_param)
 
 
-def has_table(collection_name):
+def has_table(collection_name,milvus):
     status, ok = milvus.has_collection(collection_name)
     if not ok:
         # print("create table.")
-        create_milvus_table(collection_name)
+        create_milvus_table(collection_name,milvus)
         index_param = {'nlist': nlist}
         status = milvus.create_index(collection_name,IndexType.IVF_SQ8,index_param)
         print(status)
     # print("insert into:", collection_name)
 
 
-def connect_milvus_server():
-    try:
-        # milvus = Milvus()
-        status = milvus.connect(MILVUS_HOST, MILVUS_PORT, timeout=30)
-        logging.info(status)
-    except Exception as e:
-        logging.error(e)
-        logging.error(traceback.format_exc())
-        return None
 
 
 def read_data(file_dir):
@@ -109,9 +100,9 @@ def read_data(file_dir):
 
 def import_data(collection_name, question_dir, answer_dir):
     question_data = read_data(question_dir)
-    connect_milvus_server()
-    has_table(collection_name)
-    ids = import_to_milvus(question_data,collection_name)
+    milvus = Milvus(host=MILVUS_HOST, port=MILVUS_PORT)
+    has_table(collection_name,milvus)
+    ids = import_to_milvus(question_data,collection_name,milvus)
     import_to_pg(collection_name,ids,answer_dir)
         
 
@@ -125,14 +116,14 @@ def search_in_milvus(collection_name, query_sentence):
     query_list = normaliz_vec(vectors.tolist())
     #connect_milvus_server()
     try:
-        status = milvus.connect(MILVUS_HOST, MILVUS_PORT, timeout=10)
+        milvus = Milvus(host=MILVUS_HOST, port=MILVUS_PORT)
         #logging.info(status)
     except:
         return "milvus service connection failed"
     try:
         logging.info("start search in milvus...")
         search_params = {'nprobe': 64}
-        status,results = milvus.search_vectors(collection_name=collection_name, query_records=query_list, top_k=1, params=search_params)
+        status,results = milvus.search(collection_name=collection_name, query_records=query_list, top_k=1, params=search_params)
         if results[0][0].distance < 0.9:
             return "对不起，我暂时无法为您解答该问题"
     except:
