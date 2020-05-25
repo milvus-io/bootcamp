@@ -53,7 +53,7 @@ $ python3 partition_import.py
 
 如图所示，导入 Milvus 中的1,000,000条向量分成了10个区，`partition_tag` 是例如'2019-11-20'这样的字符串，partition0 到 partition9 是相应分区的 `partition_name`。（`partition_tag` 和 `partition_name` 均是自定义的）
 
-### partition_query.py
+### partition_search.py
 
 **变量说明**
 
@@ -80,7 +80,7 @@ $ python3 partition_import.py
 查询与向量集中第0条向量相似 top10的向量，且性别为男、没戴眼镜、图片获取时间2019-11-24：
 
 ```shell
-$ python3 partition_query.py -n 0 -s male -g False -t 2019-11-24 -q
+$ python3 partition_search.py -n 0 -s male -g False -t 2019-11-24 -q
 ```
 
 ![search](pic/search.PNG)
@@ -90,30 +90,30 @@ $ python3 partition_query.py -n 0 -s male -g False -t 2019-11-24 -q
 查询与向量集中第10条向量相似 top 10的向量，且性别为男、图片获取时间2019-12-07：
 
 ```shell
-$ python3 partition_query.py -n 10 -s male -t 2019-12-07 -q
+$ python3 partition_search.py -n 10 -s male -t 2019-12-07 -q
 ```
 
 查询与向量集中第50条向量相似 top 10的向量，且没有戴眼镜、图片获取时间2019-11-29：
 
 ```shell
-$ python3 partition_query.py -n 50 -g False -t 2019-11-29 -q
+$ python3 partition_search.py -n 50 -g False -t 2019-11-29 -q
 ```
 
 查询与向量集中第306条向量相似 top 10的向量，且性别为女、戴眼镜：
 
 ```shell
-$ python3 partition_query.py -n 306 -s female -g True -q
+$ python3 partition_search.py -n 306 -s female -g True -q
 ```
 
 查询与向量集中第255条向量相似 top 10的向量，且性别为男：
 
 ```shell
-$ python3 partition_query.py -n 255 -s male -q
+$ python3 partition_search.py -n 255 -s male -q
 ```
 
 查询与向量集中第3450条向量相似 top 10的向量：
 
 ```shell
-$ python3 partition_query.py -n 3450 -q
+$ python3 partition_search.py -n 3450 -q
 ```
 

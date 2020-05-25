@@ -11,16 +11,16 @@ fake = Faker()
 
 milvus_collection = 'partition_query'
 
-FILE_PATH = '/data/workspace/milvus_data/sift_data/bigann_base.bvecs'
+FILE_PATH = 'bigann_base.bvecs'
 
-VEC_NUM = 1000000
+VEC_NUM = 10000000
 BASE_LEN = 100000
 NUM = VEC_NUM // BASE_LEN
 
 VEC_DIM = 128
 
 SERVER_ADDR = "0.0.0.0"
-SERVER_PORT = 19534
+SERVER_PORT = 19530
 
 
 def load_bvecs_data(fname,base_len,idx):
