@@ -94,7 +94,7 @@ def insert_data_to_pg(ids, vector, sex, get_time, is_glasses, conn, cur):
 def copy_data_to_pg(conn, cur):
     fname = 'temp.csv'
     csv_path = os.path.join(os.getcwd(),fname)
-    sql = "copy " + PG_TABLE_NAME + " from '" + csv_path + " with CSV delimiter '|';"
+    sql = "copy " + PG_TABLE_NAME + " from '" + csv_path + "' with CSV delimiter '|';"
     # print(sql)
     try:
         cur.execute(sql)
