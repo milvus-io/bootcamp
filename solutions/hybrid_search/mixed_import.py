@@ -23,7 +23,7 @@ BASE_LEN = 100000
 
 VEC_DIM = 128
 
-SERVER_ADDR = "0.0.0.0"
+SERVER_ADDR = "127.0.0.1"
 SERVER_PORT = 19530
 
 PG_HOST = "192.168.1.10"
@@ -32,7 +32,7 @@ PG_USER = "postgres"
 PG_PASSWORD = "postgres"
 PG_DATABASE = "postgres"
 
-milvus = Milvus()
+# milvus = Milvus()
 
 def load_bvecs_data(fname,base_len,idx):
     begin_num = base_len * idx
@@ -45,19 +45,8 @@ def load_bvecs_data(fname,base_len,idx):
     data = data.tolist()
     return data
 
-def handle_status(status):
-    if status.code != Status.SUCCESS:
-        print(status)
-        sys.exit(2)
 
-def connect_milvus_server():
-    print("connect to milvus")
-    status =  milvus.connect(host=SERVER_ADDR, port=SERVER_PORT,timeout = 1000 * 1000 * 20 )
-    handle_status(status=status)
-    return status
-
-
-def create_milvus_collection():
+def create_milvus_collection(milvus):
     if not milvus.has_collection(MILVUS_collection)[1]:
         param = {
             'collection_name': MILVUS_collection,
@@ -67,7 +56,7 @@ def create_milvus_collection():
         }
         milvus.create_collection(param)
 
-def build_collection():
+def build_collection(milvus):
     index_param = {'nlist': 16384}
     status = milvus.create_index(MILVUS_collection,IndexType.IVF_SQ8H,index_param)
     print(status)
@@ -103,8 +92,9 @@ def insert_data_to_pg(ids, vector, sex, get_time, is_glasses, conn, cur):
 
 
 def copy_data_to_pg(conn, cur):
-    # fname = './temp.csv'
-    sql = "copy " + PG_TABLE_NAME + " from " + "'/data/lym/mixe_query/temp.csv'" + " with CSV delimiter '|';"
+    fname = 'temp.csv'
+    csv_path = os.path.join(os.getcwd(),fname)
+    sql = "copy " + PG_TABLE_NAME + " from '" + csv_path + "'' with CSV delimiter '|';"
     # print(sql)
     try:
         cur.execute(sql)
@@ -137,9 +127,10 @@ def record_txt(ids):
 
 
 def main():
-    connect_milvus_server()
-    create_milvus_collection()
-    build_collection()
+    # connect_milvus_server()
+    milvus = Milvus(host=SERVER_ADDR, port=SERVER_PORT)
+    create_milvus_collection(milvus)
+    build_collection(milvus)
     conn = connect_postgres_server()
     cur = conn.cursor()
     create_pg_table(conn,cur)
@@ -148,7 +139,7 @@ def main():
         vectors = load_bvecs_data(FILE_PATH,BASE_LEN,count)
         vectors_ids = [id for id in range(count*BASE_LEN,(count+1)*BASE_LEN)]
         time_start = time.time()    
-        status, ids = milvus.add_vectors(collection_name=MILVUS_collection, records=vectors, ids=vectors_ids)
+        status, ids = milvus.insert(collection_name=MILVUS_collection, records=vectors, ids=vectors_ids)
         time_end = time.time()
         print(count, "insert milvue time: ", time_end-time_start)
         # print(count)
