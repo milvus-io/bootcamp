@@ -133,14 +133,14 @@ def search_in_milvus(collection_name, query_sentence):
         conn = pg_operating.connect_postgres_server(PG_HOST, PG_PORT, PG_USER, PG_PASSWORD, PG_DATABASE)
         cur = conn.cursor()
     except:
-        return "Service connection failed"
+        return "postgres service connection failed"
     try:
         logging.info("start search in pg ...")
         rows = pg_operating.search_in_pg(conn, cur, results[0][0].id, collection_name)
         out_put = rows[0][1]
         return out_put
     except:
-        return "Service disconnect"
+        return "postgres service disconnect"
     finally:
         if milvus:
             milvus.disconnect()
