@@ -16,4 +16,4 @@
 - [基于 Milvus 搭建以图搜视频系统](video_search/README.md)
 - [Milvus 个性化推荐系统](recommender_system/README.md)
 - [Milvus 化学式检索系统](mols_search/README.md)
-- [生物多因子验证系统](MFA)
+- [生物多因子认证系统](MFA)
