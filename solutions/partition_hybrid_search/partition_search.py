@@ -19,23 +19,13 @@ TOP_K = 10
 DISTANCE_THRESHOLD = 1
 
 
-milvus = Milvus()
+# milvus = Milvus()
 
 
 sex_flag = False
 time_flag = False
 glasses_flag = False
 
-def handle_status(status):
-    if status.code != Status.SUCCESS:
-        print(status)
-        sys.exit(2)
-
-def connect_milvus_server():
-    print("connect to milvus")
-    status =  milvus.connect(host=SERVER_ADDR, port=SERVER_PORT,timeout = 1000 * 1000 * 20 )
-    handle_status(status=status)
-    return status
 
 
 def load_query_list(query_location):
@@ -48,10 +38,10 @@ def load_query_list(query_location):
     return query_vec
 
 
-def search_in_milvus(vector,partition_tag):
+def search_in_milvus(vector,partition_tag,milvus):
     time_start = time.time()
     _param = {'nprobe': 64}
-    status, results = milvus.search_vectors(milvus_collection, query_records=vector, top_k=10, params=_param, partition_tags=[partition_tag])
+    status, results = milvus.search(milvus_collection, query_records=vector, top_k=10, params=_param, partition_tags=[partition_tag])
     time_end = time.time()
     if len(results) == 0:
         print("No vector satisfies the condition!")
@@ -96,39 +86,39 @@ def main(argv):
             glasses_flag = True
 
         elif opt_name in ("-q", "--query"):
-            connect_milvus_server()
+            milvus = Milvus(host=SERVER_ADDR, port=SERVER_PORT)
 
             if sex_flag:
                 if time_flag:
                     if glasses_flag:
                         partition_tag = get_time + "/" + sex + "/" + glasses
-                        search_in_milvus(query_vec,partition_tag)
+                        search_in_milvus(query_vec,partition_tag,milvus)
                     else:
                         partition_tag = get_time + "/" + sex + "/"
-                        search_in_milvus(query_vec,partition_tag)
+                        search_in_milvus(query_vec,partition_tag,milvus)
                 else:
                     if glasses_flag:
                         partition_tag = "/" + sex + "/" + glasses
-                        search_in_milvus(query_vec,partition_tag)
+                        search_in_milvus(query_vec,partition_tag,milvus)
                     else:
                         partition_tag = "/" + sex + "/"
-                        search_in_milvus(query_vec,partition_tag)
+                        search_in_milvus(query_vec,partition_tag,milvus)
             else:
                 if time_flag:
                     if glasses_flag:
                         partition_tag = get_time + "/.+" + glasses
-                        search_in_milvus(query_vec,partition_tag)
+                        search_in_milvus(query_vec,partition_tag,milvus)
                     else:
                         partition_tag =  glasses
-                        search_in_milvus(query_vec,partition_tag)
+                        search_in_milvus(query_vec,partition_tag,milvus)
                 else:
                     if glasses_flag:
                         partition_tag =  get_time
-                        search_in_milvus(query_vec,partition_tag)
+                        search_in_milvus(query_vec,partition_tag,milvus)
                     else:
                         time_start = time.time()
                         _param = {'nprobe': 64}
-                        status, results = milvus.search_vectors(milvus_collection, query_records=query_vec, top_k=10, params=_param)
+                        status, results = milvus.search(milvus_collection, query_records=query_vec, top_k=10, params=_param)
                         time_end = time.time()
                         print(results)
                         print("search time: ", time_end-time_start)
