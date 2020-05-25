@@ -58,7 +58,7 @@ $ docker restart <container id>
 
 ## 3. Create a table and build indexes
 
-Make sure Milvus is already installed and started. (For details of Milvus installation, please read [Milvus Quick Start](https://milvus.io/docs/v0.8.0/guides/get_started/install_milvus/gpu_milvus_docker.md)).
+Make sure Milvus is already installed and started. (For details of Milvus installation, please read [Milvus Quick Start](https://milvus.io/docs/v0.9.0/guides/get_started/install_milvus/gpu_milvus_docker.md)).
 
 > Before testing, please modify the corresponding parameters according to the [script instructions](/benchmark_test/scripts/README.md)
 

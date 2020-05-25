@@ -27,23 +27,13 @@ TOP_K = 10
 DISTANCE_THRESHOLD = 1
 
 
-milvus = Milvus()
+# milvus = Milvus()
 
 
 sex_flag = False
 time_flag = False
 glasses_flag = False
 
-def handle_status(status):
-    if status.code != Status.SUCCESS:
-        print(status)
-        sys.exit(2)
-
-def connect_milvus_server():
-    print("connect to milvus")
-    status =  milvus.connect(host=SERVER_ADDR, port=SERVER_PORT,timeout = 1000 * 1000 * 20 )
-    handle_status(status=status)
-    return status
 
 
 def connect_postgres_server():
@@ -65,11 +55,11 @@ def load_query_list(fname, query_location):
     return query_vec
 
 
-def search_in_milvus(vector):
+def search_in_milvus(vector,milvus):
     output_ids = []
     output_distance = []
     _param = {'nprobe': 64}
-    status, results = milvus.search_vectors(collection_name = MILVUS_collection,query_records=vector, top_k=TOP_K, params=_param)
+    status, results = milvus.search(collection_name = MILVUS_collection,query_records=vector, top_k=TOP_K, params=_param)
     for result in results:
         # print(result)
         for i in range(TOP_K):
@@ -296,9 +286,9 @@ def main(argv):
             glasses_flag = True
 
         elif opt_name in ("-q", "--query"):
-            connect_milvus_server()
+            milvus = Milvus(host=SERVER_ADDR, port=SERVER_PORT)
             time_start_0 = time.time()
-            result_ids, result_distance = search_in_milvus(query_vec)
+            result_ids, result_distance = search_in_milvus(query_vec,milvus)
             time_end_0 = time.time()            
             print("search in milvus cost time: ", time_end_0 - time_start_0)
             # print(len(result_ids))
@@ -306,8 +296,8 @@ def main(argv):
             # print(result_distance)
             conn = connect_postgres_server()
             cur = conn.cursor()
-            # print("begin!")
             # print(sex_flag, glasses_flag,time_flag)
+            
             if len(result_ids)>0:
                 if sex_flag:
                     if time_flag:
