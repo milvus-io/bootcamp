@@ -111,15 +111,7 @@ def milvus_test(usr_features, IS_INFER, mov_features=None, ids=None):
     _HOST = '127.0.0.1'
     _PORT = '19530'  # default value
     table_name = 'recommender_demo'
-    milvus = Milvus()
-
-    param = {'host': _HOST, 'port': _PORT}
-    status = milvus.connect(**param)
-    if status.OK():
-        print("Server connected.")
-    else:
-        print("Server connect fail.")
-        sys.exit(1)
+    milvus = Milvus(_HOST, _PORT)
 
     if IS_INFER:
         status = milvus.drop_collection(table_name)
@@ -144,7 +136,7 @@ def milvus_test(usr_features, IS_INFER, mov_features=None, ids=None):
 
         time.sleep(1)
 
-    status, result = milvus.count_collection(table_name)
+    status, result = milvus.count_entities(table_name)
     print("rows in table recommender_demo:", result)
 
     search_vectors = normaliz_data(usr_features)
