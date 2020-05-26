@@ -34,7 +34,7 @@
 
 ##### 1、启动 Milvus docker
 
-本实验使用 Milvus0.8.0 版本，启动方法参考链接：https://github.com/milvus-io/docs/blob/v0.9.0/site/zh-CN/guides/get_started/install_milvus/install_milvus.md
+本实验使用 Milvus0.9.0 版本，启动方法参考链接：https://github.com/milvus-io/docs/blob/v0.9.0/site/zh-CN/guides/get_started/install_milvus/install_milvus.md
 
 ##### 2、启动 pic-search-webserver docker
 
