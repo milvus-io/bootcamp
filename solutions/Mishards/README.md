@@ -4,7 +4,7 @@ Milvus 旨在帮助用户实现海量非结构化数据的近似检索和分析�
 
 本文主要展示如何使用 Mishards（Milvus 集群分片中间件）来搭建 Milvus 集群。
 
-关于 Mishards 更多详解请参考[https://github.com/milvus-io/milvus/blob/0.8.0/shards/README_CN.md](https://github.com/milvus-io/milvus/blob/0.8.0/shards/README_CN.md)。
+关于 Mishards 更多详解请参考[https://github.com/milvus-io/milvus/blob/0.9.0/shards/README_CN.md](https://github.com/milvus-io/milvus/blob/0.9.0/shards/README_CN.md)。
 
 本文默认你已经会在单机上安装使用 Milvus 了，在此基础上可参考下文搭建一个 Milvus 集群。
 
@@ -42,6 +42,8 @@ $ docker ps
 
 ### 2.启动Milvus
 
+> 注意：本教程中启动的是gpu版的milvus
+
 集群中的每一台设备均需要安装 Milvus,不同的设备可给 Milvus 配置不同的读写权限。（这里建议给集群中的一台设备配置为可写，其他均为只读）
 
 #### 可写
@@ -66,6 +68,12 @@ $ docker ps
 $ docker-compose -f cluster_wr.yml up -d
 ```
 
+查看可写的Milvus 服务是否启动成功
+
+```shell
+$ docker ps
+```
+
 #### 只读
 
 本项目目录下有 `cluster_ro_server.yml`、`cluster_ro.yml` 两个脚本。根据实际环境，修改相应配置。
@@ -88,7 +96,7 @@ $ docker-compose -f cluster_wr.yml up -d
 $ docker-compose -f cluster_ro.yml up -d
 ```
 
-（注意：集群中每台设备的 Milvus 安装与启动也可参考[Milvus 官网](https://milvus.io/cn/docs/v0.7.1/guides/get_started/install_milvus/gpu_milvus_docker.md)的安装步骤执行。但是需要修改 `conf` 文件夹下的配置文件 `server_config.yml`，可写设备按照 `cluster_wr_server.yml` 修改参数 `deploy_mode` 和 `backend_url`，只读设备按照 `cluster_ro_server.yml` 修改参数 `deploy_mode` 和 `backend_url`。且启动时，所有设备数据存储路径均需要映射到同一个共享存储。）
+（注意：集群中每台设备的 Milvus 安装与启动也可参考[Milvus 官网](https://milvus.io/cn/docs/v0.9.0/guides/get_started/install_milvus/gpu_milvus_docker.md)的安装步骤执行。但是需要修改 `conf` 文件夹下的配置文件 `server_config.yml`，可写设备按照 `cluster_wr_server.yml` 修改参数 `deploy_mode` 和 `backend_url`，只读设备按照 `cluster_ro_server.yml` 修改参数 `deploy_mode` 和 `backend_url`。且启动时，所有设备数据存储路径均需要映射到同一个共享存储。）
 
 ### 3.启动 Mishards
 
