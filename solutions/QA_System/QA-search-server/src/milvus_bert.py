@@ -142,7 +142,5 @@ def search_in_milvus(collection_name, query_sentence):
     except:
         return "postgres service disconnect"
     finally:
-        if milvus:
-            milvus.disconnect()
         conn.close()
 
