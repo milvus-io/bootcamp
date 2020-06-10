@@ -10,12 +10,11 @@ import milvus_load
 import config
 
 
-milvus = Milvus()
 
 def connect_server():
     try:
-        status = milvus.connect(host=config.MILVUS_HOST, port=config.MILVUS_PORT)
-        # print(status)
+        milvus = Milvus(host=config.MILVUS_HOST, port=config.MILVUS_PORT)
+        return milvus
     except Exception as e:
         logging.error(e)
 
@@ -55,7 +54,7 @@ def main():
 
         # create collection
         elif opt_name in ("-c", "--create"):
-            connect_server()
+            milvus = connect_server()
             param = {'collection_name': collection_name, 'dimension': dim, 'index_file_size':config.INDEX_FILE_SIZE, 'metric_type':config.METRIC_TYPE}
             print(param)
             print(milvus.create_collection(param))
@@ -93,54 +92,54 @@ def main():
 
 
         elif opt_name == "--create_partition":
-            connect_server()
+            milvus = connect_server()
             milvus.create_partition(collection_name,partition_tag)
 
         # present collection info
         elif opt_name == "--info":
-            connect_server()
-            print(milvus.collection_info(collection_name)[1])
+            milvus = connect_server()
+            print(milvus.get_collection_stats(collection_name)[1])
             sys.exit(2)
 
 
         # Describe collection
         elif opt_name == "--describe":
-            connect_server()
-            print(milvus.describe_collection(collection_name)[1])
+            milvus = connect_server()
+            print(milvus.get_collection_info(collection_name)[1])
             sys.exit(2)
 
 
         # Show collections in Milvus server
         elif opt_name == "--show":
-            connect_server()
-            print(milvus.show_collections()[1])
+            milvus = connect_server()
+            print(milvus.list_collections()[1])
             sys.exit(2)
 
 
         # Show if collection exists
         elif opt_name == "--has":
-            connect_server()
+            milvus = connect_server()
             print(milvus.has_collection(collection_name)[1])
             sys.exit(2)
 
 
         # Get collection row count
         elif opt_name == "--rows":
-            connect_server()
-            print(milvus.count_collection(collection_name)[1])
+            milvus = connect_server()
+            print(milvus.count_entities(collection_name)[1])
             sys.exit(2)
 
 
         # describe index, get information of index
         elif opt_name == "--describe_index":
-            connect_server()
-            print(milvus.describe_index(collection_name)[1])
+            milvus = connect_server()
+            print(milvus.get_index_info(collection_name)[1])
             sys.exit(2)
 
 
         # Flush collection  inserted data to disk.
         elif opt_name == "--flush":
-            connect_server()
+            milvus = connect_server()
             status = milvus.flush([collection_name])
             print(status)
             sys.exit(2)
@@ -148,7 +147,7 @@ def main():
 
         # Drop collection
         elif opt_name == "--drop":
-            connect_server()
+            milvus = connect_server()
             status = milvus.drop_collection(collection_name)
             print(status)
             sys.exit(2)
@@ -156,7 +155,7 @@ def main():
 
         # Drop index
         elif opt_name == "--drop_index":
-            connect_server()
+            milvus = connect_server()
             status = milvus.drop_index(collection_name)
             print(status)
             sys.exit(2)
@@ -164,7 +163,7 @@ def main():
 
         # Get milvus version
         elif opt_name == "--version":
-            connect_server()
+            milvus = connect_server()
             print("server_version: ", milvus.server_version()[1])
             print("client_version: ", milvus.client_version())
 
