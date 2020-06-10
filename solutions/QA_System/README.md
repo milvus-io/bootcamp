@@ -4,11 +4,13 @@
 
 ## 数据说明
 
-本项目所需要问答数据集包括两个文本，一个问题集，一个与问题集一一对应的答案集，存在在data目录下。运行本项目之前记得解压缩。
+本项目所需要问答数据集包括两个文本，一个问题集，一个与问题集一一对应的答案集，存在在data目录下。
 
-数据来源：https://github.com/Bennu-Li/ChineseNlpCorpus
+data目录下的数据集是来自于十万个为什么的问答集，只有100条数据。
 
-本项目所用数据取自ChineseNlpCorpus项目下问答系统中的金融数据集，从中提取了约33w对的问答集。
+如果想要测试更多的数据集，请下载33万条[银行业务客服问答数据集](https://pan.baidu.com/s/1g-vMh05sDRv1EBZN6X7Qxw)，提取码：hkzn 。下载该数据后解压放在对应的目录下，若使用该数据集，再导入数据集时，指定该问答数据文件所在路径。
+
+该银行业务相关的数据来源：https://github.com/Bennu-Li/ChineseNlpCorpus。本项目提供的数据取自ChineseNlpCorpus项目下问答系统中的金融数据集，从中提取了约33w对的问答集。
 
 ## 脚本说明
 
@@ -75,12 +77,12 @@ bert-serving-start -model_dir chinese_L-12_H-768_A-12/ -num_worker=12 -max_seq_l
 
 ```shell
 cd QA-search-server
-python main.py --collection milvus_qa --question data/finance_question.txt --answer data/finance_answer.txt --load
+python main.py --collection milvus_qa --question data/question.txt --answer data/answer.txt --load
 ```
 
-> 注：data/finance_question.txt 是导入的问题集所在的路径
+> 注：data/question.txt 是导入的问题集所在的路径
 >
-> ​        data/finance_answer.txt 是导入的答案集所在的路径
+> ​        data/answer.txt 是导入的答案集所在的路径
 
 6. 启动查询服务
 
