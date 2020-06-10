@@ -50,6 +50,13 @@ milvusbootcamp/pic-search-webserver:0.6.0
 
 上述启动命令中，“ $IMAGE_PATH1 ” 、“ $IMAGE_PATH2” 表示你存放图片数据的目录。启动时将这些路径映射到 docker 容器里面，系统搭建好以后，可以直接在前端界面上输入 docker 容器中的图片路径 “ /tmp/pic1 ” 、“ /tmp/pic2” 去加载图片。“ MILVUS_HOST “ 表示启动 Milvus docker 的服务器地址，注意不要使用回环地址 “127.0.0.1” 。命令其他部分保持不变即可。
 
+> 注意：
+>
+> 如果 webserver 镜像下载太慢，可以先通过百度网盘链接将 VGG 模型下载到pic_search/webserver/data/models 目录下面，再利用 pic_search/webserver/ 目录下的 Dockerfile 自己构建 webserver 镜像。百度网盘链接及提取码如下：
+>
+> 链接：https://pan.baidu.com/s/1z_HGlwCRZOGGk4gYJJOOBQ 
+> 提取码：qmqk
+
 ##### 3、启动 pic-search-webclient docker
 
 ```bash
