@@ -43,9 +43,9 @@ $ docker build -t mfa-demo:0.1.0 .
 $ docker run -td -p 5003:5000 -e API_URL=https://192.168.1.85:5003 -e "MILVUS_HOST=192.168.1.85" -e "MILVUS_PORT=19533" -e "PG_HOST=192.168.1.85" -e "PG_HOST=5432" mfa-demo:0.1.0
 ```
 
-> 注意：在构建镜像时需下载 face_embedding 模型，下载链接：https://pan.baidu.com/s/18EWcP5YJmeDrY1A8_k09pw , 提取码：82ht；在构建镜像时需下载 deep speaker 模型，下载链接：https://pan.baidu.com/s/16_moPcoUGah1dqdDtEQreQ, 提取码：11vv。
+> 注意：在构建镜像时需下载 face_embedding 模型，下载链接：https://pan.baidu.com/s/18EWcP5YJmeDrY1A8_k09pw , 提取码：82ht；下载 deep speaker 模型，下载链接：https://pan.baidu.com/s/16_moPcoUGah1dqdDtEQreQ, 提取码：11vv。
 >
-> 下载后请解压 mfa-models，并将 models 文件夹移动到 bootcamp/solutions/MFA/webserver/face-embedding 下；将ResCNN_triplet_training_checkpoint_265移动到 bootcamp/solutions/MFA/webserver/src/deep_speaker/checkpoints。
+> 下载后请解压 mfa-models，并将 models 文件夹移动到 bootcamp/solutions/MFA/webserver/face-embedding 下；将ResCNN_triplet_training_checkpoint_265.h5移动到 bootcamp/solutions/MFA/webserver/src/deep_speaker/checkpoints。
 
 
 
