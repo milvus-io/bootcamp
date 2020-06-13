@@ -40,15 +40,15 @@
 
 ```bash
 $ docker run -d --name zilliz_search_images_demo \
--v $IMAGE_PATH1:/tmp/pic1 \
--v $IMAGE_PATH2:/tmp/pic2 \
+-v ${IMAGE_PATH1}:/tmp/pic1 \
+-v ${IMAGE_PATH2}:/tmp/pic2 \
 -p 35000:5000 \
 -e "DATA_PATH=/tmp/images-data" \
--e "MILVUS_HOST=192.168.1.123" \
+-e "MILVUS_HOST=${MILVUS_IP}" \
 milvusbootcamp/pic-search-webserver:0.7.0
 ```
 
-上述启动命令中，“ $IMAGE_PATH1 ” 、“ $IMAGE_PATH2” 表示你的服务器上存放图片的绝对路径。启动时将这些路径映射到 docker 容器里面，系统搭建好以后，可以直接在前端界面上输入 docker 容器中的图片路径 “ /tmp/pic1 ” 、“ /tmp/pic2” 去加载图片。“ MILVUS_HOST “ 表示启动 Milvus docker 的服务器地址，注意不要使用回环地址 “127.0.0.1” 。命令其他部分保持不变即可。
+上述启动命令中， IMAGE_PATH1  、 IMAGE_PATH2 表示你的服务器上存放图片的绝对路径，启动时将这些路径映射到 docker 容器里面，系统搭建好以后，可以直接在前端界面上输入 docker 容器中的图片路径 “ /tmp/pic1 ” 、“ /tmp/pic2 ” 去加载图片。 ${MILVUS_IP} 表示启动 Milvus docker 的服务器 IP 地址，注意不要使用回环地址 “127.0.0.1” 。命令其他部分保持不变即可。
 
 > 注意：
 >
@@ -61,16 +61,16 @@ milvusbootcamp/pic-search-webserver:0.7.0
 
 ```bash
 $ docker run --name zilliz_search_images_demo_web -d --rm -p 8001:80 \
--e API_URL=http://192.168.1.123:35000 \
+-e API_URL=http://${WEBSERVER_IP}:35000 \
 milvusbootcamp/pic-search-webclient:0.1.0
 ```
 
-上述启动命令中，" 192.168.1.123 " 表示启动 pic-search-webserver docker 的服务器地址。
+上述启动命令中，WEBSERVER_IP 表示启动 pic-search-webserver docker 的服务器 IP 地址。
 
 
 ### 界面展示
 
-按照上述部署流程部署完成之后，在浏览器输入 " localhost:8001 " 就可以访问以图搜图的界面了。
+按照上述部署流程部署完成之后，在浏览器输入 " ${WEBCLIENT_IP}:8001 " 就可以访问以图搜图的界面了，WEBCLIENT_IP 表示启动 pic-search-webclient docker 的服务器 IP 地址。
 
 <img src="pic/web4.png" width = "650" height = "500" alt="系统架构图" align=center />
 
