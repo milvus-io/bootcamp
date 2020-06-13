@@ -48,7 +48,7 @@ $ docker run -d --name zilliz_search_images_demo \
 milvusbootcamp/pic-search-webserver:0.7.0
 ```
 
-上述启动命令中， IMAGE_PATH1  、 IMAGE_PATH2 表示你的服务器上存放图片的绝对路径，启动时将这些路径映射到 docker 容器里面，系统搭建好以后，可以直接在前端界面上输入 docker 容器中的图片路径 “ /tmp/pic1 ” 、“ /tmp/pic2 ” 去加载图片。 ${MILVUS_IP} 表示启动 Milvus docker 的服务器 IP 地址，注意不要使用回环地址 “127.0.0.1” 。命令其他部分保持不变即可。
+上述启动命令中， IMAGE_PATH1  、 IMAGE_PATH2 表示你的服务器上存放图片的绝对路径，启动时将这些路径映射到 docker 容器里面。系统搭建好以后，可以直接在前端界面上输入 docker 容器中的图片路径 “ /tmp/pic1 ” 、“ /tmp/pic2 ” 去加载图片。 MILVUS_IP 表示启动 Milvus docker 的服务器 IP 地址，注意不要使用回环地址 “127.0.0.1” 。命令其他部分保持不变即可。
 
 > 注意：
 >
