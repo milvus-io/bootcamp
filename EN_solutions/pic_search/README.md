@@ -36,33 +36,33 @@ Download location: http://host.robots.ox.ac.uk/pascal/VOC/voc2012/VOCtrainval_11
 
 This demo uses Milvus 0.9.0. Refer to the [Install Milvus](https://github.com/milvus-io/docs/blob/v0.9.0/site/en/guides/get_started/install_milvus/install_milvus.md) for how to run Milvus docker.
 
-#### 2. Run pic_search_demo docker
+#### 2. Run pic_search_webserver docker
 
 ```bash
 $ docker run -d --name zilliz_search_images_demo \
--v $IMAGE_PATH1:/tmp/pic1 \
--v $IMAGE_PATH2:/tmp/pic2 \
+-v ${IMAGE_PATH1}:/tmp/pic1 \
+-v ${IMAGE_PATH2}:/tmp/pic2 \
 -p 35000:5000 \
 -e "DATA_PATH=/tmp/images-data" \
--e "MILVUS_HOST=192.168.1.123" \
+-e "MILVUS_HOST=${MILVUS_IP}" \
 milvusbootcamp/pic-search-webserver:0.7.0
 ```
 
-In the previous command, `$IMAGE_PATH1` and `$IMAGE_PATH2` specify the path where images are located. These locations are mapped to the docker container. After deployment, you can use `/tmp/pic1` and `/tmp/pic2` to load images. `MILVUS_HOST` specifies the IP address of the Milvus Docker host. Do not use backloop address "127.0.0.1". You do not have to modify other parts of the command.
+In the previous command, `IMAGE_PATH1` and `IMAGE_PATH2` specify the path where images are located. These locations are mapped to the docker container. After deployment, you can use `/tmp/pic1` and `/tmp/pic2` to load images. `MILVUS_HOST` specifies the IP address of the Milvus Docker host. Do not use backloop address "127.0.0.1". You do not have to modify other parts of the command.
 
 #### 3. Run pic-search-webclient docker
 
 ```bash
 $ docker run --name zilliz_search_images_demo_web -d --rm -p 8001:80 \
--e API_URL=http://192.168.1.123:35000 \
+-e API_URL=http://${WEBSERVER_IP}:35000 \
 milvusbootcamp/pic-search-webclient:0.1.0
 ```
 
-In the previous command, `192.168.1.123` specifies the server IP address that runs pic-search-webserver docker.
+In the previous command, WEBSERVER_IP specifies the server IP address that runs pic-search-webserver docker.
 
 ### How to perform reverse image search
 
-After deployment, enter `localhost:8001` in the browser to open the interface for reverse image search.
+After deployment, enter ` ${WEBCLIENT_IP}:8001` in the browser to open the interface for reverse image search. WEBCLIENT_IP specifies the server IP address that runs pic-search-webclient docker.
 
 <img src="pic/web4.png" width = "650" height = "500" alt="arch" align=center />
 
