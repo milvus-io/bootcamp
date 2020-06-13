@@ -52,7 +52,7 @@ milvusbootcamp/pic-search-webserver:0.7.0
 
 > 注意：
 >
-> 如果 webserver 镜像下载太慢，可以先通过百度网盘链接将 VGG 模型下载到pic_search/webserver/data/models 目录下面，再利用 pic_search/webserver/ 目录下的 Dockerfile 自己构建 webserver 镜像。百度网盘链接及提取码如下：
+> 如果 webserver 镜像下载太慢，可以先通过百度网盘链接将 VGG 模型下载到 pic_search/webserver/data/models 目录下面，再利用 pic_search/webserver/ 目录下的 Dockerfile 自己构建 webserver 镜像。百度网盘链接及提取码如下：
 >
 > 链接：https://pan.baidu.com/s/1z_HGlwCRZOGGk4gYJJOOBQ 
 > 提取码：qmqk
