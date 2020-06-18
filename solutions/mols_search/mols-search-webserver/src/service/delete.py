@@ -19,5 +19,5 @@ def do_delete(table_name):
         return "Error with {}".format(e)
     finally:
         if index_client:
-            index_client.disconnect()
+            index_client.close()
 
