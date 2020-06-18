@@ -4,7 +4,7 @@
 
 ## 前提环境
 
-- #### Milvus
+- #### Milvus 0.9.0
 
 - #### postgres
 

@@ -7,7 +7,7 @@
 | CPU      | Intel(R) Core(TM) i7-7700K CPU @ 4.20GHz                     |
 | Memory   | 32 GB                                                         |
 | OS       | Ubuntu 18.04                                                 |
-| Software | [Milvus 0.8.0](https://milvus.io/cn/docs/v0.8.0/guides/get_started/install_milvus/cpu_milvus_docker.md) <br />mols-search-webserver 0.5.0 <br />mols-search-webclient 0.3.0 |
+| Software | [Milvus 0.9.0](https://milvus.io/cn/docs/v0.9.0/guides/get_started/install_milvus/cpu_milvus_docker.md) <br />mols-search-webserver 0.6.0 <br />mols-search-webclient 0.3.0 |
 
 The previous configuration has been tested and this scenario is also supported in Windows.
 
@@ -23,22 +23,7 @@ $ wget https://raw.githubusercontent.com/milvus-io/bootcamp/0.8.0/solutions/mols
 
 #### 1. Run Milvus Docker
 
-This demo uses Milvus 0.8.0 CPU version. Refer to https://milvus.io/cn/docs/v0.8.0/guides/get_started/install_milvus/cpu_milvus_docker.md to learn how to install and run Milvus. 
-
-**Note：Please use the following command to run Milvus:**
-
-```bash
-# Start Milvus
-$ docker run -d --name milvus_cpu \
--p 19530:19530 \
--p 19121:19121 \
--p 9091:9091 \
--v /home/$USER/milvus/db:/var/lib/milvus/db \
--v /home/$USER/milvus/conf:/var/lib/milvus/conf \
--v /home/$USER/milvus/logs:/var/lib/milvus/logs \
--v /home/$USER/milvus/wal:/var/lib/milvus/wal \
-milvusdb/milvus:0.8.0-cpu-d041520-464400
-```
+This demo uses Milvus 0.9.0 CPU version. Refer to https://milvus.io/cn/docs/v0.9.0/guides/get_started/install_milvus/cpu_milvus_docker.md to learn how to install and run Milvus. 
 
 #### 2. Run mols-search-webserver docker
 
@@ -55,8 +40,6 @@ Refer to the following table for detailed parameter description:
 | -e "MILVUS_HOST=192.168.1.25" | -e specifies the system parameter mapping between the host and the image. Pease update `192.168.1.25` to the IP address of the Milvus docker.|
 | -e "MILVUS_PORT=19530"        | Update `19530` to the port of Milvus docker.           |
 
-
-
 #### 3. Run mols-search-webclient docker
 
 ```bash
@@ -64,7 +47,6 @@ $ docker run -d --rm -p 8001:80 -e API_URL=http://192.168.1.25:35001 milvusbootc
 ```
 
 > Note: Please update `192.168.1.25` to the IP address of the Milvus docker.
-
 
 #### 4. Launch a browser
 
