@@ -4,7 +4,7 @@
 
 ## 前提环境
 
-- #### Milvus 0.9.0
+- #### Milvus 0.10.0
 
 - #### postgres
 
@@ -17,7 +17,7 @@
 - #### 启动 MFA-demo
 
 ```bash
-$ docker run -td -p 5003:5000 -e API_URL=https://192.168.1.85:5003 -e "MILVUS_HOST=192.168.1.85" -e "MILVUS_PORT=19533" -e "PG_HOST=192.168.1.85" -e "PG_HOST=5432" milvusbootcamp/mfa-demo:0.1.0
+$ docker run -td -p 5003:5000 -e API_URL=https://192.168.1.85:5003 -e "MILVUS_HOST=192.168.1.85" -e "MILVUS_PORT=19533" -e "PG_HOST=192.168.1.85" -e "PG_HOST=5432" milvusbootcamp/mfa-demo:0.2.0
 ```
 
 上述启动命令相关参数说明：
@@ -38,9 +38,9 @@ $ docker run -td -p 5003:5000 -e API_URL=https://192.168.1.85:5003 -e "MILVUS_HO
 $ git clone https://github.com/milvus-io/bootcamp.git
 $ cd bootcamp/solutions/MFA/webserver
 # 构建 mfa-demo 镜像
-$ docker build -t mfa-demo:0.1.0 .
+$ docker build -t mfa-demo:0.2.0 .
 # 启动 mfa-demo, 启动命令参考"使用 Docker 部署"
-$ docker run -td -p 5003:5000 -e API_URL=https://192.168.1.85:5003 -e "MILVUS_HOST=192.168.1.85" -e "MILVUS_PORT=19533" -e "PG_HOST=192.168.1.85" -e "PG_HOST=5432" mfa-demo:0.1.0
+$ docker run -td -p 5003:5000 -e API_URL=https://192.168.1.85:5003 -e "MILVUS_HOST=192.168.1.85" -e "MILVUS_PORT=19533" -e "PG_HOST=192.168.1.85" -e "PG_HOST=5432" mfa-demo:0.2.0
 ```
 
 > 注意：在构建镜像时需下载 face_embedding 模型，下载链接：https://pan.baidu.com/s/18EWcP5YJmeDrY1A8_k09pw , 提取码：82ht；下载 deep speaker 模型，下载链接：https://pan.baidu.com/s/16_moPcoUGah1dqdDtEQreQ, 提取码：11vv。
