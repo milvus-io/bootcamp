@@ -51,7 +51,7 @@ $ docker run -d -v <DATAPATH>:/tmp/data -p 35001:5000 -e "MILVUS_HOST=192.168.1.
 #### 3. 启动 mols-search-webclient docker
 
 ```bash
-$ docker run -d --rm -p 8001:80 -e API_URL=http://192.168.1.25:35001 milvusbootcamp/mols-search-webclient:0.3.0
+$ docker run -d -p 8001:80 -e API_URL=http://192.168.1.25:35001 milvusbootcamp/mols-search-webclient:0.3.0
 ```
 
 > 参数 -e API_URL=http://192.168.1.25:35001 与本节第二部分相对应，请修改`192.168.1.25`为启动 Milvus docker 的服务器 IP 地址。

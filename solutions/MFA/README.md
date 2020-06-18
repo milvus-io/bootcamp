@@ -17,7 +17,7 @@
 - #### 启动 MFA-demo
 
 ```bash
-$ docker run -td -p 5003:5000 -e API_URL=https://192.168.1.85:5003 -e "MILVUS_HOST=192.168.1.85" -e "MILVUS_PORT=19533" -e "PG_HOST=192.168.1.85" -e "PG_HOST=5432" milvusbootcamp/mfa-demo:0.2.0
+$ docker run -td -p 5003:5000 -e API_URL=https://192.168.1.85:5003 -e "MILVUS_HOST=192.168.1.85" -e "MILVUS_PORT=19530" -e "PG_HOST=192.168.1.85" -e "PG_HOST=5432" milvusbootcamp/mfa-demo:0.2.0
 ```
 
 上述启动命令相关参数说明：

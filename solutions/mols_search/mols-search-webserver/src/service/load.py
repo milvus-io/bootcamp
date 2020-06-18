@@ -44,4 +44,4 @@ def do_load(table_name, database_path):
         return "Error with {}".format(e)
     finally:
         if index_client:
-            index_client.disconnect()
+            index_client.close()

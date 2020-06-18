@@ -37,4 +37,4 @@ def do_search(table_name, molecular_name, top_k):
         return "Fail with error {}".format(e)
     finally:
         if index_client:
-            index_client.disconnect()
+            index_client.close()
