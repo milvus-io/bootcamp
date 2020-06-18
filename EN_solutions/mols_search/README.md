@@ -28,7 +28,7 @@ This demo uses Milvus 0.9.0 CPU version. Refer to https://milvus.io/cn/docs/v0.9
 #### 2. Run mols-search-webserver docker
 
 ```bash
-$ docker run -d -v <DATAPATH>:/tmp/data -p 35001:5000 -e "MILVUS_HOST=192.168.1.25" -e "MILVUS_PORT=19530" milvusbootcamp/mols-search-webserver:0.5.0
+$ docker run -d -v <DATAPATH>:/tmp/data -p 35001:5000 -e "MILVUS_HOST=192.168.1.25" -e "MILVUS_PORT=19530" milvusbootcamp/mols-search-webserver:0.6.0
 ```
 
 Refer to the following table for detailed parameter description:
