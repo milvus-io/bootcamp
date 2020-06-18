@@ -7,8 +7,6 @@ import traceback
 def milvus_client():
     try:
         milvus = Milvus(MILVUS_HOST, MILVUS_PORT)
-        # status = milvus.connect(MILVUS_HOST, MILVUS_PORT, timeout=60)
-        # print(status)
         return milvus
     except Exception as e:
         log.error(e)
@@ -44,7 +42,7 @@ def insert_vectors(client, table_name, vectors, ids):
 
 
 def create_index(client, table_name):
-    param = {'nlist': 2048}
+    param = {'nlist': 16384}
     status = client.create_index(table_name, IndexType.IVFLAT, param)
     return status
 
@@ -70,12 +68,12 @@ def search_vectors(client, table_name, vectors, top_k):
 
 def has_table(client, table_name):
     status, ok = client.has_collection(table_name)
-    print(status, ok)
+    # print(status, ok)
     return status, ok
 
 
 def count_table(client, table_name):
     # status, num = client.count_collection(table_name)
     status, num = client.count_entities(table_name)
-    print(status)
+    # print(status)
     return num
