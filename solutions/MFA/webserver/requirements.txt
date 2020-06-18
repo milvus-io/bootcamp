@@ -7,8 +7,9 @@ natsort
 flask-cors
 flask
 flask_restful
+numba==0.49.1
+librosa==0.7.2
 pymilvus==0.2.13
-librosa
 tensorflow
 keras
 psycopg2-binary
