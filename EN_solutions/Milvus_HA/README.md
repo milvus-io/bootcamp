@@ -14,7 +14,7 @@ Backup server: 192.168.1.38
 
 Install Milvus on the master and backup server. The `db` folder must direct to the shared storage device.
 
-Refer to https://www.milvus.io/docs/v0.8.0/guides/get_started/install_milvus/install_milvus.md to learn how to install Milvus.
+Refer to https://www.milvus.io/docs/v0.10.0/guides/get_started/install_milvus/install_milvus.md to learn how to install Milvus.
 
 After installation, launch the Milvus server on the master server and stop the Milvus server on the backup server.
 
