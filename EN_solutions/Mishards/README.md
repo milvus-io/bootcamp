@@ -2,7 +2,7 @@
 
 Milvus aims to achieve efficient similarity search and analytics for massive-scale vectors. A standalone Milvus instance can easily handle vector search among billion-scale vectors. However, for 10 billion, 100 billion or even larger datasets, a Milvus cluster is needed.
 
-This topic displays how to use Mishards to build a Milvus cluster. Refer to https://github.com/milvus-io/milvus/blob/0.8.0/shards/README.md for more information.
+This topic displays how to use Mishards to build a Milvus cluster. Refer to https://github.com/milvus-io/milvus/blob/0.10.0/shards/README.md for more information.
 
 This topic assumes you can install and use Milvus in a standalone server. Refer to the following content to learn how to build a Milvus cluster.
 
@@ -48,9 +48,9 @@ Use `cluster_wr_server.yml` and `cluster_wr.yml` for Milvus with write access. U
 
 `cluster_wr_server.yml`:
 
-![1577780602167](pic/1577780602167.png)
+![1577780602167](pic/image-1.png)
 
-In this config file, the `deploy_mode` parameter determines whether Milvus has read-only access or write access and the value `cluster_writable` indicates that the Milvus has write access. You must update `backend_url` to the IP address of the server that installs MySQL. You can set other parameters per the requirements in a standalone server.
+In this config file, the `enable` parameter determines whether to set to distributed mode, the `role` parameter determines whether Milvus has read-only access or write access and the value `rw` indicates that the Milvus has write access. You must update `meta_uri` to the IP address of the server that installs MySQL. You can set other parameters per the requirements in a standalone server.
 
 `cluster_wr.yml`:
 
@@ -70,9 +70,9 @@ Use `cluster_ro_server.yml` and `cluster_ro.yml` for Milvus with read-only acces
 
 `cluster_ro_server.yml`:
 
-![1577782332404](pic/1577782332404.png)
+![1577782332404](pic/image-2.png)
 
-`deploy_mode` is `cluster_readonly`, which indicates that Milvus has read-only access and runs only during search. You must update `backend_url` to the IP address of the server that installs MySQL. You can set other parameters per the requirements in a standalone server.
+`role` is `ro`, which indicates that Milvus has read-only access and runs only during search. You must update `meta_uri` to the IP address of the server that installs MySQL. You can set other parameters per the requirements in a standalone server.
 
 `cluster_ro.yml`:
 
