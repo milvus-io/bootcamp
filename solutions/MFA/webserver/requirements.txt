@@ -7,7 +7,7 @@ natsort
 flask-cors
 flask
 flask_restful
-pymilvus
+pymilvus==0.2.13
 librosa
 tensorflow
 keras
