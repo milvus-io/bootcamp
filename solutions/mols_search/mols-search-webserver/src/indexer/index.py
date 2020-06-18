@@ -15,7 +15,7 @@ def milvus_client():
 
 
 def create_table(client, table_name=None, dimension=VECTOR_DIMENSION,
-                 index_file_size=256, metric_type=MetricType.IP):
+                 index_file_size=256, metric_type=MetricType.JACCARD):
     table_param = {
         'collection_name': table_name,
         'dimension': dimension,
@@ -29,51 +29,40 @@ def create_table(client, table_name=None, dimension=VECTOR_DIMENSION,
         log.error(e)
 
 
-def insert_vectors(client, table_name, vectors, ids):
-    if not client.has_collection(table_name):
+def insert_vectors(client, table_name, vectors):
+    if not client.has_collection(collection_name=table_name):
         log.error("table %s not exist", table_name)
         return
     try:
-        status, ids = client.insert(collection_name=table_name, records=vectors, ids=ids)
-        print(status, ids)
-        return status
+        status, ids = client.insert(collection_name=table_name, records=vectors)
+        return status, ids
     except Exception as e:
         log.error(e)
 
 
 def create_index(client, table_name):
-    param = {'nlist': 2048}
-    status = client.create_index(table_name, IndexType.IVFLAT, param)
+    index_param = {'nlist': 2048}
+    status = client.create_index(table_name, IndexType.IVFLAT, index_param)
     return status
 
 
 def delete_table(client, table_name):
-    status = client.drop_collection(collection_name=table_name)
+    status = client.drop_collection(table_name)
     print(status)
     return status
 
 
 def search_vectors(client, table_name, vectors, top_k):
-    param = {
-        'collection_name': table_name,
-        'query_records': vectors,
-        'top_k': top_k,
-        'params': {},
-    }
-    status, res = client.search(**param)
-    # status, res = client.search_vectors(table_name=table_name, query_records=vectors, top_k=top_k, nprobe=512)
-    print(status, res)
+    status, res = client.search(collection_name=table_name, query_records=vectors, top_k=top_k, params={'nprobe':64})
     return status, res
 
 
 def has_table(client, table_name):
-    status, ok = client.has_collection(table_name)
-    # print(status, ok)
-    return status, ok
+    status = client.has_collection(collection_name=table_name)
+    return status
 
 
 def count_table(client, table_name):
-    # status, num = client.count_collection(table_name)
-    status, num = client.count_entities(table_name)
-    # print(status)
+    status, num = client.count_entities(collection_name=table_name)
+    print(status)
     return num

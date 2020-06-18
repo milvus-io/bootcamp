@@ -42,6 +42,3 @@ def do_load(table_name, database_path):
     except Exception as e:
         logging.error(e)
         return "Error with {}".format(e)
-    finally:
-        if index_client:
-            index_client.close()
