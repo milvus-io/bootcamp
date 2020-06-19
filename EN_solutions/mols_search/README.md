@@ -16,7 +16,7 @@ The previous configuration has been tested and this scenario is also supported i
 Data source: [ftp://ftp.ncbi.nlm.nih.gov/pubchem/Compound/CURRENT-Full/SDF](ftp://ftp.ncbi.nlm.nih.gov/pubchem/Compound/CURRENT-Full/SDF). The data source contains compressed SDF files. You need to convert these files to SMILES files. We already prepared a SMILE file containing 10,000 chemical structures [test_1w.smi](../../solutions/mols_search/smiles-data). You can use wget to download the file:
 
 ```bash
-$ wget https://raw.githubusercontent.com/milvus-io/bootcamp/0.8.0/solutions/mols_search/smiles-data/test_1w.smi
+$ wget https://raw.githubusercontent.com/milvus-io/bootcamp/0.9.0/solutions/mols_search/smiles-data/test_1w.smi
 ```
 
 ## Deploy
@@ -28,7 +28,7 @@ This demo uses Milvus 0.9.0 CPU version. Refer to https://milvus.io/cn/docs/v0.9
 #### 2. Run mols-search-webserver docker
 
 ```bash
-$ docker run -d -v <DATAPATH>:/tmp/data -p 35001:5000 -e "MILVUS_HOST=192.168.1.25" -e "MILVUS_PORT=19530" milvusbootcamp/mols-search-webserver:0.5.0
+$ docker run -d -v <DATAPATH>:/tmp/data -p 35001:5000 -e "MILVUS_HOST=192.168.1.25" -e "MILVUS_PORT=19530" milvusbootcamp/mols-search-webserver:0.6.0
 ```
 
 Refer to the following table for detailed parameter description:
@@ -43,7 +43,7 @@ Refer to the following table for detailed parameter description:
 #### 3. Run mols-search-webclient docker
 
 ```bash
-$ docker run -d --rm -p 8001:80 -e API_URL=http://192.168.1.25:35001 milvusbootcamp/mols-search-webclient:0.3.0
+$ docker run -d -p 8001:80 -e API_URL=http://192.168.1.25:35001 milvusbootcamp/mols-search-webclient:0.3.0
 ```
 
 > Note: Please update `192.168.1.25` to the IP address of the Milvus docker.
