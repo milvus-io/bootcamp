@@ -16,7 +16,7 @@ The following tables show recommended configurations for reverse image search. T
 | CPU      | Intel(R) Core(TM) i7-7700K CPU @ 4.20GHz                     |
 | Memory   | 32GB                                                         |
 | OS       | Ubuntu 18.04                                                 |
-| Software | Milvus 0.9.0<br />pic_search_webclient <br />pic_search_webserver |
+| Software | Milvus 0.10.0<br />pic_search_webclient  0.2.0<br />pic_search_webserver 0.10.0 |
 
 ### Data source
 
@@ -34,7 +34,7 @@ Download location: http://host.robots.ox.ac.uk/pascal/VOC/voc2012/VOCtrainval_11
 
 #### 1. Run Milvus Docker
 
-This demo uses Milvus 0.9.0. Refer to the [Install Milvus](https://github.com/milvus-io/docs/blob/v0.9.0/site/en/guides/get_started/install_milvus/install_milvus.md) for how to run Milvus docker.
+This demo uses Milvus 0.10.0. Refer to the [Install Milvus](https://github.com/milvus-io/docs/blob/v0.10.0/site/en/guides/get_started/install_milvus/install_milvus.md) for how to run Milvus docker.
 
 #### 2. Run pic_search_webserver docker
 
@@ -45,7 +45,7 @@ $ docker run -d --name zilliz_search_images_demo \
 -p 35000:5000 \
 -e "DATA_PATH=/tmp/images-data" \
 -e "MILVUS_HOST=${MILVUS_IP}" \
-milvusbootcamp/pic-search-webserver:0.7.0
+milvusbootcamp/pic-search-webserver:0.10.0
 ```
 
 In the previous command, `IMAGE_PATH1` and `IMAGE_PATH2` specify the path where images are located. These locations are mapped to the docker container. After deployment, you can use `/tmp/pic1` and `/tmp/pic2` to load images. `MILVUS_HOST` specifies the IP address of the Milvus Docker host. Do not use backloop address "127.0.0.1". You do not have to modify other parts of the command.
@@ -55,7 +55,7 @@ In the previous command, `IMAGE_PATH1` and `IMAGE_PATH2` specify the path where 
 ```bash
 $ docker run --name zilliz_search_images_demo_web -d --rm -p 8001:80 \
 -e API_URL=http://${WEBSERVER_IP}:35000 \
-milvusbootcamp/pic-search-webclient:0.1.0
+milvusbootcamp/pic-search-webclient:0.2.0
 ```
 
 In the previous command, WEBSERVER_IP specifies the server IP address that runs pic-search-webserver docker.
