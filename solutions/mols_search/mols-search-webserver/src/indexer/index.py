@@ -30,11 +30,19 @@ def create_table(client, table_name=None, dimension=VECTOR_DIMENSION,
 
 
 def insert_vectors(client, table_name, vectors):
+<<<<<<< HEAD
     if not client.has_collection(collection_name=table_name):
+=======
+    if not client.has_collection(table_name):
+>>>>>>> d37d04782f5bfde3ce51ceb580ae59e0e1fc1f7d
         log.error("table %s not exist", table_name)
         return
     try:
         status, ids = client.insert(collection_name=table_name, records=vectors)
+<<<<<<< HEAD
+=======
+        print(status, ids)
+>>>>>>> d37d04782f5bfde3ce51ceb580ae59e0e1fc1f7d
         return status, ids
     except Exception as e:
         log.error(e)
