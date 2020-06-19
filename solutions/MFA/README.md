@@ -17,7 +17,7 @@
 - #### 启动 MFA-demo
 
 ```bash
-$ docker run -td -p 5003:5000 -e API_URL=https://192.168.1.85:5003 -e "MILVUS_HOST=192.168.1.85" -e "MILVUS_PORT=19530" -e "PG_HOST=192.168.1.85" -e "PG_HOST=5432" milvusbootcamp/mfa-demo:0.2.0
+$ docker run -td -p 5003:5000 -e API_URL=https://192.168.1.85:5003 -e "MILVUS_HOST=192.168.1.85" -e "MILVUS_PORT=19530" -e "PG_HOST=192.168.1.85" -e "PG_PORT=5432" milvusbootcamp/mfa-demo:0.2.0
 ```
 
 上述启动命令相关参数说明：
@@ -29,7 +29,7 @@ $ docker run -td -p 5003:5000 -e API_URL=https://192.168.1.85:5003 -e "MILVUS_HO
 | -e "MILVUS_HOST=192.168.1.85"        | 请修改`192.168.1.85`为启动 Milvus docker 的服务器 IP 地址    |
 | -e "MILVUS_PORT=19530"               | 请修改`19530`为启动 Milvus docker 的服务器端口号             |
 | -e "PG_HOST=192.168.1.85"            | 请修改`192.168.1.85`为启动 Postgres 的服务器 IP 地址         |
-| -e "PG_HOST=5432"                    | 请修改`5432`为启动 Postgres 的服务器端口                     |
+| -e "PG_PORT=5432"                    | 请修改`5432`为启动 Postgres 的服务器端口                     |
 
 ### 构建镜像部署
 
