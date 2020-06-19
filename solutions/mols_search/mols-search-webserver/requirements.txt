@@ -4,4 +4,4 @@ diskcache
 flask
 flask_restful
 futures==3.1.1
-pymilvus==0.2.8
+pymilvus==0.2.13
