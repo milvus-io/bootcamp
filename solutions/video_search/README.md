@@ -55,7 +55,7 @@ Milvus、Redis 和 Minio 需用户手动创建存储目录，然后在 docker-co
 
 所以在 docker-compose.yml 的 Milvus、Redis 和 Minio 的配置部分可以按照下图配置：
 
-<img src="pic/pic3.png" width = "700" height = "650" alt="系统架构图" align=center /> 
+<img src="pic/pic4.png" width = "700" height = "650" alt="系统架构图" align=center /> 
 
 #### **Step3 系统启动**
 
