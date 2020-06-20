@@ -1,2 +1,1 @@
-pymilvus==0.2.11
-numpy
+pymilvus==0.2.13

@@ -17,7 +17,7 @@
 | CPU      | Intel(R) Core(TM) i7-7700K CPU @ 4.20GHz                     |
 | Memory   | 32GB                                                         |
 | OS       | Ubuntu 18.04                                                 |
-| Software | Milvus 0.9.0<br />pic_search_webclient <br />pic_search_webserver |
+| Software | Milvus 0.10.0<br />pic_search_webclient 0.2.0<br />pic_search_webserver 0.10.0 |
 
 
 ### 数据来源
@@ -28,13 +28,17 @@
 
 下载地址：http://host.robots.ox.ac.uk/pascal/VOC/voc2012/VOCtrainval_11-May-2012.tar
 
-> 说明：您也可以使用其他的图片数据进行测试。经过测试，可以进行加载的图片格式有.jpg格式、.png格式。
+> 说明：您也可以使用其他的图片数据进行测试。目前支持加载的图片格式有.jpg格式、.png格式。
 
-### 部署流程
+### **部署流程**
+
+> 注意：
+>
+> 整个部署流程只需要启动 Milvus、pic-search-webserver、pic-search-webclient 三个 docker 容器即可，请务必保证它们的版本是匹配的，否则无法搭建成功。
 
 ##### 1、启动 Milvus docker
 
-本实验使用 Milvus0.9.0 版本，启动方法参考链接：https://github.com/milvus-io/docs/blob/v0.9.0/site/zh-CN/guides/get_started/install_milvus/install_milvus.md
+本实验使用 Milvus0.10.0 版本，启动方法参考链接：https://github.com/milvus-io/docs/blob/v0.10.0/site/zh-CN/guides/get_started/install_milvus/install_milvus.md
 
 ##### 2、启动 pic-search-webserver docker
 
@@ -45,10 +49,16 @@ $ docker run -d --name zilliz_search_images_demo \
 -p 35000:5000 \
 -e "DATA_PATH=/tmp/images-data" \
 -e "MILVUS_HOST=${MILVUS_IP}" \
-milvusbootcamp/pic-search-webserver:0.7.0
+milvusbootcamp/pic-search-webserver:0.10.0
 ```
 
-上述启动命令中， IMAGE_PATH1  、 IMAGE_PATH2 表示你的服务器上存放图片的绝对路径，启动时将这些路径映射到 docker 容器里面。系统搭建好以后，可以直接在前端界面上输入 docker 容器中的图片路径 “ /tmp/pic1 ” 、“ /tmp/pic2 ” 去加载图片。 MILVUS_IP 表示启动 Milvus docker 的服务器 IP 地址，注意不要使用回环地址 “127.0.0.1” 。命令其他部分保持不变即可。
+**IMAGE_PATH1  、 IMAGE_PATH2** ：
+
+表示你的服务器上存放图片的绝对路径，启动时将这些路径映射到 docker 容器里面。系统搭建好以后，可以直接在前端界面上输入 docker 容器中的图片路径 “ /tmp/pic1 ” 、“ /tmp/pic2 ” 去加载图片。 
+
+**MILVUS_IP** ：
+
+表示启动 Milvus docker 的服务器 IP 地址，注意不要使用回环地址 “127.0.0.1” 。命令其他部分保持不变即可。
 
 > 注意：
 >
@@ -62,10 +72,10 @@ milvusbootcamp/pic-search-webserver:0.7.0
 ```bash
 $ docker run --name zilliz_search_images_demo_web -d --rm -p 8001:80 \
 -e API_URL=http://${WEBSERVER_IP}:35000 \
-milvusbootcamp/pic-search-webclient:0.1.0
+milvusbootcamp/pic-search-webclient:0.2.0
 ```
 
-上述启动命令中，WEBSERVER_IP 表示启动 pic-search-webserver docker 的服务器 IP 地址。
+**WEBSERVER_IP**： 表示启动 pic-search-webserver docker 的服务器 IP 地址。
 
 
 ### 界面展示

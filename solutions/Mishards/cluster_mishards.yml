@@ -2,7 +2,7 @@ version: "2.3"
 services:
     mishards:
         restart: always
-        image: milvusdb/mishards:0.9.0
+        image: milvusdb/mishards:0.10.0
         ports:
             - "0.0.0.0:19531:19531"
             - "0.0.0.0:19532:19532"

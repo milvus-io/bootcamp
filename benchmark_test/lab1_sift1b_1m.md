@@ -18,10 +18,10 @@
 | pymilvus    |   0.2.9    |
 
 测试工具下载：
-- 100 万测试数据集下载地址：链接：https://pan.baidu.com/s/1XB0u4zDJoF-2E9T5HmoWJQ   提取码：zvs4 
-- 查询向量集下载地址：链接：https://pan.baidu.com/s/1LSB167UzUtm1H5Fk91bQfA   提取码：imnw 
-- 搜索结果对照 （ ground truth ）下载地址：链接：https://pan.baidu.com/s/1OlFKFoi3zVTr8DZQMoGkJQ 
-  提取码：49lg
+- 100 万测试数据集下载地址：链接：https://pan.baidu.com/s/1TSjGaAlQOQm3PpJfZ6dtPQ   提取码：2x5o
+- 查询向量集下载地址：链接：https://pan.baidu.com/s/158QrpC71I4jhEwNG6rD-kQ   提取码： 0j3c
+- 搜索结果对照 （ ground truth ）下载地址：链接：https://pan.baidu.com/s/1pyjNAUdXvxcJjvTmdzQgBw 
+  提取码：1776
 - 测试脚本下载路径：[/bootcamp/benchmark_test/scripts/](/benchmark_test/scripts/)
 
 为方便存放测试数据和脚本，请创建名为 `milvus_sift1m` 的文件夹。利用前文提供的下载链接，将测试数据集下载到 `milvus_sift1m` 目录下：
@@ -57,7 +57,7 @@ $ docker restart <container id>
 
 ## 3、 建表并建立索引
 
-建表之前，首先确认 Milvus 已经正常启动。（ Milvus 安装及启动方法参见：[Milvus 快速上手](https://milvus.io/cn/docs/v0.9.0/guides/get_started/install_milvus/gpu_milvus_docker.md) ）
+建表之前，首先确认 Milvus 已经正常启动。（ Milvus 安装及启动方法参见：[Milvus 快速上手](https://milvus.io/cn/docs/v0.10.0/guides/get_started/install_milvus/gpu_milvus_docker.md) ）
 
 >  测试之前请根据脚本[说明](/benchmark_test/scripts/README.md)修改相应参数！
 
