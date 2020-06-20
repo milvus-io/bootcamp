@@ -2,7 +2,7 @@ version: "2.3"
 services:
     mishards:
         restart: always
-        image: milvusdb/mishards:0.9.0
+        image: milvusdb/mishards:0.10.0
         ports:
             - "0.0.0.0:19531:19531"
             - "0.0.0.0:19532:19532"
@@ -17,7 +17,7 @@ services:
             SERVER_PORT: 19531
             WOSERVER: tcp://192.168.1.85:19530
             DISCOVERY_PLUGIN_PATH: static
-            DISCOVERY_STATIC_HOSTS: 192.168.1.85,192.168.1.38
+            DISCOVERY_STATIC_HOSTS: 192.168.1.85, 192.168.1.38
             DISCOVERY_STATIC_PORT: 19530
 
 

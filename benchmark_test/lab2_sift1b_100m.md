@@ -18,8 +18,8 @@
 测试工具下载：
 - 1亿测试数据集下载地址：https://pan.baidu.com/s/1N5jGKHYTGchye3qR31aNnA
 - 查询向量集下载地址：https://pan.baidu.com/s/1nVAFi5_DBZS2eazA7SN0VQ
-- 搜索结果对照 （ ground truth ）下载地址：链接：https://pan.baidu.com/s/1Raqs_1NkGMkPboENFlkPsw 
-  提取码：yvdr
+- 搜索结果对照 （ ground truth ）下载地址：链接：https://pan.baidu.com/s/1tBjXRcFGFl59wfo7owmH1g 
+  提取码：sns7
 - 测试脚本下载地址：[/bootcamp/benchmark_test/scripts/](/benchmark_test/scripts/)
 
 为方便存放测试数据和脚本，请创建名为 milvus_sift100m 的文件夹。利用前文提供的下载链接，将测试数据集下载到 milvus_sift100m 目录下：
@@ -54,7 +54,7 @@ $ docker restart <container id>
 
 ## 3、 建表并建立索引
 
-建表之前确认 Milvus 已经正常启动。（ Milvus 安装及启动方法参见：[Milvus 快速上手](https://milvus.io/cn/docs/v0.9.0/guides/get_started/install_milvus/gpu_milvus_docker.md) ）
+建表之前确认 Milvus 已经正常启动。（ Milvus 安装及启动方法参见：[Milvus 快速上手](https://milvus.io/cn/docs/v0.10.0/guides/get_started/install_milvus/gpu_milvus_docker.md) ）
 
 > 测试之前请根据脚本[说明](/benchmark_test/scripts/README.md)修改相应参数！
 

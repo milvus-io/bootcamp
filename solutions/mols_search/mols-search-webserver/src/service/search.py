@@ -35,6 +35,3 @@ def do_search(table_name, molecular_name, top_k):
     except Exception as e:
         logging.error(e)
         return "Fail with error {}".format(e)
-    finally:
-        if index_client:
-            index_client.disconnect()

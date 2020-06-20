@@ -123,67 +123,67 @@ python main.py --collection <collection_name> --index <index_type> --build
 python main.py --collection <collection_name> --load
 ```
 
-1. 性能测试
+4. 性能测试
 
 ```shell
 python main.py --collection <collection_name> --search_param <search_param> --performance
 ```
 
-1. 召回率测试
+5. 召回率测试
 
 ```shell
 python main.py --collection <collection_name> --search_param <search_param> --recall
 ```
 
-1. 创建分区
+6. 创建分区
 
 ```shell
 python main.py --collection <collection_name> --partition_tag --create_partition
 ```
 
-1. 查看集合的信息
+7. 查看集合的信息
 
 ```shell
 python main.py --collection <collection_name> --describe
 ```
 
-1. 查看库中的集合
+8. 查看库中的集合
 
 ```shell
 python main.py --show
 ```
 
-1. 判断集合是否存在
+9. 判断集合是否存在
 
 ```shell
 python main.py --collection <collection_name> --has
 ```
 
-1. 查看集合中的向量数
+10. 查看集合中的向量数
 
 ```shell
 python main.py --collection <collection_name> --rows
 ```
 
-1. 查看集合的索引类型
+11. 查看集合的索引类型
 
 ```shell
 python main.py --collection <collection_name> --describe_index
 ```
 
-1. 删除集合
+12. 删除集合
 
 ```shell
 python main.py --collection <collection_name> --drop
 ```
 
-1. 删除索引
+13. 删除索引
 
 ```shell
 python main.py --collection <collection_name> --drop_index
 ```
 
-1. 查看milvus server和pymilvus版本
+14. 查看milvus server和pymilvus版本
 
 ```shell
 python main.py --version
