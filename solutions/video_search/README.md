@@ -22,7 +22,7 @@
 
 #### **Step1 镜像构建**
 
-整个以图搜视频系统需要使用到 Milvus0.9.0 docker、Redis docker、Minio docker、前端界面 docker 和后台 api docker。前端界面 docker 和后台 api docker 需要读者自己构建，其余三个 docker 可以直接从 docker hub 拉取。
+整个以图搜视频系统需要使用到 Milvus0.10.0 docker、Redis docker、Minio docker、前端界面 docker 和后台 api docker。前端界面 docker 和后台 api docker 需要读者自己构建，其余三个 docker 可以直接从 docker hub 拉取。
 
 ```bash
 # 获取以图搜视频代码
