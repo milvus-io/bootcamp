@@ -36,15 +36,13 @@ Milvus 可以根据数据分布和性能、准确性的要求灵活调整相关�
 
 | 参数名称             | 推荐值       |
 | -------------------- | ------------ |
-| cpu_cache_capacity   | 25           |
-| gpu_cache_capacity   | 4            |
-| use_blas_threshold   | 801          |
+| cache.cache_size   | 25           |
+| gpu.cache_size   | 4            |
 | gpu_search_threshold | 1001         |
-| search_resources     | -cpu   -gpu0 |
+| search_devices     |-gpu0 |
+| build_index_devices     |-gpu0 |
 
 gpu_search_threshold, 该参数决定是否使用纯gpu版本查询。当nq值>use_blas_threshold，将使用纯gpu查询，当nq值较大时，使用纯gpu查询更优。本实验中建议使用cpu与gpu混合查询。
-
-search_resources决定查询时使用的资源，参数中至少需要包含cpu和一块gpu。若主机有多个gpu也可以同时使用多个gpu。
 
 修改配置文件后，需要重启 Milvus Docker 使其生效。
 
