@@ -42,7 +42,7 @@ Milvus 可以根据数据分布和性能、准确性的要求灵活调整相关�
 | search_devices     |-gpu0 |
 | build_index_devices     |-gpu0 |
 
-gpu_search_threshold, 该参数决定是否使用纯gpu版本查询。当nq值>use_blas_threshold，将使用纯gpu查询，当nq值较大时，使用纯gpu查询更优。本实验中建议使用cpu与gpu混合查询。
+gpu_search_threshold, 该参数决定是否使用 GPU 查询。当 nq>use_blas_threshold，将使用 GPU 查询(只有当 nq 值较大时，使用 GPU 查询才会更有优势)。
 
 修改配置文件后，需要重启 Milvus Docker 使其生效。
 
