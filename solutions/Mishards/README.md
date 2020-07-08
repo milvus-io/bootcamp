@@ -80,7 +80,7 @@ $ docker ps
 
 `cluster_ro_server.yml`：
 
-![image-20200616154713759](pic\image-2.png)
+![image-20200616154713759](pic/image-2.png)
 
 参数 enable 表示是否设置为分布式模式，参数 role 决定了 Milvus 是只读还是可写，此处选择 `rw`表示为该 Milvus 只可读（即只有在 search 时才会启用该服务）。参数 meta_url 应修改为 mysql 所安装的设备的地址。其余配置参照 Milvus 单机版时的配置。
 
