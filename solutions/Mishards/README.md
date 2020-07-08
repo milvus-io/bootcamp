@@ -52,7 +52,7 @@ $ docker ps
 
 `cluster_wr_server.yml`：
 
-![image-20200616154108675](pic\image-1.png)
+![image-20200616154108675](pic/image-1.png)
 
 在该配置文件中，参数 `enable` 表示是否设置为分布式模式，参数 `role` 决定了 Milvus 是只读还是可写，此处选择 `rw` 表示为该 Milvus 可写。参数 `meta_uri` 应修改为 MySQL 所安装的设备的地址。其余配置参照 Milvus 单机版时的配置。
 
