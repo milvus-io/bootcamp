@@ -36,29 +36,34 @@ config.py：该脚本是配置文件，需要根据具体环境做出相应修�
 
 ## 搭建步骤
 
-1、安装milvus
 
-参考链接https://www.milvus.io/cn/docs/v0.10.0/gpu_milvus_docker.md
+1、安装milvus
+-------------------
+    参考链接https://www.milvus.io/cn/docs/v0.10.0/gpu_milvus_docker.md
 
 2、安装postgresql
-
-参考官网https://www.postgresql.org/
+-------------------------
+    参考官网https://www.postgresql.org/
 
 3、安装所需要的python包
-pip install --ignore-installed --upgrade tensorflow==1.10
-pip install -r requriment.txt
+-------------------------------------
+    pip install --ignore-installed --upgrade tensorflow==1.10
+    pip install -r requriment.txt
+
 4、启动bert服务
-#下载模型
-cd model
-wget https://storage.googleapis.com/bert_models/2018_11_03/chinese_L-12_H-768_A-12.zip
-#启动服务
-bert-serving-start -model_dir chinese_L-12_H-768_A-12/ -num_worker=12 -max_seq_len=40
+---------------------
+    #下载模型
+    cd model
+    wget https://storage.googleapis.com/bert_models/2018_11_03/chinese_L-12_H-768_A-12.zip
+    #启动服务
+    bert-serving-start -model_dir chinese_L-12_H-768_A-12/ -num_worker=12 -max_seq_len=40
+
 5、导入数据
-cd Milvus-bert-server
-python main.py --collection test11 --title data/title.txt --version data/version.txt --load
+-----------------
+    cd Milvus-bert-server\<br>
+    python main.py --collection test11 --title data/title.txt --version data/version.txt --load\<br>
+    #data/title.txt 是导入的标题集所在的路径
+    #data/version.txt 是导入文本集所在的路径
 
-#data/title.txt 是导入的标题集所在的路径
-
-#data/version.txt 是导入文本集所在的路径
 
 
