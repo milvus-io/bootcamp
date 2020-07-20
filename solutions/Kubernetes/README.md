@@ -15,6 +15,7 @@
 如果我们希望在 Kubernetes 集群中一个存储卷可以被多个 Pod 同时挂载，多个 Pod 同时修改相同数据，这时便需要共享存储。目前常见的共享资源协议有 NFS 和 CIFS 等。下面，我们将演示如何搭建 NFS 存储资源并在 Kubernetes 中部署 NFS Server。
 
 * **搭建 NFS 存储资源**
+
   **server端**
 
   1. 创建容器并运行
