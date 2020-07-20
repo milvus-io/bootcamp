@@ -115,7 +115,7 @@
   3. 查看 nfs-client release 是否安装成功：
 
      ```bash
-   $ helm list
+     $ helm list
      NAME      	NAMESPACE	REVISION	UPDATED                                	STATUS  	CHART                       	APP VERSION
      nfs-client	default  	1       	2020-07-16 16:33:11.528645222 +0800 CST	deployed	nfs-client-provisioner-1.2.8	3.1.0             
      ```
