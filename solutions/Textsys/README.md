@@ -36,7 +36,6 @@ config.py：该脚本是配置文件，需要根据具体环境做出相应修�
 
 ## 搭建步骤
 
-
 1、安装milvus
 -------------------
     参考链接https://www.milvus.io/cn/docs/v0.10.0/gpu_milvus_docker.md
@@ -60,10 +59,9 @@ config.py：该脚本是配置文件，需要根据具体环境做出相应修�
 
 5、导入数据
 -----------------
-    cd Milvus-bert-server
+    cd Milvus-bert-server\<br>
     python main.py --collection test11 --title data/title.txt --version data/version.txt --load\<br>
     #data/title.txt 是导入的标题集所在的路径
     #data/version.txt 是导入文本集所在的路径
-
 
 
