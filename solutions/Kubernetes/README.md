@@ -199,7 +199,7 @@
 5. 获取 Milvus 的 manifest 文件
 
    ```bash
-$ helm install --dry-run --debug --set web.enabled=true --set cluster.enabled=true --set persistence.enabled=true --set mysql.enabled=true my-release  . | ~/go/bin/schelm output/
+	$ helm install --dry-run --debug --set web.enabled=true --set cluster.enabled=true --set persistence.enabled=true --set mysql.enabled=true my-release  . | ~/go/bin/schelm output/
    # You are expected to see the following output.
    install.go:172: [debug] Original chart version: ""
    install.go:189: [debug] CHART PATH: /home/mia/milvus-helm/charts/milvus
