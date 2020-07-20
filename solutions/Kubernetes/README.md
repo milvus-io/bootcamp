@@ -1,6 +1,8 @@
 # 基于 Kubernetes 部署 Milvus 分布式集群
 
-本文将介绍两种在 Kubernetes 中部署 Milvus 的方式。
+本示例主要展示如何安装共享存储，如何利用 Helm 和 Kubectl 两种方式搭建 Milvus 集群。
+
+本示例不包含如何搭建 Kubernetes 集群，如何安装 Helm 和 kubectl。
 
 ## 环境准备
 
@@ -8,121 +10,121 @@
 - Helm >= 2.12.0
 - Docker >= 19.03
 
-## 搭建 NFS 共享存储
+## 搭建共享存储
 
-如果我们希望在 Kubernetes 集群中一个存储卷可以被多个 Pod 同时挂载，多个 Pod 同时修改相同数据，这时便需要共享存储。目前常见的共享资源协议有 NFS 和 CIFS 等。
+如果我们希望在 Kubernetes 集群中一个存储卷可以被多个 Pod 同时挂载，多个 Pod 同时修改相同数据，这时便需要共享存储。目前常见的共享资源协议有 NFS 和 CIFS 等。下面，我们将演示如何搭建 NFS 存储资源并在 Kubernetes 中部署 NFS Server。
 
-下面，我们将演示如何搭建 NFS 存储资源。
+* **搭建 NFS 存储资源**
+  **server端**
 
-* **server端**
+  1. 创建容器并运行
 
-1. 创建容器并运行
+     ```bash
+     $ docker run -d --privileged --restart=always \
+     -v /data/usr/nfs_test:/nfs  \
+     -e NFS_EXPORT_0='/nfs                  *(rw,no_subtree_check,no_root_squash,fsid=1)' \
+     -p 111:111 \
+     -p 111:111/udp \
+     -p 2049:2049 \
+     -p 2049:2049/udp \
+     -p 32765:32765 \
+     -p 32765:32765/udp \
+     -p 32766:32766 \
+     -p 32766:32766/udp \
+     -p 32767:32767 \
+     -p 32767:32767/udp \
+     --cap-add SYS_ADMIN \
+     erichough/nfs-server
+     ```
 
-```bash
-$ docker run -d --privileged --restart=always \
--v /data/usr/nfs_test:/nfs  \
--e NFS_EXPORT_0='/nfs                  *(rw,no_subtree_check,no_root_squash,fsid=1)' \
--p 111:111 \
--p 111:111/udp \
--p 2049:2049 \
--p 2049:2049/udp \
--p 32765:32765 \
--p 32765:32765/udp \
--p 32766:32766 \
--p 32766:32766/udp \
--p 32767:32767 \
--p 32767:32767/udp \
---cap-add SYS_ADMIN \
-erichough/nfs-server
-```
+     > `/data/nfs` 为 server 端的共享文件夹的目录
+     
+  2. 安装 nfs 模型
 
-> `/data/nfs` 为 server 端的共享文件夹的目录
+     ```bash
+      $ sudo apt install nfs-kernel-server
+     ```
 
-2. 安装 nfs 模型
+  3. 查看容器状态
 
-```bash
-$ sudo apt install nfs-kernel-server
-```
+     ```bash
+     $ sudo docker logs c8a4abde5401
+     ......
+     ==================================================================
+           SERVER STARTUP COMPLETE
+     ==================================================================
+     ----> list of enabled NFS protocol versions: 4.2, 4.1, 4, 3
+     ----> list of container exports:
+     ---->   /nfs                  *(rw,no_subtree_check,no_root_squash,fsid=1)
+     ----> list of container ports that should be exposed:
+     ---->   111 (TCP and UDP)
+     ---->   2049 (TCP and UDP)
+     ---->   32765 (TCP and UDP)
+     ---->   32767 (TCP and UDP)
+     
+     ==================================================================
+           READY AND WAITING FOR NFS CLIENT CONNECTIONS
+     ==================================================================
+     ```
 
-3. 查看容器状态
+  **client端**
 
-```bash
-$ sudo docker logs c8a4abde5401
-......
-==================================================================
-      SERVER STARTUP COMPLETE
-==================================================================
-----> list of enabled NFS protocol versions: 4.2, 4.1, 4, 3
-----> list of container exports:
----->   /nfs                  *(rw,no_subtree_check,no_root_squash,fsid=1)
-----> list of container ports that should be exposed:
----->   111 (TCP and UDP)
----->   2049 (TCP and UDP)
----->   32765 (TCP and UDP)
----->   32767 (TCP and UDP)
+  下面我们配置并启动客户端，检查 nfs 是否搭建成功。
 
-==================================================================
-      READY AND WAITING FOR NFS CLIENT CONNECTIONS
-==================================================================
-```
+  1. 挂载
 
-* **client端**
-下面我们配置并启动客户端，检查 nfs 是否搭建成功。
-1. 挂载
+     ```bash
+     $ mount -t nfs -o rw,nfsvers=3 192.168.1.31:/nfs /data/nfs
+     ```
 
-```bash
-$ mount -t nfs -o rw,nfsvers=3 192.168.1.31:/nfs /data/nfs
-```
+     > 192.168.1.31 为 server 端 ip
+     >
+     > `/data/nfs` 为 client 端挂载路径
 
-> 192.168.1.31 为 server 端 ip
->
-> `/data/nfs` 为 client 端挂载路径
+  2. 查看挂载信息
 
-2. 查看挂载信息
-
-```bash
-$ df -h
-```
-
-## 利用 Helm 部署 Milvus
+     ```bash
+     $ df -h
+     ```
 
 * **NFS Server 的 Helm 部署**
 
-1. 拉取源码
+  1. 拉取源码
 
-   ```bash
-   $ git clone -b 0.10.0 https://github.com/milvus-io/milvus-helm.git
-   $ cd milvus-helm
-   ```
+     ```bash
+     $ git clone -b 0.10.0 https://github.com/milvus-io/milvus-helm.git
+     $ cd milvus-helm
+     ```
 
-2. 安装 nfs chart
+  2. 安装 nfs chart
 
-   > [chart](https://github.com/helm/charts) 为预先配置好的安装包资源，类似于 Ubuntu 的 APT 和 CentOS 中的 YUM。当 chart 安装到 Kubernetes 中后就会创建一个 release。
+     > [chart](https://github.com/helm/charts) 为预先配置好的安装包资源，类似于 Ubuntu 的 APT 和 CentOS 中的 YUM。当 chart 安装到 Kubernetes 中后就会创建一个 release。
 
-   ```bash
-   $ git clone https://github.com/helm/charts.git
-   $ cd charts/stable/nfs-client-provisioner
-   # 修改 values.yaml 下 内容：
-   # nfs:
-   # server: 192.168.1.31
-   # path: /nfs
-   # mountOptions:
-   #   - rw
-   #   - nfsvers=3
-   $ helm install nfs-client .
-   ```
+     ```bash
+     $ git clone https://github.com/helm/charts.git
+     $ cd charts/stable/nfs-client-provisioner
+     # 修改 values.yaml 下 内容：
+     # nfs:
+     # server: 192.168.1.31
+     # path: /nfs
+     # mountOptions:
+     #   - rw
+     #   - nfsvers=3
+     $ helm install nfs-client .
+     ```
 
-3. 查看 nfs-client release 是否安装成功：
+  3. 查看 nfs-client release 是否安装成功：
 
-   ```bash
-   $ helm list
-   NAME      	NAMESPACE	REVISION	UPDATED                                	STATUS  	CHART                       	APP VERSION
-   nfs-client	default  	1       	2020-07-16 16:33:11.528645222 +0800 CST	deployed	nfs-client-provisioner-1.2.8	3.1.0             
-   ```
+     ```bash
+     $ helm list
+     NAME      	NAMESPACE	REVISION	UPDATED                                	STATUS  	CHART                       	APP VERSION
+     nfs-client	default  	1       	2020-07-16 16:33:11.528645222 +0800 CST	deployed	nfs-client-provisioner-1.2.8	3.1.0             
+     ```
 
-* **Milvus 的 Helm 部署**
 
-4. 部署 Milvus
+## 利用 Helm 部署 Milvus
+
+1. 部署 Milvus
 
    ```bash
    $ git clone https://github.com/milvus-io/milvus-helm.git
@@ -132,7 +134,7 @@ $ df -h
 
    > 关于 Milvus 服务器的详细参数，可参考 [Milvus Configuration](https://github.com/milvus-io/milvus-helm/tree/0.10.0#configuration)
 
-5. 查看 Milvus release 是否安装成功：
+2. 查看 Milvus release 是否安装成功：
 
    ```bash
    $ helm list
@@ -141,7 +143,7 @@ $ df -h
    nfs-client	default  	1       	2020-07-16 14:20:16.652557193 +0800 CST	deployed	nfs-client-provisioner-1.2.8	3.1.0    
    ```
 
-6. 查看 pods 是否启动成功：
+3. 查看 pods 是否启动成功：
 
    ```bash
    $ kubectl get pods
