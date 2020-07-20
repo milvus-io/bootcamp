@@ -10,15 +10,11 @@
 
 ## 搭建 NFS 共享存储
 
-目前 Kubernetes 支持的持久化存储方案主要如下：
-分布式文件系统：NFS/GlusterFS/CephFS
-公有云存储方案：AWS/GCE/Auzre
-
-> 更多有关 Kubernetes 持久化存储的信息,请参考 [Persistent Volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/)
+如果我们希望在 Kubernetes 集群中一个存储卷可以被多个 Pod 同时挂载，多个 Pod 同时修改相同数据，这时便需要共享存储。目前常见的共享资源协议有 NFS 和 CIFS 等。
 
 下面，我们将演示如何搭建 NFS 存储资源。
 
-server端
+* **server端**
 
 1. 创建容器并运行
 
@@ -41,8 +37,6 @@ erichough/nfs-server
 ```
 
 > `/data/nfs` 为 server 端的共享文件夹的目录
->
-> 如果出现111端口占用的问题，请参考[如何禁用 rpcbind 111端口](https://blog.csdn.net/miss1181248983/article/details/90201559)
 
 2. 安装 nfs 模型
 
@@ -72,8 +66,8 @@ $ sudo docker logs c8a4abde5401
 ==================================================================
 ```
 
-client端
-
+* **client端**
+下面我们配置并启动客户端，检查 nfs 是否搭建成功。
 1. 挂载
 
 ```bash
@@ -92,6 +86,8 @@ $ df -h
 
 ## 利用 Helm 部署 Milvus
 
+* **NFS Server 的 Helm 部署**
+
 1. 拉取源码
 
    ```bash
@@ -99,7 +95,7 @@ $ df -h
    $ cd milvus-helm
    ```
 
-2. 部署 nfs
+2. 安装 nfs chart
 
    > [chart](https://github.com/helm/charts) 为预先配置好的安装包资源，类似于 Ubuntu 的 APT 和 CentOS 中的 YUM。当 chart 安装到 Kubernetes 中后就会创建一个 release。
 
@@ -123,6 +119,8 @@ $ df -h
    NAME      	NAMESPACE	REVISION	UPDATED                                	STATUS  	CHART                       	APP VERSION
    nfs-client	default  	1       	2020-07-16 16:33:11.528645222 +0800 CST	deployed	nfs-client-provisioner-1.2.8	3.1.0             
    ```
+
+* **Milvus 的 Helm 部署**
 
 4. 部署 Milvus
 
@@ -162,6 +160,8 @@ $ df -h
 
 ## 利用 kubectl 部署 Milvus
 
+利用 kubectl 部署应用的实质便是部署 YAML 文件中定义的内容。因此我们需要利用 go 语言安装 schelm 插件。通过 schelm 插件获得 manifest 文件，它们即为 Kubernetes 可以识别的 YAML 格式的资源描述。
+
 1. 拉取源码
 
    ```bash
@@ -169,10 +169,8 @@ $ df -h
    $ cd milvus-helm
    ```
 
-2. 下载并解压 go 环境
+2. 下载并解压 go 语言
 
-   > 此处需要安装 go 语言用于获得 schelm 插件
-   
    ```bash
    $ wget https://dl.google.com/go/go1.14.6.linux-amd64.tar.gz
    $ sudo tar -C /usr/local -xzf go1.14.6.linux-amd64.tar.gz
@@ -197,10 +195,8 @@ $ df -h
 
 5. 获取 Milvus 的 manifest 文件
 
-   > 通过 schelm 插件可以获得 manifest 文件，它们是 Kubernetes 可以识别的 YAML 格式的资源描述。
-
    ```bash
-   $ helm install --dry-run --debug --set web.enabled=true --set cluster.enabled=true --set persistence.enabled=true --set mysql.enabled=true my-release  . | ~/go/bin/schelm output/
+$ helm install --dry-run --debug --set web.enabled=true --set cluster.enabled=true --set persistence.enabled=true --set mysql.enabled=true my-release  . | ~/go/bin/schelm output/
    # You are expected to see the following output.
    install.go:172: [debug] Original chart version: ""
    install.go:189: [debug] CHART PATH: /home/mia/milvus-helm/charts/milvus
@@ -220,7 +216,7 @@ $ df -h
    2020/07/17 14:51:33 Creating output/milvus/templates/readonly-deployment.yaml
    2020/07/17 14:51:33 Creating output/milvus/templates/writable-deployment.yaml
    ```
-
+   
 6. 将配置文件应用到 pod
 
    ```bash
@@ -266,7 +262,7 @@ $ df -h
 
 ## 集群测试
 
-此时，Milvus 服务已成功部署到 Kubernetes 上。但是，Kubernetes 的默认服务为ClusterIP，集群内的其它应用可以访问该服务，而集群外部无法进行访问。所以，如果我们想在 Internet 或者生产环境中使用集群，我们需要更换 Service 以暴露应用。Kubernetes的三种可以暴露服务的 service 类型为：NodePort、LoadBalancer 和 ExternalName。下面我们将介绍如何使用 NodePort 服务在外部访问集群。                         
+此时，Milvus 服务已成功部署到 Kubernetes 上。但是，Kubernetes 的默认服务为ClusterIP，集群内的其它应用可以访问该服务，而集群外部无法进行访问。所以，如果我们想在 Internet 或者生产环境中使用集群，我们需要更换 Service 以暴露应用。Kubernetes的三种可以暴露服务的 Service 类型为：NodePort、LoadBalancer 和 ExternalName。下面我们将介绍如何使用 NodePort 服务在外部访问集群。                         
 
 1. 修改服务方式
 
