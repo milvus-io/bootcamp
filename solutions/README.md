@@ -18,3 +18,4 @@
 - [Milvus 化学式检索系统](mols_search/README.md)
 - [Milvus 智能问答系统](QA_System/README.md)
 - [生物多因子认证系统](MFA)
+- [基于 Milvus 的文本检索系统](Textsys/README.md)
