@@ -168,7 +168,7 @@
 
 ## 利用 kubectl 部署 Milvus
 
-利用 kubectl 部署应用的实质便是部署 YAML 文件中定义的内容。因此我们需要利用 go 语言安装 schelm 插件。通过 schelm 插件获得 manifest 文件，它们即为 Kubernetes 可以识别的 YAML 格式的资源描述。
+利用 kubectl 部署应用的实质便是部署 yaml 或 json 文件中定义的内容。因此我们需要利用 Go 安装 schelm 插件。通过 schelm 插件获得 manifest 文件，它们即为 Kubernetes 可以识别的 yaml 格式的资源描述。
 
 1. 拉取源码
 
@@ -177,7 +177,7 @@
    $ cd milvus-helm
    ```
 
-2. 下载并解压 go 语言
+2. 下载并解压 go 
 
    ```bash
    $ wget https://dl.google.com/go/go1.14.6.linux-amd64.tar.gz
@@ -270,7 +270,7 @@
 
 ## 集群测试
 
-此时，Milvus 服务已成功部署到 Kubernetes 上。但是，Kubernetes 的默认服务为ClusterIP，集群内的其它应用可以访问该服务，而集群外部无法进行访问。所以，如果我们想在 Internet 或者生产环境中使用集群，我们需要更换 Service 以暴露应用。Kubernetes的三种可以暴露服务的 Service 类型为：NodePort、LoadBalancer 和 ExternalName。下面我们将介绍如何使用 NodePort 服务在外部访问集群。                         
+此时，Milvus 服务已成功部署到 Kubernetes 上。但是，Kubernetes 的默认服务为ClusterIP，集群内的其它应用可以访问该服务，而集群外部无法进行访问。所以，如果我们想在 Internet 或者生产环境中使用集群，我们需要更换 Service 以暴露应用。Kubernetes的两种可以暴露服务的 Service 类型为：NodePort 和 LoadBalancer。下面我们将介绍如何使用 NodePort 服务在外部访问集群。                         
 
 1. 修改服务方式
 
