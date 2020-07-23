@@ -64,4 +64,15 @@ config.py：该脚本是配置文件，需要根据具体环境做出相应修�
     #data/title.txt 是导入的标题集所在的路径
     #data/version.txt 是导入文本集所在的路径
 
+6、启动查询服务
+---------------------
+        python app.py
 
+ 
+7、启动 UI客户端
+----------------------  
+   -Install  [Node.js 12+](https://nodejs.org/en/download/) and [Yarn](https://classic.yarnpkg.com/en/docs/install/).
+   - $ cd client
+   - $ yarn install #安装依赖包
+   - $ yarn start    #启动服务
+   -  打开localhost:3000/search
