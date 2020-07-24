@@ -47,7 +47,7 @@ config.py：该脚本是配置文件，需要根据具体环境做出相应修�
         PostgreSQL 是一个强大的、开源的对象关系数据库系统。
         PostgreSQL 在可靠性、稳定性、数据一致性等性能方面表现不错。
         具体安装方式参考 PostgreSQL 官网链接：               
-        参考官网https://www.postgresql.org/
+        https://www.postgresql.org/
 
 3、安装所需要的python包
 -------------------------------------
