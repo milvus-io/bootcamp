@@ -2,7 +2,9 @@
 
 ## 数据说明
 
-本项目实验数来源于2K条企业投资事件数据集，数据链接https://www.kesci.com/home/dataset/5ebba5840bff1b002ce6d88c
+本项目实验数来源于14K条中文新闻数据集，该数据集经过预处理操作，存在data目录下
+未处理的数据集来自和鲸社区提供的中午数据集，
+链接https://www.kesci.com/home/dataset/5d8878638499bc002c1148f7，
 
 ## 脚本说明
 
