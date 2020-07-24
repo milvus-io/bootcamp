@@ -68,7 +68,7 @@ config.py：该脚本是配置文件，需要根据具体环境做出相应修�
 -----------------
     在项目中的 Milvus-bert-server  文件的 main.py 文本数据导入脚本，只需要修改脚本中的标题集文件的路径和文本集的路径可运行脚本进行文本数据导入
     cd Milvus-bert-server\<br>
-    python main.py --collection test11 --title data/title.txt --version data/version.txt --load\<br>
+    python main.py --collection test11 --title data/title.txt --version data/version.txt --load
     #data/title.txt 是导入的标题集所在的路径
     #data/version.txt 是导入文本集所在的路径
 
@@ -83,4 +83,4 @@ config.py：该脚本是配置文件，需要根据具体环境做出相应修�
    - $ cd client
    - $ yarn install #安装依赖包
    - $ yarn start    #启动服务
-   -  打开localhost:3000/search
+   -  打开localhost:3001/search
