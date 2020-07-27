@@ -7,6 +7,10 @@
 
 ## 脚本说明
 
+Milvus-bert-client
+ 
+ 该目录下是前端页面的脚本
+ 
 Milvus-bert-server
 
 app.py: 该脚本为前端界面提供接口
