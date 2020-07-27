@@ -110,8 +110,8 @@ https://www.milvus.io/cn/docs/v0.10.0/gpu_milvus_docker.md
 
 在浏览器中输入127.0.0.1:3001/search，打开搜索页面，输入搜索的文本。
 
-![1](/home/zilliz/test/bootcamp/solutions/Textsys/img/1.png)
+![1](https://github.com/jingkl/bootcamp/blob/0.10.0/solutions/Textsys/img/1.png)
 
 得到输入文本的搜索结果，具体如图所示
 
-![2](/home/zilliz/test/bootcamp/solutions/Textsys/img/2.png)
+![2](https://github.com/jingkl/bootcamp/blob/0.10.0/solutions/Textsys/img/2.png)
