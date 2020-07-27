@@ -39,16 +39,13 @@ config.py：该脚本是配置文件，需要根据具体环境做出相应修�
 
 1、安装milvus
 -------------------
-     Milvus 提供两个发行版本：CPU 版本和 GPU 版本
-     为了得到更优的查询性能，项目中使用的是 GPU 版本 参考链接
+     Milvus 提供两个发行版本：CPU 版本和 GPU 版本。 为了得到更优的查询性能，项目中使用的是 GPU 版本参考链接
     https://www.milvus.io/cn/docs/v0.10.0/gpu_milvus_docker.md
 
 2、安装postgresql
 -------------------------
-        PostgreSQL 是一个强大的、开源的对象关系数据库系统。
-        PostgreSQL 在可靠性、稳定性、数据一致性等性能方面表现不错。
-        具体安装方式参考 PostgreSQL 官网链接：               
-        https://www.postgresql.org/
+        PostgreSQL 是一个强大的、开源的对象关系数据库系统。 PostgreSQL 在可靠性、稳定性、数据一致性等性能方面表现不错。
+        具体安装方式参考 PostgreSQL 官网链接：https://www.postgresql.org/
 
 3、安装所需要的python包
 -------------------------------------
@@ -57,8 +54,7 @@ config.py：该脚本是配置文件，需要根据具体环境做出相应修�
 
 4、启动bert服务
 ---------------------
-    安装 Bert-as-service 的方式如下，也可以参考 
-    Bert-as-service 的Github存储库的官网链接:https://github.com/hanxiao/bert-as-service
+    安装 Bert-as-service 的方式如下，也可以参考 Bert-as-service 的Github存储库的官网链接:https://github.com/hanxiao/bert-as-service
     #下载模型
     cd model
     wget https://storage.googleapis.com/bert_models/2018_11_03/chinese_L-12_H-768_A-12.zip
