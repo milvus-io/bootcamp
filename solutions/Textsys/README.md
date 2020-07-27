@@ -50,7 +50,8 @@ https://www.milvus.io/cn/docs/v0.10.0/gpu_milvus_docker.md
 
 2、安装postgresql
 -------------------------
- PostgreSQL 是一个强大的、开源的对象关系数据库系统。 PostgreSQL 在可靠性、稳定性、数据一致性等性能方面表现不错。具体安装方式参考 PostgreSQL 官网链接：https://www.postgresql.org/
+ PostgreSQL 是一个强大的、开源的对象关系数据库系统。 PostgreSQL 在可靠性、稳定性、数据一致性等性能方面表现不错。  
+具体安装方式参考 PostgreSQL 官网链接：https://www.postgresql.org/
 
 3、安装所需要的python包
 -------------------------------------
@@ -93,7 +94,7 @@ https://www.milvus.io/cn/docs/v0.10.0/gpu_milvus_docker.md
 
    - $ yarn start    #启动服务
 
-   - 打开localhost:3001/search
+   - 打开localhost:3001/search  
 
-     注：如果更改了服务器的端口，请针对您自己的环境在第17行的/src/ shared / Constants.ts上修改参数
+注：如果更改了服务器的端口，请针对您自己的环境在第17行的/src/ shared / Constants.ts上修改参数
 
