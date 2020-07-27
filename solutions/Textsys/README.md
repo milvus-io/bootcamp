@@ -72,7 +72,7 @@ https://www.milvus.io/cn/docs/v0.10.0/gpu_milvus_docker.md
     bert-serving-start -model_dir chinese_L-12_H-768_A-12/ -num_worker=12 -max_seq_len=40
 
 5、导入数据
-
+-------------------
 在项目中的 Milvus-bert-server  文件的 main.py 文本数据导入脚本，只需要修改脚本中的标题集文件的路径和文本集的路径可运行脚本进行文本数据导入
 
     cd Milvus-bert-server
