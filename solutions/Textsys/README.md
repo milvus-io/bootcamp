@@ -1,9 +1,14 @@
+
+
+
+
 ## README
-本项目是使用Milvus和bert构建文本搜索引擎，使用bert将文本转换为固定长度向量，结合Milvus就可以进行文本相似搜索
+
+本项目是使用Milvus和bert构建文本搜索引擎，该项目中使用bert将文本转换为固定长度向量存储到Milvus中，然后结合Milvus可以搜索出用户输入文本的相似文本。
 
 ## 数据说明
 
-- 本项目实验数来源于14K条中文新闻数据集，该数据集经过预处理操作，存在data目录下。未处理的数据集来自和鲸社区提供的中文新闻数据集，官网链接https://www.kesci.com/home/dataset/5d8878638499bc002c1148f7，
+- 本项目实验数来源于14K条中文新闻数据集，该数据集经过预处理操作，存在data目录下。未处理的数据集来自和鲸社区提供的中文新闻数据集，官网链接https://www.kesci.com/home/dataset/5d8878638499bc002c1148f7，经过处理的数据可以下载链接: https://pan.baidu.com/s/1OrUKbLXn8__pLfnN5uTaRg 提取码: cd4e
 
 ## 脚本说明
 
@@ -70,20 +75,21 @@ https://www.milvus.io/cn/docs/v0.10.0/gpu_milvus_docker.md
     bert-serving-start -model_dir chinese_L-12_H-768_A-12/ -num_worker=12 -max_seq_len=40
 
 5、导入数据
------------------
 
 在项目中的 Milvus-bert-server  文件的 main.py 文本数据导入脚本，只需要修改脚本中的标题集文件的路径和文本集的路径可运行脚本进行文本数据导入
 
     cd Milvus-bert-server
     python main.py --collection test11 --title data/title.txt --version data/version.txt --load
-    #data/title.txt 是导入的标题集所在的路径
-    #data/version.txt 是导入文本集所在的路径
+
+注：其中 data/title.txt 是导入的标题集所在的路径、data/version.txt 是导入文本集所在的路径
 
 6、启动查询服务
 ---------------------
+
         python app.py
 
  
+
 
 7、启动 UI客户端
 ----------------------  
@@ -98,3 +104,14 @@ https://www.milvus.io/cn/docs/v0.10.0/gpu_milvus_docker.md
 
      注：如果更改了服务器的端口，请针对您自己的环境在第17行的conviex/src/ shared / Constants.ts上修改参数
 
+
+
+## 8、界面展示
+
+在浏览器中输入127.0.0.1:3001/search，打开搜索页面，输入搜索的文本。
+
+![1](/home/zilliz/test/bootcamp/solutions/Textsys/img/1.png)
+
+得到输入文本的搜索结果，具体如图所示
+
+![2](/home/zilliz/test/bootcamp/solutions/Textsys/img/2.png)
