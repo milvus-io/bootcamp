@@ -88,7 +88,7 @@ https://www.milvus.io/cn/docs/v0.10.0/gpu_milvus_docker.md
 7、启动 UI客户端
 ----------------------  
    -Install  [Node.js 12+](https://nodejs.org/en/download/) and [Yarn](https://classic.yarnpkg.com/en/docs/install/)
- 
+   
      $cd client
       #安装依赖包
      $ yarn install
