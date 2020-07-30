@@ -14,11 +14,11 @@ This example does not include how to build a Kubernetes cluster or how to instal
 
 Shared storage is needed when we want a storage volume in a Kubernetes cluster to be simultaneously mounted by multiple pods and multiple pods modify the same data at the same time. Common protocols for sharing resources include NFS and CIFS. In the following, we will demonstrate how to build NFS storage resources and deploy NFS Server in Kubernetes.
 
-* [**Building NFS Storage Resources with docker**](https://github.com/ehough/docker-nfs-server)
+* [**Build NFS Storage Resources with docker**](https://github.com/ehough/docker-nfs-server)
 
   **server**
 
-  1. Create Containers and Run
+  1. Create and run containers
 
      ```bash
      $ docker run -d --privileged --restart=always \
@@ -40,7 +40,7 @@ Shared storage is needed when we want a storage volume in a Kubernetes cluster t
 
      > `/data/nfs` :the directory of the shared folder on the server side.
      
-  2. Install the NFS model
+  2. Install NFS model
 
      ```bash
       $ sudo apt install nfs-kernel-server
@@ -258,7 +258,7 @@ The essence of deploying an application using kubectl is to deploy the content d
    $ kubectl get pods
    ```
 
-8. Check pvc
+8. Check pvc status
 
    ```bash
    $ kubectl get pvc -A
