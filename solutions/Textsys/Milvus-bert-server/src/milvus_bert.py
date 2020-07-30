@@ -124,9 +124,9 @@ def search_in_milvus(collection_name, query_sentence):
     try:
         logging.info("start search in milvus...")
         search_params = {'nprobe': 64}
-        status,results = milvus.search(collection_name=collection_name, query_records=query_list, top_k=3, params=search_params)
-        if results[0][0].distance < 0.1:
-         return "对不起，我暂时无法为您解答该问题"
+        status,results = milvus.search(collection_name=collection_name, query_records=query_list, top_k=9, params=search_params)
+        if results[0][0].distance < 0.8:
+         return "对不起，无法搜索到相似文本"
     except:
         return "milvus service disconnect"
 
@@ -139,7 +139,7 @@ def search_in_milvus(collection_name, query_sentence):
         logging.info("start search in pg ...")
         out_put=[]
        # print(results)
-        for a in range (3):
+        for a in range (9):
              rows = pg_operating.search_in_pg(conn, cur, results[0][a].id, collection_name)
              #print(rows)
              out_put .append(rows[0][1:])
