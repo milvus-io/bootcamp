@@ -20,3 +20,4 @@
 - [Milvus 智能问答系统](QA_System/README.md)
 - [生物多因子认证系统](MFA)
 - [基于 Milvus 的文本检索系统](Textsys/README.md)
+- [COVID-19 文章检索](../EN_solutions/covidex)

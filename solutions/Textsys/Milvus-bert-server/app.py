@@ -44,7 +44,8 @@ def do_search_api():
         try:
             output = search_in_milvus(table_name, query_sentence)
             if output:
-                return str(output)
+                result={"response":output}
+                return result
             else:
                 return "没有查到相应文本"
         except Exception as e:
