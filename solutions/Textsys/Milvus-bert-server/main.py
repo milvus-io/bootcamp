@@ -2,7 +2,7 @@ import src.milvus_bert as milvus_bert
 import sys, getopt
 import src.config as config
 
-TOP_K = 3
+TOP_K = 9
 
 
 
@@ -39,3 +39,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
