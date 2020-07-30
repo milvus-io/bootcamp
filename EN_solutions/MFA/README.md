@@ -63,7 +63,7 @@ Type `https://192.168.1.85:5003` (the API_URL specified by the launch MFA-demo) 
 
 ![](./pic/record.png)
 
-​		The following display will appear after a successful system entry.
+​		The following GUI will appear after a successful system entry.
 
 ![](./pic/record_success.png)
 
@@ -73,6 +73,6 @@ Type `https://192.168.1.85:5003` (the API_URL specified by the launch MFA-demo) 
 
 ![](./pic/indentify.png)
 
-​		Successful system authentication will result in the following screen, with the image showing the verifier's face. The Milvus logo has been replaced here.
+​		Successful system authentication is shown below, with the image showing the verifier's face. The Milvus logo has been replaced here.
 
 ![](./pic/indentify_success.png)
