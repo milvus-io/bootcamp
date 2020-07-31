@@ -17,7 +17,7 @@
 - [Building a video search system based on Milvus](https://github.com/milvus-io/bootcamp/blob/0.10.0/EN_solutions/video_search/README.md)
 - [Personalized recommender system based on Milvus](https://github.com/milvus-io/bootcamp/blob/0.10.0/EN_solutions/recommender_system/README.md)
 - [Chemical structure similarity search with Milvus](https://github.com/milvus-io/bootcamp/blob/0.10.0/EN_solutions/mols_search/README.md)
-- [Milvus intelligent Question answering system](https://github.com/milvus-io/bootcamp/blob/0.10.0/EN_solutions/QA_System/README.md)
+- [Milvus intelligent question answering system](https://github.com/milvus-io/bootcamp/blob/0.10.0/EN_solutions/QA_System/README.md)
 - [Biological multi-factor authentication system](https://github.com/milvus-io/bootcamp/blob/0.10.0/EN_solutions/MFA)
 - [Text retrieval system based on Milvus](https://github.com/jingkl/bootcamp/tree/0.10.0/EN_solutions/Textsys/README.md)
 - [COVID-19 Open Research Dataset Search](https://github.com/milvus-io/bootcamp/blob/0.10.0/EN_solutions/covidex)
