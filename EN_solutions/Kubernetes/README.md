@@ -1,24 +1,24 @@
-# 基于 Kubernetes 部署 Milvus 分布式集群
+# Deploy Milvus distributed clusters based on Kubernetes
 
-本示例主要展示如何安装共享存储，如何利用 Helm 和 Kubectl 两种方式搭建 Milvus 集群。
+This example shows how to install shared storage and how to build a Milvus cluster using both Helm and Kubectl.
 
-本示例不包含如何搭建 Kubernetes 集群，如何安装 Helm。
+This example does not include how to build a Kubernetes cluster or how to install Helm.
 
-## 环境准备
+## Preparation
 
 - Kubernetes 1.10+
 - Helm >= 2.12.0
 - Docker >= 19.03
 
-## 搭建共享存储
+## Build shared storage
 
-如果我们希望在 Kubernetes 集群中一个存储卷可以被多个 Pod 同时挂载，多个 Pod 同时修改相同数据，这时便需要共享存储。目前常见的共享资源协议有 NFS 和 CIFS 等。下面，我们将演示如何搭建 NFS 存储资源并在 Kubernetes 中部署 NFS Server。
+Shared storage is needed when we want a storage volume in a Kubernetes cluster to be simultaneously mounted by multiple pods and multiple pods modify the same data at the same time. Common protocols for sharing resources include NFS and CIFS. In the following, we will demonstrate how to build NFS storage resources and deploy NFS Server in Kubernetes.
 
-* [**利用 docker 搭建 NFS 存储资源**](https://github.com/ehough/docker-nfs-server)
+* [**Build NFS Storage Resources with docker**](https://github.com/ehough/docker-nfs-server)
 
-  **server端**
+  **server**
 
-  1. 创建容器并运行
+  1. Create and run containers
 
      ```bash
      $ docker run -d --privileged --restart=always \
@@ -38,15 +38,15 @@
      erichough/nfs-server
      ```
 
-     > `/data/nfs` 为 server 端的共享文件夹的目录
+     > `/data/nfs` :the directory of the shared folder on the server side.
      
-  2. 安装 nfs 模型
+  2. Install NFS model
 
      ```bash
       $ sudo apt install nfs-kernel-server
      ```
 
-  3. 查看容器状态
+  3. View container status
 
      ```bash
      $ sudo docker logs c8a4abde5401
@@ -68,41 +68,41 @@
      ==================================================================
      ```
 
-  **client端**
+  **client**
 
-  下面我们配置并启动客户端，检查 nfs 是否搭建成功。
+  Let's configure and start the client, and check if NFS has been built successfully.
 
-  1. 挂载
+  1. mount
 
      ```bash
      $ mount -t nfs -o rw,nfsvers=3 192.168.1.31:/nfs /data/nfs
      ```
 
-     > 192.168.1.31 为 server 端 ip
+     > 192.168.1.31 : IP of server
      >
-     > `/data/nfs` 为 client 端挂载路径
+     > `/data/nfs` :the path to the client end mount.
 
-  2. 查看挂载信息
+  2. View Mount Information
 
      ```bash
      $ df -h
      ```
 
-* [**NFS Provisioner 的 Helm 部署**](https://github.com/helm/charts/tree/master/stable/nfs-client-provisioner)
+* [**Helm Deployment of NFS Provisioner**](https://github.com/helm/charts/tree/master/stable/nfs-client-provisioner)
 
-  1. 拉取源码
+  1. Pull source code
 
      ```bash
      $ git clone https://github.com/helm/charts.git
      $ cd charts/stable/nfs-client-provisioner
      ```
 
-  2. 安装 nfs chart
+  2. Install NFS chart
 
-     > [chart](https://github.com/helm/charts) 为预先配置好的安装包资源，类似于 Ubuntu 的 APT 和 CentOS 中的 YUM。当 chart 安装到 Kubernetes 中后就会创建一个 release。
+     > [chart](https://github.com/helm/charts) is a pre-configured installer resource, similar to Ubuntu's APT and CentOS's YUM. a release is created when chart is installed into Kubernetes.
 
      ```bash
-     # 修改 values.yaml 下 内容：
+     $ vim values.yaml
      # nfs:
      # server: 192.168.1.31
      # path: /nfs
@@ -112,7 +112,7 @@
      $ helm install nfs-client .
      ```
      
-  3. 查看 nfs-client release 是否安装成功：
+  3. Check if the nfs-client release was installed successfully
 
      ```bash
      $ helm list
@@ -121,16 +121,16 @@
      ```
 
 
-## 利用 Helm 部署 Milvus
+## Deploy Milvus with Helm
 
-1. 拉取源码
+1. Pull source code
 
    ```bash
    $ git clone -b 0.10.0 https://github.com/milvus-io/milvus-helm.git
    $ cd milvus-helm
    ```
    
-2. 部署 Milvus
+2. Deploy Milvus
 
    ```bash
    $ git clone https://github.com/milvus-io/milvus-helm.git
@@ -138,9 +138,9 @@
    $ helm install --set cluster.enabled=true --set persistence.enabled=true --set mysql.enabled=true my-release  .
    ```
 
-   > 关于 Milvus 服务器的详细参数，可参考 [Milvus Configuration](https://github.com/milvus-io/milvus-helm/tree/0.10.0#configuration)
+   > For detailed parameters of the Milvus server, please refer to [Milvus Configuration](https://github.com/milvus-io/milvus-helm/tree/0.10.0#configuration)
 
-3. 查看 Milvus release 是否安装成功：
+3. Check if Milvus release was installed successfully
 
    ```bash
    $ helm list
@@ -149,7 +149,7 @@
    nfs-client	default  	1       	2020-07-16 14:20:16.652557193 +0800 CST	deployed	nfs-client-provisioner-1.2.8	3.1.0    
    ```
 
-4. 查看 pods 是否启动成功：
+4. Check if pods started successfully
 
    ```bash
    $ kubectl get pods
@@ -162,37 +162,37 @@
    nfs-client-nfs-client-provisioner-86cf7c4bc-hd7bq   1/1     Running   3          32m
    ```
 
-   > 如果有 pods 未启动成功，请使用 `kubectl logs <NAME>` 或 `kubectl describe pod <NAME>` 进行错误排查
+   > If any of the pods failed to start, use `kubectl logs <NAME>` or `kubectl describe pod <NAME>` for error checking!
    >
-   > 更多关于 Helm 的使用，请参考 [Helm 官方文档](https://helm.sh/docs/)。
+   > For more information on the use of Helm, please refer to [Helm](https://helm.sh/docs/).
 
-## 利用 kubectl 部署 Milvus
+## Deploy Milvus with kubectl
 
-利用 kubectl 部署应用的实质便是部署 yaml 或 json 文件中定义的内容。因此我们需要利用 Go 安装 schelm 插件。通过 schelm 插件获得 manifest 文件，它们即为 Kubernetes 可以识别的 yaml 格式的资源描述。
+The essence of deploying an application using kubectl is to deploy the content defined in the YAML file. Therefore, we need to install the schelm plugin using the go language. The schelm plug-in retrieves the manifest files, which are resource descriptions in YAML format that Kubernetes can recognize.
 
-1. 拉取源码
+1. Pull source code
 
    ```bash
    $ git clone -b 0.10.0 https://github.com/milvus-io/milvus-helm.git
    $ cd milvus-helm
    ```
 
-2. 下载并解压 go 
+2. Download Go
 
    ```bash
    $ wget https://dl.google.com/go/go1.14.6.linux-amd64.tar.gz
    $ sudo tar -C /usr/local -xzf go1.14.6.linux-amd64.tar.gz
    ```
    
-3. 在 `/etc/profile` 或者 `$HOME/.profile` 添加环境变量
+3. Add environment variable to `/etc/profile` or `$HOME/.profile`.
 
    ```bash
    export PATH=$PATH:/usr/local/go/bin
    ```
 
-   > 其他系统的安装流程，请参考 [Install the Go tools](https://golang.org/doc/install) 。
+   > For installation procedures for other systems, please refer to [Install the Go tools](https://golang.org/doc/install).
 
-4. 安装 schelm 插件
+4. Install schelm
 
    ```bash
    $ go get -u github.com/databus23/schelm
@@ -201,7 +201,7 @@
    sha1sum          sha256sum        sha512sum        shasum           shift            shotwell         showkey          shred            shutdown         
    ```
 
-5. 获取 Milvus 的 manifest 文件
+5. Get manifest files for Milvus
 
    ```bash
    $ helm install --dry-run --debug --set web.enabled=true --set cluster.enabled=true --set persistence.enabled=true --set mysql.enabled=true my-release  . | ~/go/bin/schelm output/
@@ -225,7 +225,7 @@
    2020/07/17 14:51:33 Creating output/milvus/templates/writable-deployment.yaml
    ```
    
-6. 将配置文件应用到 pod
+6. Apply configuration file to pods
 
    ```bash
    $ cd output/milvus/
@@ -250,15 +250,15 @@
    service/my-release-mysql created
    ```
 
-   > 如果出现格式转换错误，请修改对应 .yaml 文件
+   > If a format conversion error occurs, please modify the corresponding .yaml file.
 
-7. 查看 pods 是否成功启动
+7. Check if pods started successfully
 
    ```bash
    $ kubectl get pods
    ```
 
-8. 查看 pvc
+8. Check pvc status
 
    ```bash
    $ kubectl get pvc -A
@@ -268,25 +268,24 @@
    default     pvc-nfs-client-nfs-client-provisioner   Bound    pv-nfs-client-nfs-client-provisioner       10Mi       RWO                           22h
    ```
 
-## 集群测试
+## Test Cluster
 
-此时，Milvus 服务已成功部署到 Kubernetes 上。但是，Kubernetes 的默认服务为ClusterIP，集群内的其它应用可以访问该服务，而集群外部无法进行访问。所以，如果我们想在 Internet 或者生产环境中使用集群，我们需要更换 Service 以暴露应用。Kubernetes的两种可以暴露服务的 Service 类型为：NodePort 和 LoadBalancer。下面我们将介绍如何使用 NodePort 服务在外部访问集群。                         
+At this point, the Milvus service has been successfully deployed on Kubernetes. However, the default service for Kubernetes is ClusterIP, which can be accessed by other applications within the cluster, but not outside the cluster. So, if we want to use the cluster on the Internet or in a production environment, we need to change the service to expose the application.The two types of Kubernetes services that can expose the service are NodePort and LoadBalancer. In the following, we will explain how to access the cluster externally using the NodePort service.
 
-1. 修改服务方式
+1. Modify service
 
    ```bash
    $ vim values.yaml
+   # service.type: NodePort
    ```
    
-   修改 `service.type` 参数为NodePort
-   
-2. 更新 Milvus release
+2. Update Milvus release
 
    ```bash
    $ helm upgrade --set cluster.enabled=true --set persistence.enabled=true --set mysql.enabled=true my-release --set web.enabled=true  .
    ```
 
-3. 查看此时端口状态
+3. Check the status of ports
 
    ```bash
    $ kubectl get service
@@ -299,7 +298,7 @@
    my-release-mysql             ClusterIP   10.97.182.37   <none>        3306/TCP              30m
    ```
 
-   > 此时，在集群外部便可以通过访问 master 节点或 node 节点的32227端口来运行 Milvus 服务。
+   > At this point, Milvus services can be run outside the cluster by accessing port 32227 of Master node or Worker node.
    >
-   > 关于更多暴露应用的方法，请参考 [Expose Your App Publicly](https://kubernetes.io/docs/tutorials/kubernetes-basics/expose/)
+   > For more ways to expose your application, please refer to [Expose Your App Publicly](https://kubernetes.io/docs/tutorials/kubernetes-basics/expose/).
 
