@@ -90,9 +90,9 @@ https://www.milvus.io/cn/docs/v0.10.0/gpu_milvus_docker.md
    -Install  [Node.js 12+](https://nodejs.org/en/download/) and [Yarn](https://classic.yarnpkg.com/en/docs/install/)
    
      $cd client
-      #安装依赖包
+     #安装依赖包
      $ yarn install
-      #启动服务
+     #启动服务
      $ yarn start    
      打开localhost:3001/search  
 注：如果更改了服务器的端口，请针对您自己的环境在第17行的 **/src/ shared / Constants.ts** 上修改参数
