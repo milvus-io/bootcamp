@@ -78,7 +78,7 @@ https://www.milvus.io/cn/docs/v0.10.0/gpu_milvus_docker.md
      $ cd Milvus-bert-server
      $  python main.py --collection test11 --title data/title.txt --version data/version.txt --load
 
-注：其中 **data/title.txt** 是导入的标题集所在的路径、**data/version.txt**是导入文本集所在的路径
+>注：其中 **data/title.txt** 是导入的标题集所在的路径、**data/version.txt**是导入文本集所在的路径
 
 6、启动查询服务
 ---------------------
