@@ -8,11 +8,11 @@ This project uses Milvus and Bert to build a Text Search Engine. In this project
 
 ## Script description
 
-**Milvus-bert-client
+**Milvus-bert-client**
 
 This directory is the script of the front page
 
-**Milvus-bert-server
+**Milvus-bert-server**
 
 Under this directory is the script to start the back-end service
 
@@ -20,7 +20,7 @@ app.py: The script provides an interface for the front page
 
 main.py: The script can perform operations such as data import and query
 
-**Parameter description:
+**Parameter description:**
 
 | Parameter  | Description                                                  |
 | ---------- | ------------------------------------------------------------ |
