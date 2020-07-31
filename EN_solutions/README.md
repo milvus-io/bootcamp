@@ -9,6 +9,7 @@
 - [High availability (HA) solution based on Milvus](Milvus_HA/README.md)
 - [Hybrid search based on Milvus partitions](partition_hybrid_search/README.md)
 - [Distributed solution based on Mishards, a sharding middleware for Milvus clusters](Mishards/README.md)
+- [Deploy Milvus distributed clusters based on Kubernetes](Kubernetes/README.md)
 
 ## Application Scenarios
 
@@ -16,5 +17,5 @@
 - [Building a video search system based on Milvus](video_search/README.md)
 - [Personalized recommender system based on Milvus](recommender_system/README.md)
 - [Chemical structure similarity search with Milvus](mols_search/README.md)
+- [Biological multi-factor authentication system](./MFA)
 - [COVID-19 Open Research Dataset Search](./covidex)
-
