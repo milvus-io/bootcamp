@@ -63,7 +63,7 @@ pip install --ignore-installed --upgrade tensorflow==1.10
 pip install -r requriment.txt
 ```
 
-4.Start the Bert services (more [Bert] (https://github.com/hanxiao/bert-as-service#building-a-qa-semantic-search-engine-in-3-minutes) related)
+4.Start the Bert services (more[Bert](https://github.com/hanxiao/bert-as-service#building-a-qa-semantic-search-engine-in-3-minutes) related)
 
 ```shell
 #Download model
@@ -80,9 +80,8 @@ cd QA-search-server
 python main.py --collection milvus_qa --question data/question.txt --answer data/answer.txt --load
 ```
 
-> Note: **Data /question.txt **is the path of the imported question set
->
-> ​           **Data /answer.txt **is the path of the imported answer set
+> Note: **Data /question.txt** is the path of the imported question set
+>  **Data /answer.txt** is the path of the imported answer set
 
 6. Start the query service
 
