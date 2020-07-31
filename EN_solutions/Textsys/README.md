@@ -8,11 +8,11 @@ This project uses Milvus and Bert to build a Text Search Engine. In this project
 
 ## Script description
 
-Milvus-bert-client
+**Milvus-bert-client**
 
 This directory is the script of the front page
 
-Milvus-bert-server
+**Milvus-bert-server**
 
 Under this directory is the script to start the back-end service
 
@@ -20,7 +20,7 @@ app.py: The script provides an interface for the front page
 
 main.py: The script can perform operations such as data import and query
 
-Parameter description:
+**Parameter description:**
 
 | Parameter  | Description                                                  |
 | ---------- | ------------------------------------------------------------ |
@@ -73,7 +73,7 @@ https://github.com/hanxiao/bert-as-service
     #Download model
     $ cd model
     $ wget https://storage.googleapis.com/bert_models/2018_11_03/english_L-12_H-768_A-12.zip
-    #start service
+    # start service
     $ bert-serving-start -model_dir / tmp / english_L-12_H-768_A-12 / -num_worker = 4 
 
 ## 5、Import Data
