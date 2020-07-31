@@ -105,7 +105,7 @@ open localhost:3001/search
 
 > Note: If you change the port of the server, please modify the parameters on line 17 **/src/shared/Constants.ts** for your own environment
 
-## 8、The interface display
+## 8、Web Presentation
 
 Enter 127.0.0.1:3001/search in the browser to open the search page and enter the search text.
 
