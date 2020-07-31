@@ -58,7 +58,7 @@ https://www.milvus.io/cn/docs/v0.10.0/gpu_milvus_docker.md
 3、安装所需要的python包
 -------------------------------------
     $ pip install --ignore-installed --upgrade tensorflow==1.10
-    $  pip install -r requriment.txt
+    $ pip install -r requriment.txt
 
 4、启动bert服务
 ---------------------
@@ -78,7 +78,7 @@ https://www.milvus.io/cn/docs/v0.10.0/gpu_milvus_docker.md
      $ cd Milvus-bert-server
      $  python main.py --collection test11 --title data/title.txt --version data/version.txt --load
 
-注：其中 **data/title.txt** 是导入的标题集所在的路径、**data/version.txt ** 是导入文本集所在的路径
+注：其中 **data/title.txt** 是导入的标题集所在的路径、**data/version.txt**是导入文本集所在的路径
 
 6、启动查询服务
 ---------------------
@@ -90,12 +90,12 @@ https://www.milvus.io/cn/docs/v0.10.0/gpu_milvus_docker.md
    -Install  [Node.js 12+](https://nodejs.org/en/download/) and [Yarn](https://classic.yarnpkg.com/en/docs/install/)
    
      $cd client
-      #安装依赖包
+     #安装依赖包
      $ yarn install
-      #启动服务
+     #启动服务
      $ yarn start    
      打开localhost:3001/search  
-注：如果更改了服务器的端口，请针对您自己的环境在第17行的 **/src/ shared / Constants.ts** 上修改参数
+>注：如果更改了服务器的端口，请针对您自己的环境在第17行的 **/src/ shared / Constants.ts** 上修改参数
 
 
 ## 8、界面展示
