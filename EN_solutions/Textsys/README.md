@@ -70,7 +70,7 @@ The way to install Bert-as-service is as follows. You can also refer to the offi
 
 https://github.com/hanxiao/bert-as-service
 
-    #Download model
+    # Download model
     $ cd model
     $ wget https://storage.googleapis.com/bert_models/2018_11_03/english_L-12_H-768_A-12.zip
     # start service
@@ -95,8 +95,8 @@ In the main.py text data import script of the Milvus-bert-server file in the pro
 Install  [Node.js 12+](https://nodejs.org/en/download/) and [Yarn](https://classic.yarnpkg.com/en/docs/install/).
 
 ```
-$ cd  Milvus-bert-client/client 
-#Install dependencies
+$ cd Milvus-bert-client/client 
+# Install dependencies
 $ yarn install 
 #start yarn 
 $ yarn start   
