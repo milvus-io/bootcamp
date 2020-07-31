@@ -19,5 +19,5 @@
 - [Chemical structure similarity search with Milvus](https://github.com/milvus-io/bootcamp/blob/0.10.0/EN_solutions/mols_search/README.md)
 - [Milvus intelligent Question answering system](https://github.com/milvus-io/bootcamp/blob/0.10.0/EN_solutions/QA_System/README.md)
 - [Biological multi-factor authentication system](https://github.com/milvus-io/bootcamp/blob/0.10.0/EN_solutions/MFA)
-- [Text retrieval system based on Milvus](https://github.com/milvus-io/bootcamp/blob/0.10.0/EN_solutions/Textsys/README.md)
+- [Text retrieval system based on Milvus](https://github.com/jingkl/bootcamp/tree/0.10.0/EN_solutions/Textsys/README.md)
 - [COVID-19 Open Research Dataset Search](https://github.com/milvus-io/bootcamp/blob/0.10.0/EN_solutions/covidex)
