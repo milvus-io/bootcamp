@@ -4,20 +4,20 @@
 
 ## Solutions
 
-- [Milvus-Based hybrid search solution](https://github.com/milvus-io/bootcamp/blob/0.10.0/EN_solutions/hybrid_search/readme.md)
-- [Build Milvus from source in Windows](https://github.com/milvus-io/bootcamp/blob/0.10.0/EN_solutions/Milvus_with_Windows.md)
-- [High availability (HA) solution based on Milvus](https://github.com/milvus-io/bootcamp/blob/0.10.0/EN_solutions/Milvus_HA/README.md)
-- [Hybrid search based on Milvus partitions](https://github.com/milvus-io/bootcamp/blob/0.10.0/EN_solutions/partition_hybrid_search/README.md)
-- [Distributed solution based on Mishards, a sharding middleware for Milvus clusters](https://github.com/milvus-io/bootcamp/blob/0.10.0/EN_solutions/Mishards/README.md)
-- [Deploy Milvus distributed clusters based on Kubernetes](https://github.com/milvus-io/bootcamp/blob/0.10.0/EN_solutions/Kubernetes/README.md)
+- [Milvus-Based hybrid search solution](/hybrid_search/readme.md)
+- [Build Milvus from source in Windows](/EN_solutions/Milvus_with_Windows.md)
+- [High availability (HA) solution based on Milvus](/Milvus_HA/README.md)
+- [Hybrid search based on Milvus partitions](/partition_hybrid_search/README.md)
+- [Distributed solution based on Mishards, a sharding middleware for Milvus clusters](/Mishards/README.md)
+- [Deploy Milvus distributed clusters based on Kubernetes](/Kubernetes/README.md)
 
 ## Application Scenarios
 
-- [Reverse image search based on Milvus and VGG](https://github.com/milvus-io/bootcamp/blob/0.10.0/EN_solutions/pic_search/README.md)
-- [Building a video search system based on Milvus](https://github.com/milvus-io/bootcamp/blob/0.10.0/EN_solutions/video_search/README.md)
-- [Personalized recommender system based on Milvus](https://github.com/milvus-io/bootcamp/blob/0.10.0/EN_solutions/recommender_system/README.md)
-- [Chemical structure similarity search with Milvus](https://github.com/milvus-io/bootcamp/blob/0.10.0/EN_solutions/mols_search/README.md)
-- [Milvus intelligent question answering system](https://github.com/milvus-io/bootcamp/blob/0.10.0/EN_solutions/QA_System/README.md)
-- [Biological multi-factor authentication system](https://github.com/milvus-io/bootcamp/blob/0.10.0/EN_solutions/MFA)
-- [Text retrieval system based on Milvus](https://github.com/jingkl/bootcamp/tree/0.10.0/EN_solutions/Textsys/README.md)
-- [COVID-19 Open Research Dataset Search](https://github.com/milvus-io/bootcamp/blob/0.10.0/EN_solutions/covidex)
+- [Reverse image search based on Milvus and VGG](/pic_search/README.md)
+- [Building a video search system based on Milvus](/video_search/README.md)
+- [Personalized recommender system based on Milvus](/recommender_system/README.md)
+- [Chemical structure similarity search with Milvus](/mols_search/README.md)
+- [Milvus intelligent question answering system](/QA_System/README.md)
+- [Biological multi-factor authentication system](/MFA)
+- [Text retrieval system based on Milvus](/Textsys/README.md)
+- [COVID-19 Open Research Dataset Search](/covidex)
