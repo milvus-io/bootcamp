@@ -63,7 +63,7 @@ pip install --ignore-installed --upgrade tensorflow==1.10
 pip install -r requriment.txt
 ```
 
-4.Start the Bert services (more [Bert] (https://github.com/hanxiao/bert-as-service#building-a-qa-semantic-search-engine-in-3-minutes) related)
+4.Start the Bert services (more [Bert](https://github.com/hanxiao/bert-as-service#building-a-qa-semantic-search-engine-in-3-minutes) related)
 
 ```shell
 #Download model
@@ -80,9 +80,9 @@ cd QA-search-server
 python main.py --collection milvus_qa --question data/question.txt --answer data/answer.txt --load
 ```
 
-> Note: **Data /question.txt **is the path of the imported question set
+> Note: **Data /question.txt**is the path of the imported question set
 >
-> ​           **Data /answer.txt **is the path of the imported answer set
+> ​           **Data /answer.txt**is the path of the imported answer set
 
 6. Start the query service
 
@@ -103,6 +103,6 @@ docker run --name milvus_qa -d --rm -p 8001:80 -e API_URL=http://40.73.34.15:500
 
 > Http://40.73.34.15 Where IP is the machine IP where the service started in step 6.
 
-8. Open the web page, enter the url: 40.73.34.15:8081, you can experience the intelligent QUESTION answering system belongs to you。
+8. Open the web page, enter the url: 40.73.34.15:8081, you can experience the intelligent Question Answering system belongs to you。
 
 > 47.73.34.15:8081 is the IP of the machine where the service in step 7 is started
