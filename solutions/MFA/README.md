@@ -4,7 +4,7 @@
 
 ## 前提环境
 
-- #### Milvus 0.10.0
+- #### [Milvus 0.10.0](https://milvus.io/cn/docs/v0.10.0/install_milvus.md)
 
 - #### postgres
 
