@@ -7,7 +7,7 @@
 | CPU      | Intel(R) Core(TM) i7-7700K CPU @ 4.20GHz                     |
 | Memory   | 32 GB                                                         |
 | OS       | Ubuntu 18.04                                                 |
-| Software | [Milvus 0.10.0](https://milvus.io/cn/docs/v0.10.0/guides/get_started/install_milvus/cpu_milvus_docker.md) <br />mols-search-webserver 0.7.0 <br />mols-search-webclient 0.3.0 |
+| Software | [Milvus 0.10.0](https://milvus.io/cn/docs/v0.10.0/install_milvus.md) <br />mols-search-webserver 0.7.0 <br />mols-search-webclient 0.3.0 |
 
 The previous configuration has been tested and this scenario is also supported in Windows.
 
