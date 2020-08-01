@@ -1,8 +1,8 @@
 # COVID-19 Open Research Dataset Search
 
-This system contains the API server, neural models, and UI client, a neural search engine for the [COVID-19 Open Research Dataset (CORD-19)](https://pages.semanticscholar.org/coronavirus-research) and is refer to [covidex](https://github.com/castorini/covidex).
+This system contains the API server, neural models, and UI client, a neural search engine for the [COVID-19 Open Research Dataset (CORD-19)](https://pages.semanticscholar.org/coronavirus-research) , and is referred to [covidex](https://github.com/castorini/covidex).
 
-At the COVID-19 Dataset Search system, Milvus is used to get the related articles. Let's start to have fun with the local deployment.
+At the COVID-19 Dataset Search system, [Milvus](https://milvus.io/) is used to get the related articles. Let's start to have fun with the local deployment.
 
 
 ## Local Deployment
@@ -28,7 +28,7 @@ At the COVID-19 Dataset Search system, Milvus is used to get the related article
 
 #### 1. Start Docker container
 
-The server system uses Milvus 0.10.0. Refer to the [Install Milvus](https://github.com/milvus-io/docs/blob/v0.10.0/site/en/guides/get_started/install_milvus/install_milvus.md) for how to start Milvus server.
+The server system uses Milvus 0.10.0. Refer to the [Install Milvus](https://milvus.io/cn/docs/v0.10.0/install_milvus.md) for how to start Milvus server.
 
 ```bash
 $ docker run -d --name milvus_cpu_0.10.0 \
@@ -88,7 +88,7 @@ The server wil be running at [localhost:8000](http://localhost:8000) with API do
     $ yarn install
     ```
 
-    > If you changed the port of the server, please modify the parames at src/shared/Constants.ts at line 17 for your own enviroments.
+    > If you changed the port of the server, please modify the parames at src/shared/Constants.ts at line 17 for your own environment.
 
 - Start the server
 
@@ -98,7 +98,7 @@ The server wil be running at [localhost:8000](http://localhost:8000) with API do
 
 The UI client will be running at [localhost:3000](http://localhost:3000), enter it in the browser to open the interface.
 
-- Search somthing about COVID-19
+- Search something about COVID-19
 
   ![](./pic/search.png)
 
