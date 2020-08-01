@@ -4,7 +4,7 @@ The biological multi-factor authentication system presented in this paper uses [
 
 ## Preparation
 
-- #### Milvus 0.10.0
+- #### [Milvus 0.10.0](https://milvus.io/cn/docs/v0.10.0/install_milvus.md)
 
 - #### postgres
 
