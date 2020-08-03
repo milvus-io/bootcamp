@@ -1,6 +1,6 @@
 # 基于 Milvus 和 VGG 实现以图搜图
 
-***新版的以图搜图项目已经发布，项目地址：https://github.com/zilliztech/phantoscope。***
+***新版的以图搜图项目已经发布，项目地址：https://github.com/zilliztech/phantoscope 。***
 
 ***本文的以图搜图项目将不再更新维护。***
 
