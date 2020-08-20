@@ -88,7 +88,7 @@
      $ df -h
      ```
 
-* [**NFS Provisioner 的 Helm 部署**](https://github.com/helm/charts/tree/master/stable/nfs-client-provisioner)
+* [**利用 Helm 配置 StorageClass**](https://github.com/helm/charts/tree/master/stable/nfs-client-provisioner)
 
   1. 拉取源码
 
