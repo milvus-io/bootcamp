@@ -40,7 +40,7 @@
 
      > `/data/nfs` 为 server 端的共享文件夹的目录
      
-  2. 安装 nfs 模型
+  2. 安装 NFS 模型
 
      ```bash
       $ sudo apt install nfs-kernel-server
@@ -70,7 +70,7 @@
 
   **client端**
 
-  下面我们配置并启动客户端，检查 nfs 是否搭建成功。
+  下面我们配置并启动客户端，检查 NFS 是否搭建成功。
 
   1. 挂载
 
@@ -78,7 +78,7 @@
      $ mount -t nfs -o rw,nfsvers=3 192.168.1.31:/nfs /data/nfs
      ```
 
-     > 192.168.1.31 为 server 端 ip
+     > 192.168.1.31 为 server 端 IP
      >
      > `/data/nfs` 为 client 端挂载路径
 
@@ -88,7 +88,7 @@
      $ df -h
      ```
 
-* [**NFS Provisioner 的 Helm 部署**](https://github.com/helm/charts/tree/master/stable/nfs-client-provisioner)
+* [**利用 Helm 配置 StorageClass**](https://github.com/helm/charts/tree/master/stable/nfs-client-provisioner)
 
   1. 拉取源码
 
@@ -97,9 +97,11 @@
      $ cd charts/stable/nfs-client-provisioner
      ```
 
-  2. 安装 nfs chart
+  2. 安装 NFS client chart
 
      > [chart](https://github.com/helm/charts) 为预先配置好的安装包资源，类似于 Ubuntu 的 APT 和 CentOS 中的 YUM。当 chart 安装到 Kubernetes 中后就会创建一个 release。
+     >
+     > NFS Client Provisioner 是用于自动创建 Kubernetes PV 的自动化插件。它可以根据已配置好的 NFS Server，自动创建 Kubernetes PV。
 
      ```bash
      # 修改 values.yaml 下 内容：
@@ -112,7 +114,7 @@
      $ helm install nfs-client .
      ```
      
-  3. 查看 nfs-client release 是否安装成功：
+  3. 检查部署状态：
 
      ```bash
      $ helm list
@@ -149,7 +151,7 @@
    nfs-client	default  	1       	2020-07-16 14:20:16.652557193 +0800 CST	deployed	nfs-client-provisioner-1.2.8	3.1.0    
    ```
 
-4. 查看 pods 是否启动成功：
+4. 查看 Pods 是否启动成功：
 
    ```bash
    $ kubectl get pods
@@ -177,7 +179,7 @@
    $ cd milvus-helm
    ```
 
-2. 下载并解压 go 
+2. 下载并解压 GO 
 
    ```bash
    $ wget https://dl.google.com/go/go1.14.6.linux-amd64.tar.gz
@@ -225,7 +227,7 @@
    2020/07/17 14:51:33 Creating output/milvus/templates/writable-deployment.yaml
    ```
    
-6. 将配置文件应用到 pod
+6. 将配置文件应用到 Pod
 
    ```bash
    $ cd output/milvus/
@@ -252,13 +254,13 @@
 
    > 如果出现格式转换错误，请修改对应 .yaml 文件
 
-7. 查看 pods 是否成功启动
+7. 查看 Pods 是否成功启动
 
    ```bash
    $ kubectl get pods
    ```
 
-8. 查看 pvc
+8. 查看 PVC
 
    ```bash
    $ kubectl get pvc -A
