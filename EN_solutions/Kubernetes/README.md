@@ -88,7 +88,7 @@ Shared storage is needed when we want a storage volume in a Kubernetes cluster t
      $ df -h
      ```
 
-* [**Helm Deployment of NFS Provisioner**](https://github.com/helm/charts/tree/master/stable/nfs-client-provisioner)
+* [**Set StorageClass with Helm**](https://github.com/helm/charts/tree/master/stable/nfs-client-provisioner)
 
   1. Pull source code
 
@@ -100,6 +100,8 @@ Shared storage is needed when we want a storage volume in a Kubernetes cluster t
   2. Install NFS chart
 
      > [chart](https://github.com/helm/charts) is a pre-configured installer resource, similar to Ubuntu's APT and CentOS's YUM. a release is created when chart is installed into Kubernetes.
+     >
+     > The NFS Client Provisioner is an automation plug-in for automatic creation of Kubernetes PV. It automatically creates Kubernetes PV based on a configured NFS Server.
 
      ```bash
      $ vim values.yaml
