@@ -135,8 +135,6 @@
 2. 部署 Milvus
 
    ```bash
-   $ git clone https://github.com/milvus-io/milvus-helm.git
-   $ cd milvus-helm
    $ helm install --set cluster.enabled=true --set persistence.enabled=true --set mysql.enabled=true my-release  .
    ```
 
@@ -186,9 +184,10 @@
    $ sudo tar -C /usr/local -xzf go1.14.6.linux-amd64.tar.gz
    ```
    
-3. 在 `/etc/profile` 或者 `$HOME/.profile` 添加环境变量
+3. 在 `/etc/profile.d` 或者 `$HOME/.profile` 添加环境变量
 
    ```bash
+   $ vim go.sh
    export PATH=$PATH:/usr/local/go/bin
    ```
 
