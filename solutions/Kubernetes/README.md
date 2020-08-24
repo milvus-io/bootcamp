@@ -196,10 +196,7 @@
 4. 安装 schelm 插件
 
    ```bash
-   $ go get -u github.com/databus23/schelm
-   $ sh
-   sh               sha224sum        sha384sum        shadowconfig     sh.distrib       shopt            showconsolefont  showrgb          shuf             
-   sha1sum          sha256sum        sha512sum        shasum           shift            shotwell         showkey          shred            shutdown         
+   $ go get -u github.com/databus23/schelm      
    ```
 
 5. 获取 Milvus 的 manifest 文件

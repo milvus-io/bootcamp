@@ -196,10 +196,7 @@ The essence of deploying an application using kubectl is to deploy the content d
 4. Install schelm
 
    ```bash
-   $ go get -u github.com/databus23/schelm
-   $ sh
-   sh               sha224sum        sha384sum        shadowconfig     sh.distrib       shopt            showconsolefont  showrgb          shuf             
-   sha1sum          sha256sum        sha512sum        shasum           shift            shotwell         showkey          shred            shutdown         
+   $ go get -u github.com/databus23/schelm     
    ```
 
 5. Get manifest files for Milvus
