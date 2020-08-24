@@ -135,8 +135,6 @@ Shared storage is needed when we want a storage volume in a Kubernetes cluster t
 2. Deploy Milvus
 
    ```bash
-   $ git clone https://github.com/milvus-io/milvus-helm.git
-   $ cd milvus-helm
    $ helm install --set cluster.enabled=true --set persistence.enabled=true --set mysql.enabled=true my-release  .
    ```
 
@@ -186,9 +184,10 @@ The essence of deploying an application using kubectl is to deploy the content d
    $ sudo tar -C /usr/local -xzf go1.14.6.linux-amd64.tar.gz
    ```
    
-3. Add environment variable to `/etc/profile` or `$HOME/.profile`.
+3. Add environment variable to `/etc/profile.d` or `$HOME/.profile`.
 
    ```bash
+   $ vim go.sh
    export PATH=$PATH:/usr/local/go/bin
    ```
 
