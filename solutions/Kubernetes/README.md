@@ -213,9 +213,9 @@
    $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/0.2.14/examples/example.py
    ```
 
-   > _HOST: IP of cluster node
+   > _HOST: 集群中任意一台服务器 IP
    >
-   > _PORT: static port of exposure service
+   > _PORT: 暴露服务的静态端口
 
 6. 运行示例代码。
 
