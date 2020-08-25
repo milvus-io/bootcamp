@@ -246,7 +246,7 @@
    ```bash
    $ vim go.sh
    export PATH=$PATH:/usr/local/go/bin
-   $ source /etc/profile.d/
+   $ source /etc/profile.d/go.sh
    ```
    
 > 其他系统的安装流程，请参考 [Install the Go tools](https://golang.org/doc/install) 。
