@@ -106,11 +106,11 @@ Shared storage is needed when we want a storage volume in a Kubernetes cluster t
      ```bash
      $ vim values.yaml
      # nfs:
-     # server: 192.168.1.31
-     # path: /nfs
+     # server: 192.168.1.126
+     # path: /volume1/tmp
      # mountOptions:
      #   - rw
-     #   - nfsvers=3
+     #   - nfsvers=4
      $ helm install nfs-client .
      ```
      
@@ -129,7 +129,7 @@ Shared storage is needed when we want a storage volume in a Kubernetes cluster t
 
    ```bash
    $ git clone -b 0.10.0 https://github.com/milvus-io/milvus-helm.git
-   $ cd milvus-helm
+   $ cd milvus-helm/charts/milvus
    ```
    
 2. Deploy Milvus
@@ -199,6 +199,28 @@ At this point, the Milvus service has been successfully deployed on Kubernetes. 
    > At this point, Milvus services can be run outside the cluster by accessing port 32227 of Master node or Worker node.
    >
    > For more ways to expose your application, please refer to [Expose Your App Publicly](https://kubernetes.io/docs/tutorials/kubernetes-basics/expose/).
+   
+4. Install Milvus Python SDK.
+
+   ```bash
+    $ pip3 install pymilvus==0.2.14
+   ```
+
+5. Download Python example code.
+
+   ```bash
+   $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/0.2.14/examples/example.py
+   ```
+
+   > _HOST: IP of cluster node
+   >
+   > _PORT: static port of exposure service
+
+6. Run the example code.
+
+   ```bash
+   $ python3 example.py
+   ```
 
 ## Deploy Milvus with kubectl
 
@@ -208,7 +230,7 @@ The essence of deploying an application using kubectl is to deploy the content d
 
    ```bash
    $ git clone -b 0.10.0 https://github.com/milvus-io/milvus-helm.git
-   $ cd milvus-helm
+   $ cd milvus-helm/charts/milvus
    ```
 
 2. Download Go
@@ -223,11 +245,11 @@ The essence of deploying an application using kubectl is to deploy the content d
    ```bash
    $ vim go.sh
    export PATH=$PATH:/usr/local/go/bin
-   $ source /etc/profile.d
+   $ source /etc/profile.d/go.sh
    ```
    
 > For installation procedures for other systems, please refer to [Install the Go tools](https://golang.org/doc/install).
-   
+
 4. Install schelm
 
    ```bash
