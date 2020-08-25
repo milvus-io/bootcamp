@@ -104,13 +104,13 @@
      > NFS Client Provisioner 是用于自动创建 Kubernetes PV 的自动化插件。它可以根据已配置好的 NFS Server，自动创建 Kubernetes PV。
 
      ```bash
-     $ vim values.ymal
+     $ vim values.yaml
      # nfs:
-     # server: 192.168.1.31
-     # path: /nfs
+     # server: 192.168.1.126
+     # path: /volume1/tmp
      # mountOptions:
      #   - rw
-     #   - nfsvers=3
+     #   - nfsvers=4
      $ helm install nfs-client .
      ```
      
@@ -129,7 +129,7 @@
 
    ```bash
    $ git clone -b 0.10.0 https://github.com/milvus-io/milvus-helm.git
-   $ cd milvus-helm
+   $ cd milvus-helm/charts/milvus
    ```
    
 2. 部署 Milvus
@@ -200,6 +200,28 @@
    > 此时，在集群外部便可以通过访问 master 节点或 node 节点的32227端口来运行 Milvus 服务。
    >
    > 关于更多暴露应用的方法，请参考 [Expose Your App Publicly](https://kubernetes.io/docs/tutorials/kubernetes-basics/expose/)
+   
+4. 安装 Milvus Python SDK。
+
+   ```bash
+   $ pip3 install pymilvus==0.2.14
+   ```
+
+5. 下载 Python 示例代码。
+
+   ```bash
+   $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/0.2.14/examples/example.py
+   ```
+
+   > _HOST: 集群中任意一台服务器 IP
+   >
+   > _PORT: 暴露服务的静态端口
+
+6. 运行示例代码。
+
+   ```bash
+   $ python3 example.py
+   ```
 
 ## 利用 kubectl 部署 Milvus
 
@@ -209,7 +231,7 @@
 
    ```bash
    $ git clone -b 0.10.0 https://github.com/milvus-io/milvus-helm.git
-   $ cd milvus-helm
+   $ cd milvus-helm/charts/milvus
    ```
 
 2. 下载并解压 GO 
@@ -224,11 +246,11 @@
    ```bash
    $ vim go.sh
    export PATH=$PATH:/usr/local/go/bin
-   $ source /etc/profile.d
+   $ source /etc/profile.d/go.sh
    ```
    
 > 其他系统的安装流程，请参考 [Install the Go tools](https://golang.org/doc/install) 。
-   
+
 4. 安装 schelm 插件
 
    ```bash
