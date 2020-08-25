@@ -104,7 +104,7 @@
      > NFS Client Provisioner 是用于自动创建 Kubernetes PV 的自动化插件。它可以根据已配置好的 NFS Server，自动创建 Kubernetes PV。
 
      ```bash
-     # 修改 values.yaml 下 内容：
+     $ vim values.ymal
      # nfs:
      # server: 192.168.1.31
      # path: /nfs
@@ -166,6 +166,41 @@
    >
    > 更多关于 Helm 的使用，请参考 [Helm 官方文档](https://helm.sh/docs/)。
 
+## 集群测试
+
+此时，Milvus 服务已成功部署到 Kubernetes 上。但是，Kubernetes 的默认服务为 ClusterIP，集群内的其它应用可以访问该服务，而集群外部无法进行访问。所以，如果我们想在 Internet 或者生产环境中使用集群，我们需要更换 Service 以暴露应用。Kubernetes 的两种可以暴露服务的 Service 类型为：NodePort 和 LoadBalancer。下面我们将介绍如何使用 NodePort 服务在外部访问集群。                         
+
+1. 修改服务方式
+
+   ```bash
+   $ vim values.yaml
+   ```
+
+   修改 `service.type` 参数为 NodePort
+
+2. 更新 Milvus release
+
+   ```bash
+   $ helm upgrade --set cluster.enabled=true --set persistence.enabled=true --set mysql.enabled=true my-release --set web.enabled=true  .
+   ```
+
+3. 查看此时端口状态
+
+   ```bash
+   $ kubectl get service
+   # You are expected to see the following output.
+   NAME                         TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)               AGE
+   kubernetes                   ClusterIP   10.96.0.1      <none>        443/TCP               24h
+   my-release-milvus            NodePort    10.99.64.80    <none>        19530:32227/TCP       30m
+   my-release-milvus-readonly   ClusterIP   10.99.29.32    <none>        19530/TCP,19121/TCP   30m
+   my-release-milvus-writable   ClusterIP   10.98.84.247   <none>        19530/TCP,19121/TCP   30m
+   my-release-mysql             ClusterIP   10.97.182.37   <none>        3306/TCP              30m
+   ```
+
+   > 此时，在集群外部便可以通过访问 master 节点或 node 节点的32227端口来运行 Milvus 服务。
+   >
+   > 关于更多暴露应用的方法，请参考 [Expose Your App Publicly](https://kubernetes.io/docs/tutorials/kubernetes-basics/expose/)
+
 ## 利用 kubectl 部署 Milvus
 
 利用 kubectl 部署应用的实质便是部署 yaml 或 json 文件中定义的内容。因此我们需要利用 Go 安装 schelm 插件。通过 schelm 插件获得 manifest 文件，它们即为 Kubernetes 可以识别的 yaml 格式的资源描述。
@@ -189,10 +224,11 @@
    ```bash
    $ vim go.sh
    export PATH=$PATH:/usr/local/go/bin
+   $ source /etc/profile.d
    ```
-
-   > 其他系统的安装流程，请参考 [Install the Go tools](https://golang.org/doc/install) 。
-
+   
+> 其他系统的安装流程，请参考 [Install the Go tools](https://golang.org/doc/install) 。
+   
 4. 安装 schelm 插件
 
    ```bash
@@ -237,7 +273,7 @@
    service/my-release-milvus-readonly created
    deployment.apps/my-release-milvus-writable created
    service/my-release-milvus-writable created
-   $ cd /charts/mysql/
+   $ cd charts/mysql/
    $ kubectl apply -f templates/
    # You are expected to see the following output.
    configmap/my-release-mysql-configuration created
@@ -265,39 +301,4 @@
    default     my-release-mysql                        Bound    pvc-a5599f51-06b9-4743-aacd-1d00f9fd9fe0   4Gi        RWO            nfs-client     29s
    default     pvc-nfs-client-nfs-client-provisioner   Bound    pv-nfs-client-nfs-client-provisioner       10Mi       RWO                           22h
    ```
-
-## 集群测试
-
-此时，Milvus 服务已成功部署到 Kubernetes 上。但是，Kubernetes 的默认服务为ClusterIP，集群内的其它应用可以访问该服务，而集群外部无法进行访问。所以，如果我们想在 Internet 或者生产环境中使用集群，我们需要更换 Service 以暴露应用。Kubernetes的两种可以暴露服务的 Service 类型为：NodePort 和 LoadBalancer。下面我们将介绍如何使用 NodePort 服务在外部访问集群。                         
-
-1. 修改服务方式
-
-   ```bash
-   $ vim values.yaml
-   ```
-   
-   修改 `service.type` 参数为NodePort
-   
-2. 更新 Milvus release
-
-   ```bash
-   $ helm upgrade --set cluster.enabled=true --set persistence.enabled=true --set mysql.enabled=true my-release --set web.enabled=true  .
-   ```
-
-3. 查看此时端口状态
-
-   ```bash
-   $ kubectl get service
-   # You are expected to see the following output.
-   NAME                         TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)               AGE
-   kubernetes                   ClusterIP   10.96.0.1      <none>        443/TCP               24h
-   my-release-milvus            NodePort    10.99.64.80    <none>        19530:32227/TCP       30m
-   my-release-milvus-readonly   ClusterIP   10.99.29.32    <none>        19530/TCP,19121/TCP   30m
-   my-release-milvus-writable   ClusterIP   10.98.84.247   <none>        19530/TCP,19121/TCP   30m
-   my-release-mysql             ClusterIP   10.97.182.37   <none>        3306/TCP              30m
-   ```
-
-   > 此时，在集群外部便可以通过访问 master 节点或 node 节点的32227端口来运行 Milvus 服务。
-   >
-   > 关于更多暴露应用的方法，请参考 [Expose Your App Publicly](https://kubernetes.io/docs/tutorials/kubernetes-basics/expose/)
 

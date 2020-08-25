@@ -166,6 +166,40 @@ Shared storage is needed when we want a storage volume in a Kubernetes cluster t
    >
    > For more information on the use of Helm, please refer to [Helm](https://helm.sh/docs/).
 
+## Test Cluster
+
+At this point, the Milvus service has been successfully deployed on Kubernetes. However, the default service for Kubernetes is ClusterIP, which can be accessed by other applications within the cluster, but not outside the cluster. So, if we want to use the cluster on the Internet or in a production environment, we need to change the service to expose the application.The two types of Kubernetes services that can expose the service are NodePort and LoadBalancer. In the following, we will explain how to access the cluster externally using the NodePort service.
+
+1. Modify service
+
+   ```bash
+   $ vim values.yaml
+   # service.type: NodePort
+   ```
+
+2. Update Milvus release
+
+   ```bash
+   $ helm upgrade --set cluster.enabled=true --set persistence.enabled=true --set mysql.enabled=true my-release --set web.enabled=true  .
+   ```
+
+3. Check the status of ports
+
+   ```bash
+   $ kubectl get service
+   # You are expected to see the following output.
+   NAME                         TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)               AGE
+   kubernetes                   ClusterIP   10.96.0.1      <none>        443/TCP               24h
+   my-release-milvus            NodePort    10.99.64.80    <none>        19530:32227/TCP       30m
+   my-release-milvus-readonly   ClusterIP   10.99.29.32    <none>        19530/TCP,19121/TCP   30m
+   my-release-milvus-writable   ClusterIP   10.98.84.247   <none>        19530/TCP,19121/TCP   30m
+   my-release-mysql             ClusterIP   10.97.182.37   <none>        3306/TCP              30m
+   ```
+
+   > At this point, Milvus services can be run outside the cluster by accessing port 32227 of Master node or Worker node.
+   >
+   > For more ways to expose your application, please refer to [Expose Your App Publicly](https://kubernetes.io/docs/tutorials/kubernetes-basics/expose/).
+
 ## Deploy Milvus with kubectl
 
 The essence of deploying an application using kubectl is to deploy the content defined in the YAML file. Therefore, we need to install the schelm plugin using the go language. The schelm plug-in retrieves the manifest files, which are resource descriptions in YAML format that Kubernetes can recognize.
@@ -189,10 +223,11 @@ The essence of deploying an application using kubectl is to deploy the content d
    ```bash
    $ vim go.sh
    export PATH=$PATH:/usr/local/go/bin
+   $ source /etc/profile.d
    ```
-
-   > For installation procedures for other systems, please refer to [Install the Go tools](https://golang.org/doc/install).
-
+   
+> For installation procedures for other systems, please refer to [Install the Go tools](https://golang.org/doc/install).
+   
 4. Install schelm
 
    ```bash
@@ -237,7 +272,7 @@ The essence of deploying an application using kubectl is to deploy the content d
    service/my-release-milvus-readonly created
    deployment.apps/my-release-milvus-writable created
    service/my-release-milvus-writable created
-   $ cd /charts/mysql/
+   $ cd charts/mysql/
    $ kubectl apply -f templates/
    # You are expected to see the following output.
    configmap/my-release-mysql-configuration created
@@ -265,38 +300,3 @@ The essence of deploying an application using kubectl is to deploy the content d
    default     my-release-mysql                        Bound    pvc-a5599f51-06b9-4743-aacd-1d00f9fd9fe0   4Gi        RWO            nfs-client     29s
    default     pvc-nfs-client-nfs-client-provisioner   Bound    pv-nfs-client-nfs-client-provisioner       10Mi       RWO                           22h
    ```
-
-## Test Cluster
-
-At this point, the Milvus service has been successfully deployed on Kubernetes. However, the default service for Kubernetes is ClusterIP, which can be accessed by other applications within the cluster, but not outside the cluster. So, if we want to use the cluster on the Internet or in a production environment, we need to change the service to expose the application.The two types of Kubernetes services that can expose the service are NodePort and LoadBalancer. In the following, we will explain how to access the cluster externally using the NodePort service.
-
-1. Modify service
-
-   ```bash
-   $ vim values.yaml
-   # service.type: NodePort
-   ```
-   
-2. Update Milvus release
-
-   ```bash
-   $ helm upgrade --set cluster.enabled=true --set persistence.enabled=true --set mysql.enabled=true my-release --set web.enabled=true  .
-   ```
-
-3. Check the status of ports
-
-   ```bash
-   $ kubectl get service
-   # You are expected to see the following output.
-   NAME                         TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)               AGE
-   kubernetes                   ClusterIP   10.96.0.1      <none>        443/TCP               24h
-   my-release-milvus            NodePort    10.99.64.80    <none>        19530:32227/TCP       30m
-   my-release-milvus-readonly   ClusterIP   10.99.29.32    <none>        19530/TCP,19121/TCP   30m
-   my-release-milvus-writable   ClusterIP   10.98.84.247   <none>        19530/TCP,19121/TCP   30m
-   my-release-mysql             ClusterIP   10.97.182.37   <none>        3306/TCP              30m
-   ```
-
-   > At this point, Milvus services can be run outside the cluster by accessing port 32227 of Master node or Worker node.
-   >
-   > For more ways to expose your application, please refer to [Expose Your App Publicly](https://kubernetes.io/docs/tutorials/kubernetes-basics/expose/).
-
