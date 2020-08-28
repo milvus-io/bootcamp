@@ -63,11 +63,13 @@ def image_endpoint(img: int):
 
 
 @app.post('/getRandom')
-def get_random_item(request: Request, table_name: str=None):
+def get_random_item(request: Request, num: int=None, table_name: str=None):
     try:
+        if not num:
+            num = 16
         index_client, conn, cursor = init_conn()
         img_list = get_img_list()
-        list_id = random.sample(img_list, 16)
+        list_id = random.sample(img_list, num)
         host = request.headers['host']
         print(list_id)
         info = get_list_info(conn, cursor, table_name, host, list_id)
