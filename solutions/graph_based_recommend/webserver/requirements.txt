@@ -1,0 +1,11 @@
+numpy==1.16.5
+pymilvus==0.2.14
+dgl==0.4.3.post2
+pymysql
+fastapi
+uvicorn
+torch
+torchvision
+pandas
+torchtext
+aiofiles
