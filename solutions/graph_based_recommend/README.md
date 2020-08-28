@@ -24,7 +24,7 @@
 
    ```bash
    # Make sure you are in the pinsage folder
-   $ cd bootcamp/solutions/user_base_recommend/webserver/src/pinsage
+   $ cd bootcamp/solutions/graph_based_recommend/webserver/src/pinsage
    $ wget http://files.grouplens.org/datasets/movielens/ml-1m.zip
    $ unzip ml-1m.zip
    ```
@@ -38,7 +38,7 @@
    $ python process_movielens1m.py ./ml-1m ./output
    ```
 
-   可以看到，在 **output** 目录下生成了两个文件：**data.pkl**和**mov_id.csv**。**data.pkl**和**mov_id.csv**。
+   可以看到，在 **output** 目录下生成了两个文件：**data.pkl** 和 **mov_id.csv**。
 
 
 
@@ -69,7 +69,7 @@ $ python model.py output --num-epochs 100 --num-workers 2 --hidden-dims 256
 | MYSQL_DB     | postgresql datebase name  | mysql            |
 | MILVUS_TABLE | default table name        | milvus_recommend |
 
-请根据你的环境修改Milvus和MySQL的参数。
+请根据你的环境修改 Milvus 和 MySQL 的参数。
 
 ```bash
 # Make sure you are in the src folder
@@ -84,6 +84,7 @@ $ python insert_milvus.py ./pinsage/output
 1. 下载并解压 movies_poster 文件
 
    ```bash
+   # Make sure you are in the src folder
    $ wget https://github.com/shiyu22/user_base_recommend/raw/master/webserver/src/movies_poster.zip
    $ unzip movies_poster.zip
    ```

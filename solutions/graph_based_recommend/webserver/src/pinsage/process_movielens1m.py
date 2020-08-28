@@ -98,8 +98,8 @@ with open('../movie_info.dat','r') as f_r:
             info[line[0]] = line[1]
         print("----info:", len(info))
         for i in range(len(mov_id)):
-            print(str(i), mov_id[i], info[str(mov_id[i])])
-            line_w = str(i) + "::" + str(info[mov_id[i]]) + '\n'
+            # print(str(i), mov_id[i], info[str(mov_id[i])])
+            line_w = str(i) + "::" + info[str(mov_id[i])] + '\n'
             f_w.write(line_w)
         print("writing movie_id.dat")
 

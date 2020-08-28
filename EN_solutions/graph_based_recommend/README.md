@@ -24,7 +24,7 @@ The data source is [MovieLens million-scale dataset (ml-1m)](http://files.groupl
 
    ```bash
    # Make sure you are in the pinsage folder
-   $ cd bootcamp/solutions/user_base_recommend/webserver/src/pinsage
+   $ cd bootcamp/solutions/graph_based_recommend/webserver/src/pinsage
    $ wget http://files.grouplens.org/datasets/movielens/ml-1m.zip
    $ unzip ml-1m.zip
    ```
@@ -84,6 +84,7 @@ $ python insert_milvus.py ./pinsage/output
 1. Download and extract  the movies_poster file.
 
    ```bash
+   # Make sure you are in the src folder
    $ wget https://github.com/shiyu22/user_base_recommend/raw/master/webserver/src/movies_poster.zip
    $ unzip movies_poster.zip
    ```
