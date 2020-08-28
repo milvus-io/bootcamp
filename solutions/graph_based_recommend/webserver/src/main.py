@@ -106,4 +106,4 @@ def do_search_images_api(request: Request, search_id: list, table_name: str=None
 
 
 if __name__ == '__main__':
-    uvicorn.run(app=app, host='192.168.1.85', port=8000)
+    uvicorn.run(app=app, host='127.0.0.1', port=8000)
