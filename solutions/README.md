@@ -21,3 +21,4 @@
 - [生物多因子认证系统](MFA)
 - [基于 Milvus 的文本检索系统](Textsys/README.md)
 - [COVID-19 文章检索](../EN_solutions/covidex)
+- [利用 Milvus 搭建基于图的推荐系统](./graph_based_recommend)
