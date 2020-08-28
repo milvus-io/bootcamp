@@ -21,3 +21,5 @@
 - [Biological multi-factor authentication system](./MFA)
 - [Text retrieval system based on Milvus](./Textsys/README.md)
 - [COVID-19 Open Research Dataset Search](./covidex)
+- [Graph-based Recommendation System with Milvus](./graph_based_recommend)
+
