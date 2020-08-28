@@ -38,7 +38,7 @@
    $ python process_movielens1m.py ./ml-1m ./output
    ```
 
-   你可以看到，在 **output** 目录下生成了两个文件：**data.pkl**和**mov_id.csv**。**data.pkl**和**mov_id.csv**。
+   可以看到，在 **output** 目录下生成了两个文件：**data.pkl**和**mov_id.csv**。**data.pkl**和**mov_id.csv**。
 
 
 
