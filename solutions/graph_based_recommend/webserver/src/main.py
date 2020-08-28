@@ -12,8 +12,17 @@ import uvicorn
 from starlette.responses import FileResponse
 from starlette.requests import Request
 import random
+from starlette.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"])
+
 
 def init_conn():
     conn = connect_mysql()
