@@ -44,14 +44,18 @@ def do_search(index_client, conn, cursor, img_list, search_id, table_name):
     print("-----milvus search status------", status)
 
     results_ids = []
+    search_num = len(search_id)
+    num = 100/search_num
+    print("-----num:", num)
     for results_id in results.id_array:
+        k = 0
         for i in results_id:
+            if k >= num:
+                break
             img = str(i) +'.jpg'
             if img in img_list and i not in search_id:
                 results_ids.append(img)
+                k += 1
     # print(results_ids)
-    try:
-        list_ids = random.sample(results_ids, 100)
-    except:
-        list_ids = results_ids
-    return list_ids
+
+    return results_ids
