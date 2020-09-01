@@ -1,8 +1,5 @@
 # 基于 Milvus 和 VGG 实现以图搜图
 
-***新版的以图搜图项目已经发布，项目地址：https://github.com/zilliztech/phantoscope 。***
-
-***本文的以图搜图项目将不再更新维护。***
 
 本文展示如何利用图片特征提取模型 VGG 和向量搜索引擎 Milvus 搭建一个以图搜图系统。
 
