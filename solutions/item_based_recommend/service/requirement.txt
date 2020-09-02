@@ -1,0 +1,7 @@
+bert-serving-server
+bert-serving-client
+pymilvus==0.2.14
+pymysql
+tensorflow==1.14.0
+fastapi
+uvicorn
