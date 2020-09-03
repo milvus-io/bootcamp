@@ -129,10 +129,10 @@ $ docker run -d -p 8001:80 -e API_URL=http://127.0.0.1:8000 tumao/movie-taste-de
 
   根据标记的喜欢推荐用户可能感兴趣的电影。
 
-  ![](F:/github/shiyu22/bootcamp/0.10.0/bootcamp/EN_solutions/graph_based_recommend/pic/recommend.png)
+  ![](./pic/recommend.png)
 
 - 获取 Movie 信息
 
   点击电影图片获取电影的相关信息。
 
-  ![](F:/github/shiyu22/bootcamp/0.10.0/bootcamp/EN_solutions/graph_based_recommend/pic/info.png)
+  ![](./pic/info.png)
