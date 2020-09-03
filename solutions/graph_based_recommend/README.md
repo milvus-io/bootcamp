@@ -105,3 +105,34 @@ $ python insert_milvus.py ./pinsage/output
 
 
 
+## 运行 webclient
+
+```bash
+$ docker run -d -p 8001:80 -e API_URL=http://127.0.0.1:8000 tumao/movie-taste-demo
+```
+
+> API_URL 参数表示 webserver 的网址
+
+
+
+## 系统使用
+
+在手机端或者浏览器中输入 `http://127.0.0.1:8001` 就可以开始使用电影推荐系统了。
+
+- 电影标记
+
+  从 16 个随机电影中标记你喜欢或者不喜欢的电影。
+
+  ![](./pic/mark.png)
+
+- Movie 推荐
+
+  根据标记的喜欢推荐用户可能感兴趣的电影。
+
+  ![](F:/github/shiyu22/bootcamp/0.10.0/bootcamp/EN_solutions/graph_based_recommend/pic/recommend.png)
+
+- 获取 Movie 信息
+
+  点击电影图片获取电影的相关信息。
+
+  ![](F:/github/shiyu22/bootcamp/0.10.0/bootcamp/EN_solutions/graph_based_recommend/pic/info.png)
