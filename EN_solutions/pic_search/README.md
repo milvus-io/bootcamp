@@ -1,9 +1,5 @@
 # Reverse Image Search Based on Milvus and VGG
 
-***The new version of the project to search for pictures with pictures has been released, the project address: https://github.com/zilliztech/phantoscope.***
-
-***The article search for pictures in this article will no longer be updated and maintained.***
-
 This demo uses VGG, an image feature extraction model, and Milvus to build a system that can perform reverse image search.
 
 The system architecture is displayed as follows:
