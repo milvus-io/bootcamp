@@ -105,4 +105,34 @@ $ python insert_milvus.py ./pinsage/output
 
 
 
+## Run webclient
 
+```bash
+$ docker run -d -p 8001:80 -e API_URL=http://127.0.0.1:8000 tumao/movie-taste-demo
+```
+
+> Note: The API_URL parameter is the webserver address.
+
+
+
+## System Usage
+
+Type `http://127.0.0.1:8001` into your mobile or client browser to get started with the movie recommendation system.
+
+- Mark movies
+
+  Mark your favorite or disliked movies from 16 random movies.
+
+  ![](./pic/mark.png)
+
+- Movie recommendations
+
+  Recommend movies based on your marked favorites.
+
+  ![](./pic/recommend.png)
+
+- Movie info
+
+  Get more information with movie.
+
+  ![](./pic/info.png)
