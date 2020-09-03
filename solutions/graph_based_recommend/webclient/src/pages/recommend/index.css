@@ -1,0 +1,28 @@
+.recommend-wrapper {
+  /* flex-grow: 1; */
+  display: flex;
+  flex-direction: column;
+
+  position: relative;
+
+  width: 100%;
+  overflow: hidden;
+}
+
+.cards-wrapper {
+  overflow-y: scroll;
+}
+
+.card-mask {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: rgb(0, 0, 0, 0.6);
+}
