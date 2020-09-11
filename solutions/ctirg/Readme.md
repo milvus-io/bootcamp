@@ -92,4 +92,4 @@ INFO:     Application startup complete.
 INFO:     Uvicorn running on http://192.168.1.58:7000 (Press CTRL+C to quit)
 ```
 
-> You can get the API by typing http://127.0.0.1:8000/docs into your browser.
+> You can get the API by typing http://127.0.0.1:7000/docs into your browser.
