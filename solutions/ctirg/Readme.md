@@ -71,7 +71,7 @@ Before running the script, please modify the parameters in **webserver/src/commo
 | MILVUS_TABLE | default table name        | milvus_k        |
 
 Please modify the parameters of Milvus and MySQL based on your environment.
-
+Before executing this code, you need to put the vector **img.npy** file for the target image under the **tirg/css** path
 ```
 $ cd ..
 $ python insert_milvus.py ./tirg/css
