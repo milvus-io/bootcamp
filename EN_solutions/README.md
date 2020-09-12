@@ -22,4 +22,6 @@
 - [Text retrieval system based on Milvus](./Textsys/README.md)
 - [COVID-19 Open Research Dataset Search](./covidex)
 - [Graph-based Recommendation System with Milvus](./graph_based_recommend)
+- [Image-text retrieval System with Milvus](./ctirg/Readme.md)
+
 
