@@ -68,7 +68,7 @@ Before running the script, please modify the parameters in **webserver/src/commo
 | MYSQL_USER   | postgresql user name      | root             |
 | MYSQL_PWD    | postgresql password       | 123456           |
 | MYSQL_DB     | postgresql datebase name  | mysql            |
-| MILVUS_TABLE | default table name        | milvus_recommend |
+| MILVUS_TABLE | 默认表名| milvus_kk|
 
 Please modify the parameters of Milvus and MySQL based on your environment.
 
