@@ -119,3 +119,15 @@ docker run -d -p 9999:80 -e API_URL=http://127.0.0.1:8000 tumao/paper-recommend-
 
 # Result Show
 
+show categorie
+
+![1600246331](img/1600246331.png)
+
+show papers
+
+![1600246331](img/1600246467.png)
+
+Similar articles
+
+![1600246331](img/1600246498.png)
+
