@@ -92,7 +92,15 @@ unzip uncased_L-12_H-768_A-12.zip
 bert-serving-start -model_dir uncased_L-12_H-768_A-12 -num_worker=12
 ```
 
-6. Start service
+6. Import data
+
+```shell
+python load.py -p ../data/test.json
+```
+
+
+
+7. Start service
 
 ```shell
 cd service
@@ -101,45 +109,25 @@ uvicorn main:app
 
 > you can access http://127.0.0.1:8000/docs to learn about the interface provided by the service
 
-7. Import data
-
-```shell
-curl -X POST "http://127.0.0.1:8000/insert/${data_path}"
-```
-
-> ${data_path} is the path of data.
-
-8. Show category
+8. Start the client
 
 ```
-curl -X GET "http://127.0.0.1:8000/categories"
-```
-
-> View the classification of data
-
-9.  Show texts
-
-```shell
-curl -X GET "http:/127.0.0.1:8000/category_texts/${category_name}"
-```
-
-> View articles under each category
-
-10. Recommend
-
-```shell
-curl -X POST "http://192.168.1.85:8008/search/${articles}"
-```
-
-
-
-10. Start the client
-
-```
-
+docker run -d -p 9999:80 -e API_URL=http://127.0.0.1:8000 tumao/paper-recommend-demo:latest
 ```
 
 
 
 # Result Show
+
+show categorie
+
+![1600246331](img/1600246331.png)
+
+show papers
+
+![1600246331](img/1600246467.png)
+
+Similar articles
+
+![1600246331](img/1600246498.png)
 
