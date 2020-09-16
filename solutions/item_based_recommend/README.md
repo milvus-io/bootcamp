@@ -34,9 +34,9 @@
 
 ## 脚本说明
 
-本项目中包含了 service 和 webclient 两部分.
+本项目中包含了 service 和 data 两部分.
 
-service 提供了后端服务的代码。webclient 提供了前端界面的脚本。
+service 提供了后端服务的代码。data 提供了测试用的数据。
 
 service 中的配置文件 config.py 说明：
 
@@ -94,7 +94,13 @@ unzip uncased_L-12_H-768_A-12.zip
 bert-serving-start -model_dir uncased_L-12_H-768_A-12 -num_worker=12
 ```
 
-6. 启动系统服务
+6. 数据导入
+
+```shell
+python load.py -p ../data/test.json
+```
+
+7. 启动系统服务
 
 ```shell
 cd service
@@ -103,21 +109,13 @@ uvicorn main:app
 
 
 
-7. 数据导入
-
-```shell
-curl -X POST 127.0.0.1:8000/insert/{data_path}
-```
-
-
-
 8. 启动前端界面
 
 ```
-
+docker run -d -p 9999:80 -e API_URL=http://127.0.0.1:8000 tumao/paper-recommend-demo:latest
 ```
 
-
+> `API_URL` 该值后应填写服务端所在的 `IP` 和 `port`
 
 ## 结果展示
 
