@@ -14,15 +14,7 @@
 
 在本项目中选取了 recipe1M 中的部分数据集。本项目中需要用的数据集和模型下载链接： 提取码： 。
 
-该数据集包含了
 
-
-
-
-
-**数据处理**
-
-如果你想使用是
 
 
 
@@ -91,9 +83,7 @@ python load.py
 uvicorn main:app
 ```
 
-> 本项目使用 `FastAPI` 构建 `API`, 启动服务后，输入网址 127.0.0.1:8000/docs 可查看该服务提供的接口。点击 `/search/ Do Search Api` ，再点击 `Try it out`。然后就可以也是查询了，在参数 `image`选择一张本地的食谱图片，点击 `Excute` 即可。结果如图：
-
-![img](C:\Users\37790\AppData\Local\Temp\企业微信截图_15996388449668.png)
+> 本项目使用 `FastAPI` 构建 `API`, 启动服务后，输入网址 127.0.0.1:8000/docs 可查看该服务提供的接口。点击 `/search/ Do Search Api` ，再点击 `Try it out`。然后就可以也是查询了，在参数 `image`选择一张本地的食谱图片，点击 `Excute` 即可。
 
 
 
