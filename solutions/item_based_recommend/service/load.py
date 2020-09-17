@@ -12,6 +12,7 @@ import sys, getopt
 index_client = milvus_client()
 
 
+
 def init_conn():
     conn = connect_mysql()
     cursor = conn.cursor()
@@ -24,8 +25,12 @@ def insert_data(data_path):
         status = do_insert(data_path,index_client, conn, cursor, bc)
         return "{0}".format(status)
     except Exception as e:
+        print(e)
         return "{0}".format(e)
-
+    # finally:
+    #     cursor.close()
+    #     conn.close()
+    #     bc.close()
 
 
 def main():
@@ -38,7 +43,7 @@ def main():
     except getopt.GetoptError:
         print("Usage: params error")
         sys.exit(2)
-    for opt_name, opt_value in opts:       
+    for opt_name, opt_value in opts:      
         if opt_name in ("-p","--path"):
             data_path = opt_value
     insert_data(data_path)
