@@ -51,3 +51,11 @@ def milvus_search(client,vec):
 		return status, results
 	except Exception as e:
 		print("Milvus search error:", e)
+
+
+def milvus_collection_rows(client):
+    try:
+        rows = client.count_entities(collection_name=TABLE_NAME)[1]
+        return rows
+    except Exception as e:
+        print("get milvus rows error: ", e)
