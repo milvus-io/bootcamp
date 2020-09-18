@@ -139,10 +139,11 @@ def search_in_milvus(collection_name, query_sentence):
         logging.info("start search in pg ...")
         out_put=[]
        # print(results)
-        for a in range (9):
-             rows = pg_operating.search_in_pg(conn, cur, results[0][a].id, collection_name)
-             #print(rows)
-             out_put .append(rows[0][1:])
+        for a in range(9):
+             rows = pg_operating.search_in_pg(conn, cur, results[0][a].id, collection_name)   
+             if rows and len(rows[0]) > 0:
+                 #print(rows)
+                 out_put.append(rows[0][1:])
             # print(out_put)
         return out_put
     except:
