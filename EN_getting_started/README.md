@@ -7,6 +7,7 @@ The getting started section includes the following content:
 - [Basics](basics)
     - [Hardware Platform](./basics/hardware_platform.md)
     - [Quick Start](./basics/quickstart.md)
+    - [Tutorials based on Google Cloab](./basics/milvus_tutorial)
 - [Data Preparation](data_preparation)
     - [Prepare Data Files](./data_preparation/data_file_consideration.md)
     - [Data Normalization](./data_preparation/data_normalization.md)
