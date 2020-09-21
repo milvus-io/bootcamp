@@ -57,9 +57,9 @@ def do_insert(data_path,index_client, conn, cursor, bc):
                 for data in data_dict[i*batch_size:(i+1)*batch_size]:
                     ids_list.append(int(data['id']))
                     abstract_list.append(data['abstract'])
-                    vectors = bc.encode(abstract_list)
-                    vectors = [(x/np.sqrt(np.sum(x**2))).tolist() for x in vectors]
-                    # vectors = vectors.tolist()
+                vectors = bc.encode(abstract_list)
+                vectors = [(x/np.sqrt(np.sum(x**2))).tolist() for x in vectors]
+                # vectors = vectors.tolist()
                 print("doing insert, size:", batch_size, "the num of insert vectors:", len(vectors))
                 status, ids = milvus_insert(index_client, ids_list, vectors)
     				# print(status)
