@@ -94,7 +94,7 @@ def get_search_params(collection_name,search_param,milvus):
     if index_type == 'RNSG':
         search_params = {'search_length':search_param}
     elif index_type == 'HNSW':
-        search_params == {'ef':search_param}
+        search_params = {'ef':search_param}
     else:
         search_params = {'nprobe': search_param}
     return search_params

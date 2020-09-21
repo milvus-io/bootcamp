@@ -1,7 +1,9 @@
 import logging
 from bert_serving.client import BertClient
 
-from fastapi import Depends, FastAPI
+from fastapi import Depends, FastAPI, Body
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 
 from src.milvus import milvus_client
 from src.search import do_search, do_show_categories, do_show_category_texts
@@ -13,10 +15,20 @@ from src.config import BERT_HOST, BERT_PORT
 
 app = FastAPI()
 
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 index_client = milvus_client()
 
-
+class Item(BaseModel):
+    abstract: str
 
 def init_conn():
     conn = connect_mysql()
@@ -32,34 +44,24 @@ def init_bc_client():
 		print("Error with connect bert: ", e)
 
 
-@app.post('/insert/{data_path}')
-async def do_insert_api(data_path: str):	
-	try:
-		conn, cursor = init_conn()
-		bc = BertClient(ip=BERT_HOST, port=BERT_PORT, check_length=False)
-		status = do_insert(data_path,index_client, conn, cursor, bc)
-		return "{0}".format(status)
-	except Exception as e:
-		return "{0}".format(e)
-	finally:
-		cursor.close()
-		conn.close()
-		bc.close()
 
-
-@app.post('/search/{query_text}')
-async def do_search_api(query_text: str):
-	try:
-		conn, cursor = init_conn()
-		bc = init_bc_client()
-		results = do_search(query_text,index_client,conn,cursor,bc)
-		return results
-	except Exception as e:
-		return "{0}".format(e)
-	finally:
-		cursor.close()
-		conn.close()
-		bc.close()
+@app.post('/search/')
+async def do_search_api(query_text: Item):
+    try:
+        conn, cursor = init_conn()
+        bc = init_bc_client()
+        # print(1111)
+        # print(query_text)
+        # print("======",query_text.abstract,"=====")
+        print(type(query_text.abstract))
+        results = do_search(query_text.abstract,index_client,conn,cursor,bc)
+        return results
+    except Exception as e:
+       return "{0}".format(e), 400
+    finally:
+        cursor.close()
+        conn.close()
+        bc.close()
 
 
 @app.get("/categories")
@@ -72,7 +74,7 @@ async def do_show_categories_api():
 		else:
 			return "There is no data"
 	except Exception as e:
-		return "{0}".format(e)
+		return "{0}".format(e), 400
 	finally:
 		cursor.close()
 		conn.close()
@@ -85,17 +87,31 @@ async def do_show_category_texts_api(category: str):
 		texts = do_show_category_texts(category,conn,cursor)
 		return texts
 	except Exception as e:
-		return "{0}".format(e)
+		return "{0}".format(e), 400
 	finally:
 		cursor.close()
 		conn.close()
 
 
-@app.get("/")
-async def root():
-    return {"message": "begin"}
+# @app.get("/")
+# async def root():
+#     return {"message": "begin"}
 
-
+'''
+@app.post('/insert/{data_path}')
+async def do_insert_api(data_path: str):    
+    try:
+        conn, cursor = init_conn()
+        bc = BertClient(ip=BERT_HOST, port=BERT_PORT, check_length=False)
+        status = do_insert(data_path,index_client, conn, cursor, bc)
+        return "{0}".format(status)
+    except Exception as e:
+        return "{0}".format(e)
+    finally:
+        cursor.close()
+        conn.close()
+        bc.close()
+'''
 
 # data_path = 'test.json'
 # conn, cursor = init_conn()

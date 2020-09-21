@@ -10,7 +10,7 @@ The data set in the data directory is a question and answer set from 100,000 why
 
 If want to test more data sets, please download the article 33 w【banking customer Q&A dataset】(https://pan.baidu.com/s/1g-vMh05sDRv1EBZN6X7Qxw), the extracted code: hkzn.After downloading the data, unzip it and put it in the corresponding directory. If you use the data set, when you import the data set, specify the path where the q&A data file is located.
 
-Source of data related to the banking business: https://github.com/Bennu-Li/ChineseNlpCorpus.The data provided by this project are extracted from the financial data set in the QUESTION-and-answer system of ChineseNlpCorpus project, from which about 33W pairs of question-and-answer sets are extracted.
+Source of data related to the banking business: https://github.com/Bennu-Li/ChineseNlpCorpus. The data provided by this project are extracted from the financial data set in the QUESTION-and-answer system of ChineseNlpCorpus project, from which about 33W pairs of question-and-answer sets are extracted.
 
 ## Script description
 

@@ -24,12 +24,14 @@ MYSQL_DATABASE = os.getenv("MYSQL_DATABASE", 'mysql')
 TABLE_NAME = os.getenv("DEFAULT_TABLE", "recommend")
 
 
+insert_file_path = '/data/workspace/lym/Recommend'
+
 batch_size = 10000
 temp_file_path = 'temp.csv'
 
 
-categories_num = 10
-texts_num = 5
+categories_num = 8
+texts_num = 20
 
 
 collection_param = {
@@ -40,5 +42,5 @@ collection_param = {
 }
 
 search_param = {'nprobe': 16}
-top_k = 3
+top_k = 20
 
