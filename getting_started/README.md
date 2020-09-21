@@ -7,7 +7,7 @@
 - [入门基础](basics)
     - [硬件平台](./basics/hardware_platform.md)
     - [快速入门](./basics/quickstart.md)
-    - [基于 Google Cloab 的教程](./basics/milvus_tutorial)
+    - [基于 Google Colab 的教程](./basics/milvus_tutorial)
 - [数据准备](data_preparation)
     - [准备数据文件](./data_preparation/data_file_consideration.md)
     - [数据正则化](./data_preparation/data_normalization.md)
