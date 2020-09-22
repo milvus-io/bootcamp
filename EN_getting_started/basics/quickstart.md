@@ -8,4 +8,4 @@ Refer to [Installation Overview](https://www.milvus.io/docs/guides/get_started/i
 
 ## Running Python example program
 
-Refer to [Try an Example Program](https://www.milvus.io/docs/guides/get_started/example_code.md) to learn how to run a Python example program.
+Refer to [Try an Example Program](https://github.com/milvus-io/pymilvus/tree/master/examples) to learn how to run a Python example program.
