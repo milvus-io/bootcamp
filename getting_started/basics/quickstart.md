@@ -8,5 +8,5 @@
 
 ## 运行 Python 示例代码
 
-请参考[运行示例程序](https://www.milvus.io/cn/docs/guides/get_started/example_code.md)了解如何运行 Python 示例代码。
+请参考[运行示例程序](https://github.com/milvus-io/pymilvus/tree/master/examples)了解如何运行 Python 示例代码。
 
