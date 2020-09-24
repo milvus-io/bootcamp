@@ -118,7 +118,8 @@ def search_in_milvus(collection_name, query_sentence):
     try:
         milvus = Milvus(host=MILVUS_HOST, port=MILVUS_PORT)
         #logging.info(status)
-    except:
+    except Exception as e:
+        print("Milvus connect error: ", e)
         return "milvus service connection failed"
     try:
         logging.info("start search in milvus...")
@@ -126,7 +127,8 @@ def search_in_milvus(collection_name, query_sentence):
         status,results = milvus.search(collection_name=collection_name, query_records=query_list, top_k=1, params=search_params)
         if results[0][0].distance < 0.9:
             return "对不起，我暂时无法为您解答该问题"
-    except:
+    except  Exception as e:
+        print("Milvus search error: ", e)
         return "milvus service disconnect"
 
     try:
