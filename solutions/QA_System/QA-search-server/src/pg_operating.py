@@ -9,9 +9,9 @@ def connect_postgres_server(PG_HOST, PG_PORT, PG_USER, PG_PASSWORD, PG_DATABASE)
     try: 
         conn = psycopg2.connect(host=PG_HOST, port=PG_PORT, user=PG_USER, password=PG_PASSWORD, database=PG_DATABASE)
         return conn
-    except:
-        print ("unable to connect to the database")
-        #sys.exit(2)
+    except Exception as e:
+        print ("unable to connect to the database: ", e)
+        sys.exit(2)
 
 
 def create_pg_table(conn, cur, PG_TABLE_NAME):
@@ -20,8 +20,9 @@ def create_pg_table(conn, cur, PG_TABLE_NAME):
         cur.execute(sql)
         conn.commit()
         print("create postgres table!")
-    except:
-        print("can't create postgres table")
+    except Exception as e:
+        print("can't create postgres table: ", e)
+        sys.exit(2)
 
 
 def copy_data_to_pg(conn, cur, PG_TABLE_NAME):
@@ -32,8 +33,9 @@ def copy_data_to_pg(conn, cur, PG_TABLE_NAME):
         cur.execute(sql)
         conn.commit()
         print("insert pg sucessful!")
-    except:
-        print("faild  copy!")
+    except Exception as e:
+        print("copy data to postgres faild: ", e)
+        sys.exit(2)
 
 def build_pg_index(conn, cur, PG_TABLE_NAME):
     try:
@@ -41,8 +43,8 @@ def build_pg_index(conn, cur, PG_TABLE_NAME):
         cur.execute(sql)
         conn.commit()
         print("build index sucessful!")
-    except:
-        print("faild build index")
+    except Exception as e:
+        print("faild build index: ", e)
 
 
 def search_in_pg(conn, cur, result, PG_TABLE_NAME):
@@ -64,8 +66,8 @@ def drop_pg_table(conn, cur, PG_TABLE_NAME):
         cur.execute(sql)
         conn.commit()
         print("drop postgres table!")
-    except:
-        print("can't drop postgres table")
+    except Exception as e:
+        print("drop postgres table faild: ", e)
 
 
 def record_txt(ids,answer_file):
