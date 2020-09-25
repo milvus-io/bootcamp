@@ -25,10 +25,9 @@ def create_pg_table(conn, cur, PG_TABLE_NAME):
 
 def copy_data_to_pg(conn, cur, PG_TABLE_NAME):
     fname = os.path.join(os.getcwd(),'temp.csv')
-    sql = "copy " + PG_TABLE_NAME + " from '" + fname + "' with CSV delimiter '|';"
-    print(sql)
+    file = open(fname, 'r')
     try:
-        cur.execute(sql)
+        cur.copy_from(file, PG_TABLE_NAME, sep='|', columns=('ids', 'title', 'version'))
         conn.commit()
         print("insert pg sucessful!")
     except:
