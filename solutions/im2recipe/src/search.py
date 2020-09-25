@@ -17,7 +17,28 @@ def do_search(image,index_client,conn,cursor,model, device):
 	if len(results) != 0:
 		ids = [res.id for res in results[0]]
 		results = search_by_milvus_ids(conn, cursor, ids)
-		return results
+		output = []
+		for result in results:
+			title = result[2]
+			Ingredients = eval(result[3])
+			Ingredients = [ingre['text'] for ingre in Ingredients]
+			instructions = eval(result[4])
+			instructions = instructions = [instr['text'] for instr in instructions]
+			link = result[5]
+			result = {"title":title,"ingredients":Ingredients,"instructions":instructions,"link":link}
+			output.append(result)
+		return output
 	else:
 		return "there is no data"
+
+# output = []
+# for result in results:
+# 	title = result[2]
+# 	Ingredients = eval(result[3])
+# 	Ingredients = [ingre['text'] for ingre in Ingredients]
+# 	instructions = eval(result[4])
+# 	instructions = instructions = [instr['text'] for instr in instructions]
+# 	link = result[5]
+# 	result = {"title":title,"ingredients":Ingredients,"instructions":instructions,"link":link}
+# 	output.append(result)
 
