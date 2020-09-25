@@ -1,3 +1,4 @@
+from bert_serving.client import BertClient
 import src.milvus_bert as milvus_bert
 import sys, getopt
 import src.config as config
@@ -10,7 +11,7 @@ def main():
     try:
         opts, args = getopt.getopt(
             sys.argv[1:],
-            "t:q:a:ls",
+            "t:q:a:l",
             ["collection=", "question=", "answer=", "load", "sentence=", "search"],
         )
     except:
@@ -31,9 +32,10 @@ def main():
         elif opt_name in("--sentence"):
             query_sentence = opt_value
             print(query_sentence)
-        elif opt_name in ("-s","--search"):
+        elif opt_name in ("--search"):
             print("begin search")
-            out_put = milvus_bert.search_in_milvus(table_name, query_sentence)
+            bc = BertClient(timeout=10000)
+            out_put = milvus_bert.search_in_milvus(table_name, query_sentence, bc)
             print(out_put)
 
 
