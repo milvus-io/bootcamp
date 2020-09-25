@@ -2,19 +2,20 @@
 
 本项目基于 milvus 实现了一个图片和食谱的检索系统。即输入一张食物图片，返回该图片对应的食谱。
 
-本项目基于项目 [im2recipe-Pytorch](https://github.com/torralba-lab/im2recipe-Pytorch) 实现的。
+本项目是基于项目 [im2recipe-Pytorch](https://github.com/torralba-lab/im2recipe-Pytorch) 实现的。
 
 ## 数据说明
 
 **数据说明**
 
-本项目数据选用的是 [recipe1M](http://pic2recipe.csail.mit.edu/). 是一个大规模结构化语料库，包含超过一百万种烹饪食谱和一千三百万种食物图像。
+本项目的数据来自 [recipe1M](http://pic2recipe.csail.mit.edu/). recipe1M 是一个大规模结构化语料库，包含超过一百万种烹饪食谱和一千三百万种食物图像。
 
-**数据准备** 
+**数据下载** 
 
-在本项目中选取了 recipe1M 中的部分数据集。本项目中需要用的数据集和模型下载链接： 提取码： 。
+在本项目中用的是 recipe1M 中的数据集。你可以从[recipe1M](http://pic2recipe.csail.mit.edu/) 网站上下载数据集和模型。本项目也提供了部分数据集和模型 。
 
-
+链接：https://pan.baidu.com/s/1GpPqRTjiBen0qoudAWZn6g 
+提取码：bptf
 
 
 
@@ -83,7 +84,7 @@ python load.py
 uvicorn main:app
 ```
 
-> 本项目使用 `FastAPI` 构建 `API`, 启动服务后，输入网址 127.0.0.1:8000/docs 可查看该服务提供的接口。点击 `/search/ Do Search Api` ，再点击 `Try it out`。然后就可以也是查询了，在参数 `image`选择一张本地的食谱图片，点击 `Excute` 即可。
+> 本项目使用 `FastAPI` 构建 `API`, 启动服务后，输入网址 127.0.0.1:8000/docs 可查看该服务提供的接口。点击 `/search/ Do Search Api` ，再点击 `Try it out`。然后就可以查询了，在参数 `image`选择一张本地的食谱图片，点击 `Excute` 即可。
 
 
 
