@@ -8,6 +8,7 @@ from flask_restful import reqparse
 from werkzeug.utils import secure_filename
 
 import numpy as np
+from bert_serving.client import BertClient
 
 import shutil
 import urllib
@@ -26,6 +27,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_PATH
 app.config['JSON_SORT_KEYS'] = False
 CORS(app)
 
+bc = BertClient(timeout=10000)
 
 @app.route('/api/v1/search', methods=['POST'])
 def do_search_api():
@@ -42,7 +44,7 @@ def do_search_api():
         return "no text"
     if query_sentence:
         try:
-            output = search_in_milvus(table_name, query_sentence)
+            output = search_in_milvus(table_name, query_sentence, bc)
             if output:
                 return output
             else:
