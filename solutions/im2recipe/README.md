@@ -90,13 +90,22 @@ uvicorn main:app
 
 7. 启动前端界面
 
+```shell
+docker run -d -p 80:80 -e API_URL=http://127.0.0.1:8000 zilliz/milvus-search-food-recipes:latest
 ```
 
-```
-
+> `API_URL` 该值是服务端所在的 `IP` 和 `port`
+>
 > 本项目也提供了前端展示界面。你也可以在前端界面体验本项目。
 
 
 
 ## 结果展示
 
+打开网页 127.0.0.1:80, 前端展示如图，点击 `UPLOAD AN IMAGE`选择要搜索的实食物图像。
+
+![img](pic/16011887482155.png)
+
+检索结果如图，会展示检索到的食物的标题和食谱。
+
+![img](pic/16011892329653.png)
