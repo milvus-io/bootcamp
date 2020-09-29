@@ -69,7 +69,7 @@ https://www.milvus.io/cn/docs/v0.10.0/gpu_milvus_docker.md
     $ cd model
     $  wget https://storage.googleapis.com/bert_models/2018_11_03/chinese_L-12_H-768_A-12.zip
     #启动服务
-    $ bert-serving-start -model_dir chinese_L-12_H-768_A-12/ -num_worker=12 -max_seq_len=40
+    $ bert-serving-start -model_dir chinese_L-12_H-768_A-12/ -num_worker=2 -max_seq_len=100
 
 5、导入数据
 -------------------
