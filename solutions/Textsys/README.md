@@ -5,7 +5,9 @@
 
 ## 数据说明
 
-本项目实验数据存于data目录下，有2k的金融投资事件数据集。您可以自行下载未处理的数据集来自和鲸社区提供的中文新闻14w数据集，官网链接https://www.kesci.com/home/dataset/5d8878638499bc002c1148f7        也可以在百度网盘中下载经过处理的数据，链接: https://pan.baidu.com/s/1OrUKbLXn8__pLfnN5uTaRg 提取码: cd4e 
+本项目实验数据存于data目录下，您可以自行下载未处理的数据集来自和鲸社区提供的中文新闻14w数据集，官网链接https://www.kesci.com/home/dataset/5d8878638499bc002c1148f7        也可以在百度网盘中下载经过处理的数据，链接: https://pan.baidu.com/s/1OrUKbLXn8__pLfnN5uTaRg 提取码: cd4e   
+推荐一个来自微软研究院的英文新闻数据集MIcrosoft News Dataset: https://msnews.github.io/
+
 
 ## 脚本说明
 
@@ -46,7 +48,7 @@ config.py：该脚本是配置文件，需要根据具体环境做出相应修�
 1、安装milvus
 -------------------
 
-Milvus 提供两个发行版本：CPU 版本和 GPU 版本。 为了得到更优的查询性能，项目中使用的是 GPU 版本参考链接
+Milvus 提供两个发行版本：CPU 版本和 GPU 版本。 本次项目中使用的是 GPU 版本参考链接
 
 https://www.milvus.io/cn/docs/v0.10.0/gpu_milvus_docker.md
 
