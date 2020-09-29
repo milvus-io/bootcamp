@@ -2,7 +2,7 @@
 
 This project combines milvus and bert to implement an item-based text recommendation system.
 
-# Data Introduction
+## Data Introduction
 
 In this project, we selected a public data set from [ArXiv](https://arxiv.org/). We have downloaded more than 3 million pieces of data. The data set is a metadata file in json format. This file contains entries for each paper:
 
@@ -30,7 +30,7 @@ To download the original data, please refer to [arxiv-public-datasets](https://g
 
 
 
-# Script Description
+## Script Description
 
 This project contains two parts, service and webclient.
 
@@ -60,7 +60,7 @@ The configuration file config.py in service explains:
 
 
 
-# Steps to build a project
+## Steps to build a project
 
 1. Install [Milvus](https://milvus.io/cn/docs/v0.10.2/milvus_docker-cpu.md)。
 
@@ -117,7 +117,7 @@ docker run -d -p 9999:80 -e API_URL=http://127.0.0.1:8000 tumao/paper-recommend-
 
 
 
-# Result Show
+## Result Show
 
 show categorie
 

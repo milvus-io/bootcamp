@@ -115,7 +115,7 @@ uvicorn main:app
 docker run -d -p 9999:80 -e API_URL=http://127.0.0.1:8000 tumao/paper-recommend-demo:latest
 ```
 
-> `API_URL` 该值后应填写服务端所在的 `IP` 和 `port`
+> `API_URL` 该值后是服务端所在的 `IP` 和 `port`
 
 ## 结果展示
 
