@@ -5,8 +5,8 @@
 
 ## 数据说明
 
-本项目实验数据存于data目录下，您可以自行下载未处理的数据集来自和鲸社区提供的中文新闻14w数据集，官网链接https://www.kesci.com/home/dataset/5d8878638499bc002c1148f7        也可以在百度网盘中下载经过处理的数据，链接: https://pan.baidu.com/s/1OrUKbLXn8__pLfnN5uTaRg 提取码: cd4e   
-推荐一个来自微软研究院的英文新闻数据集MIcrosoft News Dataset: https://msnews.github.io/
+本项目实验数据存于data目录下，您可以自行下载未处理的数据集来自和鲸社区提供的中文新闻14w数据集，官网链接https://www.kesci.com/home/dataset/5d8878638499bc002c1148f7        也可以在百度网盘中下载经过处理的数据，链接: https://pan.baidu.com/s/1OrUKbLXn8__pLfnN5uTaRg 提取码: cd4e   大家也可以自行下载更多的数据集进行测试
+这边推荐一个来自微软研究院的英文新闻数据集MIcrosoft News Dataset: https://msnews.github.io/
 
 
 ## 脚本说明
@@ -16,6 +16,8 @@ Milvus-bert-client
 该目录下是前端页面的脚本
 
 Milvus-bert-server
+
+该目录下是启动后端服务的脚本
 
 app.py: 该脚本为前端界面提供接口
 
