@@ -11,7 +11,7 @@ def connect_mysql():
 		conn = pymysql.connect(host="127.0.0.1",user="root",port=3306,password="123456",database="mysql", local_infile=True)
 		return conn
 	except Exception as e:
-		print("CINNECT MYSQL ERROR:", e)
+		print("CONNECT MYSQL ERROR:", e)
 		# return "connect mysql faild"
 
 
@@ -35,7 +35,7 @@ def load_data_to_mysql(conn, cursor):
 		cursor.execute(sql)
 		conn.commit()
 	except Exception as e:
-		print("CREATE MYSQL TABLE ERROR:", e)
+		print("LOAD DATA TO MYSQL ERROR:", e)
 		# conn.rollback()
 		# print("load data faild")
 
