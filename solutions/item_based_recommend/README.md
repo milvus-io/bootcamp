@@ -64,7 +64,7 @@ service 中的配置文件 config.py 说明：
 
 ## 搭建步骤
 
-1. 安装 Milvus，参考  [Milvus安装](https://milvus.io/cn/docs/v0.10.2/milvus_docker-cpu.md)。
+1. 安装 Milvus0.10.2，参考  [Milvus安装](https://milvus.io/cn/docs/v0.10.2/milvus_docker-cpu.md)。
 
 2. 安装 MySql.
 
