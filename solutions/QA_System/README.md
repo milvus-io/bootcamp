@@ -52,7 +52,7 @@ config.py：该脚本是配置文件，需要根据具体环境做出相应修�
 
 ## 搭建步骤
 
-1. 安装milvus
+1. 安装milvus0.10.3
 
 2. 安装postgresql
 
