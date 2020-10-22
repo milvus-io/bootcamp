@@ -1,5 +1,7 @@
 # 性能指标
 
+本文档是基于 Milvus 0.10.0 的性能测试结果。
+
 ## 环境
 
 **CPU**: Intel(R) Core(TM) i7-8700 CPU @ 3.20GHz  (12 Cores)
