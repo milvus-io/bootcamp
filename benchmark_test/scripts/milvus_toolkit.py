@@ -178,7 +178,7 @@ def compute_recall(collection_name,nq,results,search_param,rand):
         temp = entities.ids
        # print(len(temp))
         all_ids.append(temp)
-        print(len(all_ids))
+        #print(len(all_ids))
    # entities =results[0]
 
    # all_ids.append(entities.ids)

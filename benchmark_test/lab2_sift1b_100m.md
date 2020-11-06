@@ -42,7 +42,7 @@ Milvus 可以根据数据分布和性能、准确性的要求灵活调整相关�
 | search_devices     |-gpu0 |
 | build_index_devices     |-gpu0 |
 
-gpu_search_threshold, 该参数决定是否使用 GPU 查询。当 nq>use_blas_threshold，将使用 GPU 查询(只有当 nq 值较大时，使用 GPU 查询才会更有优势)。
+gpu_search_threshold, 该参数决定是否使用 GPU 查询。当 nq>gpu_search_threshold，将使用 GPU 查询(只有当 nq 值较大时，使用 GPU 查询才会更有优势)。
 
 修改配置文件后，需要重启 Milvus Docker 使其生效。
 
@@ -70,8 +70,6 @@ $ python3 main.py --collection ann_100m_sq8 --index sq8 --build
 $ python3 main.py --show
 #查看表ann_100m_sq8h的行数
 $ python3 main.py --collectio ann_100m_sq8q8 --rows
-ann_100m_sq8_sq8h的索引类型
-$ python3 main.py --collection ann_100m_sq8 --describe_index
 ```
 
 ## 4、 数据导入

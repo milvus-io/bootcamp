@@ -12,7 +12,7 @@ milvus_collection = 'partition_query'
 
 
 SERVER_ADDR = "0.0.0.0"
-SERVER_PORT = 19530
+SERVER_PORT = 19573
 
 
 TOP_K = 10
