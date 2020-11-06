@@ -41,13 +41,12 @@ Milvus 可以根据数据分布和性能、准确性的要求灵活调整相关�
 
 |         参数名称         | 推荐值 |
 | ---------------------- | ---- |
-| `cpu_cache_capacity` |   4   |
-|    `gpu_resource_config`.`cache_capacity`    |   1    |
-|    `use_blas_threshold`    |  801   |
+| `cpu_cache_size |   4   |
+|    `gpu_cache_size    |   1    |
 | `gpu_search_threshold` | 1001         |
 | `search_resources`     | gpu0 |
 
-关于参数设置的详细信息请参考[Milvus 配置](https://www.milvus.io/docs/zh-CN/reference/milvus_config/)。
+关于参数设置的详细信息请参考[Milvus 配置](https://www.milvus.io/cn/docs/v0.11.0/milvus_config.md)。
 
 其余参数保持默认即可。配置文件参数修改完毕后，重启 Milvus Docker 使配置生效。
 
@@ -75,8 +74,6 @@ $ python3 main.py --collection ann_1m_sq8 --index sq8 --build
 $ python3 main.py --show
 #查看表ann_1m_sq8h的行数
 $ python3 main.py --collection ann_1m_sq8 --rows
-#查看表ann_1m_sq8h的索引类型
-$ python3 main.py --collection ann_1m_sq8 --describe_index
 ```
 
 ## 4、 数据导入
