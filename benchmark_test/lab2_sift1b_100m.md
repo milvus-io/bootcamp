@@ -32,7 +32,7 @@
 
 Milvus 可以根据数据分布和性能、准确性的要求灵活调整相关系统参数，以发挥产品的最佳性能。在此实验中，采用如下表所示的参数配置，就可以实现90%以上召回率。
 
-配置文件： **/home/$USER/milvus/conf/server_config.yaml**
+配置文件： **/home/$USER/milvus/conf/Milvus.yaml**
 
 | 参数名称             | 推荐值       |
 | -------------------- | ------------ |
@@ -42,7 +42,7 @@ Milvus 可以根据数据分布和性能、准确性的要求灵活调整相关�
 | search_devices     |-gpu0 |
 | build_index_devices     |-gpu0 |
 
-gpu_search_threshold, 该参数决定是否使用 GPU 查询。当 nq>use_blas_threshold，将使用 GPU 查询(只有当 nq 值较大时，使用 GPU 查询才会更有优势)。
+gpu_search_threshold, 该参数决定是否使用 GPU 查询。当 nq>gpu_search_threshold，将使用 GPU 查询(只有当 nq 值较大时，使用 GPU 查询才会更有优势)。
 
 修改配置文件后，需要重启 Milvus Docker 使其生效。
 
@@ -70,8 +70,6 @@ $ python3 main.py --collection ann_100m_sq8 --index sq8 --build
 $ python3 main.py --show
 #查看表ann_100m_sq8h的行数
 $ python3 main.py --collectio ann_100m_sq8q8 --rows
-ann_100m_sq8_sq8h的索引类型
-$ python3 main.py --collection ann_100m_sq8 --describe_index
 ```
 
 ## 4、 数据导入
@@ -103,10 +101,8 @@ $ sqlite3 meta.sqlite
 进入交互式命令行之后，输入如下命令，检查向量数据表当前的状态：
 
 ```sqlite
-sqlite> select * from TableFiles where table_id='ann_100m_sq8';
+sqlite> select * from collection;
 ```
-
-Milvus 会将一个向量数据表分成若干数据分片进行存储，因此查询命令会返回多条记录。其中第三列数字代表数据表采用的索引类型，数字 4 代表采用的是IVF_SQ8H索引。第五列数字代表索引构建的情况，当这列数字为 3 时，代表相应的数据表分片上的索引已构建完毕。如果某个分片上的索引还没有构建完成，可以再次手动为这个数据分片建立索引。
 
 退出 sqlite 交互式命令行:
 

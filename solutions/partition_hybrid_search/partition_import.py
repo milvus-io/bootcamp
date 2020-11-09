@@ -1,7 +1,7 @@
 # import face_recognition
 import os
 import time
-from milvus import *
+from milvus import Milvus, DataType
 import numpy as np
 import random
 from faker import Faker
