@@ -10,6 +10,7 @@
 - [Hybrid search based on Milvus partitions](./partition_hybrid_search/README.md)
 - [Distributed solution based on Mishards, a sharding middleware for Milvus clusters](./Mishards/README.md)
 - [Deploy Milvus distributed clusters based on Kubernetes](./Kubernetes/README.md)
+- [Prometheus and Grafana were used to monitor and alarm Milvus](./Prometheus/Readme.md)
 
 ## Application Scenarios
 
@@ -22,7 +23,8 @@
 - [Text retrieval system based on Milvus](./Textsys/README.md)
 - [COVID-19 Open Research Dataset Search](./covidex)
 - [Graph-based Recommendation System with Milvus](./graph_based_recommend)
+- [Item_based Recommendation System with Milvus](./item_based_recommend)
 - [Image-text retrieval System with Milvus](./ctirg/Readme.md)
 - [Cross-modal pedestrian retrieval based on Milvus](./pedestrian_search)
-
+- [Recipe retrieval system based on Milvus](./im2recipe)
 

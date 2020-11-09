@@ -16,8 +16,8 @@ The following configuration has been tested:
 | GPU Driver    | Driver 418.74 |
 | Memory        | 8 GB DDR4          |
 | Storage       | NVMe SSD 256 GB             |
-| Milvus       | 0.6.0            |
-| pymilvus       | 0.2.6            |
+| Milvus       | 0.11.0          |
+| pymilvus       | 0.3.0         |
 
 #### Download test tools
 
@@ -41,13 +41,12 @@ Create a folder named `milvus_sift1m` and move all downloaded files to the folde
 
 To optimize the performance of Milvus, you can change Milvus parameters based on data distribution, performance, and accuracy requirements. In this test, 90% or higher recall rate can be achieved by using the recommended values in the following table.
 
-Configuration file: `/home/$USER/milvus/conf/server_config.yaml`
+Configuration file: `/home/$USER/milvus/conf/Milvus.yaml`
 
 |         Parameter         | Recommended value |
 | ---------------------- | ---- |
 |       `cpu_cache_capacity`   |   4   |
 |         `gpu_resource_config`.`cache_capacity`      |  1    |
-|         `use_blas_threshold`	                |   801     |
 |         `gpu_search_threshold`	                |   1001     |
 |         `search_resources`	                |   gpu0     |
 
@@ -78,12 +77,11 @@ Vectors are then inserted into a table named `ann_1m_sq8h`, with the index_type 
 To show the available tables and number of vectors in each table, use the following command:
 
 ```bash
-#查看库中有哪些表
+#See which tables are in the library
 $ python3 main.py --show
-#查看表ann_1m_sq8h的行数
+#View the number of rows in table ANN_1m_sq8h
 $ python3 main.py --collection ann_1m_sq8 --rows
-#查看表ann_1m_sq8h的索引类型
-$ python3 main.py --collection ann_1m_sq8 --describe_index
+
 ```
 
 ## 4.  Import data
@@ -113,10 +111,8 @@ $ sqlite3 meta.sqlite
 In sqlite3 CLI, enter the following command to check the current status:
 
 ```sql
-sqlite> select * from TableFiles where table_id='ann_1m_sq8h';
+sqlite> select * from collections；
 ```
-
-Milvus divides a vector table into shards for storage. So, a query returns multiple records. The third column specifies the index type and 5 stands for IVF_SQ8H. The fifth column specifies the build status of the index and 3 indicates that index building is complete for the shard. If index building is not complete for a specific shard, you can manually build indexes for the shard.
 
 Exit sqlite CLI:
 
