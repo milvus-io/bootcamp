@@ -43,10 +43,10 @@ Configuration file: **/home/$USER/milvus/conf/server_config.yaml**
 
 |         Parameter         | Recommended value |
 | ----------------------   | ---- |
-| index_building_threshold |  1024  |
-|    cpu_cache_capacity    |   25   |
-|    use_blas_threshold    |  801   |
-|          nprobe          |   32   |
+| cache.cache_size     | 25                |
+| gpu.cache_size       | 4                 |
+| gpu_search_threshold | 1001              |
+| search_devices       | -gpu0             |
 
 Refer to [Milvus Configuration](https://github.com/milvus-io/docs/blob/0.7.1/reference/milvus_config.md) for more information.
 
@@ -74,12 +74,11 @@ Vectors are then inserted into a table named `ann_100m_sq8h`, with the index_typ
 To show the available tables and number of vectors in each table, use the following command:
 
 ```bash
-#查看库中有哪些表
+#See which tables are in the library
 $ python3 main.py --show
-#查看表ann_100m_sq8h的行数
-$ python3 main.py --collectio ann_100m_sq8q8 --rows
-ann_100m_sq8_sq8h的索引类型
-$ python3 main.py --collection ann_100m_sq81m_sq8 --describe_index
+#View the number of rows in table ANN_1m_sq8h
+$ python3 main.py --collection ann_1m_sq8 --rows
+
 ```
 
 
@@ -113,10 +112,8 @@ $ sqlite3 meta.sqlite
 In sqlite3 CLI, enter the following command to check the current status:
 
 ```sql
-sqlite> select * from TableFiles where table_id='ann_100m_sq8h';
+sqlite> select * from collections;
 ```
-
-Milvus divides a vector table into shards for storage. So, a query returns multiple records. The third column specifies the index type and 5 stands for IVF_SQ8H. The fifth column specifies the build status of the index and 3 indicates that index building is complete for the shard. If index building is not complete for a specific shard, you can manually build indexes for the shard.
 
 Exit sqlite CLI:
 
