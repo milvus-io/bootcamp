@@ -24,5 +24,6 @@
 - [Graph-based Recommendation System with Milvus](./graph_based_recommend)
 - [Image-text retrieval System with Milvus](./ctirg/Readme.md)
 - [Cross-modal pedestrian retrieval based on Milvus](./pedestrian_search)
+- [Recipe retrieval system based on Milvus](./im2recipe)
 
 
