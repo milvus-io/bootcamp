@@ -22,6 +22,7 @@
 - [基于 Milvus 的文本检索系统](Textsys/README.md)
 - [COVID-19 文章检索](../EN_solutions/covidex)
 - [利用 Milvus 搭建基于图的推荐系统](./graph_based_recommend)
+- [利用 Milvus 搭建基于内容的推荐系统](./item_based_recommend)
 - [基于 Milvus 搭建图文检索系统](ctirg/Readme.md)
 - [基于 Milvus 的跨模态行人检索](./pedestrian_search)
 - [基于 Milvus 的食谱检索系统](./im2recipe)
