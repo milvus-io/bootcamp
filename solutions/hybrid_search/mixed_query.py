@@ -1,7 +1,7 @@
 import sys, getopt
 import os
 import time
-from milvus import *
+from milvus import Milvus, DataType
 import psycopg2
 import numpy as np
 
@@ -14,11 +14,11 @@ PG_TABLE_NAME = 'mixe_query'
 
 
 SERVER_ADDR = "0.0.0.0"
-SERVER_PORT = 19530
+SERVER_PORT = 19573
 
 
-PG_HOST = "192.168.1.10"
-PG_PORT = 5432
+PG_HOST = "192.168.1.58"
+PG_PORT = 3307
 PG_USER = "postgres"
 PG_PASSWORD = "postgres"
 PG_DATABASE = "postgres"
@@ -59,15 +59,23 @@ def search_in_milvus(vector,milvus):
     output_ids = []
     output_distance = []
     _param = {'nprobe': 64}
-    status, results = milvus.search(collection_name = MILVUS_collection,query_records=vector, top_k=TOP_K, params=_param)
-    for result in results:
-        # print(result)
-        for i in range(TOP_K):
-            if result[i].distance < DISTANCE_THRESHOLD:
-                output_ids.append(result[i].id)
-                output_distance.append(result[i].distance)
-    # print(output_ids)
-    return  output_ids,output_distance
+    dsl = {"bool": {"must": [{"vector": {
+        "Vec": {"topk": TOP_K, "query": vector, "metric_type": "L2", "params": _param}}}]}}
+    results = milvus.search(MILVUS_collection, dsl)
+    for i in range(len(results)):
+        for j in range(len(results[i])):
+            if results[i][j].distance <DISTANCE_THRESHOLD:
+                output_ids.append(result[i][j].id)
+                output_distance.append(result[i][j].distance)
+    return output_ids,output_distance
+    # for result in results:
+    #     # print(result)
+    #     for i in range(TOP_K):
+    #         if result[i].distance < DISTANCE_THRESHOLD:
+    #             output_ids.append(result[i].id)
+    #             output_distance.append(result[i].distance)
+    # # print(output_ids)
+    # return  output_ids,output_distance
 
 
 def merge_rows_distance(rows,ids,distance):
