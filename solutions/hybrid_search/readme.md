@@ -23,7 +23,7 @@
 ## 脚本测试说明
 
 本示例包含了两个脚本： `mixed_import.py` 和 `mixed_query.py` 。
-`mixed_import` 将数据导入 Milvus 和 Postgres 中， `mixed_query.py` 实现自定义条件的混合查询。
+`mixed_import` 将向量数据导入 Milvus 中， `mixed_query.py` 实现自定义条件的混合查询。
 
 ### mixed_import.py
 
