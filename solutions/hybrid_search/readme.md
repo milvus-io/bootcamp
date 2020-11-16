@@ -84,19 +84,19 @@ python3 mixed_import.py
 查询与向量集中的第 0 条向量相似的向量，且性别为男，且时间在 2018 年 到 2019 年:
 
 ```shell
-python3 mixed_query.py -n 0 -s male -t '[2018, 2019]' -q
+python3 mixed_query.py -n 0 -s 0 -t '[2018, 2019]' -q
 ```
 
 查询与向量集中的第 20 条向量相似的向量，且性别为女，未戴眼镜：
 
 ```shell
-python3 mixed_query.py -n 20 -s female -g False
+python3 mixed_query.py -n 20 -s 1 -g False
 ```
 
 查询与向量集中的第 100 条向量相似的向量，且性别为女，戴眼镜，时间在 2018 年  到 2019 年：
 
 ```shell
-python3 mixed_query.py -n 100 -s female -g True -t '[2018 ,2019]' -q
+python3 mixed_query.py -n 100 -s 1 -g 11 -t '[2018 ,2019]' -q
 ```
 
 查询得到的 id 对应的原始向量：
