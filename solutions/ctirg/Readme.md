@@ -1,8 +1,8 @@
-# Image and text retrieval system based on Milvus
+# 基于Milvus的图文检索系统
 
-This project is based on a paper **[Composing Text and Image for Image Retrieval - An Empirical Odyssey](https://arxiv.org/abs/1812.07119)**，The project is an image retrieval task in which an input query is specified as an image and a modified text description of the image is used for image retrieval
+这个项目参考论文 **[Composing Text and Image for Image Retrieval - An Empirical Odyssey](https://arxiv.org/abs/1812.07119)**，该项目是一个图像检索任务，其中将输入查询指定为图像，并将图像的修改文本描述用于图像检索
 
-## Prerequisite
+## 前期准备
 
 **[Milvus 0.10.2](https://milvus.io/docs/v0.10.2/milvus_docker-cpu.md)**
 
@@ -10,28 +10,28 @@ This project is based on a paper **[Composing Text and Image for Image Retrieval
 
 **[Tirg](https://github.com/google/tirg)**
 
-## Data preparation
+## 数据准备
 
-Download the dataset from this [external website](https://drive.google.com/file/d/1wPqMw-HKmXUG2qTgYBiTNUnjz83hA2tY/view?usp=sharing).
+下载数据集 [Data Set](https://drive.google.com/file/d/1wPqMw-HKmXUG2qTgYBiTNUnjz83hA2tY/view?usp=sharing).
 
-Make sure the dataset include these files: `<dataset_path>/css_toy_dataset_novel2_small.dup.npy` `<dataset_path>/images/*.png`
+确保下载的数据集包含以下这些文件: `<dataset_path>/css_toy_dataset_novel2_small.dup.npy` `<dataset_path>/images/*.png`
 
-## Run model with
+## TiRG模型
 
-First, the TIRG model needs to be cloned:
+1.首先去下载TiRG模型
 
 ```
 cd tirg
 git clone https://github.com/google/tirg.git
 ```
 
-Then you need to install the Python environment:
+2.需要安装python 包
 
 ```
 pip install -r requirement
 ```
 
-To run our training & testing:
+对模型进行训练和测试，得到训练和测试的结果
 
 ```
 cd tirg
@@ -42,44 +42,45 @@ python main.py --dataset=css3d --dataset_path=./CSSDataset --num_iters=160000 \
   --model=tirg_lastconv --loss=soft_triplet --comment=css3d_tirgconv
 ```
 
-The first command apply TIRG to the fully connected layer and the second applies it to the last conv layer. To run the baseline:
+第一个命令将TIRG应用到完全连接层，第二个命令将它应用到最后一个conv层，我们可以使用下面的基本模型。
 
 ```
 python main.py --dataset=css3d --dataset_path=./CSSDataset --num_iters=160000 \
   --model=concat --loss=soft_triplet --comment=css3d_concat
 ```
 
-All log files will be saved at `./runs/<timestamp><comment>`. Monitor with tensorboard (training loss, training retrieval performance, testing retrieval performance):
+所有的日志文件保存在 `./runs/<timestamp><comment>`路径下. 使用tensorboard查看这些指标(training loss, training retrieval performance, testing retrieval performance):
 
 ```
 tensorboard --logdir ./runs/ --port 8888
 ```
 
-## Load data
+## 导入数据
 
-Before running the script, please modify the parameters in **webserver/src/common/config.py**:
+在运行脚本之前，我们需要修改相应的配置文件 **webserver/src/common/config.py**:
 
-| Parameter    | Description               | Default setting |
-| ------------ | ------------------------- | --------------- |
-| MILVUS_HOST  | milvus service ip address | 127.0.0.1       |
-| MILVUS_PORT  | milvus service port       | 19530           |
-| MYSQL_HOST   | postgresql service ip     | 127.0.0.1       |
-| MYSQL_PORT   | postgresql service port   | 3306            |
-| MYSQL_USER   | postgresql user name      | root            |
-| MYSQL_PWD    | postgresql password       | 123456          |
-| MYSQL_DB     | postgresql datebase name  | mysql           |
-| MILVUS_TABLE | default table name        | milvus_k        |
+| 参数         | 说明                      | 默认值    |
+| ------------ | ------------------------- | --------- |
+| MILVUS_HOST  | milvus service ip address | 127.0.0.1 |
+| MILVUS_PORT  | milvus service port       | 19530     |
+| MYSQL_HOST   | Mysql service ip          | 127.0.0.1 |
+| MYSQL_PORT   | Mysql service port        | 3306      |
+| MYSQL_USER   | Mysql user name           | root      |
+| MYSQL_PWD    | Mysql password            | 123456    |
+| MYSQL_DB     | Mysqldatebase name        | mysql     |
+| MILVUS_TABLE | default table name        | milvus_k  |
 
-Please modify the parameters of Milvus and MySQL based on your environment.
-Before executing this code, you need to put the vector **img.npy** file for the target image under the **tirg/css** path
+请根据您的环境修改Milvus和MySQL的参数。
+在执行下面的代码之前，需要将 **img.npy** 文件放在 **tirg/css** 路径下面
+
 ```
 $ cd ..
 $ python insert_milvus.py ./tirg/css
 ```
 
-## Run webserver
+## 运行webserver
 
-Start Image-Text retrieval system service.
+开启图文检索系统的服务
 
 ```
 $ python main.py
@@ -92,4 +93,4 @@ INFO:     Application startup complete.
 INFO:     Uvicorn running on http://192.168.1.58:7000 (Press CTRL+C to quit)
 ```
 
-> You can get the API by typing http://127.0.0.1:7000/docs into your browser.
+> 可以在浏览器输入http://127.0.0.1:7000/docs 中运行图文检索系统
