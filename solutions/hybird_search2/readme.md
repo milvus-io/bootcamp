@@ -6,7 +6,7 @@
 
 ## 运行要求：
 
-1. [安装 Milvus0.10.0](https://milvus.io/cn/docs/v0.10.0/guides/get_started/install_milvus/gpu_milvus_docker.md)
+1. [安装 Milvus](https://milvus.io/cn/docs/v0.10.0/guides/get_started/install_milvus/gpu_milvus_docker.md)
 2. [安装 Postgres](https://www.postgresql.org/download/)
 3. pip install pymilvus==0.2.13
 4. pip install numpy

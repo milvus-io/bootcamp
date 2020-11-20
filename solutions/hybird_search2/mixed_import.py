@@ -1,7 +1,7 @@
 # import face_recognition
 import os
 import time
-from milvus import Milvus, DataType
+from milvus import *
 import psycopg2
 import numpy as np
 import random
@@ -18,15 +18,15 @@ PG_TABLE_NAME = 'mixe_query'
 
 FILE_PATH = 'bigann_base.bvecs'
 
-VEC_NUM = 1000000
+VEC_NUM = 100000000 
 BASE_LEN = 100000
 
 VEC_DIM = 128
 
 SERVER_ADDR = "127.0.0.1"
-SERVER_PORT = 19573
+SERVER_PORT = 19530
 
-PG_HOST = "192.168.1.58"
+PG_HOST = "192.168.1.10"
 PG_PORT = 5432
 PG_USER = "postgres"
 PG_PASSWORD = "postgres"
@@ -48,22 +48,17 @@ def load_bvecs_data(fname,base_len,idx):
 
 def create_milvus_collection(milvus):
     if not milvus.has_collection(MILVUS_collection)[1]:
-        collection_name = 'MILVUS_collection'
-        collection_param = {
-            "fields": [
-                {"name": "sex", "type": DataType.INT32},
-                {"name": "is_glasses", "type": DataType.INT32},
-                {"name": "get_time","type":DataType.INT32},
-                {"name": "Vec", "type": DataType.FLOAT_VECTOR, "params": {"dim": VEC_DIM}},
-            ],
-            "segment_row_limit": 4096,
-            "auto_id": False
+        param = {
+            'collection_name': MILVUS_collection,
+            'dimension': VEC_DIM,
+            'index_file_size':1024,
+            'metric_type':MetricType.L2
         }
-        milvus.create_collection(collection_name,collection_param)
+        milvus.create_collection(param)
 
 def build_collection(milvus):
-    ivf_param = {"index_type": "IVF_SQ8", "metric_type": "L2", "params": {"nlist": 4096}}
-    status = milvus.create_index(MILVUS_collection,"Vec",ivf_param)
+    index_param = {'nlist': 16384}
+    status = milvus.create_index(MILVUS_collection,IndexType.IVF_SQ8H,index_param)
     print(status)
 
 def connect_postgres_server():
@@ -76,7 +71,7 @@ def connect_postgres_server():
 
 def create_pg_table(conn,cur):
     try:       
-        sql = "CREATE TABLE " + PG_TABLE_NAME + " (ids bigint, vec float, sex char(10), get_time timestamp, is_glasses boolean);"
+        sql = "CREATE TABLE " + PG_TABLE_NAME + " (ids bigint, sex char(10), get_time timestamp, is_glasses boolean);"
         cur.execute(sql)
         conn.commit()
         print("create postgres table!")
@@ -119,15 +114,17 @@ def build_pg_index(conn,cur):
         print("faild build index")
 
 
-# def record_txt(ids):
-#     fname = 'temp.csv'
-#     with open(fname,'w+') as f:
-#         for i in range(len(ids)):
-#             #sex = random.choice(['female','male'])
-#             #get_time = fake.past_datetime(start_date="-120d", tzinfo=None)
-#             #is_glasses = random.choice(['True','False'])
-#             line = str(ids[i]) + "|" + sex + "|'" + str(get_time) + "'|" + str(is_glasses) + "\n"
-#             f.write(line)
+def record_txt(ids):
+    fname = 'temp.csv'
+    with open(fname,'w+') as f:
+        for i in range(len(ids)):
+            sex = random.choice(['female','male'])
+            get_time = fake.past_datetime(start_date="-120d", tzinfo=None)
+            is_glasses = random.choice(['True','False'])
+            line = str(ids[i]) + "|" + sex + "|'" + str(get_time) + "'|" + str(is_glasses) + "\n"
+            f.write(line)
+
+
 
 def main():
     # connect_milvus_server()
@@ -141,31 +138,17 @@ def main():
     while count < (VEC_NUM // BASE_LEN):
         vectors = load_bvecs_data(FILE_PATH,BASE_LEN,count)
         vectors_ids = [id for id in range(count*BASE_LEN,(count+1)*BASE_LEN)]
-        sex = random.choice(['female', 'male'])
-        get_time = fake.past_datetime(start_date="-120d", tzinfo=None)
-        is_glasses = random.choice(['True', 'False'])
-        line = str(vectors_ids[i]) + "|" + sex + "|'" + str(get_time) + "'|" + str(is_glasses) + "\n"
-        hybrid_entities = [
-            {"name": "sex", "values": sex, "type": DataType.INT32},
-            {"name": "is_glasses", "values": get_time, "type": DataType.INT32},
-            {"name": "get_time","values": is_glasses, "type":DataType.INT32},
-            {"name": "Vec", "values": vectors, "type": DataType.FLOAT_VECTOR}
-        ]
-        time_start = time.time()
-        ids = milvus.bulk_insert(MILVUS_collection, hybrid_entities, ids=vectors_ids)
+        time_start = time.time()    
+        status, ids = milvus.insert(collection_name=MILVUS_collection, records=vectors, ids=vectors_ids)
         time_end = time.time()
         print(count, "insert milvue time: ", time_end-time_start)
-        #print(format(ids))
         # print(count)
         time_start = time.time()
-        with open(fname, 'w+') as f:
-             for i in range(len(ids)):
-                res=client.get_entity_by_id(collection_name, ids)
-                line = str(res.id) + "|" + res.get(sex) + "|'" + str(res.get(get_time)) + "'|" + str(res.get(is_glasses)) + "\n"
-                f.write(line)
+        record_txt(ids)
         copy_data_to_pg(conn, cur)
         time_end = time.time()
         print(count, "insert pg time: ", time_end-time_start)
+
         count = count + 1
 
     build_pg_index(conn,cur)
