@@ -5,7 +5,7 @@
 ## Solutions
 
 - [Milvus-Based hybrid search solution](./hybrid_search/readme.md)
-- [Milvus-Based Mixed query solution](./Mixed query/readme.md)
+- [Milvus-Based Mixed query solution](Mixed query/readme.md)
 - [Build Milvus from source in Windows](./Milvus_with_Windows.md)
 - [High availability (HA) solution based on Milvus](./Milvus_HA/README.md)
 - [Hybrid search based on Milvus partitions](./partition_hybrid_search/README.md)
