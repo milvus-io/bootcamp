@@ -4,7 +4,8 @@
 
 ## 解决方案
 
-- [基于 Milvus 的混合查询方案](hybird_search2/readme.md)
+- [基于 Milvus 的 Postgressql 混合查询方案](hybird_search2/readme.md)
+- [基于 Milvus 的混合查询](./Mixed query/readme.md)
 - [Windows 环境源码编译 Milvus](./Milvus_with_Windows.md)
 - [基于 Milvus 的高可用（HA）方案](Milvus_HA/README.md)
 - [基于 Milvus 分区表的混合查询方案](partition_hybrid_search/README.md)
