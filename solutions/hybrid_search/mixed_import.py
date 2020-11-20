@@ -66,7 +66,6 @@ def main():
     while count < (VEC_NUM // BASE_LEN):
         vectors = load_bvecs_data(FILE_PATH,BASE_LEN,count)
         vectors_ids = [id for id in range(count*BASE_LEN,(count+1)*BASE_LEN)]
-
         sex = [random.randint(0, 2) for _ in range(10000)]
         get_time = [random.randint(2017, 2020) for _ in range(10000)]
         is_glasses = [random.randint(10, 13) for _ in range(10000)]
@@ -77,9 +76,10 @@ def main():
             {"name": "Vec", "values": vectors, "type": DataType.FLOAT_VECTOR}
         ]
         time_start = time.time()
-        res = milvus.insert(MILVUS_collection, hybrid_entities, ids=vectors_ids)
+        result = milvus.insert('mixed06', hybrid_entities, ids=vectors_ids)
         time_end = time.time()
-        print(count, "insert milvue time: ", time_end-time_start)
+        print("insert milvue time: ", time_end - time_start)
+        count = count + 1
 
 
 if __name__ == '__main__':
