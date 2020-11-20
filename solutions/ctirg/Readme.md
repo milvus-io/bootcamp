@@ -41,8 +41,7 @@ python main.py --dataset=css3d --dataset_path=./CSSDataset --num_iters=160000 \
 python main.py --dataset=css3d --dataset_path=./CSSDataset --num_iters=160000 \
   --model=tirg_lastconv --loss=soft_triplet --comment=css3d_tirgconv
 ```
-
-第一个命令将TIRG应用到完全连接层，第二个命令将它应用到最后一个conv层，我们可以使用下面的基本模型。
+如果你不想分开进行模型训练和测试的话，我们可以使用下面的基本模型。
 
 ```
 python main.py --dataset=css3d --dataset_path=./CSSDataset --num_iters=160000 \
