@@ -42,7 +42,7 @@ python main.py --dataset=css3d --dataset_path=./CSSDataset --num_iters=160000 \
   --model=tirg_lastconv --loss=soft_triplet --comment=css3d_tirgconv
 ```
 
-The first command apply TIRG to the fully connected layer and the second applies it to the last conv layer. To run the baseline:
+If you don’t want to run the training model and the test model separately, we can run the baseline model directly：
 
 ```
 python main.py --dataset=css3d --dataset_path=./CSSDataset --num_iters=160000 \
