@@ -26,7 +26,7 @@ Download the following data and scripts:
 - 1 million test data: https://pan.baidu.com/s/1XB0u4zDJoF-2E9T5HmoWJQ  Extraction code : zvs4 
 - Query data: https://pan.baidu.com/s/1LSB167UzUtm1H5Fk91bQfA   Extraction code : imnw 
 - Ground truth: https://pan.baidu.com/s/1OlFKFoi3zVTr8DZQMoGkJQ Extraction code : 49lg
-- Test scripts[/EN_benchmark_test/Scripts.md]
+- [Test scripts](/EN_benchmark_test/Scripts.md)
 
 Create a folder named `milvus_sift1m` and move all downloaded files to the folder:
 
