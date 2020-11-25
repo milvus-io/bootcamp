@@ -24,7 +24,7 @@ Download the following data and scripts, and save them to a file named **milvlus
 
 - [Search ground truth](https://pan.baidu.com/s/1Raqs_1NkGMkPboENFlkPsw )     Extraction code  ：yvdr
 
-- [Test scripts](/En_benchmark_test/Scripts.md)
+- [Test scripts](/EN_benchmark_test/Scripts.md)
 
 When it is done, there should be the following files in **milvus_sift100m**:
 
