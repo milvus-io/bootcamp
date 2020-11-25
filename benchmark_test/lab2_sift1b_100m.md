@@ -52,7 +52,7 @@ $ docker restart <container id>
 
 ## 3、 建表并建立索引
 
-建表之前确认 Milvus 已经正常启动。（ Milvus 安装及启动方法参见：[Milvus 快速上手](https://milvus.io/cn/docs/v0.10.0/guides/get_started/install_milvus/gpu_milvus_docker.md) ）
+建表之前确认 Milvus 已经正常启动。（ Milvus 安装及启动方法参见：[Milvus 快速上手](https://www.milvus.io/cn/docs/v0.11.0/install_milvus.md) ）
 
 > 测试之前请根据脚本[说明](/benchmark_test/scripts/README.md)修改相应参数！
 
