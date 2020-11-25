@@ -50,7 +50,7 @@ Configuration file: `/home/$USER/milvus/conf/Milvus.yaml`
 |         `gpu_search_threshold`	                |   1001     |
 |         `search_resources`	                |   gpu0     |
 
-Refer to [Milvus Configuration](https://github.com/milvus-io/docs/blob/0.7.1/reference/milvus_config.md) for more information.
+Refer to [Milvus Configuration](https://www.milvus.io/cn/docs/v0.11.0/milvus_config.md) for more information.
 
 Use default values for other parameters. After setting parameter values, restart Milvus Docker to apply all changes.
 
@@ -60,9 +60,9 @@ $ docker restart <container id>
 
 ## 3. Create a table and build indexes
 
-Make sure Milvus is already installed and started. (For details of Milvus installation, please read [Milvus Quick Start](https://milvus.io/docs/v0.9.0/guides/get_started/install_milvus/gpu_milvus_docker.md)).
+Make sure Milvus is already installed and started. (For details of Milvus installation, please read [Milvus Quick Start](https://www.milvus.io/docs/v0.11.0/install_milvus.md)).
 
->  Before testing, please modify the corresponding parameters according to the [script instructions](/benchmark_test/scripts/README.md)
+>  Before testing, please modify the corresponding parameters according to the [script instructions](//EN_benchmark_test/Scripts.md)
 
 
 Go to `milvus_sift1m`, and run the following command to create a table and build indexes:
