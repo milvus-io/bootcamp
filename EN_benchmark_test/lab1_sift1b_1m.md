@@ -62,7 +62,7 @@ $ docker restart <container id>
 
 Make sure Milvus is already installed and started. (For details of Milvus installation, please read [Milvus Quick Start](https://www.milvus.io/docs/v0.11.0/install_milvus.md)).
 
->  Before testing, please modify the corresponding parameters according to the [script instructions](//EN_benchmark_test/Scripts.md)
+>  Before testing, please modify the corresponding parameters according to the [script instructions](/EN_benchmark_test/Scripts.md)
 
 
 Go to `milvus_sift1m`, and run the following command to create a table and build indexes:
