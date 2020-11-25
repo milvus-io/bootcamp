@@ -42,7 +42,7 @@ pip install -r requirements.txt
 | Parameter   | Description                               | Defaults  |
 | ----------- | ----------------------------------------- | --------- |
 | MILVUS_HOST | The IP where the Milvus server is located | 127.0.0.1 |
-| MILVUS_PORT | Milvus server提供的端口                   | 19530     |
+| MILVUS_PORT | Port provided by Milvus server            | 19530     |
 
 l**Parameters required when creating a collection**：
 
