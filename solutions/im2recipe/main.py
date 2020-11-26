@@ -2,6 +2,8 @@ import logging
 # from bert_serving.client import BertClient
 
 from fastapi import Depends, FastAPI, File, UploadFile
+from fastapi.middleware.cors import CORSMiddleware
+
 
 from src.milvus import milvus_client
 from src.search import do_search
@@ -12,6 +14,12 @@ from src.trijoint import im2recipe
 import torch
 
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=['*'], # 这里是为了简单允许所有 origin 跨域, 生产环境谨慎填写
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 index_client = milvus_client()
 

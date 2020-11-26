@@ -76,7 +76,7 @@ pip3 install -r requirement.txt
 python load.py
 ```
 
-> 导入的是 `config.py` 中 `data_path` 指定的数据。导入前检查该参数的路径是否正确。
+> 导入的是 `config.py` 中 `data_path` 指定的数据。**导入前检查该参数的路径是否正确!!!**。
 
 6. 启动查询服务
 
@@ -94,7 +94,7 @@ uvicorn main:app
 docker run -d -p 80:80 -e API_URL=http://127.0.0.1:8000 zilliz/milvus-search-food-recipes:latest
 ```
 
-> `API_URL` 该值是服务端所在的 `IP` 和 `port`
+> `API_URL` 该值是服务端所在的 `IP` 和 `port`，注意这个地方的 ip 如果是远程访问前端不能是回环地址 `127.0.0.1`，必须是你的部署机的 ip。
 >
 > 本项目也提供了前端展示界面。你也可以在前端界面体验本项目。
 
