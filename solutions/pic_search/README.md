@@ -27,7 +27,7 @@
 
 数据集大小：~2GB
 
-下载地址：http://host.robots.ox.ac.uk/pascal/VOC/voc2012/VOCtrainval_11-May-2012.tar
+下载地址：https://pan.baidu.com/s/1MjACqsGiLo3oiTMcxodtdA 提取码：v78m 
 
 > 说明：您也可以使用其他的图片数据进行测试。目前支持加载的图片格式有.jpg格式、.png格式。
 
