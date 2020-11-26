@@ -86,9 +86,16 @@ uvicorn main:app
 7. Start the client
 
 ```
-
+docker run -d -p 80:80 -e API_URL=http://127.0.0.1:8000 zilliz/milvus-search-food-recipes:latest
 ```
+> API_URL specifies the IP and port of the server
 
+## show
 
+Open the web page 127.0.0.1:80, the front end is as shown in the figure, click `UPLOAD AN IMAGE` to select the food image to be searched
 
-## Result Show
+![img](pic/16011887482155.png)
+
+The search result is shown as follows:
+
+![img](pic/16011892329653.png)
