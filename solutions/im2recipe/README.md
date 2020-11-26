@@ -102,7 +102,7 @@ docker run -d -p 80:80 -e API_URL=http://127.0.0.1:8000 zilliz/milvus-search-foo
 
 ## 结果展示
 
-打开网页 127.0.0.1:80, 前端展示如图，点击 `UPLOAD AN IMAGE`选择要搜索的实食物图像。
+打开网页 127.0.0.1:80, 前端展示如图，点击 `UPLOAD AN IMAGE`选择要搜索的食物图像。
 
 ![img](pic/16011887482155.png)
 
