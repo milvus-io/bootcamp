@@ -51,7 +51,7 @@
 
 - 插入数据
 
-  你可以下载示例数据 [game_sound.zip]( ./data/game_sound.zip) 并导入系统。
+  你可以下载示例数据 [game_sound.zip](https://github.com/shiyu22/bootcamp/blob/0.11.0/solutions/audio_search/data/game_sound.zip?raw=true) 并导入系统。
 
   > 注意：要求压缩包文件中的声音都是 wav 格式。
 
@@ -59,6 +59,6 @@
 
 - 声音查询
 
-  导入 [test.wav](./data/test.wav) 在系统中查询与该声音最相似的结果。
+  导入 [test.wav](https://github.com/shiyu22/bootcamp/blob/0.11.0/solutions/audio_search/data/test.wav) 在系统中查询与该声音最相似的结果。
   
   ![](./pic/search.png)
