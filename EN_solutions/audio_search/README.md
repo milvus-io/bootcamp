@@ -15,7 +15,7 @@ This project use [PANNs](https://github.com/qiuqiangkong/audioset_tagging_cnn): 
 1. **Install python requirements**
 
    ```bash
-   $ cd solutions/audio_search/webserver/
+   $ cd cd bootcamp/solutions/audio_search/webserver/
    $ pip install -r audio_requirements.txt
    ```
 

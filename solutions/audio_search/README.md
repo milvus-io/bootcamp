@@ -1,4 +1,4 @@
-# 基于Milvus 的音频检索系统
+# 基于 Milvus 的音频检索系统
 
 该项目使用 [PANNs](https://github.com/qiuqiangkong/audioset_tagging_cnn) 对音频做 Embeddings 提取，然后利用 Milvus 检索出相似的音频数据。 
 
@@ -15,13 +15,13 @@
 1. **安装 python依赖**
 
    ```bash
-   $ cd solutions/audio_search/webserver/
+   $ cd bootcamp/solutions/audio_search/webserver/
    $ pip install -r audio_requirements.txt
    ```
 
 2. **修改配置参数**
 
-   再运行代码前，请修改该文件中的相关配置：**webserver/audio/common/config.py**:
+   在运行代码前，请修改该文件中的相关配置：**webserver/audio/common/config.py**:
 
    | Parameter    | Description               | Default setting |
    | ------------ | ------------------------- | --------------- |
@@ -57,8 +57,8 @@
 
   ![](./pic/insert.png)
 
-- 声音查询
+- 音频检索
 
-  导入 [test.wav](https://github.com/shiyu22/bootcamp/blob/0.11.0/solutions/audio_search/data/test.wav) 在系统中查询与该声音最相似的结果。
+  导入 [test.wav](https://github.com/shiyu22/bootcamp/blob/0.11.0/solutions/audio_search/data/test.wav) 在系统中检索与该音频最相似的结果。
   
   ![](./pic/search.png)
