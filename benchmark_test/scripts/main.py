@@ -1,4 +1,4 @@
-from milvus import *
+from milvus import Milvus,DataType
 import sys, getopt
 import time
 import logging
@@ -54,10 +54,10 @@ def main():
 
         # create collection
         elif opt_name in ("-c", "--create"):
-            milvus = connect_server()
-            param = {'collection_name': collection_name, 'dimension': dim, 'index_file_size':config.INDEX_FILE_SIZE, 'metric_type':config.METRIC_TYPE}
-            print(param)
-            print(milvus.create_collection(param))
+            milvus = connect_server() 
+            collection_param = { "fields": [ {"name": "Vec", "type": DataType.FLOAT_VECTOR, "params": {"dim": 128}} ], "segment_row_limit": 1000000 ,'auto_id': False}
+           # print(param)
+            print(milvus.create_collection(collection_name, collection_param))
             sys.exit(2)
 
 
@@ -78,7 +78,7 @@ def main():
 
         # test search performance
         elif opt_name == "--performance":
-            # connect_server()
+            # connect_server()d
             toolkit.search(collection_name,search_param)
             sys.exit(2)
 
@@ -126,9 +126,8 @@ def main():
         # Get collection row count
         elif opt_name == "--rows":
             milvus = connect_server()
-            print(milvus.count_entities(collection_name)[1])
+            print(milvus.count_entities(collection_name))
             sys.exit(2)
-
 
         # describe index, get information of index
         elif opt_name == "--describe_index":
