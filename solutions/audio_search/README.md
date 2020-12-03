@@ -62,3 +62,5 @@
   导入 [test.wav](https://github.com/shiyu22/bootcamp/blob/0.11.0/solutions/audio_search/data/test.wav) 在系统中检索与该音频最相似的结果。
   
   ![](./pic/search.png)
+
+> 如果你需要前端界面，请参考https://zilliz.com/demos/。
