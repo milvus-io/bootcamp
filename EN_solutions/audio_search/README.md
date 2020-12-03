@@ -49,7 +49,7 @@ You can type `127.0.0.1:8002/docs` into your browser to see all the APIs.
 
 - Insert data.
 
-  You can download the sample [game_sound.zip](../../solutions/audio_search/data/game_sound.zip) and insert it into the system.
+  You can download the sample [game_sound.zip](https://github.com/shiyu22/bootcamp/blob/0.11.0/solutions/audio_search/data/game_sound.zip?raw=true) and insert it into the system.
 
   > The sound data in the zip archive is required to be in wav format.
 
@@ -57,6 +57,6 @@ You can type `127.0.0.1:8002/docs` into your browser to see all the APIs.
 
 - Search audio.
 
-  You can pass in [test.wav](../../solutions/audio_search/data/test.wav) to find the result that is most similar to that sound.
+  You can pass in [test.wav](https://github.com/shiyu22/bootcamp/blob/0.11.0/solutions/audio_search/data/test.wav) to find the result that is most similar to that sound.
   
   ![](./pic/search.png)
