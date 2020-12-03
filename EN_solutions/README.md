@@ -29,3 +29,4 @@
 - [Cross-modal pedestrian retrieval based on Milvus](./pedestrian_search)
 - [Recipe retrieval system based on Milvus](./im2recipe)
 
+- [Audio retrieval system with Milvus](./audio_search)
