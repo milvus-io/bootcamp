@@ -16,8 +16,8 @@ The following configuration has been tested:
 | GPU Driver    | Driver 418.74 |
 | Memory        | 8 GB DDR4          |
 | Storage       | NVMe SSD 256 GB             |
-| Milvus       | 0.6.0            |
-| pymilvus       | 0.2.6            |
+| Milvus       | 0.11.0          |
+| pymilvus       | 0.3.0         |
 
 #### Download test tools
 
@@ -26,7 +26,7 @@ Download the following data and scripts:
 - 1 million test data: https://pan.baidu.com/s/1XB0u4zDJoF-2E9T5HmoWJQ  Extraction code : zvs4 
 - Query data: https://pan.baidu.com/s/1LSB167UzUtm1H5Fk91bQfA   Extraction code : imnw 
 - Ground truth: https://pan.baidu.com/s/1OlFKFoi3zVTr8DZQMoGkJQ Extraction code : 49lg
-- Test scripts: [/bootcamp/benchmark_test/scripts/](/benchmark_test/scripts/)
+- [Test scripts](/EN_benchmark_test/Scripts.md)
 
 Create a folder named `milvus_sift1m` and move all downloaded files to the folder:
 
@@ -41,17 +41,16 @@ Create a folder named `milvus_sift1m` and move all downloaded files to the folde
 
 To optimize the performance of Milvus, you can change Milvus parameters based on data distribution, performance, and accuracy requirements. In this test, 90% or higher recall rate can be achieved by using the recommended values in the following table.
 
-Configuration file: `/home/$USER/milvus/conf/server_config.yaml`
+Configuration file: `/home/$USER/milvus/conf/Milvus.yaml`
 
 |         Parameter         | Recommended value |
 | ---------------------- | ---- |
 |       `cpu_cache_capacity`   |   4   |
 |         `gpu_resource_config`.`cache_capacity`      |  1    |
-|         `use_blas_threshold`	                |   801     |
 |         `gpu_search_threshold`	                |   1001     |
 |         `search_resources`	                |   gpu0     |
 
-Refer to [Milvus Configuration](https://github.com/milvus-io/docs/blob/0.7.1/reference/milvus_config.md) for more information.
+Refer to [Milvus Configuration](https://www.milvus.io/cn/docs/v0.11.0/milvus_config.md) for more information.
 
 Use default values for other parameters. After setting parameter values, restart Milvus Docker to apply all changes.
 
@@ -61,9 +60,9 @@ $ docker restart <container id>
 
 ## 3. Create a table and build indexes
 
-Make sure Milvus is already installed and started. (For details of Milvus installation, please read [Milvus Quick Start](https://milvus.io/docs/v0.9.0/guides/get_started/install_milvus/gpu_milvus_docker.md)).
+Make sure Milvus is already installed and started. (For details of Milvus installation, please read [Milvus Quick Start](https://www.milvus.io/docs/v0.11.0/install_milvus.md)).
 
->  Before testing, please modify the corresponding parameters according to the [script instructions](/benchmark_test/scripts/README.md)
+>  Before testing, please modify the corresponding parameters according to the [script instructions](/EN_benchmark_test/Scripts.md)
 
 
 Go to `milvus_sift1m`, and run the following command to create a table and build indexes:
@@ -78,12 +77,11 @@ Vectors are then inserted into a table named `ann_1m_sq8h`, with the index_type 
 To show the available tables and number of vectors in each table, use the following command:
 
 ```bash
-#查看库中有哪些表
+#See which tables are in the library
 $ python3 main.py --show
-#查看表ann_1m_sq8h的行数
+#View the number of rows in table ANN_1m_sq8h
 $ python3 main.py --collection ann_1m_sq8 --rows
-#查看表ann_1m_sq8h的索引类型
-$ python3 main.py --collection ann_1m_sq8 --describe_index
+
 ```
 
 ## 4.  Import data
@@ -113,10 +111,8 @@ $ sqlite3 meta.sqlite
 In sqlite3 CLI, enter the following command to check the current status:
 
 ```sql
-sqlite> select * from TableFiles where table_id='ann_1m_sq8h';
+sqlite> select * from collections；
 ```
-
-Milvus divides a vector table into shards for storage. So, a query returns multiple records. The third column specifies the index type and 5 stands for IVF_SQ8H. The fifth column specifies the build status of the index and 3 indicates that index building is complete for the shard. If index building is not complete for a specific shard, you can manually build indexes for the shard.
 
 Exit sqlite CLI:
 

@@ -10,11 +10,11 @@
 
 
 
-## 安装 Milvus
+## 安装 Milvus0.11.0
 
 在主备机上安装 Milvus server。主备机的 Milvus `db` 目录均指向共享存储的位置。
 
-安装方法：参考 https://www.milvus.io/cn/docs/v0.10.0/guides/get_started/install_milvus/install_milvus.md
+安装方法：参考 https://www.milvus.io/cn/docs/v0.11.0/guides/get_started/install_milvus/install_milvus.md
 
 安装完成后，启动主机的 Milvus server，停止备机的 Milvus server。
 

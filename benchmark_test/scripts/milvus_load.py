@@ -4,7 +4,7 @@ import sys
 import time
 from functools import reduce
 import numpy as np
-from milvus import *
+from milvus import Milvus, DataType
 
 import config
 
@@ -91,8 +91,9 @@ def npy_to_milvus(collection_name,collection_rows,milvus):
         vectors = load_npy_data(filename)
         vectors_ids = [id for id in range(collection_rows,collection_rows+len(vectors))]
         time_add_start = time.time()
-        #status, ids = milvus.insert(collection_name=collection_name, records=vectors, ids=vectors_ids)
-        status, ids = milvus.insert(collection_name=collection_name, records=vectors,ids=vectors_ids)
+        hybrid_entities = [{"name": "Vec", "values": vectors,"type":DataType.FLOAT_VECTOR}]
+        ids = milvus.insert(collection_name, hybrid_entities, ids=vectors_ids)
+       # ids = milvus.insert(collection_name=collection_name, hybrid_entities, ids=vectors_ids)
         # time_add_end = time.time()
         total_insert_time = total_insert_time + time.time() - time_add_start
         print(filename, " insert milvus time: ", time.time() - time_add_start)                
@@ -151,7 +152,7 @@ def fvecs_to_milvus(collection_name,milvus):
 
 def load(collection_name):
     milvus = connect_server()
-    collection_rows = milvus.count_entities(collection_name)[1]
+    collection_rows = milvus.count_entities(collection_name)
     file_type = config.FILE_TYPE
     if file_type == 'npy':
         npy_to_milvus(collection_name,collection_rows,milvus)
@@ -161,7 +162,6 @@ def load(collection_name):
         bvecs_to_milvus(collection_name,milvus)
     if file_type == 'fvecs':
         fvecs_to_milvus(collection_name,milvus)
-
 
 
 

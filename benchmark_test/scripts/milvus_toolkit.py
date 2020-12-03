@@ -37,10 +37,9 @@ def build_collection(collection_name,it):
         index_type = IndexType.IVF_FLAT
         index_param = {'nlist': config.NLIST}
     elif it == 'sq8':
-        index_type = IndexType.IVF_SQ8
         index_param = {'nlist': config.NLIST}
     elif it == 'sq8h':
-        index_type = IndexType.IVF_SQ8H
+       # index_type = IndexType.IVF_SQ8H
         index_param = {'nlist': config.NLIST}
     elif it == 'pq':
         index_type = IndexType.IVF_PQ
@@ -56,8 +55,8 @@ def build_collection(collection_name,it):
         print("please try again!")
         sys.exit(2)
 
-    print(collection_name, " ", index_type, " ", index_param)
-    status = milvus.create_index(collection_name,index_type,index_param)
+   # print(collection_name, " ", index_type, " ", index_param)
+    status = milvus.create_index(collection_name, "Vec", {"index_type":"IVF_SQ8", "metric_type": "L2", "params": {"nlist":  config.NLIST}})
     print(status)
 
 
@@ -79,7 +78,10 @@ def search(collection_name,search_param):
             print("load query:", len(query_list), "time_load = ", time.time() - time_start)
             for topk in topk_scope:
                 time_start = time.time()
-                status,result = milvus.search(collection_name=collection_name, query_records=query_list, top_k=topk, params=search_params)
+                dsl = {"bool": {"must": [{"vector": {
+                    "Vec": {"topk": topk, "query": query_list , "metric_type": "L2", "params": {"nprobe": search_param}}}}]}}
+                # results = milvus.search(collection_name, dsl, fields=["Vec"])
+                results = milvus.search(collection_name, dsl)
                 time_cost = time.time() - time_start
                 print(nq, topk, time_cost)
                 line = str(nq) + ',' + str(topk) + ',' + str(round(time_cost, 4)) + ',' + str(round(time_cost / nq, 4)) + '\n'
@@ -90,11 +92,12 @@ def search(collection_name,search_param):
 
 
 def get_search_params(collection_name,search_param,milvus):
-    index_type = str(milvus.get_index_info(collection_name)[1]._index_type)
+    info = (milvus.get_collection_info(collection_name))
+    index_type= info['fields'][0]['indexes'][0]['index_type']
     if index_type == 'RNSG':
         search_params = {'search_length':search_param}
     elif index_type == 'HNSW':
-        search_params == {'ef':search_param}
+        search_params = {'ef':search_param}
     else:
         search_params = {'nprobe': search_param}
     return search_params
@@ -137,13 +140,14 @@ def recall_test(collection_name,search_param):
     rand = sorted(random.sample(range(0, len(vectors)), nq))
     for i in rand:
         query_list.append(vectors[i])
-    # print("load query:", len(query_list))
+    print("load query:", len(query_list))
     #rand=[0,1,2,3,4,5,6,7,8,9]
     search_params = get_search_params(collection_name,search_param,milvus)
     print("collection name:", collection_name, "query list:", len(query_list), "topk:", config.recall_topk, "search_params:", search_params)
     time_start = time.time()
-    status, results = milvus.search(collection_name=collection_name, query_records=query_list, top_k=config.recall_topk, params=search_params)
-    # time_end = time.time()
+    dsl = {"bool": {"must": [{"vector": {
+                    "Vec": {"topk" : 500, "query": query_list, "metric_type": "L2", "params": {"nprobe": search_params}}}}]}}
+    results = milvus.search(collection_name,dsl,fields=["Vec"])
     time_cost = time.time() - time_start
     print("time_search = ", time_cost)
     save_re_to_file(collection_name, rand, results, search_param,nq)
@@ -156,39 +160,44 @@ def save_re_to_file(collection_name, rand, results, search_param, nq):
     if not os.path.exists(config.recall_res_fname):
         os.mkdir(config.recall_res_fname)
     file_name = config.recall_res_fname + '/' + collection_name + '_' + str(search_param) + '_' + str(nq) + '_recall.txt'
+    entities = results[0]
     with open(file_name, 'w') as f:
-        for i in range(len(results)):
-            for j in range(len(results[i])):
-                line = str(rand[i]) + ' ' + str(results[i][j].id) + ' ' + str(results[i][j].distance)
+        all_ids = entities.ids
+        all_distances = entities.distances
+        for i in range(len(all_ids)):
+                line = str(rand[i]) + ' ' + str(all_ids[i]) + ' ' + str(all_distances[i])
                 f.write(line + '\n')
-            f.write('\n')
+        f.write('\n')
     f.close()
 
-
-
-
 def compute_recall(collection_name,nq,results,search_param,rand):
-    ids = []
-    # dis = []
-    for nq_result in (results):
+    all_ids = []
+    for i in range (nq):
         temp = []
-        for result in (nq_result):
-            temp.append(result.id)
-        ids.append(temp)
-    gt_ids = load_gt_ids()
+        entities = results[i]
+        temp = entities.ids
+       # print(len(temp))
+        all_ids.append(temp)
+        #print(len(all_ids))
+   # entities =results[0]
 
+   # all_ids.append(entities.ids)
+   # print(all_ids)
+    gt_ids = load_gt_ids() 
+    
     for top_k in config.compute_recall_topk:
-        recalls, count_all = compare_correct(nq, top_k, rand, gt_ids, ids)
+        recalls, count_all = compare_correct(nq, top_k, rand, gt_ids, all_ids)
         fname = config.recall_out_fname+ '/' + collection_name + '_' + str(search_param) + '_' + str(nq) + "_" + str(top_k) + ".csv"
         with open(fname,'w') as f:
             f.write('nq,topk,recall\n')
-            for i in range(nq):
+           # nq = 1 
+            for i in range(nq):#nq
+               # top_k = 500
                 line = str(i + 1) + ',' + str(top_k) + ',' + str(recalls[i] * 100) + "%"
                 f.write(line + '\n')
             f.write("max, avarage, min\n")
             f.write( str(max(recalls) * 100) + "%," + str(round(count_all / nq / top_k, 3) * 100) + "%," + str(min(recalls) * 100) + "%\n")
         print("topk=", top_k,", total accuracy", round(count_all / nq / top_k, 3) * 100, "%")           
-
 
 
 def load_gt_ids():
@@ -206,20 +215,31 @@ def load_gt_ids():
     return gt_ids
 
 
-def compare_correct(nq, top_k, rand, gt_ids, ids):
+
+def get_newids(all_ids):
+    results=[]
+    for o in range(len(all_ids)):
+        for p in range(len(all_ids[0])):
+           results.append(all_ids[o][p])
+          # print(len(results))
+    return results
+
+def compare_correct(nq, top_k, rand, gt_ids, all_ids):
     recalls = []
     count_all = 0
+   # milvus_results = []
+  #  milvus_results=get_newids(all_ids)
+   # print(len(milvus_results))
+   # top_k=500
     for i in range(nq):
         milvus_results = []
         ground_truth = []
         for j in range(top_k):
-            milvus_results.append(ids[i][j])
+            milvus_results.append(all_ids[i][j])
             ground_truth.append(gt_ids[int(rand[i])][j])
-            # ground_truth += gt_ids[int(rand[i * top_k]) * config.ground_truth_topk + j]
-        # print(milvus_results)
-        # print(ground_truth)
         union = list(set(milvus_results).intersection(set(ground_truth)))
         recalls.append(len(union) / top_k)
+       # print(recalls)
         count_all += len(union)
-    # print("topk_ground_truth:", topk_ground_truth)
+       # print(count_all)
     return recalls, count_all
