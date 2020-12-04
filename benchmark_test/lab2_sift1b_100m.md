@@ -68,8 +68,8 @@ $ python3 main.py --collection ann_100m_sq8 --index sq8 --build
 ```shell
 #查看库中有哪些表
 $ python3 main.py --show
-#查看表ann_100m_sq8h的行数
-$ python3 main.py --collectio ann_100m_sq8q8 --rows
+#查看表ann_100m_sq8的行数
+$ python3 main.py --collectio ann_100m_sq8 --rows
 ```
 
 ## 4、 数据导入
