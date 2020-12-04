@@ -25,14 +25,15 @@ def create_pg_table(conn, cur, PG_TABLE_NAME):
 
 def copy_data_to_pg(conn, cur, PG_TABLE_NAME):
     fname = os.path.join(os.getcwd(),'temp.csv')
-    sql = "copy " + PG_TABLE_NAME + " from '" + fname + "' with CSV delimiter '|';"
-    print(sql)
+    f = open(fname, 'r') 
     try:
-        cur.execute(sql)
+        cur.copy_from(f, PG_TABLE_NAME, sep='|')
         conn.commit()
         print("insert pg sucessful!")
     except:
         print("faild  copy!")
+    finally:
+        f.close()
 
 def build_pg_index(conn, cur, PG_TABLE_NAME):
     try:
