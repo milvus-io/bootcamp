@@ -62,9 +62,15 @@
    $ cd ../..
    $ python main.py
    # You are expected to see the following outputs.
+   ...
+   INFO:     Started server process [71037]
+   INFO:     Waiting for application startup.
+   INFO:     Application startup complete.
+   INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+   ...
    ```
    
-   > 在浏览器访问 http://192.168.1.58:8000/，即可访问并使用前端。
+   > 在浏览器访问 http://127.0.0.1:8000/docs，即可访问并使用前端。
 ## 结果展示
 
 徽标识别

@@ -62,9 +62,15 @@ The following describes the important parameters of webservice.
    $ cd ../..
    $ python main.py
    # You are expected to see the following outputs.
+   ...
+INFO:     Started server process [71037]
+   INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+   INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+...
    ```
 
-   > Now, get the API by visiting http://192.168.1.58:8000 in your browser.
+   > Now, get the API by visiting http://127.0.0.1.58:8000/docs in your browser.
 
    ## Results display
 
@@ -79,10 +85,10 @@ The following describes the important parameters of webservice.
    Only him/her
 
    ![image-20201112182009521](C:\Users\85443\AppData\Roaming\Typora\typora-user-images\image-20201112182009521.png)
-
    
-
    
-
+   
+   
+   
    
 
