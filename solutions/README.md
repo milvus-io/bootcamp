@@ -29,4 +29,5 @@
 - [基于 Milvus 的跨模态行人检索](./pedestrian_search)
 - [基于 Milvus 的食谱检索系统](./im2recipe)
 - [基于 Milvus 的音频检索系统](./audio_search)
+- [基于 Milvus 的视频分析系统](./Video_analysis)
 
