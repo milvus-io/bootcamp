@@ -26,7 +26,7 @@ Download the following data and scripts:
 - 1 million test data: https://pan.baidu.com/s/1XB0u4zDJoF-2E9T5HmoWJQ  Extraction code : zvs4 
 - Query data: https://pan.baidu.com/s/1LSB167UzUtm1H5Fk91bQfA   Extraction code : imnw 
 - Ground truth: https://pan.baidu.com/s/1OlFKFoi3zVTr8DZQMoGkJQ Extraction code : 49lg
-- Test scripts: [/bootcamp/benchmark_test/scripts/](/benchmark_test/scripts/)
+- [Test scripts](/EN_benchmark_test/Scripts.md)
 
 Create a folder named `milvus_sift1m` and move all downloaded files to the folder:
 
@@ -62,7 +62,7 @@ $ docker restart <container id>
 
 Make sure Milvus is already installed and started. (For details of Milvus installation, please read [Milvus Quick Start](https://www.milvus.io/docs/v0.11.0/install_milvus.md)).
 
->  Before testing, please modify the corresponding parameters according to the [script instructions](//EN_benchmark_test/Scripts.md)
+>  Before testing, please modify the corresponding parameters according to the [script instructions](/EN_benchmark_test/Scripts.md)
 
 
 Go to `milvus_sift1m`, and run the following command to create a table and build indexes:
