@@ -30,7 +30,7 @@ The following describes the important parameters of webservice.
 | YOLO_CONFIG_PATH | Path of config file       | None         |
 | FACE_MODEL_PATH  | Path of insightface model | None         |
 
-# Steps
+## Steps
 
 1. Install Milvus 0.11.0 as described in [installation overview](https://milvus.io/docs/install_milvus.md).
 
@@ -63,28 +63,28 @@ The following describes the important parameters of webservice.
    $ python main.py
    # You are expected to see the following outputs.
    ...
-INFO:     Started server process [71037]
+   INFO:     Started server process [71037]
    INFO:     Waiting for application startup.
-INFO:     Application startup complete.
+   INFO:     Application startup complete.
    INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
-...
+   ...
    ```
 
    > Now, get the API by visiting http://127.0.0.1.58:8000/docs in your browser.
 
-   ## Results display
+## Results display
 
-   Logo recognition
+Logo recognition
 
-   ![image-20201112182116464](C:\Users\85443\AppData\Roaming\Typora\typora-user-images\image-20201112182116464.png)
+![image-20201112182116464](C:\Users\85443\AppData\Roaming\Typora\typora-user-images\image-20201112182116464.png)
 
-   Who is he/she?
+Who is he/she?
 
-   ![image-20201112181949959](C:\Users\85443\AppData\Roaming\Typora\typora-user-images\image-20201112181949959.png)
+![image-20201112181949959](C:\Users\85443\AppData\Roaming\Typora\typora-user-images\image-20201112181949959.png)
 
-   Only him/her
+Only him/her
 
-   ![image-20201112182009521](C:\Users\85443\AppData\Roaming\Typora\typora-user-images\image-20201112182009521.png)
+![image-20201112182009521](C:\Users\85443\AppData\Roaming\Typora\typora-user-images\image-20201112182009521.png)
    
    
    
