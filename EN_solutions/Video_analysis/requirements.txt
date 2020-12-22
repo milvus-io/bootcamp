@@ -1,7 +1,7 @@
 numpy==1.16.5
 pymilvus==0.3.0
 Keras==2.3.1
-tensorflow==1.14.0
+tensorflow==2.4.0
 opencv-python==4.2.0.34
 pillow
 pymysql
