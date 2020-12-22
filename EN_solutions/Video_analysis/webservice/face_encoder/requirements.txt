@@ -1,0 +1,5 @@
+paddlepaddle
+grpcio==1.27.2
+pillow
+opencv-python==4.2.0.34
+grpcio-reflection==1.30.0
