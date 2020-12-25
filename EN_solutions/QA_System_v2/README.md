@@ -10,13 +10,7 @@ The data set in the data directory is a sample data.
 
 
 
-## Script description
-
-Data:
-
-main.py: The script provides an interface for the front page
-
-QA:
+## config description
 
 QA/config.py：The script is a configuration file and needs to be modified for the specific environment.
 
