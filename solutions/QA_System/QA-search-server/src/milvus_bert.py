@@ -38,9 +38,9 @@ def import_to_pg(table_name,ids,answer_file):
     conn = pg_operating.connect_postgres_server(PG_HOST, PG_PORT, PG_USER, PG_PASSWORD, PG_DATABASE)
     cur = conn.cursor()
     pg_operating.create_pg_table(conn, cur, table_name)
+    pg_operating.build_pg_index(conn, cur, table_name)
     pg_operating.record_txt(ids,answer_file)
     pg_operating.copy_data_to_pg(conn, cur, table_name)
-    pg_operating.build_pg_index(conn, cur, table_name)
 
 
 def normaliz_vec(vec_list):
