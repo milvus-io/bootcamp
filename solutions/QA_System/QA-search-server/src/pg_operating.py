@@ -16,7 +16,7 @@ def connect_postgres_server(PG_HOST, PG_PORT, PG_USER, PG_PASSWORD, PG_DATABASE)
 
 def create_pg_table(conn, cur, PG_TABLE_NAME):
     try:       
-        sql = "CREATE TABLE " + PG_TABLE_NAME + " (ids bigint, answer text);"
+        sql = "CREATE TABLE IF NOT EXISTS " + PG_TABLE_NAME + " (ids bigint, answer text);"
         cur.execute(sql)
         conn.commit()
         print("create postgres table!")
@@ -39,7 +39,7 @@ def copy_data_to_pg(conn, cur, PG_TABLE_NAME):
 
 def build_pg_index(conn, cur, PG_TABLE_NAME):
     try:
-        sql = "CREATE INDEX " + PG_TABLE_NAME + "_index_ids on " + PG_TABLE_NAME + "(ids);"
+        sql = "CREATE INDEX IF NOT EXISTS " + PG_TABLE_NAME + "_index_ids on " + PG_TABLE_NAME + "(ids);"
         cur.execute(sql)
         conn.commit()
         print("build index sucessful!")
