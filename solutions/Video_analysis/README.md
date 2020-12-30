@@ -75,12 +75,12 @@
 
 徽标识别
 
-![图片 3](/Users/mialee/Desktop/图片 3.png)
+![pic 1](./pic/1.png)
 
 TA 是谁？
 
-![图片 1](/Users/mialee/Desktop/图片 1.png)
+![pic 2](./pic/2.png)
 
 只看 TA
 
-![图片 2](/Users/mialee/Desktop/图片 2.png)
+![图片 2](./pic/3.png)
