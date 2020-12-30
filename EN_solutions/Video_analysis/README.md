@@ -46,7 +46,7 @@ The following describes the important parameters of webservice.
 4. Installation dependencies.
 
    ```bash
-   $ pip install -r requirement.txt
+   $ pip install -r requirements.txt
    ```
 
 5. Download YOLOv3 model.
@@ -76,19 +76,13 @@ The following describes the important parameters of webservice.
 
 Logo recognition
 
-![image-20201112182116464](C:\Users\85443\AppData\Roaming\Typora\typora-user-images\image-20201112182116464.png)
+![图片 3](/Users/mialee/Desktop/图片 3.png)
 
 Who is he/she?
 
-![image-20201112181949959](C:\Users\85443\AppData\Roaming\Typora\typora-user-images\image-20201112181949959.png)
+![图片 1](/Users/mialee/Desktop/图片 1.png)
 
 Only him/her
 
-![image-20201112182009521](C:\Users\85443\AppData\Roaming\Typora\typora-user-images\image-20201112182009521.png)
-   
-   
-   
-   
-   
-   
+![图片 2](/Users/mialee/Desktop/图片 2.png)
 
