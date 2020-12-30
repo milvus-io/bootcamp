@@ -48,7 +48,7 @@ config.py：The script is a configuration file and needs to be modified for the 
 | PG_USER       | postgresql user name     | postgres        |
 | PG_PASSWORD   | postgresql password      | postgres        |
 | PG_DATABASE   | postgresql datebase name | postgres        |
-| DEFAULT_TABLE | default  table name      | milvus_qa       |
+| DEFAULT_TABLE | default table name       | milvus_qa       |
 
 ## Steps to build a project
 
@@ -58,14 +58,14 @@ config.py：The script is a configuration file and needs to be modified for the 
 
 3.Install the Python packages you need
 
-```shell
+```
 pip install --ignore-installed --upgrade tensorflow==1.10
 pip install -r requriment.txt
 ```
 
 4.Start the Bert services (more [Bert](https://github.com/hanxiao/bert-as-service#building-a-qa-semantic-search-engine-in-3-minutes) related)
 
-```shell
+```
 #Download model
 $ cd model
 $ wget https://storage.googleapis.com/bert_models/2018_11_03/english_L-12_H-768_A-12.zip
@@ -75,24 +75,24 @@ $ bert-serving-start -model_dir/tmp/english_L-12_H-768_A-12/ -num_worker =12 -ma
 
 5. Import data
 
-```shell
+```
 cd QA-search-server
 python main.py --collection milvus_qa --question data/question.txt --answer data/answer.txt --load
 ```
 
 > Note: **Data /question.txt**is the path of the imported question set
 >
-> ​           **Data /answer.txt**is the path of the imported answer set
+>  **Data /answer.txt**is the path of the imported answer set
 
 6. Start the query service
 
-```shell
+```
 python app.py
 ```
 
 7. Build and start the query client
 
-```shell
+```
 # Go to the QA-Search-Client directory to build the image
 cd QA-search-client
 docker build .
@@ -101,7 +101,7 @@ docker tag <image_id> milvus-qa:latest
 docker run --name milvus_qa -d --rm -p 8001:80 -e API_URL=http://40.73.34.15:5000 milvus-qa:latest
 ```
 
-> Http://40.73.34.15 Where IP is the machine IP where the service started in step 6.
+> [Http://40.73.34.15](http://40.73.34.15/) Where IP is the machine IP where the service started in step 6.
 
 8. Open the web page, enter the url: 40.73.34.15:8081, you can experience the intelligent Question Answering system belongs to you。
 
