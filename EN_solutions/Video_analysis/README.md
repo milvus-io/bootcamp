@@ -76,13 +76,13 @@ The following describes the important parameters of webservice.
 
 Logo recognition
 
-![图片 3](/Users/mialee/Desktop/图片 3.png)
+![pic_1](./pic/1.png)
 
 Who is he/she?
 
-![图片 1](/Users/mialee/Desktop/图片 1.png)
+![pic 2](./pic/2.png)
 
 Only him/her
 
-![图片 2](/Users/mialee/Desktop/图片 2.png)
+![pic 3](./pic/3.png)
 
