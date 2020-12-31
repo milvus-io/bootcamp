@@ -9,11 +9,11 @@
 | 组件          | 配置                |
 | ------------------ | -------------------------- |
 | 操作系统            | Ubuntu LTS 18.04 |
-| CPU           | Intel Core i5-8250U           |
-| GPU           | NVIDIA GeForce MX150, 2GB GDDR5  |
-| GPU 驱动软件    | Driver 418.74 |
-| 内存        | 8 GB DDR4          |
-| 硬盘       | NVMe SSD 256 GB             |
+| CPU           | Intel(R) Xeon(R) Platinum 8163 CP |
+| GPU           | CUDA Version: 10.2 GeForce RTX 2080 Ti |
+| GPU 驱动软件    | Driver 440.100 |
+| 内存        | 755GB  DDR4                            |
+| 硬盘       | 1.9T         |
 | Milvus     |  0.11.0  |
 | pymilvus    |   0.3.0   |
 
