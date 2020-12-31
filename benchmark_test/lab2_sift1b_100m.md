@@ -9,11 +9,11 @@
 | Component           | Minimum Config                |
 | ------------------ | -------------------------- |
 | OS            | Ubuntu LTS 18.04 |
-| CPU           | Intel Core i7-8700        |
-| GPU           | Nvidia GeForce GTX 1060, 6GB GDDR5 |
-| GPU Driver    | CUDA 10.1, Driver 418.74 |
-| Memory        | 16 GB DDR4 ( 2400 Mhz ) x 2                |
-| Storage       | SATA 3.0 SSD 256 GB                  |
+| CPU           | Intel(R) Xeon(R) Platinum 8163 CP  |
+| GPU           | GeForce RTX 2080 Ti |
+| GPU Driver    | CUDA Version: 10.2, Driver 440.100 |
+| Memory        | 755GB DDR4    |
+| Hard Disk | 1.9T              |
 
 测试工具下载：
 - 1亿测试数据集下载地址：https://pan.baidu.com/s/1N5jGKHYTGchye3qR31aNnA
