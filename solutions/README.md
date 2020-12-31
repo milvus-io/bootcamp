@@ -12,7 +12,7 @@
 - [基于 Mishards（Milvus 集群分片中间件）的分布式方案](Mishards/README.md)
 - [基于 Kubernetes 部署 Milvus 分布式集群](./Kubernetes)
 - [使用 Prometheus 和 Grafana 对 Milvus 进行监控与报警](Prometheus/Readme.md)
-- [使用 nginx 实现 Milvus 的负载均衡](nginx/Readme.md)
+- [使用 Nginx 实现对Milvus 负载均衡](nginx/Readme.md)
 
 ## 应用场景
 
