@@ -76,7 +76,7 @@ You can also input *<localhost(local IP address):port(default port is 80)>* in y
 
 1.This example installs two Milvus, the two Milvus versions are required to be the same, this example installs two 0.11 version Milvus, refer to the [Milvus official website](https://www.milvus.io/cn/docs/v0.11.0/milvus_docker-gpu.md) for installation, this example The example has been successfully installed Milvus by default, as shown below, one of the Milvus 1 ip 192.168.1.85:19573, the other Milvus 2 ip 192.168.1.85:19538
 
-![](\2.png)
+![](2.png)
 
 2、Then modify the Nginx configuration file at **/usr/local/nginx/conf/nginx.conf** and add the following code at the end of the configuration file, the load balancing policy used in this example is polling
 
@@ -128,7 +128,7 @@ client = Milvus(host='localhost', port='19585')
 
 Finally, the result of the ngnix log query is shown in the figure below, where you can see that nginx distributes the requests to different Milvus
 
-![3](\3.png)
+![3](3.png)
 
 
 
