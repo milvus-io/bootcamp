@@ -11,11 +11,10 @@ The following configuration has been tested:
 | Component           |  Configuration                |
 | ------------------ | -------------------------- |
 | Operating System           | Ubuntu LTS 18.04 |
-| CPU           | Intel Core i5-8250U           |
-| GPU           | NVIDIA GeForce MX150, 2GB GDDR5  |
-| GPU Driver    | Driver 418.74 |
-| Memory        | 8 GB DDR4          |
-| Storage       | NVMe SSD 256 GB             |
+| CPU           | Intel(R) Xeon(R) Platinum 8163 CP |
+| GPU           | CUDA Version: 10.2 GeForce RTX 2080 Ti |
+| GPU Driver    | Driver 440.100 |
+| Memory        | 755GB DDR4                             |
 | Milvus       | 0.11.0          |
 | pymilvus       | 0.3.0         |
 
