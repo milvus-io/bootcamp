@@ -71,7 +71,7 @@ ps -ef | grep nginx
 
 1、本示例中安装两个Milvus，要求两个Milvus的版本是相同的，本示例安装了两个0.11Milvus，参考[Milvus官网](https://www.milvus.io/cn/docs/v0.11.0/milvus_docker-gpu.md)进行安装，本示例默认已经成功安装Milvus，如下图所示,其中一个Milvus 1的 ip 为192.168.1.85:19573,另一个Milvus 2的 ip 为 192.168.1.85:19538
 
-![](\2.png)
+![](2.png)
 
 2、然后修改Nginx的配置文件，配置文件的位置为 **/usr/local/nginx/conf/nginx.conf**，在配置文件的末尾添加如下代码，本示例中使用的负载均衡策略为轮询
 
@@ -122,7 +122,7 @@ client = Milvus(host='localhost', port='19585')
 
 最后，得到ngnix日志查询结果如下图所示，可以看到nginx将请求分给不同的Milvus
 
-![3](\3.png)
+![3](3.png)
 
 
 
