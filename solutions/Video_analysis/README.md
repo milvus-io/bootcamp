@@ -40,13 +40,13 @@
 
    ```bash
    $ git clone https://github.com/milvus-io/bootcamp.git
-   $ cd bootcanp/solution/Video_analysis
+   $ cd bootcamp/solution/Video_analysis
    ```
    
 4. 安装依赖
 
    ```bash
-   $ pip install -r requirement.txt
+   $ pip install -r requirements.txt
    ```
 
 5. 下载 YOLOv3 模型
@@ -75,12 +75,12 @@
 
 徽标识别
 
-![image-20201112182116464](C:\Users\85443\AppData\Roaming\Typora\typora-user-images\image-20201112182116464.png)
+![pic 1](./pic/1.png)
 
 TA 是谁？
 
-![image-20201112181949959](C:\Users\85443\AppData\Roaming\Typora\typora-user-images\image-20201112181949959.png)
+![pic 2](./pic/2.png)
 
 只看 TA
 
-![image-20201112182009521](C:\Users\85443\AppData\Roaming\Typora\typora-user-images\image-20201112182009521.png)
+![图片 2](./pic/3.png)
