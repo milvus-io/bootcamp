@@ -1,5 +1,7 @@
 # README
 
+This project will no longer be maintained and updated, and the latest content will be updated at https://github.com/zilliz-bootcamp/item_based_recommend
+
 This project combines milvus and bert to implement an item-based text recommendation system.
 
 ## Data Introduction
