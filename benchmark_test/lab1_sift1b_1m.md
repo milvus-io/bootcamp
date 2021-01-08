@@ -1,5 +1,7 @@
 # 实验一：百万向量检索
 
+本项目后续将不再维护更新，最新内容将更新在:https://github.com/zilliz-bootcamp/milvus_benchmark/blob/0.11/lab1_sift1b_1m.md
+
 ## 1、准备测试数据和脚本
 
 本实验所使用的原始数据集为 SIFT1B ，关于该数据集的详细信息请参考：[http://corpus-texmex.irisa.fr/](http://corpus-texmex.irisa.fr/)。在本次测试中，我们提取了原始数据集中的 100 万条数据。
