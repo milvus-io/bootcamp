@@ -1,5 +1,7 @@
 # 基于 Google Cloab 的教程
 
+本项目后续将不再维护更新，最新内容将更新在https://github.com/zilliz-bootcamp/milvus_tutorials_on_googlecolab。
+
 本教程将展示如何[源码编译 Milvus ](https://github.com/milvus-io/milvus/blob/0.10.3/INSTALL.md) 并且在 Google Colab 中运行 [Python 代码](https://milvus-io.github.io/milvus-sdk-python/pythondoc/v0.2.14/index.html)。
 
 **1. 下载 notebook**
