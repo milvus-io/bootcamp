@@ -1,5 +1,7 @@
 # README
 
+本项目后续将不再维护更新，最新内容将更新在 https://github.com/zilliz-bootcamp/recipe_retrieval
+
 本项目基于 milvus 实现了一个图片和食谱的检索系统。即输入一张食物图片，返回该图片对应的食谱。
 
 本项目是基于项目 [im2recipe-Pytorch](https://github.com/torralba-lab/im2recipe-Pytorch) 实现的。
