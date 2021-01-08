@@ -1,4 +1,5 @@
 # Lab Test 1: One Million Vector Search
+This project will no longer be maintained and updated, and the latest content will be updated at https://github.com/zilliz-bootcamp/milvus_benchmark/blob/0.11/lab1_sift1b_1m.md
 
 ## 1. Prepare test data and scripts
 
