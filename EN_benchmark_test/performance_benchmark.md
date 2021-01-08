@@ -1,4 +1,6 @@
 # Performance Benchmark
+This project will no longer be maintained and updated, and the latest content will be updated at https://github.com/zilliz-bootcamp/milvus_benchmark/blob/0.11/performance_benchmark.md
+
 
 This topic displays the performance of different index types in Milvus 0.11.0 for reference purposes. The test data uses an open source dataset, sift1B, with 1,000 million 128-dimensional vectors.
 
