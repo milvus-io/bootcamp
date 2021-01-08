@@ -1,12 +1,9 @@
+本项目后续将不再维护更新，最新内容将更新在:https://github.com/zilliz-bootcamp/milvus_benchmark/blob/0.11/performance_benchmark.md
+
 # 性能指标
 
 本文档是基于 Milvus 0.11.0 的性能测试结果。
 
-## 环境
-
-**CPU**: Intel(R) Core(TM) i7-8700 CPU @ 3.20GHz  (12 Cores)
-
-**GPU**: GeForce GTX 1060 6GB  、 GeForce GTX 1660 6GB
 
 ## 数据
 
