@@ -2,7 +2,7 @@
 
 ## 前提
 
-在运行本项目脚本，需要启动milvus0.7的服务。
+在运行本项目脚本，需要启动milvus0.11的服务。
 
 安装相关python包
 
@@ -18,7 +18,7 @@ pip install -r requirements.txt
 | --dim              | 新建集合时需要指定集合中向量的维度                           |
 | --index            | 建立索引时，需要指定索引类型<flat, ivf_flat, sq8, sq8h, pq, nsg, hnsw> |
 | --search_param     | 查询时，指定查询时的参数值 (索引是ivf类时，该参数指nprobe。rnsg索引时，该参数指search_length。索引是hnsw时，该参数指ef) |
-| --partition_tag    | 指定分区标签                                                 |
+| --partition_tag    | 指定分区标签：                                               |
 | --create           | 执行创建集合的操作。该操作需要指定参数collection和dim两个参数 |
 | --load             | 执行写入数据的操作。该操作需要指定参数collection             |
 | --build            | 执行建立索引的操作。该操作需要指定参数collection和index      |
@@ -30,7 +30,6 @@ pip install -r requirements.txt
 | --show             | 显示库中存在的集合。该操作无需其他参数                       |
 | --has              | 判断某个集合是否存在。该操作需要指定参数collection           |
 | --rows             | 查看某个集合的向量条数。该操作需要指定参数collection         |
-| --describe_index   | 显示某个集合的索引信息。该操作需要指定参数collection         |
 | --flush            | 手动数据落盘操作。该操作需要指定参数collection               |
 | --drop             | 删除指定集合。该操作需要指定参数collection                   |
 | --drop_index       | 删除指定集合的索引。该操作需要指定参数collection             |
@@ -47,10 +46,11 @@ pip install -r requirements.txt
 
 创建collection时需要的配置：
 
-| 参数            | 说明                             | 默认值        |
-| --------------- | -------------------------------- | ------------- |
-| INDEX_FILE_SIZE | 创建集合时指定的数据文件大小     | 2048          |
-| METRIC_TYPE     | 创建集合时指定向量相似度计算方式 | MetricType.L2 |
+| 参数              | 说明                             | 默认值        |
+| ----------------- | -------------------------------- | ------------- |
+| SEGMENT_ROW_LIMIT | 创建集合时存储实体的行数         | 4096          |
+| METRIC_TYPE       | 创建集合时指定向量相似度计算方式 | MetricType.L2 |
+| AUTO_ID           | 创建集合时自动生成ID             | True          |
 
 建索引时需要的配置参数：
 
@@ -165,25 +165,19 @@ python main.py --collection <collection_name> --has
 python main.py --collection <collection_name> --rows
 ```
 
-11. 查看集合的索引类型
-
-```shell
-python main.py --collection <collection_name> --describe_index
-```
-
-12. 删除集合
+11.删除集合
 
 ```shell
 python main.py --collection <collection_name> --drop
 ```
 
-13. 删除索引
+12.删除索引
 
 ```shell
 python main.py --collection <collection_name> --drop_index
 ```
 
-14. 查看milvus server和pymilvus版本
+13.查看milvus server和pymilvus版本
 
 ```shell
 python main.py --version

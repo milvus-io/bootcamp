@@ -11,7 +11,7 @@ import traceback
 
 
 # milvus = Milvus()
-bc = BertClient()
+
 
 
 index_file_size = 1024
@@ -38,9 +38,9 @@ def import_to_pg(table_name,ids,answer_file):
     conn = pg_operating.connect_postgres_server(PG_HOST, PG_PORT, PG_USER, PG_PASSWORD, PG_DATABASE)
     cur = conn.cursor()
     pg_operating.create_pg_table(conn, cur, table_name)
+    pg_operating.build_pg_index(conn, cur, table_name)
     pg_operating.record_txt(ids,answer_file)
     pg_operating.copy_data_to_pg(conn, cur, table_name)
-    pg_operating.build_pg_index(conn, cur, table_name)
 
 
 def normaliz_vec(vec_list):
@@ -56,6 +56,7 @@ def normaliz_vec(vec_list):
 
 
 def import_to_milvus(data,collection_name,milvus):
+    bc = BertClient()
     vectors = bc.encode(data)
     question_vectors = normaliz_vec(vectors.tolist())
     status, ids = milvus.insert(collection_name=collection_name, records=question_vectors)
@@ -106,41 +107,54 @@ def import_data(collection_name, question_dir, answer_dir):
     import_to_pg(collection_name,ids,answer_dir)
         
 
-def search_in_milvus(collection_name, query_sentence):
+def search_in_milvus(collection_name, query_sentence, bc):
     logging.info("start test process ...")
     query_data = [query_sentence]
     try:
         vectors = bc.encode(query_data)
-    except:
-        return "bert service disconnect"
+        logging.info("get query vector!")
+    except Exception as e:
+        info = "bert Error: " + e
+        logging.info(info)
+        return info
     query_list = normaliz_vec(vectors.tolist())
     #connect_milvus_server()
     try:
         milvus = Milvus(host=MILVUS_HOST, port=MILVUS_PORT)
         #logging.info(status)
-    except:
-        return "milvus service connection failed"
+    except Exception as e:
+        info = "Milvus connect error: " + e
+        logging.info(info)
+        return info
     try:
         logging.info("start search in milvus...")
         search_params = {'nprobe': 64}
         status,results = milvus.search(collection_name=collection_name, query_records=query_list, top_k=1, params=search_params)
+        if not results:
+            return "there is no data in milvus"
         if results[0][0].distance < 0.9:
             return "对不起，我暂时无法为您解答该问题"
-    except:
-        return "milvus service disconnect"
+    except Exception as e:
+        info = "Milvus search error: " + e
+        logging.info(info)
+        return info
 
     try:
         conn = pg_operating.connect_postgres_server(PG_HOST, PG_PORT, PG_USER, PG_PASSWORD, PG_DATABASE)
         cur = conn.cursor()
-    except:
-        return "postgres service connection failed"
+    except Exception as e:
+        info = "postgres service connection failed" + e
+        logging.info(info)
+        return info
     try:
         logging.info("start search in pg ...")
         rows = pg_operating.search_in_pg(conn, cur, results[0][0].id, collection_name)
         out_put = rows[0][1]
         return out_put
-    except:
-        return "postgres service disconnect"
+    except Exception as e:
+        info = "dearch in postgres error: " + e
+        logging.info(info)
+        return info
     finally:
         conn.close()
 
