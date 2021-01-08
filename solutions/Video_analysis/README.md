@@ -1,5 +1,7 @@
 # 基于 Milvus 的视频分析系统
 
+> Note: The content will no longer be maintained and updated in this project. The latest content will be migrated to https://github.com/zilliz-bootcamp/video_analysis
+
 常见的视频分析系统能够对视频区域内出现的运动目标自动识别出目标类型并跟踪，能够同时监测同一场景里多个目标。经过分析的视频可以被广泛应用到各个领域，例如广告推荐、安防和娱乐产业。本项目利用 [yolov3](https://pjreddie.com/darknet/yolo/) 和 [insightface](https://github.com/deepinsight/insightface)，结合 OpenCV 的截帧技术，对视频中出现的物品进行徽标识别并对人脸进行追踪与识别。
 
 ## 环境准备
