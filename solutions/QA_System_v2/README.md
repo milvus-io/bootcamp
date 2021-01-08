@@ -1,5 +1,7 @@
 # README
 
+本项目后续将不再维护更新，最新内容将更新在 https://github.com/zilliz-bootcamp/intelligent_question_answering_v2
+
 本项目结合Milvus和bert提供的模型实现了一个中文问答系统。旨在提供一个用Milvus结合各种AI模型实现语义相似度匹配的解决方案。
 
 ## 数据说明
