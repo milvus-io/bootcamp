@@ -1,6 +1,6 @@
 # 基于 Milvus 的向量数据和结构化数据混合查询方案
 
-本项目后续将不再维护更新，最新内容将更新在 https://github.com/zilliz-bootcamp/intelligent_question_answering_v2
+本项目后续将不再维护更新，最新内容将更新在 https://github.com/zilliz-bootcamp/milvus_hybrid_search_based_postgres
 
 本方案是结合向量数据库 Milvus 和关系型数据库 Postgres 进行混合查询的一个示例。
 
