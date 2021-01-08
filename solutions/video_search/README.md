@@ -1,5 +1,6 @@
 # 基于 Milvus 搭建以图搜视频系统
 
+本项目后续将不再维护更新，最新内容将更新在 https://github.com/zilliz-bootcamp/video_search
 本文展示如何利用图片特征提取模型 VGG 和向量搜索引擎 Milvus 搭建一个以图搜视频系统。
 
 ## 1 系统简介
