@@ -57,7 +57,7 @@ def do_insert_audio(index_client, conn, cursor, table_name, audio_path):
         ids_audio = []
         for wav in wavs:
             # print("---wav:", wav)
-            if ".wav" in wav: 
+            if ".wav" in wav:
                 ids_wav, vectors_wav = get_audio_embedding(audio_path + '/' + wav)
                 if vectors_wav:
                     get_spectorgram(audio_path, wav)
