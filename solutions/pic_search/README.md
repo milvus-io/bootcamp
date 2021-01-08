@@ -1,8 +1,5 @@
 # 基于 Milvus 和 VGG 实现以图搜图
 
-***新版的以图搜图项目已经发布，项目地址：https://github.com/zilliztech/phantoscope 。***
-
-***本文的以图搜图项目将不再更新维护。***
 
 本文展示如何利用图片特征提取模型 VGG 和向量搜索引擎 Milvus 搭建一个以图搜图系统。
 
@@ -30,7 +27,7 @@
 
 数据集大小：~2GB
 
-下载地址：http://host.robots.ox.ac.uk/pascal/VOC/voc2012/VOCtrainval_11-May-2012.tar
+下载地址：https://pan.baidu.com/s/1MjACqsGiLo3oiTMcxodtdA 提取码：v78m 
 
 > 说明：您也可以使用其他的图片数据进行测试。目前支持加载的图片格式有.jpg格式、.png格式。
 
@@ -42,7 +39,7 @@
 
 ##### 1、启动 Milvus docker
 
-本实验使用 Milvus0.10.0 版本，启动方法参考链接：https://github.com/milvus-io/docs/blob/v0.10.0/site/zh-CN/guides/get_started/install_milvus/install_milvus.md
+本实验使用 Milvus0.10.0 版本，启动方法参考链接：https://milvus.io/cn/docs/v0.10.0/cpu_milvus_docker.md
 
 ##### 2、启动 pic-search-webserver docker
 

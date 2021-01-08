@@ -1,5 +1,5 @@
 #!/bin/bash
-RUNNING_STATUS=$(docker inspect --format '{{.State.Running}}' c5154606b258)
+RUNNING_STATUS=$(docker inspect --format '{{.State.Running}}' <master-docker-id>)
 
 
 if [[ "${RUNNING_STATUS}" != "true" ]];then

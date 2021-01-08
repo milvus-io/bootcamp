@@ -9,13 +9,13 @@
 | 组件          | 配置                |
 | ------------------ | -------------------------- |
 | 操作系统            | Ubuntu LTS 18.04 |
-| CPU           | Intel Core i5-8250U           |
-| GPU           | NVIDIA GeForce MX150, 2GB GDDR5  |
-| GPU 驱动软件    | Driver 418.74 |
-| 内存        | 8 GB DDR4          |
-| 硬盘       | NVMe SSD 256 GB             |
-| Milvus     |  0.7.1  |
-| pymilvus    |   0.2.9    |
+| CPU           | Intel(R) Xeon(R) Platinum 8163 CP |
+| GPU           | CUDA Version: 10.2 GeForce RTX 2080 Ti |
+| GPU 驱动软件    | Driver 440.100 |
+| 内存        | 755GB  DDR4                            |
+| 硬盘       | 1.9T         |
+| Milvus     |  0.11.0  |
+| pymilvus    |   0.3.0   |
 
 测试工具下载：
 - 100 万测试数据集下载地址：链接：https://pan.baidu.com/s/1TSjGaAlQOQm3PpJfZ6dtPQ   提取码：2x5o
@@ -37,17 +37,16 @@
 
 Milvus 可以根据数据分布和性能、准确性的要求灵活调整相关系统参数，以发挥产品的最佳性能。在此实验中，采用如下表所示的参数配置，就可以实现90%以上召回率。
 
-配置文件： `/home/$USER/milvus/conf/server_config.yaml`
+配置文件： `/home/$USER/milvus/conf/Milvus.yaml`
 
 |         参数名称         | 推荐值 |
 | ---------------------- | ---- |
-| `cpu_cache_capacity` |   4   |
-|    `gpu_resource_config`.`cache_capacity`    |   1    |
-|    `use_blas_threshold`    |  801   |
+| `cpu_cache_size |   4   |
+|    `gpu_cache_size    |   1    |
 | `gpu_search_threshold` | 1001         |
 | `search_resources`     | gpu0 |
 
-关于参数设置的详细信息请参考[Milvus 配置](https://www.milvus.io/docs/zh-CN/reference/milvus_config/)。
+关于参数设置的详细信息请参考[Milvus 配置](https://www.milvus.io/cn/docs/v0.11.0/milvus_config.md)。
 
 其余参数保持默认即可。配置文件参数修改完毕后，重启 Milvus Docker 使配置生效。
 
@@ -57,7 +56,7 @@ $ docker restart <container id>
 
 ## 3、 建表并建立索引
 
-建表之前，首先确认 Milvus 已经正常启动。（ Milvus 安装及启动方法参见：[Milvus 快速上手](https://milvus.io/cn/docs/v0.10.0/guides/get_started/install_milvus/gpu_milvus_docker.md) ）
+建表之前，首先确认 Milvus 已经正常启动。（ Milvus 安装及启动方法参见：[Milvus 快速上手](https://www.milvus.io/cn/docs/v0.11.0/install_milvus.md) ）
 
 >  测试之前请根据脚本[说明](/benchmark_test/scripts/README.md)修改相应参数！
 
@@ -75,8 +74,6 @@ $ python3 main.py --collection ann_1m_sq8 --index sq8 --build
 $ python3 main.py --show
 #查看表ann_1m_sq8h的行数
 $ python3 main.py --collection ann_1m_sq8 --rows
-#查看表ann_1m_sq8h的索引类型
-$ python3 main.py --collection ann_1m_sq8 --describe_index
 ```
 
 ## 4、 数据导入
@@ -103,13 +100,11 @@ $ python3 main.py --collection=ann_1m_sq8 --rows
 $ sqlite3 meta.sqlite
 ```
 
-进入交互式命令行之后，输入如下命令，检查向量数据表当前的状态：
+进入交互式命令行之后，输入如下命令，检查数据表是否建立成功：
 
 ```sqlite
-sqlite> select * from TableFiles where table_id='ann_1m_sq8';
+sqlite> select * from collection;
 ```
-
-Milvus 会将一个向量数据表分成若干数据分片进行存储，因此查询命令会返回多条记录。其中第三列数字代表数据表采用的索引类型，数字 4 代表采用的是IVF_SQ8H索引。第五列数字代表索引构建的情况，当这列数字为 3 时，代表相应的数据表分片上的索引已构建完毕。如果某个分片上的索引还没有构建完成，可以再次手动为这个数据分片建立索引。
 
 退出 sqlite 交互式命令行:
 

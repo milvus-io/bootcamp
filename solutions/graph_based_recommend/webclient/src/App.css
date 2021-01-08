@@ -1,0 +1,32 @@
+.app-wrapper {
+  text-align: center;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: #fff;
+}
+
+.app-content {
+  width: 100%;
+  max-width: 414px;
+  height: 100vh;
+  max-height: 812px;
+
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  /* background-color: #333; */
+  background-color: #565f77;
+}
+
+@media screen and (min-height: 825px) {
+  .app-content {
+    margin: 160px auto;
+  }
+}
