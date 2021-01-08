@@ -1,4 +1,5 @@
 # 实验二：亿级向量检索
+本项目后续将不再维护更新，最新内容将更新在:https://github.com/zilliz-bootcamp/milvus_benchmark/blob/0.11/lab2_sift1b_100m.md
 
 ## 1、准备测试数据和脚本
 
