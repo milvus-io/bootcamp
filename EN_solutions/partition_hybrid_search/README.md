@@ -1,5 +1,7 @@
 # Hybrid search of vectors and structured data based on Milvus Partitions
 
+This project will no longer be maintained and updated, and the latest content will be updated at https://github.com/zilliz-bootcamp/milvus_search_based_partition
+
 This solution implements hybrid search of vectors and structured data based on Milvus Partitions.
 
 The following example uses feature vectors and structured data to simulate human faces. For a specific vector (can be regarded as a specific feature vector retrieved from a human face) and corresponding properties, this example moves this vector into a specific partition based on its properties. Vectors in a partition share the same properties. During a query, this example searches for top 10 similar vectors in the corresponding partition based on specified properties (time when the face image is acquired, gender, with/without glasses).
