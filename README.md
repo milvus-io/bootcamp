@@ -1,5 +1,7 @@
 # About Milvus Bootcamp
 
+> Note: The content of benchmark tests, solutions and application scenarios will no longer be maintained and updated in this project. The latest content will be migrated to https://github.com/zilliz-bootcamp
+
 [English](README.md) | [中文版](CN_README.md)
 
 Milvus is an intelligent, high-speed vector search engine. It is intended to help users deal with challenges of massive-scale unstructured data by the following methods:
