@@ -1,3 +1,4 @@
+> Note: The content will no longer be maintained and updated in this project. The latest content will be migrated to https://github.com/zilliz-bootcamp/Kubernetes
 # Deploy Milvus distributed clusters based on Kubernetes
 
 This example shows how to install shared storage and how to build a Milvus cluster using both Helm and Kubectl.
