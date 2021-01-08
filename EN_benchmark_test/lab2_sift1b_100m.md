@@ -1,5 +1,5 @@
 # Lab Test 2: 100-Million-Scale Vector Similarity Search
-
+This project will no longer be maintained and updated, and the latest content will be updated at https://github.com/zilliz-bootcamp/milvus_benchmark/blob/0.11/lab2_sift1b_100m.md
 ## 1. Prepare test data and scripts
 
 The 100 million vectors used in this test are extracted from the dataset [SIFT1B](http://corpus-texmex.irisa.fr/).
