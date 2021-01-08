@@ -1,6 +1,6 @@
 # Milvus-Based Hybrid Search of Vectors and Structured Data
 
-This project will no longer be maintained and updated, and the latest content will be updated at https://github.com/zilliz-bootcamp/intelligent_question_answering_v2
+This project will no longer be maintained and updated, and the latest content will be updated at https://github.com/zilliz-bootcamp/milvus_hybrid_search_based_postgres
 
 This solution provides an example of consolidating Milvus (vector database) and PostgreSQL (relational database) to carry out the hybrid search of vectors and structured data.
 
