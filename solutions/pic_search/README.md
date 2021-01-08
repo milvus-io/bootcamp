@@ -1,6 +1,6 @@
 # 基于 Milvus 和 VGG 实现以图搜图
 
-
+本项目后续将不再维护更新，最新内容将更新在 https://github.com/zilliz-bootcamp/image_search
 本文展示如何利用图片特征提取模型 VGG 和向量搜索引擎 Milvus 搭建一个以图搜图系统。
 
 系统架构图如下所示：
