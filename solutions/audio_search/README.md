@@ -1,5 +1,7 @@
 # 基于 Milvus 的音频检索系统
 
+本项目后续将不再维护更新，最新内容将更新在https://github.com/zilliz-bootcamp/audio_search。
+
 该项目使用 [PANNs](https://github.com/qiuqiangkong/audioset_tagging_cnn) 对音频做 Embeddings 提取，然后利用 Milvus 检索出相似的音频数据。 
 
 ## 系统部署
