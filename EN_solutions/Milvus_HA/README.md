@@ -1,5 +1,7 @@
 # Milvus High Availability (HA) Solution
 
+This project will no longer be maintained and updated, and the latest content will be updated at https://github.com/zilliz-bootcamp/milvus_high_availability
+
 ## Environment settings
 
 Two servers and one shared storage device.
