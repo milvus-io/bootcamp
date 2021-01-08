@@ -1,5 +1,7 @@
 # Reverse Image Search Based on Milvus and VGG
 
+This project will no longer be maintained and updated, and the latest content will be updated at https://github.com/zilliz-bootcamp/image_search
+
 This demo uses VGG, an image feature extraction model, and Milvus to build a system that can perform reverse image search.
 
 The system architecture is displayed as follows:
