@@ -1,5 +1,5 @@
 # 使用Nginx实现对Milvus的负载均衡
-
+本项目后续将不再维护更新，最新内容将更新在:https://github.com/zilliz-bootcamp/milvus_load_balance
 本示例主要展示如何利用Nginx实现对Milvus的负载均衡，Nginx最常见的功能是服务器的负载均衡配置，通过使用Nginx分发请求，将不同请求分发给多个Milvus中，从而实现负载均衡。
 
 ## 前期准备
