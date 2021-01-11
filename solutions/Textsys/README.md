@@ -1,5 +1,7 @@
 
 ## README
+ 
+本项目后续将不再维护更新，最新内容将更新在:https://github.com/zilliz-bootcamp/text_search
 
 本项目是使用Milvus和bert构建文本搜索引擎，该项目中使用bert将文本转换为固定长度向量存储到Milvus中，然后结合Milvus可以搜索出用户输入文本的相似文本。
 
