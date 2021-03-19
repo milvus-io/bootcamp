@@ -33,7 +33,7 @@ QA/config.py：The script is a configuration file and needs to be modified for t
 
 ## Steps to build a project
 
-1.Install Milvus 0.10.4
+1.Install Milvus 1.0
 
 2.Install PostgreSQL
 
