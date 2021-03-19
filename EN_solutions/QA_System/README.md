@@ -1,6 +1,5 @@
 # README
 
-This project will no longer be maintained and updated, and the latest content will be updated at https://github.com/zilliz-bootcamp/intelligent_question_answering_v2
 
 This project combines the model provided by Milvus and Bert to realize a Chinese question and answer system.This paper aims to provide a solution to achieve semantic similarity matching with Milvus combined with various AI models.
 
@@ -34,7 +33,7 @@ QA/config.py：The script is a configuration file and needs to be modified for t
 
 ## Steps to build a project
 
-1.Install Milvus 0.10.4
+1.Install Milvus 1.0
 
 2.Install PostgreSQL
 
