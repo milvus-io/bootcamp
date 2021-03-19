@@ -20,7 +20,6 @@
 - [Personalized recommender system based on Milvus](./recommender_system/README.md)
 - [Chemical structure similarity search with Milvus](./mols_search/README.md)
 - [Milvus intelligent Question answering system](./QA_System/README.md)
-- [Milvus intelligent Question answering system_v2.0](./QA_System_v2/README.md)
 - [Biological multi-factor authentication system](./MFA)
 - [Text retrieval system based on Milvus](./Textsys/README.md)
 - [COVID-19 Open Research Dataset Search](./covidex)
