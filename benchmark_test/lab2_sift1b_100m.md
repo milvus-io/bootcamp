@@ -9,11 +9,11 @@
 | Component           | Minimum Config                |
 | ------------------ | -------------------------- |
 | OS            | Ubuntu LTS 18.04 |
-| CPU           | Intel Core i7-8700        |
-| GPU           | Nvidia GeForce GTX 1060, 6GB GDDR5 |
-| GPU Driver    | CUDA 10.1, Driver 418.74 |
-| Memory        | 16 GB DDR4 ( 2400 Mhz ) x 2                |
-| Storage       | SATA 3.0 SSD 256 GB                  |
+| CPU           | Intel(R) Xeon(R) Platinum 8163 CP  |
+| GPU           | GeForce RTX 2080 Ti |
+| GPU Driver    | CUDA Version: 10.2, Driver 440.100 |
+| Memory        | 755GB DDR4    |
+| Hard Disk | 1.9T              |
 
 测试工具下载：
 - 1亿测试数据集下载地址：https://pan.baidu.com/s/1N5jGKHYTGchye3qR31aNnA
@@ -52,7 +52,7 @@ $ docker restart <container id>
 
 ## 3、 建表并建立索引
 
-建表之前确认 Milvus 已经正常启动。（ Milvus 安装及启动方法参见：[Milvus 快速上手](https://milvus.io/cn/docs/v0.10.0/guides/get_started/install_milvus/gpu_milvus_docker.md) ）
+建表之前确认 Milvus 已经正常启动。（ Milvus 安装及启动方法参见：[Milvus 快速上手](https://www.milvus.io/cn/docs/v0.11.0/install_milvus.md) ）
 
 > 测试之前请根据脚本[说明](/benchmark_test/scripts/README.md)修改相应参数！
 
@@ -68,8 +68,8 @@ $ python3 main.py --collection ann_100m_sq8 --index sq8 --build
 ```shell
 #查看库中有哪些表
 $ python3 main.py --show
-#查看表ann_100m_sq8h的行数
-$ python3 main.py --collectio ann_100m_sq8q8 --rows
+#查看表ann_100m_sq8的行数
+$ python3 main.py --collectio ann_100m_sq8 --rows
 ```
 
 ## 4、 数据导入

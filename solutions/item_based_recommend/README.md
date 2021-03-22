@@ -1,5 +1,7 @@
 # README
 
+本项目后续将不再维护更新，最新内容将更新在 https://github.com/zilliz-bootcamp/item_based_recommend
+
 本项目结合 milvus 和 bert 实现了一个基于 item 的文本推荐系统。
 
 ## 数据说明

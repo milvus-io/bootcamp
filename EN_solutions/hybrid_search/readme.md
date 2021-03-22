@@ -1,5 +1,7 @@
 # Milvus-Based Hybrid Search of Vectors and Structured Data
 
+This project will no longer be maintained and updated, and the latest content will be updated at https://github.com/zilliz-bootcamp/milvus_hybrid_search_based_postgres
+
 This solution provides an example of consolidating Milvus (vector database) and PostgreSQL (relational database) to carry out the hybrid search of vectors and structured data.
 
 In below example, feature vectors and structured data are used to represent human face attributes. Here is how hybrid search works out: First, search the top 10 most similar vectors (and their Euclidean distances) of a defined vector (could be a specified human face image). Then by comparing the Euclidean distance, find out (among the top 10  result vectors) vectors which have Euclidean distance < 1, and which at the same time meet the filtering conditions (gender, time, and if with glasses) in PostgreSQL. 

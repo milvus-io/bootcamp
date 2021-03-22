@@ -1,5 +1,7 @@
 # README
 
+This project will no longer be maintained and updated, and the latest content will be updated at https://github.com/zilliz-bootcamp/recipe_retrieval
+
 This project implements a picture and recipe retrieval system based on milvus. That is, input a food picture and return the recipe corresponding to the picture.
 
 This project is based on the project [im2recipe-Pytorch](https://github.com/torralba-lab/im2recipe-Pytorch).
@@ -86,9 +88,7 @@ uvicorn main:app
 7. Start the client
 
 ```
-
+docker run -d -p 80:80 -e API_URL=http://127.0.0.1:8000 zilliz/milvus-search-food-recipes:latest
 ```
+> API_URL specifies the IP and port of the server
 
-
-
-## Result Show

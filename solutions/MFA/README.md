@@ -1,5 +1,7 @@
 # 生物多因子认证系统
 
+本项目后续将不再维护更新，最新内容将更新在https://github.com/zilliz-bootcamp/multi_factor_authentication。
+
 本文介绍的生物多因子认证系统利用 [InsightFace](https://github.com/deepinsight/insightface) 提取人脸特征，[Deep Speaker](https://github.com/philipperemy/deep-speaker) 提取声纹特征，然后在 [Milvus](https://milvus.io/) 中做混合认证。
 
 ## 前提环境

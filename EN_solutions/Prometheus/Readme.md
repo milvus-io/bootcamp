@@ -1,4 +1,6 @@
 # Prometheus and Grafana were used to monitor and alarm Milvus
+ 
+This project will no longer be maintained and updated, and the latest content will be updated at https://github.com/zilliz-bootcamp/milvus_monitoring_and_alarm
 
 Milvus uses Prometheus to monitor and store performance metrics, and uses open source timing data analysis and visualizable platform Grafana to display performance metrics.
 

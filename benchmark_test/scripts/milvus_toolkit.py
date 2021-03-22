@@ -79,7 +79,7 @@ def search(collection_name,search_param):
             for topk in topk_scope:
                 time_start = time.time()
                 dsl = {"bool": {"must": [{"vector": {
-                    "Vec": {"topk": topk, "query": query_list , "metric_type": "L2", "params": {"nprobe": 256}}}}]}}
+                    "Vec": {"topk": topk, "query": query_list , "metric_type": "L2", "params": {"nprobe": search_param}}}}]}}
                 # results = milvus.search(collection_name, dsl, fields=["Vec"])
                 results = milvus.search(collection_name, dsl)
                 time_cost = time.time() - time_start
@@ -146,7 +146,7 @@ def recall_test(collection_name,search_param):
     print("collection name:", collection_name, "query list:", len(query_list), "topk:", config.recall_topk, "search_params:", search_params)
     time_start = time.time()
     dsl = {"bool": {"must": [{"vector": {
-                    "Vec": {"topk" : 500, "query": query_list, "metric_type": "L2", "params": {"nprobe": 256}}}}]}}
+                    "Vec": {"topk" : 500, "query": query_list, "metric_type": "L2", "params": search_params}}}]}}
     results = milvus.search(collection_name,dsl,fields=["Vec"])
     time_cost = time.time() - time_start
     print("time_search = ", time_cost)
