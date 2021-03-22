@@ -1,5 +1,7 @@
 # 基于 Kubernetes 部署 Milvus 分布式集群
 
+> Note: The content will no longer be maintained and updated in this project. The latest content will be migrated to https://github.com/zilliz-bootcamp/Kubernetes
+
 本示例主要展示如何安装共享存储，如何利用 Helm 和 Kubectl 两种方式搭建 Milvus 集群。
 
 本示例不包含如何搭建 Kubernetes 集群，如何安装 Helm。

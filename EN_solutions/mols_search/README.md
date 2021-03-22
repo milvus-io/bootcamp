@@ -1,5 +1,7 @@
 # Chemical Structure Similarity Search
 
+This project will no longer be maintained and updated, and the latest content will be updated at https://github.com/zilliz-bootcamp/chemical_similarity_search.
+
 ## Environment
 
 | Component     | Recommended Configuration                                                     |

@@ -1,5 +1,7 @@
 
 ## README
+ 
+本项目后续将不再维护更新，最新内容将更新在:https://github.com/zilliz-bootcamp/text_search
 
 本项目是使用Milvus和bert构建文本搜索引擎，该项目中使用bert将文本转换为固定长度向量存储到Milvus中，然后结合Milvus可以搜索出用户输入文本的相似文本。
 
@@ -51,7 +53,7 @@ config.py：该脚本是配置文件，需要根据具体环境做出相应修�
 1、安装milvus
 -------------------
 
-Milvus 提供两个发行版本：CPU 版本和 GPU 版本。 本次项目中使用的是 GPU 版本参考链接
+Milvus 提供两个发行版本：CPU 版本和 GPU 版本。 本次项目中使用的是 0.10版本、GPU版本的MIlvus参考链接
 
 https://www.milvus.io/cn/docs/v0.10.0/gpu_milvus_docker.md
 
@@ -93,7 +95,7 @@ https://www.milvus.io/cn/docs/v0.10.0/gpu_milvus_docker.md
 7、启动 UI客户端
 ----------------------  
    -Install  [Node.js 12+](https://nodejs.org/en/download/) and [Yarn](https://classic.yarnpkg.com/en/docs/install/)
-   
+
      $cd client
      #安装依赖包
      $ yarn install
