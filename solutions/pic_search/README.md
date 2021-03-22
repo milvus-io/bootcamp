@@ -1,6 +1,6 @@
 # 基于 Milvus 和 VGG 实现以图搜图
 
-
+本项目后续将不再维护更新，最新内容将更新在 https://github.com/zilliz-bootcamp/image_search
 本文展示如何利用图片特征提取模型 VGG 和向量搜索引擎 Milvus 搭建一个以图搜图系统。
 
 系统架构图如下所示：
@@ -27,7 +27,7 @@
 
 数据集大小：~2GB
 
-下载地址：http://host.robots.ox.ac.uk/pascal/VOC/voc2012/VOCtrainval_11-May-2012.tar
+下载地址：https://pan.baidu.com/s/1MjACqsGiLo3oiTMcxodtdA 提取码：v78m 
 
 > 说明：您也可以使用其他的图片数据进行测试。目前支持加载的图片格式有.jpg格式、.png格式。
 

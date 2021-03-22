@@ -1,5 +1,7 @@
 # Building a video search system based on Milvus
 
+This project will no longer be maintained and updated, and the latest content will be updated at https://github.com/zilliz-bootcamp/video_search
+
 This article shows how to use the image feature extraction model VGG and the vector search engine Milvus to build an video search system.
 
 ## 1 System Introduction

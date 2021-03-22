@@ -1,5 +1,7 @@
 # 使用Promtheus 和Grafana 对Milvus进行监控和报警
 
+本项目后续将不再维护更新，最新内容将更新在:https://github.com/zilliz-bootcamp/milvus_monitoring_and_alarm
+
 Milvus使用Prometheus来监控和存储性能指标，并使用开源计时数据分析和可视化平台Grafana来显示性能指标。
 
 ## 方案概述

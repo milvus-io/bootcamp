@@ -12,7 +12,7 @@
 - [Distributed solution based on Mishards, a sharding middleware for Milvus clusters](./Mishards/README.md)
 - [Deploy Milvus distributed clusters based on Kubernetes](./Kubernetes/README.md)
 - [Prometheus and Grafana were used to monitor and alarm Milvus](./Prometheus/Readme.md)
-
+- [Implementing Milvus Load Balancing with Nginx](./nginx/README.md)
 ## Application Scenarios
 
 - [Reverse image search based on Milvus and VGG](./pic_search/README.md)
@@ -28,4 +28,5 @@
 - [Image-text retrieval System with Milvus](./ctirg/Readme.md)
 - [Cross-modal pedestrian retrieval based on Milvus](./pedestrian_search)
 - [Recipe retrieval system based on Milvus](./im2recipe)
-
+- [Audio retrieval system with Milvus](./audio_search)
+- [Video analysis based on Milvus](./Video_analysis)

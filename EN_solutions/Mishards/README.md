@@ -1,5 +1,7 @@
 # Distributed Solution Based on Mishards, a Sharding Middleware for Milvus Clusters
 
+This project will no longer be maintained and updated, and the latest content will be updated at https://github.com/zilliz-bootcamp/Milvus_distributed_based_misheards
+
 Milvus aims to achieve efficient similarity search and analytics for massive-scale vectors. A standalone Milvus instance can easily handle vector search among billion-scale vectors. However, for 10 billion, 100 billion or even larger datasets, a Milvus cluster is needed.
 
 This topic displays how to use Mishards to build a Milvus cluster. Refer to https://github.com/milvus-io/milvus/blob/0.10.0/shards/README.md for more information.

@@ -1,5 +1,8 @@
 # 基于 Mishards（Milvus 集群分片中间件）的分布式解决方案
 
+
+本项目后续将不再维护更新，最新内容将更新在 https://github.com/zilliz-bootcamp/Milvus_distributed_based_misheards
+
 Milvus 旨在帮助用户实现海量非结构化数据的近似检索和分析。单个 Milvus 实例可处理十亿级数据规模，而对于百亿或者千亿级数据，则需要一个 Milvus 集群实例。该实例对于上层应用可以像单机实例一样使用，同时满足海量数据低延迟、高并发业务需求。
 
 本文主要展示如何使用 Mishards（Milvus 集群分片中间件）来搭建 Milvus 集群。

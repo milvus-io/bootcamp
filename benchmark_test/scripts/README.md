@@ -50,6 +50,7 @@ pip install -r requirements.txt
 | ----------------- | -------------------------------- | ------------- |
 | SEGMENT_ROW_LIMIT | 创建集合时存储实体的行数         | 4096          |
 | METRIC_TYPE       | 创建集合时指定向量相似度计算方式 | MetricType.L2 |
+| AUTO_ID           | 创建集合时自动生成ID             | True          |
 
 建索引时需要的配置参数：
 

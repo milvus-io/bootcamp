@@ -1,5 +1,7 @@
 # Milvus 高可用 (HA) 方案
 
+本项目后续将不再维护更新，最新内容将更新在 https://github.com/zilliz-bootcamp/milvus_high_availability
+
 ## 环境准备
 
 本次HA方案需要用到两台机器和一个共享存储设备。
