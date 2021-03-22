@@ -30,8 +30,6 @@ Download location: http://host.robots.ox.ac.uk/pascal/VOC/voc2012/VOCtrainval_11
 
 ### How to deploy the system
 
-### GPU method
-
 #### 1. Run Milvus Docker
 
 This demo uses Milvus 0.10.0. Refer to the [Install Milvus](https://github.com/milvus-io/docs/blob/v0.10.0/site/en/guides/get_started/install_milvus/install_milvus.md) for how to run Milvus docker.
