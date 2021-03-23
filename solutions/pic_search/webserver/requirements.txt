@@ -1,8 +1,8 @@
 flask-cors
 Keras==2.3.1
 numpy==1.16.5
-Pillow==8.1.1
-pymilvus==0.2.13
+Pillow==7.1.0
+pymilvus==1.0.1
 diskcache
 flask
 flask_restful
