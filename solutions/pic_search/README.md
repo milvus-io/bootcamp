@@ -51,7 +51,7 @@ $ docker run -d --name milvus_image_search_demo \
 milvusbootcamp/pic-search-webserver:1.0
 ```
 
-**IMAGE_PATH1 ** ：
+**IMAGE_PATH1** ：
 
 表示你的服务器上存放图片的绝对路径，启动时将这些路径映射到 docker 容器里面。系统搭建好以后，可以直接在前端界面上输入 docker 容器中的图片路径 “ /tmp/pic1 ”  去加载图片。 
 
