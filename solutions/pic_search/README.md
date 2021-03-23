@@ -17,7 +17,7 @@
 | CPU      | Intel(R) Core(TM) i7-7700K CPU @ 4.20GHz                     |
 | Memory   | 32GB                                                         |
 | OS       | Ubuntu 18.04                                                 |
-| Software | Milvus 0.10.0<br />pic_search_webclient 0.2.0<br />pic_search_webserver 0.10.0 |
+| Software | Milvus 1.0<br />pic_search_webclient 1.0<br />pic_search_webserver 1.0 |
 
 
 ### 数据来源
@@ -38,23 +38,22 @@
 
 ##### 1、启动 Milvus docker
 
-本实验使用 Milvus0.10.0 版本，启动方法参考链接：https://milvus.io/cn/docs/v0.10.0/cpu_milvus_docker.md
+本实验使用 Milvus1.0 版本，启动方法参考链接：https://milvus.io/cn/docs/v1.0.0/milvus_docker-cpu.md
 
 ##### 2、启动 pic-search-webserver docker
 
 ```bash
-$ docker run -d --name zilliz_search_images_demo \
+$ docker run -d --name milvus_image_search_demo \
 -v ${IMAGE_PATH1}:/tmp/pic1 \
--v ${IMAGE_PATH2}:/tmp/pic2 \
 -p 35000:5000 \
 -e "DATA_PATH=/tmp/images-data" \
 -e "MILVUS_HOST=${MILVUS_IP}" \
-milvusbootcamp/pic-search-webserver:0.10.0
+milvusbootcamp/pic-search-webserver:1.0
 ```
 
-**IMAGE_PATH1  、 IMAGE_PATH2** ：
+**IMAGE_PATH1** ：
 
-表示你的服务器上存放图片的绝对路径，启动时将这些路径映射到 docker 容器里面。系统搭建好以后，可以直接在前端界面上输入 docker 容器中的图片路径 “ /tmp/pic1 ” 、“ /tmp/pic2 ” 去加载图片。 
+表示你的服务器上存放图片的绝对路径，启动时将这些路径映射到 docker 容器里面。系统搭建好以后，可以直接在前端界面上输入 docker 容器中的图片路径 “ /tmp/pic1 ”  去加载图片。 
 
 **MILVUS_IP** ：
 
@@ -70,9 +69,9 @@ milvusbootcamp/pic-search-webserver:0.10.0
 ##### 3、启动 pic-search-webclient docker
 
 ```bash
-$ docker run --name zilliz_search_images_demo_web -d --rm -p 8001:80 \
+$ docker run --name milvus_image_search_demo_web -d --rm -p 8001:80 \
 -e API_URL=http://${WEBSERVER_IP}:35000 \
-milvusbootcamp/pic-search-webclient:0.2.0
+milvusbootcamp/pic-search-webclient:1.0
 ```
 
 **WEBSERVER_IP**： 表示启动 pic-search-webserver docker 的服务器 IP 地址。
