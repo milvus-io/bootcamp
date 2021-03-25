@@ -40,7 +40,7 @@ QA/config.py：The script is a configuration file and needs to be modified for t
 3.Install the Python packages you need
 
 ```shell
-pip install -r requriment.txt
+pip install -r requirements.txt
 ```
 
 4.Start the Bert services (more [Bert](https://github.com/hanxiao/bert-as-service#building-a-qa-semantic-search-engine-in-3-minutes) related)
