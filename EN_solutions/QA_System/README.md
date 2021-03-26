@@ -40,17 +40,18 @@ QA/config.py：The script is a configuration file and needs to be modified for t
 3.Install the Python packages you need
 
 ```shell
-pip install -r requriment.txt
+pip install -r requirements.txt
 ```
 
-4.Start the Bert services (more [Bert](https://github.com/hanxiao/bert-as-service#building-a-qa-semantic-search-engine-in-3-minutes) related)
+4.Start the Bert services (more [Bert](https://github.com/hanxiao/bert-as-service/tree/master) related)
 
 ```shell
 #Download model
 $ cd model
-$ wget https://storage.googleapis.com/bert_models/2018_11_03/english_L-12_H-768_A-12.zip
+$ wget https://storage.googleapis.com/bert_models/2018_10_18/cased_L-12_H-768_A-12.zip
+$ unzip cased_L-12_H-768_A-12.zip
 #start service
-$ bert-serving-start -model_dir/tmp/english_L-12_H-768_A-12/ -num_worker =12 -max_seq_len=40
+$ bert-serving-start -model_dir cased_L-12_H-768_A-12/ -num_worker=2 -max_seq_len=40
 ```
 
 5. Start the query service

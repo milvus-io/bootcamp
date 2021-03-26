@@ -1,5 +1,5 @@
-tensorflow==2.4.0
-pymilvus==0.2.14
+tensorflow==1.13.1
+pymilvus==1.0.1
 uvicorn
 fastapi
 numpy
