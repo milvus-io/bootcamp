@@ -47,15 +47,16 @@ QA下的脚本 config.py 是配置文件，需要根据具体环境做出相应�
 3. 安装所需要的python包
 
 ```
-pip install -r requriment.txt
+pip install -r requirement.txt
 ```
 
-4. 启动bert服务(更多[bert](https://github.com/hanxiao/bert-as-service#building-a-qa-semantic-search-engine-in-3-minutes)相关)
+4. 启动bert服务(更多[bert](https://github.com/hanxiao/bert-as-service/tree/master)相关)
 
 ```shell
 #下载模型
 cd model
 wget https://storage.googleapis.com/bert_models/2018_11_03/chinese_L-12_H-768_A-12.zip
+unzip chinese_L-12_H-768_A-12.zip
 #启动服务
 bert-serving-start -model_dir chinese_L-12_H-768_A-12/ -num_worker=12 -max_seq_len=40
 ```
