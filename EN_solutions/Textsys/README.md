@@ -51,9 +51,9 @@ config.py：The script is a configuration file and needs to be modified accordin
 1、Install Milvus
 -------------------
 
-Milvus provides two release versions: CPU version and GPU version. In order to get better query performance, the GPU version 0.10Milvus reference link is used in the project:
+Milvus provides two release versions: CPU version and GPU version. In order to get better query performance, the GPU version 1.0 Milvus reference link is used in the project:
 
-https://www.milvus.io/cn/docs/v0.10.0/gpu_milvus_docker.md
+https://milvus.io/cn/docs/v1.0.0/milvus_docker-gpu.md
 
 2、Install PostgreSQL
 -------------------------
