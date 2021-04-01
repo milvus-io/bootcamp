@@ -7,7 +7,7 @@ The following example uses feature vectors and structured data to simulate human
 
 ## Prerequisite
 
-- [Install Milvus](https://www.milvus.io/docs/v1.0.0/milvus_docker-cpu.md)
+- [Install Milvus1.0](https://www.milvus.io/docs/v1.0.0/milvus_docker-cpu.md)
 - pip3 install numpy
 - pip3 install faker
 - pip3 install pymilvus==1.0.1
