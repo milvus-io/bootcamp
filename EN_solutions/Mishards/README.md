@@ -1,10 +1,9 @@
 # Distributed Solution Based on Mishards, a Sharding Middleware for Milvus Clusters
 
-This project will no longer be maintained and updated, and the latest content will be updated at https://github.com/zilliz-bootcamp/Milvus_distributed_based_misheards
 
 Milvus aims to achieve efficient similarity search and analytics for massive-scale vectors. A standalone Milvus instance can easily handle vector search among billion-scale vectors. However, for 10 billion, 100 billion or even larger datasets, a Milvus cluster is needed.
 
-This topic displays how to use Mishards to build a Milvus cluster. Refer to https://github.com/milvus-io/milvus/blob/0.10.0/shards/README.md for more information.
+This topic displays how to use Mishards to build a Milvus cluster. Refer to https://www.milvus.io/docs/v1.0.0/milvus_docker-cpu.md for more information.
 
 This topic assumes you can install and use Milvus in a standalone server. Refer to the following content to learn how to build a Milvus cluster.
 
@@ -94,7 +93,8 @@ $ docker-compose -f cluster_ro.yml up -d
 
 You can run Mishards in either of the two servers. In the server to run Mishards, configure `cluster_mishards.yml`. 
 
-![1577783243935](pic/1577783243935.png)
+![image](https://user-images.githubusercontent.com/53458891/113251640-3643fc00-92f5-11eb-8036-3946c9431734.png)
+
 
 You need to modify the following parameters:
 
