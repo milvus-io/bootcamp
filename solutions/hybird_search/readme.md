@@ -1,6 +1,5 @@
 # 基于 Milvus 的向量数据和结构化数据混合查询方案
 
-本项目后续将不再维护更新，最新内容将更新在 https://github.com/zilliz-bootcamp/milvus_hybrid_search_based_postgres
 
 本方案是结合向量数据库 Milvus 和关系型数据库 Postgres 进行混合查询的一个示例。
 
@@ -8,9 +7,9 @@
 
 ## 运行要求：
 
-1. [安装 Milvus0.10.2](https://milvus.io/cn/docs/v0.10.0/guides/get_started/install_milvus/gpu_milvus_docker.md)
+1. [安装 Milvus1.0](https://www.milvus.io/cn/docs/v1.0.0/milvus_docker-cpu.md)
 2. [安装 Postgres](https://www.postgresql.org/download/)
-3. pip install pymilvus==0.2.14
+3. pip install pymilvus==1.0.1
 4. pip install numpy
 5. pip install psycopg2
 6. pip install faker
