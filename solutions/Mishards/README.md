@@ -107,7 +107,7 @@ Mishards 服务只需在集群中**任意一台**设备上启动即可。
 
 本项目目录中有一个 `cluster_mishards.yml` 文件，如图：
 
-![1577783243935](pic/1577783243935.png)
+![image](https://user-images.githubusercontent.com/53458891/113249138-cdf31b80-92f0-11eb-9e63-033d34074ab7.png)
 
 在脚本中需要注意修改的参数：
 
