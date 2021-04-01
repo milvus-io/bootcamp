@@ -1,6 +1,4 @@
 # Prometheus and Grafana were used to monitor and alarm Milvus
- 
-This project will no longer be maintained and updated, and the latest content will be updated at https://github.com/zilliz-bootcamp/milvus_monitoring_and_alarm
 
 Milvus uses Prometheus to monitor and store performance metrics, and uses open source timing data analysis and visualizable platform Grafana to display performance metrics.
 
@@ -60,13 +58,14 @@ metric:
 Download the Milvus Prometheus profile:
 
 ```
-$ wget https://raw.githubusercontent.com/milvus-io/docs/master/v0.10.3/assets/monitoring/prometheus.yml \ -O prometheus.yml
+$ wget https://raw.githubusercontent.com/milvus-io/docs/master/v1.0.0/assets/monitoring/prometheus.yml \ -O prometheus.yml
+
 ```
 
 Download Milvus alarm rules file to Prometheus root directory:
 
 ```
-$ wget -P rules https://raw.githubusercontent.com/milvus-io/docs/master/v0.10.3/assets/monitoring/alert_rules.yml
+$ wget -P rules https://raw.githubusercontent.com/milvus-io/docs/master/v1.0.0/assets/monitoring/alert_rules.yml
 ```
 
 Edit Prometheus configuration file according to actual requirements:
@@ -179,13 +178,13 @@ From the Grafana User Interaction page, click **Configuration>Data Sources>Prome
 |   URL   | *http://<Host IP providing the services of Prometheus>:9090* |
 | Access  | Browser                                                      |
 
-- Download the [Grafana configuration file](https://github.com/milvus-io/docs/blob/master/v0.10.3/assets/monitoring/dashboard.json)
+- Download the [Grafana configuration file](https://github.com/milvus-io/docs/blob/master/v1.0.0/assets/monitoring/dashboard.json)
 
 - Import the configuration file into Grafana
 
   ![img](./008.png)
 
-- Configure the monitoring metrics provided by Milvus through the **Grafana profile** provided by Milvus,The [Milvus monitoring metrics](https://www.milvus.io/cn/docs/v0.10.3/milvus_metrics.md) are shown below.
+- Configure the monitoring metrics provided by Milvus through the **Grafana profile** provided by Milvus,The [Milvus monitoring metrics](https://milvus.io/cn/docs/v1.0.0/milvus_metrics.md) are shown below.
 
   ![](./006.png)
   

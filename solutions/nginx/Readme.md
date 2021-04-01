@@ -1,13 +1,9 @@
 # 使用Nginx实现对Milvus的负载均衡
-本项目后续将不再维护更新，最新内容将更新在:https://github.com/zilliz-bootcamp/milvus_load_balance
-
-
-
 本示例主要展示如何利用Nginx实现对Milvus的负载均衡，Nginx最常见的功能是服务器的负载均衡配置，通过使用Nginx分发请求，将不同请求分发给多个Milvus中，从而实现负载均衡。
 
 ## 前期准备
 
-本示例至少需要两台设备和一个共享存储设备，基于0.10.4版本的Milvus的搭建
+本示例至少需要两台设备和一个共享存储设备，基于1.0版本的Milvus的搭建
 
 1、Nginx 1.18.0
 
@@ -74,7 +70,7 @@ ps -ef | grep nginx
 
 ## 二、Milvus配置
 
-1、本示例中Milvus的版本为0.10.4，详细安装方式参考[Milvus官网](https://www.milvus.io/cn/docs/v0.11.0/milvus_docker-gpu.md)，在安装时需要将所有设备数据存储位置都应设置为共享存储的路径，如下图所示。![](2.png)
+1、本示例中Milvus的版本为1.0，详细安装方式参考[Milvus官网](https://milvus.io/cn/docs/v1.0.0/milvus_docker-gpu.md)，在安装时需要将所有设备数据存储位置都应设置为共享存储的路径，如下图所示。![](2.png)
 
 其中**/cifs/test/nfs/milvus/db**为共享存储的路径
 
