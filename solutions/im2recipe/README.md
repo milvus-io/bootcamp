@@ -1,8 +1,7 @@
 # README
 
-本项目后续将不再维护更新，最新内容将更新在 https://github.com/zilliz-bootcamp/recipe_retrieval
 
-本项目基于 milvus 实现了一个图片和食谱的检索系统。即输入一张食物图片，返回该图片对应的食谱。
+本项目基于 milvus1.0 实现了一个图片和食谱的检索系统。即输入一张食物图片，返回该图片对应的食谱。
 
 本项目是基于项目 [im2recipe-Pytorch](https://github.com/torralba-lab/im2recipe-Pytorch) 实现的。
 
@@ -54,7 +53,7 @@ service 中的配置文件 config.py 说明：
 
 ## 搭建步骤
 
-1. 安装 Milvus0.10.2，参考  [Milvus安装](https://milvus.io/cn/docs/v0.10.2/milvus_docker-cpu.md)。
+1. 安装 Milvus1.0，参考  [Milvus安装](https://www.milvus.io/cn/docs/v1.0.0/milvus_docker-cpu.md)。
 
 2. 安装 MySql.
 
