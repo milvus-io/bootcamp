@@ -5,7 +5,7 @@ This project is based on a paper **[Composing Text and Image for Image Retrieval
 
 ## Prerequisite
 
-**[Milvus 0.10.4](https://www.milvus.io/cn/docs/v0.10.4/milvus_docker-gpu.md)**
+**[Milvus 1.0](https://milvus.io/cn/docs/v1.0.0/milvus_docker-gpu.md)**
 
 **MySQL**
 
