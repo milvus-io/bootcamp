@@ -1,6 +1,5 @@
 # Hybrid search of vectors and structured data based on Milvus Partitions
 
-This project will no longer be maintained and updated, and the latest content will be updated at https://github.com/zilliz-bootcamp/milvus_search_based_partition
 
 This solution implements hybrid search of vectors and structured data based on Milvus Partitions.
 
@@ -8,9 +7,10 @@ The following example uses feature vectors and structured data to simulate human
 
 ## Prerequisite
 
-- [Install Milvus](https://www.milvus.io/docs/v0.10.0/guides/get_started/install_milvus/install_milvus.md)
+- [Install Milvus](https://www.milvus.io/docs/v1.0.0/milvus_docker-cpu.md)
 - pip3 install numpy
 - pip3 install faker
+- pip3 install pymilvus==1.0.1
 
 ## Data source
 
