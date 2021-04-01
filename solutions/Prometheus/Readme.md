@@ -1,7 +1,5 @@
 # 使用Promtheus 和Grafana 对Milvus进行监控和报警
 
-本项目后续将不再维护更新，最新内容将更新在:https://github.com/zilliz-bootcamp/milvus_monitoring_and_alarm
-
 Milvus使用Prometheus来监控和存储性能指标，并使用开源计时数据分析和可视化平台Grafana来显示性能指标。
 
 ## 方案概述
@@ -57,16 +55,18 @@ metric:
   port: 9091         # Set the port number of Pushgateway.
 ```
 
-下载 Milvus [Prometheus 配置文件](https://github.com/milvus-io/docs/blob/master/v0.11.0/assets/monitoring/prometheus.yml)：
+下载 Milvus [Prometheus 配置文件](https://github.com/milvus-io/docs/blob/master/v1.0.0/assets/monitoring/prometheus.yml)：
 
 ```
-$ wget https://raw.githubusercontent.com/milvus-io/docs/master/v0.10.3/assets/monitoring/prometheus.yml \ -O prometheus.yml
-```
-
-下载 Milvus [报警规则文件](https://github.com/milvus-io/docs/blob/master/v0.11.0/assets/monitoring/alert_rules.yml) 到 Prometheus 根目录：
+$ wget https://raw.githubusercontent.com/milvus-io/docs/master/v1.0.0/assets/monitoring/prometheus.yml \ -O prometheus.yml
 
 ```
-$ wget -P rules https://raw.githubusercontent.com/milvus-io/docs/master/v0.10.3/assets/monitoring/alert_rules.yml
+
+下载 Milvus [报警规则文件](https://github.com/milvus-io/docs/blob/master/v1.0.0/assets/monitoring/alert_rules.yml) 到 Prometheus 根目录：
+
+```
+$wget -P rules https://raw.githubusercontent.com/milvus-io/docs/master/v1.0.0/assets/monitoring/alert_rules.yml
+
 ```
 
 根据实际需求编辑 Prometheus 配置文件：
@@ -181,28 +181,26 @@ docker run -i -p 3000:3000 grafana/grafana
 | URL     | *http://<提供 Prometheus 服务的主机 IP>:9090* |
 | Access  | Browser                                       |
 
-- 下载 [Grafana 配置文件](https://github.com/milvus-io/docs/blob/master/v0.11.0/assets/monitoring/dashboard.json)
-
-- 下载 [Grafana 配置文件](https://github.com/milvus-io/docs/blob/master/v0.11.0/assets/monitoring/dashboard.json)
+- 下载 [Grafana 配置文件](https://github.com/milvus-io/docs/blob/master/v1.0.0/assets/monitoring/dashboard.json)
 
   ![img](./008.png)
 
-- 你可以通过 Milvus 提供的 [Grafana 配置文件](https://github.com/milvus-io/docs/blob/master/v0.11.0/assets/monitoring/dashboard.json) 配置 Milvus 提供的各项监控指标。详见：[Milvus 监控指标](https://www.milvus.io/cn/docs/v0.11.0/milvus_metrics.md)
+  你可以通过 Milvus 提供的 [Grafana 配置文件](https://github.com/milvus-io/docs/blob/master/v1.0.0/assets/monitoring/dashboard.json) 配置 Milvus 提供的各项监控指标。详见：[Milvus 监控指标](https://milvus.io/cn/docs/v1.0.0/milvus_metrics.md)
 
   ![](./006.png)
-  
+
   ![](./007.png)
-  
+
   # Milvus 监控指标
-  
+
   Milvus 会生成关于系统运行状态的详细时序 metrics。你可以通过 [Prometheus](https://prometheus.io/)、[Grafana](https://grafana.com/) 或任何可视化工具展现以下指标：
-  
+
   - Milvus 性能指标
   - 系统运行指标：CPU/GPU 使用状况，网络、磁盘读取等指标。
   - 硬件存储指标：数据大小，数据文件及存储情况等指标。
-  
+
   ## Milvus 性能指标
-  
+
   | 指标                      | 说明                                                         |
   | :------------------------ | :----------------------------------------------------------- |
   | **Insert per Second**     | 每秒钟插入的向量数量（实时显示）。                           |
@@ -210,9 +208,9 @@ docker run -i -p 3000:3000 grafana/grafana
   | **Query Time per Vector** | 单条向量查询时间 = 查询使用时间 / 向量数量                   |
   | **Query Service Level**   | 查询服务级别 = 一定时间阈值内的查询数量/总查询数量 一般建议设置 3 个时间阈值来跟踪查询服务级别。 |
   | **Uptime**                | Milvus 服务器正常运行的时长（分钟）。                        |
-  
+
   ## 系统运行指标
-  
+
   | 指标                  | 说明                                                   |
   | :-------------------- | :----------------------------------------------------- |
   | **GPU Utilization**   | GPU 利用率（%）。                                      |
@@ -223,10 +221,11 @@ docker run -i -p 3000:3000 grafana/grafana
   | **Network IO**        | 网口的读写速度（GB/s）。                               |
   | **Disk Read Speed**   | 磁盘读取速度（GB/s）。                                 |
   | **Disk Write Speed**  | 磁盘写入速度（GB/s）。                                 |
-  
+
   ## 硬件存储指标
-  
+
   | 指标           | 说明                        |
   | :------------- | :-------------------------- |
   | **Data Size**  | Milvus 所存数据总量（GB）。 |
   | **Total File** | Milvus 所存数据文件总个数。 |
+

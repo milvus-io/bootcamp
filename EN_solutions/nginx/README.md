@@ -80,7 +80,7 @@ You can also input *<localhost(local IP address):port(default port is 80)>* in y
 
 ## 二、Milvus Configuration
 
-1.The version of Milvus in this example is 0.10.4, refer to [Milvus official website](https://www.milvus.io/cn/docs/v0.11.0/milvus_docker-gpu.md) for installation details, you need to set the path of all device data storage to the shared storage path during installation. As shown in the figure below
+1.The version of Milvus in this example is 1.0, refer to [Milvus official website](https://milvus.io/cn/docs/v1.0.0/milvus_docker-gpu.md) for installation details, you need to set the path of all device data storage to the shared storage path during installation. As shown in the figure below
 
 ![](2.png)
 
