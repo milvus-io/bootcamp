@@ -1,6 +1,5 @@
 # Milvus 高可用 (HA) 方案
 
-本项目后续将不再维护更新，最新内容将更新在 https://github.com/zilliz-bootcamp/milvus_high_availability
 
 ## 环境准备
 
@@ -12,11 +11,11 @@
 
 
 
-## 安装 Milvus0.11.0
+## 安装 Milvus1.0
 
 在主备机上安装 Milvus server。主备机的 Milvus `db` 目录均指向共享存储的位置。
 
-安装方法：参考 https://www.milvus.io/cn/docs/v0.11.0/guides/get_started/install_milvus/install_milvus.md
+安装方法：参考 https://www.milvus.io/cn/docs/v1.0.0/milvus_docker-cpu.md
 
 安装完成后，启动主机的 Milvus server，停止备机的 Milvus server。
 
