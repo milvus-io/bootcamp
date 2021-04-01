@@ -1,8 +1,7 @@
 # README
 
-This project will no longer be maintained and updated, and the latest content will be updated at https://github.com/zilliz-bootcamp/item_based_recommend
 
-This project combines milvus and bert to implement an item-based text recommendation system.
+This project combines milvus1.0 and bert to implement an item-based text recommendation system.
 
 ## Data Introduction
 
@@ -64,7 +63,7 @@ The configuration file config.py in service explains:
 
 ## Steps to build a project
 
-1. Install [Milvus](https://milvus.io/cn/docs/v0.10.2/milvus_docker-cpu.md)。
+1. Install [Milvus1.0](https://www.milvus.io/docs/v1.0.0/milvus_docker-cpu.md)。
 
 2. Install MySql.
 
