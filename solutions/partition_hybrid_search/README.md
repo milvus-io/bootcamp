@@ -1,6 +1,5 @@
 # 基于 Milvus 分区的向量数据和结构化数据混合查询方案
 
-本项目后续将不再维护更新，最新内容将更新在 https://github.com/zilliz-bootcamp/milvus_search_based_partition
 
 本方案是基于 Milvus 的分区功能，实现向量数据和结构化数据混合查询的一个示例。
 
@@ -8,10 +7,10 @@
 
 ## 运行要求
 
-- [安装 Milvus0.10.0](https://www.milvus.io/cn/docs/v0.10.0/guides/get_started/install_milvus/install_milvus.md)
+- [安装 Milvus1.0](https://www.milvus.io/cn/docs/v1.0.0/milvus_docker-cpu.md)
 - pip3 install numpy
 - pip3 install faker
-- pip3 install pymilvus==0.2.13
+- pip3 install pymilvus==1.0.1
 
 ## 数据来源
 
