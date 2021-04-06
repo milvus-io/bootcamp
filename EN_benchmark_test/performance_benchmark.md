@@ -1,6 +1,6 @@
 # Performance Benchmark
 
-This topic displays the performance of different index types in Milvus 0.11.0 for reference purposes. The test data uses an open source dataset, sift1B, with 1,000 million 128-dimensional vectors.
+This topic displays the performance of different index types in Milvus 0.5.3 for reference purposes. The test data uses an open source dataset, sift1B, with 1,000 million 128-dimensional vectors.
 
 The following table displays the terms used in this topic:
 
@@ -14,198 +14,148 @@ The following table displays the terms used in this topic:
 
 Performance is correlated with nprobe. The greater the value of nprobe, the lower the performance, but the higher the accuracy. You can set nprobe per specific scenarios. In this topic, nprobe is set to 32.
 
-Test parameter Settings: Nlist =4096, Sift1m, segment_row_limit =1000000
-
-Sift10m, SiFT100m, Segment_row_limit =2000000
-
 Refer to [https://medium.com/@milvusio/how-to-choose-an-index-in-milvus-4f3d15259212](https://medium.com/@milvusio/how-to-choose-an-index-in-milvus-4f3d15259212) to learn how to choose indexes.
 
-[SiFT1m test result](Performance_bench.md# sift1m): In this test, the first 1,000,000 vectors from the sift1B data set are selected.
-
-[SiFT10m test results](Performance_bench.md# sift10m): In this test, the first 10,000,000 vectors from the sift1B dataset are selected.
-
-[Results of the SIFT100M test](Performance_bench.md# sift100m): In this test, the first 100,000,000 vectors from the sift1B dataset are selected.
-
-In this test, the data was imported into Milvus in batches of 100,000, and the import time of 100,000 128-dimensional vectors was approximately  : 2S
-
-## sift1m
-
-##### index：ivf_sq8
-
-(Index creation time：8s)
-
-(nprobe:256)
-
-**accuracy：**
-
-The department randomly took out 500 vector queries from the vector set to be queried, and the average value of the 500 results was taken out for recall rate, which was tested for a total of three times. The 500 vectors taken out each time were not completely the same
-
-| accuracy | 第一次 | 第二次 | 第三次 |
-| -------- | ------ | ------ | ------ |
-| topk=1   | 98.2%  | 98.0%  | 98.8%  |
-| topk=10  | 98.9%  | 97.8%  | 97.5%  |
-| topk=100 | 98.2%  | 97.8%  | 97.7%  |
-| topk=500 | 98.4%  | 96.9%  | 98.4%  |
-
-**performance：**
-
-Query (CPU)
-
-| Time(s) | Topk =1 | Topk=10 | Topk=100 | Topk =500 |
-| ------- | ------- | ------- | -------- | --------- |
-| nq =1   | 0.0086  | 0.0063  | 0.0065   | 0.0082    |
-| nq =10  | 0.0159  | 0.0138  | 0.0153   | 0.0187    |
-| nq =100 | 0.0285  | 0.0318  | 0.0336   | 0.0422    |
-| nq =500 | 0.0976  | 0.0988  | 0.1154   | 0.1590    |
-
-##### 索引ivf_sq8h
-
-(Index creation time：7.8s)
-
-(nprobe:256)
-
-**accuracy：**
-
-The department randomly took out 500 vector queries from the vector set to be queried, and the average value of the 500 results was taken out for recall rate, which was tested for a total of three times. The 500 vectors taken out each time were not completely the same
-
-| accuracy  | 第一次 | 第二次 | 第三次 |
-| --------- | ------ | ------ | ------ |
-| Topk =1   | 99.4%  | 98.8%  | 99.0%  |
-| Topk =10  | 98.7%  | 98.7%  | 98.4%  |
-| Topk =10  | 98.7%  | 98.7%  | 98.4%  |
-| Topk =500 | 98.0%  | 98.1%  | 98.0%  |
-
-**performance**：
-
-Query (CPU)
-
-| time(S) | topk=1 | topk=10 | topk=100 | topk=500 |
-| ------- | ------ | ------- | -------- | -------- |
-| nq=1    | 0.0163 | 0.0062  | 0.0065   | 0.0076   |
-| nq=10   | 0.0141 | 0.0142  | 0.0152   | 0.0168   |
-| nq=100  | 0.0332 | 0.0334  | 0.0369   | 0.0495   |
-| nq=500  | 0.1093 | 0.1054  | 0.1235   | 0.1713   |
-
-
-
-
-## sift10m
-
-##### index：ivf_sq8
-
-(Index creation time：64s)
-
-(nprobe:128)
-
-**accuracy：**
-
-The department randomly took out 500 vector queries from the vector set to be queried, and the average value of the 500 results was taken out for recall rate, which was tested for a total of three times. The 500 vectors taken out each time were not completely the same
-
-| accuracy | 第一次 | 第二次 | 第三次 |
-| -------- | ------ | ------ | ------ |
-| topk=1   | 98.0%  | 98.4%  | 98.6%  |
-| topk=10  | 98.2%  | 97.7%  | 98.2%  |
-| topk=100 | 98.3%  | 98.0%  | 98.1%  |
-| topk=500 | 97.8%  | 97.5%  | 97.4%  |
-
-**performance**：
-
-Query (CPU)
-
-| time(S) | topk=1 | topk=10 | topk=100 | topk=500 |
-| ------- | ------ | ------- | -------- | -------- |
-| nq=1    | 0.0189 | 0.0176  | 0.0183   | 0.0253   |
-| nq=10   | 0.0594 | 0.0570  | 0.0598   | 0.0638   |
-| nq=100  | 0.0982 | 0.1011  | 0.1056   | 0.1234   |
-| nq=500  | 0.3526 | 0.3371  | 0.3712   | 0.4370   |
-
-
-
-##### index：ivf_sq8h
-
-(nprobe:128)
-
-**accuracy：**
-
-The department randomly took out 500 vector queries from the vector set to be queried, and the average value of the 500 results was taken out for recall rate, which was tested for a total of three times. The 500 vectors taken out each time were not completely the same
-
-| accuracy | 第一次 | 第二次 | 第三次 |
-| -------- | ------ | ------ | ------ |
-| topk=1   | 97.0%  | 98.6%  | 97.6%  |
-| topk=10  | 98.1%  | 98.0%  | 97.7%  |
-| topk=100 | 98.1%  | 98.2%  | 98.0%  |
-| topk=500 | 97.6%  | 97.7%  | 97.6%  |
-
-**performance**：
-
-Query (CPU)
-
-| time(S) | topk=1 | topk=10 | topk=100 | topk=500 |
-| ------- | ------ | ------- | -------- | -------- |
-| nq=1    | 0.0180 | 0.0187  | 0.0189   | 0.0369   |
-| nq=10   | 0.0584 | 0.0684  | 0.0603   | 0.0692   |
-| nq=100  | 0.0971 | 0.1038  | 0.1033   | 0.1203   |
-| nq=500  | 0.3494 | 0.3496  | 0.0382   | 0.4585   |
-| nq=1000 | 0.7034 | 0.6702  | 0.7381   | 0.8805   |
-
-
-
-## sift100m
-
-##### index：ivf_sq8
-
-(Index creation time：300s)
-
-(nprobe:64)
-
-**accuracy：**
-
-The department randomly took out 500 vector queries from the vector set to be queried, and the average value of the 500 results was taken out for recall rate, which was tested for a total of three times. The 500 vectors taken out each time were not completely the same
-
-| accuracy | 第一次 | 第二次 | 第三次 |
-| -------- | ------ | ------ | ------ |
-| topk=1   | 97.2%  | 97.2%  | 97.6%  |
-| topk=10  | 97.3%  | 97.5%  | 97.4%  |
-| topk=100 | 97.2%  | 97.5%  | 97.5%  |
-| topk=500 | 96.6%  | 96.8%  | 96.9%  |
-
-
-
-**performance**：
-
-Query (CPU)
-
-| time(S) | topk=1 | topk=10 | topk=100 | topk=500 |
-| ------- | ------ | ------- | -------- | -------- |
-| nq=1    | 0.1293 | 0.1388  | 0.148    | 0.2495   |
-| nq=10   | 0.3315 | 0.3185  | 0.3366   | 0.3716   |
-| nq=100  | 0.5495 | 0.5313  | 0.5587   | 0.6257   |
-| nq=500  | 1.7314 | 1.8109  | 2.119    | 2.1481   |
-| nq=1000 | 3.3412 | 3.3696  | 3.5066   | 4.1944   |
-
-##### index：ivf_sq8h
-
-(nprobe:64)
-
-**accuracy：**
-
-The department randomly took out 500 vector queries from the vector set to be queried, and the average value of the 500 results was taken out for recall rate, which was tested for a total of three times. The 500 vectors taken out each time were not completely the same
-
-| accuracy | 第一次 | 第二次 | 第三次 |
-| -------- | ------ | ------ | ------ |
-| topk=1   | 98.2%  | 96.0%  | 98.2%  |
-| topk=10  | 97.4%  | 97.2%  | 97.3%  |
-| topk=100 | 97.7%  | 97.3%  | 97.5%  |
-| topk=500 | 97.1%  | 96.7%  | 97.0%  |
-
-**performance**：
-
-| time(S) | topk=1 | topk=10 | topk=100 | topk=500 |
-| ------- | ------ | ------- | -------- | -------- |
-| nq=1    | 0.1499 | 0.1477  | 0.1415   | 0.2358   |
-| nq=10   | 0.3340 | 0.3572  | 0.3330   | 0.4376   |
-| nq=100  | 0.5142 | 0.5120  | 0.6066   | 0.6223   |
-| nq=500  | 1.6685 | 1.6852  | 1.7850   | 2.0676   |
-| nq=1000 | 3.2482 | 3.2930  | 3.2112   | 3.8729   |
-
-### 
+### IVF_FLAT
+
+cpu search
+
+| nq   | topk | total_time | avg_time |
+| ---- | ---- | ---------- | -------- |
+| 1    | 1    | 0.6487     | 0.6487   |
+| 1    | 10   | 0.6408     | 0.6408   |
+| 1    | 100  | 0.6493     | 0.6493   |
+|      |      |            |          |
+| 10   | 1    | 1.1243     | 0.1124   |
+| 10   | 10   | 0.9356     | 0.0936   |
+| 10   | 100  | 1.3931     | 0.1393   |
+|      |      |            |          |
+| 50   | 1    | 1.2678     | 0.0254   |
+| 50   | 10   | 1.2675     | 0.0253   |
+| 50   | 100  | 1.3115     | 0.0262   |
+|      |      |            |          |
+| 100  | 1    | 2.2895     | 0.0229   |
+| 100  | 10   | 3.1338     | 0.0313   |
+| 100  | 100  | 2.1886     | 0.0219   |
+|      |      |            |          |
+| 500  | 1    | 14.0294    | 0.0281   |
+| 500  | 10   | 14.0151    | 0.028    |
+| 500  | 100  | 14.4321    | 0.0289   |
+|      |      |            |          |
+| 1000 | 1    | 22.0935    | 0.0221   |
+| 1000 | 10   | 25.4936    | 0.0255   |
+| 1000 | 100  | 25.901     | 0.0259   |
+
+gpu search
+
+| nq   | topk | total_time | avg_time |
+| ---- | ---- | ---------- | -------- |
+| 1    | 1    | 14.2485    | 14.2485  |
+| 1    | 10   | 14.2673    | 14.2673  |
+| 1    | 100  | 14.3479    | 14.3479  |
+|      |      |            |          |
+| 10   | 1    | 14.3771    | 1.4377   |
+| 10   | 10   | 14.4297    | 1.443    |
+| 10   | 100  | 14.3873    | 1.4387   |
+|      |      |            |          |
+| 50   | 1    | 14.498     | 0.29     |
+| 50   | 10   | 14.4178    | 0.2884   |
+| 50   | 100  | 14.3513    | 0.287    |
+|      |      |            |          |
+| 100  | 1    | 14.6015    | 0.146    |
+| 100  | 10   | 14.4465    | 0.1445   |
+| 100  | 100  | 14.6844    | 0.1468   |
+|      |      |            |          |
+| 500  | 1    | 14.6073    | 0.0292   |
+| 500  | 10   | 14.6434    | 0.0293   |
+| 500  | 100  | 14.9968    | 0.03     |
+|      |      |            |          |
+| 1000 | 1    | 15.3294    | 0.0153   |
+| 1000 | 10   | 15.3135    | 0.0153   |
+| 1000 | 100  | 15.3364    | 0.0153   |
+
+### sq8
+
+cpu search
+
+| nq   | topk | total_time | avg_time |
+| ---- | ---- | ---------- | -------- |
+| 1    | 1    | 0.6416     | 0.6416   |
+| 1    | 10   | 0.6433     | 0.6433   |
+| 1    | 100  | 0.6541     | 0.6541   |
+|      |      |            |          |
+| 10   | 1    | 1.0057     | 0.1006   |
+| 10   | 10   | 1.0391     | 0.1039   |
+| 10   | 100  | 1.0289     | 0.1029   |
+|      |      |            |          |
+| 50   | 1    | 0.9738     | 0.0195   |
+| 50   | 10   | 0.8948     | 0.0179   |
+| 50   | 100  | 2.0333     | 0.0407   |
+|      |      |            |          |
+| 100  | 1    | 1.5835     | 0.0158   |
+| 100  | 10   | 1.584      | 0.0158   |
+| 100  | 100  | 1.6095     | 0.0161   |
+|      |      |            |          |
+| 500  | 1    | 4.2526     | 0.0085   |
+| 500  | 10   | 4.4623     | 0.0089   |
+| 500  | 100  | 5.6541     | 0.0113   |
+|      |      |            |          |
+| 1000 | 1    | 9.0937     | 0.0091   |
+| 1000 | 10   | 9.1369     | 0.0091   |
+| 1000 | 100  | 9.5043     | 0.0095   |
+
+gpu search
+
+| nq   | topk | total_time | avg_time |
+| ---- | ---- | ---------- | -------- |
+| 1    | 1    | 5.1387     | 5.1387   |
+| 1    | 10   | 5.0663     | 5.0663   |
+| 1    | 100  | 5.0685     | 5.0685   |
+|      |      |            |          |
+| 10   | 1    | 5.1336     | 0.5134   |
+| 10   | 10   | 5.0085     | 0.5009   |
+| 10   | 100  | 5.1068     | 0.5107   |
+|      |      |            |          |
+| 50   | 1    | 5.0067     | 0.1001   |
+| 50   | 10   | 5.0983     | 0.102    |
+| 50   | 100  | 5.0527     | 0.1011   |
+|      |      |            |          |
+| 100  | 1    | 5.1222     | 0.0512   |
+| 100  | 10   | 5.2778     | 0.0528   |
+| 100  | 100  | 4.9544     | 0.0495   |
+|      |      |            |          |
+| 500  | 1    | 5.1924     | 0.0104   |
+| 500  | 10   | 5.1253     | 0.0103   |
+| 500  | 100  | 5.1715     | 0.0103   |
+|      |      |            |          |
+| 1000 | 1    | 5.1741     | 0.0052   |
+| 1000 | 10   | 5.276      | 0.0053   |
+| 1000 | 100  | 5.4707     | 0.0055   |
+
+### sq8h
+
+| nq   | topk | total_time | avg_time |
+| ---- | ---- | ---------- | -------- |
+| 1    | 1    | 0.3014     | 0.3014   |
+| 1    | 10   | 0.2949     | 0.2949   |
+| 1    | 100  | 0.3146     | 0.3146   |
+|      |      |            |          |
+| 10   | 1    | 0.5546     | 0.0555   |
+| 10   | 10   | 0.5711     | 0.0571   |
+| 10   | 100  | 0.6225     | 0.0623   |
+|      |      |            |          |
+| 50   | 1    | 0.6317     | 0.0126   |
+| 50   | 10   | 0.6336     | 0.0127   |
+| 50   | 100  | 0.6788     | 0.0136   |
+|      |      |            |          |
+| 100  | 1    | 0.9978     | 0.01     |
+| 100  | 10   | 0.9975     | 0.01     |
+| 100  | 100  | 1.0336     | 0.0103   |
+|      |      |            |          |
+| 500  | 1    | 2.729      | 0.0055   |
+| 500  | 10   | 2.732      | 0.0055   |
+| 500  | 100  | 2.9172     | 0.0058   |
+|      |      |            |          |
+| 1000 | 1    | 4.7836     | 0.0048   |
+| 1000 | 10   | 4.8186     | 0.0048   |
+| 1000 | 100  | 5.1465     | 0.0051   |
