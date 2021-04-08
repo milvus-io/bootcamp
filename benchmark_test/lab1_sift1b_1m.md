@@ -16,8 +16,8 @@
 | GPU 驱动软件    | Driver 418.74 |
 | 内存        | 8 GB DDR4          |
 | 硬盘       | NVMe SSD 256 GB             |
-| Milvus     |  0.10.0  |
-| pymilvus    |   0.2.14    |
+| Milvus     |  1.0  |
+| pymilvus    |   1.0.1    |
 
 测试工具下载：
 - 100 万测试数据集下载地址：链接：https://pan.baidu.com/s/1TSjGaAlQOQm3PpJfZ6dtPQ   提取码：2x5o
@@ -45,7 +45,6 @@ Milvus 可以根据数据分布和性能、准确性的要求灵活调整相关�
 | ---------------------- | ---- |
 | `cpu_cache_capacity` |   4   |
 |    `gpu_resource_config`.`cache_capacity`    |   1    |
-|    `use_blas_threshold`    |  801   |
 | `gpu_search_threshold` | 1001         |
 | `search_resources`     | gpu0 |
 
