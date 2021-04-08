@@ -16,6 +16,7 @@
 ## Application Scenarios
 
 - [Reverse image search based on Milvus and VGG](./pic_search/README.md)
+- [Milvus-based image search system](./image_search2/README.md)
 - [Building a video search system based on Milvus](./video_search/README.md)
 - [Personalized recommender system based on Milvus](./recommender_system/README.md)
 - [Chemical structure similarity search with Milvus](./mols_search/README.md)
