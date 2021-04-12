@@ -6,7 +6,7 @@
 
 ### 环境要求
 
-- [Milvus 0.11.0](https://milvus.io/docs/v0.11.0/milvus_docker-cpu.md) (请注意 Milvus 的版本)
+- [Milvus 1.0.0](https://milvus.io/cn/docs/v1.0.0/install_milvus.md) (请注意 Milvus 的版本)
 - [MySQL](https://hub.docker.com/r/mysql/mysql-server)
 - [Python3](https://www.python.org/downloads/)
 
@@ -15,6 +15,7 @@
 1. **安装 python依赖**
 
    ```bash
+   $ git clone -b 1.0 https://github.com/milvus-io/bootcamp.git
    $ cd bootcamp/solutions/audio_search/webserver/
    $ pip install -r audio_requirements.txt
    ```
