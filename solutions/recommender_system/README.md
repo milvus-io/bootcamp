@@ -1,5 +1,7 @@
 # Milvus 个性化推荐系统
 
+本项目后续将不再维护更新，最新内容将更新在https://github.com/zilliz-bootcamp/personalized_recommender_system。
+
 ## 使用前提
 
 ### 环境要求

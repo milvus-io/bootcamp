@@ -1,6 +1,9 @@
 # 基准测试
 
+
 [English](../EN_benchmark_test/README.md) | [中文版](README.md)
+
+本项目是基于 Milvus1.0 的性能和准确率测试教程。
 
 基准测试部分包含以下内容：
 

@@ -1,5 +1,7 @@
 # 基于 Milvus 的跨模态行人检索
 
+> Note: The content will no longer be maintained and updated in this project. The latest content will be migrated to https://github.com/zilliz-bootcamp/pedestrian_search
+
 跨模态进行图像和文字的关键点是如何准确地衡量图像和文本之间的相似性。本项目参考了 Deep Cross-Modal Projection Learning for Image-Text Matching [论文](https://openaccess.thecvf.com/content_ECCV_2018/papers/Ying_Zhang_Deep_Cross-Modal_Projection_ECCV_2018_paper.pdf)和其[项目](https://github.com/labyrinth7x/Deep-Cross-Modal-Projection-Learning-for-Image-Text-Matching)，利用 Pytorch 神经网络提取图像—文本 embeddings。利用训练好的模型提取图像特征，将其插入 Milvus 中。输入行人描述后再使用 Milvus 进行搜索，即可获得目标行人图像，实现跨模态检索。
 
 ## 前提条件

@@ -1,5 +1,6 @@
 # Milvus High Availability (HA) Solution
 
+
 ## Environment settings
 
 Two servers and one shared storage device.
@@ -12,9 +13,9 @@ Backup server: 192.168.1.38
 
 ## Install Milvus
 
-Install Milvus on the master and backup server. The `db` folder must direct to the shared storage device.
+Install Milvus1.0 on the master and backup server. The `db` folder must direct to the shared storage device.
 
-Refer to https://www.milvus.io/docs/v0.10.0/guides/get_started/install_milvus/install_milvus.md to learn how to install Milvus.
+Refer to https://www.milvus.io/docs/v1.0.0/milvus_docker-cpu.md to learn how to install Milvus1.0.
 
 After installation, launch the Milvus server on the master server and stop the Milvus server on the backup server.
 

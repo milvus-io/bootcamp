@@ -8,11 +8,12 @@ In below example, feature vectors and structured data are used to represent huma
 
 Before executing the hybrid search, make sure you have completed the following steps:
 
-1. [Install Milvus](https://www.milvus.io/docs/v0.10.0/guides/get_started/install_milvus/install_milvus.md)
+1. [Install Milvus](https://www.milvus.io/docs/v1.0.0/milvus_docker-cpu.md)
 2. [Install PostgreSQL](https://www.postgresql.org/download/)
-3. Use `pip install numpy` to download numpy.
-4. Use `pip install psycopg2-binary` to download psycopg2.
-5. Use `pip install faker` to download Faker. 
+3. use `pip install pymilvus==1.0.1` to download pymilvus.
+4. Use `pip install numpy` to download numpy.
+5. Use `pip install psycopg2-binary` to download psycopg2.
+6. Use `pip install faker` to download Faker. 
 
 ## Data source
 
