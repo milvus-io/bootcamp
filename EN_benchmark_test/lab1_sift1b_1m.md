@@ -25,9 +25,9 @@ The following configuration has been tested:
 
 Download the following data and scripts:
 
-- 1 million test data: https://pan.baidu.com/s/1XB0u4zDJoF-2E9T5HmoWJQ  Extraction code : zvs4 
-- Query data: https://pan.baidu.com/s/1LSB167UzUtm1H5Fk91bQfA   Extraction code : imnw 
-- Ground truth: https://pan.baidu.com/s/1OlFKFoi3zVTr8DZQMoGkJQ Extraction code : 49lg
+- 1 million test data: https://drive.google.com/file/d/1lwS6iAN-ic3s6LLMlUhyxzPlIk7yV7et/view?usp=sharing
+- Query data: https://drive.google.com/file/d/17jPDk93PQsB5yGh1J1YD9N7X8jvPEUQL/view?usp=sharing
+- Ground truth: https://drive.google.com/file/d/1vBP9mKu5oxyognHtOBBRtLvyPvo8cCp0/view?usp=sharing
 - Test scripts: [/bootcamp/benchmark_test/scripts/](/benchmark_test/scripts/)
 
 Create a folder named `milvus_sift1m` and move all downloaded files to the folder:
