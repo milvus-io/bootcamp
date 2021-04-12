@@ -1,7 +1,5 @@
 # Personalized Recommender System Based on Milvus
 
-This project will no longer be maintained and updated, and the latest content will be updated at https://github.com/zilliz-bootcamp/personalized_recommender_system.
-
 ## Prerequisites
 
 ### Environment requirements
