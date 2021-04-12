@@ -1,14 +1,12 @@
 # 基于 Milvus 的音频检索系统
 
-本项目后续将不再维护更新，最新内容将更新在https://github.com/zilliz-bootcamp/audio_search。
-
 该项目使用 [PANNs](https://github.com/qiuqiangkong/audioset_tagging_cnn) 对音频做 Embeddings 提取，然后利用 Milvus 检索出相似的音频数据。 
 
 ## 系统部署
 
 ### 环境要求
 
-- [Milvus 0.11.0](https://milvus.io/docs/v0.11.0/milvus_docker-cpu.md) (请注意 Milvus 的版本)
+- [Milvus 1.0.0](https://milvus.io/cn/docs/v1.0.0/install_milvus.md) (请注意 Milvus 的版本)
 - [MySQL](https://hub.docker.com/r/mysql/mysql-server)
 - [Python3](https://www.python.org/downloads/)
 
@@ -17,6 +15,7 @@
 1. **安装 python依赖**
 
    ```bash
+   $ git clone -b 1.0 https://github.com/milvus-io/bootcamp.git
    $ cd bootcamp/solutions/audio_search/webserver/
    $ pip install -r audio_requirements.txt
    ```
@@ -65,4 +64,4 @@
   
   ![](./pic/search.png)
 
-> 如果你需要前端界面，请参考https://zilliz.com/demos/。
+> 如果你需要前端界面，请参考https://zilliz.com/demos
