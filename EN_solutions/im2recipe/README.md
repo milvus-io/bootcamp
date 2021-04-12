@@ -1,5 +1,6 @@
 # README
 
+
 This project implements a picture and recipe retrieval system based on milvus. That is, input a food picture and return the recipe corresponding to the picture.
 
 This project is based on the project [im2recipe-Pytorch](https://github.com/torralba-lab/im2recipe-Pytorch).
@@ -50,7 +51,7 @@ The configuration file config.py in service explains:
 
 ## Steps to build a project
 
-1. Install [Milvus](https://milvus.io/cn/docs/v0.10.2/milvus_docker-cpu.md).
+1. Install [Milvus1.0](https://www.milvus.io/docs/v1.0.0/milvus_docker-cpu.md).
 2. Install MySql.
 3. Clone project
 

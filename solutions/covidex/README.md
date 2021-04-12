@@ -1,5 +1,7 @@
 # COVID-19 文章检索
 
+本项目后续将不再维护更新，最新内容将更新在https://github.com/zilliz-bootcamp/covid_19_data_research。
+
 该系统用于用于检索 [COVID-19 开放数据集](https://pages.semanticscholar.org/coronavirus-research)，参考了 [covidex](https://github.com/castorini/covidex) 并提供了API接口、UI 界面。我们使用 Milvus 来查找最相近的文章，让我们一起学习怎么搭建系统吧。
 
 

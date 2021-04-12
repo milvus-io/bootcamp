@@ -13,7 +13,7 @@ torchvision
 torchwordemb
 pickle
 pymysql
-pymilvus==0.2.14
+pymilvus==1.0.1
 fastapi
 uvicorn
 python-multipart

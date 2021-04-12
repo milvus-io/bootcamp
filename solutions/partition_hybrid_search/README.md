@@ -1,15 +1,16 @@
 # 基于 Milvus 分区的向量数据和结构化数据混合查询方案
 
+
 本方案是基于 Milvus 的分区功能，实现向量数据和结构化数据混合查询的一个示例。
 
 在以下示例中，使用特征向量和结构数据模拟人脸属性，展示了如何进行结构化数据和非结构化数据的混合查询。示例中，针对一个给定向量（可以看做是一个给定的人脸图片提取的特征向量）和其对应的属性，将该向量按其属性进行分区，各属性值相同的向量为同一个分区。在进行查询时，根据给定的属性（获取时间、性别、是否戴眼镜）和特征向量在底库中对应的分区里搜索与给定向量相似度 top 10的向量。
 
 ## 运行要求
 
-- [安装 Milvus0.10.0](https://www.milvus.io/cn/docs/v0.10.0/guides/get_started/install_milvus/install_milvus.md)
+- [安装 Milvus1.0](https://www.milvus.io/cn/docs/v1.0.0/milvus_docker-cpu.md)
 - pip3 install numpy
 - pip3 install faker
-- pip3 install pymilvus==0.2.13
+- pip3 install pymilvus==1.0.1
 
 ## 数据来源
 
