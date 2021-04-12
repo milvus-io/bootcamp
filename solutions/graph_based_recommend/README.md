@@ -1,7 +1,5 @@
 # 利用 Milvus 搭建基于图的推荐系统
 
-本项目后续将不再维护更新，最新内容将更新在 https://github.com/zilliz-bootcamp/graph_based_recommend。
-
 该项目使用图卷积神经网络生成 Embedding，然后使用 Milvus 特征向量相似度检索引擎来检索，助力实现推荐系统。本项目还提供了 flask 服务和前端接口。
 
 ## 前提条件
