@@ -1,14 +1,16 @@
 # Hybrid search of vectors and structured data based on Milvus Partitions
 
+
 This solution implements hybrid search of vectors and structured data based on Milvus Partitions.
 
 The following example uses feature vectors and structured data to simulate human faces. For a specific vector (can be regarded as a specific feature vector retrieved from a human face) and corresponding properties, this example moves this vector into a specific partition based on its properties. Vectors in a partition share the same properties. During a query, this example searches for top 10 similar vectors in the corresponding partition based on specified properties (time when the face image is acquired, gender, with/without glasses).
 
 ## Prerequisite
 
-- [Install Milvus](https://www.milvus.io/docs/v0.10.0/guides/get_started/install_milvus/install_milvus.md)
+- [Install Milvus1.0](https://www.milvus.io/docs/v1.0.0/milvus_docker-cpu.md)
 - pip3 install numpy
 - pip3 install faker
+- pip3 install pymilvus==1.0.1
 
 ## Data source
 

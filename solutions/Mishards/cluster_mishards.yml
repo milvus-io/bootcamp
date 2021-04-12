@@ -2,12 +2,12 @@ version: "2.3"
 services:
     mishards:
         restart: always
-        image: milvusdb/mishards:0.10.0
+        image: milvusdb/mishards
         ports:
             - "0.0.0.0:19531:19531"
             - "0.0.0.0:19532:19532"
-              #volumes:
-              #- /tmp/milvus/db:/tmp/milvus/db
+        volumes:
+            - /tmp/milvus/db:/tmp/milvus/db
             # - /tmp/mishards_env:/source/mishards/.env
         command: ["python", "mishards/main.py"]
         environment:
