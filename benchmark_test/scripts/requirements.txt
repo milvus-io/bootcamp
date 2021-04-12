@@ -1,1 +1,1 @@
-pymilvus==0.2.13
+pymilvus==1.0.1

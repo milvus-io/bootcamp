@@ -1,7 +1,5 @@
 # Milvus 化学式检索
 
-本项目后续将不再维护更新，最新内容将更新在https://github.com/zilliz-bootcamp/chemical_similarity_search。
-
 ## 环境准备
 
 | 组件     | 推荐配置                                                     |

@@ -18,8 +18,8 @@
 | GPU Driver    | CUDA 10.1, Driver 418.74 |
 | Memory        | 16 GB DDR4 ( 2400 Mhz ) x 2                |
 | Storage       | SATA 3.0 SSD 256 GB                  |
-| Milvus     |  0.10.0  |
-| pymilvus    |   0.2.14    |
+| Milvus     |  1.0  |
+| pymilvus    |   1.0.1    |
 
 测试工具下载：
 - 1亿测试数据集下载地址：https://pan.baidu.com/s/1N5jGKHYTGchye3qR31aNnA
@@ -45,10 +45,9 @@ Milvus 可以根据数据分布和性能、准确性的要求灵活调整相关�
 | cache.cache_size   | 25           |
 | gpu.cache_size   | 4            |
 | gpu_search_threshold | 1001         |
-| search_devices     |-gpu0 |
 | build_index_devices     |-gpu0 |
 
-gpu_search_threshold, 该参数决定是否使用 GPU 查询。当 nq>use_blas_threshold，将使用 GPU 查询(只有当 nq 值较大时，使用 GPU 查询才会更有优势)。
+gpu_search_threshold, 该参数决定是否使用 GPU 查询。当 nq>gpu_search_threshold，将使用 GPU 查询(只有当 nq 值较大时，使用 GPU 查询才会更有优势)。
 
 修改配置文件后，需要重启 Milvus Docker 使其生效。
 
