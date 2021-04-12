@@ -1,9 +1,10 @@
 import os
+from milvus import *
 
 MILVUS_HOST = os.getenv("MILVUS_HOST", "127.0.0.1")
 MILVUS_PORT = os.getenv("MILVUS_PORT", 19530)
 VECTOR_DIMENSION = os.getenv("VECTOR_DIMENSION", 2048)
-METRIC_TYPE = os.getenv("METRIC_TYPE", "IP")
+METRIC_TYPE = os.getenv("METRIC_TYPE", MetricType.IP)
 TOP_K = os.getenv("TOP_K", 100)
 
 UPLOAD_PATH = os.getenv("UPLOAD_PATH", "./tmp")

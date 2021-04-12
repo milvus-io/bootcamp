@@ -63,4 +63,4 @@
   
   ![](./pic/search.png)
 
-> 如果你需要前端界面，请参考https://zilliz.com/demos/。
+> 如果你需要前端界面，请参考https://zilliz.com/demos
