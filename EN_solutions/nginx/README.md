@@ -122,7 +122,12 @@ stream {
 ```
 
 *Note: The code cannot be written inside **http{}***
-
+If you are using the grpc client to call the nginx interface, you need to replace the above proxy_pass with the following code
+```
+location / {
+        grpc_pass grpc://milvus;
+    }
+```
 3、After modifying the Nginx configuration file, test whether the configuration file is correct by first stopping the Nginx service and then restarting it
 
 ```
