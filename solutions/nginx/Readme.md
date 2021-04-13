@@ -109,6 +109,13 @@ stream {
 
 *注：代码不能写在**http{}**内部*
 
+如果使用grpc client 调用 nginx 接口，需要将上面的proxy_pass 替换成如下代码                  
+```                    
+location / {
+        grpc_pass grpc://milvus;
+    }
+```
+  
 2、修改完Nginx配置文件之后，测试配置文件是否配置正确，先停止Nginx服务之后再重新启动
 
 ```
@@ -131,7 +138,7 @@ client = Milvus(host='localhost', port='19585')
 
 最后，得到ngnix日志查询结果如下图所示，可以看到nginx将请求分给不同的Milvus
 
-![](\4.png)
+![](4.png)
 
 
 
