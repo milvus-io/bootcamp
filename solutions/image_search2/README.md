@@ -87,7 +87,7 @@ milvusbootcamp/pic-search-webclient:0.2.0
 
 <img src="pic/web0.png" width = "650" height = "500" alt="arch" align=center  />
 
-> Note: After clicking the Load button, you need to wait for a while for the system to respond. Please do not make mulitple clicks.
+> 注意：点击 "加载 "按钮后，需要等待一段时间，系统才会有反应。请不要进行多次点击。
 
 根据图片的数量及大小可能需要一定的时间来加载图片。下面的截图显示了图像加载成功后的界面。
 
