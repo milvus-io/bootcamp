@@ -82,12 +82,12 @@ You can also input *<localhost(local IP address):port(default port is 80)>* in y
 
 1.The version of Milvus in this example is 1.0, refer to [Milvus official website](https://milvus.io/cn/docs/v1.0.0/milvus_docker-gpu.md) for installation details, you need to set the path of all device data storage to the shared storage path during installation. As shown in the figure below
 
-![](2.png)
+![](6.png)
 
  **/cifs/test/nfs/milvus/db** is the path to shared storage
 
 2、Then [Use Mysql to manage metadata](https://www.milvus.io/cn/docs/v0.10.4/data_manage.md), after the installation of Mysql is complete, you need to change the parameter meta_uri in the Milvus configuration file server_config.yaml. Server 1 ip address 192.168.1.85, server 2 ip address 172.16.10.1, we install two Milvus on server 1 , Milvus 1 set readable , IP address 192.168.1.85:19537 and Milvus 3 set writable 192.168.1.85: 19539, server 2 install Milvus 2 set to readable, ip address 172.16.10.1:19538. modify the parameters enable and role in the server_config.yaml configuration file, as shown in the following figure
-![](3.png)
+![](7.png)
 
 The parameter `enable` indicates whether to set it to distributed mode, the parameter `role` determines whether Milvus is read-only or writable, the parameter `meta_uri` should be modified to the address of the device on which MySQL is installed, and the rest of the configuration refers to the configuration of the standalone version of Milvus.
 
