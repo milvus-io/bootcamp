@@ -70,11 +70,11 @@ ps -ef | grep nginx
 
 ## 二、Milvus配置
 
-1、本示例中Milvus的版本为1.0，详细安装方式参考[Milvus官网](https://milvus.io/cn/docs/v1.0.0/milvus_docker-gpu.md)，在安装时需要将所有设备数据存储位置都应设置为共享存储的路径，如下图所示。![](2.png)
+1、本示例中Milvus的版本为1.0，详细安装方式参考[Milvus官网](https://milvus.io/cn/docs/v1.0.0/milvus_docker-gpu.md)，在安装时需要将所有设备数据存储位置都应设置为共享存储的路径，如下图所示。![](6.png)
 
 其中**/cifs/test/nfs/milvus/db**为共享存储的路径
 
-2、然后[使用Mysql管理元数据](https://www.milvus.io/cn/docs/v0.10.4/data_manage.md)，安装Mysql完成之后，需要在Milvus的配置文件server_config.yaml中修改参数meta_uri。 服务器1的ip地址为192.168.1.85，服务器2的ip地址为172.16.10.1，我们在服务器1上安装两个Milvus ，Milvus 1设置可读 ，IP地址为192.168.1.85:19537和Milvus3设置为可写192.168.1.85:19539，服务器2安装Milvus2设置为可读，ip地址为172.16.10.1:19538。在server_config.yaml 配置文件中修改参数enable和role，如下图所示。![](3.png)
+2、然后[使用Mysql管理元数据](https://www.milvus.io/cn/docs/v0.10.4/data_manage.md)，安装Mysql完成之后，需要在Milvus的配置文件server_config.yaml中修改参数meta_uri。 服务器1的ip地址为192.168.1.85，服务器2的ip地址为172.16.10.1，我们在服务器1上安装两个Milvus ，Milvus 1设置可读 ，IP地址为192.168.1.85:19537和Milvus3设置为可写192.168.1.85:19539，服务器2安装Milvus2设置为可读，ip地址为172.16.10.1:19538。在server_config.yaml 配置文件中修改参数enable和role，如下图所示。![](7.png)
 
 其中参数 `enable` 表示是否设置为分布式模式，参数 `role` 决定了 Milvus 是只读还是可写，参数 `meta_uri` 应修改为 MySQL 所安装的设备的地址，其余配置参照 Milvus 单机版时的配置。
 
