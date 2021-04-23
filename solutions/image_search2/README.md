@@ -65,7 +65,7 @@ vim  /image_search_v2/webserver/src/common/config.py
 cd  /image_search/webserver/src
 python app.py
 ```
-<!--如果yolo模型没有自动下载，您需要到**image_search_v2/webserver/src/yolov3_detector/data/**路径运行**paprepare_model.sh**脚本。-->
+如果yolo模型没有自动下载，您需要到**image_search_v2/webserver/src/yolov3_detector/data/**路径运行**paprepare_model.sh**脚本。
 
 #### 5. 启动 pic-search-webclient 
 
