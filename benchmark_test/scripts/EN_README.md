@@ -1,4 +1,6 @@
-README
+# README
+
+[English](EN_README.md) | [中文版](README.md)
 
 ## Preparation
 
@@ -42,14 +44,14 @@ pip install -r requirements.txt
 | MILVUS_HOST | The IP where the Milvus server is located | 127.0.0.1 |
 | MILVUS_PORT | Port provided by Milvus server            | 19539     |
 
-l**Parameters required when creating a collection**：
+**Parameters required when creating a collection**：
 
 | Parameter       | Description                                                  | Defaults      |
 | --------------- | ------------------------------------------------------------ | ------------- |
 | INDEX_FILE_SIZE | Specify the size of each segment.                            | 2048          |
 | METRIC_TYPE     | Specify the vector similarity calculation method when creating a collection | MetricType.L2 |
 
-l**Parameters required for indexing**：
+**Parameters required for indexing**：
 
 | Parameter      | Description                              | Defaults |
 | -------------- | ---------------------------------------- | -------- |
@@ -62,7 +64,7 @@ l**Parameters required for indexing**：
 | HNSW_M         | M value for indexing HNSW                | 16       |
 | EFCONSTRUCTION | Build the EFCONSTRUCTION value of HNSW   | 500      |
 
-l**Configuration parameters required when writing data**：
+**Configuration parameters required when writing data**：
 
 | Parameter          | Description                                                  | Defaults |
 | ------------------ | ------------------------------------------------------------ | -------- |
@@ -70,7 +72,7 @@ l**Configuration parameters required when writing data**：
 | TOTAL_VECTOR_COUNT | When the data format is bvecs or fvecs, the amount of data to be written | 20000    |
 | IMPORT_CHUNK_SIZE  | When the data format is bvecs or fvecs, the amount of data written into milvus each time | 20000    |
 
-l**Parameters required for performance** **test**
+**Parameters required for performance** **test**
 
 | Parameter                | Description                                                  | Defaults            |
 | ------------------------ | ------------------------------------------------------------ | ------------------- |
@@ -79,7 +81,7 @@ l**Parameters required for performance** **test**
 | NQ_SCOPE                 | The nq value to be tested (Here means testing multiple nq values) | [1,10,100,500,1000] |
 | TOPK_SCOPE               | The topk value to be tested in each np (Here means testing multiple topk values) | [1,1, 10, 100,500]  |
 
-l**Parameters required for recall test**：
+**Parameters required for recall test**：
 
 | Parameter         | Description                                                  | Defaults                           |
 | ----------------- | ------------------------------------------------------------ | ---------------------------------- |
