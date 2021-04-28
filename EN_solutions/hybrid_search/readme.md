@@ -1,7 +1,5 @@
 # Milvus-Based Hybrid Search of Vectors and Structured Data
 
-This project will no longer be maintained and updated, and the latest content will be updated at https://github.com/zilliz-bootcamp/milvus_hybrid_search_based_postgres
-
 This solution provides an example of consolidating Milvus (vector database) and PostgreSQL (relational database) to carry out the hybrid search of vectors and structured data.
 
 In below example, feature vectors and structured data are used to represent human face attributes. Here is how hybrid search works out: First, search the top 10 most similar vectors (and their Euclidean distances) of a defined vector (could be a specified human face image). Then by comparing the Euclidean distance, find out (among the top 10  result vectors) vectors which have Euclidean distance < 1, and which at the same time meet the filtering conditions (gender, time, and if with glasses) in PostgreSQL. 
@@ -10,11 +8,12 @@ In below example, feature vectors and structured data are used to represent huma
 
 Before executing the hybrid search, make sure you have completed the following steps:
 
-1. [Install Milvus](https://www.milvus.io/docs/v0.10.0/guides/get_started/install_milvus/install_milvus.md)
+1. [Install Milvus](https://www.milvus.io/docs/v1.0.0/milvus_docker-cpu.md)
 2. [Install PostgreSQL](https://www.postgresql.org/download/)
-3. Use `pip install numpy` to download numpy.
-4. Use `pip install psycopg2-binary` to download psycopg2.
-5. Use `pip install faker` to download Faker. 
+3. use `pip install pymilvus==1.0.1` to download pymilvus.
+4. Use `pip install numpy` to download numpy.
+5. Use `pip install psycopg2-binary` to download psycopg2.
+6. Use `pip install faker` to download Faker. 
 
 ## Data source
 

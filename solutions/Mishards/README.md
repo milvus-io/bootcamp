@@ -1,13 +1,12 @@
 # 基于 Mishards（Milvus 集群分片中间件）的分布式解决方案
 
 
-本项目后续将不再维护更新，最新内容将更新在 https://github.com/zilliz-bootcamp/Milvus_distributed_based_misheards
 
 Milvus 旨在帮助用户实现海量非结构化数据的近似检索和分析。单个 Milvus 实例可处理十亿级数据规模，而对于百亿或者千亿级数据，则需要一个 Milvus 集群实例。该实例对于上层应用可以像单机实例一样使用，同时满足海量数据低延迟、高并发业务需求。
 
 本文主要展示如何使用 Mishards（Milvus 集群分片中间件）来搭建 Milvus 集群。
 
-关于 Mishards 更多详解请参考[https://github.com/milvus-io/milvus/blob/0.10.0/shards/README_CN.md](https://github.com/milvus-io/milvus/blob/0.9.0/shards/README_CN.md)。
+关于 Mishards 更多详解请参考[Mishards](https://github.com/milvus-io/milvus/blob/1.0/shards/README_CN.md)。
 
 本文默认你已经会在单机上安装使用 Milvus 了，在此基础上可参考下文搭建一个 Milvus 集群。
 
@@ -26,7 +25,7 @@ Milvus 旨在帮助用户实现海量非结构化数据的近似检索和分析�
 在本示例中，将用两台设备搭建一个小的 Milvus 集群。其中一台设置为可写，另一台设置为只读。
 
 ## 搭建步骤
-本项目是 Milvus0.10.0 分布式搭建方案。
+本项目是基于 Milvus1.0 的分布式搭建方案。
 
 ### 1.安装 MySQL
 
@@ -44,9 +43,9 @@ $ docker-compose -f mysql_dc.yml up -d
 $ docker ps
 ```
 
-### 2.启动Milvus
+### 2.启动 Milvus
 
-> 注意：本教程中启动的是gpu版的milvus
+> 注意：本教程中启动的是 GPU 版的 Milvus
 
 集群中的每一台设备均需要安装 Milvus,不同的设备可给 Milvus 配置不同的读写权限。（这里建议给集群中的一台设备配置为可写，其他均为只读）
 
@@ -108,7 +107,7 @@ Mishards 服务只需在集群中**任意一台**设备上启动即可。
 
 本项目目录中有一个 `cluster_mishards.yml` 文件，如图：
 
-![1577783243935](pic/1577783243935.png)
+![image](https://user-images.githubusercontent.com/53458891/113249138-cdf31b80-92f0-11eb-9e63-033d34074ab7.png)
 
 在脚本中需要注意修改的参数：
 

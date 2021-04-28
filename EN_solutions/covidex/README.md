@@ -1,5 +1,7 @@
 # COVID-19 Open Research Dataset Search
 
+This project will no longer be maintained and updated, and the latest content will be updated at https://github.com/zilliz-bootcamp/covid_19_data_research.
+
 This system contains the API server, neural models, and UI client, a neural search engine for the [COVID-19 Open Research Dataset (CORD-19)](https://pages.semanticscholar.org/coronavirus-research) , and is referred to [covidex](https://github.com/castorini/covidex).
 
 At the COVID-19 Dataset Search system, [Milvus](https://milvus.io/) is used to get the related articles. Let's start to have fun with the local deployment.
