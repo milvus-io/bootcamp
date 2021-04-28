@@ -1,5 +1,7 @@
 # Milvus -Based Mixed Query Solution
 
+This project will no longer be maintained and updated, and the latest content will be updated at https://github.com/zilliz-bootcamp/milvus_mixed_query
+
 This solution is an example of hybrid query combined with the vector database Milvus.
 
 In the following example, feature vectors and structured data are used to simulate face attributes, showing how to perform a mixed query of structured data and unstructured data. In the example, for a given vector (can be regarded as a given face picture), and its attributes (gender, time, whether to wear glasses), combine Milvus to query the top ten most similar vectors and their European styles distance.

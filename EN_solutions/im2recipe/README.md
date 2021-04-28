@@ -1,6 +1,5 @@
 # README
 
-This project will no longer be maintained and updated, and the latest content will be updated at https://github.com/zilliz-bootcamp/recipe_retrieval
 
 This project implements a picture and recipe retrieval system based on milvus. That is, input a food picture and return the recipe corresponding to the picture.
 
@@ -52,7 +51,7 @@ The configuration file config.py in service explains:
 
 ## Steps to build a project
 
-1. Install [Milvus](https://milvus.io/cn/docs/v0.10.2/milvus_docker-cpu.md).
+1. Install [Milvus1.0](https://www.milvus.io/docs/v1.0.0/milvus_docker-cpu.md).
 2. Install MySql.
 3. Clone project
 

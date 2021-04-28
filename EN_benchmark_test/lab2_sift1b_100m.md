@@ -9,11 +9,11 @@ The 100 million vectors used in this test are extracted from the dataset [SIFT1B
 | Component           | Minimum Config                |
 | ------------------ | -------------------------- |
 | OS            | Ubuntu LTS 18.04 |
-| CPU           | Intel(R) Xeon(R) Platinum 8163 CP |
+| CPU           | Intel Core i7-8700        |
 | GPU           | Nvidia GeForce GTX 1060, 6GB GDDR5 |
-| GPU Driver    | CUDA 10.2, Driver 440.100 |
-| Memory        | 755GB DDR4    |
-| Hard Disk | 1.9T              |
+| GPU Driver    | CUDA 10.1, Driver 418.74 |
+| Memory        | 16 GB DDR4 ( 2400 Mhz ) x 2                |
+| Storage       | SATA 3.0 SSD 256 GB                  |
 
 Download the following data and scripts, and save them to a file named **milvlus_sift100m**. 
 - [100 million vector dataset](https://pan.baidu.com/s/1N5jGKHYTGchye3qR31aNnA)
@@ -24,7 +24,7 @@ Download the following data and scripts, and save them to a file named **milvlus
 
 - [Search ground truth](https://pan.baidu.com/s/1Raqs_1NkGMkPboENFlkPsw )     Extraction code  ：yvdr
 
-- [Test scripts](/EN_benchmark_test/Scripts.md)
+- [Test scripts](/benchmark_test/scripts/)
 
 When it is done, there should be the following files in **milvus_sift100m**:
 
@@ -43,12 +43,12 @@ Configuration file: **/home/$USER/milvus/conf/server_config.yaml**
 
 |         Parameter         | Recommended value |
 | ----------------------   | ---- |
-| cache.cache_size     | 25                |
-| gpu.cache_size       | 4                 |
-| gpu_search_threshold | 1001              |
-| search_devices       | -gpu0             |
+| index_building_threshold |  1024  |
+|    cpu_cache_capacity    |   25   |
+|    use_blas_threshold    |  801   |
+|          nprobe          |   32   |
 
-Refer to [Milvus Configuration](https://www.milvus.io/docs/v0.11.0/milvus_config.md) for more information.
+Refer to [Milvus Configuration](https://github.com/milvus-io/docs/blob/0.7.1/reference/milvus_config.md) for more information.
 
 Use default values for other parameters. After setting parameter values, restart Milvus Docker to apply all changes.
 
@@ -58,9 +58,9 @@ $ docker restart <container id>
 
 ## 3. Create a table and build indexes
 
-Make sure Milvus is already installed and started. (For details of Milvus installation, please read [Milvus Quick Start](https://www.milvus.io/docs/install_milvus.md)).
+Make sure Milvus is already installed and started. (For details of Milvus installation, please read [Milvus Quick Start](https://milvus.io/docs/v1.0.0/milvus_docker-cpu.md)).
 
-> Before testing, please modify the corresponding parameters according to the [script instructions](/EN_benchmark_test/Scripts.md)
+> Before testing, please modify the corresponding parameters according to the [script instructions](/benchmark_test/scripts/README.md)
 
 Go to `milvus_sift1m`, and run the following command to create a table and build indexes:
 
@@ -74,11 +74,12 @@ Vectors are then inserted into a table named `ann_100m_sq8h`, with the index_typ
 To show the available tables and number of vectors in each table, use the following command:
 
 ```bash
-#See which tables are in the library
+#查看库中有哪些表
 $ python3 main.py --show
-#View the number of rows in table ANN_1m_sq8h
-$ python3 main.py --collection ann_1m_sq8 --rows
-
+#查看表ann_100m_sq8h的行数
+$ python3 main.py --collectio ann_100m_sq8q8 --rows
+ann_100m_sq8_sq8h的索引类型
+$ python3 main.py --collection ann_100m_sq81m_sq8 --describe_index
 ```
 
 
@@ -112,8 +113,10 @@ $ sqlite3 meta.sqlite
 In sqlite3 CLI, enter the following command to check the current status:
 
 ```sql
-sqlite> select * from collections;
+sqlite> select * from TableFiles where table_id='ann_100m_sq8h';
 ```
+
+Milvus divides a vector table into shards for storage. So, a query returns multiple records. The third column specifies the index type and 5 stands for IVF_SQ8H. The fifth column specifies the build status of the index and 3 indicates that index building is complete for the shard. If index building is not complete for a specific shard, you can manually build indexes for the shard.
 
 Exit sqlite CLI:
 
