@@ -15,7 +15,7 @@ def init_table(index_client, conn, cursor, table_name):
         print("create table.")
         create_table_mysql(conn, cursor, table_name)
         create_table_milvus(index_client, table_name, VECTOR_DIMENSION)
-        create_index(index_client, table_name, METRIC_TYPE)
+        create_index(index_client, table_name)
 
 
 def get_ids_file(ids_milvus, ids_audio, file_name):
@@ -57,14 +57,14 @@ def do_insert_audio(index_client, conn, cursor, table_name, audio_path):
         ids_audio = []
         for wav in wavs:
             # print("---wav:", wav)
-            if ".wav" in wav: 
+            if ".wav" in wav:
                 ids_wav, vectors_wav = get_audio_embedding(audio_path + '/' + wav)
                 if vectors_wav:
                     get_spectorgram(audio_path, wav)
                     embeddings.append(vectors_wav)
                     ids_audio.append(ids_wav)
                 # print("len of embeddings", len(embeddings))
-        ids_milvus = insert_vectors(index_client, table_name, embeddings)
+        _, ids_milvus = insert_vectors(index_client, table_name, embeddings)
         
         file_name = str(uuid.uuid1()) + ".csv"
         get_ids_file(ids_milvus, ids_audio, file_name)

@@ -1,5 +1,7 @@
 ## README
 
+This project will no longer be maintained and updated, and the latest content will be updated at https://github.com/zilliz-bootcamp/text_search
+
 This project uses Milvus and Bert to build a Text Search Engine. In this project, Bert is used to convert the text into a fixed-length vector and store it in Milvus, and then combine Milvus to search for similar text in the text entered by the user.
 
 ## Data description
@@ -49,9 +51,9 @@ config.py：The script is a configuration file and needs to be modified accordin
 1、Install Milvus
 -------------------
 
-Milvus provides two release versions: CPU version and GPU version. In order to get better query performance, the GPU version 0.10Milvus reference link is used in the project:
+Milvus provides two release versions: CPU version and GPU version. In order to get better query performance, the GPU version 1.0 Milvus reference link is used in the project:
 
-https://www.milvus.io/cn/docs/v0.10.0/gpu_milvus_docker.md
+https://milvus.io/cn/docs/v1.0.0/milvus_docker-gpu.md
 
 2、Install PostgreSQL
 -------------------------
