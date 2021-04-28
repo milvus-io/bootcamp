@@ -1,5 +1,7 @@
 # README
 
+[English](EN_README.md) | [中文版](README.md)
+
 ## 前提
 
 在运行本项目脚本前，需要启动 milvus1.0。
