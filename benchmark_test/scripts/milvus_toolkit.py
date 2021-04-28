@@ -10,16 +10,6 @@ import logging
 import random
 
 
-
-def is_normalized():
-    filenames = os.listdir(NL_FOLDER_NAME)
-    filenames.sort()
-    vetors = load_vec_list(NL_FOLDER_NAME+'/'+filenames[0])
-    for i in range(10):
-        sqrt_sum = np.sum(np.power(vetors[i], 2))
-        print(sqrt_sum)
-
-
 def connect_server():
     try:
         milvus = Milvus(host=config.MILVUS_HOST, port=config.MILVUS_PORT)
@@ -28,7 +18,7 @@ def connect_server():
         logging.error(e)
 
 
-def build_collection(collection_name,it):
+def build_collection(collection_name, it):
     milvus = connect_server()
     if it == 'flat':
         index_type = IndexType.FLAT
@@ -44,57 +34,59 @@ def build_collection(collection_name,it):
         index_param = {'nlist': config.NLIST}
     elif it == 'pq':
         index_type = IndexType.IVF_PQ
-        index_param = {'nlist': config.NLIST, 'm':config.PQ_M}
+        index_param = {'nlist': config.NLIST, 'm': config.PQ_M}
     elif it == 'nsg':
         index_type = IndexType.RNSG
-        index_param = {'search_length': config.SEARCH_LENGTH, 'out_degree':config.OUT_DEGREE, 'candidate_pool_size':config.CANDIDATE_POOL, 'knng':config.KNNG}
+        index_param = {'search_length': config.SEARCH_LENGTH, 'out_degree': config.OUT_DEGREE,
+                       'candidate_pool_size': config.CANDIDATE_POOL, 'knng': config.KNNG}
     elif it == 'hnsw':
         index_type = IndexType.HNSW
-        index_param = {'M': config.HNSW_M, 'efConstruction':config.EFCONSTRUCTION}
+        index_param = {'M': config.HNSW_M, 'efConstruction': config.EFCONSTRUCTION}
     else:
         print("error index_type, only support these index: flat, ivf_flat, sq8, sq8h, pq, nsg, hnsw")
         print("please try again!")
         sys.exit(2)
 
     print(collection_name, " ", index_type, " ", index_param)
-    status = milvus.create_index(collection_name,index_type,index_param)
+    status = milvus.create_index(collection_name, index_type, index_param)
     print(status)
 
 
-
-def search(collection_name,search_param):
+def search(collection_name, search_param):
     milvus = connect_server()
-    performance_file = config.PERFORMANCE_FILE_NAME
-    nq_scope = config.nq_scope
-    topk_scope = config.topk_scope
+    performance_file = config.PERFORMANCE_RESULTS_PATH
+    nq_scope = config.NQ_SCOPE
+    topk_scope = config.TOPK_SCOPE
     if not os.path.exists(performance_file):
         os.mkdir(performance_file)
     filename = performance_file + '/' + collection_name + '_' + str(search_param) + '_performance.csv'
-    search_params = get_search_params(collection_name,search_param,milvus)
-    with open(filename,'w+') as f:
-        f.write("nq,topk,total_time,avg_time"+'\n')
+    search_params = get_search_params(collection_name, search_param, milvus)
+    with open(filename, 'w+') as f:
+        f.write("nq,topk,total_time,avg_time" + '\n')
         for nq in nq_scope:
             time_start = time.time()
             query_list = load_nq_vec(nq)
             print("load query:", len(query_list), "time_load = ", time.time() - time_start)
             for topk in topk_scope:
                 time_start = time.time()
-                status,result = milvus.search(collection_name=collection_name, query_records=query_list, top_k=topk, params=search_params)
+                status, result = milvus.search(collection_name=collection_name, query_records=query_list, top_k=topk,
+                                               params=search_params)
                 time_cost = time.time() - time_start
                 print(nq, topk, time_cost)
-                line = str(nq) + ',' + str(topk) + ',' + str(round(time_cost, 4)) + ',' + str(round(time_cost / nq, 4)) + '\n'
+                line = str(nq) + ',' + str(topk) + ',' + str(round(time_cost, 4)) + ',' + str(
+                    round(time_cost / nq, 4)) + '\n'
                 f.write(line)
             f.write('\n')
     # file.close()
     print("search_vec_list done !")
 
 
-def get_search_params(collection_name,search_param,milvus):
+def get_search_params(collection_name, search_param, milvus):
     index_type = str(milvus.get_index_info(collection_name)[1]._index_type)
     if index_type == 'RNSG':
-        search_params = {'search_length':search_param}
+        search_params = {'search_length': search_param}
     elif index_type == 'HNSW':
-        search_params = {'ef':search_param}
+        search_params = {'ef': search_param}
     else:
         search_params = {'nprobe': search_param}
     return search_params
@@ -103,10 +95,10 @@ def get_search_params(collection_name,search_param,milvus):
 def load_nq_vec(nq):
     vectors = []
     length = 0
-    filenames = os.listdir(config.NQ_FOLDER_NAME)
+    filenames = os.listdir(config.QUERY_FILE_PATH)
     filenames.sort()
     for filename in filenames:
-        vec_list = load_vec_list(config.NQ_FOLDER_NAME + '/' + filename)
+        vec_list = load_vec_list(config.QUERY_FILE_PATH + '/' + filename)
         length += len(vec_list)
         if length > nq:
             num = nq % len(vec_list)
@@ -127,35 +119,35 @@ def load_vec_list(file_name):
     return vec_list
 
 
-
-def recall_test(collection_name,search_param):
+def recall_test(collection_name, search_param):
     milvus = connect_server()
-    vectors = load_vec_list(config.recall_vec_fname)
+    vectors = load_vec_list(config.RECALL_QUERY_FILE)
     # for nq in config.nq_scope:
-    nq = config.recall_nq
+    nq = config.RECALL_NQ
     query_list = []
     rand = sorted(random.sample(range(0, len(vectors)), nq))
     for i in rand:
         query_list.append(vectors[i])
     # print("load query:", len(query_list))
-    #rand=[0,1,2,3,4,5,6,7,8,9]
-    search_params = get_search_params(collection_name,search_param,milvus)
-    print("collection name:", collection_name, "query list:", len(query_list), "topk:", config.recall_topk, "search_params:", search_params)
+    # rand=[0,1,2,3,4,5,6,7,8,9]
+    search_params = get_search_params(collection_name, search_param, milvus)
+    print("collection name:", collection_name, "query list:", len(query_list), "topk:", config.RECALL_TOPK,
+          "search_params:", search_params)
     time_start = time.time()
-    status, results = milvus.search(collection_name=collection_name, query_records=query_list, top_k=config.recall_topk, params=search_params)
+    status, results = milvus.search(collection_name=collection_name, query_records=query_list, top_k=config.RECALL_TOPK,
+                                    params=search_params)
     # time_end = time.time()
     time_cost = time.time() - time_start
     print("time_search = ", time_cost)
-    save_re_to_file(collection_name, rand, results, search_param,nq)
-    compute_recall(collection_name,nq,results,search_param,rand)
-
-
+    save_re_to_file(collection_name, rand, results, search_param, nq)
+    compute_recall(collection_name, nq, results, search_param, rand)
 
 
 def save_re_to_file(collection_name, rand, results, search_param, nq):
     if not os.path.exists(config.recall_res_fname):
         os.mkdir(config.recall_res_fname)
-    file_name = config.recall_res_fname + '/' + collection_name + '_' + str(search_param) + '_' + str(nq) + '_recall.txt'
+    file_name = config.recall_res_fname + '/' + collection_name + '_' + str(search_param) + '_' + str(
+        nq) + '_recall.txt'
     with open(file_name, 'w') as f:
         for i in range(len(results)):
             for j in range(len(results[i])):
@@ -165,9 +157,7 @@ def save_re_to_file(collection_name, rand, results, search_param, nq):
     f.close()
 
 
-
-
-def compute_recall(collection_name,nq,results,search_param,rand):
+def compute_recall(collection_name, nq, results, search_param, rand):
     ids = []
     # dis = []
     for nq_result in (results):
@@ -177,22 +167,25 @@ def compute_recall(collection_name,nq,results,search_param,rand):
         ids.append(temp)
     gt_ids = load_gt_ids()
 
-    for top_k in config.compute_recall_topk:
+    for top_k in config.RECALL_CALC_SCOPE:
         recalls, count_all = compare_correct(nq, top_k, rand, gt_ids, ids)
-        fname = config.recall_out_fname+ '/' + collection_name + '_' + str(search_param) + '_' + str(nq) + "_" + str(top_k) + ".csv"
-        with open(fname,'w') as f:
+        fname = config.recall_out_fname + '/' + collection_name + '_' + str(search_param) + '_' + str(nq) + "_" + str(
+            top_k) + ".csv"
+        if not os.path.exists(config.recall_out_fname):
+            os.mkdir(config.recall_out_fname)
+        with open(fname, 'w') as f:
             f.write('nq,topk,recall\n')
             for i in range(nq):
                 line = str(i + 1) + ',' + str(top_k) + ',' + str(recalls[i] * 100) + "%"
                 f.write(line + '\n')
             f.write("max, avarage, min\n")
-            f.write( str(max(recalls) * 100) + "%," + str(round(count_all / nq / top_k, 3) * 100) + "%," + str(min(recalls) * 100) + "%\n")
-        print("topk=", top_k,", total accuracy", round(count_all / nq / top_k, 3) * 100, "%")           
-
+            f.write(str(max(recalls) * 100) + "%," + str(round(count_all / nq / top_k, 3) * 100) + "%," + str(
+                min(recalls) * 100) + "%\n")
+        print("topk=", top_k, ", total accuracy", round(count_all / nq / top_k, 3) * 100, "%")
 
 
 def load_gt_ids():
-    file_name = config.GT_FNAME_NAME
+    file_name = config.GROUNDTRUTH_FILE
     gt_ids = []
     result = []
     with open(file_name, 'r') as f:
@@ -223,3 +216,4 @@ def compare_correct(nq, top_k, rand, gt_ids, ids):
         count_all += len(union)
     # print("topk_ground_truth:", topk_ground_truth)
     return recalls, count_all
+
