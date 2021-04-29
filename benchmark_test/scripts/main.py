@@ -10,7 +10,6 @@ import milvus_load
 import config
 
 
-
 def connect_server():
     try:
         milvus = Milvus(host=config.MILVUS_HOST, port=config.MILVUS_PORT)
@@ -19,14 +18,14 @@ def connect_server():
         logging.error(e)
 
 
-
 def main():
     try:
         opts, args = getopt.getopt(
             sys.argv[1:],
             "hc",
-            ["help", "collection=", "dim=", "index=", "create", "load", "build", "performance", "info", "describe", "show", "has", "rows", "describe_index",  "drop", "drop_index", "version",
-             "search_param=", "recall","partition_tag=","create_partition"]
+            ["help", "collection=", "dim=", "index=", "create", "load", "build", "performance", "info", "describe",
+             "show", "has", "rows", "describe_index", "drop", "drop_index", "version",
+             "search_param=", "recall", "partition_tag=", "create_partition"]
         )
     except getopt.GetoptError:
         print("Usage: python milvus_toolkindex_type.py -q <nq> -k <topk> -c <collection> -s")
@@ -55,7 +54,8 @@ def main():
         # create collection
         elif opt_name in ("-c", "--create"):
             milvus = connect_server()
-            param = {'collection_name': collection_name, 'dimension': dim, 'index_file_size':config.INDEX_FILE_SIZE, 'metric_type':config.METRIC_TYPE}
+            param = {'collection_name': collection_name, 'dimension': dim, 'index_file_size': config.INDEX_FILE_SIZE,
+                     'metric_type': config.METRIC_TYPE}
             print(param)
             print(milvus.create_collection(param))
             sys.exit(2)
@@ -67,11 +67,11 @@ def main():
             milvus_load.load(collection_name)
 
 
-        #build index
+        # build index
         elif opt_name == "--build":
             # connect_server()            
             time1 = time.time()
-            toolkit.build_collection(collection_name,index_type)
+            toolkit.build_collection(collection_name, index_type)
             print("build cost time: ", time.time() - time1)
             sys.exit(2)
 
@@ -79,7 +79,7 @@ def main():
         # test search performance
         elif opt_name == "--performance":
             # connect_server()
-            toolkit.search(collection_name,search_param)
+            toolkit.search(collection_name, search_param)
             sys.exit(2)
 
         # save search result 
@@ -90,10 +90,9 @@ def main():
         # elif opt_name == "--compare":
         #     toolkit.
 
-
         elif opt_name == "--create_partition":
             milvus = connect_server()
-            milvus.create_partition(collection_name,partition_tag)
+            milvus.create_partition(collection_name, partition_tag)
 
         # present collection info
         elif opt_name == "--info":
@@ -168,6 +167,6 @@ def main():
             print("client_version: ", milvus.client_version())
 
 
-
 if __name__ == '__main__':
     main()
+
