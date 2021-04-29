@@ -95,7 +95,7 @@ pip install -r requirements.txt
 | IS_UINT8          | Whether the vector to be queried is the value of uint8       | False                              |
 | GROUNDTRUTH_FILE  | Standard result set for comparison with test results         | ''                                 |
 | RECALL_RES  | The recall results are saved in this directory               | 'recall_result'                    |
-| RECALL_RES_TOPK  | The recall rate for each topk are saved in this directory    | 'recall_result/recall_compare_out' |
+| RECALL_RES_TOPK  | The average recall rate for each topk are saved in this directory | 'recall_result/recall_compare_out' |
 
 ## Instructions
 
