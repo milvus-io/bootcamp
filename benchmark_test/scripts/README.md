@@ -69,39 +69,36 @@ pip install -r requirements.txt
 
 写入数据时需要的配置参数：
 
-| 参数            | 说明                                                 | 默认值  |
-| --------------- | ---------------------------------------------------- | ------- |
-| FILE_TYPE       | 写入数据的文件格式<npy,csv,bvecs,fvecs>              | bvecs   |
-| FILE_NPY_PATH   | 写入数据格式为npy时，该文件所在目录的路径            | ' '     |
-| FILE_CSV_PATH   | 写入数据格式为csv时，该文件所在目录的路径            | ' '     |
-| FILE_FVECS_PATH | 写入数据格式为fvecs时，该文件所在的路径              | ' '     |
-| FILE_BVECS_PATH | 写入数据格式为bvecs时，该文件所在的路径              | ' '     |
-| VECS_VEC_NUM    | 当数据格式为bvecs或fvecs时,要写入的数据量            | 1000000 |
-| VECS_BASE_LEN   | 当数据格式为bvecs或fvecs时，每次写入milvus中的数据量 | 500000  |
-| if_normaliz     | 导入数据前，是否需要将数据归一化                     | False   |
+| 参数               | 说明                                                         | 默认值 |
+| ------------------ | ------------------------------------------------------------ | ------ |
+| FILE_TYPE          | 写入数据的文件格式<npy,csv,bvecs,fvecs>                      | bvecs  |
+| BASE_FILE_PATH     | 待载入Milvus的数据路径                                       | ''     |
+| IF_NORMALIZE       | 导入数据前，是否需要将数据归一化                             | False  |
+| TOTAL_VECTOR_COUNT | 当数据格式为bvecs或fvecs时,要写入的数据量                    | 20000  |
+| IMPORT_CHUNK_SIZE  | 当数据格式为bvecs或fvecs时，每次写入milvus中的数据量(<=256MB)。 | 20000  |
 
 性能测试时需要的配置参数：
 
-| 参数                  | 说明                                             | 默认值             |
-| --------------------- | ------------------------------------------------ | ------------------ |
-| NQ_FOLDER_NAME        | 待查询向量所在的目录                             | ' '                |
-| PERFORMANCE_FILE_NAME | 性能结果将保存在该文件夹下                       | 'performance '     |
-| nq_scope              | 待测试的nq值（这里表示测试多个nq值）             | [1,10,100,200]     |
-| topk_scope            | 每个np中待测试的topk值（这里表示测试多个topk值） | [1,1, 10, 100,500] |
-| IS_CSV                | 待查询向量是否存在csv格式的文件中                | False              |
-| IS_UINT8              | 待查询向量是否为uint8的数值                      | False              |
+| 参数                     | 说明                                             | 默认值              |
+| ------------------------ | ------------------------------------------------ | ------------------- |
+| QUERY_FILE_PATH          | 待查询向量所在的目录                             | ''                  |
+| PERFORMANCE_RESULTS_PATH | 性能结果将保存在该文件夹下                       | 'performance '      |
+| NQ_SCOPE                 | 待测试的nq值（这里表示测试多个nq值）             | [1,10,100,500,1000] |
+| TOPK_SCOPE               | 每个np中待测试的topk值（这里表示测试多个topk值） | [1,1, 10, 100,500]  |
 
 召回率测试时需要的配置参数：
 
-| 参数                | 说明                                                | 默认值           |
-| ------------------- | --------------------------------------------------- | ---------------- |
-| recall_topk         | 测试召回率时查询的topk值                            | 200              |
-| compute_recall_topk | 计算召回率时待计算的多个topk值，小于等于recall_topk | [1, 10, 100,200] |
-| recall_nq           | 测试召回率时需要计算的nq个向量的平均recall          | 500              |
-| recall_vec_fname    | 测试召回率时待查询的向量所在文件的路径              | recall_vec_fname |
-| GT_FNAME_NAME       | 与测试结果比对的标准结果集                          | GT_FNAME_NAME    |
-| recall_res_fname    | 测试结果保存在该目录下                              | recall_res_fname |
-| recall_out_fname    | 召回率计算结果存在该路径下                          | recall_out_fname |
+| 参数              | 说明                                                | 默认值           |
+| ----------------- | --------------------------------------------------- | ---------------- |
+| RECALL_NQ         | 测试召回率时需要计算的nq个向量的平均recall          | 500              |
+| RECALL_TOPK       | 测试召回率时查询的topk值                            | 500              |
+| RECALL_CALC_SCOPE | 计算召回率时待计算的多个topk值，小于等于RECALL_TOPK | [1, 10, 100,500] |
+| RECALL_QUERY_FILE | 测试召回率时待查询的向量所在文件的路径              | ''               |
+| IS_CSV            | 待查询向量是否存在csv格式的文件中                   | False            |
+| IS_UINT8          | 待查询向量是否为uint8的数值                         | False            |
+| GROUNDTRUTH_FILE  | 与测试结果比对的标准结果集                          | ''               |
+| RECALL_RES  | 测试结果保存在该目录下                              | RECALL_RES |
+| RECALL_RES_TOPK  | 针对不同topk的召回率计算结果存在该路径下            | RECALL_RES_TOPK |
 
 
 

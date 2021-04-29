@@ -44,10 +44,10 @@ IF_NORMALIZE = False
 TOTAL_VECTOR_COUNT = 20000
 IMPORT_CHUNK_SIZE = 20000
 
+##################### Performance Test Parameters ##################################################
+
 # Location of the query files
 QUERY_FILE_PATH = '/data1/workspace/lym/milvus_test/sift_data/query_data'
-
-##################### Performance Test Parameters ##################################################
 
 # Path to put performance results to, based on current directory.
 PERFORMANCE_RESULTS_PATH = 'performance'
@@ -77,6 +77,5 @@ IS_UINT8 = False
 GROUNDTRUTH_FILE = '/data1/workspace/lym/milvus_test/sift_data/sift1m/gnd/ground_truth_1M.txt'
 
 # Result locations
-recall_res_fname = 'recall_result'
-recall_out_fname = 'recall_result/recall_compare_out'
-
+RECALL_RES = 'recall_result'
+RECALL_RES_TOPK = 'recall_result/recall_compare_out'
