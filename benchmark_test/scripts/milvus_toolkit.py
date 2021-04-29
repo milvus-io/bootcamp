@@ -144,9 +144,9 @@ def recall_test(collection_name, search_param):
 
 
 def save_re_to_file(collection_name, rand, results, search_param, nq):
-    if not os.path.exists(config.recall_res_fname):
-        os.mkdir(config.recall_res_fname)
-    file_name = config.recall_res_fname + '/' + collection_name + '_' + str(search_param) + '_' + str(
+    if not os.path.exists(config.RECALL_RES):
+        os.mkdir(config.RECALL_RES)
+    file_name = config.RECALL_RES + '/' + collection_name + '_' + str(search_param) + '_' + str(
         nq) + '_recall.txt'
     with open(file_name, 'w') as f:
         for i in range(len(results)):
@@ -169,10 +169,10 @@ def compute_recall(collection_name, nq, results, search_param, rand):
 
     for top_k in config.RECALL_CALC_SCOPE:
         recalls, count_all = compare_correct(nq, top_k, rand, gt_ids, ids)
-        fname = config.recall_out_fname + '/' + collection_name + '_' + str(search_param) + '_' + str(nq) + "_" + str(
+        fname = config.RECALL_RES_TOPK + '/' + collection_name + '_' + str(search_param) + '_' + str(nq) + "_" + str(
             top_k) + ".csv"
-        if not os.path.exists(config.recall_out_fname):
-            os.mkdir(config.recall_out_fname)
+        if not os.path.exists(config.RECALL_RES_TOPK):
+            os.mkdir(config.RECALL_RES_TOPK)
         with open(fname, 'w') as f:
             f.write('nq,topk,recall\n')
             for i in range(nq):

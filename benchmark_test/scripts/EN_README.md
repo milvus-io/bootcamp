@@ -69,14 +69,16 @@ pip install -r requirements.txt
 | Parameter          | Description                                                  | Defaults |
 | ------------------ | ------------------------------------------------------------ | -------- |
 | FILE_TYPE          | File format for writing data<npy,csv,bvecs,fvecs>            | Npy      |
+| BASE_FILE_PATH     | The directory of data to be loaded in milvus                 | ''       |
+| IF_NORMALIZE       | Does the data need to be normalized before insertion         | False    |
 | TOTAL_VECTOR_COUNT | When the data format is bvecs or fvecs, the amount of data to be written | 20000    |
-| IMPORT_CHUNK_SIZE  | When the data format is bvecs or fvecs, the amount of data written into milvus each time | 20000    |
+| IMPORT_CHUNK_SIZE  | When the data format is bvecs or fvecs, the amount of data written into milvus each time(<=256MB) | 20000    |
 
 **Parameters required for performance** **test**
 
 | Parameter                | Description                                                  | Defaults            |
 | ------------------------ | ------------------------------------------------------------ | ------------------- |
-| QUERY_FILE_PATH          | The directory where the vector to be queried is located      | ' '                 |
+| QUERY_FILE_PATH          | The directory where the vector to be queried is located      | ''                  |
 | PERFORMANCE_RESULTS_PATH | Performance results will be saved in this folder             | 'performance '      |
 | NQ_SCOPE                 | The nq value to be tested (Here means testing multiple nq values) | [1,10,100,500,1000] |
 | TOPK_SCOPE               | The topk value to be tested in each np (Here means testing multiple topk values) | [1,1, 10, 100,500]  |
@@ -85,14 +87,15 @@ pip install -r requirements.txt
 
 | Parameter         | Description                                                  | Defaults                           |
 | ----------------- | ------------------------------------------------------------ | ---------------------------------- |
+| RECALL_NQ         | The average recall results of the nq vectors to be calculated when testing recall | 500                                |
 | RECALL_TOPK       | Topk value queried when testing recall                       | 500                                |
-| RECALL_CALC_SCOPE | Multiple topk values to be calculated when calculating the recall rate, less than or equal to recall_topk | [1, 10, 100,500]                   |
+| RECALL_CALC_SCOPE | Multiple topk values to be calculated when calculating the recall rate, less than or equal to RECALL_TOPK | [1, 10, 100,500]                   |
 | RECALL_QUERY_FILE | The path of the file where the vector to be queried is located when testing the recall rate | ''                                 |
 | IS_CSV            | Whether the vector to be queried exists in a csv format file | False                              |
 | IS_UINT8          | Whether the vector to be queried is the value of uint8       | False                              |
 | GROUNDTRUTH_FILE  | Standard result set for comparison with test results         | ''                                 |
-| recall_res_fname  | The recall results are saved in this directory               | 'recall_result'                    |
-| recall_out_fname  | The recall rate for each topk are saved in this directory    | 'recall_result/recall_compare_out' |
+| RECALL_RES  | The recall results are saved in this directory               | 'recall_result'                    |
+| RECALL_RES_TOPK  | The recall rate for each topk are saved in this directory    | 'recall_result/recall_compare_out' |
 
 ## Instructions
 
