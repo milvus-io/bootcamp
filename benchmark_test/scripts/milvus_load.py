@@ -9,14 +9,12 @@ from milvus import *
 import config
 
 
-
 def connect_server():
     try:
         milvus = Milvus(host=config.MILVUS_HOST, port=config.MILVUS_PORT)
         return milvus
     except Exception as e:
         logging.error(e)
-
 
 
 def normaliz_data(vec_list):
@@ -31,11 +29,11 @@ def normaliz_data(vec_list):
 
 
 def load_npy_data(filename):
-    filename = config.FILE_NPY_PATH + "/" + filename
-    data = np.load(filename) 
+    filename = config.BASE_FILE_PATH + "/" + filename
+    data = np.load(filename)
     if config.IS_UINT8:
-        data = (data+0.5)/255
-    if config.if_normaliz:
+        data = (data + 0.5) / 255
+    if config.IF_NORMALIZE:
         data = normaliz_data(data)
     data = data.tolist()
     return data
@@ -43,11 +41,11 @@ def load_npy_data(filename):
 
 def load_csv_data(filename):
     import pandas as pd
-    filename = config.FILE_CSV_PATH + "/" + filename
+    filename = config.BASE_FILE_PATH + "/" + filename
     data = pd.read_csv(filename, header=None)
     data = np.array(data)
     if config.IS_UINT8:
-        data = (data+0.5)/255
+        data = (data + 0.5) / 255
     if config.if_normaliz:
         data = normaliz_data(data)
     data = data.tolist()
@@ -55,13 +53,14 @@ def load_csv_data(filename):
 
 
 def load_bvecs_data(base_len, idx):
-    fname = config.FILE_BVECS_PATH
+    filenames = os.listdir(config.BASE_FILE_PATH)
+    fname = config.BASE_FILE_PATH + '/' + filenames[0]
     begin_num = base_len * idx
     # print(fname, ": ", begin_num)
     x = np.memmap(fname, dtype='uint8', mode='r')
     d = x[:4].view('int32')[0]
     data = x.reshape(-1, d + 4)[begin_num:(begin_num + base_len), 4:]
-    data = (data+0.5)/255
+    data = (data + 0.5) / 255
     if config.if_normaliz:
         data = normaliz_data(data)
     data = data.tolist()
@@ -69,7 +68,8 @@ def load_bvecs_data(base_len, idx):
 
 
 def load_fvecs_data(base_len, idx):
-    fname = config.FILE_FVECS_PATH
+    filenames = os.listdir(config.BASE_FILE_PATH)
+    fname = config.BASE_FILE_PATH + '/' + filenames[0]
     begin_num = base_len * idx
     x = np.memmap(fname, dtype='uint8', mode='r')
     d = x[:4].view('int32')[0]
@@ -81,89 +81,81 @@ def load_fvecs_data(base_len, idx):
     return data
 
 
-
-def npy_to_milvus(collection_name,collection_rows,milvus):
-    filenames = os.listdir(config.FILE_NPY_PATH)
+def npy_to_milvus(collection_name, collection_rows, milvus):
+    filenames = os.listdir(config.BASE_FILE_PATH)
     filenames.sort()
     # file_index = 0
     total_insert_time = 0
     for filename in filenames:
         vectors = load_npy_data(filename)
-        vectors_ids = [id for id in range(collection_rows,collection_rows+len(vectors))]
+        vectors_ids = [id for id in range(collection_rows, collection_rows + len(vectors))]
         time_add_start = time.time()
-        #status, ids = milvus.insert(collection_name=collection_name, records=vectors, ids=vectors_ids)
-        status, ids = milvus.insert(collection_name=collection_name, records=vectors,ids=vectors_ids)
+        # status, ids = milvus.insert(collection_name=collection_name, records=vectors, ids=vectors_ids)
+        status, ids = milvus.insert(collection_name=collection_name, records=vectors, ids=vectors_ids)
         # time_add_end = time.time()
         total_insert_time = total_insert_time + time.time() - time_add_start
-        print(filename, " insert milvus time: ", time.time() - time_add_start)                
-        collection_rows = collection_rows+len(vectors)
+        print(filename, " insert milvus time: ", time.time() - time_add_start)
+        collection_rows = collection_rows + len(vectors)
     print("total insert time: ", total_insert_time)
 
 
-
-def csv_to_milvus(collection_name,collection_rows,milvus):
-    filenames = os.listdir(config.FILE_CSV_PATH)
+def csv_to_milvus(collection_name, collection_rows, milvus):
+    filenames = os.listdir(config.BASE_FILE_PATH)
     filenames.sort()
     total_insert_time = 0
     for filename in filenames:
         vectors = load_csv_data(filename)
-        vectors_ids = [id for id in range(collection_rows,collection_rows+len(vectors))]
+        vectors_ids = [id for id in range(collection_rows, collection_rows + len(vectors))]
         time_add_start = time.time()
         status, ids = milvus.insert(collection_name=collection_name, records=vectors, ids=vectors_ids)
         total_insert_time = total_insert_time + time.time() - time_add_start
         print(filename, " insert time: ", time.time() - time_add_start)
-        collection_rows = collection_rows+len(vectors)
+        collection_rows = collection_rows + len(vectors)
     print("total insert time: ", total_insert_time)
 
 
-
-def bvecs_to_milvus(collection_name,milvus):
+def bvecs_to_milvus(collection_name, milvus):
     count = 0
     total_insert_time = 0
-    while count < (config.VECS_VEC_NUM // config.VECS_BASE_LEN):
-        vectors = load_bvecs_data(config.VECS_BASE_LEN, count)
-        #vectors_ids = [id for id in range(count*config.VECS_BASE_LEN,(count+1)*config.VECS_BASE_LEN)]                
+    while count < (config.TOTAL_VECTOR_COUNT // config.IMPORT_CHUNK_SIZE):
+        vectors = load_bvecs_data(config.IMPORT_CHUNK_SIZE, count)
+        # vectors_ids = [id for id in range(count*config.VECS_BASE_LEN,(count+1)*config.VECS_BASE_LEN)]
         collection_rows = milvus.count_entities(collection_name)[1]
-        vectors_ids = [id for id in range(collection_rows,collection_rows+len(vectors))]
+        vectors_ids = [id for id in range(collection_rows, collection_rows + len(vectors))]
         time_add_start = time.time()
         status, ids = milvus.insert(collection_name=collection_name, records=vectors, ids=vectors_ids)
-        print(status,count*config.VECS_BASE_LEN,(count+1)*config.VECS_BASE_LEN,'time:', time.time() - time_add_start)
+        print(status, count * config.IMPORT_CHUNK_SIZE, (count + 1) * config.IMPORT_CHUNK_SIZE, 'time:',
+              time.time() - time_add_start)
         total_insert_time = total_insert_time + time.time() - time_add_start
         count = count + 1
     print("total insert time: ", total_insert_time)
 
 
-
-def fvecs_to_milvus(collection_name,milvus):
+def fvecs_to_milvus(collection_name, milvus):
     count = 0
     total_insert_time = 0
-    while count < (config.VECS_VEC_NUM // config.VECS_BASE_LEN):
-        vectors = load_fvecs_data(config.VECS_BASE_LEN, count)
-        vectors_ids = [id for id in range(count*config.VECS_BASE_LEN,(count+1)*config.VECS_BASE_LEN)]                
+    while count < (config.TOTAL_VECTOR_COUNT // config.IMPORT_CHUNK_SIZE):
+        vectors = load_fvecs_data(config.IMPORT_CHUNK_SIZE, count)
+        vectors_ids = [id for id in range(count * config.IMPORT_CHUNK_SIZE, (count + 1) * config.IMPORT_CHUNK_SIZE)]
         time_add_start = time.time()
         status, ids = milvus.insert(collection_name=collection_name, records=vectors, ids=vectors_ids)
         total_insert_time = total_insert_time + time.time() - time_add_start
-        print(status,count*config.VECS_BASE_LEN,(count+1)*config.VECS_BASE_LEN,'time:', time.time() - time_add_start)
+        print(status, count * config.IMPORT_CHUNK_SIZE, (count + 1) * config.IMPORT_CHUNK_SIZE, 'time:',
+              time.time() - time_add_start)
         count = count + 1
     print("total insert time: ", total_insert_time)
-
 
 
 def load(collection_name):
     milvus = connect_server()
     collection_rows = milvus.count_entities(collection_name)[1]
-    file_type = config.FILE_TYPE
+    file_type = config.FILE_TYPE[0]
     if file_type == 'npy':
-        npy_to_milvus(collection_name,collection_rows,milvus)
+        npy_to_milvus(collection_name, collection_rows, milvus)
     if file_type == 'csv':
-        csv_to_milvus(collection_name,collection_rows,milvus)
+        csv_to_milvus(collection_name, collection_rows, milvus)
     if file_type == 'bvecs':
-        bvecs_to_milvus(collection_name,milvus)
+        bvecs_to_milvus(collection_name, milvus)
     if file_type == 'fvecs':
-        fvecs_to_milvus(collection_name,milvus)
-
-
-
-
-
+        fvecs_to_milvus(collection_name, milvus)
 
