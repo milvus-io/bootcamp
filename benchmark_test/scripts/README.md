@@ -98,7 +98,7 @@ pip install -r requirements.txt
 | IS_UINT8          | 待查询向量是否为uint8的数值                         | False            |
 | GROUNDTRUTH_FILE  | 与测试结果比对的标准结果集                          | ''               |
 | RECALL_RES  | 测试结果保存在该目录下                              | RECALL_RES |
-| RECALL_RES_TOPK  | 针对不同topk的召回率计算结果存在该路径下            | RECALL_RES_TOPK |
+| RECALL_RES_TOPK  | 针对不同topk的召回率平均值存在该路径下 | RECALL_RES_TOPK |
 
 
 
