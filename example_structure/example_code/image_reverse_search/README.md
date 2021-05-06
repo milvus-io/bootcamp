@@ -137,7 +137,7 @@ for inputs, labels, paths in dataloader:
             red.set(str(ids[x]), paths[x])
 ```
 
-###Searching
+### Searching
 When searching for an image, we first put the image through the same transformations as the ones used for storing the images. Once transformed, we run the image through the ResNet to get the corresponding vectors. 
 
 ```python
