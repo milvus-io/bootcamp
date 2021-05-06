@@ -1,1 +1,0 @@
-This directory is for Milvus solutions pertaining to cloud deplyoment and scalability. 
