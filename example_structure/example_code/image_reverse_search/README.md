@@ -1,6 +1,8 @@
 # Reverse Image Search Based on Milvus and Resnet
 
-In this example we use a ResNet model to extract image features that are then used with Milvus to build a system that can perform reverse image searches.
+In this example we will be going over the code required to perform reverse image searches. This example uses a ResNet model to extract image features that are then used with Milvus to build a system that can perform the searches. 
+
+A deployable version of a reverse image search can be found here.
 
 ## Data
 
