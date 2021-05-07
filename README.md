@@ -18,10 +18,11 @@ This bootcamp includes the following contents:
   - [Hybrid search](solutions/hybrid_search)
 
 - Deployments
-  - Distributed deployment based on Mishards
-  - High availability (HA) in Milvus
-  - Load balancing in Milvus
-  - Set up on Google Colab
+  - [Distributed deployment on Mishards](deployments/Mishards)
+  - [Distributed deployment on Kubernetes](deployments/Kubernetes)
+  - [High availability (HA) in Milvus](deployments/HA)
+  - [Load balancing in Milvus](deployments/load_balancing)
+  - [Set up on Google Colab](Google_colab)
 
 To connect with other users and contributors, welcome to join our [Slack channel](https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk).
 
