@@ -15,8 +15,9 @@ This bootcamp includes the following contents:
   - [Recommendation system](solutions/recommendation_system)
   - [Molecular search](solutions/molecular_search)
   - [Video search](solutions/video_search)
-  - [Hybrid search](solutions/hybrid_search)
-
+  - [Audio search](solutions/audio_search)
+- [Hybrid search](solutions/hybrid_search)
+  
 - Deployments
   - [Distributed deployment on Mishards](deployments/Mishards)
   - [Distributed deployment on Kubernetes](deployments/Kubernetes)
