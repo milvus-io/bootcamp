@@ -11,13 +11,13 @@ This bootcamp includes the following contents:
 
 - Solutions
   - [Reverse Image search](solutions/reverse_image_search)
-  - Chatbot
-  - Recommendation system
-  - Molecular search
-  - Video search
-  - Hybrid search
+  - [Chatbot](solutions/chatbot)
+  - [Recommendation system](solutions/recommendation_system)
+  - [Molecular search](solutions/molecular_search)
+  - [Video search](solutions/video_search)
+  - [Hybrid search](solutions/hybrid_search)
 
-- Deployment
+- Deployments
   - Distributed deployment based on Mishards
   - High availability (HA) in Milvus
   - Load balancing in Milvus
