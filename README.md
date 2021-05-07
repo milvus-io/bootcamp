@@ -10,7 +10,7 @@ This bootcamp includes the following contents:
 - [Benchmark test](benchmark_test)
 
 - Solutions
-  - [Reverse Image search](reverse_image_search)
+  - [Reverse Image search](Solutions/reverse_image_search)
   - Chatbot
   - Recommendation system
   - Molecular search
