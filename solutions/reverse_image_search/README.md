@@ -2,7 +2,7 @@
 
 In this example we will be going over the code required to perform reverse image search. This example uses a ResNet model to extract image features that are then used with Milvus to build a system that can perform the searches. 
 
-**Here is the [quick start](quick_start.md) for a deployable version of a reverse image search.**
+**Here is the [quick start](QUICK_START.md) for a deployable version of a reverse image search.**
 
 ## Data
 
