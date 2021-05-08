@@ -1,5 +1,5 @@
 # 基于Milvus的图文检索系统
- 本项目后续将不再维护更新，最新内容将更新在:https://github.com/zilliz-bootcamp/image_text_search
+
 
 这个项目参考论文 **[Composing Text and Image for Image Retrieval - An Empirical Odyssey](https://arxiv.org/abs/1812.07119)**，该项目是一个图像检索任务，其中将输入查询指定为图像，并将图像的修改文本描述用于图像检索
 
