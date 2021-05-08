@@ -1,8 +1,0 @@
-flask-cors
-numpy
-flask
-flask_restful
-pymilvus==1.0.1
-psycopg2-binary
-bert-serving-server
-bert-serving-client
