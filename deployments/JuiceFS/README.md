@@ -26,7 +26,7 @@ MySQL services can be started on any of the **devices** in the cluster, for MySQ
 
 2.**Install JuiceFS**
 
-The [pre-compiled version](https://github.com/JuiceFSicedata/JuiceFSicefs/releases) selected for this tutorial can be downloaded directly, and the detailed installation process can be found on the [JuiceFS website](https://github.com/juicedata/juicefs) for the installation tutorial.
+The [precompiled binaries](https://github.com/juicedata/juicefs/releases) selected for this tutorial can be downloaded directly, and the detailed installation process can be found on the [JuiceFS website](https://github.com/juicedata/juicefs) for the installation tutorial.
 
 After downloading you will need to install the dependencies, JuiceFS requires a Redis (2.8 and above) server to store the metadata, see [Redis Quick Start](https://redis.io/topics/quickstart).
 
