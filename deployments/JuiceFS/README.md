@@ -1,30 +1,30 @@
-## Build a Milvus distributed cluster based on JuiceFS
+# Build a Milvus distributed cluster based on JuiceFS
 
-This tutorial uses JuiceFS as shared storage to build Mishards. JuiceFS is an open source POSIX file system built on top of object stores such as Redis and S3, and is equivalent to a stateless middleware that helps various applications share data through a standard file system interface. As shown in the diagram below:
+This tutorial uses JuiceFS as shared storage to build Mishards. JuiceFS is an open source POSIX file system built on top of Redis and object storage (e.g. S3), and is equivalent to a stateless middleware that helps various applications share data through a standard file system interface. As shown in the diagram below:
 
 <img src="2.png" alt="1" style="zoom:60%;" />
 
-### **Environment Preparation**
+## Install dependencies
 
-To build a Milvus cluster you need at least two devices and a shared storage device, i.e. **JuiceFS**.
+To build a Milvus cluster you need at least two servers and a shared storage device, i.e. **JuiceFS**.
 
-1. Install [Nvidia-driver](https://www.nvidia.com/Download/index.aspx)418 or higher.
+1. Install [NVIDIA driver](https://www.nvidia.com/Download/index.aspx) 418 or higher.
 
-2. Install [docker](https://docs.docker.com/install/linux/docker-ce/ubuntu/).
+2. Install [Docker](https://docs.docker.com/install/linux/docker-ce/ubuntu/).
 
-2. Install [docker-compose](https://docs.docker.com/compose/install/).
+2. Install [Docker Compose](https://docs.docker.com/compose/install/).
 
-3. Install [nvidia-docker2](https://github.com/nvidia/nvidia-docker/wiki/Installation-(version-2.0)).
+3. Install [nvidia-docker 2.0](https://github.com/nvidia/nvidia-docker/wiki/Installation-(version-2.0)).
 
-### **Building steps**
+## Building steps
 
 This project is a distributed build solution based on Milvus 1.0
 
-1. **Install MySQL**
+### 1. Install MySQL
 
-MySQL services can be started on any of the **devices** in the cluster, for MySQL installation see [Managing Metadata with MySQL](https://milvus.io/cn/docs/v1.0.0/data_manage.md)
+MySQL service can be started on any of the **devices** in the cluster, for MySQL installation see [Managing Metadata with MySQL](https://milvus.io/docs/v1.0.0/data_manage.md).
 
-2. **Install and configure JuiceFS**
+### 2. Install and configure JuiceFS
 
 The [precompiled binaries](https://github.com/juicedata/juicefs/releases) selected for this tutorial can be downloaded directly, and the detailed installation process can be found on the [JuiceFS website](https://github.com/juicedata/juicefs) for the installation tutorial.
 
@@ -54,7 +54,7 @@ $ ./juicefs mount -d localhost ~/jfs
 
 For more information, please refer to [JuiceFS website](https://github.com/juicedata/juicefs).
 
-3. **Starting Milvus**
+### 3. Starting Milvus
 
 Each device in the cluster requires Milvus to be installed, and different devices can be configured with different read and write permissions to Milvus. One device in the cluster is configured as writable, the others are read-only.
 
@@ -77,7 +77,7 @@ In the Milvus system configuration file `server_config.yaml`, the following para
 
 ***Read-only requires the parameter `role` to be set to `ro`, the rest of the parameters are the same as write-only.***
 
-#### Milvus start-up configuration
+#### Starting Milvus
 
 ```sh
 sudo docker run -d --name milvus_gpu_1.0.0 --gpus all \
@@ -90,7 +90,7 @@ sudo docker run -d --name milvus_gpu_1.0.0 --gpus all \
 milvusdb/milvus:1.0.0-gpu-d030521-1ea92e
 ```
 
-4. **Starting Mishards**
+### 4. Starting Mishards
 
 The Mishards service can simply be started on any of the **devices** in the cluster, here we use the `cluster_mishards.yml` file from the project:
 
@@ -131,14 +131,14 @@ Start the Mishards service with the following command.
 $ docker-compose -f cluster_mishards.yml up
 ```
 
-### **Caution**
+## **FAQ**
 
-#### 1. Can I mount JuiceFS volume with non-root user?
+### 1. Can I mount JuiceFS volume with non-root user?
 
 JuiceFS can be mounted by any user. The default cache directory is `$HOME/.juicefs/cache` (macOS) or `/var/jfsCache` (Linux), make sure the user has write access to this directory, or switch to another directory with sufficient permissions.
 
 If you do not use a privileged user, you may get an error like `docker: Error response from daemon: error while creating mount source path 'XXX': mkdir XXX: file exists`. Refer to [JuiceFS FAQ](https://github.com/juicedata/juicefs/blob/main/docs/en/faq.md#docker-error-response-from-daemon-error-while-creating-mount-source-path-xxx-mkdir-xxx-file-exists) for more information.
 
-#### 2. Cannot connect to Redis
+### 2. Cannot connect to Redis
 
 When Redis is executed with the default configuration (binding all the interfaces) and without any password in order to access it, it enters a special mode called **protected mode**. So you need to configure the `redis.conf` file and set the `protected-mode` to `no`.
