@@ -1,8 +1,6 @@
 # Image and text retrieval system based on Milvus
  This project will no longer be maintained and updated, and the latest content will be updated at https://github.com/zilliz-bootcamp/image_text_search
 
-This project is based on a paper **[Composing Text and Image for Image Retrieval - An Empirical Odyssey](https://arxiv.org/abs/1812.07119)**，The project is an image retrieval task in which an input query is specified as an image and a modified text description of the image is used for image retrieval
-
 ## Prerequisite
 
 **[Milvus 1.0](https://milvus.io/cn/docs/v1.0.0/milvus_docker-gpu.md)**
