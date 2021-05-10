@@ -21,6 +21,7 @@ This bootcamp includes the following contents:
 - Deployments
   - [Distributed deployment on Mishards](deployments/Mishards)
   - [Distributed deployment on Kubernetes](deployments/Kubernetes)
+  - [Distributed deployment on JuiceFS](deployments/JuiceFS)
   - [High availability (HA) in Milvus](deployments/HA)
   - [Load balancing in Milvus](deployments/load_balancing)
   - [Set up on Google Colab](deployments/Google_colab)
