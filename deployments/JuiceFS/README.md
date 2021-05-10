@@ -56,7 +56,7 @@ For more information, please refer to [JuiceFS website](https://github.com/juice
 
 ### 3. Starting Milvus
 
-Each server in the cluster requires Milvus to be installed, and different servers can be configured with different read and write permissions to Milvus. One server in the cluster is configured as writable, the others are read-only.
+Each server in the cluster requires Milvus to be installed, and different servers can be configured with different read and write permissions to Milvus. One server in the cluster is configured as write-only, the others are read-only.
 
 #### Write-only/Read-only configuration
 
