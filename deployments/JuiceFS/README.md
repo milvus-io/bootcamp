@@ -1,10 +1,10 @@
 # Build a Milvus distributed cluster based on JuiceFS
 
-This tutorial uses JuiceFS as shared storage to build Mishards. JuiceFS is an open source POSIX file system built on top of Redis and object storage (e.g. S3), and is equivalent to a stateless middleware that helps various applications share data through a standard file system interface. As shown in the diagram below:
+This tutorial uses [JuiceFS](https://github.com/juicedata/juicefs) as shared storage to build Mishards. JuiceFS is an open source POSIX file system built on top of Redis and object storage (e.g. S3), and is equivalent to a stateless middleware that helps various applications share data through a standard file system interface. As shown in the diagram below:
 
 <img src="2.png" alt="1" style="zoom:60%;" />
 
-## Install dependencies
+## Environment preparation
 
 To build a Milvus cluster you need at least two servers and a shared storage device, i.e. **JuiceFS**.
 
@@ -18,7 +18,7 @@ To build a Milvus cluster you need at least two servers and a shared storage dev
 
 ## Building steps
 
-This project is a distributed build solution based on Milvus 1.0
+This project is a distributed build solution based on Milvus 1.0.
 
 ### 1. Install MySQL
 
@@ -28,11 +28,11 @@ MySQL service can be started on any of the **devices** in the cluster, for MySQL
 
 The [precompiled binaries](https://github.com/juicedata/juicefs/releases) selected for this tutorial can be downloaded directly, and the detailed installation process can be found on the [JuiceFS website](https://github.com/juicedata/juicefs) for the installation tutorial.
 
-After downloading you will need to install the dependencies, JuiceFS requires a Redis (2.8 and above) server to store the metadata, see [Redis Quick Start](https://redis.io/topics/quickstart).
+After downloading you will need to install the dependencies, JuiceFS requires a Redis (2.8 and above) server to store the metadata, see [Redis Quick Start](https://redis.io/topics/quickstart). **It's highly recommended use Redis service managed by public cloud provider if possible.**
 
-JuiceFS needs to be configured with object storage, i.e. create a new volume through `juicefs format` command. The object storage used in the tutorial is Azure Blob Storage, users need to choose their own suitable object storage, refer to [the guide](https://github.com/juicedata/juicefs/blob/main/docs/en/how_to_setup_object_storage.md). Once the volume has been formatted, it can be mounted as a directory.
+JuiceFS needs to be configured with object storage, i.e. create a new volume through `juicefs format` command. The object storage used in the tutorial is Azure Blob Storage, you need to choose your own suitable object storage, refer to [the guide](https://github.com/juicedata/juicefs/blob/main/docs/en/how_to_setup_object_storage.md). Once the volume has been formatted, it can be mounted as a directory.
 
-Assuming that you have a locally running Redis service, use it to format a file system called `test`:
+Assuming that you have a locally running Redis service, use it to format a volume called `test`:
 
 ```sh
 $ export AZURE_STORAGE_CONNECTION_STRING="DefaultEndpointsProtocol=https;AccountName=XXX;AccountKey=XXX;EndpointSuffix=core.windows.net"
@@ -66,14 +66,14 @@ In the Milvus system configuration file `server_config.yaml`, the following para
 
 | Parameter     | Description                    | Parameter Setting |
 | :------------ | :----------------------------- | :---------------- |
-| `enable`      | Whether to enable cluster mode | ture              |
-| `role`        | Milvus deployment role         | rw                |
+| `enable`      | Whether to enable cluster mode | `ture`            |
+| `role`        | Milvus deployment role         | `rw`              |
 
 ##### Section `general`
 
-| Parameter     | Description                                                                                                                        | Parameter Setting                        |
-| :------------ | :-----------------------------------------------------------                                                                       | :--------------------------------------- |
-| `meta_uri`    | URI for metadata storage, using  MySQL (for distributed cluster Milvus). Format: `dialect://username:password@host:port/database`. | mysql://root:milvusroot@host:3306/milvus |
+| Parameter     | Description                                                                                                                        | Parameter Setting                          |
+| :------------ | :-----------------------------------------------------------                                                                       | :---------------------------------------   |
+| `meta_uri`    | URI for metadata storage, using  MySQL (for distributed cluster Milvus). Format: `dialect://username:password@host:port/database`. | `mysql://root:milvusroot@host:3306/milvus` |
 
 ***Read-only requires the parameter `role` to be set to `ro`, the rest of the parameters are the same as write-only.***
 
