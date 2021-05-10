@@ -1,4 +1,4 @@
-# Chemical Structure Similarity Search
+# Molecular Similarity Search
 
 ## Environment
 
@@ -7,7 +7,7 @@
 | CPU      | Intel(R) Core(TM) i7-7700K CPU @ 4.20GHz                     |
 | Memory   | 32 GB                                                         |
 | OS       | Ubuntu 18.04                                                 |
-| Software | [Milvus 1.0](https://milvus.io/docs/install_milvus.md) <br />mols-search-webserver 0.7.0 <br />mols-search-webclient 0.3.0 |
+| Software | [Milvus 1.0](https://milvus.io/docs/v1.0.0/overview.md) <br />mols-search-webserver 0.7.0 <br />mols-search-webclient 0.3.0 |
 
 The previous configuration has been tested and this scenario is also supported in Windows.
 
@@ -31,14 +31,14 @@ This demo uses Milvus 1.0 CPU version. Refer to [milvus.io](https://milvus.io/do
 $ docker run -d -v <DATAPATH>:/tmp/data -p 35001:5000 -e "MILVUS_HOST=192.168.1.25" -e "MILVUS_PORT=19530" milvusbootcamp/mols-search-webserver:0.7.0
 ```
 
-Refer to the following table for detailed parameter description:
+Refer to the following table for the parameter description:
 
 | Parameter                     | Description                                                      |
 | ----------------------------- | ------------------------------------------------------------ |
-| -v DATAPATH:/tmp/data       | -v specifies directory mapping between the host and the docker image. Please change DATAPATH to the location of test_1w.smi. |
+| -v DATAPATH:/tmp/data       | -v specifies directory mapping between the host and the docker image. Please modify `/tmp/data` to your path of test_1w.smi. |
 | -p 35001:5000                 | -p specifies pot mapping between the host and the image.                        |
-| -e "MILVUS_HOST=192.168.1.25" | -e specifies the system parameter mapping between the host and the image. Pease update `192.168.1.25` to the IP address of the Milvus docker.|
-| -e "MILVUS_PORT=19530"        | Update `19530` to the port of Milvus docker.           |
+| -e "MILVUS_HOST=192.168.1.25" | -e specifies the system parameter mapping between the host and the image. Pease modify `192.168.1.25` to the IP address of the Milvus docker.|
+| -e "MILVUS_PORT=19530"        | Pease modify `19530` to the port of Milvus docker.           |
 
 #### 3. Run mols-search-webclient docker
 
@@ -46,12 +46,12 @@ Refer to the following table for detailed parameter description:
 $ docker run -d -p 8001:80 -e API_URL=http://192.168.1.25:35001 milvusbootcamp/mols-search-webclient:0.3.0
 ```
 
-> Note: Please update `192.168.1.25` to the IP address of the Milvus docker.
+> Note: Please modify `192.168.1.25` to the IP address of the Milvus docker.
 
 #### 4. Launch a browser
 
 ```bash
-# Please update IP address and port per your previous configurations
+# Please modify IP address and port according the previous configurations
 http://192.168.1.25:8001
 ```
 
@@ -83,19 +83,6 @@ http://192.168.1.25:8001
 
 ## Conclusion
 
-This demo implements chemical structure similarity search with Milvus. You can also use your own SMILES data. For 37 million chemical structures/90 million structures (512-dimensional feature vector), Milvus has the following performance:
+This demo shows a system about molecular similarity search with Milvus. You can also use your own SMILES data.
 
-|                                                              | Performance (37 million) | Performance (90 million) |
-| :----------------------------------------------------------- | :------------------------- | :--------------------- |
-| Search a single chemical structure                                       | 190 ms                      | 480 ms                  |
-| Search 50 chemical structures. The performance is the average time of each structure.| 6 ms                        | 12 ms       |
-
-The following table shows memory usage:
-
-|                 | 37 million | 90 million |
-| :-------------- | :----------------- | :------------- |
-| Memory Usage | 2.6 G               | 6 G             |
-
-We can see that Milvus has faster search speed and lower memory usage for massive-scale chemical structure search.
-
-We have built a chemical structure similarity search system (http://40.73.24.85) based on Milvus. Welcome to search for your own chemical structure.
+We have built the demo system (https://milvus.io/scenarios), and we also have an open source projects on substructure and superstructure search in called [MolSearch](https://github.com/zilliztech/MolSearch), so you are welcome to try it yourself and search your own molecular.
