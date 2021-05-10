@@ -2,7 +2,7 @@
 
 This tutorial uses JuiceFS as shared storage to build Mishards. JuiceFS is an open source POSIX file system built on top of object stores such as Redis and S3, and is equivalent to a stateless middleware that helps various applications share data through a standard file system interface. As shown in the diagram below
 
-![](1.png)
+<img src="1.png" alt="1" style="zoom:48%;" />
 
 ### **Environment Preparation**
 
@@ -26,11 +26,11 @@ MySQL services can be started on any of the **devices** in the cluster, for MySQ
 
 2.**Install JuiceFS**
 
-The [pre-compiled version](https://github.com/JuiceFSicedata/JuiceFSicefs/releases) selected for this tutorial can be downloaded directly, and the detailed installation process can be found on the [JuiceFS official website](https://github.com/ JuiceFSicedata/JuiceFSicefs/blob/main/README_CN.md) for the installation tutorial.
+The [pre-compiled version](https://github.com/JuiceFSicedata/JuiceFSicefs/releases) selected for this tutorial can be downloaded directly, and the detailed installation process can be found on the [JuiceFS website](https://github.com/juicedata/juicefs) for the installation tutorial.
 
 After downloading you will need to install the dependencies, JuiceFS requires a Redis (2.8 and above) server to store the metadata, see [Redis Quick Start](https://redis.io/topics/quickstart).
 
-JuiceFS needs to be configured with object storage, the object storage used in the tutorial is Azure Blob Storage, users need to choose their own suitable object storage, refer to [Text Block](https://github.com/juicedata/juicefs/blob/main/docs/en/how_to_setup_object_storage.md) . Once the object storage has been formatted and completed, it can be mounted as a directory.
+JuiceFS needs to be configured with object storage, the object storage used in the tutorial is Azure Blob Storage, users need to choose their own suitable object storage, refer to [the guide](https://github.com/juicedata/juicefs/blob/main/docs/en/how_to_setup_object_storage.md) . Once the object storage has been formatted and completed, it can be mounted as a directory.
 
 Assuming that you have a locally running Redis service, use it to format a filesystem called `test`.
 
