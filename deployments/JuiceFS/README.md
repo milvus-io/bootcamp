@@ -22,7 +22,7 @@ This project is a distributed build solution based on Milvus 1.0.
 
 ### 1. Install MySQL
 
-MySQL service can be started on any of the **devices** in the cluster, for MySQL installation see [Managing Metadata with MySQL](https://milvus.io/docs/v1.0.0/data_manage.md).
+MySQL service can be started on any of the **server** in the cluster, for MySQL installation see [Managing Metadata with MySQL](https://milvus.io/docs/v1.0.0/data_manage.md).
 
 ### 2. Install and configure JuiceFS
 
@@ -56,7 +56,7 @@ For more information, please refer to [JuiceFS website](https://github.com/juice
 
 ### 3. Starting Milvus
 
-Each device in the cluster requires Milvus to be installed, and different devices can be configured with different read and write permissions to Milvus. One device in the cluster is configured as writable, the others are read-only.
+Each server in the cluster requires Milvus to be installed, and different servers can be configured with different read and write permissions to Milvus. One server in the cluster is configured as writable, the others are read-only.
 
 #### Write-only/Read-only configuration
 
