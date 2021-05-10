@@ -28,7 +28,7 @@ MySQL services can be started on any of the **devices** in the cluster, for MySQ
 
 The [precompiled binaries](https://github.com/juicedata/juicefs/releases) selected for this tutorial can be downloaded directly, and the detailed installation process can be found on the [JuiceFS website](https://github.com/juicedata/juicefs) for the installation tutorial.
 
-After downloading you will need to install the dependencies, JuiceFS requires a Redis (2.8 and above) server to store the metadata, see [Redis Quick Start](https://redis.io/topics/quickstart).
+After downloading you will need to install the dependencies, JuiceFS requires a Redis (2.8 and above) server to store the metadata, see [redis quick start](https://redis.io/topics/quickstart).
 
 JuiceFS needs to be configured with object storage, the object storage used in the tutorial is Azure Blob Storage, users need to choose their own suitable object storage, refer to [the guide](https://github.com/juicedata/juicefs/blob/main/docs/en/how_to_setup_object_storage.md) . Once the object storage has been formatted and completed, it can be mounted as a directory.
 
@@ -139,4 +139,5 @@ JuiceFS can be mounted by any user. The default cache directory is `$HOME/.Juice
 
 If you do not use a privileged user, you may get a `docker: Error response from daemon: error while creating mount source path 'XXX': mkdir XXX: file exists` error.
 
-2.When installing the JuiceFS dependency on Redis, you need to configure the redis.conf file and set the protection node to no
+2.When installing the JuiceFS dependency on Redis, you need to configure the `redis.conf` file and set the protection node to `no`
+
