@@ -1,8 +1,8 @@
-### Build a Milvus distributed cluster based on JuiceFS
+## Build a Milvus distributed cluster based on JuiceFS
 
 This tutorial uses JuiceFS as shared storage to build Mishards. JuiceFS is an open source POSIX file system built on top of object stores such as Redis and S3, and is equivalent to a stateless middleware that helps various applications share data through a standard file system interface. As shown in the diagram below
 
-<img src="1.png" alt="1" style="zoom:48%;" />
+<img src="1.png" alt="1" style="zoom:60%;" />
 
 ### **Environment Preparation**
 
