@@ -1,97 +1,100 @@
-## Build a Milvus distributed cluster based on JuiceFS
+# Build a Milvus distributed cluster based on JuiceFS
 
-This tutorial uses JuiceFS as shared storage to build Mishards. JuiceFS is an open source POSIX file system built on top of object stores such as Redis and S3, and is equivalent to a stateless middleware that helps various applications share data through a standard file system interface. As shown in the diagram below
+This tutorial uses [JuiceFS](https://github.com/juicedata/juicefs) as shared storage to build Mishards. JuiceFS is an open source POSIX file system built on top of Redis and object storage (e.g. S3), and is equivalent to a stateless middleware that helps various applications share data through a standard file system interface. As shown in the diagram below:
 
 <img src="2.png" alt="1" style="zoom:60%;" />
 
-### **Environment Preparation**
+## Environment preparation
 
-To build a Milvus cluster you need at least two devices and a shared storage device, i.e. **JuiceFS**.
+To build a Milvus cluster you need at least two servers and a shared storage device, i.e. **JuiceFS**.
 
-1. Install [Nvidia-driver](https://www.nvidia.com/Download/index.aspx)418 or higher.
+1. Install [NVIDIA driver](https://www.nvidia.com/Download/index.aspx) 418 or higher.
 
-2. Install [docker](https://docs.docker.com/install/linux/docker-ce/ubuntu/).
+2. Install [Docker](https://docs.docker.com/install/linux/docker-ce/ubuntu/).
 
-2. Install [docker-compose](https://docs.docker.com/compose/install/).
+2. Install [Docker Compose](https://docs.docker.com/compose/install/).
 
-3. Install [nvidia-docker2](https://github.com/nvidia/nvidia-docker/wiki/Installation-(version-2.0)).
+3. Install [nvidia-docker 2.0](https://github.com/nvidia/nvidia-docker/wiki/Installation-(version-2.0)).
 
-### **Building steps**
+## Building steps
 
-This project is a distributed build solution based on Milvus 1.0
+This project is a distributed build solution based on Milvus 1.0.
 
-1.**Install MySQL**
+### 1. Install MySQL
 
-MySQL services can be started on any of the **devices** in the cluster, for MySQL installation see [Managing Metadata with MySQL](https://milvus.io/cn/docs/v1.0.0/data_manage.md)
+MySQL service can be started on any of the **devices** in the cluster, for MySQL installation see [Managing Metadata with MySQL](https://milvus.io/docs/v1.0.0/data_manage.md).
 
-2.**Install JuiceFS**
+### 2. Install and configure JuiceFS
 
 The [precompiled binaries](https://github.com/juicedata/juicefs/releases) selected for this tutorial can be downloaded directly, and the detailed installation process can be found on the [JuiceFS website](https://github.com/juicedata/juicefs) for the installation tutorial.
 
-After downloading you will need to install the dependencies, JuiceFS requires a Redis (2.8 and above) server to store the metadata, see [redis quick start](https://redis.io/topics/quickstart).
+After downloading you will need to install the dependencies, JuiceFS requires a Redis (2.8 and above) server to store the metadata, see [Redis Quick Start](https://redis.io/topics/quickstart). **It's highly recommended use Redis service managed by public cloud provider if possible.**
 
-JuiceFS needs to be configured with object storage, the object storage used in the tutorial is Azure Blob Storage, users need to choose their own suitable object storage, refer to [the guide](https://github.com/juicedata/juicefs/blob/main/docs/en/how_to_setup_object_storage.md) . Once the object storage has been formatted and completed, it can be mounted as a directory.
+JuiceFS needs to be configured with object storage, i.e. create a new volume through `juicefs format` command. The object storage used in the tutorial is Azure Blob Storage, you need to choose your own suitable object storage, refer to [the guide](https://github.com/juicedata/juicefs/blob/main/docs/en/how_to_setup_object_storage.md). Once the volume has been formatted, it can be mounted as a directory.
 
-Assuming that you have a locally running Redis service, use it to format a filesystem called `test`.
+Assuming that you have a locally running Redis service, use it to format a volume called `test`:
 
-```
-$  export AZURE_STORAGE_CONNECTION_STRING="DefaultEndpointsProtocol=https;AccountName=XXX;AccountKey=XXX;EndpointSuffix=core.windows.net"
+```sh
+$ export AZURE_STORAGE_CONNECTION_STRING="DefaultEndpointsProtocol=https;AccountName=XXX;AccountKey=XXX;EndpointSuffix=core.windows.net"
+# Formatting a volume
 $ ./juicefs format \
     --storage wasb \
     --bucket https://<container> \
     ... \
-    localhost test #Formatting
+    localhost test
 ```
 
-If the Redis service is not local, the localhost needs to be replaced with a full address like this: redis://user:password@host:6379/1
+If the Redis service is not running locally, the `localhost` in the above command needs to be replaced with a full address like this: `redis://username:password@host:6379/1`.
 
-Once the filesystem has been formatted, it can be mounted as a directory.
+Once the volume has been formatted, it can be mounted as a directory (e.g. `~/jfs`):
 
-```
+```sh
 $ ./juicefs mount -d localhost ~/jfs
 ```
 
-3.**Start Milvus**
+For more information, please refer to [JuiceFS website](https://github.com/juicedata/juicefs).
 
-Each device in the cluster requires Milvus to be installed, and different devices can be configured with different read and write permissions to Milvus. One device in the cluster is configured as writable, the others are read-only
+### 3. Starting Milvus
 
-**write-only**/**read-only**
+Each device in the cluster requires Milvus to be installed, and different devices can be configured with different read and write permissions to Milvus. One device in the cluster is configured as writable, the others are read-only.
 
-In the Milvus system configuration file **server_config.yaml**, the following parameters need to be configured
+#### Write-only/Read-only configuration
 
-###### Section `cluster` 
+In the Milvus system configuration file `server_config.yaml`, the following parameters need to be configured.
 
-| **Parameter** | **Description**                 | Parameter Setting |
-| :------------ | :------------------------------ | :---------------- |
-| enable        | Whether to enable cluster mode. | ture              |
-| role          | Milvus deployment role          | rw                |
+##### Section `cluster`
+
+| Parameter     | Description                    | Parameter Setting |
+| :------------ | :----------------------------- | :---------------- |
+| `enable`      | Whether to enable cluster mode | `ture`            |
+| `role`        | Milvus deployment role         | `rw`              |
 
 ##### Section `general`
 
-| **Parameter** | **Description**                                              | Parameter Setting                        |
-| :------------ | :----------------------------------------------------------- | :--------------------------------------- |
-| `meta_uri`    | URI for metadata storage, using  MySQL (for distributed cluster Milvus). Format: `dialect://username:password@host:port/database`. `dialect` | mysql://root:milvusroot@host:3306/milvus |
+| Parameter     | Description                                                                                                                        | Parameter Setting                          |
+| :------------ | :-----------------------------------------------------------                                                                       | :---------------------------------------   |
+| `meta_uri`    | URI for metadata storage, using  MySQL (for distributed cluster Milvus). Format: `dialect://username:password@host:port/database`. | `mysql://root:milvusroot@host:3306/milvus` |
 
-***Read-only requires the parameter role to be set to ro, the rest of the parameters are the same as write-only***
+***Read-only requires the parameter `role` to be set to `ro`, the rest of the parameters are the same as write-only.***
 
-**Milvus start-up configuration**
+#### Starting Milvus
 
-```
+```sh
 sudo docker run -d --name milvus_gpu_1.0.0 --gpus all \
 -p 19530:19530 \
 -p 19121:19121 \
--v /root/jfs/milvus/db:/var/lib/milvus/db \    #/root/jfs/milvus/db is the path to shared storage
+-v /root/jfs/milvus/db:/var/lib/milvus/db \    # /root/jfs/milvus/db is the path to JuiceFS
 -v /home/$USER/milvus/conf:/var/lib/milvus/conf \
 -v /home/$USER/milvus/logs:/var/lib/milvus/logs \
 -v /home/$USER/milvus/wal:/var/lib/milvus/wal \
 milvusdb/milvus:1.0.0-gpu-d030521-1ea92e
 ```
 
-4.**Starting Mishards**
+### 4. Starting Mishards
 
-The Mishards service can simply be started on any of the **devices** in the cluster, here we use the `cluster_mishards.yml` file from the project 
+The Mishards service can simply be started on any of the **devices** in the cluster, here we use the `cluster_mishards.yml` file from the project:
 
-```
+```yaml
 version: "2.3"
 services:
     mishards:
@@ -117,27 +120,25 @@ services:
 
 Parameters to note in the script that need to be changed.
 
-`SQLALCHEMY_DATABASE_URI`: change `192.168.1.85` to the IP address where MySQL is located.
-
-`WOSERVER`: change to the IP address of the Milvus writeable instance. Reference format: `tcp://127.0.0.1:19530`.
-
-`DISCOVERY_STATIC_HOSTS`: all IP addresses in the cluster.
-
-`SERVER_PORT` defines the service port for Mishards
+- `SQLALCHEMY_DATABASE_URI`: change `192.168.1.85` to the IP address where MySQL is located.
+- `WOSERVER`: change to the IP address of the Milvus writeable instance. Reference format: `tcp://127.0.0.1:19530`.
+- `DISCOVERY_STATIC_HOSTS`: all IP addresses in the cluster.
+- `SERVER_PORT`: defines the service port for Mishards
 
 Start the Mishards service with the following command.
 
-```
+```sh
 $ docker-compose -f cluster_mishards.yml up
 ```
 
-### **Caution**
+## **FAQ**
 
-1.Can I replace the root user in JuiceFS?
+### 1. Can I mount JuiceFS volume with non-root user?
 
-JuiceFS can be mounted by any user. The default cache directory is `$HOME/.Juicefs/cache` (macOS) or `/var/jfsCache` (Linux), make sure the user has write access to this directory, or switch to another directory with permissions
+JuiceFS can be mounted by any user. The default cache directory is `$HOME/.juicefs/cache` (macOS) or `/var/jfsCache` (Linux), make sure the user has write access to this directory, or switch to another directory with sufficient permissions.
 
-If you do not use a privileged user, you may get a `docker: Error response from daemon: error while creating mount source path 'XXX': mkdir XXX: file exists` error.
+If you do not use a privileged user, you may get an error like `docker: Error response from daemon: error while creating mount source path 'XXX': mkdir XXX: file exists`. Refer to [JuiceFS FAQ](https://github.com/juicedata/juicefs/blob/main/docs/en/faq.md#docker-error-response-from-daemon-error-while-creating-mount-source-path-xxx-mkdir-xxx-file-exists) for more information.
 
-2.When installing the JuiceFS dependency on Redis, you need to configure the `redis.conf` file and set the protection node to `no`
+### 2. Cannot connect to Redis
 
+When Redis is executed with the default configuration (binding all the interfaces) and without any password in order to access it, it enters a special mode called **protected mode**. So you need to configure the `redis.conf` file and set the `protected-mode` to `no`.
