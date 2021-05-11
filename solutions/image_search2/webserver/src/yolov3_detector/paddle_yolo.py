@@ -12,6 +12,8 @@ from yolov3_detector.yolo_infer import offset_to_lengths
 from yolov3_detector.yolo_infer import coco17_category_info, bbox2out
 from yolov3_detector.yolo_infer import Preprocess
 from common.config import DATA_PATH, COCO_MODEL_PATH, YOLO_CONFIG_PATH
+import paddle
+paddle.enable_static()
 
 
 # def temp_directory():
