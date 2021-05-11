@@ -24,7 +24,7 @@ This bootcamp includes the following contents:
   - [Milvus cloud NFS using JuiceFS](deployments/juicefs)
   - [Highly available Milvus using keepalived](deployments/highly_available)
   - [Load balanced Milvus using nginx](deployments/load_balanced)
-  - [Milvus on Google Collab](deployments/google_colab)
+  - [Milvus on Google Colab](deployments/google_colab)
 
 To connect with other users and contributors, welcome to join our [Slack channel](https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk).
 
