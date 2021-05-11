@@ -8,5 +8,5 @@ In this [notebook](TUTORIAL.ipynb) we will be going over the code required to pe
 
 ## How to deploy
 
-- Here is the [quick start](QUICK_START.md) for a deployable version of a question-answering system.
+Here is the [quick start](QUICK_START.md) for a deployable version of a question-answering system.
 
