@@ -23,7 +23,7 @@ $ wget https://raw.githubusercontent.com/milvus-io/bootcamp/0.10.0/solutions/mol
 
 #### 1. Run Milvus Docker
 
-This demo uses Milvus 1.0 CPU version. Refer to [milvus.io](https://milvus.io/docs/milvus_docker-cpu.md) to learn how to install and run Milvus. 
+This demo uses Milvus 1.1.0 CPU version. Refer to [milvus.io](https://milvus.io/docs/v1.1.0/milvus_docker-cpu.md) to learn how to install and run Milvus. 
 
 #### 2. Run mols-search-webserver docker
 
@@ -85,4 +85,4 @@ http://192.168.1.25:8001
 
 This demo shows a system about molecular similarity search with Milvus. You can also use your own SMILES data.
 
-We have built the demo system (https://milvus.io/scenarios), and we also have an open source projects on substructure and superstructure search in called [MolSearch](https://github.com/zilliztech/MolSearch), so you are welcome to try it yourself and search your own molecular.
+We have built the demo system (https://milvus.io/scenarios), and we also have an open source projects on substructure and superstructure search in [MolSearch](https://github.com/zilliztech/MolSearch), so you are welcome to try it yourself and search your own molecular.
