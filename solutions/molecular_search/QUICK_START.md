@@ -7,7 +7,7 @@
 | CPU      | Intel(R) Core(TM) i7-7700K CPU @ 4.20GHz                     |
 | Memory   | 32 GB                                                         |
 | OS       | Ubuntu 18.04                                                 |
-| Software | [Milvus 1.1.0](https://milvus.io/docs/v1.1.0/overview.md) <br />mols-search-webserver 0.7.0 <br />mols-search-webclient 0.3.0 |
+| Software | [Milvus 1.1.0](https://milvus.io/docs/v1.1.0/overview.md) <br />mols-search-webserver 1.1.0 <br />mols-search-webclient 0.3.0 |
 
 The previous configuration has been tested and this scenario is also supported in Windows.
 
@@ -28,7 +28,7 @@ This demo uses Milvus 1.1.0 CPU version. Refer to [milvus.io](https://milvus.io/
 #### 2. Run mols-search-webserver docker
 
 ```bash
-$ docker run -d -v <DATAPATH>:/tmp/data -p 35001:5000 -e "MILVUS_HOST=192.168.1.25" -e "MILVUS_PORT=19530" milvusbootcamp/mols-search-webserver:0.7.0
+$ docker run -d -v <DATAPATH>:/tmp/data -p 35001:5000 -e "MILVUS_HOST=192.168.1.25" -e "MILVUS_PORT=19530" milvusbootcamp/mols-search-webserver:1.1.0
 ```
 
 Refer to the following table for the parameter description:
