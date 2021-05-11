@@ -19,12 +19,12 @@ This bootcamp includes the following contents:
   - [Hybrid search](solutions/hybrid_search)
   
 - Deployments
-  - [Distributed deployment using Mishards](deployments/Mishards)
-  - [Distributing Mishards with Kubernetes](deployments/Kubernetes)
-  - [Milvus cloud NFS using JuiceFS](deployments/JuiceFS)
-  - [Highly available Milvus using keepalived](deployments/HA)
-  - [Load balanced Milvus using nginx](deployments/load_balancing)
-  - [Milvus on Google Collab](deployments/Google_colab)
+  - [Distributed deployment using Mishards](deployments/mishards)
+  - [Distributing Mishards with Kubernetes](deployments/kubernetes)
+  - [Milvus cloud NFS using JuiceFS](deployments/juicefs)
+  - [Highly available Milvus using keepalived](deployments/highly_available)
+  - [Load balanced Milvus using nginx](deployments/load_balanced)
+  - [Milvus on Google Colab](deployments/google_colab)
 
 To connect with other users and contributors, welcome to join our [Slack channel](https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk).
 
