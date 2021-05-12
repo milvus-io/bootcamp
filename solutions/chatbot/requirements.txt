@@ -1,4 +1,4 @@
-tensorflow==1.15.2
+tensorflow==1.13.0rc1
 pymilvus==1.0.1
 uvicorn
 fastapi
