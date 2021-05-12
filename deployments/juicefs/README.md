@@ -2,7 +2,7 @@
 
 This tutorial uses [JuiceFS](https://github.com/juicedata/juicefs) as shared storage to build Mishards. JuiceFS is an open source POSIX file system built on top of Redis and object storage (e.g. S3), and is equivalent to a stateless middleware that helps various applications share data through a standard file system interface. As shown in the diagram below:
 
-<img src="2.png" alt="1" style="zoom:60%;" />
+<img src="2.png" alt="2" style="zoom:60%;" />
 
 ## Environment preparation
 
