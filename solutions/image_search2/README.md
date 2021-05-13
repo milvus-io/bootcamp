@@ -102,5 +102,5 @@ milvusbootcamp/pic-search-webclient:0.2.0
 
 
 注意：
-本代码已经更新，PaddlePadlle 版本之前升级
+本代码已经更新，PaddlePadlle 版本之前升级，会出现版本的错误
 
