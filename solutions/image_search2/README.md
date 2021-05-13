@@ -47,7 +47,7 @@ pip install -r requirements.txt
 vim  /image_search_v2/webserver/src/common/config.py
 
 ```
-需要修改**milvus端口** 和**milvus ip**参数与Milvus安装的端口和Ip相对应。。 需要自行创建 **DATA_PATH** 和 **UPLOAD_PATH** 。
+需要修改**milvus端口** 和**milvus ip**参数与Milvus安装的端口和Ip相对应。 需要自行创建 **DATA_PATH** 和 **UPLOAD_PATH** 。
 | 参数             | 参数描述                   | 默认值                                        |
 | ---------------- | -------------------------- | --------------------------------------------- |
 | MILVUS_HOST      | Milvus IP                  | 127.0.0.1                                     |
