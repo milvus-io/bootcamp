@@ -1,0 +1,2 @@
+# Solutions
+This directory contains many python notebooks that help with showing how to implement Milvus in different situations. The notebooks cover the range of audio, video, image, and text based similarity searching and should provide you everything you need in order to build up a system yourself. Along with the notebooks come prebuilt demo servers that can be run in a few lines of code.
