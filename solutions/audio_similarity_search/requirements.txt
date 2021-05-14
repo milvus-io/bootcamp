@@ -1,0 +1,6 @@
+pymilvus
+redis
+librosa
+ipython
+numpy
+panns_inference
