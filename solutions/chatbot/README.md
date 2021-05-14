@@ -4,7 +4,7 @@ This project deals with mainly in domain-specific Q&A systems, which are usually
 
 ## Try notebook
 
-In this [notebook](TUTORIAL.ipynb) we will be going over the code required to perform a chatbot. This example uses a BERT to extract features od questions that are then used with Milvus to build a system that can perform the searches. 
+In this [notebook](TUTORIAL.ipynb) we will be going over the code required to perform a chatbot. This example uses a BERT to extract features of questions that are then used with Milvus to build a system that can perform the searches. 
 
 ## How to deploy
 
