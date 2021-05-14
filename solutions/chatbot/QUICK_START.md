@@ -1,7 +1,7 @@
-# README
+# Quick Start
 
 
-This project combines the model provided by Milvus and Bert to realize a Chinese question and answer system.This paper aims to provide a solution to achieve semantic similarity matching with Milvus combined with various AI models.
+This project combines Milvus and BERT to build a question and answer system. This saims to provide a solution to achieve semantic similarity matching with Milvus combined with AI models.
 
 ## Data description
 
