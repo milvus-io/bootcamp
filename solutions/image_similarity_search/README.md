@@ -4,3 +4,5 @@
 
 - Here is the [quick start](QUICK_START.md) for a deployable version of a reverse image search.
 
+- Also can run this [notebook](milvus_with_different_models.ipynb) for image similarity search on different models(VGG16 and ResNet).
+
