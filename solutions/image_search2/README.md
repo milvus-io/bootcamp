@@ -27,10 +27,9 @@
 
 下载链接: https://pan.baidu.com/s/1MjACqsGiLo3oiTMcxodtdA 验证码: v78m
 
-<!--注：本系统支持的图片格式为.jpg和.png-->
+注：本系统支持的图片格式为.jpg和.png
 
-
-<!--注：使用自己数据集时仅限于包含多个物体图片的，否则建议使用 Milvus image search 1.0-->
+注：使用自己数据集时仅限于包含多个物体图片的，否则建议使用 Milvus image search 1.0
 
 ### 系统部署
 
@@ -45,7 +44,7 @@ cd /image_search/webserver
 pip install -r requirements.txt
 
 ```
-注：python依赖包可能需要根据自己机器配置进行版本的调整
+**注：python依赖包可能需要根据自己机器配置进行版本的调整**
 
 #### 3.修改配置文件
 
