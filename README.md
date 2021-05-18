@@ -1,22 +1,22 @@
 # About Milvus Bootcamp
 
-Milvus is the world most popular open-sourced vector database. It intends to help users deal with challenges of massive-scale unstructured data by the following methods:
+Milvus is the world most popular open-source vector database. It aims to help users deal with the challenges that comes with massive-scale, unstructured through the following methods:
 
-- High-performance, high-precision and scalable search of feature vectors.
+- High-performance, high-precision and scalable search of vectors.
 - Similarity search and analysis of unstructured data.
 
-This bootcamp includes the following contents:
+This bootcamp includes the following:
 
-- [Benchmark test](benchmark_test)
+- [Benchmark Test](benchmark_test)
 
 - Solutions
-  - [Image similarity search](solutions/reverse_image_search)
-  - [Chatbot](solutions/chatbot)
-  - [Recommendation system](solutions/recommendation_system)
-  - [Molecular search](solutions/molecular_search)
-  - [Video search](solutions/video_search)
-  - [Audio similarity search](solutions/audio_search)
-  - [Hybrid search](solutions/hybrid_search)
+  - [Image Similarity Search](solutions/image_similarity_search)
+  - [Question Answering System](solutions/question_answering_system)
+  - [Recommendation System](solutions/recommendation_system)
+  - [Molecular Similarity Search](solutions/molecular_similarity_search)
+  - [Video Similarity Search](solutions/video_similarity_search)
+  - [Audio Similarity Search](solutions/audio_similarity_search)
+  - [Hybrid Search](solutions/hybrid_search)
   
 - Deployments
   - [Distributed deployment using Mishards](deployments/mishards)
@@ -26,5 +26,5 @@ This bootcamp includes the following contents:
   - [Load balanced Milvus using nginx](deployments/load_balanced)
   - [Milvus on Google Colab](deployments/google_colab)
 
-To connect with other users and contributors, welcome to join our [Slack channel](https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk).
+To connect with other users and contributors, join our [Slack channel](https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk).
 
