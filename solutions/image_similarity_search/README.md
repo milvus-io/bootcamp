@@ -5,6 +5,6 @@ Image search is one of the core ideas behind many different technologies, from a
 In this [notebook](image_similarity_search.ipynb) we will be going over the code required to perform reverse image search. This example uses a ResNet model to extract image features that are then used with Milvus to build a system that can perform the searches. 
 
 ## How to Deploy
-Here is the [quick start](QUICK_START.md) for a deployable version of a reverse image search.
+Here is the [quick start](./quick_deploy/QUICK_START.md) for a deployable version of a reverse image search.
 
 

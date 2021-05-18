@@ -8,5 +8,5 @@ This solution builds around a movie recommendation system, specifically tackling
 In this [notebook](recommendation_system.ipynb) we will be going over the code required to perform the recall portion in a movie recommendation system. 
 
 ## How to deploy
-Here is the [quick start](QUICK_START.md) for a deployable version of a movie recommendation system.
+Here is the [quick start](./quick_deploy/QUICK_START.md) for a deployable version of a movie recommendation system.
 

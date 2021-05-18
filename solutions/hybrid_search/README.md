@@ -8,6 +8,6 @@ In this solution we will be demonstrating how to perform hybrid seraches using P
 - In this [notebook](hybird_search.ipynb) we will be going over the code required to perform the hybrid search. This example combines a relational database, Postgres, and then uses it with Milvus for hybird search
 
 ## How to deploy
-- Here is the [quick start](QUICK_START.md) for a deployable version of hybrid search.
+- Here is the [quick start](./quick_deploy/QUICK_START.md) for a deployable version of hybrid search.
 
 
