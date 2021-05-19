@@ -1,0 +1,11 @@
+diskcache==5.2.1
+Keras==2.3.1
+Keras-Applications==1.0.8
+Keras-Preprocessing==1.1.2
+numpy==1.16.5
+opencv-python==4.5.2.52
+Pillow==8.2.0
+pymilvus==1.0.1
+tensorboard==1.15.0
+tensorflow==1.15.4
+tensorflow-estimator==1.15.1
