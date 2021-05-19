@@ -4,7 +4,7 @@ This example shows how to implement load balancing for Milvus using Nginx. The m
 
 ## Preparation
 
-This example requires at least two devices and a **shared storage device**, based on the 0.10.4 version of Milvus' build
+This example requires at least two devices and a **shared storage device**, based on the 1.0 version of Milvus' build
 
 1、Nginx 1.18.0
 
