@@ -103,4 +103,8 @@ venv.bak/
 # mypy
 .mypy_cache/
 
+#MacOS
+**/.idea
+
+#IntelliJ
 **/.DS_Store
