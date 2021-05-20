@@ -5,9 +5,9 @@ In this solution we will be creating a question answering system that deals with
 
 ## Try notebook
 
-In this [notebook](question_answering.ipynb) we will be going over the code required to create a question-answering system. This example uses BERT to extract features of questions that are then used with Milvus to build a system that can perform the searches. 
+In this [notebook](question_answering.ipynb) we will be going over the code required to create a question-answering system. This example uses a modified BERT to extract features of questions that are then used with Milvus to find similar questions and answers. 
 
 ## How to deploy
 
-Here is the [quick start](QUICK_START.md) for a deployable version of a question-answering system.
+Here is the [quick start](./quick_deploy/QUICK_START.md) for a deployable version of a question-answering system.
 
