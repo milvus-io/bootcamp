@@ -48,7 +48,7 @@ Configuration file: **/home/$USER/milvus/conf/server_config.yaml**
 |    use_blas_threshold    |  801   |
 |          nprobe          |   32   |
 
-Refer to [Milvus Configuration](https://github.com/milvus-io/docs/blob/0.7.1/reference/milvus_config.md) for more information.
+Refer to [Milvus Configuration](https://milvus.io/docs/v1.1.0/milvus_config.md) for more information.
 
 Use default values for other parameters. After setting parameter values, restart Milvus Docker to apply all changes.
 
