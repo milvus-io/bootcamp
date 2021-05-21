@@ -138,7 +138,7 @@ Shared storage is needed when we want a storage volume in a Kubernetes cluster t
    $ helm install --set cluster.enabled=true --set persistence.enabled=true --set mysql.enabled=true my-release  .
    ```
 
-   > For detailed parameters of the Milvus server, please refer to [Milvus Configuration](https://github.com/milvus-io/milvus-helm/tree/0.10.0#configuration)
+   > For detailed parameters of the Milvus server, please refer to [Milvus Configuration](https://github.com/milvus-io/milvus-helm/tree/1.1)
 
 3. Check if Milvus release was installed successfully
 

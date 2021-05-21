@@ -4,7 +4,7 @@ This example shows how to implement load balancing for Milvus using Nginx. The m
 
 ## Preparation
 
-This example requires at least two devices and a **shared storage device**, based on the 1.1 version of Milvus build
+This example requires at least two devices and a **shared storage device**, based on the 1.0.0 version of Milvus build
 
 1、Nginx 1.18.0
 
@@ -76,7 +76,7 @@ You can also input *<localhost(local IP address):port(default port is 80)>* in y
 
 ## 二、Milvus Configuration
 
-1. The version of Milvus in this example is 1.1, refer to [Milvus official website](https://milvus.io/cn/docs/v1.1.0/milvus_docker-gpu.md) for installation details, you need to set the path of all device data storage to the shared storage path during installation. As shown in the figure below
+1. The version of Milvus in this example is 1.0.0, refer to [Milvus official website](https://milvus.io/docs/v1.0.0/install_milvus.md) for installation details, you need to set the path of all device data storage to the shared storage path during installation. As shown in the figure below
 
 ![](pic/6.png)
 
