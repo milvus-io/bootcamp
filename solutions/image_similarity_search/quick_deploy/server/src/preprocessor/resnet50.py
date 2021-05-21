@@ -1,7 +1,7 @@
 import numpy as np
-from keras.applications.resnet50 import ResNet50
-from keras.applications.resnet50 import preprocess_input as preprocess_input_resnet50
-from keras.preprocessing import image
+from tensorflow.keras.applications.resnet50 import ResNet50
+from tensorflow.keras.applications.resnet50 import preprocess_input as preprocess_input_resnet50
+from tensorflow.keras.preprocessing import image
 from numpy import linalg as LA
 
 
