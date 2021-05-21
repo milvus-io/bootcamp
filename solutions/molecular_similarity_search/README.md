@@ -5,4 +5,4 @@ In order to discover available compounds in the fragment space from billion-scal
 ## Try notebook
 In this [notebook](./molecular_search.ipynb) we will be going over the code required to perform molecular search. This example uses RDKit to generate fingerprint then used Milvus to build a system that can perform the searches.
 ## How to deploy
-Here is the [quick start](./quick_deploy/QUICK_START.md) for a deployable version of molecular search. The code for the system is in the `quick_deploy/server` and `quick_deploy/client` directories.
+Here is the [quick start](./quick_deploy) for a deployable version of molecular search. The code for the system is in the `quick_deploy/server` and `quick_deploy/client` directories.
