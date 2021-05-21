@@ -1,10 +1,9 @@
 import logging
 import time
 from common.config import DEFAULT_TABLE
-from common.const import default_cache_dir
-# from common.config import DATA_PATH as database_path
+from common.config import DEFAULT_CACHE_DIR
 from encoder.encode import feature_extract
-from preprocessor.vggnet import VGGNet
+from preprocessor.resnet50 import Resnet50
 from diskcache import Cache
 from indexer.index import milvus_client, create_table, insert_vectors, delete_table, search_vectors, create_index,has_table
 
@@ -12,9 +11,10 @@ from indexer.index import milvus_client, create_table, insert_vectors, delete_ta
 def do_train(table_name, database_path):
     if not table_name:
         table_name = DEFAULT_TABLE
-    cache = Cache(default_cache_dir)
+    cache = Cache(DEFAULT_CACHE_DIR)
     try:
-        vectors, names = feature_extract(database_path, VGGNet())
+        print(database_path)
+        vectors, names = feature_extract(database_path, Resnet50())
         index_client = milvus_client()
         # delete_table(index_client, table_name=table_name)
         # time.sleep(1)
