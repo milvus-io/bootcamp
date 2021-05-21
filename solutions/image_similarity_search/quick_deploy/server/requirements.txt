@@ -7,5 +7,4 @@ diskcache
 flask
 flask_restful
 gunicorn==20.0.0
-tensorflow
 futures==3.1.1
