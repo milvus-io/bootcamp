@@ -17,12 +17,10 @@ def do_search(table_name, img_path, top_k, model):
     try:
         index_client = milvus_client()
         feat = model.resnet50_extract_feat(img_path)
-        print(feat)
         status, vectors = search_vectors(index_client, table_name, [feat], top_k)
         vids = [x.id for x in vectors[0]]
         res_id = [x.decode('utf-8') for x in query_name_from_ids(vids)]
         res_distance = [x.distance for x in vectors[0]]
-        print(res_id, res_distance)
         return res_id, res_distance
     except Exception as e:
         logging.error(e)
