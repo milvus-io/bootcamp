@@ -9,5 +9,5 @@ In this [notebook](question_answering.ipynb) we will be going over the code requ
 
 ## How to deploy
 
-Here is the [quick start](./quick_deploy/QUICK_START.md) for a deployable version of a question-answering system.
+Here is the [quick start](./quick_deploy/README.md) for a deployable version of a question-answering system.
 
