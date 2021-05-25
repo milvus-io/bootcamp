@@ -1,0 +1,5 @@
+sentence_transformers
+pymilvus
+psycopg2
+pandas
+numpy
