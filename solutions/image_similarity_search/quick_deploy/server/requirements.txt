@@ -1,0 +1,10 @@
+flask-cors
+Keras==2.3.1
+numpy==1.16.5
+Pillow
+pymilvus==1.0.1
+diskcache
+flask
+flask_restful
+gunicorn==20.0.0
+futures==3.1.1

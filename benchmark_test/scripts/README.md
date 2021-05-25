@@ -1,190 +1,176 @@
 # README
 
-[English](EN_README.md) | [中文版](README.md)
+## Preparation
 
-## 前提
+Before running this project script, you need to start the service of milvus 0.11.
 
-在运行本项目脚本前，需要启动 milvus1.0。
+Install python package
 
-安装相关python包
-
-```shell
+```
 pip install -r requirements.txt
 ```
 
-## 脚本说明
+## Scripts
 
-| 参数               | 说明                                                         |
+| Parameter          | Description                                                  |
 | ------------------ | ------------------------------------------------------------ |
-| --collection       | 指定要进行操作的集合名                                       |
-| --dim              | 新建集合时需要指定集合中向量的维度                           |
-| --index            | 建立索引时，需要指定索引类型<flat, ivf_flat, sq8, sq8h, pq, nsg, hnsw> |
-| --search_param     | 查询时，指定查询时的参数值 (索引是ivf类时，该参数指nprobe。rnsg索引时，该参数指search_length。索引是hnsw时，该参数指ef) |
-| --partition_tag    | 指定分区标签                                                 |
-| --create           | 执行创建集合的操作。该操作需要指定参数collection和dim两个参数 |
-| --load             | 执行写入数据的操作。该操作需要指定参数collection             |
-| --build            | 执行建立索引的操作。该操作需要指定参数collection和index      |
-| --performance      | 执行性能测试的操作。该操作需要指定参数collection和search_param |
-| --recall           | 执行召回率测试的操作。该操作需要指定参数collection和search_param |
-| --create_partition | 执行建立分区的操作。该操作需要指定参数collection和partition  |
-| --info             | 查看某个集合的数据信息。该操作需要指定参数collection         |
-| --describe         | 查看某个集合的基本信息。该操作需要指定参数collection         |
-| --show             | 显示库中存在的集合。该操作无需其他参数                       |
-| --has              | 判断某个集合是否存在。该操作需要指定参数collection           |
-| --rows             | 查看某个集合的向量条数。该操作需要指定参数collection         |
-| --describe_index   | 显示某个集合的索引信息。该操作需要指定参数collection         |
-| --flush            | 手动数据落盘操作。该操作需要指定参数collection               |
-| --drop             | 删除指定集合。该操作需要指定参数collection                   |
-| --drop_index       | 删除指定集合的索引。该操作需要指定参数collection             |
-| --version          | 查看milvus server 和 pymilvus的版本。该操作无需其他参数      |
+| --collection       | Specify the name of the collection to be operated on         |
+| --dim              | When creating a new collection, you need to specify the dimensions of the vectors in the collection |
+| --index            | When creating an index, you need to specify the index type<flat, ivf_flat, sq8, sq8h, pq, nsg, hnsw> |
+| --search_param     | When querying, specify the parameter value when querying (When the index is of type Ivf, this parameter refers to Nprobe. When indexing by Rnsg, this parameter refers to Search_Length. When the index is HNSW, this parameter refers to EF) |
+| --partition_tag    | Specify the partition label:                                 |
+| --create           | Perform the operation of creating a collection. This operation needs to specify two parameters: Collection and Dim |
+| --load             | Perform the operation of writing data. This operation needs to specify the parameter Collection |
+| --build            | Perform indexing operations. This operation needs to specify the parameters Collection and Index |
+| --performance      | Perform performance testing operations. This operation needs to specify the parameters Collection and Search_param |
+| --recall           | Perform recall test operations. This operation needs to specify the parameters Collection and Search_param |
+| --create_partition | Perform the operation of creating a partition. This operation needs to specify the parameters Collection and Partition |
+| --info             | View the data information of a certain collection. This operation needs to specify the parameter Collection |
+| --describe         | View the basic information of a collection. This operation needs to specify the parameter Collection |
+| --show             | Display the collections that exist in the library. No other parameters are required for this operation |
+| --has              | Determine whether a collection exists. This operation needs to specify the parameter Collection |
+| --rows             | View the number of vectors in a collection. This operation needs to specify the parameter Collection |
+| --flush            | Manual data placement operation. This operation needs to specify the parameter Collection |
+| --drop             | Delete the specified collection. This operation needs to specify the parameter Collection |
+| --drop_index       | Delete the index of the specified collection. This operation needs to specify the parameter Collection |
+| --version          | Check the version of milvus server and pymilvus. No other parameters are required for this operation |
 
+## Configuration File
 
+| Parameter   | Description                               | Defaults  |
+| ----------- | ----------------------------------------- | --------- |
+| MILVUS_HOST | The IP where the Milvus server is located | 127.0.0.1 |
+| MILVUS_PORT | Port provided by Milvus server            | 19539     |
 
-## 配置文件说明
+**Parameters required when creating a collection**：
 
-| 参数        | 说明                    | 默认值    |
-| ----------- | ----------------------- | --------- |
-| MILVUS_HOST | Milvus server所在的ip   | 127.0.0.1 |
-| MILVUS_PORT | Milvus server提供的端口 | 19530     |
+| Parameter       | Description                                                  | Defaults      |
+| --------------- | ------------------------------------------------------------ | ------------- |
+| INDEX_FILE_SIZE | Specify the size of each segment.                            | 2048          |
+| METRIC_TYPE     | Specify the vector similarity calculation method when creating a collection | MetricType.L2 |
 
-创建collection时需要的配置：
+**Parameters required for indexing**：
 
-| 参数            | 说明                             | 默认值        |
-| --------------- | -------------------------------- | ------------- |
-| INDEX_FILE_SIZE | 创建集合时指定的数据文件大小     | 2048          |
-| METRIC_TYPE     | 创建集合时指定向量相似度计算方式 | MetricType.L2 |
+| Parameter      | Description                              | Defaults |
+| -------------- | ---------------------------------------- | -------- |
+| NLIST          | Nlist value when indexing                | 2000     |
+| PQ_M           | M value when indexing PQ                 | 12       |
+| SEARCH_LENGTH  | SEARCH_LENGTH value when indexing NSG    | 45       |
+| OUT_DEGREE     | OUT_DEGREE value when building index NSG | 50       |
+| CANDIDATE_POOL | CANDIDATE_POOL value when indexing NSG   | 300      |
+| KNNG           | KNNG value when indexing NSG             | 100      |
+| HNSW_M         | M value for indexing HNSW                | 16       |
+| EFCONSTRUCTION | Build the EFCONSTRUCTION value of HNSW   | 500      |
 
-建索引时需要的配置参数：
+**Configuration parameters required when writing data**：
 
-| 参数           | 说明                          | 默认值 |
-| -------------- | ----------------------------- | ------ |
-| NLIST          | 建索引时的nlist值             | 16384  |
-| PQ_M           | 建索引PQ时的M值               | 12     |
-| SEARCH_LENGTH  | 建索引NSG时的SEARCH_LENGTH值  | 45     |
-| OUT_DEGREE     | 建索引NSG时的OUT_DEGREE值     | 50     |
-| CANDIDATE_POOL | 建索引NSG时的CANDIDATE_POOL值 | 300    |
-| KNNG           | 建索引NSG时的KNNG值           | 100    |
-| HNSW_M         | 建索引HNSW的M值               | 16     |
-| EFCONSTRUCTION | 建索引HNSW的EFCONSTRUCTION值  | 500    |
+| Parameter          | Description                                                  | Defaults |
+| ------------------ | ------------------------------------------------------------ | -------- |
+| FILE_TYPE          | File format for writing data<npy,csv,bvecs,fvecs>            | Npy      |
+| BASE_FILE_PATH     | The directory of data to be loaded in milvus                 | ''       |
+| IF_NORMALIZE       | Does the data need to be normalized before insertion         | False    |
+| TOTAL_VECTOR_COUNT | When the data format is bvecs or fvecs, the amount of data to be written | 20000    |
+| IMPORT_CHUNK_SIZE  | When the data format is bvecs or fvecs, the amount of data written into milvus each time(<=256MB) | 20000    |
 
-写入数据时需要的配置参数：
+**Parameters required for performance** **test**
 
-| 参数               | 说明                                                         | 默认值 |
-| ------------------ | ------------------------------------------------------------ | ------ |
-| FILE_TYPE          | 写入数据的文件格式<npy,csv,bvecs,fvecs>                      | bvecs  |
-| BASE_FILE_PATH     | 待载入Milvus的数据路径                                       | ''     |
-| IF_NORMALIZE       | 导入数据前，是否需要将数据归一化                             | False  |
-| TOTAL_VECTOR_COUNT | 当数据格式为bvecs或fvecs时,要写入的数据量                    | 20000  |
-| IMPORT_CHUNK_SIZE  | 当数据格式为bvecs或fvecs时，每次写入milvus中的数据量(<=256MB)。 | 20000  |
+| Parameter                | Description                                                  | Defaults            |
+| ------------------------ | ------------------------------------------------------------ | ------------------- |
+| QUERY_FILE_PATH          | The directory where the vector to be queried is located      | ''                  |
+| PERFORMANCE_RESULTS_PATH | Performance results will be saved in this folder             | 'performance '      |
+| NQ_SCOPE                 | The nq value to be tested (Here means testing multiple nq values) | [1,10,100,500,1000] |
+| TOPK_SCOPE               | The topk value to be tested in each np (Here means testing multiple topk values) | [1,1, 10, 100,500]  |
 
-性能测试时需要的配置参数：
+**Parameters required for recall test**：
 
-| 参数                     | 说明                                             | 默认值              |
-| ------------------------ | ------------------------------------------------ | ------------------- |
-| QUERY_FILE_PATH          | 待查询向量所在的目录                             | ''                  |
-| PERFORMANCE_RESULTS_PATH | 性能结果将保存在该文件夹下                       | 'performance '      |
-| NQ_SCOPE                 | 待测试的nq值（这里表示测试多个nq值）             | [1,10,100,500,1000] |
-| TOPK_SCOPE               | 每个np中待测试的topk值（这里表示测试多个topk值） | [1,1, 10, 100,500]  |
+| Parameter         | Description                                                  | Defaults                           |
+| ----------------- | ------------------------------------------------------------ | ---------------------------------- |
+| RECALL_NQ         | The average recall results of the nq vectors to be calculated when testing recall | 500                                |
+| RECALL_TOPK       | Topk value queried when testing recall                       | 500                                |
+| RECALL_CALC_SCOPE | Multiple topk values to be calculated when calculating the recall rate, less than or equal to RECALL_TOPK | [1, 10, 100,500]                   |
+| RECALL_QUERY_FILE | The path of the file where the vector to be queried is located when testing the recall rate | ''                                 |
+| IS_CSV            | Whether the vector to be queried exists in a csv format file | False                              |
+| IS_UINT8          | Whether the vector to be queried is the value of uint8       | False                              |
+| GROUNDTRUTH_FILE  | Standard result set for comparison with test results         | ''                                 |
+| RECALL_RES  | The recall results are saved in this directory               | 'recall_result'                    |
+| RECALL_RES_TOPK  | The average recall rate for each topk are saved in this directory | 'recall_result/recall_compare_out' |
 
-召回率测试时需要的配置参数：
+## Instructions
 
-| 参数              | 说明                                                | 默认值           |
-| ----------------- | --------------------------------------------------- | ---------------- |
-| RECALL_NQ         | 测试召回率时需要计算的nq个向量的平均recall          | 500              |
-| RECALL_TOPK       | 测试召回率时查询的topk值                            | 500              |
-| RECALL_CALC_SCOPE | 计算召回率时待计算的多个topk值，小于等于RECALL_TOPK | [1, 10, 100,500] |
-| RECALL_QUERY_FILE | 测试召回率时待查询的向量所在文件的路径              | ''               |
-| IS_CSV            | 待查询向量是否存在csv格式的文件中                   | False            |
-| IS_UINT8          | 待查询向量是否为uint8的数值                         | False            |
-| GROUNDTRUTH_FILE  | 与测试结果比对的标准结果集                          | ''               |
-| RECALL_RES  | 测试结果保存在该目录下                              | RECALL_RES |
-| RECALL_RES_TOPK  | 针对不同topk的召回率平均值存在该路径下 | RECALL_RES_TOPK |
+**1.Create a Collection**
 
-
-
-## 使用说明
-
-1. 建立集合
-
-```shell
+```
 python main.py --collection <collection_name> -c
 ```
 
-2. 创建索引
+**2. Create an index**
 
-```shell
+```
 python main.py --collection <collection_name> --index <index_type> --build
 ```
 
-3. 写入数据
+**3. Data load**
 
-```shell
+```
 python main.py --collection <collection_name> --load
 ```
 
-4. 性能测试
+**4. Performance** **Test**
 
-```shell
+```
 python main.py --collection <collection_name> --search_param <search_param> --performance
 ```
 
-5. 召回率测试
+**5. Recall test**
 
-```shell
+```
 python main.py --collection <collection_name> --search_param <search_param> --recall
 ```
 
-6. 创建分区
+**6.Create partition**
 
-```shell
+```
 python main.py --collection <collection_name> --partition_tag --create_partition
 ```
 
-7. 查看集合的信息
+**7. View collection information**
 
-```shell
+```
 python main.py --collection <collection_name> --describe
 ```
 
-8. 查看库中的集合
+**8.View collections**
 
-```shell
+```
 python main.py --show
 ```
 
-9. 判断集合是否存在
+**9.Determine whether the collection exists**
 
-```shell
+```
 python main.py --collection <collection_name> --has
 ```
 
-10. 查看集合中的向量数
+**10.View the number of vectors in the collection**
 
-```shell
+```
 python main.py --collection <collection_name> --rows
 ```
 
-11. 查看集合的索引类型
+**11.Delete the collection**
 
-```shell
-python main.py --collection <collection_name> --describe_index
 ```
-
-12. 删除集合
-
-```shell
 python main.py --collection <collection_name> --drop
 ```
 
-13. 删除索引
+**12.Delete the index**
 
-```shell
+```
 python main.py --collection <collection_name> --drop_index
 ```
 
-14. 查看milvus server和pymilvus版本
+**13.View** **milvus** **server and** **pymilvus** **version**
 
-```shell
+```
 python main.py --version
 ```
-
