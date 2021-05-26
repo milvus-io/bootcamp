@@ -77,7 +77,7 @@ https://github.com/hanxiao/bert-as-service
 In the main.py text data import script of the Milvus-bert-server file in the project, you only need to modify the path of the title set file and the path of the version set in the script to import text data
 
     $ cd Milvus-bert-server
-    $ python main.py --collection test11 --title data/title.txt --version data/version.txt --load
+    $ python main.py --collection test01 --title data/title.txt --version data/text.txt --load
 
 > Note: **data/title.txt** is the path where the imported title set is located, **data/version.txt** is the path where the imported version set is located
 
