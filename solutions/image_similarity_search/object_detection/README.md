@@ -14,7 +14,7 @@ Dataset size: ~ 2 GB.
 
 Download: http://host.robots.ox.ac.uk/pascal/VOC/voc2012/VOCtrainval_11-May-2012.tar
 
-> Note: You can also use your own images. This demo supports images in formats of .jpg and .png.
+> Note: You can also use your own images, **and needs to be an object in the image**. This demo supports images in formats of .jpg and .png.
 
 ### How to deploy the system
 
@@ -44,7 +44,7 @@ Please modify the parameters according to your own environment.
 | UPLOAD_PATH      | Path to uploaded the target images | /data/search-images                   |
 | COCO_MODEL_PATH  | Path to the YOLO detection model   | ./yolov3_detector/data/yolov3_darknet |
 
-> Note that you need to create the folder named DATA_PATH and UPLOAD_PATH.
+> Note that you need to **create the folder named DATA_PATH and UPLOAD_PATH.**
 
 #### 4. Start search service
 
@@ -52,7 +52,7 @@ Please modify the parameters according to your own environment.
 $ cd webserver/src
 $ python app.py
 ```
->  If the YOLO model is not downloaded automatically, you should switch to the **webserver/src/yolov3_detector/data/** path and run the `./paprepare_model.sh` commend.
+>  If the YOLO model is not downloaded automatically, you should switch to the **webserver/src/yolov3_detector/data/** path and **run the `./paprepare_model.sh` commend.**
 
 #### 5. Run pic-search-webclient docker
 

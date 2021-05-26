@@ -1,4 +1,10 @@
 import os
 
+
 def get_imlist(path):
-    return [os.path.join(path, f) for f in os.listdir(path) if (f.endswith('.jpg') or f.endswith('.png'))]
+    pics = []
+    for f in os.listdir(path):
+        if ((f.endswith(extension) for extension in
+             ['.png', '.jpg', '.jpeg', '.PNG', '.JPG', '.JPEG']) and not f.startswith('.DS_Store')):
+            pics.append(os.path.join(path, f))
+    return pics
