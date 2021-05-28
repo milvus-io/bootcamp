@@ -1,5 +1,7 @@
 # Lab Test 2: 100-Million-Scale Vector Similarity Search
 
+This experiment uses one million data from the SIFT1B dataset to test the performance and accuracy of Milvus 1.1.
+
 ## 1. Prepare test data and scripts
 
 The 100 million vectors used in this test are extracted from the dataset [SIFT1B](http://corpus-texmex.irisa.fr/).
