@@ -1,3 +1,4 @@
+# Milvus performance
 This topic displays the performance of different index types in Milvus 0.10.0 for reference purposes. The test data uses an open source dataset, sift1B, with 1 billion 128-dimensional vectors.
 
 The following table displays the terms used in this topic:
@@ -18,11 +19,11 @@ Refer to [https://zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-D
 
 ## Performance result
 
-[sift1m test result]((performance_benchmark.md#sift1m)): In this test, the first 1,000,000 vectors in the sift1B dataset are selected.
+[sift1m test result](performance_benchmark.md#sift1m): In this test, the first 1,000,000 vectors in the sift1B dataset are selected.
 
-[sift10m test result]((performance_benchmark.md#sift10m)): In this test, the first 10,000,000 vectors in the sift1B data set are selected.
+[sift10m test result](performance_benchmark.md#sift10m): In this test, the first 10,000,000 vectors in the sift1B data set are selected.
 
-[sift100m test result]((performance_benchmark.md#sift100m)): In this test, the first 100,000,000 vectors in the sift1B data set were selected.
+[sift100m test result](performance_benchmark.md#sift100m): In this test, the first 100,000,000 vectors in the sift1B data set were selected.
 
 During this test, the data was imported into milvus in batches of 100,000, and it took about 0.7S to import 100,000 vectors of 128 dimensions.
 
