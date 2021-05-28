@@ -1,6 +1,6 @@
 # Lab Test 1: One Million Vector Search
 
-This experiment uses one million data from the SIFT1B dataset to test the performance and accuracy of Milvus 1.0.
+This experiment uses one million data from the SIFT1B dataset to test the performance and accuracy of Milvus 1.1.
 
 ## 1. Prepare test data and scripts
 
@@ -18,8 +18,6 @@ The following configuration has been tested:
 | GPU Driver    | Driver 418.74 |
 | Memory        | 8 GB DDR4          |
 | Storage       | NVMe SSD 256 GB             |
-| Milvus       | 0.10.3            |
-| pymilvus       | 0.2.14            |
 
 #### Download test tools
 
@@ -182,3 +180,4 @@ When the execution is completed, a `performance` folder is generated and include
 > 2. To run the first vector search, some extra time is needed to load the data (from the disk) to the memory.
 >
 > 3. It is recommended to run several performance tests continuously, and use the search time of the second run. If the tests are executed intermittently, Intel CPU may downgrade to base clock speed.
+

@@ -2,7 +2,7 @@
 
 ## Preparation
 
-Before running this project script, you need to start the service of milvus 0.11.
+Before running this project script, you need to start the service of milvus 1.1.
 
 Install python package
 
@@ -40,7 +40,7 @@ pip install -r requirements.txt
 | Parameter   | Description                               | Defaults  |
 | ----------- | ----------------------------------------- | --------- |
 | MILVUS_HOST | The IP where the Milvus server is located | 127.0.0.1 |
-| MILVUS_PORT | Port provided by Milvus server            | 19539     |
+| MILVUS_PORT | Port provided by Milvus server            | 19530     |
 
 **Parameters required when creating a collection**：
 
