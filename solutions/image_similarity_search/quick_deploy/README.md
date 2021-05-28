@@ -66,7 +66,7 @@ $ docker run -d --name zilliz_search_images_demo --network my-net --ip 10.0.0.3 
 milvusbootcamp/pic-search-webserver:1.0
 ```
 
-For the command in this step, `IMAGE_PATH1` specifies the path to where the images you are searching through are located. This location is mapped to the docker container. 
+For the command in this step, `IMAGE_PATH1` specifies the path to where the images you are searching through are located, **please set it before run this docker.** This location is mapped to the docker container. 
 
 #### 4. Run pic-search-webclient docker
 
