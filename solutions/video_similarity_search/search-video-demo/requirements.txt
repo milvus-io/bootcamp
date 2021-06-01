@@ -6,7 +6,7 @@ flask-restful==0.3.8
 redis==3.4.1
 diskcache==4.1.0
 opencv-python-headless==4.2.0.32
-tensorflow==1.14.0
+tensorflow==2.5.0
 #tensorflow-gpu==1.14.0
 Keras==2.3.1
 pymilvus==0.2.13
