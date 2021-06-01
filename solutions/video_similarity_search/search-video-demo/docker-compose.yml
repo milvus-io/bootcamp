@@ -1,0 +1,57 @@
+version: '3'
+services:
+  demo:
+    image: milvus.io/search-video-demo:v1
+    ports:
+      - "8001:80"
+    networks:
+      - app
+    depends_on:
+      - api
+  api:
+    image: milvus.io/search-video-api:v1
+    ports:
+      - "5002:5000"
+    environment:
+      - MINIO_ADDR=192.168.1.38:9000
+      - UPLOAD_FOLDER=/tmp
+      - MILVUS_ADDR=192.168.1.38
+      - VIDEO_REDIS_ADDR=192.168.1.38
+      - MILVUS_PORT=19530
+      - MINIO_BUCKET_NUM=20
+    networks:
+      - app
+    depends_on:
+      - redis
+      - milvus
+      - minio
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    volumes:
+      - /mnt/redis/data:/data
+    command: redis-server --appendonly yes
+    networks:
+      - app
+  milvus:
+    image: milvusdb/milvus:0.10.0-cpu-d061620-5f3c00
+    ports:
+      - "19530:19530"
+      - "8080:8080"
+    volumes:
+      - /mnt/milvus/db:/var/lib/milvus/db
+    networks:
+      - app
+  minio:
+    image: minio/minio:latest
+    ports:
+      - "9000:9000"
+    volumes:
+      - /mnt/minio/data:/data
+    command: ["server","/data"]
+    networks:
+      - app
+networks:
+  app:
+    driver: bridge

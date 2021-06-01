@@ -16,13 +16,13 @@ This article uses Tumblr's approximately 100,000 animated gifs as an example to 
 
 ## 3 System Deployment
 
-This article builds the code of the video search video has been uploaded to the GitHub warehouse, the warehouse address is: https://github.com/JackLCL/search-video-demo.
-
 #### Step1 image build
 
 The entire video search system needs to use Milvus0.10.0 docker, Redis docker, Minio docker, front-end interface docker and background API docker. The front-end interface docker and background API docker need to be built by the reader, and the remaining three dockers can be directly pulled from the docker hub.
 
 ```bash
+# Download VGG model file to "search-video-demo/search/models/" from google drive.  Download link: https://drive.google.com/file/d/1EDGJNY09NstqgH-hssKvRJe23k1MAcXD/view?usp=sharing
+
 # Get the video search code
 $ git clone -b 0.10.0 https://github.com/JackLCL/search-video-demo.git
 
