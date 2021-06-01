@@ -23,9 +23,6 @@ The entire video search system needs to use Milvus0.10.0 docker, Redis docker, M
 ```bash
 # Download VGG model file to "search-video-demo/search/models/" from google drive.  Download link: https://drive.google.com/file/d/1EDGJNY09NstqgH-hssKvRJe23k1MAcXD/view?usp=sharing
 
-# Get the video search code
-$ git clone -b 0.10.0 https://github.com/JackLCL/search-video-demo.git
-
 # Build front-end interface docker and api docker images
 $ cd search-video-demo & make all
 ```
