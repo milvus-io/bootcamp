@@ -16,7 +16,7 @@ The previous configuration has been tested and this scenario is also supported i
 Data source: [ftp://ftp.ncbi.nlm.nih.gov/pubchem/Compound/CURRENT-Full/SDF](ftp://ftp.ncbi.nlm.nih.gov/pubchem/Compound/CURRENT-Full/SDF). The data source contains compressed SDF files. You need to convert these files to SMILES files. We already prepared a SMILE file containing 10,000 chemical structures [test_1w.smi](../../solutions/mols_search/smiles-data). You can use wget to download the file:
 
 ```bash
-$ wget https://raw.githubusercontent.com/milvus-io/bootcamp/0.10.0/solutions/mols_search/smiles-data/test_1w.smi
+$ wget https://raw.githubusercontent.com/milvus-io/bootcamp/1.0/solutions/mols_search/smiles-data/test_1w.smi
 ```
 
 ## Deploy
