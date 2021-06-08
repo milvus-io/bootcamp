@@ -10,5 +10,5 @@ tensorflow==2.5.0
 #tensorflow-gpu==1.14.0
 Keras==2.3.1
 pymilvus==0.2.13
-Pillow==8.1.1
+Pillow==8.2.0
 gunicorn==19.10.0
