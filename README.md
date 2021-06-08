@@ -17,6 +17,7 @@ This bootcamp includes the following:
   - [Video Similarity Search](solutions/video_similarity_search)
   - [Audio Similarity Search](solutions/audio_similarity_search)
   - [Hybrid Search](solutions/hybrid_search)
+  - [Text Search Engine](solutions/text_search_engine)
   
 - Deployments
   - [Distributed deployment using Mishards](deployments/mishards)
