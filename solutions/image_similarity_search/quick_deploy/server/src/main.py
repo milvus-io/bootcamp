@@ -72,7 +72,7 @@ async def search_images(image: UploadFile = File(...), table_name: str = None):
 
 
 @app.post('/img/count')
-async def count_images_num(table_name: str = None):
+async def count_images(table_name: str = None):
     # Returns the total number of images in the system
     try:
         num = do_count(table_name, MILVUS_CLI)
