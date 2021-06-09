@@ -11,6 +11,7 @@ class MySQLHelper():
                                     local_infile=True)
         self.cursor = self.conn.cursor()
 
+    # Create mysql table if not exists
     def create_mysql_table(self, table_name):
         sql = "create table if not exists " + table_name + "(milvus_id TEXT, image_path TEXT);"
         try:
@@ -20,6 +21,7 @@ class MySQLHelper():
             LOGGER.error("MYSQL ERROR: {} with sql: {}".format(e, sql))
             sys.exit(1)
 
+    # Batch insert (Milvus_ids, img_path) to mysql
     def load_data_to_mysql(self, table_name, data):
         sql = "insert into " + table_name + " (milvus_id,image_path) values (%s,%s);"
         try:
@@ -30,6 +32,7 @@ class MySQLHelper():
             LOGGER.error("MYSQL ERROR: {} with sql: {}".format(e, sql))
             sys.exit(1)
 
+    # Get the img_path according to the milvus ids
     def search_by_milvus_ids(self, ids, table_name):
         str_ids = str(ids).replace('[', '').replace(']', '')
         sql = "select image_path from " + table_name + " where milvus_id in (" + str_ids + ") order by field (milvus_id," + str_ids + ");"
@@ -43,6 +46,7 @@ class MySQLHelper():
             LOGGER.error("MYSQL ERROR: {} with sql: {}".format(e, sql))
             sys.exit(1)
 
+    # Delete mysql table if exists
     def delete_table(self, table_name):
         sql = "drop table if exists " + table_name + ";"
         try:
@@ -52,6 +56,7 @@ class MySQLHelper():
             LOGGER.error("MYSQL ERROR: {} with sql: {}".format(e, sql))
             sys.exit(1)
 
+    # Delete all the data in mysql table
     def delete_all_data(self, table_name):
         sql = 'delete from ' + table_name + ';'
         try:
@@ -62,6 +67,7 @@ class MySQLHelper():
             LOGGER.error("MYSQL ERROR: {} with sql: {}".format(e, sql))
             sys.exit(1)
 
+    # Get the number of mysql table
     def count_table(self, table_name):
         sql = "select count(milvus_id) from " + table_name + ";"
         try:

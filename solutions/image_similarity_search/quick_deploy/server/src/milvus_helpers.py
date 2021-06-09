@@ -13,6 +13,7 @@ class MilvusHelper:
             LOGGER.error("Failed to connect Milvus: {}".format(e))
             sys.exit(1)
 
+    # Create milvus collection if not exists
     def create_colllection(self, collection_name):
         try:
             if not self.client.has_collection(collection_name)[1]:
@@ -30,6 +31,7 @@ class MilvusHelper:
             LOGGER.error("Failed to load data to Milvus: {}".format(e))
             sys.exit(1)
 
+    # Batch insert vectors to milvus collection
     def insert(self, collection_name, vectors):
         try:
             self.create_colllection(collection_name)
@@ -43,6 +45,7 @@ class MilvusHelper:
             LOGGER.error("Failed to load data to Milvus: {}".format(e))
             sys.exit(1)
 
+    # Create IVF_FLAT index on milvus collection
     def create_index(self, collection_name):
         try:
             index_param = {'nlist': 16384}
@@ -56,6 +59,7 @@ class MilvusHelper:
             LOGGER.error("Failed to create index: {}".format(e))
             sys.exit(1)
 
+    # Delete Milvus collection
     def delete_collection(self, collection_name):
         try:
             status = self.client.drop_collection(collection_name=collection_name)
@@ -68,6 +72,7 @@ class MilvusHelper:
             LOGGER.error("Failed to drop collection: {}".format(e))
             sys.exit(1)
 
+    # Search vector in milvus collection
     def search_vectors(self, collection_name, vectors, top_k):
         try:
             search_param = {'nprobe': 16}
@@ -82,6 +87,7 @@ class MilvusHelper:
             LOGGER.error("Failed to search vectors in Milvus: {}".format(e))
             sys.exit(1)
 
+    # Get the number of milvus collection
     def count(self, collection_name):
         try:
             status, num = self.client.count_entities(collection_name=collection_name)
