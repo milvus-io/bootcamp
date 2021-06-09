@@ -1,5 +1,5 @@
 sentence_transformers
 pymilvus
-psycopg2
+psycopg2-binary
 pandas
 numpy
