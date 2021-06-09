@@ -1,14 +1,16 @@
 import sys
+from main import LOGGER
 
 sys.path.append("..")
 from config import DEFAULT_TABLE
 
 
-def do_count(table_name, mil_cli):
+def do_count(table_name, milvus_cli):
     if not table_name:
         table_name = DEFAULT_TABLE
     try:
-        num = mil_cli.count(table_name)
+        num = milvus_cli.count(table_name)
         return num
     except Exception as e:
-        return "Fail with error {}".format(e)
+        LOGGER.error(" Error with count table {}".format(e))
+        sys.exit(1)
