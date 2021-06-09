@@ -1,22 +1,12 @@
 # Reverse Image Search Based on Milvus and ResNet50
 
+## Overview
+
 This demo uses ResNet50, an image feature extraction model, and Milvus to build a system that can perform reverse image search.
 
 The system architecture is displayed as follows:
 
 <img src="pic/demo.jpg" width = "450" height = "600" alt="system_arch" align=center />
-
-## Environment requirements
-
-The following tables show recommended configurations for reverse image search. These configurations haven been tested.
-
-
-| Component     | Recommended Configuration                                                    |
-| -------- | ------------------------------------------------------------ |
-| CPU      | Intel(R) Core(TM) i7-7700K CPU @ 4.20GHz                     |
-| Memory   | 32GB                                                         |
-| OS       | Ubuntu 18.04                                                 |
-| Software | Milvus 1.0<br />pic_search_webclient  1.0<br />pic_search_webserver 2.0 |
 
 ## Data source
 
@@ -30,88 +20,154 @@ Download location: http://host.robots.ox.ac.uk/pascal/VOC/voc2012/VOCtrainval_11
 
 ## How to deploy the system
 
-### Docker Single Host (Beginner Recommended)
+### 1. Start Milvus and MySQL
 
+As shown in the architecture diagram, the system will use Milvus to store and search the feature vector data, and Mysql is used to store the correspondence between the ids returned by Milvus and the image paths, then you need to start Milvus and Mysql first.
 
-#### 1. Create a Docker network
+- **Start Milvus v1.1.0**
 
-```bash
-$ docker network create my-net --subnet 10.0.0.0/16
-```
-
-This docker network will be used to connect the 3 different servers that are run in this example. The subnet of 10.0.0.0/16 is used for this example, but this can be replaced with any other free subnet. If another range is used, the next commands will need their IPs altered.
-
-#### 2. Run Milvus Docker
+First, you are supposed to refer to the Install Milvus v1.1.0 for how to run Milvus docker.
 
 ```bash
-$  docker run -d --name milvus_cpu_1.0.0 --network my-net --ip 10.0.0.2 \
+$ wget -P /home/$USER/milvus/conf https://raw.githubusercontent.com/milvus-io/milvus/v1.1.0/core/conf/demo/server_config.yaml
+$ sudo docker run -d --name milvus_cpu_1.1.0 \
 -p 19530:19530 \
 -p 19121:19121 \
 -v /home/$USER/milvus/db:/var/lib/milvus/db \
 -v /home/$USER/milvus/conf:/var/lib/milvus/conf \
 -v /home/$USER/milvus/logs:/var/lib/milvus/logs \
 -v /home/$USER/milvus/wal:/var/lib/milvus/wal \
-milvusdb/milvus:1.0.0-cpu-d030521-1ea92e
+milvusdb/milvus:1.1.0-cpu-d050721-5e559c
 ```
 
-This demo uses Milvus 1.0. Refer to the [Install Milvus](https://milvus.io/docs/v1.0.0/milvus_docker-cpu.md) for how to install Milvus docker. 
+> Note the version of Milvus.
 
-#### 3. Run pic_search_webserver docker
+- **Start MySQL**
 
 ```bash
-$ docker run -d --name zilliz_search_images_demo --network my-net --ip 10.0.0.3 \
--v ${IMAGE_PATH1}:/tmp/pic1 \
--p 35000:5000 \
--e "MILVUS_HOST=10.0.0.2" \
-milvusbootcamp/pic-search-webserver:2.0
+$ docker run -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7
 ```
 
-For the command in this step, `IMAGE_PATH1` specifies the path to where the images you are searching through are located, **please set it before run this docker.** This location is mapped to the docker container. 
+### 2. Start Server
 
-#### 4. Run pic-search-webclient docker
+The next step is to start the system server. It provides HTTP backend services, and there are two ways to start, such as Docker and source code.
+
+#### 2.1 Run server with Docker
+
+- **Set parameters**
+
+Please modify the parameters according to your own environment. Here listing some parameters that need to be set, for more information please refer to [config.py](./server/src/config.py).
+
+| **Parameter**   | **Description**                                       | **example**      |
+| --------------- | ----------------------------------------------------- | ---------------- |
+| **DATAPATH1**   | The dictionary of the image path.                     | /data/image_path |
+| **MILVUS_HOST** | The IP address of Milvus, you can get it by ifconfig. | 192.168.1.85     |
+| **MILVUS_PORT** | The port of Milvus.                                   | 19530            |
 
 ```bash
-$ docker run -d --name zilliz_search_images_demo_web --network my-net --ip 10.0.0.4 --rm \
--e API_URL=http://10.0.0.3:5000 \
-milvusbootcamp/pic-search-webclient:1.0
+$ export DATAPATH1='/data/image_path'
+$ export Milvus_HOST='192.168.1.85'
+$ export Milvus_PORT='19530'
 ```
 
-### Custom Network
-
-#### 1. Run Milvus Docker
-
-This demo uses Milvus 1.0. Refer to the [Install Milvus](https://milvus.io/docs/install_milvus.md) for how to run Milvus docker.
-
-
-#### 2. Run pic_search_webserver docker
+- **Run Docker**
 
 ```bash
-$ docker run -d --name zilliz_search_images_demo \
--v ${IMAGE_PATH1}:/tmp/pic1 \
--p 35000:5000 \
+$ docker run -d \
+-v ${DATAPATH1}:${DATAPATH1} \
+-p 5000:5000 \
 -e "MILVUS_HOST=${MILVUS_IP}" \
+-e "MILVUS_PORT=${MILVUS_PORT}" \
 milvusbootcamp/pic-search-webserver:2.0
 ```
 
-In the previous command, `IMAGE_PATH1` specify the path where images are located. The location is mapped to the docker container. After deployment, you can use `/tmp/pic1` to load images. `MILVUS_HOST` specifies the IP address of the Milvus Docker host. Do not use backloop address "127.0.0.1". You do not have to modify other parts of the command.
+> **Note:** -v ${DATAPATH1}:${DATAPATH1} means that you can mount the directory into the container. If needed, you can load the parent directory or more directories.
 
-#### 3. Run pic-search-webclient docker
+#### 2.2 Run source code
+
+- **Install the Python packages**
 
 ```bash
-$ docker run --name zilliz_search_images_demo_web -d --rm -p 8001:80 \
--e API_URL=http://${WEBSERVER_IP}:35000 \
+$ cd server
+$ pip install -r requirements.txt
+```
+
+- **Set configuration**
+
+```bash
+$ vim server/src/config.py
+```
+
+Please modify the parameters according to your own environment. Here listing some parameters that need to be set, for more information please refer to [config.py](./server/src/config.py).
+
+| **Parameter**    | **Description**                                       | **Default setting** |
+| ---------------- | ----------------------------------------------------- | ------------------- |
+| MILVUS_HOST      | The IP address of Milvus, you can get it by ifconfig. | 127.0.0.1           |
+| MILVUS_PORT      | Port of Milvus.                                       | 19530               |
+| VECTOR_DIMENSION | Dimension of the vectors.                             | 2048                |
+| MYSQL_HOST       | The IP address of Mysql.                              | 127.0.0.1           |
+| MYSQL_PORT       | Port of Milvus.                                       | 3306                |
+| DEFAULT_TABLE    | The milvus and mysql default collection name.         | milvus_img_search   |
+
+- **Run the code** 
+
+Then start the server with Fastapi. 
+
+```bash
+$ cd src
+$ python main.py
+```
+
+- **The API docs**
+
+Type 127.0.0.1:5000/docs in your browser to see all the APIs.
+
+[img] (API_imag.png)
+
+- **Code  structure**
+
+If you are interested in our code or would like to contribute code, feel free to learn more about our code structure.
+
+```
+└───server
+│   │   Dockerfile
+│   │   requirements.txt
+│   │   main.py  # File for starting the program.
+│   │
+│   └───src
+│       │   config.py  # Configuration file.
+│       │   encode.py  # Covert image/video/questions/... to embeddings.
+│       │   milvus.py  # Connect to Milvus server and insert/drop/query vectors in Milvus.
+│       │   mysql.py   # Connect to MySQL server, and add/delete/query IDs and object information.
+│       │   
+│       └───operations # Call methods in milvus.py and mysql.py to insert/query/delete objects.
+│               │   insert.py
+│               │   query.py
+│               │   delete.py
+│               │   count.py
+```
+
+### 3. Start Client
+
+- **Start the front-end**
+
+```bash
+# Please modify API_URL to the IP address and port of the server.
+$ export API_URL='http://192.168.1.85:5000'
+$ docker run -d -p 8001:80 \
+-e API_URL=${API_URL} \
 milvusbootcamp/pic-search-webclient:1.0
 ```
 
-In the previous command, `WEBSERVER_IP` specifies the server IP address that runs pic-search-webserver docker.
+- **How to use**
 
-### How to perform reverse image search
+Enter ` WEBCLIENT_IP:8001`  in the browser to open the interface for reverse image search. 
 
-After deployment, enter ` ${WEBCLIENT_IP}:8001` (`10.0.0.4:80` in the case of single docker host example) in the browser to open the interface for reverse image search. WEBCLIENT_IP specifies the server IP address that runs pic-search-webclient docker.
+> `WEBCLIENT_IP `specifies the IP address that runs pic-search-webclient docker.
 
 <img src="pic/web4.png" width = "650" height = "500" alt="arch" align=center />
 
-Enter the path of an image folder in the pic_search_webserver docker container, "/tmp/pic1" being used for the example. Click Load to load the pictures. The following screenshot shows the loading process:
+Enter the path of an image folder in the pic_search_webserver docker container with `${DATAPATH1}`, then click `+` to load the pictures. The following screenshot shows the loading process:
 
 <img src="pic/web2.png" width = "650" height = "500" alt="arch" align=center />
 
@@ -124,6 +180,4 @@ The loading process may take several minutes. The following screenshot shows the
 Select an image to search.
 
 <img src="pic/web5.png" width = "650" height = "500" alt="arch" align=center />
-
-It has been tested tha the system can complete reverse image search within 1 second using the recommended configuration. To load images in other directories of the pic_search_webserver docker, specify the path in the textbox.
 
