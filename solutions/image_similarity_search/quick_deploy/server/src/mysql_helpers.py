@@ -1,7 +1,7 @@
 import pymysql
 import sys
 from config import MYSQL_HOST, MYSQL_PORT, MYSQL_USER, MYSQL_PWD, MYSQL_DB
-from logs import write_log
+from main import LOGGER
 
 
 class MySQLHelper():
@@ -15,24 +15,20 @@ class MySQLHelper():
         sql = "create table if not exists " + table_name + "(milvus_id TEXT, image_path TEXT);"
         try:
             self.cursor.execute(sql)
-            print("MYSQL create table.")
+            LOGGER.debug("MYSQL create table: {} with sql: {}".format(table_name, sql))
         except Exception as e:
-            print("MYSQL ERROR:", sql, e)
+            LOGGER.error("MYSQL ERROR: {} with sql: {}".format(e, sql))
             sys.exit(1)
 
     def load_data_to_mysql(self, table_name, data):
         sql = "insert into " + table_name + " (milvus_id,image_path) values (%s,%s);"
-        print(data)
         try:
             self.cursor.executemany(sql, data)
             self.conn.commit()
-            print("MYSQL loads data to table successfully.")
+            LOGGER.debug("MYSQL loads data to table: {} successfully".format(table_name))
         except Exception as e:
-            print("MYSQL ERROR:", sql, e)
+            LOGGER.error("MYSQL ERROR: {} with sql: {}".format(e, sql))
             sys.exit(1)
-        finally:
-            print("-----------MySQL insert info--------total count: " + str(len(data)))
-            write_log("-----------MySQL insert info--------total count: " + str(len(data)))
 
     def search_by_milvus_ids(self, ids, table_name):
         str_ids = str(ids).replace('[', '').replace(']', '')
@@ -41,19 +37,19 @@ class MySQLHelper():
             self.cursor.execute(sql)
             results = self.cursor.fetchall()
             results = [res[0] for res in results]
-            print("MYSQL search by milvus id.")
+            LOGGER.debug("MYSQL search by milvus id.")
             return results
         except Exception as e:
-            print("MYSQL ERROR:", sql, e)
+            LOGGER.error("MYSQL ERROR: {} with sql: {}".format(e, sql))
             sys.exit(1)
 
     def delete_table(self, table_name):
         sql = "drop table if exists " + table_name + ";"
         try:
             self.cursor.execute(sql)
-            print("MYSQL delete table.")
+            LOGGER.debug("MYSQL delete table:{}".format(table_name))
         except Exception as e:
-            print("MYSQL ERROR:", sql, e)
+            LOGGER.error("MYSQL ERROR: {} with sql: {}".format(e, sql))
             sys.exit(1)
 
     def delete_all_data(self, table_name):
@@ -61,9 +57,9 @@ class MySQLHelper():
         try:
             self.cursor.execute(sql)
             self.conn.commit()
-            print("MYSQL delete all data.")
+            LOGGER.debug("MYSQL delete all data in table:{}".format(table_name))
         except Exception as e:
-            print("MYSQL ERROR:", sql, e)
+            LOGGER.error("MYSQL ERROR: {} with sql: {}".format(e, sql))
             sys.exit(1)
 
     def count_table(self, table_name):
@@ -71,8 +67,8 @@ class MySQLHelper():
         try:
             self.cursor.execute(sql)
             results = self.cursor.fetchall()
-            print("MYSQL count table.")
+            LOGGER.debug("MYSQL count table:{}".format(table_name))
             return results[0][0]
         except Exception as e:
-            print("MYSQL ERROR:", sql, e)
+            LOGGER.error("MYSQL ERROR: {} with sql: {}".format(e, sql))
             sys.exit(1)

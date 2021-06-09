@@ -29,10 +29,10 @@ LOGGER = write_log()
 @app.get('/data')
 def image_path(image_path):
     try:
-        print("load image:", image_path)
+        LOGGER.debug(("load image: {}".format(image_path))
         return FileResponse(image_path)
     except Exception as e:
-        write_log(e, 1)
+        LOGGER.error(e, 1)
         return {'status': False, 'msg': e}, 400
 
 
