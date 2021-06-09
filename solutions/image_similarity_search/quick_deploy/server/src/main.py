@@ -1,5 +1,6 @@
 import uvicorn
 import os
+from diskcache import Cache
 from fastapi import FastAPI, File, UploadFile
 from starlette.middleware.cors import CORSMiddleware
 from starlette.responses import FileResponse
@@ -13,6 +14,7 @@ from operations.count import do_count
 from operations.drop import do_drop
 from logs import write_log
 
+
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
@@ -25,6 +27,11 @@ MILVUS_CLI = MilvusHelper()
 MYSQL_CLI = MySQLHelper()
 LOGGER = write_log()
 
+# Mkdir '/tmp/search-images'
+if not os.path.exists(UPLOAD_PATH):
+    os.makedirs(UPLOAD_PATH)
+    LOGGER.debug("mkdir the path:{} ".format(UPLOAD_PATH))
+
 
 @app.get('/data')
 def image_path(image_path):
@@ -32,6 +39,17 @@ def image_path(image_path):
     try:
         LOGGER.debug(("Successfully load image: {}".format(image_path))
         return FileResponse(image_path)
+    except Exception as e:
+        LOGGER.error("upload image error: {}".format(e))
+        return {'status': False, 'msg': e}, 400
+
+
+@app.get('/progress')
+def get_progress():
+    # Get the progress of dealing with images
+    try:
+        cache = Cache('./tmp')
+        return "current: {}, total: {}".format(cache['current'], cache['total'])
     except Exception as e:
         LOGGER.error("upload image error: {}".format(e))
         return {'status': False, 'msg': e}, 400
@@ -54,9 +72,7 @@ async def search_images(image: UploadFile = File(...), table_name: str = None):
     try:
         # Save the upload image to server.
         content = await image.read()
-        if not os.path.exists(UPLOAD_PATH):
-            os.makedirs(UPLOAD_PATH)
-            LOGGER.debug("mkdir the path:{} ".format(UPLOAD_PATH))
+        
         img_path = os.path.join(UPLOAD_PATH, image.filename)
         with open(img_path, "wb+") as f:
             f.write(content)
