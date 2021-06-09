@@ -1,4 +1,4 @@
-pymilvus
+pymilvus==1.1.0
 redis
 torch
 torchvision
