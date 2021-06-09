@@ -1,5 +1,5 @@
 import sys
-from main import LOGGER
+from logs import LOGGER
 
 sys.path.append("..")
 from config import DEFAULT_TABLE

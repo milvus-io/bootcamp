@@ -19,3 +19,6 @@ MYSQL_DB = os.getenv("MYSQL_DB", "mysql")
 
 ############### Data Path ###############
 UPLOAD_PATH = os.getenv("UPLOAD_PATH", "tmp/search-images")
+
+############### Number of log files ###############
+LOGS_NUM = os.getenv("logs_num", 0)
