@@ -1,12 +1,13 @@
 import sys
 import os
 from diskcache import Cache
-from main import LOGGER
+from logs import LOGGER
 
 sys.path.append("..")
 from config import DEFAULT_TABLE
 
- # Get the path to the image
+
+# Get the path to the image
 def get_imgs(path):
     pics = []
     for f in os.listdir(path):
@@ -14,6 +15,7 @@ def get_imgs(path):
              ['.png', '.jpg', '.jpeg', '.PNG', '.JPG', '.JPEG']) and not f.startswith('.DS_Store')):
             pics.append(os.path.join(path, f))
     return pics
+
 
 # Get the vector of images
 def extract_features(img_dir, model):
@@ -28,13 +30,14 @@ def extract_features(img_dir, model):
             norm_feat = model.resnet50_extract_feat(img_path)
             feats.append(norm_feat)
             names.append(img_path.encode())
-            cache['current'] = i+1
-            LOGGER.debug("Extracting feature from image No. %d , %d images in total" % (i+1, total))
+            cache['current'] = i + 1
+            print("Extracting feature from image No. %d , %d images in total" % (i + 1, total))
         return feats, names
     except Exception as e:
         LOGGER.error(" Error with extracting feature from image {}".format(e))
         sys.exit(1)
-       
+
+
 # Combine the id of the vector and the name of the image into a list
 def format_data(ids, names):
     data = []
@@ -42,6 +45,7 @@ def format_data(ids, names):
         value = (str(ids[i]), names[i])
         data.append(value)
     return data
+
 
 # Import vectors to Milvus and data to Mysql respectively
 def do_load(table_name, image_dir, model, milvus_client, mysql_cli):

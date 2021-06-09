@@ -1,7 +1,7 @@
 import sys
 from config import MILVUS_HOST, MILVUS_PORT, VECTOR_DIMENSION, INDEX_FILE_SIZE, METRIC_TYPE
 from milvus import Milvus, IndexType
-from main import LOGGER
+from logs import LOGGER
 
 
 class MilvusHelper:
@@ -37,7 +37,8 @@ class MilvusHelper:
             self.create_colllection(collection_name)
             status, ids = self.client.insert(collection_name=collection_name, records=vectors)
             if not status.code:
-                LOGGER.debug("Insert vectors to Milvus in collection: {} with {} rows".format(collection_name, len(vectors)))
+                LOGGER.debug(
+                    "Insert vectors to Milvus in collection: {} with {} rows".format(collection_name, len(vectors)))
                 return ids
             else:
                 raise Exception(status.message)
@@ -51,7 +52,8 @@ class MilvusHelper:
             index_param = {'nlist': 16384}
             status = self.client.create_index(collection_name, IndexType.IVF_FLAT, index_param)
             if not status.code:
-                LOGGER.debug("Successfully create index in collection:{} with param:{}".format(collection_name, index_param))
+                LOGGER.debug(
+                    "Successfully create index in collection:{} with param:{}".format(collection_name, index_param))
                 return status
             else:
                 raise Exception(status.message)

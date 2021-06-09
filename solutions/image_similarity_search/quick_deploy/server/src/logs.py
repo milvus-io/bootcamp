@@ -3,6 +3,7 @@ import re
 import datetime
 import logging
 import sys
+from config import LOGS_NUM
 
 try:
     import codecs
@@ -94,6 +95,7 @@ class MultiprocessHandler(logging.FileHandler):
         except:
             self.handleError(record)
 
+
 def write_log():
     logger = logging.getLogger()
     logger.setLevel(logging.DEBUG)
@@ -117,9 +119,10 @@ def write_log():
     return logger
 
 
-if __name__ == "__main__":
-    message = 'test writing logs'
-    logger = write_log()
-    logger.info(message)
-    logger.debug(message)
-    logger.error(message)
+LOGGER = write_log()
+# if __name__ == "__main__":
+#     message = 'test writing logs'
+#     logger = write_log()
+#     logger.info(message)
+#     logger.debug(message)
+#     logger.error(message)

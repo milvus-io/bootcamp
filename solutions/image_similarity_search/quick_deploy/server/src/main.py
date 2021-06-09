@@ -12,8 +12,7 @@ from operations.load import do_load
 from operations.search import do_search
 from operations.count import do_count
 from operations.drop import do_drop
-from logs import write_log
-
+from logs import LOGGER
 
 app = FastAPI()
 app.add_middleware(
@@ -25,19 +24,18 @@ app.add_middleware(
 MODEL = Resnet50()
 MILVUS_CLI = MilvusHelper()
 MYSQL_CLI = MySQLHelper()
-LOGGER = write_log()
 
 # Mkdir '/tmp/search-images'
 if not os.path.exists(UPLOAD_PATH):
     os.makedirs(UPLOAD_PATH)
-    LOGGER.debug("mkdir the path:{} ".format(UPLOAD_PATH))
+    LOGGER.info("mkdir the path:{} ".format(UPLOAD_PATH))
 
 
 @app.get('/data')
 def image_path(image_path):
     # Get the image file
     try:
-        LOGGER.debug(("Successfully load image: {}".format(image_path))
+        LOGGER.info(("Successfully load image: {}".format(image_path)))
         return FileResponse(image_path)
     except Exception as e:
         LOGGER.error("upload image error: {}".format(e))
@@ -60,7 +58,8 @@ async def load_images(Table: str = None, File: str = None):
     # Insert all the image under the file path to Milvus/MySQL
     try:
         total_num = do_load(Table, File, MODEL, MILVUS_CLI, MYSQL_CLI)
-        LOGGER.debug("Successfully insert data, total count: {}".format(total_num))
+        LOGGER.info("Successfully loaded data, total count: {}".format(total_num))
+        return {'status': True, 'msg': "Successfully loaded data!"}
     except Exception as e:
         LOGGER.error(e)
         return {'status': False, 'msg': e}, 400
@@ -72,15 +71,13 @@ async def search_images(image: UploadFile = File(...), table_name: str = None):
     try:
         # Save the upload image to server.
         content = await image.read()
-        
         img_path = os.path.join(UPLOAD_PATH, image.filename)
         with open(img_path, "wb+") as f:
             f.write(content)
-
         paths, distances = do_search(table_name, img_path, MODEL, MILVUS_CLI, MYSQL_CLI)
         res = dict(zip(paths, distances))
         res = sorted(res.items(), key=lambda item: item[1])
-        LOGGER.debug("Successfully searched similar images!")
+        LOGGER.info("Successfully searched similar images!")
         return res
     except Exception as e:
         LOGGER.error(e)
@@ -92,7 +89,7 @@ async def count_images(table_name: str = None):
     # Returns the total number of images in the system
     try:
         num = do_count(table_name, MILVUS_CLI)
-        LOGGER.debug("Successfully count the number of images!")
+        LOGGER.info("Successfully count the number of images!")
         return num
     except Exception as e:
         LOGGER.error(e)
@@ -104,7 +101,7 @@ async def drop_tables(table_name: str = None):
     # Delete the collection of Milvus and MySQL
     try:
         status = do_drop(table_name, MILVUS_CLI, MYSQL_CLI)
-        LOGGER.debug("Successfully drop tables in Milvus and MySQL!")
+        LOGGER.info("Successfully drop tables in Milvus and MySQL!")
         return status
     except Exception as e:
         LOGGER.error(e)
