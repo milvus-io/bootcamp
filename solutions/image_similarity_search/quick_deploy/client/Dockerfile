@@ -22,7 +22,7 @@ EXPOSE 80
 # Copy .env file and shell script to container
 WORKDIR /usr/share/nginx/html
 COPY ./env.sh .
-COPY .env .
+#COPY .env .
 
 # Add bash
 RUN apk add --no-cache bash
