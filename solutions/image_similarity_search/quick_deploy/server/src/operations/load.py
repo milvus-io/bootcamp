@@ -1,10 +1,10 @@
 import sys
 import os
 from diskcache import Cache
-from logs import LOGGER
 
 sys.path.append("..")
 from config import DEFAULT_TABLE
+from logs import LOGGER
 
 
 # Get the path to the image
@@ -53,6 +53,7 @@ def do_load(table_name, image_dir, model, milvus_client, mysql_cli):
         table_name = DEFAULT_TABLE
     vectors, names = extract_features(image_dir, model)
     ids = milvus_client.insert(table_name, vectors)
+    milvus_client.create_index(table_name)
     mysql_cli.create_mysql_table(table_name)
     mysql_cli.load_data_to_mysql(table_name, format_data(ids, names))
     return len(ids)
