@@ -2,18 +2,22 @@ import os
 import uuid
 import base64
 import logging
-import urllib.request
+import sys
 import time
 import numpy as np
 import yaml
 import cv2
 import paddle.fluid as fluid
+import paddle
 from yolov3_detector.yolo_infer import offset_to_lengths
 from yolov3_detector.yolo_infer import coco17_category_info, bbox2out
 from yolov3_detector.yolo_infer import Preprocess
-from common.config import DATA_PATH, COCO_MODEL_PATH, YOLO_CONFIG_PATH
-import paddle
+
+sys.path.append("..")
+from config import DATA_PATH, COCO_MODEL_PATH, YOLO_CONFIG_PATH
+
 paddle.enable_static()
+
 
 # def temp_directory():
 #     return os.path.abspath(os.path.join('.', 'data'))
@@ -108,7 +112,7 @@ class YOLO_v3:
                 tmp_obj = images[i][int(bbox.y1):int(
                     bbox.y2), int(bbox.x1):int(bbox.x2)]
                 frame_object.append(cv2base64(tmp_obj, self.fps, path))
-            
+
             self.fps += 1
             obj_images.append(frame_object)
         return obj_images
@@ -161,13 +165,3 @@ def run(detector, path):
     logging.info('%s cost: {:.3f}s, get %d results'.format(end - start),
                  "yolov3 detector", len(result_images))
     return result_images, object_num
-
-
-def main():
-    detector = YOLO_v3()
-    datas = DATA_PATH + '/' + 'test-f1577db8-0dea-11eb-9433-ac1f6ba128da'
-    result_images = run(detector, datas)
-
-
-if __name__ == '__main__':
-    main()
