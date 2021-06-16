@@ -1,8 +1,8 @@
 import sys
-from logs import LOGGER
 
 sys.path.append("..")
 from config import DEFAULT_TABLE
+from logs import LOGGER
 
 
 def do_drop(table_name, milvus_cli, mysql_cli):

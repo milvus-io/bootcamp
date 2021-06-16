@@ -1,12 +1,14 @@
 import sys
-from logs import LOGGER
 
 sys.path.append("..")
-from config import TOP_K
+from config import TOP_K, DEFAULT_TABLE
+from logs import LOGGER
 
 
 def do_search(table_name, img_path, model, milvus_client, mysql_cli):
     try:
+        if not table_name:
+            table_name = DEFAULT_TABLE
         feat = model.resnet50_extract_feat(img_path)
         vectors = milvus_client.search_vectors(table_name, [feat], TOP_K)
         vids = [str(x.id) for x in vectors[0]]

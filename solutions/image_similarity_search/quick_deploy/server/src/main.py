@@ -13,14 +13,19 @@ from operations.search import do_search
 from operations.count import do_count
 from operations.drop import do_drop
 from logs import LOGGER
+from pydantic import BaseModel
+from typing import Optional
 
 app = FastAPI()
+origins = ["*"]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
-    allow_headers=["*"])
+    allow_headers=["*"],
+
+)
 MODEL = Resnet50()
 MILVUS_CLI = MilvusHelper()
 MYSQL_CLI = MySQLHelper()
@@ -52,18 +57,20 @@ def get_progress():
         LOGGER.error("upload image error: {}".format(e))
         return {'status': False, 'msg': e}, 400
 
+class Item(BaseModel):
+    Table: Optional[str] = None
+    File: str
 
 @app.post('/img/load')
-async def load_images(Table: str = None, File: str = None):
+async def load_images(item: Item):
     # Insert all the image under the file path to Milvus/MySQL
     try:
-        total_num = do_load(Table, File, MODEL, MILVUS_CLI, MYSQL_CLI)
+        total_num = do_load(item.Table, item.File, MODEL, MILVUS_CLI, MYSQL_CLI)
         LOGGER.info("Successfully loaded data, total count: {}".format(total_num))
-        return {'status': True, 'msg': "Successfully loaded data!"}
+        return "Successfully loaded data!"
     except Exception as e:
         LOGGER.error(e)
         return {'status': False, 'msg': e}, 400
-
 
 @app.post('/img/search')
 async def search_images(image: UploadFile = File(...), table_name: str = None):
@@ -71,6 +78,7 @@ async def search_images(image: UploadFile = File(...), table_name: str = None):
     try:
         # Save the upload image to server.
         content = await image.read()
+        print('read pic succ')
         img_path = os.path.join(UPLOAD_PATH, image.filename)
         with open(img_path, "wb+") as f:
             f.write(content)
@@ -78,7 +86,7 @@ async def search_images(image: UploadFile = File(...), table_name: str = None):
         res = dict(zip(paths, distances))
         res = sorted(res.items(), key=lambda item: item[1])
         LOGGER.info("Successfully searched similar images!")
-        return res
+        return res 
     except Exception as e:
         LOGGER.error(e)
         return {'status': False, 'msg': e}, 400
@@ -109,4 +117,4 @@ async def drop_tables(table_name: str = None):
 
 
 if __name__ == '__main__':
-    uvicorn.run(app=app, host='127.0.0.1', port=5000)
+    uvicorn.run(app=app, host='0.0.0.0', port=5000)
