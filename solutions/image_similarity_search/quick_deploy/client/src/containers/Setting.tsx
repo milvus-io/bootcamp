@@ -180,8 +180,8 @@ const Setting = (props: any) => {
   );
   const _search = ({ topK, image }: any) => {
     const fd = new FormData();
-    fd.set("Num", topK);
-    fd.append("file", image);
+    // fd.set("Num", topK);
+    fd.append("image", image);
     search(fd).then((res: any) => {
       const { status, data } = res || {};
       if (status === 200) {
