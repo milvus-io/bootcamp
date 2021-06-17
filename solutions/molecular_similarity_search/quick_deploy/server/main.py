@@ -24,22 +24,6 @@ MODEL = None
 MILVUS_CLI = MilvusHelper()
 MYSQL_CLI = MySQLHelper()
 
-# Mkdir '/tmp/search-images'
-if not os.path.exists(UPLOAD_PATH):
-    os.makedirs(UPLOAD_PATH)
-    LOGGER.info("mkdir the path:{} ".format(UPLOAD_PATH))
-
-
-@app.get('/data')
-def data_path(data_path):
-    # Get the image file
-    try:
-        LOGGER.info(("Successfully load data: {}".format(data_path)))
-        return FileResponse(data_path)
-    except Exception as e:
-        LOGGER.error("upload data error: {}".format(e))
-        return {'status': False, 'msg': e}, 400
-
 
 @app.get('/progress')
 def get_progress():
@@ -65,11 +49,11 @@ async def load_data(Table: str = None, File: str = None):
 
 
 @app.post('/data/search')
-async def search_data(Table: str = None, File: str = None):
+async def search_data(Table: str = None, Mol: str = None):
     # Search the upload image in Milvus/MySQL
     try:
         # Save the upload data to server.
-        paths, distances = do_search(Table, File, MODEL, MILVUS_CLI, MYSQL_CLI)
+        paths, distances = do_search(Table, Mol, MODEL, MILVUS_CLI, MYSQL_CLI)
         res = dict(zip(paths, distances))
         res = sorted(res.items(), key=lambda item: item[1])
         LOGGER.info("Successfully searched similar data!")
