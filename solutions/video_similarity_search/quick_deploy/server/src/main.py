@@ -63,11 +63,11 @@ def get_progress():
 
 
 @app.post('/video/count')
-async def count_images(table_name: str = None):
+async def count_video(table_name: str = None):
     # Returns the total number of images in the system
     try:
         num = do_count(table_name, MILVUS_CLI, MYSQL_CLI)
-        LOGGER.info("Successfully count the number of images!")
+        LOGGER.info("Successfully count the number:{} of images!".format(num))
         return num
     except Exception as e:
         LOGGER.error(e)
@@ -94,7 +94,7 @@ class Item(BaseModel):
 async def load_video(item: Item):
     # Insert all the video under the file path to Milvus/MySQL
     try:
-        total_num = do_load(Table, File, MODEL, FRAME, MILVUS_CLI, MYSQL_CLI)
+        total_num = do_load(item.Table, item.File, MODEL, FRAME, MILVUS_CLI, MYSQL_CLI)
         LOGGER.info("Successfully loaded data, total count: {}".format(total_num))
         return {'status': True, 'msg': "Successfully loaded data!"}
     except Exception as e:
@@ -112,7 +112,10 @@ async def search_images(image: UploadFile = File(...), table_name: str = None):
         with open(img_path, "wb+") as f:
             f.write(content)
         paths, distances = do_search(table_name, img_path, MODEL, MILVUS_CLI, MYSQL_CLI)
-        res = dict(zip(paths, distances))
+        res = {}
+        for p, d in zip(paths, distances):
+            if not p in res or res[p]>d:
+                res[p] = d
         res = sorted(res.items(), key=lambda item: item[1])
         LOGGER.info("Successfully searched similar images!")
         return res
