@@ -2,6 +2,6 @@ flask-cors
 numpy
 flask
 flask_restful
-pymilvus==1.1.0
+pymilvus==1.1.2
 psycopg2-binary
 sentence_transformers

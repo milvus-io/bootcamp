@@ -3,7 +3,7 @@ import numpy as np
 import time
 import logging
 import pandas as pd
-
+import csv
 from src.pg_operating import create_pg_table, copy_data_to_pg, build_pg_index, search_in_pg, get_result_answer
 from src.config import DEFAULT_TABLE
 from src.milvus_operating import has_table, create_table, drop_milvus_table, create_index, milvus_insert, milvus_search, \
@@ -13,10 +13,10 @@ from src.milvus_operating import has_table, create_table, drop_milvus_table, cre
 def record_temp_txt(fname, ids, answer, question):
     # fname = 'data/' + user_id + '/temp.csv'
     with open(fname, 'w') as f:
+        writer = csv.writer(f, delimiter='|')
         for i in range(len(ids)):
             # print(str(ids[i]),question[i],answer[i])
-            line = str(ids[i]) + "|" + question[i] + "|" + answer[i] + "\n"
-            f.write(line)
+            writer.writerow([ids[i], question[i], answer[i]])
 
 
 def normaliz_vec(vec_list):

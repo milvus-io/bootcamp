@@ -1,5 +1,5 @@
 numpy
-pymilvus==1.1.0
+pymilvus==1.1.2
 redis
 pymysql
 ipyplot
