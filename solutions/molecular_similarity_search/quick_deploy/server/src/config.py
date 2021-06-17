@@ -6,8 +6,8 @@ MILVUS_HOST = os.getenv("MILVUS_HOST", "127.0.0.1")
 MILVUS_PORT = os.getenv("MILVUS_PORT", 19530)
 VECTOR_DIMENSION = os.getenv("VECTOR_DIMENSION", 512)
 INDEX_FILE_SIZE = os.getenv("INDEX_FILE_SIZE", 1024)
-METRIC_TYPE = os.getenv("METRIC_TYPE", MetricType.L2)
-DEFAULT_TABLE = os.getenv("DEFAULT_TABLE", "milvus_img_search")
+METRIC_TYPE = os.getenv("METRIC_TYPE", MetricType.JACCARD)
+DEFAULT_TABLE = os.getenv("DEFAULT_TABLE", "milvus_mol_search")
 TOP_K = os.getenv("TOP_K", 10)
 
 ############### MySQL Configuration ###############

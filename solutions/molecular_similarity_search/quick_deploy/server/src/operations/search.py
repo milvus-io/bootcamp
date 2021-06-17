@@ -2,11 +2,14 @@ import sys
 from src.logs import LOGGER
 from src.config import TOP_K
 from src.encode import smiles_to_vector
-
+from src.config import DEFAULT_TABLE
 
 def do_search(table_name, molecular_name, model, milvus_client, mysql_cli):
+    if not table_name:
+        table_name = DEFAULT_TABLE
     try:
         feat = smiles_to_vector(molecular_name)
+        print(feat)
         vectors = milvus_client.search_vectors(table_name, [feat], TOP_K)
         vids = [str(x.id) for x in vectors[0]]
         smiles = mysql_cli.search_by_milvus_ids(vids, table_name)
