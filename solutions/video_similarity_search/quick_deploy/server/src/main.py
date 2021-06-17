@@ -19,6 +19,8 @@ from frame_extract import FrameExtract
 from logs import LOGGER
 from config import UPLOAD_PATH
 from encode import Resnet50
+from pydantic import BaseModel
+from typing import Optional
 
 app = FastAPI()
 app.add_middleware(
