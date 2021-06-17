@@ -5,6 +5,18 @@ from diskcache import Cache
 from src.logs import LOGGER
 from src.encode import smiles_to_vector
 from src.config import DEFAULT_TABLE, VECTOR_DIMENSION
+from src.config import UPLOAD_PATH
+from rdkit import Chem
+from rdkit.Chem import AllChem
+from rdkit import DataStructs
+from rdkit.Chem import Draw
+
+# save the molecular images
+def save_mols_img(milvus_ids, smiles):
+    for ids, mol in zip(milvus_ids, smiles):
+        mol = Chem.MolFromSmiles(mol)
+        sub_img = Draw.MolsToGridImage([mol], molsPerRow=1, subImgSize=(500, 500))
+        sub_img.save(UPLOAD_PATH + "/" + str(ids) + ".png")
 
 
 # Extract all vectors from mol file
@@ -54,6 +66,7 @@ def do_load(table_name, mol_path, model, milvus_client, mysql_cli):
         table_name = DEFAULT_TABLE
     vectors, names = extract_features(mol_path, model)
     ids = milvus_client.insert(table_name, vectors)
+    save_mols_img(ids, names)
     mysql_cli.create_mysql_table(table_name)
     mysql_cli.load_data_to_mysql(table_name, format_data(ids, names))
     return len(ids)

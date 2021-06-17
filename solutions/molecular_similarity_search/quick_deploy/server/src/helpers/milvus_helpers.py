@@ -13,10 +13,20 @@ class MilvusHelper:
             LOGGER.error("Failed to connect Milvus: {}".format(e))
             sys.exit(1)
 
+    # Return if Milvus has the collection
+    def has_collection(self, collection_name):
+        try:
+            status = self.client.has_collection(collection_name)[1]
+            return status
+        except Exception as e:
+            LOGGER.error("Failed to load data to Milvus: {}".format(e))
+            sys.exit(1)
+
+
     # Create milvus collection if not exists
     def create_colllection(self, collection_name):
         try:
-            if not self.client.has_collection(collection_name)[1]:
+            if not self.has_collection(collection_name):
                 collection_param = {
                     'collection_name': collection_name,
                     'dimension': VECTOR_DIMENSION,
