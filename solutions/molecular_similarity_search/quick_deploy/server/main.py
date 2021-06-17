@@ -24,6 +24,22 @@ MODEL = None
 MILVUS_CLI = MilvusHelper()
 MYSQL_CLI = MySQLHelper()
 
+# Mkdir 'tmp/mol-data'
+if not os.path.exists(UPLOAD_PATH):
+    os.makedirs(UPLOAD_PATH)
+    LOGGER.info("mkdir the path:{} ".format(UPLOAD_PATH))
+
+
+@app.get('/data')
+def mols_img(mols_path):
+    # Get the gif file
+    try:
+        LOGGER.info(("Successfully load gif: {}".format(mols_path)))
+        return FileResponse(UPLOAD_PATH + '/' + mols_path + '.png')
+    except Exception as e:
+        LOGGER.error("upload image error: {}".format(e))
+        return {'status': False, 'msg': e}, 400
+
 
 @app.get('/progress')
 def get_progress():
@@ -53,8 +69,8 @@ async def search_data(Table: str = None, Mol: str = None):
     # Search the upload image in Milvus/MySQL
     try:
         # Save the upload data to server.
-        paths, distances = do_search(Table, Mol, MODEL, MILVUS_CLI, MYSQL_CLI)
-        res = dict(zip(paths, distances))
+        ids, paths, distances = do_search(Table, Mol, MODEL, MILVUS_CLI, MYSQL_CLI)
+        res = dict(zip(paths, zip(ids, distances)))
         res = sorted(res.items(), key=lambda item: item[1])
         LOGGER.info("Successfully searched similar data!")
         return res
@@ -67,7 +83,7 @@ async def search_data(Table: str = None, Mol: str = None):
 async def count_data(table_name: str = None):
     # Returns the total number of data in the system
     try:
-        num = do_count(table_name, MILVUS_CLI)
+        num = do_count(table_name, MILVUS_CLI, MYSQL_CLI)
         LOGGER.info("Successfully count the number of data!")
         return num
     except Exception as e:

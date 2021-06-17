@@ -14,7 +14,7 @@ def do_search(table_name, molecular_name, model, milvus_client, mysql_cli):
         vids = [str(x.id) for x in vectors[0]]
         smiles = mysql_cli.search_by_milvus_ids(vids, table_name)
         distances = [x.distance for x in vectors[0]]
-        return smiles, distances
+        return vids, smiles, distances
     except Exception as e:
         LOGGER.error(" Error with search : {}".format(e))
         sys.exit(1)
