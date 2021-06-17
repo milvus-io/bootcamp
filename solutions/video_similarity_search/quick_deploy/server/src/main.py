@@ -84,8 +84,12 @@ async def drop_tables(table_name: str = None):
         return {'status': False, 'msg': e}, 400
 
 
+class Item(BaseModel):
+    Table: Optional[str] = None
+    File: str
+
 @app.post('/video/load')
-async def load_video(File: str, Table: str = None):
+async def load_video(item: Item):
     # Insert all the video under the file path to Milvus/MySQL
     try:
         total_num = do_load(Table, File, MODEL, FRAME, MILVUS_CLI, MYSQL_CLI)
