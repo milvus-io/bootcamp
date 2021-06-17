@@ -12,6 +12,8 @@ from src.operations.search import do_search
 from src.operations.count import do_count
 from src.operations.drop import do_drop
 from src.logs import LOGGER
+from pydantic import BaseModel
+from typing import Optional
 
 app = FastAPI()
 app.add_middleware(
@@ -52,11 +54,15 @@ def get_progress():
         return {'status': False, 'msg': e}, 400
 
 
+class Item(BaseModel):
+    Table: Optional[str] = None
+    File: str
+
 @app.post('/data/load')
-async def load_data(Table: str = None, File: str = None):
+async def load_data(item: Item):
     # Insert all the data under the file path to Milvus/MySQL
     try:
-        total_num = do_load(Table, File, MODEL, MILVUS_CLI, MYSQL_CLI)
+        total_num = do_load(item.Table, item.File, MODEL, MILVUS_CLI, MYSQL_CLI)
         LOGGER.info("Successfully loaded data, total count: {}".format(total_num))
         return {'status': True, 'msg': "Successfully loaded data!"}
     except Exception as e:
@@ -104,4 +110,4 @@ async def drop_tables(table_name: str = None):
 
 
 if __name__ == '__main__':
-    uvicorn.run(app=app, host='127.0.0.1', port=5000)
+    uvicorn.run(app=app, host='0.0.0.0', port=5001)
