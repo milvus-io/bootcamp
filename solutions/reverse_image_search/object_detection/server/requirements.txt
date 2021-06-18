@@ -4,7 +4,7 @@ uvicorn==0.13.4
 PyMySQL==1.0.2
 paddlepaddle==2.1.0
 starlette==0.13.6
-#tensorflow==2.5.0
+tensorflow==2.5.0
 opencv_python==4.5.2.54
 numpy==1.19.5
 pydantic==1.8.1
