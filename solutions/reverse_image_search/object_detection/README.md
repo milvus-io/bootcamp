@@ -1,12 +1,12 @@
-# Reverse Image Search Based on Milvus and ResNet50
+# Image Similarity Search with object detection
 
 ## Overview
 
-This demo uses ResNet50, an image feature extraction model, and Milvus to build a system that can perform reverse image search.
+This demo uses the YOLOv3 model to detect objects in images and the ResNet-50 model to extract feature vectors of images, and then uses Milvus to build an image similarity search system.
 
-The system architecture is displayed as follows:
+The following is the system diagram.
 
-<img src="pic/demo.jpg" width = "450" height = "600" alt="system_arch" align=center />
+<img src="pic\demo1.png" alt="demo1" style="zoom:40%;" />
 
 ## Data source
 
@@ -14,9 +14,9 @@ This demo uses the PASCAL VOC image set, which contains 17125 images with 20 cat
 
 Dataset size: ~ 2 GB.
 
-Download location: http://host.robots.ox.ac.uk/pascal/VOC/voc2012/VOCtrainval_11-May-2012.tar
+Download: http://host.robots.ox.ac.uk/pascal/VOC/voc2012/VOCtrainval_11-May-2012.tar
 
-> Note: You can also use other images for testing. This system supports the following formats: .jpg and .png.
+> Note: You can also use your own images, **and needs to be an object in the image**. This demo supports images in formats of .jpg and .png.
 
 ## How to deploy the system
 
@@ -50,24 +50,26 @@ $ docker run -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7
 
 ### 2. Start Server
 
-The next step is to start the system server. It provides HTTP backend services, and there are two ways to start, such as Docker and source code.
+The next step is to start the system server. It provides HTTP backend services, and there are two ways to start: running with Docker or source code.
 
 #### 2.1 Run server with Docker
 
 - **Set parameters**
 
-Please modify the parameters according to your own environment. Here listing some parameters that need to be set, for more information please refer to [config.py](./server/src/config.py).
+Modify the parameters according to your own environment. Here listing some parameters that need to be set, for more information please refer to [config.py](./server/src/config.py).
 
 | **Parameter**   | **Description**                                       | **example**      |
 | --------------- | ----------------------------------------------------- | ---------------- |
 | **DATAPATH1**   | The dictionary of the image path.                     | /data/image_path |
-| **MILVUS_HOST** | The IP address of Milvus, you can get it by ifconfig. | 192.168.1.85     |
+| **MILVUS_HOST** | The IP address of Milvus, you can get it by ifconfig. | 172.16.20.10     |
 | **MILVUS_PORT** | The port of Milvus.                                   | 19530            |
+| **MYSQL_HOST**  | The IP address of MySQL                               | 172.16.20.10     |
 
-```bash
+```shell
 $ export DATAPATH1='/data/image_path'
-$ export Milvus_HOST='192.168.1.85'
+$ export Milvus_HOST='172.16.20.10'
 $ export Milvus_PORT='19530'
+$ export Mysql_HOST='172.16.20.10'
 ```
 
 - **Run Docker**
@@ -75,10 +77,11 @@ $ export Milvus_PORT='19530'
 ```bash
 $ docker run -d \
 -v ${DATAPATH1}:${DATAPATH1} \
--p 5000:5000 \
--e "MILVUS_HOST=${MILVUS_IP}" \
--e "MILVUS_PORT=${MILVUS_PORT}" \
-milvusbootcamp/pic-search-webserver:2.0
+-p 5010:5010 \
+-e "MILVUS_HOST=${Milvus_HOST}" \
+-e "MILVUS_PORT=${Milvus_PORT}" \
+-e "MYSQL_HOST=${Mysql_HOST}" \
+milvusbootcamp/img-search-server:1.0
 ```
 
 > **Note:** -v ${DATAPATH1}:${DATAPATH1} means that you can mount the directory into the container. If needed, you can load the parent directory or more directories.
@@ -100,29 +103,29 @@ $ vim server/src/config.py
 
 Please modify the parameters according to your own environment. Here listing some parameters that need to be set, for more information please refer to [config.py](./server/src/config.py).
 
-| **Parameter**    | **Description**                                       | **Default setting** |
-| ---------------- | ----------------------------------------------------- | ------------------- |
-| MILVUS_HOST      | The IP address of Milvus, you can get it by ifconfig. | 127.0.0.1           |
-| MILVUS_PORT      | Port of Milvus.                                       | 19530               |
-| VECTOR_DIMENSION | Dimension of the vectors.                             | 2048                |
-| MYSQL_HOST       | The IP address of Mysql.                              | 127.0.0.1           |
-| MYSQL_PORT       | Port of Milvus.                                       | 3306                |
-| DEFAULT_TABLE    | The milvus and mysql default collection name.         | milvus_img_search   |
+> If the YOLO model is not downloaded automatically, you should switch to the **server/src/yolov3_detector/data/** path and **run the `./prepare_model.sh` command.**
 
-- **Run the code** 
+| Parameter        | Description                                   | Default setting                       |
+| ---------------- | --------------------------------------------- | ------------------------------------- |
+| MILVUS_HOST      | milvus IP address                             | 127.0.0.1                             |
+| MILVUS_PORT      | milvus service port                           | 19530                                 |
+| VECTOR_DIMENSION | Dimensionality of the vectors                 | 2048                                  |
+| MYSQL_HOST       | The IP address of Mysql.                      | 127.0.0.1                             |
+| MYSQL_PORT       | Port of Milvus.                               | 3306                                  |
+| DEFAULT_TABLE    | The milvus and mysql default collection name. | milvus_obj_det                        |
+| COCO_MODEL_PATH  | Path to the YOLO detection model              | ./yolov3_detector/data/yolov3_darknet |
 
-Then start the server with Fastapi. 
+- **Run the code**
 
 ```bash
 $ cd src
 $ python main.py
 ```
+- **API docs**
 
-- **The API docs**
+Vist 127.0.0.1:5010/docs in your browser to use all the APIs.
 
-Type 127.0.0.1:5000/docs in your browser to see all the APIs.
-
-[img] (API_imag.png)
+![fastapi](pic/fastapi.png)
 
 - **Code  structure**
 
@@ -152,32 +155,36 @@ If you are interested in our code or would like to contribute code, feel free to
 - **Start the front-end**
 
 ```bash
-# Please modify API_URL to the IP address and port of the server.
-$ export API_URL='http://192.168.1.85:5000'
+# Modify API_URL to the IP address and port of the server.
+$ export API_URL='http://172.16.20.10:5010'
 $ docker run -d -p 8001:80 \
 -e API_URL=${API_URL} \
-milvusbootcamp/pic-search-webclient:1.0
+milvusbootcamp/img-search-client:1.0
 ```
+
+> In this command, `API_URL` means the query service address.
 
 - **How to use**
 
-Enter ` WEBCLIENT_IP:8001`  in the browser to open the interface for reverse image search. 
+Visit  ` WEBCLIENT_IP:8001`  in the browser to open the interface for reverse image search. 
 
-> `WEBCLIENT_IP `specifies the IP address that runs pic-search-webclient docker.
+>  `WEBCLIENT_IP `specifies the IP address that runs pic-search-webclient docker.
 
 <img src="pic/web4.png" width = "650" height = "500" alt="arch" align=center />
 
 Enter the path of an image folder in the pic_search_webserver docker container with `${DATAPATH1}`, then click `+` to load the pictures. The following screenshot shows the loading process:
 
-<img src="pic/web2.png" width = "650" height = "500" alt="arch" align=center />
+>  Note: After clicking the Load button, it will take 1 to 2 seconds for the system to response. Please do not click again.
 
-> Note: After clicking the Load button, it will take 1 to 2 seconds for the system to response. Please do not click again.
+<img src="pic/web0.png" width = "650" height = "500" alt="arch" align=center  />
 
 The loading process may take several minutes. The following screenshot shows the interface with images loaded.
 
-<img src="pic/web3.png" width = "650" height = "500" alt="arch" align=center />
+> Only support **jpg** pictures.
+
+<img src="pic\web3 .png" width = "650" height = "500" />
 
 Select an image to search.
 
-<img src="pic/web5.png" width = "650" height = "500" alt="arch" align=center />
+<img src="pic/web5.png"  width = "650" height = "500" />
 
