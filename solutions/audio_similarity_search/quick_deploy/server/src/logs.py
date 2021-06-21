@@ -3,96 +3,81 @@ import re
 import datetime
 import logging
 import sys
+from src.config import LOGS_NUM
 
 try:
     import codecs
 except ImportError:
     codecs = None
 
-class MultiprocessHandler(logging.FileHandler):
-    def __init__(self,filename,when='D',backupCount=0,encoding=None,delay=False):
 
+class MultiprocessHandler(logging.FileHandler):
+    def __init__(self, filename, when='D', backupCount=0, encoding=None, delay=False):
         self.prefix = filename
         self.backupCount = backupCount
         self.when = when.upper()
         self.extMath = r"^\d{4}-\d{2}-\d{2}"
 
         self.when_dict = {
-            'S':"%Y-%m-%d-%H-%M-%S",
-            'M':"%Y-%m-%d-%H-%M",
-            'H':"%Y-%m-%d-%H",
-            'D':"%Y-%m-%d"
+            'S': "%Y-%m-%d-%H-%M-%S",
+            'M': "%Y-%m-%d-%H-%M",
+            'H': "%Y-%m-%d-%H",
+            'D': "%Y-%m-%d"
         }
 
         self.suffix = self.when_dict.get(when)
         if not self.suffix:
-            raise ValueError(u"指定的日期间隔单位无效: %s" % self.when)
-        
-        self.filefmt = os.path.join("logs","%s.%s" % (self.prefix,self.suffix))
-        
+            print('The specified date interval unit is invalid: ', self.when)
+            sys.exit(1)
+
+        self.filefmt = os.path.join('.', "logs", "%s-%s.log" % (self.prefix, self.suffix))
+
         self.filePath = datetime.datetime.now().strftime(self.filefmt)
-        
+
         _dir = os.path.dirname(self.filefmt)
         try:
-        
             if not os.path.exists(_dir):
                 os.makedirs(_dir)
-        except Exception:
-            print(u"创建文件夹失败")
-            print(u"文件夹路径：" + self.filePath)
-            pass
+        except Exception as e:
+            print('Failed to create log file: ', e)
+            print("log_path：" + self.filePath)
+            sys.exit(1)
 
         if codecs is None:
             encoding = None
 
-        logging.FileHandler.__init__(self,self.filePath,'a+',encoding,delay)
+        logging.FileHandler.__init__(self, self.filePath, 'a+', encoding, delay)
 
     def shouldChangeFileToWrite(self):
-      
         _filePath = datetime.datetime.now().strftime(self.filefmt)
-      
         if _filePath != self.filePath:
             self.filePath = _filePath
             return True
         return False
 
     def doChangeFile(self):
-    
         self.baseFilename = os.path.abspath(self.filePath)
-  
         if self.stream:
-            
             self.stream.close()
-            
             self.stream = None
 
         if not self.delay:
-          
             self.stream = self._open()
-
         if self.backupCount > 0:
-            print('-----------delete backup logs------------')
             for s in self.getFilesToDelete():
-                print(s)
                 os.remove(s)
 
     def getFilesToDelete(self):
-
-        dirName,_ = os.path.split(self.baseFilename)
-        fileNames = os.listdir(dirName)
+        dir_name, _ = os.path.split(self.baseFilename)
+        file_names = os.listdir(dir_name)
         result = []
-
-        prefix = self.prefix + '.'
-        plen = len(prefix)
-        for fileName in fileNames:
-            if fileName[:plen] == prefix:
-
-                suffix = fileName[plen:]
-
+        prefix = self.prefix + '-'
+        for file_name in file_names:
+            if file_name[:len(prefix)] == prefix:
+                suffix = file_name[len(prefix):-4]
                 if re.compile(self.extMath).match(suffix):
-                    result.append(os.path.join(dirName,fileName))
+                    result.append(os.path.join(dir_name, file_name))
         result.sort()
-
 
         if len(result) < self.backupCount:
             result = []
@@ -101,38 +86,43 @@ class MultiprocessHandler(logging.FileHandler):
         return result
 
     def emit(self, record):
-
         try:
             if self.shouldChangeFileToWrite():
                 self.doChangeFile()
-            logging.FileHandler.emit(self,record)
-        except (KeyboardInterrupt,SystemExit):
+            logging.FileHandler.emit(self, record)
+        except (KeyboardInterrupt, SystemExit):
             raise
         except:
             self.handleError(record)
 
 
-def write_log(log_message, level=0):
+def write_log():
     logger = logging.getLogger()
-    formattler = '%(asctime)s - %(levelname)s - %(message)s'
-    fmt = logging.Formatter(formattler)
+    logger.setLevel(logging.DEBUG)
+    # formatter = '%(asctime)s ｜ %(levelname)s ｜ %(filename)s ｜ %(funcName)s ｜ %(module)s ｜ %(lineno)s ｜ %(message)s'
+    fmt = logging.Formatter(
+        '%(asctime)s ｜ %(levelname)s ｜ %(filename)s ｜ %(funcName)s ｜ %(lineno)s ｜ %(message)s')
 
     stream_handler = logging.StreamHandler(sys.stdout)
     stream_handler.setLevel(logging.INFO)
     stream_handler.setFormatter(fmt)
 
-
-    log_name = "app.log"
-    file_handler = MultiprocessHandler(log_name, when='D', backupCount=7)
-    file_handler.setLevel(logging.INFO)
+    log_name = "milvus"
+    file_handler = MultiprocessHandler(log_name, when='D', backupCount=LOGS_NUM)
+    file_handler.setLevel(logging.DEBUG)
     file_handler.setFormatter(fmt)
-
+    file_handler.doChangeFile()
 
     logger.addHandler(stream_handler)
     logger.addHandler(file_handler)
-    if level:
-        logger.error(log_message)
-    else:
-        logger.info(log_message)
+
+    return logger
 
 
+LOGGER = write_log()
+# if __name__ == "__main__":
+#     message = 'test writing logs'
+#     logger = write_log()
+#     logger.info(message)
+#     logger.debug(message)
+#     logger.error(message)
