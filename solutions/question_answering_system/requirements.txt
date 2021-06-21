@@ -3,3 +3,5 @@ pymilvus==1.1.0
 psycopg2-binary
 pandas
 numpy
+fastapi
+uvicorn
