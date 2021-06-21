@@ -1,4 +1,4 @@
-# Image Similarity Search
+# Reverse Image Search
 Image search is one of the core ideas behind many different technologies, from autonomous cars recognizing objects to iPhones recognizing the correct user. Here you will find how one can easily empower their vision programs using Milvus.
 
 ## Try notebook
