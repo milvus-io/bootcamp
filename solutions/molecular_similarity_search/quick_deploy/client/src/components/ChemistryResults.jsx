@@ -29,14 +29,16 @@ const useStyles = makeStyles({
 const SearchResults = props => {
   const classes = useStyles({});
   const { results = [] } = props;
+  console.log(results);
   const [currentImage, setCurrentImage] = useState(0);
   const [viewerIsOpen, setViewerIsOpen] = useState(false);
-  const images = Object.keys(results);
-  const datas = images.map(image => {
+  const datas = results.map(i => {
+    const [Molecular, data] = i;
+
     return {
-      src: image,
-      Molecular: results[image][0],
-      Distance: results[image][1]
+      src: data[0],
+      Molecular,
+      Distance: data[1].toFixed(7)
     };
   });
   const _openLightbox = useCallback(index => {
