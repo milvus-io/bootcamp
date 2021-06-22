@@ -1,0 +1,14 @@
+flask==1.1.1
+flask-cors==3.0.9
+minio==5.0.7
+arrow==0.15.5
+flask-restful==0.3.8
+redis==3.4.1
+diskcache==4.1.0
+opencv-python-headless==4.2.0.32
+tensorflow==2.5.0
+#tensorflow-gpu==1.14.0
+Keras==2.3.1
+pymilvus==0.2.13
+Pillow==8.2.0
+gunicorn==19.10.0
