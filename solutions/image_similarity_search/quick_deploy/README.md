@@ -63,7 +63,7 @@ $ docker run -d --name zilliz_search_images_demo --network my-net --ip 10.0.0.3 
 -v ${IMAGE_PATH1}:/tmp/pic1 \
 -p 35000:5000 \
 -e "MILVUS_HOST=10.0.0.2" \
-milvusbootcamp/pic-search-webserver:1.0
+milvusbootcamp/pic-search-webserver:2.0
 ```
 
 For the command in this step, `IMAGE_PATH1` specifies the path to where the images you are searching through are located, **please set it before run this docker.** This location is mapped to the docker container. 
@@ -90,7 +90,7 @@ $ docker run -d --name zilliz_search_images_demo \
 -v ${IMAGE_PATH1}:/tmp/pic1 \
 -p 35000:5000 \
 -e "MILVUS_HOST=${MILVUS_IP}" \
-milvusbootcamp/pic-search-webserver:1.0
+milvusbootcamp/pic-search-webserver:2.0
 ```
 
 In the previous command, `IMAGE_PATH1` specify the path where images are located. The location is mapped to the docker container. After deployment, you can use `/tmp/pic1` to load images. `MILVUS_HOST` specifies the IP address of the Milvus Docker host. Do not use backloop address "127.0.0.1". You do not have to modify other parts of the command.
