@@ -1,8 +1,0 @@
-pymilvus
-redis
-torch
-torchvision
-matplotlib
-pillow
-numpy
-gdown
