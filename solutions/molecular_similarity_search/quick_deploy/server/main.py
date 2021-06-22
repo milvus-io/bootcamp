@@ -1,23 +1,21 @@
+import uvicorn
 import os
-import logging
-import time
-from src.milvus_helpers import MilvusHelper
-from src.mysql_helpers import MySQLHelper
+from diskcache import Cache
+from fastapi import FastAPI, File, UploadFile
+from starlette.middleware.cors import CORSMiddleware
+from starlette.responses import FileResponse
+from starlette.requests import Request
+from src.helpers.milvus_helpers import MilvusHelper
+from src.helpers.mysql_helpers import MySQLHelper
 from src.config import UPLOAD_PATH
-from src.logs import LOGGER
 from src.operations.load import do_load
 from src.operations.search import do_search
 from src.operations.count import do_count
 from src.operations.drop import do_drop
-from fastapi import FastAPI
-from fastapi import File
-from fastapi import UploadFile
-from diskcache import Cache
-import uvicorn
-from starlette.responses import FileResponse
-from starlette.requests import Request
-from pathlib import Path
-from starlette.middleware.cors import CORSMiddleware
+from src.config import TOP_K
+from src.logs import LOGGER
+from pydantic import BaseModel
+from typing import Optional
 
 app = FastAPI()
 app.add_middleware(
@@ -25,27 +23,27 @@ app.add_middleware(
     allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
-    allow_headers=["*"]
-)
-
+    allow_headers=["*"])
 MODEL = None
 MILVUS_CLI = MilvusHelper()
 MYSQL_CLI = MySQLHelper()
 
-# Mkdir 'tmp/audio-data'
+# Mkdir 'tmp/mol-data'
 if not os.path.exists(UPLOAD_PATH):
     os.makedirs(UPLOAD_PATH)
     LOGGER.info("mkdir the path:{} ".format(UPLOAD_PATH))
 
+
 @app.get('/data')
-def audio_path(audio_path):
-    # Get the audio file
+def mols_img(mols_path):
+    # Get the molecular image file
     try:
-        LOGGER.info(("Successfully load audio: {}".format(audio_path)))
-        return FileResponse(audio_path)
+        LOGGER.info(("Successfully load molecular image: {}".format(mols_path)))
+        return FileResponse(UPLOAD_PATH + '/' + mols_path + '.png')
     except Exception as e:
-        LOGGER.error("upload audio error: {}".format(e))
+        LOGGER.error("upload image error: {}".format(e))
         return {'status': False, 'msg': e}, 400
+
 
 @app.get('/progress')
 def get_progress():
@@ -57,44 +55,60 @@ def get_progress():
         LOGGER.error("upload data error: {}".format(e))
         return {'status': False, 'msg': e}, 400
 
-@app.post('/audio/load')
-async def load_audios(Table: str = None, File: str = None):
-    # Insert all the audio files under the file path to Milvus/MySQL
+
+class Item(BaseModel):
+    Table: Optional[str] = None
+    File: str
+
+@app.post('/data/load')
+async def load_data(item: Item):
+    # Insert all the data under the file path to Milvus/MySQL
     try:
-        total_num = do_load(Table, File, MODEL, MILVUS_CLI, MYSQL_CLI)
+        total_num = do_load(item.Table, item.File, MODEL, MILVUS_CLI, MYSQL_CLI)
         LOGGER.info("Successfully loaded data, total count: {}".format(total_num))
         return {'status': True, 'msg': "Successfully loaded data!"}
     except Exception as e:
         LOGGER.error(e)
         return {'status': False, 'msg': e}, 400
 
-@app.post('/audio/search')
-async def search_audio(Table: str = None, Audio: str = None):
-    # Search the uploaded audio in Milvus/MySQL
+
+class Item_search(BaseModel):
+    Table: Optional[str] = None
+    Mol: str
+    Num: Optional[int] = TOP_K
+
+@app.post('/data/search')
+async def search_data(request: Request, item: Item_search):
+    # Search the upload image in Milvus/MySQL
     try:
         # Save the upload data to server.
-        ids, paths, distances = do_search(Table, Audio, MODEL, MILVUS_CLI, MYSQL_CLI)
+        ids, paths, distances = do_search(item.Table, item.Mol, item.Num, MODEL, MILVUS_CLI, MYSQL_CLI)
+        host = request.headers['host']
+        for i in range(len(ids)):
+            tmp = "http://" + str(host) + "/data?mols_path=" + str(ids[i])
+            ids[i] = tmp
         res = dict(zip(paths, zip(ids, distances)))
-        # Sort results by distance metric, closest distances first
         res = sorted(res.items(), key=lambda item: item[1][1])
-        LOGGER.info("Successfully searched similar audio!")
+        LOGGER.info("Successfully searched similar data!")
         return res
     except Exception as e:
         LOGGER.error(e)
         return {'status': False, 'msg': e}, 400
 
-@app.get('/audio/count')
-async def count_audio(table_name: str = None):
-    # Returns the total number of vectors in the system
+
+@app.post('/data/count')
+async def count_data(table_name: str = None):
+    # Returns the total number of data in the system
     try:
-        num = do_count(table_name, MILVUS_CLI)
+        num = do_count(table_name, MILVUS_CLI, MYSQL_CLI)
         LOGGER.info("Successfully count the number of data!")
         return num
     except Exception as e:
         LOGGER.error(e)
         return {'status': False, 'msg': e}, 400
 
-@app.post('/audio/drop')
+
+@app.post('/data/drop')
 async def drop_tables(table_name: str = None):
     # Delete the collection of Milvus and MySQL
     try:
@@ -105,5 +119,6 @@ async def drop_tables(table_name: str = None):
         LOGGER.error(e)
         return {'status': False, 'msg': e}, 400
 
+
 if __name__ == '__main__':
-    uvicorn.run(app=app, host='127.0.0.1', port=8002)
+    uvicorn.run(app=app, host='0.0.0.0', port=5001)

@@ -10,7 +10,7 @@ This bootcamp includes the following:
 - [Benchmark Test](benchmark_test)
 
 - Solutions
-  - [Image Similarity Search](solutions/image_similarity_search)
+  - [Reverse Image Search](solutions/reverse_image_search)
   - [Question Answering System](solutions/question_answering_system)
   - [Recommendation System](solutions/recommendation_system)
   - [Molecular Similarity Search](solutions/molecular_similarity_search)
