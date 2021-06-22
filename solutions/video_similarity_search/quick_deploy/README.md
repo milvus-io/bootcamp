@@ -25,7 +25,7 @@ The video similarity system will use Milvus to store and search the feature vect
   ```bash
   $ wget -P /home/$USER/milvus/conf https://raw.githubusercontent.com/milvus-io/milvus/v1.1.1/core/conf/demo/server_config.yaml
   $ sudo docker run -d --name milvus_cpu_1.1.0 \
--p 19530:19530 \
+  -p 19530:19530 \
   -p 19121:19121 \
   -v /home/$USER/milvus/db:/var/lib/milvus/db \
   -v /home/$USER/milvus/conf:/var/lib/milvus/conf \
@@ -75,7 +75,7 @@ The next step is to start the system server. It provides HTTP backend services, 
   -e "MILVUS_HOST=${Milvus_HOST}" \
   -e "MILVUS_PORT=${Milvus_PORT}" \
   -e "MYSQL_HOST=${Mysql_HOST}" \
-  milvusbootcamp/video-search-server:1.0
+  milvusbootcamp/video-search-server1
   ```
 
   > **Note:** -v ${DATAPATH1}:${DATAPATH1} means that you can mount the directory into the container. If needed, you can load the parent directory or more directories.
@@ -87,7 +87,7 @@ The next step is to start the system server. It provides HTTP backend services, 
   ```bash
   $ cd server
   $ pip install -r requirements.txt
-```
+  ```
   
 - **Set configuration**
 
@@ -153,7 +153,7 @@ The next step is to start the system server. It provides HTTP backend services, 
   $ export API_URL='http://192.168.1.85:5000'
   $ docker run -d -p 8001:80 \
   -e API_URL=${API_URL} \
-  milvusbootcamp/video-search-webclient:1.0
+  milvusbootcamp/video-search-webclient
   ```
 
 - **How to use**
