@@ -11,12 +11,12 @@ const Provider = queryContext.Provider;
 
 const useStyles = makeStyles({
   root: {
-    marginTop: "20%"
+    marginTop: "20%",
   },
   color: {
     color: "red",
-    marginRight: "10px"
-  }
+    marginRight: "10px",
+  },
 });
 const QueryProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const classes = useStyles();
@@ -44,7 +44,7 @@ const QueryProvider: FC<{ children: ReactNode }> = ({ children }) => {
   };
 
   const search = async (params: any) => {
-    const url = `${URL.SEARCH}?${Math.ceil(Math.random() * 10000).toString()}`;
+    const url = URL.SEARCH;
     return await axiosInstance.post(url, params).catch(errorParser);
   };
   const clearAll = async () => {
@@ -62,7 +62,7 @@ const QueryProvider: FC<{ children: ReactNode }> = ({ children }) => {
         clearAll,
         showNote,
         hideNote,
-        status
+        status,
       }}
     >
       {children}
@@ -71,7 +71,7 @@ const QueryProvider: FC<{ children: ReactNode }> = ({ children }) => {
         open={status.isShow}
         anchorOrigin={{
           vertical: "top",
-          horizontal: "center"
+          horizontal: "center",
         }}
         autoHideDuration={6000}
         onClose={() => hideNote()}
@@ -80,7 +80,7 @@ const QueryProvider: FC<{ children: ReactNode }> = ({ children }) => {
             style={{
               display: "flex",
               alignItems: "center",
-              color: "red"
+              color: "red",
             }}
           >
             <ErrorIcon classes={{ root: classes.color }} />
