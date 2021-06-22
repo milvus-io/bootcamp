@@ -119,7 +119,7 @@ The next step is to start the system server. It provides HTTP backend services, 
 
   Type 127.0.0.1:5000/docs in your browser to see all the APIs.
 
-  [img] (API_imag.png)
+  ![img] (./pic/API_imag.png)
 
 - **Code  structure**
 
@@ -162,22 +162,21 @@ The next step is to start the system server. It provides HTTP backend services, 
 
   > `WEBCLIENT_IP`specifies the IP address that runs pic-search-webclient docker.
 
-  [img] (API_imag.png)
+  ![img] (./pic/show.png)
 
   1. **Load data**
   Enter the path of an image folder in the pic_search_webserver docker container with `${DATAPATH1}`, then click `+` to load the pictures. The following screenshot shows the loading process:
 
-  [img] (API_imag.png)
+  ![img] (./pic/load.png)
 
   > Note: After clicking the Load button, it will take 1 to 2 seconds for the system to response. Please do not click again.
 
   2. **Search data**
   The loading process may take several minutes. The following screenshot shows the interface with images loaded.
 
-  ![img] (./API_imag.png)
+  ![img] (./pic/search.png)
   
-[img] (API_imag.png)
+
   
-  
-  
+
   
