@@ -4,6 +4,7 @@ from diskcache import Cache
 from fastapi import FastAPI, File, UploadFile
 from starlette.middleware.cors import CORSMiddleware
 from starlette.responses import FileResponse
+from starlette.requests import Request
 from src.helpers.milvus_helpers import MilvusHelper
 from src.helpers.mysql_helpers import MySQLHelper
 from src.config import UPLOAD_PATH
@@ -11,6 +12,7 @@ from src.operations.load import do_load
 from src.operations.search import do_search
 from src.operations.count import do_count
 from src.operations.drop import do_drop
+from src.config import TOP_K
 from src.logs import LOGGER
 from pydantic import BaseModel
 from typing import Optional
@@ -34,9 +36,9 @@ if not os.path.exists(UPLOAD_PATH):
 
 @app.get('/data')
 def mols_img(mols_path):
-    # Get the gif file
+    # Get the molecular image file
     try:
-        LOGGER.info(("Successfully load gif: {}".format(mols_path)))
+        LOGGER.info(("Successfully load molecular image: {}".format(mols_path)))
         return FileResponse(UPLOAD_PATH + '/' + mols_path + '.png')
     except Exception as e:
         LOGGER.error("upload image error: {}".format(e))
@@ -70,14 +72,23 @@ async def load_data(item: Item):
         return {'status': False, 'msg': e}, 400
 
 
+class Item_search(BaseModel):
+    Table: Optional[str] = None
+    Mol: str
+    Num: Optional[int] = TOP_K
+
 @app.post('/data/search')
-async def search_data(Table: str = None, Mol: str = None):
+async def search_data(request: Request, item: Item_search):
     # Search the upload image in Milvus/MySQL
     try:
         # Save the upload data to server.
-        ids, paths, distances = do_search(Table, Mol, MODEL, MILVUS_CLI, MYSQL_CLI)
+        ids, paths, distances = do_search(item.Table, item.Mol, item.Num, MODEL, MILVUS_CLI, MYSQL_CLI)
+        host = request.headers['host']
+        for i in range(len(ids)):
+            tmp = "http://" + str(host) + "/data?mols_path=" + str(ids[i])
+            ids[i] = tmp
         res = dict(zip(paths, zip(ids, distances)))
-        res = sorted(res.items(), key=lambda item: item[1])
+        res = sorted(res.items(), key=lambda item: item[1][1])
         LOGGER.info("Successfully searched similar data!")
         return res
     except Exception as e:
