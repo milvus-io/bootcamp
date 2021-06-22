@@ -102,3 +102,7 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+#Extra
+.DS_STORE
+.DS_Store?
