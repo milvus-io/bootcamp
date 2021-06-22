@@ -25,7 +25,7 @@ The video similarity system will use Milvus to store and search the feature vect
   ```bash
   $ wget -P /home/$USER/milvus/conf https://raw.githubusercontent.com/milvus-io/milvus/v1.1.1/core/conf/demo/server_config.yaml
   $ sudo docker run -d --name milvus_cpu_1.1.0 \
--p 19530:19530 \
+  -p 19530:19530 \
   -p 19121:19121 \
   -v /home/$USER/milvus/db:/var/lib/milvus/db \
   -v /home/$USER/milvus/conf:/var/lib/milvus/conf \
@@ -75,7 +75,7 @@ The next step is to start the system server. It provides HTTP backend services, 
   -e "MILVUS_HOST=${Milvus_HOST}" \
   -e "MILVUS_PORT=${Milvus_PORT}" \
   -e "MYSQL_HOST=${Mysql_HOST}" \
-  milvusbootcamp/video-search-server:1.0
+  milvusbootcamp/video-search-server:1.1
   ```
 
   > **Note:** -v ${DATAPATH1}:${DATAPATH1} means that you can mount the directory into the container. If needed, you can load the parent directory or more directories.
@@ -87,7 +87,7 @@ The next step is to start the system server. It provides HTTP backend services, 
   ```bash
   $ cd server
   $ pip install -r requirements.txt
-```
+  ```
   
 - **Set configuration**
 
@@ -119,7 +119,7 @@ The next step is to start the system server. It provides HTTP backend services, 
 
   Type 127.0.0.1:5000/docs in your browser to see all the APIs.
 
-  [img] (API_imag.png)
+  ![img] (./pic/API_imag.png)
 
 - **Code  structure**
 
@@ -162,22 +162,21 @@ The next step is to start the system server. It provides HTTP backend services, 
 
   > `WEBCLIENT_IP`specifies the IP address that runs pic-search-webclient docker.
 
-  [img] (API_imag.png)
+  ![img] (./pic/show.png)
 
   1. **Load data**
   Enter the path of an image folder in the pic_search_webserver docker container with `${DATAPATH1}`, then click `+` to load the pictures. The following screenshot shows the loading process:
 
-  [img] (API_imag.png)
+  ![img] (./pic/load.png)
 
   > Note: After clicking the Load button, it will take 1 to 2 seconds for the system to response. Please do not click again.
 
   2. **Search data**
   The loading process may take several minutes. The following screenshot shows the interface with images loaded.
 
-  ![img] (./API_imag.png)
+  ![img] (./pic/search.png)
   
-[img] (API_imag.png)
+
   
-  
-  
+
   
