@@ -2,7 +2,7 @@ from milvus import *
 import os
 
 MILVUS_HOST = "127.0.0.1"
-MILVUS_PORT = 19539
+MILVUS_PORT = 19530
 
 ##################### Collection Parameters ########################################################
 

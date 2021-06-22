@@ -117,7 +117,7 @@ You need to modify the following parameters:
 
 ```yaml
 ports:
-        - "0.0.0.0:19540:19530"
+        - "0.0.0.0:19540:19531"
 ```
 You need to select which port you want to be able to access the mishards cluster from, in this case port `19540` on the localhost. The internal port, in this case `19530`, should match up with the `SERVER_PORT` parameter that is lower in the file. 
 

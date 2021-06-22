@@ -1,5 +1,7 @@
 # Lab Test 2: 100-Million-Scale Vector Similarity Search
 
+This experiment uses one million data from the SIFT1B dataset to test the performance and accuracy of Milvus 1.1.
+
 ## 1. Prepare test data and scripts
 
 The 100 million vectors used in this test are extracted from the dataset [SIFT1B](http://corpus-texmex.irisa.fr/).
@@ -74,11 +76,11 @@ Vectors are then inserted into a table named `ann_100m_sq8h`, with the index_typ
 To show the available tables and number of vectors in each table, use the following command:
 
 ```bash
-#查看库中有哪些表
+# Show collections
 $ python3 main.py --show
-#查看表ann_100m_sq8h的行数
+# Show the number of the entities in the collection ann_1m_sq8h
 $ python3 main.py --collectio ann_100m_sq8q8 --rows
-ann_100m_sq8_sq8h的索引类型
+# Show the index type of the collection ann_1m_sq8h
 $ python3 main.py --collection ann_100m_sq81m_sq8 --describe_index
 ```
 
