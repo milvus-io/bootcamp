@@ -59,6 +59,8 @@ https://github.com/hanxiao/bert-as-service
 # Download model
 $ cd model
 $ wget https://storage.googleapis.com/bert_models/2018_11_03/english_L-12_H-768_A-12.zip
+# start service
+$ bert-serving-start -model_dir / tmp / english_L-12_H-768_A-12 / -num_worker = 4 
 
 ```
 
@@ -80,22 +82,6 @@ Please modify the parameters according to your own environment. Here listing som
 | DEFAULT_TABLE    | The milvus and mysql default collection name.         | text_search         |
 
 ### Steps to build a project
-
-#### Install Milvus
-
-Milvus provides two release versions: CPU version and GPU version. In order to get better query performance, the GPU version 1.1 Milvus reference link is used in the project:
-
-https://milvus.io/docs/v1.1.0/milvus_docker-gpu.md
-
-##### Start Bert service
-
-The way to start Bert-as-service . 
-
-```
-    # start service
-    $ bert-serving-start -model_dir / tmp / english_L-12_H-768_A-12 / -num_worker = 4 
-
-```
 
 - **Run the code**
 
