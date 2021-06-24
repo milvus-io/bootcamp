@@ -1,6 +1,6 @@
 Keras==2.3.1
 tensorflow
-opencv-python==4.2.0.34
+opencv-python
 pillow
 pymysql
 fastapi
@@ -9,3 +9,4 @@ pandas
 aiofiles
 pymilvus
 diskcache
+python-multipart
