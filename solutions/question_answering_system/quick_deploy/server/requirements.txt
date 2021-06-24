@@ -1,0 +1,8 @@
+PyMySQL
+uvicorn
+numpy
+pymilvus==1.1.1
+fastapi
+python-multipart
+pandas
+sentence_transformers
