@@ -2,47 +2,83 @@
 
 This project uses Milvus and Bert to build a Text Search Engine. In this project, Bert is used to convert the text into a fixed-length vector and store it in Milvus, and then combine Milvus to search for similar text in the text entered by the user.
 
-### Data description
+### Data source
 
- The data set is stored in the **Milvus-bert-server/data** directory
+The dataset needed for this system is a **CSV** format file which needs to contain a column of titles and a column of texts.
 
-### Script description
+## How to deploy the system
 
-**Milvus-bert-client**
+### 1. Start Milvus and MySQL
 
-This directory is the script of the front page
+The system will use Milvus to store and search the feature vector data, and Mysql is used to store the correspondence between the ids returned by Milvus and the text data  , then you need to start Milvus and Mysql first.
 
-**Milvus-bert-server**
+- **Start Milvus v1.1.0**
 
-Under this directory is the script to start the back-end service
+First, you are supposed to refer to the Install Milvus v1.1.0 for how to run Milvus docker.
 
-app.py: The script provides an interface for the front page
+```
+$ wget -P /home/$USER/milvus/conf https://raw.githubusercontent.com/milvus-io/milvus/v1.1.0/core/conf/demo/server_config.yaml
+$ sudo docker run -d --name milvus_cpu_1.1.0 \
+-p 19530:19530 \
+-p 19121:19121 \
+-v /home/$USER/milvus/db:/var/lib/milvus/db \
+-v /home/$USER/milvus/conf:/var/lib/milvus/conf \
+-v /home/$USER/milvus/logs:/var/lib/milvus/logs \
+-v /home/$USER/milvus/wal:/var/lib/milvus/wal \
+milvusdb/milvus:1.1.0-cpu-d050721-5e559c
+```
 
-main.py: The script can perform operations such as data import and query
+> Note the version of Milvus.
 
-**Parameter description:**
+- **Start MySQL**
 
-| Parameter  | Description                                                  |
-| ---------- | ------------------------------------------------------------ |
-| --table    | This parameter specifies the table name when executing the script |
-| --title    | This parameter specifies the path where the title data set is located when the script is executed |
-| --version  | This parameter specifies the path where the version data set is located when the script is executed |
-| --load     | This parameter performs data import operations               |
-| --sentence | This parameter gives the question in the query               |
-| --search   | This parameter performs a query operation                    |
+```
+$ docker run -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7
+```
 
-config.py：The script is a configuration file and needs to be modified according to the specific environment
+### 2. Start Server
 
-| Parameter     | Description              | Default setting |
-| ------------- | ------------------------ | --------------- |
-| MILVUS_HOST   | milvus service ip        | 127.0.0.1       |
-| MILVUS_PORT   | milvus service port      | 19530           |
-| PG_HOST       | postgresql service ip    | 127.0.0.1       |
-| PG_PORT       | postgresql service port  | 5432            |
-| PG_USER       | postgresql user name     | postgres        |
-| PG_PASSWORD   | postgresql password      | postgres        |
-| PG_DATABASE   | postgresql datebase name | testdb          |
-| DEFAULT_TABLE | default  table name      | test01          |
+The next step is to start the system server. It provides HTTP backend services, and there are two ways to start: running with Docker or source code.
+
+#### 2.2 Run source code
+
+- **Install the Python packages**
+
+```
+$ cd server
+$ pip install -r requirements.txt
+```
+
+- **wget the model**
+
+The way to install Bert-as-service is as follows. You can also refer to the official website link of the Github repository of Bert-as-service:
+
+https://github.com/hanxiao/bert-as-service
+
+```
+# Download model
+$ cd model
+$ wget https://storage.googleapis.com/bert_models/2018_11_03/english_L-12_H-768_A-12.zip
+# start service
+$ bert-serving-start -model_dir /tmp/english_L-12_H-768_A-12/ -num_worker=4 
+```
+
+- **Set configuration**
+
+```
+$ vim server/src/config.py
+```
+
+Please modify the parameters according to your own environment. Here listing some parameters that need to be set, for more information please refer to [config.py](https://github.com/miia12/bootcamp/blob/master/solutions/reverse_image_search/quick_deploy/server/src/config.py).
+
+| **Parameter**    | **Description**                                       | **Default setting** |
+| ---------------- | ----------------------------------------------------- | ------------------- |
+| MILVUS_HOST      | The IP address of Milvus, you can get it by ifconfig. | 127.0.0.1           |
+| MILVUS_PORT      | Port of Milvus.                                       | 19530               |
+| VECTOR_DIMENSION | Dimension of the vectors.                             | 2048                |
+| MYSQL_HOST       | The IP address of Mysql.                              | 127.0.0.1           |
+| MYSQL_PORT       | Port of Milvus.                                       | 3306                |
+| DEFAULT_TABLE    | The milvus and mysql default collection name.         | text_search         |
 
 ### Steps to build a project
 
@@ -51,14 +87,6 @@ config.py：The script is a configuration file and needs to be modified accordin
 Milvus provides two release versions: CPU version and GPU version. In order to get better query performance, the GPU version 1.1 Milvus reference link is used in the project:
 
 https://milvus.io/docs/v1.1.0/milvus_docker-gpu.md
-
-##### Install PostgreSQL
-PostgreSQL is a powerful, open source object-relational database system. PostgreSQL performs well in terms of reliability, stability, and data consistency. 
-For specific installation methods, please refer to the PostgreSQL official website link:https://www.postgresql.org/
-
-##### Install python package
-    $ pip install --ignore-installed --upgrade tensorflow==1.10
-    $ pip install -r requriment.txt
 
 ##### Start Bert service
 
@@ -72,36 +100,38 @@ https://github.com/hanxiao/bert-as-service
     # start service
     $ bert-serving-start -model_dir / tmp / english_L-12_H-768_A-12 / -num_worker = 4 
 
-##### Import Data
+- **Run the code**
 
-In the main.py text data import script of the Milvus-bert-server file in the project, you only need to modify the path of the title set file and the path of the version set in the script to import text data
-
-    $ cd Milvus-bert-server
-    $ python main.py --collection test01 --title data/title.txt --version data/text.txt --load
-
-> Note: **data/title.txt** is the path where the imported title set is located, **data/version.txt** is the path where the imported version set is located
-
-##### Start query service
-
-    $ python app.py
-
-##### Start the UI client
-Install  [Node.js 12+](https://nodejs.org/en/download/) and [Yarn](https://classic.yarnpkg.com/en/docs/install/).
+Then start the server with Fastapi.
 
 ```
-$ cd Milvus-bert-client/client 
-# Install dependencies
-$ yarn install 
-#start yarn 
-$ yarn start   
-open localhost:3001/search  
+$ cd src
+$ python main.py
 ```
 
-> Note: If you change the port of the server, please modify the parameters on line 17 **/src/shared/Constants.ts** for your own environment
+- **API docs** 
 
-##### The interface 
+Vist 127.0.0.1:5000/docs in your browser to use all the APIs.
 
-Enter 127.0.0.1:3001/search in the browser to open the search page and enter the search text.
+![1](pic/1.png)
+
+**/qa/load_data**
+
+This API is used to import datasets into the system.
+
+**/qa/search**
+
+This API is used to get similar texts in the system.
+
+**/qa/count**
+
+This API is used to get the number of the titles in the system.
+
+**/qa/drop**
+
+This API is used to delete a specified collection.
+
+
 
 
 
