@@ -56,7 +56,7 @@ def get_progress():
     # Get the progress of dealing with images
     try:
         cache = Cache('./tmp')
-        return "current: {}, total: {}".format(cache['current'], cache['total'])
+        return {'current': cache['current'], 'total': cache['total']}
     except Exception as e:
         LOGGER.error("upload image error: {}".format(e))
         return {'status': False, 'msg': e}, 400
@@ -103,7 +103,7 @@ async def load_video(item: Item):
 
 
 @app.post('/video/search')
-async def search_images(image: UploadFile = File(...), table_name: str = None):
+async def search_images(request: Request, image: UploadFile = File(...), table_name: str = None):
     # Search the upload image in Milvus/MySQL
     try:
         # Save the upload image to server.
@@ -111,7 +111,8 @@ async def search_images(image: UploadFile = File(...), table_name: str = None):
         img_path = os.path.join(UPLOAD_PATH, image.filename)
         with open(img_path, "wb+") as f:
             f.write(content)
-        paths, distances = do_search(table_name, img_path, MODEL, MILVUS_CLI, MYSQL_CLI)
+        host = request.headers['host']
+        paths, distances = do_search(host, table_name, img_path, MODEL, MILVUS_CLI, MYSQL_CLI)
         res = {}
         for p, d in zip(paths, distances):
             if not p in res or res[p]>d:
