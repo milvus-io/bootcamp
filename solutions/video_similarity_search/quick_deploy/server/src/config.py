@@ -8,7 +8,7 @@ VECTOR_DIMENSION = os.getenv("VECTOR_DIMENSION", 2048)
 INDEX_FILE_SIZE = os.getenv("INDEX_FILE_SIZE", 1024)
 METRIC_TYPE = os.getenv("METRIC_TYPE", MetricType.L2)
 DEFAULT_TABLE = os.getenv("DEFAULT_TABLE", "milvus_video_search")
-TOP_K = os.getenv("TOP_K", 100)
+TOP_K = os.getenv("TOP_K", 40)
 
 ############### MySQL Configuration ###############
 MYSQL_HOST = os.getenv("MYSQL_HOST", "127.0.0.1")
