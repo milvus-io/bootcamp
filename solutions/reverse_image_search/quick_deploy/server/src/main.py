@@ -9,6 +9,7 @@ from milvus_helpers import MilvusHelper
 from mysql_helpers import MySQLHelper
 from config import UPLOAD_PATH
 from operations.load import do_load
+from operations.upload import do_upload
 from operations.search import do_search
 from operations.count import do_count
 from operations.drop import do_drop
@@ -68,6 +69,22 @@ async def load_images(item: Item):
         total_num = do_load(item.Table, item.File, MODEL, MILVUS_CLI, MYSQL_CLI)
         LOGGER.info("Successfully loaded data, total count: {}".format(total_num))
         return "Successfully loaded data!"
+    except Exception as e:
+        LOGGER.error(e)
+        return {'status': False, 'msg': e}, 400
+
+@app.post('/img/upload')
+async def upload_images(image: UploadFile = File(...), table_name: str = None):
+    # Insert the upload image to Milvus/MySQL
+    try:
+        # Save the upload image to server.
+        content = await image.read()
+        print('read pic succ')
+        img_path = os.path.join(UPLOAD_PATH, image.filename)
+        with open(img_path, "wb+") as f:
+            f.write(content)
+        do_upload(table_name, img_path, MODEL, MILVUS_CLI, MYSQL_CLI)
+        return "Successfully uploaded data!"
     except Exception as e:
         LOGGER.error(e)
         return {'status': False, 'msg': e}, 400
