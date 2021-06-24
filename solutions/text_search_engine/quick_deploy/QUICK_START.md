@@ -91,6 +91,29 @@ Then start the server with Fastapi.
 $ cd src
 $ python main.py
 ```
+- **Code  structure**
+
+  If you are interested in our code or would like to contribute code, feel free to learn more about our code structure.
+
+  ```
+  └───server
+  │   │   Dockerfile
+  │   │   requirements.txt
+  │   │   main.py  # File for starting the program.
+  │   │
+  │   └───src
+  │       │   config.py  # Configuration file.
+  │       │   encode.py  # Covert image/video/questions/text/... to embeddings.
+  │       │   milvus_helper.py  # Connect to Milvus server and insert/drop/query vectors in Milvus.
+  │       │   mysql_helper.py   # Connect to MySQL server, and add/delete/query IDs and object information.
+  │       │   
+  │       └───operations # Call methods in milvus.py and mysql.py to insert/query/delete objects.
+  │               │   insert.py
+  │               │   query.py
+  │               │   delete.py
+  │               │   count.py
+  ```
+
 
 - **API docs** 
 
@@ -113,9 +136,6 @@ This API is used to get the number of the titles in the system.
 **/qa/drop**
 
 This API is used to delete a specified collection.
-
-
-
 
 
 
