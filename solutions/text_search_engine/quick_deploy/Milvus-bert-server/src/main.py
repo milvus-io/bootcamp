@@ -78,7 +78,7 @@ async def load_text(file: UploadFile = File(...), table_name: str = None):
 @app.get('/text/search')
 async def do_search_api(table_name: str = None, query_sentence: str = None):
     try:
-        ids,title, text, distances = search_in_milvus(table_name, query_sentence, MILVUS_CLI, MYSQL_CLI)
+        ids,title, text, distances = search_in_milvus(table_name,query_sentence, MILVUS_CLI, MYSQL_CLI)
         res = dict(zip(title, text))
         #res = sorted(res.items(), key=lambda item: item[0])
         LOGGER.info("Successfully searched similar text!")
