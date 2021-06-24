@@ -27,7 +27,7 @@ class MySQLHelper():
 
     
     
-   # Batch insert (Milvus_ids, title,text) to mysql
+   # Batch insert (Milvus_id, title,text) to mysql
     def load_data_to_mysql(self, table_name,data):
         sql = "insert into " + table_name + " (milvus_id,title,text) values (%s,%s,%s);"  
         #fname = os.path.join(os.getcwd(),'temp.csv')

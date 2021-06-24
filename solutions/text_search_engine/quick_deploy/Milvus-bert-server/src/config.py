@@ -1,12 +1,11 @@
 import os
-from milvus import MetricType
 
 ############### Milvus Configuration ###############
 MILVUS_HOST = os.getenv("MILVUS_HOST", "192.168.1.85")
-MILVUS_PORT = os.getenv("MILVUS_PORT", 19532)
+MILVUS_PORT = os.getenv("MILVUS_PORT", 19533)
 VECTOR_DIMENSION = os.getenv("VECTOR_DIMENSION", 768)
 INDEX_FILE_SIZE = os.getenv("INDEX_FILE_SIZE", 1024)
-METRIC_TYPE = os.getenv("METRIC_TYPE", MetricType.IP)
+METRIC_TYPE = os.getenv("METRIC_TYPE", "IP")
 DEFAULT_TABLE = os.getenv("DEFAULT_TABLE", "text_search")
 TOP_K = os.getenv("TOP_K", 9)
 

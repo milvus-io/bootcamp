@@ -24,19 +24,18 @@ def normaliz_vec(vec_list):
         vec_list[i] = vec
     return vec_list
 
-def search_in_milvus(collection_name, query_sentence,milvus_cli, mysql_cli):
+def search_in_milvus(table_name, query_sentence,milvus_cli, mysql_cli):
     try:
+        if not milvus_cli.has_collection(table_name):
+            raise Exception("There has no collection named:{}".format(table_name))
         query_data = [query_sentence]
         vectors = bc.encode(query_data) 
         query_list = normaliz_vec(vectors.tolist())
         LOGGER.info("Successfully insert query list")
-        results = milvus_cli.search_vectors(collection_name,query_list,TOP_K)
-        if results[0][0].distance < 0.8:
-            LOGGER.info("Unable to search for similar text!")
-        else:
-            LOGGER.info("Search the similar text!")
+        results = milvus_cli.search_vectors(table_name,query_list,TOP_K)
         vids = [str(x.id) for x in results[0]]
-        ids,title, text= mysql_cli.search_by_milvus_ids(vids, collection_name)
+        print("-----------------", vids)
+        ids,title,text= mysql_cli.search_by_milvus_ids(vids, table_name)
         distances = [x.distance for x in results[0]]
         return ids,title, text, distances
     except Exception as e:
