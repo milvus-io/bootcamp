@@ -16,6 +16,7 @@ from operations.drop import do_drop
 from logs import LOGGER
 from pydantic import BaseModel
 from typing import Optional
+from urllib.request import urlretrieve
 
 app = FastAPI()
 origins = ["*"]
@@ -74,15 +75,21 @@ async def load_images(item: Item):
         return {'status': False, 'msg': e}, 400
 
 @app.post('/img/upload')
-async def upload_images(image: UploadFile = File(...), table_name: str = None):
+async def upload_images(image: UploadFile = File(None), url: str = None, table_name: str = None):
     # Insert the upload image to Milvus/MySQL
     try:
         # Save the upload image to server.
-        content = await image.read()
-        print('read pic succ')
-        img_path = os.path.join(UPLOAD_PATH, image.filename)
-        with open(img_path, "wb+") as f:
-            f.write(content)
+        if image is not None:
+            content = await image.read()
+            print('read pic succ')
+            img_path = os.path.join(UPLOAD_PATH, image.filename)
+            with open(img_path, "wb+") as f:
+                f.write(content)
+        elif url is not None:
+            img_path = os.path.join(UPLOAD_PATH, os.path.basename(url))
+            urlretrieve(url, img_path)
+        else:
+            return {'status': False, 'msg': 'Image and url are required'}, 400
         vector_id = do_upload(table_name, img_path, MODEL, MILVUS_CLI, MYSQL_CLI)
         LOGGER.info("Successfully uploaded data, vector id: {}".format(vector_id))
         return vector_id
