@@ -14,7 +14,7 @@ The system will use Milvus to store and search the feature vector data, and Mysq
 
 - **Start Milvus v2.0**
 
-First, you are supposed to refer to the Install Milvus v1.1.0 for how to run Milvus docker.
+First, you are supposed to refer to the Install Milvus v2.0 for how to run Milvus docker.
 
 ```
 $ wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/docker/standalone/docker-compose.yml -O docker-compose.yml
