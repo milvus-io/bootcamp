@@ -20,8 +20,9 @@ import SearchResult from "./SearchResult";
 import Navbar from "../../navigation/Navbar";
 import Keycodes from "../../../shared/Keycodes";
 import MilvusLogo from "../../../img/logo.svg";
+import SnackBar from "../../common/SnackBar";
 
-const TABLE_NAME = "searchTable";
+const TABLE_NAME = "test_table";
 
 const SearchPage = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -29,6 +30,12 @@ const SearchPage = () => {
   const [searched, setSearched] = useState<boolean>(false);
   const [inputFocused, setInputFocused] = useState<boolean>(false);
   const [query, setQuery] = useState<string>("");
+  const [snackConfig, setSnackConfig] = useState({
+    isActive: false,
+    duration: 3,
+    type: "info",
+    content: "",
+  });
 
   useEffect(() => {
     document.title = "Search Engine";
@@ -80,10 +87,7 @@ const SearchPage = () => {
       );
       setLoading(false);
 
-      const data = await response.json();
-      const searchResults = data.response.map((item: string[]) =>
-        formatResData(item)
-      );
+      const searchResults = await response.json();
       setSearchResults(searchResults);
     } catch (err) {
       console.log(err);
@@ -108,8 +112,25 @@ const SearchPage = () => {
     setSearched(false);
   };
 
+  const openSnackBar = ({ content = "", type = "info", duration = 5 }) =>
+    setSnackConfig({
+      isActive: true,
+      duration,
+      type,
+      content,
+    });
+
+  const closeSnackBar = () =>
+    setSnackConfig({
+      isActive: false,
+      duration: 0,
+      type: "info",
+      content: "",
+    });
+
   return (
     <>
+      <SnackBar {...snackConfig} onClose={closeSnackBar} />
       {searchResults.length === 0 && !searched ? (
         <Navbar />
       ) : (
@@ -142,6 +163,7 @@ const SearchPage = () => {
                 onSearch={onSearch}
                 tableName={TABLE_NAME}
                 setLoading={setLoading}
+                openSnackBar={openSnackBar}
               />
             </SearchContainer>
           )}
