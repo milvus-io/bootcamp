@@ -3,6 +3,7 @@ import { Search, Plus } from "react-feather";
 import styled from "styled-components";
 import { withRouter, RouteComponentProps } from "react-router";
 import { Button } from "reakit";
+import Dialog from "../../common/uploadDialog";
 
 import {
   SEARCH_API_BASE,
@@ -16,12 +17,20 @@ interface SearchBarProps extends RouteComponentProps {
   onSearch: (query: string) => any;
   tableName: string;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  openSnackBar: (params: any) => void;
 }
 
-const SearchBar = ({ onSearch, tableName, setLoading }: SearchBarProps) => {
+const SearchBar = ({
+  onSearch,
+  tableName,
+  setLoading,
+  openSnackBar,
+}: SearchBarProps) => {
   const [inputFocused, setInputFocused] = useState<boolean>(false);
   const [query, setQuery] = useState<string>("");
   const inputRef = useRef<HTMLInputElement>(null!);
+  const [open, setOpen] = useState<boolean>(false);
+  const [path, setPath] = useState<string>("");
 
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) =>
     setQuery(event.target.value);
@@ -41,13 +50,15 @@ const SearchBar = ({ onSearch, tableName, setLoading }: SearchBarProps) => {
   );
 
   const deleteTable = async () => {
-    const res = await fetch(`${SEARCH_API_BASE}${DROP}`, {
-      method: "POST",
-      body: JSON.stringify({ table_name: tableName }),
-      headers: {
-        "content-type": "application/json",
-      },
-    });
+    const res = await fetch(
+      `${SEARCH_API_BASE}${DROP}?table_name=${tableName}`,
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+      }
+    );
 
     try {
       const data = await res.json();
@@ -68,28 +79,47 @@ const SearchBar = ({ onSearch, tableName, setLoading }: SearchBarProps) => {
 
     const fd = new FormData();
     const file = inputRef.current.files![0];
-    if (file) {
-      const fileType = file.name.split(".")[1];
-      if (fileType !== "csv") {
-        alert("type error");
-        return;
-      }
-      fd.append("file", file);
-      fd.append("table_name", tableName);
+    const fileType = file.name.split(".")[1];
+    if (fileType !== "csv") {
+      openSnackBar({
+        content: "Wrong file type, Only .scv accept",
+        type: "wraning",
+      });
+      setLoading(false);
+      return;
+    }
 
+    fd.append("file", file);
+    fd.append("table_name", tableName);
+
+    if (file) {
       try {
         const res = await fetch(`${SEARCH_API_BASE}${LOAD}`, {
           method: "POST",
           body: fd,
         });
-        const data = res.json();
-        console.log(data);
+        const data = await res.json();
+
+        if (typeof data === "string") {
+          openSnackBar({
+            content: data,
+          });
+        } else {
+          openSnackBar({
+            content: JSON.stringify(data),
+            type: "warning",
+          });
+        }
       } catch (error) {
         console.log(error);
       } finally {
         setLoading(false);
       }
     }
+  };
+
+  const closeDialog = () => {
+    setOpen(false);
   };
 
   useEffect(() => {
@@ -122,10 +152,10 @@ const SearchBar = ({ onSearch, tableName, setLoading }: SearchBarProps) => {
         </SearchButton>
         <UploadFileBtn>
           <UploadIcon />
-          Upload
+          Upload File
           <FileUploader
-            ref={inputRef}
             type="file"
+            ref={inputRef}
             onChange={handleUploadTable}
           />
         </UploadFileBtn>
@@ -235,10 +265,10 @@ const UploadFileBtn = styled(Button)`
 
 const FileUploader = styled.input`
   position: absolute;
-  width: 100%;
-  height: 100%;
-  right: 0;
+  left: 0;
   top: 0;
+  right: 0;
+  bottom: 0;
   opacity: 0;
-  visibility: hiiden;
+  z-index: 10;
 `;
