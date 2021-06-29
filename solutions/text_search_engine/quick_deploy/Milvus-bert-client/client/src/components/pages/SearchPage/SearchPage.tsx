@@ -1,30 +1,37 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { Search } from 'react-feather';
-import { PageWrapper, PageContent, Heading1, Heading2 } from '../../../shared/Styles';
-import SearchBar from './SearchBar';
-import ErrorBoundary from 'react-error-boundary';
-import styled from 'styled-components';
-import Loading from '../../common/Loading';
+import React, { useState, useEffect, useCallback } from "react";
+import { Search } from "react-feather";
+import {
+  PageWrapper,
+  PageContent,
+  Heading1,
+  Heading2,
+} from "../../../shared/Styles";
+import SearchBar from "./SearchBar";
+import ErrorBoundary from "react-error-boundary";
+import styled from "styled-components";
+import Loading from "../../common/Loading";
 import {
   SEARCH_API_BASE,
-  SEARCH_PAGE_ENDPOINT,
+  SEARCH,
   TABLET_BREAKPOINT,
-} from '../../../shared/Constants';
-import { SearchResultView } from '../../../shared/Models';
-import SearchResult from './SearchResult';
-import Navbar from '../../navigation/Navbar';
-import Keycodes from '../../../shared/Keycodes';
-import MilvusLogo from '../../../img/logo.svg';
+} from "../../../shared/Constants";
+import { SearchResultView } from "../../../shared/Models";
+import SearchResult from "./SearchResult";
+import Navbar from "../../navigation/Navbar";
+import Keycodes from "../../../shared/Keycodes";
+import MilvusLogo from "../../../img/logo.svg";
+
+const TABLE_NAME = "searchTable";
 
 const SearchPage = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [searchResults, setSearchResults] = useState<SearchResultView[]>([]);
   const [searched, setSearched] = useState<boolean>(false);
   const [inputFocused, setInputFocused] = useState<boolean>(false);
-  const [query, setQuery] = useState<string>('');
+  const [query, setQuery] = useState<string>("");
 
   useEffect(() => {
-    document.title = 'Search Engine';
+    document.title = "Search Engine";
   }, []);
 
   const handleUserKeyPress = useCallback(
@@ -34,13 +41,13 @@ const SearchPage = () => {
       }
     },
     // eslint-disable-next-line
-    [query, inputFocused],
+    [query, inputFocused]
   );
 
   useEffect(() => {
-    window.addEventListener('keydown', handleUserKeyPress);
+    window.addEventListener("keydown", handleUserKeyPress);
     return () => {
-      window.removeEventListener('keydown', handleUserKeyPress);
+      window.removeEventListener("keydown", handleUserKeyPress);
     };
   }, [handleUserKeyPress]);
 
@@ -62,20 +69,24 @@ const SearchPage = () => {
   const fetchSearchResults = async (query: string) => {
     try {
       setLoading(true);
-
-      const response = await fetch(`${SEARCH_API_BASE}${SEARCH_PAGE_ENDPOINT}`, {
-        method: 'POST',
-        body: JSON.stringify({ query_text: query }),
-        headers: {
-          'content-type': 'application/json',
-        },
-      });
+      const response = await fetch(
+        `${SEARCH_API_BASE}${SEARCH}?table_name=${TABLE_NAME}&query_sentence=${query}`,
+        {
+          method: "GET",
+          headers: {
+            "content-type": "application/json",
+          },
+        }
+      );
       setLoading(false);
 
       const data = await response.json();
-      const searchResults = data.response.map((item: string[]) => formatResData(item));
+      const searchResults = data.response.map((item: string[]) =>
+        formatResData(item)
+      );
       setSearchResults(searchResults);
     } catch (err) {
+      console.log(err);
       setLoading(false);
     }
   };
@@ -89,7 +100,8 @@ const SearchPage = () => {
     } as SearchResultView;
   };
 
-  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => setQuery(event.target.value);
+  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) =>
+    setQuery(event.target.value);
 
   const clearSearchResult = () => {
     setSearchResults([]);
@@ -126,20 +138,32 @@ const SearchPage = () => {
           {searchResults.length > 0 || searched ? null : (
             <SearchContainer>
               <Logo src={MilvusLogo} alt="logo" />
-              <SearchBar onSearch={onSearch} />
+              <SearchBar
+                onSearch={onSearch}
+                tableName={TABLE_NAME}
+                setLoading={setLoading}
+              />
             </SearchContainer>
           )}
-
-          <ErrorBoundary FallbackComponent={() => <NoResult>No results found</NoResult>}>
+          <ErrorBoundary
+            FallbackComponent={() => <NoResult>No results found</NoResult>}
+          >
             {loading && <Loading />}
             {searchResults.length > 0 ? (
               <SearchResults>
                 {searchResults.map((result, i) => {
-                  return <SearchResult result={result} key={`${i}${new Date().toTimeString()}`} />;
+                  return (
+                    <SearchResult
+                      result={result}
+                      key={`${i}${new Date().toTimeString()}`}
+                    />
+                  );
                 })}
               </SearchResults>
             ) : (
-              <NoResult>{searched && !loading ? 'No results found' : ''}</NoResult>
+              <NoResult>
+                {searched && !loading ? "No results found" : ""}
+              </NoResult>
             )}
           </ErrorBoundary>
         </PageContent>
@@ -177,7 +201,7 @@ const NavbarWrapper = styled.div`
 const Row = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
 `;
 
 const NavbarLogo = styled.a`
