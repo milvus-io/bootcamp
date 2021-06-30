@@ -1,0 +1,84 @@
+{
+  "name": "wait-for-expect",
+  "version": "3.0.2",
+  "description": "Wait for expectation to be true, useful for integration and end to end testing",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "scripts": {
+    "test": "eslint --report-unused-disable-directives src/**/*.ts && jest",
+    "build": "tsc --emitDeclarationOnly && babel src --out-dir lib --extensions \".ts,.tsx\"",
+    "build:watch": "npm run build -- --watch",
+    "type-check": "tsc --noEmit",
+    "semantic-release": "semantic-release"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TheBrainFamily/wait-for-expect.git"
+  },
+  "keywords": [
+    "jest",
+    "expect",
+    "wait",
+    "async",
+    "await",
+    "promise",
+    "integration",
+    "testing",
+    "unit"
+  ],
+  "author": "Lukasz Gandecki",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TheBrainFamily/wait-for-expect/issues"
+  },
+  "homepage": "https://github.com/TheBrainFamily/wait-for-expect#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.0.0-beta.42",
+    "@babel/core": "^7.0.0-beta.42",
+    "@babel/plugin-proposal-class-properties": "^7.0.0-beta.42",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.42",
+    "@babel/preset-env": "^7.0.0-beta.42",
+    "@babel/preset-typescript": "^7.0.0-beta.42",
+    "@types/eslint": "^4.16.0",
+    "@types/eslint-plugin-prettier": "^2.2.0",
+    "@types/jest": "^22.2.2",
+    "@types/node": "^9.6.1",
+    "@types/prettier": "^1.10.0",
+    "@types/typescript": "^2.0.0",
+    "@typescript-eslint/eslint-plugin": "^2.5.0",
+    "@typescript-eslint/parser": "^2.5.0",
+    "babel-core": "^7.0.0-0",
+    "babel-jest": "^22.4.3",
+    "babel-plugin-add-module-exports": "^1.0.0",
+    "eslint": "^6.5.1",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-prettier": "^2.6.0",
+    "jest": "^22.4.3",
+    "jest-serializer-ansi": "^1.0.3",
+    "prettier": "^1.11.1",
+    "semantic-release": "^15.12.0",
+    "typescript": "~3.2.4"
+  },
+  "jest": {
+    "snapshotSerializers": [
+      "jest-serializer-ansi"
+    ],
+    "moduleDirectories": [
+      "./node_modules",
+      "./src"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx"
+    ],
+    "transform": {
+      "^.+\\.(js|jsx|ts|tsx)$": "babel-jest"
+    },
+    "testRegex": "/src/.*\\.spec\\.(js|ts|tsx)$",
+    "testURL": "http://localhost/"
+  }
+}
