@@ -20,7 +20,7 @@ The video similarity system will use Milvus to store and search the feature vect
 
 - **Start Milvus v2.0**
 
-  First, you are supposed to refer to the Install [Milvus v2.0](milvus.io) for how to run Milvus docker.
+  First, you are supposed to refer to the Install [Milvus v2.0](https://milvus.io/docs/v2.0.0/install_standalone-docker.md) for how to run Milvus docker.
   
   > Note the version of Milvus.
   
@@ -31,10 +31,43 @@ The video similarity system will use Milvus to store and search the feature vect
   ```
 
 ### 2. Start Server
+The next step is to start the system server. It provides HTTP backend services, and there are two ways to start, such as Docker and source code.
 
-The next step is to start the system server. 
-#### Run source code
+#### 2.1 Run server with Docker
 
+- **Set parameters**
+
+  Please modify the parameters according to your own environment. Here listing some parameters that need to be set, for more information please refer to [config.py](./server/src/config.py).
+
+  | **Parameter**   | **Description**                                       | **example**      |
+  | --------------- | ----------------------------------------------------- | ---------------- |
+  | **DATAPATH1**   | The dictionary of the image path.                     | /data/image_path |
+  | **MILVUS_HOST** | The IP address of Milvus, you can get it by ifconfig. | 192.168.1.85     |
+  | **MILVUS_PORT** | The port of Milvus.                                   | 19530            |
+  | **MYSQL_HOST** | The IP address of MySQL.                               | 192.168.1.85     |
+
+  ```bash
+  $ export DATAPATH1='/data/video_path'
+  $ export Milvus_HOST='192.168.1.85'
+  $ export Milvus_PORT='19530'
+  $ export Mysql_HOST='192.168.1.85'
+  ```
+
+- **Run Docker**
+
+  ```bash
+  $ docker run -d \
+  -v ${DATAPATH1}:${DATAPATH1} \
+  -p 5000:5000 \
+  -e "MILVUS_HOST=${Milvus_HOST}" \
+  -e "MILVUS_PORT=${Milvus_PORT}" \
+  -e "MYSQL_HOST=${Mysql_HOST}" \
+  milvusbootcamp/video-search-server:2.0
+  ```
+
+  > **Note:** -v ${DATAPATH1}:${DATAPATH1} means that you can mount the directory into the container. If needed, you can load the parent directory or more directories.
+
+#### 2.2 Run source code
 - **Install the Python packages**
 
   ```bash
