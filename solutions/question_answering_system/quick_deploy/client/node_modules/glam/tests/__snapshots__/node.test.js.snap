@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`basic 1`] = `
+<div>
+  <style
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": ".css-1e5q5tr{color:red;}",
+      }
+    }
+  />
+  <div
+    className="css-1e5q5tr"
+  >
+    hello world
+  </div>
+  <div
+    className="css-1e5q5tr"
+  >
+    hello world
+  </div>
+  <div
+    className="css-1e5q5tr"
+  >
+    hello world
+  </div>
+</div>
+`;
