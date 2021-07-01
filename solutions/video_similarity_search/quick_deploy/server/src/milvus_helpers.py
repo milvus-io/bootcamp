@@ -46,6 +46,8 @@ class MilvusHelper:
                 schema = CollectionSchema(fields=[ field1,field2], description="collection description")
                 self.collection = Collection(name=collection_name, schema=schema)   
                 LOGGER.debug("Create Milvus collection: {}".format(self.collection))
+            else:
+                self.set_collection(collection_name)
             return "OK"
         except Exception as e:
             LOGGER.error("Failed to load data to Milvus: {}".format(e))

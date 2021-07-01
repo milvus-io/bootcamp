@@ -21,7 +21,7 @@ class MySQLHelper():
         
     # Create mysql table if not exists
     def create_mysql_table(self, table_name):
-        test_connection()
+        self.test_connection()
         sql = "create table if not exists " + table_name + "(milvus_id TEXT, image_path TEXT);"
         try:
             self.cursor.execute(sql)
@@ -32,7 +32,7 @@ class MySQLHelper():
 
     # Batch insert (Milvus_ids, img_path) to mysql
     def load_data_to_mysql(self, table_name, data):
-        test_connection()
+        self.test_connection()
         sql = "insert into " + table_name + " (milvus_id,image_path) values (%s,%s);"
         try:
             self.cursor.executemany(sql, data)
@@ -44,7 +44,7 @@ class MySQLHelper():
 
     # Get the img_path according to the milvus ids
     def search_by_milvus_ids(self, ids, table_name):
-        test_connection()
+        self.test_connection()
         str_ids = str(ids).replace('[', '').replace(']', '')
         sql = "select image_path from " + table_name + " where milvus_id in (" + str_ids + ") order by field (milvus_id," + str_ids + ");"
         try:
@@ -59,7 +59,7 @@ class MySQLHelper():
 
     # Delete mysql table if exists
     def delete_table(self, table_name):
-        test_connection()
+        self.test_connection()
         sql = "drop table if exists " + table_name + ";"
         try:
             self.cursor.execute(sql)
@@ -70,7 +70,7 @@ class MySQLHelper():
 
     # Delete all the data in mysql table
     def delete_all_data(self, table_name):
-        test_connection()
+        self.test_connection()
         sql = 'delete from ' + table_name + ';'
         try:
             self.cursor.execute(sql)
@@ -82,7 +82,7 @@ class MySQLHelper():
 
     # Get the number of mysql table
     def count_table(self, table_name):
-        test_connection()
+        self.test_connection()
         sql = "select count(milvus_id) from " + table_name + ";"
         try:
             self.cursor.execute(sql)
