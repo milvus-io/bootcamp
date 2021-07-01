@@ -37,7 +37,7 @@ const App: React.FC = () => {
   return (
     <QueryProvider>
       <div className={classes.root}>
-        {!isMobile && <Menu></Menu>}
+        <Menu></Menu>
         {/* {!isMobile && <Setting setImages={setImages} setLoading={setLoading} />} */}
         <div className={classes.main}>
           <Header loading={loading}></Header>
