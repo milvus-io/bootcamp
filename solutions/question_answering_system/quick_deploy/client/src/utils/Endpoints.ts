@@ -4,10 +4,10 @@ declare global {
   }
 }
 // let endpoint = `http://40.117.75.127:5005`;
-let endpoint = "http://ec2-18-166-215-54.ap-east-1.compute.amazonaws.com:8000/";
-if (window._env_ && window._env_.API_URL) {
-  endpoint = window._env_.API_URL;
-}
+let endpoint = "http://13.228.73.30:8020";
+// if (window._env_ && window._env_.API_URL) {
+//   endpoint = window._env_.API_URL;
+// }
 export const Train = `${endpoint}/api/v1/train`;
 export const Processing = `${endpoint}/api/v1/process`;
 export const Count = `${endpoint}/api/v1/count`;
