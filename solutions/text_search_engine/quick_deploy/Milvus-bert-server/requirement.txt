@@ -1,0 +1,13 @@
+Keras==2.3.1
+numpy
+pymilvus==1.1.1
+futures==3.1.1
+cryptography
+aiofiles
+Pillow
+tensorflow == 1.13.1
+bert-serving-server
+bert-serving-client
+pymysql
+fastapi  
+uvicorn

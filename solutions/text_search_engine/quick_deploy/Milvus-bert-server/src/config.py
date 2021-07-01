@@ -1,12 +1,21 @@
 import os
+from milvus import MetricType
 
-MILVUS_HOST = os.getenv("MILVUS_HOST", "127.0.0.1")
-MILVUS_PORT = os.getenv("MILVUS_PORT", 19530)
+############### Milvus Configuration ###############
+MILVUS_HOST = os.getenv("MILVUS_HOST", "192.168.1.85")
+MILVUS_PORT = os.getenv("MILVUS_PORT", 19532)
+VECTOR_DIMENSION = os.getenv("VECTOR_DIMENSION", 768)
+INDEX_FILE_SIZE = os.getenv("INDEX_FILE_SIZE", 1024)
+METRIC_TYPE = os.getenv("METRIC_TYPE", MetricType.IP)
+DEFAULT_TABLE = os.getenv("DEFAULT_TABLE", "text_search")
+TOP_K = os.getenv("TOP_K", 9)
 
+############### MySQL Configuration ###############
+MYSQL_HOST = os.getenv("MYSQL_HOST", "192.168.1.85")
+MYSQL_PORT = os.getenv("MYSQL_PORT", 3306)
+MYSQL_USER = os.getenv("MYSQL_USER", "root")
+MYSQL_PWD = os.getenv("MYSQL_PWD", "123456")
+MYSQL_DB = os.getenv("MYSQL_DB", "mysql")
 
-PG_HOST = os.getenv("PG_HOST", "127.0.0.1")
-PG_PORT = os.getenv("PG_PORT", 5432)
-PG_USER = os.getenv("PG_USER", "postgres")
-PG_PASSWORD = os.getenv("PG_PASSWORD", "postgres")
-PG_DATABASE = os.getenv("PG_DATABASE", "testdb")
-DEFAULT_TABLE = os.getenv("DEFAULT_TABLE", "test233")
+############### Number of log files ###############
+LOGS_NUM = os.getenv("logs_num", 0)

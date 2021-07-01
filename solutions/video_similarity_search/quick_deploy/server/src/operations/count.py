@@ -14,7 +14,6 @@ def do_count(table_name, milvus_cli, mysql_cli):
         milvus_num = milvus_cli.count(table_name)
         mysql_num = mysql_cli.count_table(table_name)
         LOGGER.debug("The num of Milvus: {} and Mysql: {}".format(milvus_num, mysql_num))
-        assert milvus_num == mysql_num
         return milvus_num
     except Exception as e:
         LOGGER.error(" Error with count table {}".format(e))

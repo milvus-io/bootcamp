@@ -14,7 +14,7 @@ This demo uses the PASCAL VOC image set, which contains 17125 images with 20 cat
 
 Dataset size: ~ 2 GB.
 
-Download: http://host.robots.ox.ac.uk/pascal/VOC/voc2012/VOCtrainval_11-May-2012.tar
+Download: https://drive.google.com/file/d/1n_370-5Stk4t0uDV1QqvYkcvyV8rbw0O/view?usp=sharing
 
 > Note: You can also use your own images, **and needs to be an object in the image**. This demo supports images in formats of .jpg and .png.
 
