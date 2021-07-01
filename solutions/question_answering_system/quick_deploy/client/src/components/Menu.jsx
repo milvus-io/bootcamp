@@ -61,7 +61,7 @@ const Menu = () => {
   const hanldeFileChange = async () => {
     const file = inputRef.current.files[0];
     const fileType = file.name.split('.')[1];
-    if (fileType !== 'csv') {
+    if (!file || fileType !== 'csv') {
       openSnackBar("type error");
       return;
     }
@@ -76,6 +76,8 @@ const Menu = () => {
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      inputRef.current.value = '';
     }
   };
 
