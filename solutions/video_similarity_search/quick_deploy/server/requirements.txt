@@ -1,5 +1,4 @@
-Keras==2.3.1
-tensorflow
+Keras
 opencv-python
 pillow
 pymysql
@@ -7,6 +6,6 @@ fastapi
 uvicorn
 pandas
 aiofiles
-pymilvus
 diskcache
 python-multipart
+pymilvus-orm==2.0.0rc1
