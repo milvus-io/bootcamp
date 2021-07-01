@@ -1,9 +1,5 @@
 import pymysql
 import sys
-import os
-import csv
-import codecs
-import pandas as pd
 from config import MYSQL_HOST, MYSQL_PORT, MYSQL_USER, MYSQL_PWD, MYSQL_DB
 from logs import LOGGER
 
@@ -15,9 +11,18 @@ class MySQLHelper():
                                     local_infile=True)
         self.cursor = self.conn.cursor()
 
+    def test_connection():
+        try:
+            self.conn.ping()
+        except:
+            self.conn = pymysql.connect(host=MYSQL_HOST, user=MYSQL_USER, port=MYSQL_PORT, password=MYSQL_PWD,
+                                    database=MYSQL_DB,local_infile=True)
+            self.cursor = self.conn.cursor()
+        
     # Create mysql table if not exists
     def create_mysql_table(self, table_name):
-        sql = "create table if not exists " + table_name + "(milvus_id TEXT, title TEXT, text TEXT);"
+        test_connection()
+        sql = "create table if not exists " + table_name + "(milvus_id TEXT, image_path TEXT);"
         try:
             self.cursor.execute(sql)
             LOGGER.debug("MYSQL create table: {} with sql: {}".format(table_name, sql))
@@ -25,41 +30,36 @@ class MySQLHelper():
             LOGGER.error("MYSQL ERROR: {} with sql: {}".format(e, sql))
             sys.exit(1)
 
-    
-    
-   # Batch insert (Milvus_ids, title,text) to mysql
-    def load_data_to_mysql(self, table_name,data):
-        sql = "insert into " + table_name + " (milvus_id,title,text) values (%s,%s,%s);"  
-        #fname = os.path.join(os.getcwd(),'temp.csv')
-        #sql =" load data local infile '" + fname + "' into table " + table_name + " fields terminated by '|';"
+    # Batch insert (Milvus_ids, img_path) to mysql
+    def load_data_to_mysql(self, table_name, data):
+        test_connection()
+        sql = "insert into " + table_name + " (milvus_id,image_path) values (%s,%s);"
         try:
             self.cursor.executemany(sql, data)
-            #self.cursor.execute(sql)
             self.conn.commit()
             LOGGER.debug("MYSQL loads data to table: {} successfully".format(table_name))
         except Exception as e:
             LOGGER.error("MYSQL ERROR: {} with sql: {}".format(e, sql))
             sys.exit(1)
-        
 
-    # Get the texts according to the milvus ids
+    # Get the img_path according to the milvus ids
     def search_by_milvus_ids(self, ids, table_name):
+        test_connection()
         str_ids = str(ids).replace('[', '').replace(']', '')
-        sql = "select * from " + table_name + " where milvus_id in (" + str_ids + ") order by field (milvus_id," + str_ids + ");"
+        sql = "select image_path from " + table_name + " where milvus_id in (" + str_ids + ") order by field (milvus_id," + str_ids + ");"
         try:
             self.cursor.execute(sql)
             results = self.cursor.fetchall()
-            results_id = [res[0] for res in results]
-            results_title = [res[1] for res in results]
-            results_text = [res[2] for res in results]
+            results = [res[0] for res in results]
             LOGGER.debug("MYSQL search by milvus id.")
-            return  results_id,results_title, results_text
+            return results
         except Exception as e:
             LOGGER.error("MYSQL ERROR: {} with sql: {}".format(e, sql))
             sys.exit(1)
 
     # Delete mysql table if exists
     def delete_table(self, table_name):
+        test_connection()
         sql = "drop table if exists " + table_name + ";"
         try:
             self.cursor.execute(sql)
@@ -70,6 +70,7 @@ class MySQLHelper():
 
     # Delete all the data in mysql table
     def delete_all_data(self, table_name):
+        test_connection()
         sql = 'delete from ' + table_name + ';'
         try:
             self.cursor.execute(sql)
@@ -81,6 +82,7 @@ class MySQLHelper():
 
     # Get the number of mysql table
     def count_table(self, table_name):
+        test_connection()
         sql = "select count(milvus_id) from " + table_name + ";"
         try:
             self.cursor.execute(sql)
@@ -90,5 +92,3 @@ class MySQLHelper():
         except Exception as e:
             LOGGER.error("MYSQL ERROR: {} with sql: {}".format(e, sql))
             sys.exit(1)
-            
-    
