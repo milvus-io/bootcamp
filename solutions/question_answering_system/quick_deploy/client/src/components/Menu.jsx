@@ -7,15 +7,16 @@ import { queryContext } from '../contexts/QueryContext';
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
+    flexDirection: 'column',
     flex: " 0 0 80px",
     background: "#000",
-    textAlign: "center",
-    paddingTop: "20px",
+    alignItems: "center",
+    padding: "20px 0",
 
-    [theme.breakpoints.down('md')]: {
+    [theme.breakpoints.down('xs')]: {
       flexDirection: 'row',
       alignItems: 'center',
-      paddingLeft: '20px'
+      padding: '0 20px'
     }
   },
   uploaderBtn: {
@@ -31,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     alignItems: 'center',
 
-    [theme.breakpoints.down('md')]: {
+    [theme.breakpoints.down('xs')]: {
       marginTop: 0,
       marginLeft: '20px'
     },
@@ -59,7 +60,6 @@ const Menu = () => {
 
   const hanldeFileChange = async () => {
     const file = inputRef.current.files[0];
-    console.log(file);
     const fileType = file.name.split('.')[1];
     if (fileType !== 'csv') {
       openSnackBar("type error");
@@ -82,11 +82,11 @@ const Menu = () => {
   const hanldeDropTable = async () => {
     try {
       const { data } = await dropTable();
-      const { code, message } = data || {};
+      const { code, msg } = data[0];
       if (code) {
-        openSnackBar(message);
+        openSnackBar(msg);
       } else {
-        openSnackBar(data);
+        openSnackBar(msg);
       }
 
     } catch (error) {
