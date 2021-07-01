@@ -11,7 +11,7 @@ class MySQLHelper():
                                     local_infile=True)
         self.cursor = self.conn.cursor()
 
-    def test_connection():
+    def test_connection(self):
         try:
             self.conn.ping()
         except:
