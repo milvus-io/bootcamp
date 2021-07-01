@@ -75,7 +75,7 @@ The next step is to start the system server. It provides HTTP backend services, 
   -e "MILVUS_HOST=${Milvus_HOST}" \
   -e "MILVUS_PORT=${Milvus_PORT}" \
   -e "MYSQL_HOST=${Mysql_HOST}" \
-  milvusbootcamp/video-search-server:1.1
+  milvusbootcamp/video-search-server:1.0
   ```
 
   > **Note:** -v ${DATAPATH1}:${DATAPATH1} means that you can mount the directory into the container. If needed, you can load the parent directory or more directories.
@@ -153,7 +153,7 @@ The next step is to start the system server. It provides HTTP backend services, 
   $ export API_URL='http://192.168.1.85:5000'
   $ docker run -d -p 8001:80 \
   -e API_URL=${API_URL} \
-  milvusbootcamp/video-search-webclient:1.0
+  milvusbootcamp/video-search-client:1.0
   ```
 
 - **How to use**
@@ -162,19 +162,19 @@ The next step is to start the system server. It provides HTTP backend services, 
 
   > `WEBCLIENT_IP`specifies the IP address that runs pic-search-webclient docker.
 
-  ![img] (./pic/show.png)
+  ![img](../pic/show.png)
 
   1. **Load data**
   Enter the path of an image folder in the pic_search_webserver docker container with `${DATAPATH1}`, then click `+` to load the pictures. The following screenshot shows the loading process:
 
-  ![img] (./pic/load.png)
+  ![img](../pic/load.png)
 
   > Note: After clicking the Load button, it will take 1 to 2 seconds for the system to response. Please do not click again.
 
   2. **Search data**
   The loading process may take several minutes. The following screenshot shows the interface with images loaded.
 
-  ![img] (./pic/search.png)
+  ![img](../pic/search.png)
   
 
   
