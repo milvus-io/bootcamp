@@ -1,0 +1,7 @@
+{
+  "name": "@restart/hooks/useBreakpoint",
+  "private": true,
+  "main": "../cjs/useBreakpoint.js",
+  "module": "../esm/useBreakpoint.js",
+  "types": "../esm/useBreakpoint.d.ts"
+}

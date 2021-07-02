@@ -1,0 +1,6 @@
+{
+  "name": "react-overlays/DropdownToggle",
+  "private": true,
+  "main": "../cjs/DropdownToggle.js",
+  "module": "../esm/DropdownToggle.js"
+}

@@ -1,0 +1,7 @@
+{
+  "name": "@restart/hooks/useMap",
+  "private": true,
+  "main": "../cjs/useMap.js",
+  "module": "../esm/useMap.js",
+  "types": "../esm/useMap.d.ts"
+}
