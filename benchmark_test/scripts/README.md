@@ -2,7 +2,7 @@
 
 ## Preparation
 
-Before running this project script, you need to start the service of milvus 1.1.
+Before running this project script, you need to start the service of milvus 2.0.
 
 Install python package
 
@@ -15,25 +15,24 @@ pip install -r requirements.txt
 | Parameter          | Description                                                  |
 | ------------------ | ------------------------------------------------------------ |
 | --collection       | Specify the name of the collection to be operated on         |
-| --dim              | When creating a new collection, you need to specify the dimensions of the vectors in the collection |
-| --index            | When creating an index, you need to specify the index type<flat, ivf_flat, sq8, sq8h, pq, nsg, hnsw> |
+|                    |                                                              |
+| --index_type       | When creating an index, you need to specify the index type<FLAT, IVF_FLAT, IVF_SQ8, IVF_SQ8 , IVF_PQ, RNSG, HNSW, ANNOY> |
 | --search_param     | When querying, specify the parameter value when querying (When the index is of type Ivf, this parameter refers to Nprobe. When indexing by Rnsg, this parameter refers to Search_Length. When the index is HNSW, this parameter refers to EF) |
-| --partition_tag    | Specify the partition label:                                 |
 | --create           | Perform the operation of creating a collection. This operation needs to specify two parameters: Collection and Dim |
 | --load             | Perform the operation of writing data. This operation needs to specify the parameter Collection |
-| --build            | Perform indexing operations. This operation needs to specify the parameters Collection and Index |
+| --create_index     | Perform indexing operations. This operation needs to specify the parameters Collection and Index |
 | --performance      | Perform performance testing operations. This operation needs to specify the parameters Collection and Search_param |
 | --recall           | Perform recall test operations. This operation needs to specify the parameters Collection and Search_param |
+| --partition_name   | Specify the partition label                                  |
 | --create_partition | Perform the operation of creating a partition. This operation needs to specify the parameters Collection and Partition |
-| --info             | View the data information of a certain collection. This operation needs to specify the parameter Collection |
+| --index_info       | View the index information of a certain collection. This operation needs to specify the parameter Collection |
 | --describe         | View the basic information of a collection. This operation needs to specify the parameter Collection |
-| --show             | Display the collections that exist in the library. No other parameters are required for this operation |
 | --has              | Determine whether a collection exists. This operation needs to specify the parameter Collection |
 | --rows             | View the number of vectors in a collection. This operation needs to specify the parameter Collection |
-| --flush            | Manual data placement operation. This operation needs to specify the parameter Collection |
 | --drop             | Delete the specified collection. This operation needs to specify the parameter Collection |
 | --drop_index       | Delete the index of the specified collection. This operation needs to specify the parameter Collection |
-| --version          | Check the version of milvus server and pymilvus. No other parameters are required for this operation |
+
+
 
 ## Configuration File
 
@@ -44,10 +43,10 @@ pip install -r requirements.txt
 
 **Parameters required when creating a collection**：
 
-| Parameter       | Description                                                  | Defaults      |
-| --------------- | ------------------------------------------------------------ | ------------- |
-| INDEX_FILE_SIZE | Specify the size of each segment.                            | 2048          |
-| METRIC_TYPE     | Specify the vector similarity calculation method when creating a collection | MetricType.L2 |
+| Parameter        | Description                                                  | Defaults |
+| ---------------- | ------------------------------------------------------------ | -------- |
+| METRIC_TYPE      | Specify the vector similarity calculation method when creating a collection | L2       |
+| VECTOR_DIMENSION | Specify the vector dimension when creating a collection      | 128      |
 
 **Parameters required for indexing**：
 
@@ -61,6 +60,7 @@ pip install -r requirements.txt
 | KNNG           | KNNG value when indexing NSG             | 100      |
 | HNSW_M         | M value for indexing HNSW                | 16       |
 | EFCONSTRUCTION | Build the EFCONSTRUCTION value of HNSW   | 500      |
+| N_TREE         | N_TREE value when indexing ANNOY         | 8        |
 
 **Configuration parameters required when writing data**：
 
@@ -99,14 +99,14 @@ pip install -r requirements.txt
 
 **1.Create a Collection**
 
-```
+```shell
 python main.py --collection <collection_name> -c
 ```
 
 **2. Create an index**
 
-```
-python main.py --collection <collection_name> --index <index_type> --build
+```shell
+python main.py --collection <collection_name> --index_type <index_type> --create_index
 ```
 
 **3. Data load**
@@ -130,22 +130,16 @@ python main.py --collection <collection_name> --search_param <search_param> --re
 **6.Create partition**
 
 ```
-python main.py --collection <collection_name> --partition_tag --create_partition
+python main.py --collection <collection_name> --partition_name --create_partition
 ```
 
-**7. View collection information**
+**7. View collection index information**
 
 ```
-python main.py --collection <collection_name> --describe
+python main.py --collection <collection_name> --index_info
 ```
 
-**8.View collections**
-
-```
-python main.py --show
-```
-
-**9.Determine whether the collection exists**
+**8.Determine whether the collection exists**
 
 ```
 python main.py --collection <collection_name> --has
@@ -169,8 +163,3 @@ python main.py --collection <collection_name> --drop
 python main.py --collection <collection_name> --drop_index
 ```
 
-**13.View** **milvus** **server and** **pymilvus** **version**
-
-```
-python main.py --version
-```
