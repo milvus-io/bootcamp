@@ -1,7 +1,7 @@
 PyMySQL
 uvicorn
 numpy
-pymilvus==1.1.1
+pymilvus-orm==2.0.0rc1
 fastapi
 python-multipart
 pandas
