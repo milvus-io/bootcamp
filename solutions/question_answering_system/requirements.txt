@@ -1,7 +1,5 @@
-sentence_transformers
-pymilvus==1.1.0
-psycopg2-binary
-pandas
+PyMySQL
 numpy
-fastapi
-uvicorn
+pymilvus-orm==2.0.0rc1
+pandas
+sentence_transformers
