@@ -1,6 +1,6 @@
 # Lab Test 1: One Million Vector Search
 
-This experiment uses one million data from the SIFT1B dataset to test the performance and accuracy of Milvus 1.1.
+This experiment uses one million data from the SIFT1B dataset to test the performance and accuracy of Milvus 2.0.
 
 ## 1. Prepare test data and scripts
 
@@ -37,39 +37,19 @@ Create a folder named `milvus_sift1m` and move all downloaded files to the folde
 
 > **Note:** Please go through the README carefully before testing with script . Make changes to the parameters in the script to match your scenario.
 
-## 2. Configure Milvus parameters
-
-To optimize the performance of Milvus, you can change Milvus parameters based on data distribution, performance, and accuracy requirements. In this test, 90% or higher recall rate can be achieved by using the recommended values in the following table.
-
-Configuration file: `/home/$USER/milvus/conf/server_config.yaml`
-
-|         Parameter         | Recommended value |
-| ---------------------- | ---- |
-|       `cpu_cache_capacity`   |   4   |
-|         `gpu_resource_config`.`cache_capacity`      |  1    |
-|         `use_blas_threshold`	                |   801     |
-|         `gpu_search_threshold`	                |   1001     |
-|         `search_resources`	                |   gpu0     |
 
 
-Use default values for other parameters. After setting parameter values, restart Milvus Docker to apply all changes.
+## 2. Create a table
 
-```bash
-$ docker restart <container id>
-```
-
-## 3. Create a table and build indexes
-
-Make sure Milvus is already installed and started. (For details of Milvus installation, please read [Milvus Quick Start](https://milvus.io/docs/v1.0.0/milvus_docker-cpu.md)).
+Make sure Milvus is already installed and started. (For details of Milvus installation, please read [Milvus Quick Start](https://milvus.io/docs/preview/install_standalone-docker.md)).
 
 >  Before testing, please modify the corresponding parameters according to the [script instructions](/benchmark_test/scripts/EN_README.md)
 
 
-Go to `milvus_sift1m`, and run the following command to create a table and build indexes:
+Go to `milvus_sift1m`, and run the following command to create a table:
 
 ```bash
-$ python3 main.py --collection ann_1m_sq8 --dim 128 -c
-$ python3 main.py --collection ann_1m_sq8 --index sq8 --build 
+$ python3 main.py --collection ann_1m_sq8 --create
 ```
 
 Vectors are then inserted into a table named `ann_1m_sq8h`, with the index_type of `IVF_SQ8H`. 
@@ -77,17 +57,13 @@ Vectors are then inserted into a table named `ann_1m_sq8h`, with the index_type 
 To show the available tables and number of vectors in each table, use the following command:
 
 ```bash
-#Show collections
-$ python3 main.py --show
+#Show if has collections
+$ python3 main.py --collection ann_1m_sq8 --has
 #Show the number of the entities in the collection ann_1m_sq8h
 $ python3 main.py --collection ann_1m_sq8 --rows
-#Show the index type of the collection ann_1m_sq8h
-$ python3 main.py --collection ann_1m_sq8 --describe_index
 ```
 
-## 4.  Import data
-
-Make sure table ann_1m_sq8 is successfully created.
+## 3.  Import data and build indexes
 
 Run the following command to import 1,000,000 rows of data:
 
@@ -103,40 +79,13 @@ Run the following command to check the number of rows in the table:
 $ python3 main.py --collection=ann_1m_sq8 --rows
 ```
 
-To make sure that all data imported to Milvus has indexes built. Navigate to `/home/$USER/milvus/db` and enter the following command:
+Run the following command to create index:
 
 ```bash
-$ sqlite3 meta.sqlite
+$ python3 main.py --collection ann_1m_sq8 --index_type IVF_SQ8 --create_index
 ```
 
-In sqlite3 CLI, enter the following command to check the current status:
-
-```sql
-sqlite> select * from TableFiles where table_id='ann_1m_sq8h';
-```
-
-Milvus divides a vector table into shards for storage. So, a query returns multiple records. The third column specifies the index type and 5 stands for IVF_SQ8H. The fifth column specifies the build status of the index and 3 indicates that index building is complete for the shard. If index building is not complete for a specific shard, you can manually build indexes for the shard.
-
-Exit sqlite CLI:
-
-```sql
-sqlite> .quit
-```
-
-Enter `milvus_sift1m` and run the following command:
-
-```bash
-$ python3 main.py --collection=ann_1m_sq8 --index=sq8 --build 
-```
-
-After manually building indexes, enter sqlite CLI again and make sure that index building has been completed for all shards. To understand the meanings of other columns, navigate to `/home/$USER/milvus/db` and enter the following command in the sqlite CLI:
-
-```bash
-$ sqlite3 meta.sqlite
-sqlite>.schema
-```
-
-## 5. Accuracy test
+## 4. Accuracy test
 
 SIFT1B provides not only the vector dataset to search 10,000 vectors, but also the top 1000 ground truth for each vector, which allows convenient calculation of precision rate. The vector search accuracy of Milvus can be represented as follows:
 
@@ -158,7 +107,7 @@ The accuracy rate has a positive correlation with search parameter `nprobe` (num
 
 Therefore, based on your data distribution and business scenario, you need to edit `nprobe` to optimize the trade-off between accuracy and search time. 
 
-## 6. Performance test
+## 5. Performance test
 
 To test search performance, go to directory *milvus_sift1m*, and run the following script: 
 

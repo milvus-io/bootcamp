@@ -13,7 +13,7 @@ def do_drop(table_name, milvus_cli, mysql_cli):
             return ("Milvus doesn't have a collection named {}".format(table_name))
         status = milvus_cli.delete_collection(table_name)
         mysql_cli.delete_table(table_name)
-        return status
+        return status.message
     except Exception as e:
         LOGGER.error(" Error with  drop table: {}".format(e))
         sys.exit(1)
