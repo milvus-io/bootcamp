@@ -58,9 +58,9 @@ https://github.com/hanxiao/bert-as-service
 ```
 # Download model
 $ cd model
-$ wget https://storage.googleapis.com/bert_models/2018_11_03/english_L-12_H-768_A-12.zip
+$ wget https://storage.googleapis.com/bert_models/2018_11_03/uncased_L-12_H-768_A-12.zip
 # start service
-$ bert-serving-start -model_dir english_L-12_H-768_A-12/ -num_worker=4
+$ bert-serving-start -model_dir uncased_L-12_H-768_A-12/ -num_worker=2
 
 ```
 
