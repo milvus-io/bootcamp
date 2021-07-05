@@ -69,7 +69,7 @@ $ docker run -d \
 -e "MILVUS_HOST=${Milvus_HOST}" \
 -e "MILVUS_PORT=${Milvus_PORT}" \
 -e "MYSQL_HOST=${Mysql_HOST}" \
-milvusbootcamp/img-search-server:1.0
+milvusbootcamp/imgsearch-with-objdet:2.0
 ```
 
 > **Note:** -v ${DATAPATH1}:${DATAPATH1} means that you can mount the directory into the container. If needed, you can load the parent directory or more directories.
