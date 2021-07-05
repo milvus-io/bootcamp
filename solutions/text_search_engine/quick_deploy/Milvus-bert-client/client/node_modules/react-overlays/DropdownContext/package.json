@@ -1,0 +1,6 @@
+{
+  "name": "react-overlays/DropdownContext",
+  "private": true,
+  "main": "../cjs/DropdownContext.js",
+  "module": "../esm/DropdownContext.js"
+}

@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`basic 1`] = `
+Object {
+  "className": "css-1e5q5tr",
+  "parsed": Object {
+    "medias": undefined,
+    "plain": Object {
+      "color": "red",
+    },
+    "selects": undefined,
+    "supports": undefined,
+  },
+}
+`;

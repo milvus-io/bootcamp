@@ -150,12 +150,14 @@ The next step is to start the system server. It provides HTTP backend services, 
 
   > `WEBCLIENT_IP`specifies the IP address that runs pic-search-webclient docker.
 
+
   ![ ](../pic/show.png)
 
   1. **Load data**
   Enter the path of an image folder in the pic_search_webserver docker container with `${DATAPATH1}`, then click `+` to load the pictures. The following screenshot shows the loading process:
 
   ![ ](../pic/load.png)
+
 
   > Note: After clicking the Load button, it will take 1 to 2 seconds for the system to response. Please do not click again.
 

@@ -1,0 +1,33 @@
+{
+  "name": "fscreen",
+  "version": "1.0.2",
+  "description": "fullscreen spec api in a vendor agnostic wrapper",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "rm -rf lib && babel src -d lib --presets=env",
+    "prepublish": "npm run build",
+    "dev": "npm link && babel src -d lib --watch --presets=env"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rafrex/fscreen.git"
+  },
+  "files": [
+    "lib",
+    "src"
+  ],
+  "keywords": [
+    "fullscreen",
+    "browser"
+  ],
+  "author": "Rafael Pedicini <code@rafrex.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rafrex/fscreen/issues"
+  },
+  "homepage": "https://github.com/rafrex/fscreen#readme",
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-env": "^1.4.0"
+  }
+}

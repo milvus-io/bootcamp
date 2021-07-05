@@ -1,0 +1,7 @@
+{
+  "name": "@restart/hooks/useImmediateUpdateEffect",
+  "private": true,
+  "main": "../cjs/useImmediateUpdateEffect.js",
+  "module": "../esm/useImmediateUpdateEffect.js",
+  "types": "../esm/useImmediateUpdateEffect.d.ts"
+}
