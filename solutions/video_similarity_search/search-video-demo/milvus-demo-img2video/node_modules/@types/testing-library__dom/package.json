@@ -1,0 +1,56 @@
+{
+    "name": "@types/testing-library__dom",
+    "version": "6.12.1",
+    "description": "TypeScript definitions for @testing-library/dom",
+    "license": "MIT",
+    "contributors": [
+        {
+            "name": "Alex Krolick",
+            "url": "https://github.com/alexkrolick",
+            "githubUsername": "alexkrolick"
+        },
+        {
+            "name": "Kent C Dodds",
+            "url": "https://github.com/kentcdodds",
+            "githubUsername": "kentcdodds"
+        },
+        {
+            "name": "Sebastian Silbermann",
+            "url": "https://github.com/eps1lon",
+            "githubUsername": "eps1lon"
+        },
+        {
+            "name": "Weyert de Boer",
+            "url": "https://github.com/weyert",
+            "githubUsername": "weyert"
+        },
+        {
+            "name": "Ronald Rey",
+            "url": "https://github.com/reyronald",
+            "githubUsername": "reyronald"
+        },
+        {
+            "name": "Justin Hall",
+            "url": "https://github.com/wKovacs64",
+            "githubUsername": "wKovacs64"
+        },
+        {
+            "name": "Wesley Tsai",
+            "url": "https://github.com/wezleytsai",
+            "githubUsername": "wezleytsai"
+        }
+    ],
+    "main": "",
+    "types": "index.d.ts",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/DefinitelyTyped/DefinitelyTyped.git",
+        "directory": "types/testing-library__dom"
+    },
+    "scripts": {},
+    "dependencies": {
+        "pretty-format": "^24.3.0"
+    },
+    "typesPublisherContentHash": "79b0d128697a5852e63ef0955f3cc80e098de7036ccd8205ae5416c9cf5e1567",
+    "typeScriptVersion": "3.0"
+}

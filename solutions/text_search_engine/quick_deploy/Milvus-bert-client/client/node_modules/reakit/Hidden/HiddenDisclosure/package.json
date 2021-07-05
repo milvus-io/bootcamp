@@ -1,0 +1,8 @@
+{
+  "name": "reakit/Hidden/HiddenDisclosure",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../lib/Hidden/HiddenDisclosure",
+  "module": "../../es/Hidden/HiddenDisclosure",
+  "types": "../../ts/Hidden/HiddenDisclosure"
+}

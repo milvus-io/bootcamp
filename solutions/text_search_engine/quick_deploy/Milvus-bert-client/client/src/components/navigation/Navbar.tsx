@@ -1,12 +1,12 @@
-import React from 'react';
-import styled from 'styled-components';
-import { withRouter, RouteComponentProps } from 'react-router';
+import React from "react";
+import styled from "styled-components";
+import { withRouter, RouteComponentProps } from "react-router";
 
-import { TABLET_BREAKPOINT, HOME_ROUTE } from '../../shared/Constants';
-import { PageContent, Heading1 } from '../../shared/Styles';
+import { TABLET_BREAKPOINT, HOME_ROUTE } from "../../shared/Constants";
+import { PageContent, Heading1 } from "../../shared/Styles";
 
 const Navbar = ({ history }: RouteComponentProps) => {
-  const isSearch = history.location.pathname === '/search';
+  const isSearch = history.location.pathname === "/search";
   const handleClick = () => {
     if (!isSearch) {
       history.push(HOME_ROUTE);
@@ -16,8 +16,8 @@ const Navbar = ({ history }: RouteComponentProps) => {
     <NavbarWrapper>
       <PageContent>
         <Row>
-          <NavbarLogo tabIndex={0} onClick={handleClick}>
-            {isSearch ? 'Search Engine' : 'Neural Covidex'}
+          <NavbarLogo tabIndex={0}>
+            {!isSearch ? "Search Engine" : "Neural Covidex"}
             <NavbarSubtitle>powered by Milvus</NavbarSubtitle>
           </NavbarLogo>
         </Row>

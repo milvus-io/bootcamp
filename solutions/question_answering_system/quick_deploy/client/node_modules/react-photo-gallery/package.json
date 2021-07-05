@@ -1,0 +1,99 @@
+{
+  "name": "react-photo-gallery",
+  "version": "8.0.0",
+  "description": "Responsive Justified React Image Gallery Component",
+  "main": "dist/react-photo-gallery.umd.js",
+  "module": "dist/react-photo-gallery.esm.js",
+  "files": [
+    "/dist",
+    "index.d.ts"
+  ],
+  "author": "Sandra Gonzales",
+  "license": "MIT",
+  "homepage": "https://github.com/neptunian/react-photo-gallery",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/neptunian/react-photo-gallery.git"
+  },
+  "bugs": {
+    "url": "https://github.com/neptunian/react-photo-gallery/issues"
+  },
+  "dependencies": {
+    "prop-types": "~15.7.2",
+    "resize-observer-polyfill": "^1.5.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "array-move": "^2.1.0",
+    "babel-eslint": "^9.0.0",
+    "babel-jest": "^24.7.1",
+    "babel-loader": "^8.0.0",
+    "coveralls": "^3.0.4",
+    "cross-env": "^5.0.5",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "enzyme-to-json": "^3.3.4",
+    "eslint": "^4.19.1",
+    "eslint-config-prettier": "^2.3.0",
+    "eslint-plugin-prettier": "^2.2.0",
+    "eslint-plugin-react": "^7.3.0",
+    "eslint-plugin-react-hooks": "^1.6.0",
+    "jest": "^24.7.1",
+    "jest-cli": "^24.7.1",
+    "jsonp": "^0.2.1",
+    "nps": "^5.7.1",
+    "nps-utils": "^1.4.0",
+    "prettier": "^1.6.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-images": "^1.0.0",
+    "react-sortable-hoc": "^1.9.1",
+    "react-test-renderer": "^16.1.1",
+    "rollup": "^1.0.0",
+    "rollup-plugin-babel": "^4.0.1",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "webpack": "^4.28.3",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.14"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0"
+  },
+  "scripts": {
+    "build": "nps build",
+    "build:docs": "NODE_ENV=production nps build:docs",
+    "start": "webpack-dev-server --progress",
+    "lint": "eslint -c ./.eslintrc.js ./src",
+    "eslint-check": "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
+    "test": "jest",
+    "coveralls": "cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+  },
+  "keywords": [
+    "react",
+    "react component",
+    "react-component",
+    "justified image gallery",
+    "photo gallery",
+    "responsive",
+    "image gallery",
+    "images",
+    "react-image-gallery",
+    "react-masonry-gallery",
+    "react-photo-gallery",
+    "image-gallery",
+    "react-gallery",
+    "react image gallery",
+    "react gallery",
+    "masonry",
+    "react masonry",
+    "react-masonry",
+    "masonry layout",
+    "grid",
+    "layout"
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "name": "@restart/hooks/useUpdateEffect",
+  "private": true,
+  "main": "../cjs/useUpdateEffect.js",
+  "module": "../esm/useUpdateEffect.js",
+  "types": "../esm/useUpdateEffect.d.ts"
+}

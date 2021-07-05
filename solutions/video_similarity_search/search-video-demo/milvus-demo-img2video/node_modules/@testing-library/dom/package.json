@@ -1,0 +1,79 @@
+{
+  "name": "@testing-library/dom",
+  "version": "6.12.2",
+  "description": "Simple and complete DOM testing utilities that encourage good testing practices.",
+  "main": "dist/index.js",
+  "module": "dist/@testing-library/dom.esm.js",
+  "umd:main": "dist/@testing-library/dom.umd.js",
+  "source": "src/index.js",
+  "keywords": [
+    "testing",
+    "ui",
+    "dom",
+    "jsdom",
+    "unit",
+    "integration",
+    "functional",
+    "end-to-end",
+    "e2e"
+  ],
+  "author": "Kent C. Dodds <kent@doddsfamily.us> (https://kentcdodds.com/)",
+  "license": "MIT",
+  "engines": {
+    "node": ">=8"
+  },
+  "scripts": {
+    "build": "kcd-scripts build --ignore \"**/__tests__/**,**/__node_tests__/**,**/__mocks__/**\" && kcd-scripts build --bundle --no-clean",
+    "lint": "kcd-scripts lint",
+    "test": "kcd-scripts test",
+    "test:update": "npm test -- --updateSnapshot --coverage",
+    "test:debug": "node --inspect-brk ./node_modules/.bin/jest --watch --runInBand",
+    "validate": "kcd-scripts validate",
+    "setup": "npm install && npm run validate -s"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "kcd-scripts pre-commit"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@babel/runtime": "^7.6.2",
+    "@sheerun/mutationobserver-shim": "^0.3.2",
+    "@types/testing-library__dom": "^6.0.0",
+    "aria-query": "3.0.0",
+    "pretty-format": "^24.9.0",
+    "wait-for-expect": "^3.0.0"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^4.1.0",
+    "jest-in-case": "^1.0.2",
+    "jest-serializer-ansi": "^1.0.3",
+    "jest-watch-select-projects": "^1.0.0",
+    "jsdom": "^15.1.1",
+    "kcd-scripts": "^1.7.0"
+  },
+  "eslintConfig": {
+    "extends": "./node_modules/kcd-scripts/eslint.js",
+    "rules": {
+      "import/prefer-default-export": "off",
+      "import/no-unassigned-import": "off",
+      "import/no-useless-path-segments": "off"
+    }
+  },
+  "eslintIgnore": [
+    "node_modules",
+    "coverage",
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/testing-library/dom-testing-library.git"
+  },
+  "bugs": {
+    "url": "https://github.com/testing-library/dom-testing-library/issues"
+  },
+  "homepage": "https://github.com/testing-library/dom-testing-library#readme"
+}
