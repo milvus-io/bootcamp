@@ -13,7 +13,7 @@ class MySQLHelper():
 
     # Create mysql table if not exists
     def create_mysql_table(self, table_name):
-        sql = "create table if not exists " + table_name + "(milvus_id TEXT, image_path TEXT);"
+        sql = "create table if not exists " + table_name + "(milvus_id TEXT, data_path TEXT);"
         try:
             self.cursor.execute(sql)
             LOGGER.debug("MYSQL create table: {} with sql: {}".format(table_name, sql))
@@ -21,9 +21,9 @@ class MySQLHelper():
             LOGGER.error("MYSQL ERROR: {} with sql: {}".format(e, sql))
             sys.exit(1)
 
-    # Batch insert (Milvus_ids, img_path) to mysql
+    # Batch insert (Milvus_ids, data_path) to mysql
     def load_data_to_mysql(self, table_name, data):
-        sql = "insert into " + table_name + " (milvus_id,image_path) values (%s,%s);"
+        sql = "insert into " + table_name + " (milvus_id,data_path) values (%s,%s);"
         try:
             self.cursor.executemany(sql, data)
             self.conn.commit()
@@ -32,10 +32,10 @@ class MySQLHelper():
             LOGGER.error("MYSQL ERROR: {} with sql: {}".format(e, sql))
             sys.exit(1)
 
-    # Get the img_path according to the milvus ids
+    # Get the data_path according to the milvus ids
     def search_by_milvus_ids(self, ids, table_name):
         str_ids = str(ids).replace('[', '').replace(']', '')
-        sql = "select image_path from " + table_name + " where milvus_id in (" + str_ids + ") order by field (milvus_id," + str_ids + ");"
+        sql = "select data_path from " + table_name + " where milvus_id in (" + str_ids + ") order by field (milvus_id," + str_ids + ");"
         try:
             self.cursor.execute(sql)
             results = self.cursor.fetchall()
