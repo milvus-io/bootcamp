@@ -18,21 +18,9 @@ You can download the data in google drive: https://drive.google.com/file/d/1CAt-
 
 The video similarity system will use Milvus to store and search the feature vector data, and Mysql is used to store the correspondence between the ids returned by Milvus and the image paths, then you need to start Milvus and Mysql first.
 
-- **Start Milvus v1.1.1**
+- **Start Milvus v2.0**
 
-  First, you are supposed to refer to the Install Milvus v1.1.1 for how to run Milvus docker.
-
-  ```bash
-  $ wget -P /home/$USER/milvus/conf https://raw.githubusercontent.com/milvus-io/milvus/v1.1.1/core/conf/demo/server_config.yaml
-  $ sudo docker run -d --name milvus_cpu_1.1.0 \
-  -p 19530:19530 \
-  -p 19121:19121 \
-  -v /home/$USER/milvus/db:/var/lib/milvus/db \
-  -v /home/$USER/milvus/conf:/var/lib/milvus/conf \
-  -v /home/$USER/milvus/logs:/var/lib/milvus/logs \
-  -v /home/$USER/milvus/wal:/var/lib/milvus/wal \
-  milvusdb/milvus:1.1.1-cpu-d061621-330cc6
-  ```
+  First, you are supposed to refer to the Install [Milvus v2.0](https://milvus.io/docs/v2.0.0/install_standalone-docker.md) for how to run Milvus docker.
   
   > Note the version of Milvus.
   
@@ -43,7 +31,6 @@ The video similarity system will use Milvus to store and search the feature vect
   ```
 
 ### 2. Start Server
-
 The next step is to start the system server. It provides HTTP backend services, and there are two ways to start, such as Docker and source code.
 
 #### 2.1 Run server with Docker
@@ -60,7 +47,7 @@ The next step is to start the system server. It provides HTTP backend services, 
   | **MYSQL_HOST** | The IP address of MySQL.                               | 192.168.1.85     |
 
   ```bash
-  $ export DATAPATH1='/data/image_path'
+  $ export DATAPATH1='/data/video_path'
   $ export Milvus_HOST='192.168.1.85'
   $ export Milvus_PORT='19530'
   $ export Mysql_HOST='192.168.1.85'
@@ -75,13 +62,12 @@ The next step is to start the system server. It provides HTTP backend services, 
   -e "MILVUS_HOST=${Milvus_HOST}" \
   -e "MILVUS_PORT=${Milvus_PORT}" \
   -e "MYSQL_HOST=${Mysql_HOST}" \
-  milvusbootcamp/video-search-server:1.0
+  milvusbootcamp/video-search-server:2.0
   ```
 
   > **Note:** -v ${DATAPATH1}:${DATAPATH1} means that you can mount the directory into the container. If needed, you can load the parent directory or more directories.
 
 #### 2.2 Run source code
-
 - **Install the Python packages**
 
   ```bash
@@ -119,7 +105,9 @@ The next step is to start the system server. It provides HTTP backend services, 
 
   Type 127.0.0.1:5000/docs in your browser to see all the APIs.
 
-  ![img] (./pic/API_imag.png)
+  ![](../pic/API_imag.png)
+
+  
 
 - **Code  structure**
 
@@ -162,19 +150,21 @@ The next step is to start the system server. It provides HTTP backend services, 
 
   > `WEBCLIENT_IP`specifies the IP address that runs pic-search-webclient docker.
 
-  ![img](../pic/show.png)
+
+  ![ ](../pic/show.png)
 
   1. **Load data**
   Enter the path of an image folder in the pic_search_webserver docker container with `${DATAPATH1}`, then click `+` to load the pictures. The following screenshot shows the loading process:
 
-  ![img](../pic/load.png)
+  ![ ](../pic/load.png)
+
 
   > Note: After clicking the Load button, it will take 1 to 2 seconds for the system to response. Please do not click again.
 
   2. **Search data**
   The loading process may take several minutes. The following screenshot shows the interface with images loaded.
 
-  ![img](../pic/search.png)
+  ![ ](../pic/search.png)
   
 
   

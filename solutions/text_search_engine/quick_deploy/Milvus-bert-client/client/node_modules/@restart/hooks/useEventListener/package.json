@@ -1,0 +1,7 @@
+{
+  "name": "@restart/hooks/useEventListener",
+  "private": true,
+  "main": "../cjs/useEventListener.js",
+  "module": "../esm/useEventListener.js",
+  "types": "../esm/useEventListener.d.ts"
+}

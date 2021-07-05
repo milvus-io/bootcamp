@@ -1,0 +1,7 @@
+onnx
+onnxruntime
+keras2onnx
+tensorflow
+tf2onnx
+pymilvus-orm==2.0.0rc1
+redis

@@ -1,0 +1,6 @@
+{
+  "name": "react-overlays/Overlay",
+  "private": true,
+  "main": "../cjs/Overlay.js",
+  "module": "../esm/Overlay.js"
+}

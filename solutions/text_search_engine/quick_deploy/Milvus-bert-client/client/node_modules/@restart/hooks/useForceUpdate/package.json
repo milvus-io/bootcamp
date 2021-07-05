@@ -1,0 +1,7 @@
+{
+  "name": "@restart/hooks/useForceUpdate",
+  "private": true,
+  "main": "../cjs/useForceUpdate.js",
+  "module": "../esm/useForceUpdate.js",
+  "types": "../esm/useForceUpdate.d.ts"
+}

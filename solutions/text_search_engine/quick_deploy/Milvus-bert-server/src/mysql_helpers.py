@@ -28,12 +28,13 @@ class MySQLHelper():
             LOGGER.debug("MYSQL create table: {} with sql: {}".format(table_name, sql))
         except Exception as e:
             LOGGER.error("MYSQL ERROR: {} with sql: {}".format(e, sql))
-            sys.exit(1)
-
-    # Batch insert (Milvus_ids, img_path) to mysql
-    def load_data_to_mysql(self, table_name, data):
-        test_connection()
-        sql = "insert into " + table_name + " (milvus_id,image_path) values (%s,%s);"
+            sys.exit(1)  
+    
+   # Batch insert (Milvus_id, title,text) to mysql
+    def load_data_to_mysql(self, table_name,data):
+        sql = "insert into " + table_name + " (milvus_id,title,text) values (%s,%s,%s);"  
+        #fname = os.path.join(os.getcwd(),'temp.csv')
+        #sql =" load data local infile '" + fname + "' into table " + table_name + " fields terminated by '|';"
         try:
             self.cursor.executemany(sql, data)
             self.conn.commit()

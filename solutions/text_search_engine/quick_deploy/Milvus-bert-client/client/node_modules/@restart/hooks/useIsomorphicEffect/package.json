@@ -1,0 +1,7 @@
+{
+  "name": "@restart/hooks/useIsomorphicEffect",
+  "private": true,
+  "main": "../cjs/useIsomorphicEffect.js",
+  "module": "../esm/useIsomorphicEffect.js",
+  "types": "../esm/useIsomorphicEffect.d.ts"
+}

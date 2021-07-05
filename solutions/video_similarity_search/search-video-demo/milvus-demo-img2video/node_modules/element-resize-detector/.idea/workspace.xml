@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="de68fce9-0036-4416-a0e8-f1bfbd256eb5" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/examples/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/index.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileColors">
+    <fileColor scope="Non-Project Files (Material Default)" color="2E3C43" />
+    <fileColor scope="Non-Project Files (Material Darker)" color="323232" />
+    <fileColor scope="Non-Project Files (Material Lighter)" color="eae8e8" />
+    <fileColor scope="Non-Project Files (Material Palenight)" color="2f2e43" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="WIP-1.2.0" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="MERGE" />
+  </component>
+  <component name="ProjectId" id="1W9nmwW5WZadOTE4yYeIp8lCcLP" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="/usr/local/bin/node" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <module />
+      <method />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="de68fce9-0036-4416-a0e8-f1bfbd256eb5" name="Default Changelist" comment="" />
+      <created>1549441466503</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1549441466503</updated>
+      <workItem from="1549441467734" duration="837000" />
+    </task>
+    <task id="LOCAL-00001" summary="Release 1.1.15">
+      <created>1549442617397</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1549442617397</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Release 1.1.16">
+      <created>1578571135055</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1578571135055</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Release 1.2.1">
+      <created>1579090582834</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1579090582834</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="837000" />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
+    <MESSAGE value="Release 1.1.15" />
+    <MESSAGE value="Release 1.1.16" />
+    <MESSAGE value="Release 1.2.1" />
+    <option name="LAST_COMMIT_MESSAGE" value="Release 1.2.1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="603" y="435" key="CommitChangelistDialog2" timestamp="1579090595066">
+      <screen x="0" y="23" width="3440" height="1417" />
+    </state>
+    <state x="603" y="435" key="CommitChangelistDialog2/0.23.3440.1417@0.23.3440.1417" timestamp="1579090595066" />
+    <state x="0" y="154" width="2752" height="1133" key="DiffContextDialog" timestamp="1579090034488">
+      <screen x="0" y="23" width="3440" height="1417" />
+    </state>
+    <state x="0" y="154" width="2752" height="1133" key="DiffContextDialog/0.23.3440.1417@0.23.3440.1417" timestamp="1579090034488" />
+    <state x="344" y="154" key="MergeDialog" timestamp="1579089829554">
+      <screen x="0" y="23" width="3440" height="1417" />
+    </state>
+    <state x="344" y="154" key="MergeDialog/0.23.3440.1417@0.23.3440.1417" timestamp="1579089829554" />
+    <state x="1436" y="455" key="MultipleFileMergeDialog" timestamp="1579089829577">
+      <screen x="0" y="23" width="3440" height="1417" />
+    </state>
+    <state x="1436" y="455" key="MultipleFileMergeDialog/0.23.3440.1417@0.23.3440.1417" timestamp="1579089829577" />
+    <state width="500" height="445" key="SwitcherDM" timestamp="1579090535344">
+      <screen x="0" y="23" width="3440" height="1417" />
+    </state>
+    <state width="500" height="445" key="SwitcherDM/0.23.3440.1417@0.23.3440.1417" timestamp="1579090535344" />
+    <state x="560" y="473" key="Vcs.Push.Dialog.v2" timestamp="1578571138547">
+      <screen x="0" y="23" width="3440" height="1417" />
+    </state>
+    <state x="560" y="473" key="Vcs.Push.Dialog.v2/0.23.3440.1417@0.23.3440.1417" timestamp="1578571138547" />
+    <state x="1500" y="474" key="VcsDiffUtil.ChangesDialog" timestamp="1579089663798">
+      <screen x="0" y="23" width="3440" height="1417" />
+    </state>
+    <state x="1500" y="474" key="VcsDiffUtil.ChangesDialog/0.23.3440.1417@0.23.3440.1417" timestamp="1579089663798" />
+    <state x="764" y="656" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1578570846621">
+      <screen x="0" y="23" width="3440" height="1417" />
+    </state>
+    <state x="764" y="656" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.3440.1417@0.23.3440.1417" timestamp="1578570846621" />
+    <state x="1502" y="531" key="git4idea.merge.GitMergeDialog" timestamp="1579089686953">
+      <screen x="0" y="23" width="3440" height="1417" />
+    </state>
+    <state x="1502" y="531" key="git4idea.merge.GitMergeDialog/0.23.3440.1417@0.23.3440.1417" timestamp="1579089686953" />
+    <state x="625" y="348" width="670" height="676" key="search.everywhere.popup" timestamp="1579089681433">
+      <screen x="0" y="23" width="3440" height="1417" />
+    </state>
+    <state x="625" y="348" width="670" height="676" key="search.everywhere.popup/0.23.3440.1417@0.23.3440.1417" timestamp="1579089681433" />
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

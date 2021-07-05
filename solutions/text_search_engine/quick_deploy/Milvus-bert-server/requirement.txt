@@ -1,6 +1,5 @@
 Keras==2.3.1
 numpy
-pymilvus==1.1.1
 futures==3.1.1
 cryptography
 aiofiles

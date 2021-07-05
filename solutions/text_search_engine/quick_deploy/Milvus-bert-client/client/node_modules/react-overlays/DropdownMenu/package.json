@@ -1,0 +1,6 @@
+{
+  "name": "react-overlays/DropdownMenu",
+  "private": true,
+  "main": "../cjs/DropdownMenu.js",
+  "module": "../esm/DropdownMenu.js"
+}

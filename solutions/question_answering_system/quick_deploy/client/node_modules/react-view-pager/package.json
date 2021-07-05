@@ -1,0 +1,81 @@
+{
+  "name": "react-view-pager",
+  "version": "0.6.0",
+  "description": "View-Pager/Slider/Carousel powered by React Motion.",
+  "main": "lib/react-view-pager.js",
+  "files": [
+    "dist",
+    "lib"
+  ],
+  "scripts": {
+    "build:lib": "babel src --out-dir lib",
+    "build": "npm run build:lib && NODE_ENV=production webpack --config webpack.prod.config.js",
+    "dev": "webpack-dev-server --inline --hot --progress --colors --host 0.0.0.0 --devtool eval",
+    "postbuild": "NODE_ENV=production TARGET=minify webpack --config webpack.prod.config.js",
+    "prebuild": "rm -rf dist && mkdir dist",
+    "prepublish": "npm run build",
+    "test": "mocha tests/.setup.js --reporter spec tests/**/*.js",
+    "deploy": "NODE_ENV=production TARGET=minify webpack && git-directory-deploy --directory example --branch gh-pages"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/souporserious/react-view-pager"
+  },
+  "keywords": [
+    "react",
+    "component",
+    "slider",
+    "carousel",
+    "touch",
+    "responsive",
+    "flick",
+    "gallery",
+    "DOM",
+    "browser"
+  ],
+  "author": "Travis Arnold <travis@souporserious.com> (http://souporserious.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/souporserious/react-view-pager/issues"
+  },
+  "homepage": "https://github.com/souporserious/react-view-pager",
+  "dependencies": {
+    "animation-bus": "^0.2.0",
+    "get-prefix": "^1.0.0",
+    "mitt": "1.1.3",
+    "react-motion": "^0.5.0",
+    "resize-observer-polyfill": "1.5.0",
+    "tabbable": "1.1.2"
+  },
+  "peerDependencies": {
+    "prop-types": "^15.5.8",
+    "react": "0.14.x || ^15.0.0 || ^16.0.0",
+    "react-dom": "0.14.x || ^15.0.0 || ^16.0.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.16.0",
+    "babel-core": "^6.17.0",
+    "babel-loader": "^6.2.5",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-preset-es2015": "^6.16.0",
+    "babel-preset-react": "^6.16.0",
+    "babel-preset-stage-0": "^6.16.0",
+    "chokidar": "^1.6.1",
+    "css-loader": "^0.25.0",
+    "enzyme": "^2.6.0",
+    "git-directory-deploy": "^1.5.1",
+    "http-server": "^0.9.0",
+    "mocha": "^3.2.0",
+    "node-libs-browser": "^1.0.0",
+    "node-sass": "^3.2.0",
+    "postcss-loader": "^0.13.0",
+    "prop-types": "15.5.8",
+    "react": "15.3.2",
+    "react-addons-test-utils": "15.3.2",
+    "react-dom": "15.3.2",
+    "sass-loader": "^4.0.2",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.9.0"
+  }
+}
