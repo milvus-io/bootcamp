@@ -4,7 +4,7 @@ uvicorn==0.13.4
 numpy==1.19.5
 pydantic==1.8.2
 pymilvus-orm==2.0.0rc1
-#tensorflow==2.5.0
+tensorflow==2.5.0
 fastapi==0.65.2
 python-multipart
 pillow==8.2.0
