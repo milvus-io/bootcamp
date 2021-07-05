@@ -1,0 +1,23 @@
+{
+  "name": "get-prefix",
+  "version": "1.0.0",
+  "homepage": "https://github.com/souporserious/get-prefix",
+  "authors": [
+    "Travis Arnold <ftntravis@gmail.com>"
+  ],
+  "description": "Drop content anywhere on the page.",
+  "main": ["./dist/get-prefix.js"],
+  "keywords": [
+    "react",
+    "component",
+    "drop"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

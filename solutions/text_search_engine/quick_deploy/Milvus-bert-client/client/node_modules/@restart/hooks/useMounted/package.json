@@ -1,0 +1,7 @@
+{
+  "name": "@restart/hooks/useMounted",
+  "private": true,
+  "main": "../cjs/useMounted.js",
+  "module": "../esm/useMounted.js",
+  "types": "../esm/useMounted.d.ts"
+}

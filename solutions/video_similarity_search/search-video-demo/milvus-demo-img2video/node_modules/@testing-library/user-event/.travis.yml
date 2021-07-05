@@ -1,0 +1,29 @@
+env:
+  global:
+    - CC_TEST_REPORTER_ID=432df2a7d2692b54e9c072feb2c8cec8cd943456c14800c18445b6e65f709a3c
+    - CODECOV_TOKEN="a0f80db0-4517-4d00-a6e6-eaf8a7089079"
+language: node_js
+cache:
+  directories:
+    - ~/.npm
+notifications:
+  email: false
+node_js:
+  - '12'
+  - '10'
+  - '8'
+before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+script:
+  - npm run test:coverage
+after_success:
+  - npm run codecov
+  - npm run build
+  - npm run travis-deploy-once "npm run semantic-release"
+branches:
+  except:
+    - /^v\d+\.\d+\.\d+$/
