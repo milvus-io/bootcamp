@@ -1,0 +1,7 @@
+{
+  "name": "@restart/hooks/useCommittedRef",
+  "private": true,
+  "main": "../cjs/useCommittedRef.js",
+  "module": "../esm/useCommittedRef.js",
+  "types": "../esm/useCommittedRef.d.ts"
+}

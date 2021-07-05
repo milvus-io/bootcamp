@@ -1,0 +1,8 @@
+{
+  "name": "reakit/Hidden",
+  "private": true,
+  "sideEffects": false,
+  "main": "../lib/Hidden",
+  "module": "../es/Hidden",
+  "types": "../ts/Hidden"
+}

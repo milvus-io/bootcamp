@@ -1,15 +1,15 @@
-import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import styled, { ThemeProvider } from 'styled-components';
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import styled, { ThemeProvider } from "styled-components";
 
-import Navbar from './components/navigation/Navbar';
-import HomePage from './components/pages/HomePage/HomePage';
-import RelatedPage from './components/pages/RelatedPage/RelatedPage';
-import NotFoundPage from './components/pages/NotFoundPage';
+import Navbar from "./components/navigation/Navbar";
+import HomePage from "./components/pages/HomePage/HomePage";
+import RelatedPage from "./components/pages/RelatedPage/RelatedPage";
+import NotFoundPage from "./components/pages/NotFoundPage";
 
-import { HOME_ROUTE, RELATED_ROUTE, SEARCH_ROUTE } from './shared/Constants';
-import Theme from './shared/Theme';
-import SearchPage from './components/pages/SearchPage/SearchPage';
+import { HOME_ROUTE, RELATED_ROUTE, SEARCH_ROUTE } from "./shared/Constants";
+import Theme from "./shared/Theme";
+import SearchPage from "./components/pages/SearchPage/SearchPage";
 
 const App = () => {
   return (
@@ -17,11 +17,7 @@ const App = () => {
       <Router>
         <AppContainer>
           <Switch>
-            <Route exact path={HOME_ROUTE}>
-              <Navbar />
-              <HomePage />
-            </Route>
-            <Route path={SEARCH_ROUTE}>
+            <Route path="/">
               <SearchPage />
             </Route>
             <Route path={`${RELATED_ROUTE}/:articleId`}>

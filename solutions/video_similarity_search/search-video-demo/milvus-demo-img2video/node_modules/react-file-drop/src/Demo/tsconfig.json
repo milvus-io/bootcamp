@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "outDir": "../../dist/Demo",
+    "baseUrl": "../../",
+    "module": "es6",
+    "target": "es5",
+    "moduleResolution": "node",
+    "jsx": "react",
+    "allowJs": true,
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "allowSyntheticDefaultImports": true,
+    "traceResolution": false,
+    "allowUnreachableCode": true
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "name": "adjust-sourcemap-loader",
+  "version": "2.0.0",
+  "description": "Webpack loader that adjusts source maps",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bholloway/adjust-sourcemap-loader.git"
+  },
+  "keywords": [
+    "webpack",
+    "loader",
+    "source-map",
+    "sourcemap",
+    "sources",
+    "resolve",
+    "adjust"
+  ],
+  "author": "bholloway",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bholloway/adjust-sourcemap-loader/issues"
+  },
+  "homepage": "https://github.com/bholloway/adjust-sourcemap-loader",
+  "dependencies": {
+    "assert": "1.4.1",
+    "camelcase": "5.0.0",
+    "loader-utils": "1.2.3",
+    "object-path": "0.11.4",
+    "regex-parser": "2.2.10"
+  },
+  "devDependencies": {
+    "jshint": "^2.10.1"
+  },
+  "scripts": {
+    "lint": "jshint index.js lib"
+  }
+}

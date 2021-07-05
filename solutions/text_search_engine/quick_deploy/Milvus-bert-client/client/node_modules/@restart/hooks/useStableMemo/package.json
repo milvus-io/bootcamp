@@ -1,0 +1,7 @@
+{
+  "name": "@restart/hooks/useStableMemo",
+  "private": true,
+  "main": "../cjs/useStableMemo.js",
+  "module": "../esm/useStableMemo.js",
+  "types": "../esm/useStableMemo.d.ts"
+}

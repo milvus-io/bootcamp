@@ -1,0 +1,7 @@
+{
+  "name": "@restart/hooks/useRefWithInitialValueFactory",
+  "private": true,
+  "main": "../cjs/useRefWithInitialValueFactory.js",
+  "module": "../esm/useRefWithInitialValueFactory.js",
+  "types": "../esm/useRefWithInitialValueFactory.d.ts"
+}

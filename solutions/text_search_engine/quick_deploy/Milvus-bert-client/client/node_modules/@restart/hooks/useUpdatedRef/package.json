@@ -1,0 +1,7 @@
+{
+  "name": "@restart/hooks/useUpdatedRef",
+  "private": true,
+  "main": "../cjs/useUpdatedRef.js",
+  "module": "../esm/useUpdatedRef.js",
+  "types": "../esm/useUpdatedRef.d.ts"
+}
