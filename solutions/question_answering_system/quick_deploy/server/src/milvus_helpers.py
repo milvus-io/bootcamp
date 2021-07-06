@@ -88,7 +88,7 @@ class MilvusHelper:
             self.set_collection(collection_name)
             self.collection.drop()
             LOGGER.debug("Successfully drop collection!")
-            return "ok"
+            return "Successfully drop table"
         except Exception as e:
             LOGGER.error("Failed to drop collection: {}".format(e))
             sys.exit(1)

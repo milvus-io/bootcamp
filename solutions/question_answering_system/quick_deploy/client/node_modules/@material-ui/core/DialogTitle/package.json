@@ -1,5 +1,0 @@
-{
-  "sideEffects": false,
-  "module": "../esm/DialogTitle/index.js",
-  "typings": "./index.d.ts"
-}

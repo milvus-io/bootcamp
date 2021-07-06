@@ -4,9 +4,11 @@ futures==3.1.1
 cryptography
 aiofiles
 Pillow
+pymilvus-orm==2.0.0rc1
 tensorflow == 1.13.1
 bert-serving-server
 bert-serving-client
 pymysql
 fastapi  
 uvicorn
+python-multipart
