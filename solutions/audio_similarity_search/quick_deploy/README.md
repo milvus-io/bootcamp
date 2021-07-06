@@ -6,7 +6,7 @@ This project uses [PANNs](https://github.com/qiuqiangkong/audioset_tagging_cnn)(
 
 ### Requirements
 
-- [Milvus 1.0](https://milvus.io/docs/install_milvus.md)
+- [Milvus 2.0](https://milvus.io/docs/v2.0.0/install_standalone-docker.md)
 - [MySQL](https://hub.docker.com/r/mysql/mysql-server)
 - [Python3](https://www.python.org/downloads/)
 
@@ -58,7 +58,7 @@ Type `127.0.0.1:8002/docs` in your browser to see all the APIs.
 - Search for similar audio clips.
 
   You can upload [test.wav](https://github.com/shiyu22/bootcamp/blob/0.11.0/solutions/audio_search/data/test.wav) to search for the most similar sound clips.
-  
+
   ![](./pic/search.png)
 
 Please refer to https://zilliz.com/demos/ to take a try in the front-end interface.
