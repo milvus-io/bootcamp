@@ -1,5 +1,0 @@
-{
-  "sideEffects": false,
-  "module": "../esm/withMobileDialog/index.js",
-  "typings": "./index.d.ts"
-}

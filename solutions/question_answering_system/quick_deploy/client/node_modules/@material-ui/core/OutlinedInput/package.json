@@ -1,5 +1,0 @@
-{
-  "sideEffects": false,
-  "module": "../esm/OutlinedInput/index.js",
-  "typings": "./index.d.ts"
-}
