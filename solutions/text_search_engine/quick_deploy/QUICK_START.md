@@ -153,5 +153,17 @@ This API is used to get the number of the titles in the system.
 This API is used to delete a specified collection.
 
 
+3、Start the UI client
+----------------------  
+Install  [Node.js 12+](https://nodejs.org/en/download/) and [Yarn](https://classic.yarnpkg.com/en/docs/install/).
 
+```
+$ cd Milvus-bert-client/client 
+# Install dependencies
+$ yarn install 
+#start yarn 
+$ yarn start   
+open localhost:3000
+```
+> Note: If you change the port of the server, please modify the parameters on line 17 **/src/shared/Constants.ts** for your own environment
 
