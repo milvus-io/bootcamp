@@ -11,7 +11,8 @@ def do_drop(table_name, milvus_cli, mysql_cli):
     try:
         if not milvus_cli.has_collection(table_name):
             msg = "Milvus doesn't have a collection named {}".format(table_name)
-            return {'status': True, 'msg': msg}
+            return msg
+            #return {'status': True, 'msg': msg}
         status = milvus_cli.delete_collection(table_name)
         mysql_cli.delete_table(table_name)
         return status
