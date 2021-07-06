@@ -10,8 +10,7 @@ def do_drop(table_name, milvus_cli, mysql_cli):
         table_name = DEFAULT_TABLE
     try:
         if not milvus_cli.has_collection(table_name):
-            return None
-
+            raise Exception("There has no collection named:{}".format(table_name))
         status = milvus_cli.delete_collection(table_name)
         mysql_cli.delete_table(table_name)
         return status

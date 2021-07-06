@@ -1,0 +1,7 @@
+{
+  "name": "@restart/hooks/useMergeStateFromProps",
+  "private": true,
+  "main": "../cjs/useMergeStateFromProps.js",
+  "module": "../esm/useMergeStateFromProps.js",
+  "types": "../esm/useMergeStateFromProps.d.ts"
+}

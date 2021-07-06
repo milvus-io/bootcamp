@@ -1,0 +1,7 @@
+{
+  "name": "@restart/hooks/useTimeout",
+  "private": true,
+  "main": "../cjs/useTimeout.js",
+  "module": "../esm/useTimeout.js",
+  "types": "../esm/useTimeout.d.ts"
+}

@@ -1,0 +1,21 @@
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _createSvgIcon = _interopRequireDefault(require("./utils/createSvgIcon"));
+
+var _default = (0, _createSvgIcon.default)(_react.default.createElement(_react.default.Fragment, null, _react.default.createElement("path", {
+  d: "M14.47 13.5L11 20v-5.5H9l.53-1H7V22h10v-8.5h-2.53z"
+}), _react.default.createElement("path", {
+  fillOpacity: ".3",
+  d: "M17 4h-3V2h-4v2H7v9.5h2.53L13 7v5.5h2l-.53 1H17V4z"
+})), 'BatteryCharging50Sharp');
+
+exports.default = _default;

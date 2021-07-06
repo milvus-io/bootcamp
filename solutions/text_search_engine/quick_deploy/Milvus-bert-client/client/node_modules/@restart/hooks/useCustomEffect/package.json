@@ -1,0 +1,7 @@
+{
+  "name": "@restart/hooks/useCustomEffect",
+  "private": true,
+  "main": "../cjs/useCustomEffect.js",
+  "module": "../esm/useCustomEffect.js",
+  "types": "../esm/useCustomEffect.d.ts"
+}

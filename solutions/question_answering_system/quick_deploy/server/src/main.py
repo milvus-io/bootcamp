@@ -55,10 +55,10 @@ async def do_load_api(file: UploadFile = File(...), table_name: str = None):
 async def do_get_question_api(question: str, table_name: str = None):
     try:
         questions, distances = do_search(table_name, question, MODEL, MILVUS_CLI, MYSQL_CLI)
-        res = dict(zip(questions, distances))
+        #res = dict(zip(questions, distances))
         # res = sorted(res.items(), key=lambda item: item[1])
         LOGGER.info("Successfully searched similar images!")
-        return {'status': True, 'msg': res}, 200
+        return {'status': True, 'msg': questions}, 200
     except Exception as e:
         LOGGER.error(e)
         return {'status': False, 'msg': e}, 400
@@ -92,7 +92,7 @@ async def drop_tables(table_name: str = None):
     try:
         status = do_drop(table_name, MILVUS_CLI, MYSQL_CLI)
         LOGGER.info("Successfully drop tables in Milvus and MySQL!")
-        return status
+        return {'status': True, 'msg': status}
     except Exception as e:
         LOGGER.error(e)
         return {'status': False, 'msg': e}, 400
