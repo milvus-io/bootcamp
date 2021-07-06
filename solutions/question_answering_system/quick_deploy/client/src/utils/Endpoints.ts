@@ -3,11 +3,11 @@ declare global {
     _env_: any;
   }
 }
-// let endpoint = `http://40.117.75.127:5005`;
-let endpoint = "http://13.228.73.30:8020";
-// if (window._env_ && window._env_.API_URL) {
-//   endpoint = window._env_.API_URL;
-// }
+let endpoint = `http://172.16.20.7:5001`;
+if (window._env_ && window._env_.API_URL) {
+  endpoint = window._env_.API_URL;
+}
+
 export const Train = `${endpoint}/api/v1/train`;
 export const Processing = `${endpoint}/api/v1/process`;
 export const Count = `${endpoint}/api/v1/count`;
