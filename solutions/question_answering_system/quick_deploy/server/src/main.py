@@ -92,7 +92,7 @@ async def drop_tables(table_name: str = None):
     try:
         status = do_drop(table_name, MILVUS_CLI, MYSQL_CLI)
         LOGGER.info("Successfully drop tables in Milvus and MySQL!")
-        return status
+        return {'status': True, 'msg': status}
     except Exception as e:
         LOGGER.error(e)
         return {'status': False, 'msg': e}, 400
