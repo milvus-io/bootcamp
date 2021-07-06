@@ -55,6 +55,7 @@ class MilvusHelper:
     def insert(self, collection_name, vectors):
         try:
             self.create_collection(collection_name)
+            self.collection = Collection(name=collection_name)
             data = [vectors]
             mr = self.collection.insert(data)
             ids = mr.primary_keys
