@@ -4,7 +4,7 @@ import shutil
 from diskcache import Cache
 
 sys.path.append("..")
-from config import DEFAULT_TABLE, CACHE_DIR, DATA_PATH
+from config import DEFAULT_TABLE, CACHE_DIR
 from yolov3_detector.paddle_yolo import run, YOLO_v3 as Detector
 
 

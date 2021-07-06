@@ -1,0 +1,7 @@
+{
+  "name": "@restart/hooks/useGlobalListener",
+  "private": true,
+  "main": "../cjs/useGlobalListener.js",
+  "module": "../esm/useGlobalListener.js",
+  "types": "../esm/useGlobalListener.d.ts"
+}

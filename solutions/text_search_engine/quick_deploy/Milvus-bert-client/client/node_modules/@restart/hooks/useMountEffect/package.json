@@ -1,0 +1,7 @@
+{
+  "name": "@restart/hooks/useMountEffect",
+  "private": true,
+  "main": "../cjs/useMountEffect.js",
+  "module": "../esm/useMountEffect.js",
+  "types": "../esm/useMountEffect.d.ts"
+}
