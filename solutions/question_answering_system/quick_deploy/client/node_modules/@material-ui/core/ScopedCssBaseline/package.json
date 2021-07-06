@@ -1,5 +1,0 @@
-{
-  "sideEffects": false,
-  "module": "../esm/ScopedCssBaseline/index.js",
-  "typings": "./index.d.ts"
-}

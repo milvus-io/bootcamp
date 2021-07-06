@@ -1,5 +1,0 @@
-{
-  "sideEffects": false,
-  "module": "../esm/TableHead/index.js",
-  "typings": "./index.d.ts"
-}
