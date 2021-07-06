@@ -1,5 +1,0 @@
-{
-  "sideEffects": false,
-  "module": "../esm/Slider/index.js",
-  "typings": "./index.d.ts"
-}

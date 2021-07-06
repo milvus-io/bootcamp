@@ -1,5 +1,0 @@
-{
-  "sideEffects": false,
-  "module": "../esm/Popover/index.js",
-  "typings": "./index.d.ts"
-}
