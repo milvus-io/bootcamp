@@ -24,6 +24,16 @@ export const SEARCH_API_BASE =
     ? "http://192.168.1.85:5000/text"
     : "/api";
 
+declare global {
+  interface Window {
+    _env_: any;
+  }
+}
+let endpoint = `http://0.0.0.0:80`;
+if (window._env_ && window._env_.API_URL) {
+  endpoint = window._env_.API_URL;
+}
+
 export const SEARCH_PAGE_ENDPOINT = "/v1/search";
 export const SEARCH_HOME_PAGE_ENDPOINT = "/search";
 export const SEARCH_COLLAPSED_ENDPOINT = "/search/log/collapsed";
@@ -31,10 +41,10 @@ export const SEARCH_EXPANDED_ENDPOINT = "/search/log/expanded";
 export const SEARCH_CLICKED_ENDPOINT = "/search/log/clicked";
 export const RELATED_CLICKED_ENDPOINT = "/related/log/clicked";
 
-export const COUNT = "/count";
-export const DROP = "/drop";
-export const LOAD = "/load";
-export const SEARCH = "/search";
+export const COUNT = `${endpoint}/count`;
+export const DROP = `${endpoint}/drop`;
+export const LOAD = `${endpoint}/load`;
+export const SEARCH = `${endpoint}/search`;
 
 export const RELATED_ENDPOINT = "/related";
 

@@ -50,15 +50,12 @@ const SearchBar = ({
   );
 
   const deleteTable = async () => {
-    const res = await fetch(
-      `${SEARCH_API_BASE}${DROP}?table_name=${tableName}`,
-      {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-      }
-    );
+    const res = await fetch(`${DROP}?table_name=${tableName}`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+    });
 
     try {
       const data = await res.json();
@@ -94,7 +91,7 @@ const SearchBar = ({
 
     if (file) {
       try {
-        const res = await fetch(`${SEARCH_API_BASE}${LOAD}`, {
+        const res = await fetch(`${LOAD}`, {
           method: "POST",
           body: fd,
         });

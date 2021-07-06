@@ -77,7 +77,7 @@ const SearchPage = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        `${SEARCH_API_BASE}${SEARCH}?table_name=${TABLE_NAME}&query_sentence=${query}`,
+        `${SEARCH}?table_name=${TABLE_NAME}&query_sentence=${query}`,
         {
           method: "GET",
           headers: {
