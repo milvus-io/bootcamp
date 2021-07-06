@@ -11,3 +11,4 @@ bert-serving-client
 pymysql
 fastapi  
 uvicorn
+python-multipart
