@@ -5,7 +5,6 @@ torch
 torchlibrosa==0.0.4
 librosa==0.8.0
 numpy
-pymilvus==1.1.1
 pillow
 pymysql
 fastapi
@@ -15,3 +14,4 @@ python-multipart
 aiofiles
 cryptography
 diskcache==5.2.1
+pymilvus_orm==2.0.0rc1

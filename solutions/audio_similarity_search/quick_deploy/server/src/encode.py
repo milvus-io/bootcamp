@@ -1,7 +1,6 @@
 import librosa
 import panns_inference
 from panns_inference import AudioTagging, SoundEventDetection, labels
-from milvus import Milvus
 import os
 import numpy as np
 

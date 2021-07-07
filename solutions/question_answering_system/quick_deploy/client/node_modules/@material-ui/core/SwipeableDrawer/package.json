@@ -1,5 +1,0 @@
-{
-  "sideEffects": false,
-  "module": "../esm/SwipeableDrawer/index.js",
-  "typings": "./index.d.ts"
-}
