@@ -1,6 +1,6 @@
-pymilvus==1.1.0
+pymilvus_orm==2.0.0rc1
 redis
 librosa
-ipython
 numpy
 panns_inference
+torch
