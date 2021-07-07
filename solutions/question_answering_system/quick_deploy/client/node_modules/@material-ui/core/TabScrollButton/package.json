@@ -1,5 +1,0 @@
-{
-  "sideEffects": false,
-  "module": "../esm/TabScrollButton/index.js",
-  "typings": "./index.d.ts"
-}

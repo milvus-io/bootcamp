@@ -1,5 +1,0 @@
-{
-  "sideEffects": false,
-  "module": "../esm/NoSsr/index.js",
-  "typings": "./index.d.ts"
-}
