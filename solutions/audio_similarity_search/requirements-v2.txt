@@ -1,6 +1,0 @@
-pymilvus_orm==2.0.0rc1
-redis
-librosa
-numpy
-panns_inference
-torch
