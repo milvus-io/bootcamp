@@ -171,10 +171,10 @@ open localhost:3000
 
 Enter 127.0.0.1:3000 in the browser to open the search page and enter the search text.Upload a **csv** file of the title and text
 
-![1](./img/1.png)
+![1](./pic/3.png)
 
 Get the search results of the input text, as shown in the figure
 
-![2](./img/2.png)
+![2](./pic/2.png)
 
 
