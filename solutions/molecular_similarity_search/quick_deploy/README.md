@@ -48,9 +48,9 @@ Modify the parameters according to your own environment. Below are the main para
 ```bash
 $ export EXTERNAL_DATAPATH='/data/image_path'
 $ export INTERNAL_DATAPATH='/mols_data'
-$ export Milvus_HOST='172.16.20.10'
-$ export Milvus_PORT='19530'
-$ export Mysql_HOST='172.16.20.10'
+$ export MILVUS_HOST='172.16.20.10'
+$ export MILVUS_PORT='19530'
+$ export MYSQL_HOST='172.16.20.10'
 ```
 
 - **Run Docker**
@@ -59,9 +59,9 @@ $ export Mysql_HOST='172.16.20.10'
 $ docker run -d \
 -v ${EXTERNAL_DATAPATH}:${INTERNAL_DATAPATH} \
 -p 5000:5000 \
--e "MILVUS_HOST=${Milvus_HOST}" \
--e "MILVUS_PORT=${Milvus_PORT}" \
--e "MYSQL_HOST=${Mysql_HOST}" \
+-e "MILVUS_HOST=${MILVUS_HOST}" \
+-e "MILVUS_PORT=${MILVUS_PORT}" \
+-e "MYSQL_HOST=${MYSQL_HOST}" \
 milvusbootcamp/mols-search-webserver:2.0.0
 ```
 #### 2.2 Run source code
@@ -99,12 +99,6 @@ Then start the server with Fastapi.
 ```bash
 $ python main.py
 ```
-
-- **API docs**
-
-Vist 127.0.0.1:5000/docs in your browser to use all the APIs.
-
-![fastapi](pic/fastapi.png)
 
 - **Code  structure**
 
