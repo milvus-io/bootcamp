@@ -1,5 +1,0 @@
-{
-  "sideEffects": false,
-  "module": "../esm/Tab/index.js",
-  "typings": "./index.d.ts"
-}
