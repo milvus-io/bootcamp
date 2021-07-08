@@ -90,12 +90,12 @@ async def count_images(table_name: str = None):
 async def drop_tables(table_name: str = None):
     # Delete the collection of Milvus and MySQL
     try:
-        status = do_drop(table_name, MILVUS_CLI, MYSQL_CLI)
+        msg = do_drop(table_name, MILVUS_CLI, MYSQL_CLI)
         LOGGER.info("Successfully drop tables in Milvus and MySQL!")
-        return status
+        return {'status': True, 'msg': msg}, 200
     except Exception as e:
         LOGGER.error(e)
         return {'status': False, 'msg': e}, 400
 
-# if __name__ == '__main__':
-#     uvicorn.run(app=app, host='0.0.0.0', port=8000)
+if __name__ == '__main__':
+    uvicorn.run(app=app, host='0.0.0.0', port=8000)
