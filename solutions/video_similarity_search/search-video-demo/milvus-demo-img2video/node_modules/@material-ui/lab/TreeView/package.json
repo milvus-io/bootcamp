@@ -1,5 +1,0 @@
-{
-  "sideEffects": false,
-  "module": "../esm/TreeView/index.js",
-  "typings": "./index.d.ts"
-}

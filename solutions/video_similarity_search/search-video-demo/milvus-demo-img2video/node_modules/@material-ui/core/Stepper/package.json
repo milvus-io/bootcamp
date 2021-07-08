@@ -1,5 +1,0 @@
-{
-  "sideEffects": false,
-  "module": "../esm/Stepper/index.js",
-  "typings": "./index.d.ts"
-}

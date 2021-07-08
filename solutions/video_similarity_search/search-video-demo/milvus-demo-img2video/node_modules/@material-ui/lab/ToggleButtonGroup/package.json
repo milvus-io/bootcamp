@@ -1,5 +1,0 @@
-{
-  "sideEffects": false,
-  "module": "../esm/ToggleButtonGroup/index.js",
-  "typings": "./index.d.ts"
-}
