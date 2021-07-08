@@ -106,4 +106,5 @@ async def drop_tables(table_name: str = None):
         return {'status': False, 'msg': e}, 400
 
 if __name__ == '__main__':
-    uvicorn.run(app=app, host='192.168.1.85', port=8001)
+    uvicorn.run(app=app, host='0.0.0.0', port=8002)
+
