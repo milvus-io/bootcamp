@@ -108,3 +108,4 @@ venv.bak/
 .DS_Store?
 
 node_modules
+solutions/text_search_engine/quick_deploy/client/node_modules
