@@ -1,5 +1,5 @@
 # Milvus performance
-This topic displays the performance of different index types in Milvus for reference purposes. The test data uses an open source dataset, sift1B, with 1 billion 128-dimensional vectors.
+This topic displays the performance of different index types in Milvus1.1 for reference purposes. The test data uses an open source dataset, sift1B, with 1 billion 128-dimensional vectors.
 
 The following table displays the terms used in this topic:
 
