@@ -114,3 +114,24 @@ This API is used to get the number of the questions in the system.
 **/qa/drop**
 
 This API is used to delete a specified collection.
+
+### 3. Start Client
+- Start the front-end
+```
+Please modify API_URL to the IP address and port of the server.
+$ export API_URL='http://127.0.0.1:8000'
+$ docker run -d -p 80:80 \
+-e API_URL=${API_URL} \
+milvusbootcamp/qa-chatbot-client:v1
+```
+- How to use
+
+Enter WEBCLIENT_IP:80 in the browser to open the interface for reverse image search.
+
+WEBCLIENT_IPspecifies the IP address that runs qa-chatbot-client docker.
+
+i. Load data: Click the upload button, and then select a csv Q&A data file from the local to import it into the Q&A chatbot system. For the data format, you can refer to example_data in the data directory of this project.
+
+ii. Retrieve similar questions: Enter a question in the dialog, and then you'll get five questions most similar to the question in the Q&A library.
+
+iii. Obtain answer: Click any of the similar questions obtained in the previous step, and you'll get the answer.
