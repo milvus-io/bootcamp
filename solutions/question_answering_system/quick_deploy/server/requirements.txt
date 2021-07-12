@@ -5,4 +5,4 @@ pymilvus-orm==2.0.0rc1
 fastapi
 python-multipart
 pandas
-sentence_transformers
+sentence_transformers==1.2.0
