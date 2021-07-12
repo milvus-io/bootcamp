@@ -23,7 +23,7 @@ from proto import recall_pb2
 from proto import recall_pb2_grpc 
 from proto import user_info_pb2 as user_info_pb2
 import redis
-from milvus import Milvus, DataType
+from milvus import Milvus
 from paddle_serving_app.local_predict import LocalPredictor
 import numpy as np
 
