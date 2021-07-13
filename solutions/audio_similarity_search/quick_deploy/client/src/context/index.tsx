@@ -13,6 +13,21 @@ const useStyles = makeStyles((theme: Theme) => ({
     bottom: 0,
     background: "rgba(0, 0, 0, 0.5)",
   },
+  circle: {
+    color: "#fff",
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    textAlign: "center",
+
+    "& p": {
+      marginTop: "16px",
+    },
+  },
+  loadingIcon: {
+    color: "#12c3f4",
+  },
 }));
 
 const { Provider } = rootContext;
@@ -57,12 +72,11 @@ const ContextProvider = (props: { children: any }) => {
           search,
           count,
           tableName: TABLE_NAME,
-          loading,
           setLoading,
         }}
       >
         <Snackbar
-          anchorOrigin={{ vertical: "top", horizontal: "left" }}
+          anchorOrigin={{ vertical: "top", horizontal: "right" }}
           open={snackbarConfig.open}
           onClose={handleCloseSnackbar}
           message={snackbarConfig.message}
@@ -71,7 +85,10 @@ const ContextProvider = (props: { children: any }) => {
       </Provider>
       {loading && (
         <div className={classes.loading}>
-          <CircularProgress />
+          <div className={classes.circle}>
+            <CircularProgress classes={{ root: classes.loadingIcon }} />
+            <p>Loading...</p>
+          </div>
         </div>
       )}
     </>

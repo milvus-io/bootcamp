@@ -84,8 +84,9 @@ type PropsType = {
 };
 
 const Uploader: React.FC<PropsType> = ({ setTab }) => {
-  const { uploadSet, dropSet, tableName, openSnackbar } =
+  const { uploadSet, dropSet, tableName, openSnackbar, setLoading } =
     useContext(rootContext);
+
   const classes = useStyles();
   const [path, setPath] = useState({
     value: "",
@@ -102,17 +103,28 @@ const Uploader: React.FC<PropsType> = ({ setTab }) => {
   };
 
   const handleUploadSet = async () => {
+    if (!path.value) {
+      openSnackbar("Please Input Collection Path!");
+      return;
+    }
     try {
-      // await dropSet({ table_name: tableName });
-      const { data } = await uploadSet({
+      setLoading(true);
+      await dropSet({ table_name: tableName });
+      const {
+        status,
+        data: { msg },
+      } = await uploadSet({
         Table: tableName,
         File: path.value,
       });
-      console.log(data);
-      openSnackbar();
-      setTab("search");
+      if (status === 200) {
+        openSnackbar(msg);
+        setTab("search");
+      }
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 

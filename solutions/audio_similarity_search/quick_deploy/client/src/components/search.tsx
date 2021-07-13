@@ -1,25 +1,39 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 import { Theme, makeStyles } from "@material-ui/core/styles";
 import SearchResults from "./searchResults";
 import AudioPlayer from "./audioPlayer";
 import Button from "@material-ui/core/Button";
+import { rootContext } from "../context";
 
 const useStyles = makeStyles((theme: Theme) => ({
   searchWrapper: {
     height: "100%",
+    padding: "32px",
+    boxSizing: "border-box",
   },
-  title: {},
+  title: {
+    lineHeight: "24px",
+    padding: "8px 0",
+  },
   searchButton: {
     marginBottom: "20px",
   },
   uploadWrapper: {},
-  tableWrapper: {},
-  targetFileWrapper: {},
+  tableWrapper: {
+    height: "calc(100vh - 64px - 140px - 56px - 56px)",
+  },
+  resultWrapper: {
+    height: "100%",
+  },
+  targetFileWrapper: {
+    marginBottom: "20px",
+  },
   button: {
     position: "relative",
     borderRadius: "10px",
     background: "#12c3f4",
     color: "#fff",
+    textTransform: "capitalize",
 
     "&:hover": {
       background: "#65daf8",
@@ -35,27 +49,90 @@ const useStyles = makeStyles((theme: Theme) => ({
     right: 0,
   },
   placeHolder: {
-    height: "120px",
+    height: "80px",
   },
 }));
 
 type RowType = {
   name: string;
   distance: number;
-  duration: number;
   audioSrc: string;
 }[];
 
 const Search = () => {
   const classes = useStyles();
   const [rows, setRows] = useState<RowType>([]);
-  const [target, setTarget] = useState(null);
-  const targetUploadRef = useRef(null!);
+  const [target, setTarget] = useState({
+    index: 1,
+    audioSrc: "",
+    name: "",
+    distance: 1,
+  });
+  const targetUploadRef = useRef<HTMLInputElement>(null!);
+
+  const { openSnackbar, setLoading, search, tableName } =
+    useContext(rootContext);
+
+  const getSearchedAudio = (file: File) => {
+    const name = file.name;
+    const src = URL.createObjectURL(file);
+    return {
+      name,
+      src,
+    };
+  };
+
+  const handleSelectTargetFile = async () => {
+    const file = targetUploadRef.current.files![0];
+
+    if (!file) {
+      openSnackbar("Please Upload Target File!");
+      return;
+    }
+    const { name, src } = getSearchedAudio(file);
+    setTarget({
+      index: 1,
+      audioSrc: src,
+      name: name,
+      distance: 1,
+    });
+    setLoading(true);
+    const fd = new FormData();
+    fd.append("audio", file);
+    fd.append("Table", tableName);
+
+    try {
+      const { data, status } = await search(fd);
+      if (status === 200) {
+        const resData = data.map((item: [string, [string, number]]) => {
+          const [audioSrc, [name, distance]] = item;
+
+          return {
+            audioSrc,
+            duration: 0,
+            distance,
+            name,
+          };
+        });
+
+        setRows(resData);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className={classes.searchWrapper}>
       <div className={classes.targetFileWrapper}>
         <h1 className={classes.title}>Target Audio File</h1>
-        {target ? <p>target</p> : <div className={classes.placeHolder}></div>}
+        {target.name ? (
+          <AudioPlayer {...target} index={1} />
+        ) : (
+          <div className={classes.placeHolder}></div>
+        )}
       </div>
 
       <div className={classes.searchButton}>
@@ -65,6 +142,7 @@ const Search = () => {
             type="file"
             ref={targetUploadRef}
             className={classes.fileUploader}
+            onChange={handleSelectTargetFile}
           />
         </Button>
       </div>

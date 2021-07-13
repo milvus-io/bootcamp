@@ -57,13 +57,12 @@ type PropsType = {
   audioSrc: string;
   index: number;
   distance: number;
-  duration: number;
   name: string;
 };
 
 const AudioPlayer: React.FC<PropsType> = (props) => {
   const classes = useStyles();
-  const { audioSrc, index, distance, duration, name } = props;
+  const { audioSrc, index, distance, name } = props;
   const [canPlay, setCanPlay] = useState(false);
   const [isPaused, setIsPaused] = useState(true);
   const audioRef = useRef<HTMLAudioElement>(null!);
@@ -108,11 +107,11 @@ const AudioPlayer: React.FC<PropsType> = (props) => {
           </Typography>
         </Tooltip>
 
-        <Typography variant="body1" className={classes.text}>
+        {/* <Typography variant="body1" className={classes.text}>
           {formatDuration(
             duration || (audioRef.current && audioRef.current.duration)
           )}
-        </Typography>
+        </Typography> */}
 
         {distance && (
           <Tooltip title={distance} placement="top">
