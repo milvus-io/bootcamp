@@ -9,10 +9,10 @@ import { rootContext } from "../context";
 const useStyles = makeStyles((theme: Theme) => ({
   main: {
     display: "flex",
-    height: "100%",
+    height: "calc(100% - 64px)",
   },
   content: {
-    width: "100%",
+    width: "calc(100% - 80px)",
     height: "100%",
   },
 }));
@@ -24,8 +24,14 @@ const Home = () => {
   const [tab, setTab] = useState<"upload" | "search">("upload");
 
   const getCountNum = async () => {
-    const res = await getCount({ table_name: tableName });
-    console.log(res);
+    try {
+      const { status, data } = await getCount({ table_name: tableName });
+      if (status === 200) {
+        setCount(data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {

@@ -22,16 +22,7 @@ axiosInstance.interceptors.request.use(
 
 axiosInstance.interceptors.response.use(
   (res) => {
-    const { data, code } = res;
-    switch (code) {
-      case 200:
-        return Promise.resolve(data);
-      default:
-        return Promise.resolve({
-          code,
-          msg: "Request Error!",
-        });
-    }
+    return Promise.resolve(res);
   },
   (error) => {
     return Promise.reject(error);

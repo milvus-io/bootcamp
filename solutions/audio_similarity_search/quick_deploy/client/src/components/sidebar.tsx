@@ -6,7 +6,7 @@ import IconButton from "@material-ui/core/IconButton";
 
 const useStyles = makeStyles((theme: Theme) => ({
   sidebarWrapper: {
-    height: "100%",
+    height: "calc(100vh - 64px)",
     width: "80px",
     background: "#fff",
   },
