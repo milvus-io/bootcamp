@@ -67,31 +67,33 @@ entries and/or test entries
 ## Environments
 
 1. Python 3.6/3.7
-2. [Milvus 1.1.0](https://milvus.io/docs/install_milvus.md)
+2. [Milvus 2.0.0](https://milvus.io/docs/v2.0.0/install_standalone-docker.md)
 
 ## How to start
 
-1. Pull the source code.
+1. Start servers: milvus2.0 & redis
+ 
+3. Pull the source code.
 
    ```shell
    $ git clone https://github.com/milvus-io/bootcamp.git
    $ cd solutions/recommendation_system
    ```
 
-2. Install requirements.
+3. Install requirements.
 
    ```shell
    $ pip install -r requirements.txt
    ```
 
-3. Prepare data.
+4. Prepare data (movie_vectors.txt, users.dat, movies.dat) & download models (rank_model, user_vector_model).
 
    ```shell
-   $ cd movie_recommender
+   $ cd quick_deploy/movie_recommender
    $ sh get_data.sh
    ```
 
-4. Start recall and sorting service.
+5. Start recall and sorting service.
 
    ```shell
    $ sh start_server.sh
