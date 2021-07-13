@@ -2,4 +2,4 @@ PyMySQL
 numpy
 pymilvus-orm==2.0.0rc1
 pandas
-sentence_transformers
+sentence_transformers==1.2.0

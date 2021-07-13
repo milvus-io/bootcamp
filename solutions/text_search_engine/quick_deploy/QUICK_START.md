@@ -167,3 +167,15 @@ open localhost:3000
 ```
 > Note: If you change the port of the server, please modify the parameters on line 17 **/src/shared/Constants.ts** for your own environment
 
+4、The interface display
+---------------------- 
+
+Enter 127.0.0.1:3000 in the browser to open the search page and enter the search text.Upload a **csv** file of the title and text
+
+![1](./pic/3.png)
+
+Get the search results of the input text, as shown in the figure
+
+![2](./pic/2.png)
+
+

@@ -1,5 +1,0 @@
-{
-  "sideEffects": false,
-  "module": "../esm/Alert/index.js",
-  "typings": "./index.d.ts"
-}

@@ -1,4 +1,4 @@
-pymilvus==1.1.0
-paddle_serving_app==0.3.1
-paddlepaddle
+pymilvus-orm==2.0.0rc1
+paddle_serving_app
+paddlepaddle==2.1.1
 redis

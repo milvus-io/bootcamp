@@ -74,8 +74,13 @@ ids, embeddings = get_vectors()
 
 collection_name = 'demo_films'
 client = VecToMilvus()
-status, ids = client.insert(collection_name=collection_name, vectors=embeddings, ids=ids, partition_tag="Movie")
-print(status)
+try:
+    ids = client.insert(collection_name=collection_name, vectors=embeddings, ids=ids, partition_name="Movie")
+    status = "ok"
+    print(status)
+except Exception as e:
+    status = "insert fails"
+    print(status, e)
 
 
 # print("\n----------insert----------")

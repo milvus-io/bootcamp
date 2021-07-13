@@ -1,6 +1,0 @@
-pymilvus==1.1.0
-numpy
-psycopg2-binary
-psycopg2
-faker
-gdown
