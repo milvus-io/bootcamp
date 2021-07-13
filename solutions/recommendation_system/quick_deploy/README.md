@@ -108,22 +108,22 @@ entries and/or test entries
    $ python test_client.py as M 32 5 # gender, age, and occupation
    # Expected outputs
    error {
-     code: 200
-   }
-   item_infos { 
-     movie_id: "2537"
-     title: "Beyond the Poseidon Adventure (1979)"
-     genre: "Adventure"
+   code: 200
    }
    item_infos {
-     movie_id: "124"
-     title: "Star Maker, The (Uomo delle stelle, L\') (1995)"
-     genre: "Drama"
+     movie_id: "760"
+     title: "Stalingrad (1993)"
+     genre: "War"
    }
    item_infos {
-     movie_id: "2040"å
-     title: "Computer Wore Tennis Shoes, The (1970)"
-     genre: "Children\'s, Comedy"
+     movie_id: "632"
+     title: "Land and Freedom (Tierra y libertad) (1995)"
+     genre: "War"
+   }
+   item_infos {
+     movie_id: "1275"
+     title: "Highlander (1986)"
+     genre: "Action, Adventure"
    }
    ...
    ```
