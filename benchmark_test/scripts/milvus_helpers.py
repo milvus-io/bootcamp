@@ -49,6 +49,7 @@ class MilvusHelper:
                 LOGGER.debug("Create Milvus collection: {}".format(self.collection))
                 return "OK"
             else:
+                self.collection = Collection(collection_name)
                 return "collection {} exists".format(collection_name)
         except Exception as e:
             LOGGER.error("Failed to load data to Milvus: {}".format(e))
