@@ -1,7 +1,0 @@
-{
-  "name": "@restart/hooks/useMutationObserver",
-  "private": true,
-  "main": "../cjs/useMutationObserver.js",
-  "module": "../esm/useMutationObserver.js",
-  "types": "../esm/useMutationObserver.d.ts"
-}

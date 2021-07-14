@@ -1,7 +1,0 @@
-{
-  "name": "@restart/hooks/useWillUnmount",
-  "private": true,
-  "main": "../cjs/useWillUnmount.js",
-  "module": "../esm/useWillUnmount.js",
-  "types": "../esm/useWillUnmount.d.ts"
-}

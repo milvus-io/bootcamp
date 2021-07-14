@@ -1,7 +1,0 @@
-{
-  "name": "@restart/hooks/useStateAsync",
-  "private": true,
-  "main": "../cjs/useStateAsync.js",
-  "module": "../esm/useStateAsync.js",
-  "types": "../esm/useStateAsync.d.ts"
-}

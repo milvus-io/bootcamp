@@ -1,7 +1,0 @@
-{
-  "name": "@restart/hooks/useEventCallback",
-  "private": true,
-  "main": "../cjs/useEventCallback.js",
-  "module": "../esm/useEventCallback.js",
-  "types": "../esm/useEventCallback.d.ts"
-}
