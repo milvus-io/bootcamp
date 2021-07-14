@@ -1,7 +1,0 @@
-{
-  "name": "@restart/hooks/usePrevious",
-  "private": true,
-  "main": "../cjs/usePrevious.js",
-  "module": "../esm/usePrevious.js",
-  "types": "../esm/usePrevious.d.ts"
-}

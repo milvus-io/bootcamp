@@ -1,7 +1,0 @@
-{
-  "name": "@restart/hooks/useSafeState",
-  "private": true,
-  "main": "../cjs/useSafeState.js",
-  "module": "../esm/useSafeState.js",
-  "types": "../esm/useSafeState.d.ts"
-}
