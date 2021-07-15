@@ -1,7 +1,3 @@
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-
 <!-- PROJECT LOGO -->
 <br />
 
@@ -42,12 +38,11 @@
         <li><a href="#fries-try-it">Have a try</a></li>
         <li><a href="#icecream-run-in-local">Run locally</a></li>
       </ul>
-    <li><a href="#collaborations">Collaborations</a></li>
+    <li><a href="#two-women-holding-hands-collaborations">Collaborations</a></li>
       <ul>
-        <li><a href="#milvus-and-onnx">Milvus_and_ONNX</a></li>
+        <li><a href="#clap-milvus-and-onnx">Milvus_and_ONNX</a></li>
       </ul>
     <li><a href="#fire-supports">Supports</a></li>
-    <li><a href="#contributors">All contributors</a></li>
   </ol>
 </details>
 
@@ -72,7 +67,7 @@ We extract 100 million vector data from [SIFT1B Dataset](http://corpus-texmex.ir
 
 <!--ALL SOLUTIONS-->
 
-## :pencil: Solution
+## :pencil: Solutions
 
 ### :clapper: [Live demo](https://zilliz.com/milvus-demos?isZilliz=true)
 
@@ -100,31 +95,12 @@ We extract 100 million vector data from [SIFT1B Dataset](http://corpus-texmex.ir
 
 ## :two_women_holding_hands: Collaborations
 
-- ### [Milvus_and_ONNX](etc/onnx_and_milvus)
+### :clap:[Milvus_and_ONNX](etc/onnx_and_milvus)
 
-  Build a reverse image search system with Milvus using various AI models in collaboration with the Open Neural Network Exchange (ONNX).
+Build a reverse image search system with Milvus using various AI models in collaboration with the Open Neural Network Exchange (ONNX).
 
 ## :fire: Supports
 
 Join the Milvus community on [Slack](https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ) to share your suggestions, advice, and questions with our engineering team. Also, you can join our [WeChat group](https://github.com/milvus-io/milvus/discussions/4156).
 
-
-
-
-
-
-
-
-
-
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-
-[contributors-shield]: https://img.shields.io/github/contributors/github_username/repo.svg?style=for-the-badge
-[contributors-url]: https://github.com/milvus-io/bootcamp/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/github_username/repo.svg?style=for-the-badge
-[forks-url]: https://github.com/milvus-io/bootcamp/network/members
-[stars-shield]: https://img.shields.io/github/stars/github_username/repo.svg?style=for-the-badge
-[stars-url]: https://github.com/milvus-io/bootcamp/stargazers
 
