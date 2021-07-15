@@ -1,19 +1,20 @@
-from milvus import *
+from pymilvus_orm import *
 
-# from milvus_tool.config import MILVUS_HOST, MILVUS_PORT, top_k, search_param
-from milvus_tool.config import MILVUS_HOST, MILVUS_PORT, top_k, search_param
+# from milvus_tool.config import MILVUS_HOST, MILVUS_PORT, top_k, search_param, dim
+from milvus_tool.config import *
 
 
 class RecallByMilvus():
     def __init__(self):
-        self.client = Milvus(host=MILVUS_HOST, port=MILVUS_PORT)
+        connections.connect(host=MILVUS_HOST, port=MILVUS_PORT)
 
-    def search(self, vectors, collection_name, partition_tag=None):
+    def search(self, vectors, collection_name):
         try:
-            status, results = self.client.search(collection_name=collection_name, query_records=vectors, top_k=top_k,
-                                                 params=search_param, partition_tag=partition_tag)
-            # print(status)
-            return status, results
+            if utility.has_collection(collection_name):
+                collection = Collection(name = collection_name)
+            collection.load()
+            res = collection.search(vectors, anns_field="embedding", limit=top_k, param=search_params)
+            return res
         except Exception as e:
             print('Milvus recall error: ', e)
 
@@ -22,8 +23,9 @@ if __name__ == '__main__':
     import random
     client = RecallByMilvus()
     collection_name = 'test1'
-    partition_tag = 'partition_3'
-    embeddings = [[random.random() for _ in range(128)] for _ in range(2)]
-    status, resultes = client.search(collection_name=collection_name, vectors=embeddings, partition_tag=partition_tag)
-    print(status)
-    print(resultes)
+    partition_name = 'partition_3'
+    embeddings = [[random.random() for _ in range(32)] for _ in range(2)]
+    res = client.search(collection_name=collection_name, vectors=embeddings)
+    for x in res:
+        for y in x:
+            print(y.id, y.distance)

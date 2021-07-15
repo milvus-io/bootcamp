@@ -16,16 +16,7 @@ This bootcamp includes the following:
   - [Molecular Similarity Search](solutions/molecular_similarity_search)
   - [Video Similarity Search](solutions/video_similarity_search)
   - [Audio Similarity Search](solutions/audio_similarity_search)
-  - [Hybrid Search](solutions/hybrid_search)
   - [Text Search Engine](solutions/text_search_engine)
-  
-- Deployments
-  - [Distributed deployment using Mishards](deployments/mishards)
-  - [Distributing Mishards with Kubernetes](deployments/kubernetes)
-  - [Milvus cloud NFS using JuiceFS](deployments/juicefs)
-  - [Highly available Milvus using keepalived](deployments/highly_available)
-  - [Load balanced Milvus using nginx](deployments/load_balanced)
-  - [Milvus on Google Colab](deployments/google_colab)
 
 - [Others](etc)
 

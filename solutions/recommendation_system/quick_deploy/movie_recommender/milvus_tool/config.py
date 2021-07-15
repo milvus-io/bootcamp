@@ -1,18 +1,23 @@
 import os
-from milvus import MetricType, IndexType
+from pymilvus_orm import *
 
-MILVUS_HOST = '127.0.0.1'
+
+MILVUS_HOST = 'localhost'
 MILVUS_PORT = 19530
 
-collection_param = {
-    'dimension': 32,
-    'index_file_size': 2048,
-    'metric_type': MetricType.L2
-}
+dim = 32
+pk = FieldSchema(name='pk', dtype=DataType.INT64, is_primary=True)
+field = FieldSchema(name='embedding', dtype=DataType.FLOAT_VECTOR, dim=dim)
+schema = CollectionSchema(fields=[pk, field], description="movie recommendation: demo films")
 
-index_type = IndexType.IVF_FLAT
-index_param = {'nlist': 1000}
+index_param = {
+    "metric_type": "L2",
+    "index_type":"IVF_FLAT",
+    "params":{"nlist":128}
+    }
 
-top_k = 100
-search_param = {'nprobe': 20}
-
+top_k = 10
+search_params = {
+    "metric_type": "L2",
+    "params": {"nprobe": 10}
+    }

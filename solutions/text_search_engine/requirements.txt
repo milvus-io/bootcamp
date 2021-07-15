@@ -1,7 +1,11 @@
+pymilvus-orm==2.0.0rc1
 flask-cors
 numpy
 flask
 flask_restful
-pymilvus==1.1.0
+<<<<<<< HEAD
+pymilvus-orm==2.0.0rc1
+=======
+>>>>>>> fc964b6cb96df33d8e293ac91a478be47c5c53ba
 psycopg2-binary
 sentence_transformers

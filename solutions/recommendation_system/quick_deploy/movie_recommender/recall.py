@@ -19,11 +19,11 @@ from concurrent import futures
 
 import grpc
 
-from proto import recall_pb2 
-from proto import recall_pb2_grpc 
+from proto import recall_pb2
+from proto import recall_pb2_grpc
 from proto import user_info_pb2 as user_info_pb2
 import redis
-from milvus import Milvus, DataType
+from pymilvus_orm import *
 from paddle_serving_app.local_predict import LocalPredictor
 import numpy as np
 
@@ -38,7 +38,7 @@ def hash2(a):
 class RecallServerServicer(object):
     def __init__(self):
         self.uv_client = LocalPredictor()
-        self.uv_client.load_model_config("user_vector_model/serving_server_dir") 
+        self.uv_client.load_model_config("user_vector_model/serving_server_dir")
         # milvus_host = '127.0.0.1'
         # milvus_port = '19530'
         # self.milvus_client = Milvus(milvus_host, milvus_port)
@@ -89,7 +89,7 @@ class RecallServerServicer(object):
         recall_res = recall_pb2.RecallResponse()
         user_vector = self.get_user_vector(request.user_info)
 
-        status, results = self.milvus_client.search(collection_name=self.collection_name, vectors=[user_vector])
+        results = self.milvus_client.search(collection_name=self.collection_name, vectors=[user_vector])
         for entities in results:
             if len(entities) == 0:
                 recall_res.error.code = 500
@@ -111,7 +111,7 @@ class RecallServer(object):
         max_workers = 40
         concurrency = 40
         port = 8950
-        
+
         server = grpc.server(
             futures.ThreadPoolExecutor(max_workers=max_workers),
             options=[('grpc.max_send_message_length', 1024 * 1024),
