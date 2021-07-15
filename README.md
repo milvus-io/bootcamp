@@ -38,9 +38,9 @@
         <li><a href="#clapper-live-demo">Live demo</a></li>
         <li><a href="#fries-have-a-try">Have a try</a></li>
       </ul>
-    <li><a href="#two-women-holding-hands-collaborations">Collaborations</a></li>
+    <li><a href="#two_women_holding_hands-collaborations">Collaborations</a></li>
       <ul>
-        <li><a href="#clap-milvus-and-onnx">Milvus_and_ONNX</a></li>
+        <li><a href="#clap-milvus_and_onnx">Milvus_and_ONNX</a></li>
       </ul>
     <li><a href="#fire-supports">Supports</a></li>
   </ol>
