@@ -1,5 +1,1 @@
-numpy
-pymilvus==1.1.0
-redis
-pymysql
-ipyplot
+PyMySQL==1.0.2

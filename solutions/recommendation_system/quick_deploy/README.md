@@ -67,35 +67,63 @@ entries and/or test entries
 ## Environments
 
 1. Python 3.6/3.7
-2. [Milvus 1.1.0](https://milvus.io/docs/install_milvus.md)
+2. [Milvus 2.0.0](https://milvus.io/docs/v2.0.0/install_standalone-docker.md)
 
 ## How to start
 
-1. Pull the source code.
+1. Start servers: milvus2.0 & redis
+ 
+3. Pull the source code.
 
    ```shell
    $ git clone https://github.com/milvus-io/bootcamp.git
    $ cd solutions/recommendation_system
    ```
 
-2. Install requirements.
+3. Install requirements.
 
    ```shell
    $ pip install -r requirements.txt
    ```
 
-3. Prepare data.
+4. Modify config in `milvus_tool/config.py`
+
+   ```
+   MILVUS_HOST = 'localhost'
+   MILVUS_PORT = 19530
+
+   dim = 32
+   pk = FieldSchema(name='pk', dtype=DataType.INT64, is_primary=True)
+   field = FieldSchema(name='embedding', dtype=DataType.FLOAT_VECTOR, dim=dim)
+   schema = CollectionSchema(fields=[pk, field], description="movie recommendation: demo films")
+
+   index_param = {
+       "metric_type": "L2",
+       "index_type":"IVF_FLAT",
+       "params":{"nlist":128}
+       }
+   
+   top_k = 10
+   search_params = {
+       "metric_type": "L2",
+       "params": {"nprobe": 10}
+       }
+
+   ```
+
+5. Prepare data (movie_vectors.txt, users.dat, movies.dat) & download models (rank_model, user_vector_model).
 
    ```shell
-   $ cd movie_recommender
+   $ cd quick_deploy/movie_recommender
    $ sh get_data.sh
    ```
 
-4. Start recall and sorting service.
+6. Start recall and sorting service.
 
    ```shell
    $ sh start_server.sh
    ```
+   (May take a few seconds to start the service.)
 
 ## How to use
 
@@ -106,22 +134,22 @@ entries and/or test entries
    $ python test_client.py as M 32 5 # gender, age, and occupation
    # Expected outputs
    error {
-     code: 200
-   }
-   item_infos { 
-     movie_id: "2537"
-     title: "Beyond the Poseidon Adventure (1979)"
-     genre: "Adventure"
+   code: 200
    }
    item_infos {
-     movie_id: "124"
-     title: "Star Maker, The (Uomo delle stelle, L\') (1995)"
-     genre: "Drama"
+     movie_id: "760"
+     title: "Stalingrad (1993)"
+     genre: "War"
    }
    item_infos {
-     movie_id: "2040"å
-     title: "Computer Wore Tennis Shoes, The (1970)"
-     genre: "Children\'s, Comedy"
+     movie_id: "632"
+     title: "Land and Freedom (Tierra y libertad) (1995)"
+     genre: "War"
+   }
+   item_infos {
+     movie_id: "1275"
+     title: "Highlander (1986)"
+     genre: "Action, Adventure"
    }
    ...
    ```

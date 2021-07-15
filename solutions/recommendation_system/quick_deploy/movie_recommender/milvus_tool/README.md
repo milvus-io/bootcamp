@@ -39,55 +39,18 @@ Python 版本： 3.6 及以上
 
 Docker: 19.03 或以上
 
-Milvus 1.0.0
+Milvus 2.0.0
 
 
 
 ## 安装启动 Milvus
 
-这里将安装 [Milvus1.0.0 的 CPU 版本](https://milvus.io/cn/docs/v1.0.0/milvus_docker-cpu.md)，也可以选择安装 GPU 版本的 Milvus，安装方式请参考： [Milvus1.0.0 GPU 安装](https://milvus.io/cn/docs/v1.0.0/milvus_docker-gpu.md)。
-
-**拉取 CPU 版本的 Milvus 镜像：**
-
-```shell
-$ sudo docker pull milvusdb/milvus:1.0.0-cpu-d030521-1ea92e
-```
-
-**下载配置文件**
-
-```shell
-$ mkdir -p /home/$USER/milvus/conf
-$ cd /home/$USER/milvus/conf
-$ wget https://raw.githubusercontent.com/milvus-io/milvus/v1.0.0/core/conf/demo/server_config.yaml
-```
-
-> Milvus 相关的配置可以通过该配置文件指定。
-
-**启动 Milvus Docker 容器**
-
-```shell
-$ sudo docker run -d --name milvus_cpu_1.0.0 \
--p 19530:19530 \
--p 19121:19121 \
--v /home/$USER/milvus/db:/var/lib/milvus/db \
--v /home/$USER/milvus/conf:/var/lib/milvus/conf \
--v /home/$USER/milvus/logs:/var/lib/milvus/logs \
--v /home/$USER/milvus/wal:/var/lib/milvus/wal \
-milvusdb/milvus:1.0.0-cpu-d030521-1ea92e
-```
-
-**确认 Milvus 运行状态**
-
-```shell
-$ sudo docker logs milvus_cpu_1.0.0
-```
-
-> 用以上命令查看 Milvus 服务是否正常启动。
+这里将安装单机 [Milvus2.0.0 Standalone](https://milvus.io/docs/v2.0.0/install_standalone-docker.md)，也可以选择安装分布式Milvus2.0，安装方式请参考： [Milvus2.0.0 Cluster](https://milvus.io/docs/v2.0.0/install_cluster-docker.md)。
 
 **安装 Milvus Python SDK**
 
 ```shell
-$ pip install pymilvus== 1.0.1
+$ pip install pymilvus-orm==2.0.0rc1
 ```
 
 
@@ -98,13 +61,12 @@ $ pip install pymilvus== 1.0.1
 
 | Parameters       | Description                                                  | Reference value                                              |
 | ---------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| MILVUS_HOST      | Milvus 服务所在的机器 IP                                     | 127.0.0.1                                                    |
+| MILVUS_HOST      | Milvus 服务所在的机器 IP                                     | localhost                                                    |
 | MILVUS_PORT      | 提供 Milvus 服务的端口                                       | 19530                                                        |
-| collection_param | 在 Milvus 中建立的集合参数。<br />`dimension` 表示向量维度<br />`index_file_size` 表示在 Milvus 中存储的数据文件大小<br />`metric_type` 表示计算向量相似度的方式 | collection_param = {<br />      'dimension': 128,<br />      'index_file_size': 2048,<br />      'metric_type': MetricType.L2} |
-| index_type       | 指定给 Milvus 集合建立的索引类型                             | IndexType.IVF_FLAT                                           |
-| index_param      | 建立索引的参数，不同索引所需要的参数不同                     | {'nlist': 1000}                                              |
-| top_k            | 查询时，召回的向量数。                                       | 100                                                          |
-| search_param     | 在 Milvus 中查询时的参数，该参数会影像查询性能和召回率       | {'nprobe': 20}                                               |
+| schema | 在 Milvus 中建立的集合参数。<br />`fields`<br />`description` 对集合的描述<br />`dim` 向量维度| dim = 32<br />      pk = FieldSchema(name='pk', dtype=DataType.INT64, is_primary=True)<br />      field = FieldSchema(name='embedding', dtype=DataType.FLOAT_VECTOR, dim=dim)<br /> schema = CollectionSchema(fields=[pk, field], description="movie recommendation: demo films") |
+| index_param      | 建立索引的参数，不同索引所需要的参数不同                     | {<br />   "metric_type": "L2",<br />   "index_type":"IVF_FLAT",<br />   "params":{"nlist":128}<br />   }  |
+| top_k            | 查询时，召回的向量数。                                       | 10                                                         |
+| search_params     | 在 Milvus 中查询时的参数，该参数会影像查询性能和召回率       | {<br />  "metric_type": "L2",<br />  "params": {"nprobe": 10}<br />  }|
 
 ### 向量导入
 
@@ -114,7 +76,7 @@ Milvus_insert.py 脚本提供向量导入功能，在使用该脚本前，需要
 from milvus_tool.milvus_insert import VecToMilvus
 
 client = VecToMilvus()
-status, ids = client.insert(collection_name=collection_name, vectors=embeddings, ids=ids, partition_tag=partition_name)
+mr = client.insert(ids=ids, vectors=embeddings, collection_name=collection_name, partition_name=partition_name)
 ```
 
 > 调用 insert 方法时需要传入的参数：
@@ -125,9 +87,9 @@ status, ids = client.insert(collection_name=collection_name, vectors=embeddings,
 >
 > **ids**: 和向量一一对应的 ID，这里要求的 ids 是一维列表的形式，示例：[1,2]，这里表示上述两条向量对应的 ID 分别是 1 和 2. 这里的 ids 也可以为空，不传入参数，此时插入的向量将由 Milvus 自动分配 ID。
 >
-> **partition_tag**: 指定向量要插入的分区名称，Milvus 中可以通过标签将一集合分割为若干个分区 。该参数可以为空，为空时向量直接插入集合中。
+> **partition_name**: 指定向量要插入的分区名称，Milvus 中可以通过标签将一集合分割为若干个分区 。该参数可以为空，为空时向量直接插入集合中。
 
-**返回结果**：向量导入后将返回 `status` 和 `ids` 两个参数。status 返回的是插入的状态，插入成功或者失败。ids 返回的是插入向量对应的 ID，是一个一维列表。
+**返回结果**：向量导入后将返回MutationResult `mr`，其中包含插入数据对应的主键列 primary_keys：`mr.primary_keys`。
 
 具体使用可参考项目 movie_recommender/to_milvus.py
 
@@ -138,27 +100,23 @@ milvus_recall.py 提供向量召回功能，在使用该脚本前，需要在con
 ```python
 from milvus_tool.milvus_recall import RecallByMilvus
 milvus_client = RecallByMilvus()
-status, results = self.milvus_client.search(collection_name=collection_name, vectors = query_records, partition_name=partition_name)
+res = milvus_client.search(collection_name=collection_name, vectors=embeddings)
 ```
 
 > **collection_name**：指定要查询的集合名称。
 >
 > **vectors**：指定要查询的向量。该向量格式和插入时的向量格式一样，是一个二维列表。
 >
-> **partition_tag**：指定查询的分区标签。该参数可以为空，不指定时在 collection 的全局范围内查找。
 
-**返回结果**：查询后将返回 `status` 和 `results` 两个结果。`status` 返回的是查询的状态，查询成功或者失败。`results` 返回的是查询结果，返回结果的格式示例：
+**返回结果**：将返回搜索结果res包括ID和距离：
 
 ```
-以下查询两条向量，top_k =3 是的结果示例
-[
- [ (id:000, distance:0.0),
-   (id:020, distance:0.17),
-   (id:111, distance:0.60) ]
- [ (id:100, distance:0.0),
-   (id:032, distance:0.69),
-   (id:244, distance:1.051) ]
- ]
+for x in res:
+    for y in x:
+        print(y.id, y.distance)
+OR
+for x in res:
+    print(x.ids, x.distances)
 ```
 
 具体使用可参考项目 movie_recommender/recall.py

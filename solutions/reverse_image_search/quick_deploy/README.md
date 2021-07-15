@@ -14,7 +14,7 @@ This demo uses the PASCAL VOC image set, which contains 17125 images with 20 cat
 
 Dataset size: ~ 2 GB.
 
-Download location: http://host.robots.ox.ac.uk/pascal/VOC/voc2012/VOCtrainval_11-May-2012.tar
+Download location: https://drive.google.com/file/d/1n_370-5Stk4t0uDV1QqvYkcvyV8rbw0O/view?usp=sharing
 
 > Note: You can also use other images for testing. This system supports the following formats: .jpg and .png.
 
@@ -24,21 +24,9 @@ Download location: http://host.robots.ox.ac.uk/pascal/VOC/voc2012/VOCtrainval_11
 
 As shown in the architecture diagram, the system will use Milvus to store and search the feature vector data, and Mysql is used to store the correspondence between the ids returned by Milvus and the image paths, then you need to start Milvus and Mysql first.
 
-- **Start Milvus v1.1.0**
+- **Start Milvus v2.0**
 
-First, you are supposed to refer to the Install Milvus v1.1.0 for how to run Milvus docker.
-
-```bash
-$ wget -P /home/$USER/milvus/conf https://raw.githubusercontent.com/milvus-io/milvus/v1.1.0/core/conf/demo/server_config.yaml
-$ sudo docker run -d --name milvus_cpu_1.1.0 \
--p 19530:19530 \
--p 19121:19121 \
--v /home/$USER/milvus/db:/var/lib/milvus/db \
--v /home/$USER/milvus/conf:/var/lib/milvus/conf \
--v /home/$USER/milvus/logs:/var/lib/milvus/logs \
--v /home/$USER/milvus/wal:/var/lib/milvus/wal \
-milvusdb/milvus:1.1.0-cpu-d050721-5e559c
-```
+  First, you are supposed to refer to the Install [Milvus v2.0](milvus.io) for how to run Milvus docker.
 
 > Note the version of Milvus.
 
@@ -81,7 +69,7 @@ $ docker run -d \
 -e "MILVUS_HOST=${Milvus_HOST}" \
 -e "MILVUS_PORT=${Milvus_PORT}" \
 -e "MYSQL_HOST=${Mysql_HOST}" \
-milvusbootcamp/img-search-server:1.0
+milvusbootcamp/img-search-server:2.0
 ```
 
 > **Note:** -v ${DATAPATH1}:${DATAPATH1} means that you can mount the directory into the container. If needed, you can load the parent directory or more directories.
