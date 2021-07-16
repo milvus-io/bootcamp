@@ -11,9 +11,7 @@
     <br />
     <a href="https://github.com/milvus-io/bootcamp "Demo</a>
     ·
-    <a href="https://github.com/milvus-io/bootcamp/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/milvus-io/bootcamp/issues">Request Feature</a>
+    <a href="https://github.com/milvus-io/bootcamp/issues">Report a Bug or Feature</a>
   </p>
 <!-- TABLE OF CONTENTS -->
 
