@@ -11,10 +11,9 @@
     <br />
     <a href="https://github.com/milvus-io/bootcamp "Demo</a>
     ·
-    <a href="https://github.com/milvus-io/bootcamp/issues">Report a Bug or Feature</a>
+    <a href="https://github.com/milvus-io/bootcamp/issues">Report Bug or Request Feature</a>
   </p>
 <!-- TABLE OF CONTENTS -->
-
 <details open="open">
   <summary>Table of Contents</summary>
   <ol>
@@ -32,7 +31,6 @@
       <ul>
         <li><a href="#icecream-run-locally">Run locally</a></li>
         <li><a href="#clapper-live-demo">Live demo</a></li>
-        <li><a href="#fries-have-a-try">Have a try</a></li>
       </ul>
     <li><a href="#two_women_holding_hands-collaborations">Collaborations</a></li>
       <ul>
@@ -41,6 +39,7 @@
     <li><a href="#fire-supports">Supports</a></li>
   </ol>
 </details>
+
 <!-- ABOUT MILVUS Bootcamp -->
 
 ## :mega: About Milvus Bootcamp
@@ -64,7 +63,7 @@ We extract 100 million vector data from [SIFT1B Dataset](http://corpus-texmex.ir
 
 ### :icecream: Run locally
 
-Here are several solutions for vector similarity search solution based on **[Milvus](https://milvus.io/)**. Each solution contains a Jupyter Notebook and a Docker deployable solution, everyone can run it in your local machine. And there are also some related technical articles and live streams.
+Here are several scenario specific solutions for vector similarity search solution based on **[Milvus](https://milvus.io/)**. Each solution contains a Jupyter Notebook and a Docker deployable solution, everyone can run it in your local machine. And there are also some related technical articles and live streams.
 
 | <br />Solutions<img width=600/> | <br />Have fun with it<img width=300/>                    | <br />Article<img width=200/>                              | <br />Video<img width=200/>                          |
 | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------- |
@@ -79,8 +78,6 @@ Here are several solutions for vector similarity search solution based on **[Mil
 ### :clapper: [Live demo](https://zilliz.com/milvus-demos?isZilliz=true)
 
 We have built [online demos](https://zilliz.com/milvus-demos?isZilliz=true) of reverse image search, chatbot and molecular search that everyone can have fun wit it.
-
-### :fries: [Have a Try](https://zilliz.com/solutions)
 
 If you want to upload your own data for similarity search, you can [try it](https://zilliz.com/solutions). You can choose any solutions from image search, chatbot, audio search or video object detection.
 
