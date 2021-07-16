@@ -1,7 +1,0 @@
-{
-  "name": "@restart/hooks/useRafInterval",
-  "private": true,
-  "main": "../cjs/useRafInterval.js",
-  "module": "../esm/useRafInterval.js",
-  "types": "../esm/useRafInterval.d.ts"
-}

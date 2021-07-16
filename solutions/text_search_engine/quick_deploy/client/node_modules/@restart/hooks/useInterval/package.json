@@ -1,7 +1,0 @@
-{
-  "name": "@restart/hooks/useInterval",
-  "private": true,
-  "main": "../cjs/useInterval.js",
-  "module": "../esm/useInterval.js",
-  "types": "../esm/useInterval.d.ts"
-}

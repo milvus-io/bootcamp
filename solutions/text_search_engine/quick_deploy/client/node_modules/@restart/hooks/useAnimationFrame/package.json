@@ -1,7 +1,0 @@
-{
-  "name": "@restart/hooks/useAnimationFrame",
-  "private": true,
-  "main": "../cjs/useAnimationFrame.js",
-  "module": "../esm/useAnimationFrame.js",
-  "types": "../esm/useAnimationFrame.d.ts"
-}

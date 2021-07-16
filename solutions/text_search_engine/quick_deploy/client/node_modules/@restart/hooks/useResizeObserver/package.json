@@ -1,7 +1,0 @@
-{
-  "name": "@restart/hooks/useResizeObserver",
-  "private": true,
-  "main": "../cjs/useResizeObserver.js",
-  "module": "../esm/useResizeObserver.js",
-  "types": "../esm/useResizeObserver.d.ts"
-}

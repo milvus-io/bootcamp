@@ -1,6 +1,0 @@
-{
-  "name": "react-overlays/usePopper",
-  "private": true,
-  "main": "../cjs/usePopper.js",
-  "module": "../esm/usePopper.js"
-}

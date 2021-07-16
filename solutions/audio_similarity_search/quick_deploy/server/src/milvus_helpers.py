@@ -57,6 +57,7 @@ class MilvusHelper:
     def insert(self, collection_name, vectors):
         try:
             self.create_collection(collection_name)
+            self.collection = Collection(name=collection_name)
             data = [vectors]
             mr = self.collection.insert(data)
             ids = mr.primary_keys
@@ -100,7 +101,6 @@ class MilvusHelper:
         try:
             self.set_collection(collection_name)
             search_params = {"metric_type": METRIC_TYPE, "params": {"nprobe": 16}}
-            # data = [vectors]
             res = self.collection.search(vectors, anns_field="embedding", param=search_params, limit=top_k)
             print(res[0])
             LOGGER.debug("Successfully search in collection: {}".format(res))
@@ -114,6 +114,7 @@ class MilvusHelper:
         try:
             self.set_collection(collection_name)
             num =self.collection.num_entities
+            print("oooooo",num)
             LOGGER.debug("Successfully get the num:{} of the collection:{}".format(num, collection_name))
             return num
         except Exception as e:

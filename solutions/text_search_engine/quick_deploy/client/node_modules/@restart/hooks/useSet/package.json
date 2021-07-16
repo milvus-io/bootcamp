@@ -1,7 +1,0 @@
-{
-  "name": "@restart/hooks/useSet",
-  "private": true,
-  "main": "../cjs/useSet.js",
-  "module": "../esm/useSet.js",
-  "types": "../esm/useSet.d.ts"
-}

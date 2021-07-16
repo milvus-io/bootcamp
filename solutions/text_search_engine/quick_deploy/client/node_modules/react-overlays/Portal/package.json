@@ -1,6 +1,0 @@
-{
-  "name": "react-overlays/Portal",
-  "private": true,
-  "main": "../cjs/Portal.js",
-  "module": "../esm/Portal.js"
-}
