@@ -1,7 +1,0 @@
-{
-  "name": "@restart/hooks/useImage",
-  "private": true,
-  "main": "../cjs/useImage.js",
-  "module": "../esm/useImage.js",
-  "types": "../esm/useImage.d.ts"
-}

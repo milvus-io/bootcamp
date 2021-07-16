@@ -1,7 +1,0 @@
-{
-  "name": "@restart/hooks/useIntersectionObserver",
-  "private": true,
-  "main": "../cjs/useIntersectionObserver.js",
-  "module": "../esm/useIntersectionObserver.js",
-  "types": "../esm/useIntersectionObserver.d.ts"
-}

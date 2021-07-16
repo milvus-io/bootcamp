@@ -1,6 +1,0 @@
-{
-  "name": "react-overlays/ModalManager",
-  "private": true,
-  "main": "../cjs/ModalManager.js",
-  "module": "../esm/ModalManager.js"
-}

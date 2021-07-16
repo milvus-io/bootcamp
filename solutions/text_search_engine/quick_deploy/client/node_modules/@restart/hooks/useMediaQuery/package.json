@@ -1,7 +1,0 @@
-{
-  "name": "@restart/hooks/useMediaQuery",
-  "private": true,
-  "main": "../cjs/useMediaQuery.js",
-  "module": "../esm/useMediaQuery.js",
-  "types": "../esm/useMediaQuery.d.ts"
-}

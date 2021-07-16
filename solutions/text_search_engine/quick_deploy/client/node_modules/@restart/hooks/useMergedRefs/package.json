@@ -1,7 +1,0 @@
-{
-  "name": "@restart/hooks/useMergedRefs",
-  "private": true,
-  "main": "../cjs/useMergedRefs.js",
-  "module": "../esm/useMergedRefs.js",
-  "types": "../esm/useMergedRefs.d.ts"
-}

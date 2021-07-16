@@ -1,7 +1,0 @@
-{
-  "name": "@restart/hooks/useCallbackRef",
-  "private": true,
-  "main": "../cjs/useCallbackRef.js",
-  "module": "../esm/useCallbackRef.js",
-  "types": "../esm/useCallbackRef.d.ts"
-}
