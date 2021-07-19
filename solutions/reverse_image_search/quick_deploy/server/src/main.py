@@ -92,7 +92,7 @@ async def upload_images(image: UploadFile = File(None), url: str = None, table_n
             return {'status': False, 'msg': 'Image and url are required'}, 400
         vector_id = do_upload(table_name, img_path, MODEL, MILVUS_CLI, MYSQL_CLI)
         LOGGER.info("Successfully uploaded data, vector id: {}".format(vector_id))
-        return vector_id
+        return "Successfully loaded data: " + str(vector_id)
     except Exception as e:
         LOGGER.error(e)
         return {'status': False, 'msg': e}, 400
