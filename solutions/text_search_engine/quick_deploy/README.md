@@ -78,25 +78,6 @@ Please modify the parameters according to your own environment. Here listing som
 | MYSQL_PORT       | Port of Milvus.                                       | 3306                |
 | DEFAULT_TABLE    | The milvus and mysql default collection name.         | text_search         |
 
-### Steps to build a project
-
-#### Install Milvus
-
-Milvus provides two release versions: CPU version and GPU version. In order to get better query performance, the GPU version 1.1 Milvus reference link is used in the project:
-
-https://milvus.io/docs/v1.1.0/milvus_docker-gpu.md
-
-##### Start Bert service
-
-The way to install Bert-as-service is as follows. You can also refer to the official website link of the Github repository of Bert-as-service:
-
-https://github.com/hanxiao/bert-as-service
-
-    # Download model
-    $ cd model
-    $ wget https://storage.googleapis.com/bert_models/2018_11_03/english_L-12_H-768_A-12.zip
-    # start service
-    $ bert-serving-start -model_dir / tmp / english_L-12_H-768_A-12 / -num_worker = 4 
 
 - **Run the code**
 
@@ -136,19 +117,19 @@ Vist 127.0.0.1:5000/docs in your browser to use all the APIs.
 
 ![1](pic/1.png)
 
-**/qa/load_data**
+**/text/load_data**
 
 This API is used to import datasets into the system.
 
-**/qa/search**
+**/text/search**
 
 This API is used to get similar texts in the system.
 
-**/qa/count**
+**/text/count**
 
 This API is used to get the number of the titles in the system.
 
-**/qa/drop**
+**/text/drop**
 
 This API is used to delete a specified collection.
 
@@ -158,7 +139,7 @@ This API is used to delete a specified collection.
 Install  [Node.js 12+](https://nodejs.org/en/download/) and [Yarn](https://classic.yarnpkg.com/en/docs/install/).
 
 ```
-$ cd Milvus-bert-client/client 
+$ cd client 
 # Install dependencies
 $ yarn install 
 #start yarn 

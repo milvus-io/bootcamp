@@ -7,4 +7,4 @@ This example uses Milvus and Bert to build a text search engine, which uses Bert
 - In this [notebook](text_search_engine.ipynb) we will be going over the code required to perform the text search engine .This example combines a relational database, Postgres, and then uses it with Milvus for text search.
 
 ## How to deploy
-- Here is the [quick start](./quick_deploy/QUICK_START.md) for a deployable version of  text search engine.
+- Here is the [quick start](./quick_deploy/README.md) for a deployable version of  text search engine.
