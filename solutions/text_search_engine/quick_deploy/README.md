@@ -139,7 +139,7 @@ This API is used to delete a specified collection.
 Install  [Node.js 12+](https://nodejs.org/en/download/) and [Yarn](https://classic.yarnpkg.com/en/docs/install/).
 
 ```
-$ cd Milvus-bert-client/client 
+$ cd client 
 # Install dependencies
 $ yarn install 
 #start yarn 
