@@ -117,19 +117,19 @@ Vist 127.0.0.1:5000/docs in your browser to use all the APIs.
 
 ![1](pic/1.png)
 
-**/qa/load_data**
+**/text/load_data**
 
 This API is used to import datasets into the system.
 
-**/qa/search**
+**/text/search**
 
 This API is used to get similar texts in the system.
 
-**/qa/count**
+**/text/count**
 
 This API is used to get the number of the titles in the system.
 
-**/qa/drop**
+**/text/drop**
 
 This API is used to delete a specified collection.
 
