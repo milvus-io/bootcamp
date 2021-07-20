@@ -109,6 +109,26 @@ The next step is to start the system server. It provides HTTP backend services, 
 
   
 
+  > /data
+  >
+  > Return the video files.
+  >
+  > /progress
+  >
+  > Check the progress when loading.
+  >
+  > /video/count
+  >
+  > Return the number of vector in Milvus.
+  >
+  > /video/load
+  >
+  > Load the video under the specified directory.
+  >
+  > /video/search
+  >
+  > Pass in an image to search for similar videos in the system.
+
 - **Code  structure**
 
   If you are interested in our code or would like to contribute code, feel free to learn more about our code structure.
@@ -154,7 +174,7 @@ The next step is to start the system server. It provides HTTP backend services, 
   ![ ](../pic/show.png)
 
   1. **Load data**
-  Enter the path of an image folder in the pic_search_webserver docker container with `${DATAPATH1}`, then click `+` to load the pictures. The following screenshot shows the loading process:
+    Enter the path of an image folder in the pic_search_webserver docker container with `${DATAPATH1}`, then click `+` to load the pictures. The following screenshot shows the loading process:
 
   ![ ](../pic/load.png)
 
@@ -162,11 +182,11 @@ The next step is to start the system server. It provides HTTP backend services, 
   > Note: After clicking the Load button, it will take 1 to 2 seconds for the system to response. Please do not click again.
 
   2. **Search data**
-  The loading process may take several minutes. The following screenshot shows the interface with images loaded.
+    The loading process may take several minutes. The following screenshot shows the interface with images loaded.
 
   ![ ](../pic/search.png)
-  
 
-  
 
-  
+
+
+
