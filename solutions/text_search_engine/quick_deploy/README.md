@@ -146,7 +146,7 @@ $ yarn install
 $ yarn start   
 open localhost:3000
 ```
-> Note: If you change the port of the server, please modify the parameters on line 17 **/src/shared/Constants.ts** for your own environment
+
 
 4、The interface display
 ---------------------- 
