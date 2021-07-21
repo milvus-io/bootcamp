@@ -10,14 +10,21 @@ This project uses [PANNs](https://github.com/qiuqiangkong/audioset_tagging_cnn)(
 - [MySQL](https://hub.docker.com/r/mysql/mysql-server)
 - [Python3](https://www.python.org/downloads/)
 
-### Run Server
+### 1. Start Milvus and MySQL
 
-1. **Install python requirements**
+The system will use Milvus to store and search the feature vector data, and Mysql is used to store the correspondence between the ids returned by Milvus and the questions data set, then you need to start Milvus and Mysql first.
 
-   ```bash
-   $ cd bootcamp/solutions/audio_search/src/
-   $ pip install -r audio_requirements.txt
-   ```
+- **Start Milvus v2.0**
+
+  First, you are supposed to refer to the Install [Milvus v2.0](https://milvus.io/docs/v2.0.0/install_standalone-docker.md) for how to run Milvus docker.
+
+  > Note the version of Milvus.
+
+- **Start MySQL**
+
+```bash
+$ docker run -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7
+```
 
 ### 2. Start API Server
 
