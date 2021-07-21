@@ -100,6 +100,37 @@ Then start the server with Fastapi.
 $ python main.py
 ```
 
+- **API docs**
+
+
+Vist 127.0.0.1:5000/docs in your browser to use all the APIs.
+
+![](pic/api.PNG)
+
+> /data
+>
+> Return the molecules.
+>
+> /progress
+>
+> Check the progress when loading.
+>
+> /data/load
+>
+> Load the molecules in the specified file.
+>
+> /data/search
+>
+> Pass in a molecule to search for similar molecules 
+> in the system.
+>  
+> /data/count
+>
+> Return the number of vectors in Milvus.
+
+
+
+
 - **Code  structure**
 
 If you are interested in our code or would like to contribute code, feel free to learn more about our code structure.
