@@ -10,14 +10,21 @@ This project uses [PANNs](https://github.com/qiuqiangkong/audioset_tagging_cnn)(
 - [MySQL](https://hub.docker.com/r/mysql/mysql-server)
 - [Python3](https://www.python.org/downloads/)
 
-### Run Server
+### 1. Start Milvus and MySQL
 
-1. **Install python requirements**
+The system will use Milvus to store and search the feature vector data, and Mysql is used to store the correspondence between the ids returned by Milvus and the questions data set, then you need to start Milvus and Mysql first.
 
-   ```bash
-   $ cd bootcamp/solutions/audio_search/src/
-   $ pip install -r audio_requirements.txt
-   ```
+- **Start Milvus v2.0**
+
+  First, you are supposed to refer to the Install [Milvus v2.0](https://milvus.io/docs/v2.0.0/install_standalone-docker.md) for how to run Milvus docker.
+
+  > Note the version of Milvus.
+
+- **Start MySQL**
+
+```bash
+$ docker run -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7
+```
 
 ### 2. Start API Server
 
@@ -101,6 +108,36 @@ Then start the server with Fastapi.
 $ python main.py
 ```
 
+### 2.3 API Docs
+
+After starting the service, Please visit 127.0.0.1:8002/docs in your browser to view all the APIs.
+
+![](./pic/allapi.png)
+
+> **/data**
+>
+> Returns the audio file from the server at the specified file path.
+>
+> **/progress**
+>
+> Returns data processing progress.
+>
+> **/audio/load**
+>
+> Loads audio files at the specified filepath into the system to be made available for searching.
+>
+> **/audio/search**
+>
+> Upload a specified file to the system, then conduct a search for similar audio files and return results.
+>
+> **/audio/count**
+>
+> Returns the number of audio files in the system available for searching.
+>
+> **/audio/drop**
+>
+> Drops Milvus and MySQL tables, removing loaded data.
+
 ## 3. Start Client
 
 Next, start the frontend GUI. Like the system server, there are two ways to start the frontend: running with Docker or source code.
@@ -141,11 +178,9 @@ audio-search-client
 
 Refer to the instructions in the [Client Readme](./client/README.md).
 
-## System Usage
+### 3.3 How to use front-end
 
-### 1. Use frontend
-
-Navigate to `127.0.0.1:80` in your browser to access the frontend interface.
+Navigate to `127.0.0.1:80` in your browser to access the front-end interface.
 
 - Insert data.
 
@@ -158,27 +193,6 @@ Download and extract .wav sound files to the "EXTERNAL_DATAPATH" directory speci
 Select the magnifying glass icon on the left side of the interface. Then, press the "Default Target Audio File" button and upload a .wav sound file you'd like to search. Results will be displayed.
 
 ![](./pic/searchgui.png)
-
-### 2. View API docs
-
-Type `127.0.0.1:8002/docs` in your browser to see all the APIs.
-
-![](./pic/all_API.png)
-
-- Insert data.
-
-  Download the sample [game_sound.zip](https://github.com/shiyu22/bootcamp/blob/0.11.0/solutions/audio_search/data/game_sound.zip?raw=true) and upload it into the system.
-
-  > The sound data in the zip archive must be in wav format.
-
-  ![](./pic/insert.png)
-
-- Search for similar audio clips.
-
-  You can upload [test.wav](https://github.com/shiyu22/bootcamp/blob/0.11.0/solutions/audio_search/data/test.wav) to search for the most similar sound clips.
-
-  ![](./pic/search.png)
-
 
 - **Code  structure**
 
