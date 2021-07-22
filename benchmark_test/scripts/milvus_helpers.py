@@ -62,7 +62,7 @@ class MilvusHelper:
             # data = [vectors]
             self.collection.insert([ids, vectors])
             # vids = mr.primary_keys
-            self.collection.load()
+            # self.collection.load()
             LOGGER.debug(
                 "Insert vectors to Milvus in collection: {} with {} rows".format(collection_name, len(vectors)))
             return ids
@@ -76,6 +76,7 @@ class MilvusHelper:
             self.set_collection(collection_name)
             status = self.collection.create_index(field_name="embedding", index_params=index_params)
             if not status.code:
+                self.collection.load()
                 LOGGER.debug(
                     "Successfully create index in collection:{} with param:{}".format(collection_name, index_params))
                 return status
@@ -136,3 +137,7 @@ class MilvusHelper:
     def delete_index(self, collection_name):
         self.set_collection(collection_name)
         self.collection.drop_index()
+        
+    def import_to_mem(self, collection_name):
+        self.set_collection(collection_name)
+        self.collection.load()
