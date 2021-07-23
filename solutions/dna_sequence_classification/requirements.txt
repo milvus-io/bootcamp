@@ -1,0 +1,6 @@
+pymilvus-orm==2.0.0rc1
+sklearn
+pymysql
+numpy
+pickle-mixin
+fastapi
