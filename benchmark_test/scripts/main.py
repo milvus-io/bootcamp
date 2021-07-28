@@ -12,9 +12,9 @@ def main():
         opts, args = getopt.getopt(
             sys.argv[1:],
             "hc",
-            ["help", "collection=", "dim=", "index_type=", "create", "load", "create_index", "performance", "index_info", "describe",
+            ["help", "collection=", "dim=", "index_type=", "create", "insert", "create_index", "performance", "index_info", "describe",
              "show", "has", "rows", "describe_index", "drop", "drop_index", "version",
-             "search_param=", "recall", "partition_name=", "create_partition"]
+             "search_param=", "recall", "partition_name=", "create_partition", "load"]
         )
     except getopt.GetoptError:
         print("Usage: python milvus_toolkindex_type.py -q <nq> -k <topk> -c <collection> -s")
@@ -45,7 +45,7 @@ def main():
 
 
         # insert data to milvus
-        elif opt_name == "--load":
+        elif opt_name == "--insert":
             client = MilvusHelper()
             insert_data(client, collection_name)
             sys.exit(2)
@@ -112,6 +112,11 @@ def main():
         elif opt_name == "--drop_index":
             client = MilvusHelper()
             client.delete_index(collection_name)
+            sys.exit(2)
+            
+        elif opt_name == "--load":
+            client = MilvusHelper()
+            client.load_data(collection_name)
             sys.exit(2)
 
 
