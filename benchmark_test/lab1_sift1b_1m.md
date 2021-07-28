@@ -63,12 +63,12 @@ $ python3 main.py --collection ann_1m_sq8 --has
 $ python3 main.py --collection ann_1m_sq8 --rows
 ```
 
-## 3.  Import data and build indexes
+## 3.  Insert data and build indexes
 
 Run the following command to import 1,000,000 rows of data:
 
 ```bash
-$ python3 main.py --collection=ann_1m_sq8 --load
+$ python3 main.py --collection=ann_1m_sq8 --insert
 ```
 
 You can see that all data is imported from the file for once.
@@ -79,10 +79,12 @@ Run the following command to check the number of rows in the table:
 $ python3 main.py --collection=ann_1m_sq8 --rows
 ```
 
-Run the following command to create index:
+Run the following command to create index and load data to memory:
 
 ```bash
 $ python3 main.py --collection ann_1m_sq8 --index_type IVF_SQ8 --create_index
+
+$ python3 main.py --collection ann_1m_sq8 --load
 ```
 
 ## 4. Accuracy test
