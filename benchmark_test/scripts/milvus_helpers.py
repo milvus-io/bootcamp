@@ -138,6 +138,6 @@ class MilvusHelper:
         self.set_collection(collection_name)
         self.collection.drop_index()
         
-    def import_to_mem(self, collection_name):
+    def load_data(self, collection_name):
         self.set_collection(collection_name)
         self.collection.load()
