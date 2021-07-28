@@ -141,3 +141,6 @@ class MilvusHelper:
     def load_data(self, collection_name):
         self.set_collection(collection_name)
         self.collection.load()
+       
+    def show_collection(self):
+        return utility.list_collections()
