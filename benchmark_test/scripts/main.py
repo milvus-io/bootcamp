@@ -118,6 +118,11 @@ def main():
             client = MilvusHelper()
             client.load_data(collection_name)
             sys.exit(2)
+            
+        elif opt_name == "--show":
+            client = MilvusHelper()
+            client.show_collection()
+            sys.exit(2)
 
 
 
