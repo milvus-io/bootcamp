@@ -121,7 +121,7 @@ def main():
             
         elif opt_name == "--show":
             client = MilvusHelper()
-            client.show_collection()
+            print(client.show_collection())
             sys.exit(2)
 
 
