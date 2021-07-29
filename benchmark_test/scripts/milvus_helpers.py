@@ -144,3 +144,9 @@ class MilvusHelper:
        
     def show_collection(self):
         return utility.list_collections()
+    
+    def get_loading_progress(self, collection_name):
+        return utility.loading_progress(collection_name)
+    
+    def get_index_progress(self, collection_name):
+        return utility.index_building_progress(collection_name)
