@@ -71,7 +71,7 @@ def main():
             performance(client, collection_name, search_param)
             sys.exit(2)
             
-        elif opt_name == "--percentile_test“:
+        elif opt_name == "--percentile_test":
             client = MilvusHelper()
             percentile_test(client, collection_name, search_param, percentile)
             sys.exit(2)
