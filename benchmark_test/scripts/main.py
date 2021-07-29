@@ -12,8 +12,8 @@ def main():
         opts, args = getopt.getopt(
             sys.argv[1:],
             "hc",
-            ["help", "collection=", "dim=", "index_type=", "create", "insert", "create_index", "performance", "index_info", "describe",
-             "show", "has", "rows", "describe_index", "drop", "drop_index", "version",
+            ["help", "collection=", "dim=", "index_type=", "percentile=", "create", "insert", "create_index", "performance", "index_info", "describe",
+             "show", "has", "rows", "describe_index", "drop", "drop_index", "version", "percentile_test",
              "search_param=", "recall", "partition_name=", "create_partition", "load", "load_progress", "index_progress"]
         )
     except getopt.GetoptError:
@@ -34,6 +34,9 @@ def main():
 
         elif opt_name == "--search_param":
             search_param = int(opt_value)
+            
+        elif opt_name == "--percentile":
+            percentile = int(opt_value)
 
 
         # create collection
@@ -67,7 +70,13 @@ def main():
             client = MilvusHelper()
             performance(client, collection_name, search_param)
             sys.exit(2)
-
+            
+        elif opt_name == "--percentile_test“:
+            client = MilvusHelper()
+            percentile_test(client, collection_name, search_param, percentile)
+            sys.exit(2)
+                    
+  
         # save search result 
         elif opt_name == "--recall":
             client = MilvusHelper()
