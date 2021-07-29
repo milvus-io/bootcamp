@@ -1,6 +1,6 @@
 import sys, getopt
 
-from performance_test import performance
+from performance_test import performance, percentile_test
 from recall_test import recall
 from milvus_helpers import MilvusHelper
 from load import insert_data, create_index
