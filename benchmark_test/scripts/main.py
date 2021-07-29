@@ -14,7 +14,7 @@ def main():
             "hc",
             ["help", "collection=", "dim=", "index_type=", "create", "insert", "create_index", "performance", "index_info", "describe",
              "show", "has", "rows", "describe_index", "drop", "drop_index", "version",
-             "search_param=", "recall", "partition_name=", "create_partition", "load"]
+             "search_param=", "recall", "partition_name=", "create_partition", "load", "load_progress", "index_progress"]
         )
     except getopt.GetoptError:
         print("Usage: python milvus_toolkindex_type.py -q <nq> -k <topk> -c <collection> -s")
@@ -122,6 +122,16 @@ def main():
         elif opt_name == "--show":
             client = MilvusHelper()
             print(client.show_collection())
+            sys.exit(2)
+            
+        elif opt_name == "--index_progress":
+            client = MilvusHelper()
+            print(client.get_index_progress(collection_name))
+            sys.exit(2)
+        
+        elif opt_name == "--load_progress":
+            client = MilvusHelper()
+            print(client.get_loading_progress(collection_name))
             sys.exit(2)
 
 
