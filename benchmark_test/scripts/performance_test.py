@@ -3,7 +3,7 @@ import os
 import time
 import numpy as np
 from logs import LOGGER
-from config import QUERY_FILE_PATH, PERFORMANCE_RESULTS_PATH, NQ_SCOPE, TOPK_SCOPE, METRIC_TYPE
+from config import QUERY_FILE_PATH, PERFORMANCE_RESULTS_PATH, NQ_SCOPE, TOPK_SCOPE, METRIC_TYPE, PERCENTILE_NUM
 
 
 def get_search_params(search_param, index_type):
@@ -55,6 +55,41 @@ def performance(client, collection_name, search_param):
                 print(nq, topk, time_cost)
                 line = str(nq) + ',' + str(topk) + ',' + str(round(time_cost, 4)) + ',' + str(
                     round(time_cost / nq, 4)) + '\n'
+                f.write(line)
+            f.write('\n')
+    LOGGER.info("search_vec_list done !")
+    
+    
+    
+def percentile_test(client, collection_name, search_param, percentile):
+    index_type = client.get_index_params(collection_name)
+    if index_type:
+        index_type = index_type[0]['index_type']
+    else:
+        index_type = 'FLAT'
+    search_params = get_search_params(search_param, index_type)
+
+    if not os.path.exists(PERFORMANCE_RESULTS_PATH):
+        os.mkdir(PERFORMANCE_RESULTS_PATH)
+
+    result_filename = collection_name + '_' + str(search_param) + '_percentile.csv'
+    performance_file = os.path.join(PERFORMANCE_RESULTS_PATH, result_filename)
+
+    with open(performance_file, 'w+') as f:
+        f.write("nq,topk,total_time" + '\n')
+        for nq in NQ_SCOPE:
+            query_list = get_nq_vec(nq)
+            LOGGER.info("begin to search, nq = {}".format(len(query_list)))
+            for topk in TOPK_SCOPE:
+                time_cost = []
+                for i in range(PERCENTILE_NUM):
+                    time_start = time.time()
+                    client.search_vectors(collection_name, query_list, topk, search_params)
+                    time_cost.append(time.time() - time_start)
+                time_cost = np.array(time_cost)
+                time_cost = np.percentile(time_cost, float(percentile))
+                print(nq, topk, round(time_cost, 4))
+                line = str(nq) + ',' + str(topk) + ',' + str(round(time_cost, 4)) + '\n'
                 f.write(line)
             f.write('\n')
     LOGGER.info("search_vec_list done !")
