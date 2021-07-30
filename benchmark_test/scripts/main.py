@@ -13,7 +13,7 @@ def main():
             sys.argv[1:],
             "hc",
             ["help", "collection=", "dim=", "index_type=", "percentile=", "create", "insert", "create_index", "performance", "index_info", "describe",
-             "show", "has", "rows", "describe_index", "drop", "drop_index", "version", "percentile_test","release"
+             "show", "has", "rows", "describe_index", "drop", "drop_index", "version", "percentile_test","release",
              "search_param=", "recall", "partition_name=", "create_partition", "load", "load_progress", "index_progress"]
         )
     except getopt.GetoptError:
