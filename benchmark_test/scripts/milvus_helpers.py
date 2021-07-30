@@ -150,3 +150,7 @@ class MilvusHelper:
     
     def get_index_progress(self, collection_name):
         return utility.index_building_progress(collection_name)
+    
+    def release_mem(self, collection_name):
+        self.set_collection(collection_name)
+        return collection.release()
