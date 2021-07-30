@@ -153,4 +153,4 @@ class MilvusHelper:
     
     def release_mem(self, collection_name):
         self.set_collection(collection_name)
-        return collection.release()
+        return self.collection.release()
