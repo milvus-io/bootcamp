@@ -114,7 +114,6 @@ class MilvusHelper:
         try:
             self.set_collection(collection_name)
             num =self.collection.num_entities
-            print("oooooo",num)
             LOGGER.debug("Successfully get the num:{} of the collection:{}".format(num, collection_name))
             return num
         except Exception as e:

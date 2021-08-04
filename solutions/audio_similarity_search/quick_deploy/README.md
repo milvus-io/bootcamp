@@ -10,16 +10,23 @@ This project uses [PANNs](https://github.com/qiuqiangkong/audioset_tagging_cnn)(
 - [MySQL](https://hub.docker.com/r/mysql/mysql-server)
 - [Python3](https://www.python.org/downloads/)
 
-### Run Server
+### 1. Start Milvus and MySQL
 
-1. **Install python requirements**
+The system will use Milvus to store and search the feature vector data, and Mysql is used to store the correspondence between the ids returned by Milvus and the questions data set, then you need to start Milvus and Mysql first.
 
-   ```bash
-   $ cd bootcamp/solutions/audio_search/src/
-   $ pip install -r audio_requirements.txt
-   ```
+- **Start Milvus v2.0**
 
-### 2. Start Server
+  First, you are supposed to refer to the Install [Milvus v2.0](https://milvus.io/docs/v2.0.0/install_standalone-docker.md) for how to run Milvus docker.
+
+  > Note the version of Milvus.
+
+- **Start MySQL**
+
+```bash
+$ docker run -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7
+```
+
+### 2. Start API Server
 
 The next step is to start the system server. It provides HTTP backend services, and there are two ways to start: running with Docker or source code.
 
@@ -64,6 +71,9 @@ $ docker run -d \
 -e "MYSQL_HOST=${Mysql_HOST}" \
 audio-search-webserver
 ```
+
+Note: The first time you run the container, it may take a while to become usable as models must be downloaded.
+
 #### 2.2 Run source code
 
 - **Install the Python packages**
@@ -88,7 +98,7 @@ Modify the parameters according to your own environment. Here listing some param
 | VECTOR_DIMENSION | Dimension of the vectors.                             | 2048                |
 | MYSQL_HOST       | The IP address of Mysql.                              | 127.0.0.1           |
 | MYSQL_PORT       | Port of Milvus.                                       | 3306                |
-| DEFAULT_TABLE    | The milvus and mysql default collection name.         | milvus_img_search   |
+| DEFAULT_TABLE    | The milvus and mysql default collection name.         | audiotable          |
 
 - **Run the code**
 
@@ -98,28 +108,91 @@ Then start the server with Fastapi.
 $ python main.py
 ```
 
-## System Usage
+### 2.3 API Docs
 
-Type `127.0.0.1:8002/docs` in your browser to see all the APIs.
+After starting the service, Please visit 127.0.0.1:8002/docs in your browser to view all the APIs.
 
-![](./pic/all_API.png)
+![](./pic/allapi.png)
+
+> **/data**
+>
+> Returns the audio file from the server at the specified file path.
+>
+> **/progress**
+>
+> Returns data processing progress.
+>
+> **/audio/load**
+>
+> Loads audio files at the specified filepath into the system to be made available for searching.
+>
+> **/audio/search**
+>
+> Upload a specified file to the system, then conduct a search for similar audio files and return results.
+>
+> **/audio/count**
+>
+> Returns the number of audio files in the system available for searching.
+>
+> **/audio/drop**
+>
+> Drops Milvus and MySQL tables, removing loaded data.
+
+## 3. Start Client
+
+Next, start the frontend GUI. Like the system server, there are two ways to start the frontend: running with Docker or source code.
+
+#### 3.1 Run server with Docker
+
+- **Set parameters**
+
+Modify the parameters according to your own environment.
+
+| **Parameter**   | **Description**                                       | **example**      |
+| --------------- | ----------------------------------------------------- | ---------------- |
+| **API_HOST** | The IP address of the backend server.                    | 127.0.0.1        |
+| **API_PORT** | The port of the backend server.                          | 8002             |
+
+```bash
+$ export API_HOST='127.0.0.1'
+$ export API_PORT='8002'
+```
+
+- **Run Docker**
+
+First, build the docker image from the Dockerfile.
+
+```bash
+$ cd server
+$ docker build -t audio-search-client .
+```
+
+```bash
+$ docker run -d \
+-p 80:80 \
+-e "API_URL=http://${API_HOST}:${API_PORT}" \
+audio-search-client
+```
+
+#### 3.2 Run source code
+
+Refer to the instructions in the [Client Readme](./client/README.md).
+
+### 3.3 How to use front-end
+
+Navigate to `127.0.0.1:80` in your browser to access the front-end interface.
 
 - Insert data.
 
-  Download the sample [game_sound.zip](https://github.com/shiyu22/bootcamp/blob/0.11.0/solutions/audio_search/data/game_sound.zip?raw=true) and upload it into the system.
+Download and extract .wav sound files to the "EXTERNAL_DATAPATH" directory specified earlier. Next, input the path to the "INTERNAL_DATAPATH" in the frontend GUI to initiate the upload.
 
-  > The sound data in the zip archive must be in wav format.
-
-  ![](./pic/insert.png)
+![](./pic/insertgui.png)
 
 - Search for similar audio clips.
 
-  You can upload [test.wav](https://github.com/shiyu22/bootcamp/blob/0.11.0/solutions/audio_search/data/test.wav) to search for the most similar sound clips.
+Select the magnifying glass icon on the left side of the interface. Then, press the "Default Target Audio File" button and upload a .wav sound file you'd like to search. Results will be displayed.
 
-  ![](./pic/search.png)
-
-Please refer to https://zilliz.com/demos/ to take a try in the front-end interface.
-
+![](./pic/searchgui.png)
 
 - **Code  structure**
 

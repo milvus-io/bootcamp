@@ -60,6 +60,9 @@ PERFORMANCE_RESULTS_PATH = 'performance'
 NQ_SCOPE = [1, 10]
 TOPK_SCOPE = [1, 1, 10, 100, 500]
 
+PERCENTILE_NUM = 100
+
+
 ##################### Recall Test Parameters #######################################################
 
 # Number of queries to be searched for in test
