@@ -96,6 +96,6 @@ Build a reverse image search system with Milvus using various AI models in colla
 Contributions to Milvus Bootcamp are welcome from everyone. See [Guidelines for Contributing](./contributing.md) for details. 
 
 
-## :fire: Support
+## :fire: Supports
 
 Join the Milvus community on [Slack](https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ) to give feedback, ask for advice, and direct questions to our engineering team. We also have a [WeChat group](https://github.com/milvus-io/milvus/discussions/4156).
