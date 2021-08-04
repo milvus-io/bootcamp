@@ -36,6 +36,7 @@
       <ul>
         <li><a href="#clap-milvus_and_onnx">Milvus_and_ONNX</a></li>
       </ul>
+    <li><a href="#pencil-contributing">Contributing</a></li>
     <li><a href="#fire-supports">Supports</a></li>
   </ol>
 </details>
@@ -89,8 +90,12 @@ If you want to upload your own data for similarity search, you can [try it](http
 
 Build a reverse image search system with Milvus using various AI models in collaboration with the Open Neural Network Exchange (ONNX).
 
+
+## :pencil: Contributing
+
+Contributions to Milvus Bootcamp are welcome from everyone. See [Guidelines for Contributing](./contributing.md) for details. 
+
+
 ## :fire: Support
 
 Join the Milvus community on [Slack](https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ) to give feedback, ask for advice, and direct questions to our engineering team. We also have a [WeChat group](https://github.com/milvus-io/milvus/discussions/4156).
-
-
