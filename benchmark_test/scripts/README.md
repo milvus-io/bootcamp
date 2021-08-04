@@ -19,7 +19,7 @@ pip install -r requirements.txt
 | --index_type       | When creating an index, you need to specify the index type<FLAT, IVF_FLAT, IVF_SQ8, IVF_SQ8 , IVF_PQ, RNSG, HNSW, ANNOY> |
 | --search_param     | When querying, specify the parameter value when querying (When the index is of type Ivf, this parameter refers to Nprobe. When indexing by Rnsg, this parameter refers to Search_Length. When the index is HNSW, this parameter refers to EF) |
 | --create           | Perform the operation of creating a collection. This operation needs to specify two parameters: Collection and Dim |
-| --load             | Perform the operation of writing data. This operation needs to specify the parameter Collection |
+| --insert           | Perform the operation of writing data. This operation needs to specify the parameter Collection |
 | --create_index     | Perform indexing operations. This operation needs to specify the parameters Collection and Index |
 | --performance      | Perform performance testing operations. This operation needs to specify the parameters Collection and Search_param |
 | --recall           | Perform recall test operations. This operation needs to specify the parameters Collection and Search_param |
@@ -31,6 +31,7 @@ pip install -r requirements.txt
 | --rows             | View the number of vectors in a collection. This operation needs to specify the parameter Collection |
 | --drop             | Delete the specified collection. This operation needs to specify the parameter Collection |
 | --drop_index       | Delete the index of the specified collection. This operation needs to specify the parameter Collection |
+| --load             | Load the specified collection data to memory |
 
 
 
@@ -109,37 +110,42 @@ python main.py --collection <collection_name> -c
 python main.py --collection <collection_name> --index_type <index_type> --create_index
 ```
 
-**3. Data load**
+**3. Data insert**
 
+```
+python main.py --collection <collection_name> --insert
+```
+
+**4. Load data to memory**
 ```
 python main.py --collection <collection_name> --load
 ```
 
-**4. Performance** **Test**
+**5. Performance Test**
 
 ```
 python main.py --collection <collection_name> --search_param <search_param> --performance
 ```
 
-**5. Recall test**
+**6. Recall test**
 
 ```
 python main.py --collection <collection_name> --search_param <search_param> --recall
 ```
 
-**6.Create partition**
+**7.Create partition**
 
 ```
 python main.py --collection <collection_name> --partition_name --create_partition
 ```
 
-**7. View collection index information**
+**8. View collection index information**
 
 ```
 python main.py --collection <collection_name> --index_info
 ```
 
-**8.Determine whether the collection exists**
+**9.Determine whether the collection exists**
 
 ```
 python main.py --collection <collection_name> --has

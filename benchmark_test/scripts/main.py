@@ -1,6 +1,6 @@
 import sys, getopt
 
-from performance_test import performance
+from performance_test import performance, percentile_test
 from recall_test import recall
 from milvus_helpers import MilvusHelper
 from load import insert_data, create_index
@@ -12,9 +12,9 @@ def main():
         opts, args = getopt.getopt(
             sys.argv[1:],
             "hc",
-            ["help", "collection=", "dim=", "index_type=", "create", "load", "create_index", "performance", "index_info", "describe",
-             "show", "has", "rows", "describe_index", "drop", "drop_index", "version",
-             "search_param=", "recall", "partition_name=", "create_partition"]
+            ["help", "collection=", "dim=", "index_type=", "percentile=", "create", "insert", "create_index", "performance", "index_info", "describe",
+             "show", "has", "rows", "describe_index", "drop", "drop_index", "version", "percentile_test","release",
+             "search_param=", "recall", "partition_name=", "create_partition", "load", "load_progress", "index_progress"]
         )
     except getopt.GetoptError:
         print("Usage: python milvus_toolkindex_type.py -q <nq> -k <topk> -c <collection> -s")
@@ -34,6 +34,9 @@ def main():
 
         elif opt_name == "--search_param":
             search_param = int(opt_value)
+            
+        elif opt_name == "--percentile":
+            percentile = int(opt_value)
 
 
         # create collection
@@ -45,7 +48,7 @@ def main():
 
 
         # insert data to milvus
-        elif opt_name == "--load":
+        elif opt_name == "--insert":
             client = MilvusHelper()
             insert_data(client, collection_name)
             sys.exit(2)
@@ -67,7 +70,13 @@ def main():
             client = MilvusHelper()
             performance(client, collection_name, search_param)
             sys.exit(2)
-
+            
+        elif opt_name == "--percentile_test":
+            client = MilvusHelper()
+            percentile_test(client, collection_name, search_param, percentile)
+            sys.exit(2)
+                    
+  
         # save search result 
         elif opt_name == "--recall":
             client = MilvusHelper()
@@ -113,8 +122,33 @@ def main():
             client = MilvusHelper()
             client.delete_index(collection_name)
             sys.exit(2)
-
-
+            
+        elif opt_name == "--load":
+            client = MilvusHelper()
+            client.load_data(collection_name)
+            sys.exit(2)
+            
+        elif opt_name == "--show":
+            client = MilvusHelper()
+            print(client.show_collection())
+            sys.exit(2)
+            
+        elif opt_name == "--index_progress":
+            client = MilvusHelper()
+            print(client.get_index_progress(collection_name))
+            sys.exit(2)
+        
+        elif opt_name == "--load_progress":
+            client = MilvusHelper()
+            print(client.get_loading_progress(collection_name))
+            sys.exit(2)
+            
+        elif opt_name == "--release":
+            client = MilvusHelper()
+            print(client.release_mem(collection_name))
+            sys.exit(2)
+            
+        
 
 
 if __name__ == '__main__':
