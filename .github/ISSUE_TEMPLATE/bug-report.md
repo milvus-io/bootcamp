@@ -7,6 +7,7 @@ assignees: ''
 
 ---
 
+<!-- Please state your issue using the following template and, most importantly, in English. -->
 **Describe the issue**
 A clear and concise description of what the issue is.
 
