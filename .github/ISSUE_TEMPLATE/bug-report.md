@@ -7,10 +7,10 @@ assignees: ''
 
 ---
 
-<!-- Please state your issue using the following template and, most importantly, in English. -->
+<!-- Please state your issue using the following template and, most importantly, in English.-->
 
 **Describe the issue**
-A clear and concise description of what the issue is.
+A clear and concise description of what the issue is. And you can take a look at the [announcement](https://github.com/milvus-io/bootcamp/issues/587).
 
 **To Reproduce**
 - Which solution are you running? Please post the link.
