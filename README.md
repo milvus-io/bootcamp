@@ -81,8 +81,6 @@ Here are several **[Milvus](https://milvus.io/)** based solutions for a wide ran
 
 We have built [online demos](https://zilliz.com/milvus-demos?isZilliz=true) for reverse image search, chatbot and molecular search that everyone can have fun with.
 
-If you want to upload your own data for similarity search, you can [try it](https://zilliz.com/solutions).
-
 <!--THE COLLABORATIONS-->
 
 ## :two_women_holding_hands: Collaborations
