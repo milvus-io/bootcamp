@@ -11,6 +11,7 @@ assignees: ''
 
 **Is your feature request related to a problem? Please describe.**
 A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+And you can take a look at the [announcement](https://github.com/milvus-io/bootcamp/issues/587).
 
 **Describe the solution you'd like**
 A clear and concise description of what you want to happen.
