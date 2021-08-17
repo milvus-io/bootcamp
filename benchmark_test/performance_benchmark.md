@@ -42,9 +42,9 @@ During this test, the data was imported into milvus in batches of 100,000, and i
 
 ### Ivf_sq8 index
 
-**Time spent building index**: 27.8 S
+**Time spent building index**: 27.8 S, and `nlist` = 4096.
 
-**Search parameter**: {probe: 256}
+**Search parameter**: {nprobe: 256}
 
 **Accuracy**:
 
@@ -70,9 +70,9 @@ In this section, 500 vectors are randomly removed from the set of vectors to be 
 
 ### ivf_sq8h index
 
-**Time spent building index**: 27.0 S
+**Time spent building index**: 27.0 S, and `nlist` = 4096.
 
-**Search parameter**: {probe: 256}
+**Search parameter**: {nprobe: 256}
 
 **Accuracy**:
 
@@ -100,7 +100,7 @@ In this section, 500 vectors are randomly removed from the set of vectors to be 
 
 ### ivf_sq8 index
 
-**Time spent building index**: 62.8 S
+**Time spent building index**: 62.8 S, and `nlist` = 4096.
 
 **Search parameter**: {nprobe:128}
 
@@ -128,7 +128,7 @@ In this section, 500 vectors are randomly removed from the set of vectors to be 
 
 ### ivf_sq8h index
 
-**Time spent building index**: 59.6 S
+**Time spent building index**: 59.6 S, and `nlist` = 4096.
 
 **Search parameter**: {nprobe:128}
 
@@ -157,7 +157,7 @@ In this section, 500 vectors are randomly removed from the set of vectors to be 
 
 ### ivf_sq8 index
 
-**Time spent building index**: 440.1 S
+**Time spent building index**: 440.1 S, and `nlist` = 4096.
 
 **Search parameter**: {nprobe:64}
 
@@ -185,7 +185,7 @@ In this section, 500 vectors are randomly removed from the set of vectors to be 
 
 ### ivf_sq8h index
 
-**Time spent building index**: 468.9 S
+**Time spent building index**: 468.9 S, and `nlist` = 4096.
 
 **Search parameter**: {nprobe:64}
 
