@@ -1,0 +1,12 @@
+Keras==2.6.0
+tensorflow==2.6.0
+opencv-python
+Pillow==8.2.0
+pymysql
+fastapi
+uvicorn
+pandas
+aiofiles
+pymilvus-orm==2.0.0rc2
+diskcache
+python-multipart
