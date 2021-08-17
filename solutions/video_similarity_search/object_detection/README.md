@@ -92,7 +92,7 @@ The next step is to start the system server. It provides HTTP backend services, 
   >
   > Pass in an video to search for similar images of objects detected.
   
-- **Fastapi examples**
+- **Response examples**
   - /image/load
   
   ![](./pic/load.png)
