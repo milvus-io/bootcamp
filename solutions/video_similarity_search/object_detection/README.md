@@ -69,7 +69,7 @@ The next step is to start the system server. It provides HTTP backend services, 
 
   Type localhost:5000/docs in your browser to see all the APIs.
 
-  ![](../pic/fastapi.png)
+  ![](./pic/fastapi.png)
 
   > /data
   >
@@ -95,11 +95,11 @@ The next step is to start the system server. It provides HTTP backend services, 
 - **Fastapi examples**
   - /image/load
   
-  ![](../pic/load.png)
+  ![](./pic/load.png)
   
   - /video/search
   
-  ![](../pic/search.png)
+  ![](./pic/search.png)
   
 
 - **Code structure**
