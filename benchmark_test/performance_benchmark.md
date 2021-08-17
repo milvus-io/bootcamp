@@ -1,6 +1,5 @@
-# Performance Benchmark
-
-This topic displays the performance of different index types in Milvus 0.5.3 for reference purposes. The test data uses an open source dataset, sift1B, with 1,000 million 128-dimensional vectors.
+# Milvus performance
+This topic displays the performance of different index types in Milvus1.1 for reference purposes. The test data uses an open source dataset, sift1B, with 1 billion 128-dimensional vectors.
 
 The following table displays the terms used in this topic:
 
@@ -12,150 +11,203 @@ The following table displays the terms used in this topic:
 | avg_time   | Average search time per vector.       |
 | nprobe     | Number of buckets to search during a query. The value is defined during search.  |
 
-Performance is correlated with nprobe. The greater the value of nprobe, the lower the performance, but the higher the accuracy. You can set nprobe per specific scenarios. In this topic, nprobe is set to 32.
+Performance is correlated with nprobe. The greater the value of nprobe, the lower the performance, but the higher the accuracy. You can set nprobe per specific scenarios.
 
 Refer to [https://zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing](https://zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing) to learn how to choose indexes.
 
-### IVF_FLAT
 
-cpu search
 
-| nq   | topk | total_time | avg_time |
-| ---- | ---- | ---------- | -------- |
-| 1    | 1    | 0.6487     | 0.6487   |
-| 1    | 10   | 0.6408     | 0.6408   |
-| 1    | 100  | 0.6493     | 0.6493   |
-|      |      |            |          |
-| 10   | 1    | 1.1243     | 0.1124   |
-| 10   | 10   | 0.9356     | 0.0936   |
-| 10   | 100  | 1.3931     | 0.1393   |
-|      |      |            |          |
-| 50   | 1    | 1.2678     | 0.0254   |
-| 50   | 10   | 1.2675     | 0.0253   |
-| 50   | 100  | 1.3115     | 0.0262   |
-|      |      |            |          |
-| 100  | 1    | 2.2895     | 0.0229   |
-| 100  | 10   | 3.1338     | 0.0313   |
-| 100  | 100  | 2.1886     | 0.0219   |
-|      |      |            |          |
-| 500  | 1    | 14.0294    | 0.0281   |
-| 500  | 10   | 14.0151    | 0.028    |
-| 500  | 100  | 14.4321    | 0.0289   |
-|      |      |            |          |
-| 1000 | 1    | 22.0935    | 0.0221   |
-| 1000 | 10   | 25.4936    | 0.0255   |
-| 1000 | 100  | 25.901     | 0.0259   |
+## Performance result
 
-gpu search
+[sift1m test result](performance_benchmark.md#sift1m): In this test, the first 1,000,000 vectors in the sift1B dataset are selected.
 
-| nq   | topk | total_time | avg_time |
-| ---- | ---- | ---------- | -------- |
-| 1    | 1    | 14.2485    | 14.2485  |
-| 1    | 10   | 14.2673    | 14.2673  |
-| 1    | 100  | 14.3479    | 14.3479  |
-|      |      |            |          |
-| 10   | 1    | 14.3771    | 1.4377   |
-| 10   | 10   | 14.4297    | 1.443    |
-| 10   | 100  | 14.3873    | 1.4387   |
-|      |      |            |          |
-| 50   | 1    | 14.498     | 0.29     |
-| 50   | 10   | 14.4178    | 0.2884   |
-| 50   | 100  | 14.3513    | 0.287    |
-|      |      |            |          |
-| 100  | 1    | 14.6015    | 0.146    |
-| 100  | 10   | 14.4465    | 0.1445   |
-| 100  | 100  | 14.6844    | 0.1468   |
-|      |      |            |          |
-| 500  | 1    | 14.6073    | 0.0292   |
-| 500  | 10   | 14.6434    | 0.0293   |
-| 500  | 100  | 14.9968    | 0.03     |
-|      |      |            |          |
-| 1000 | 1    | 15.3294    | 0.0153   |
-| 1000 | 10   | 15.3135    | 0.0153   |
-| 1000 | 100  | 15.3364    | 0.0153   |
+[sift10m test result](performance_benchmark.md#sift10m): In this test, the first 10,000,000 vectors in the sift1B data set are selected.
 
-### sq8
+[sift100m test result](performance_benchmark.md#sift100m): In this test, the first 100,000,000 vectors in the sift1B data set were selected.
 
-cpu search
+During this test, the data was imported into milvus in batches of 100,000, and it took about 0.7S to import 100,000 vectors of 128 dimensions.
 
-| nq   | topk | total_time | avg_time |
-| ---- | ---- | ---------- | -------- |
-| 1    | 1    | 0.6416     | 0.6416   |
-| 1    | 10   | 0.6433     | 0.6433   |
-| 1    | 100  | 0.6541     | 0.6541   |
-|      |      |            |          |
-| 10   | 1    | 1.0057     | 0.1006   |
-| 10   | 10   | 1.0391     | 0.1039   |
-| 10   | 100  | 1.0289     | 0.1029   |
-|      |      |            |          |
-| 50   | 1    | 0.9738     | 0.0195   |
-| 50   | 10   | 0.8948     | 0.0179   |
-| 50   | 100  | 2.0333     | 0.0407   |
-|      |      |            |          |
-| 100  | 1    | 1.5835     | 0.0158   |
-| 100  | 10   | 1.584      | 0.0158   |
-| 100  | 100  | 1.6095     | 0.0161   |
-|      |      |            |          |
-| 500  | 1    | 4.2526     | 0.0085   |
-| 500  | 10   | 4.4623     | 0.0089   |
-| 500  | 100  | 5.6541     | 0.0113   |
-|      |      |            |          |
-| 1000 | 1    | 9.0937     | 0.0091   |
-| 1000 | 10   | 9.1369     | 0.0091   |
-| 1000 | 100  | 9.5043     | 0.0095   |
+## Hardware Configuration:
+| component  | config                             |
+| ---------- | ---------------------------------- |
+| OS         | Ubuntu LTS 18.04                   |
+| CPU        | Intel Core i7-8700                 |
+| GPU0       | Nvidia GeForce GTX 1060, 6GB GDDR5 |
+| GPU1       | Nvidia GeForce GTX 1660, 6GB GDDR5 |
+| GPU driver | CUDA 10.1, Driver 418.74           |
+| Memory     | 16 GB DDR4 ( 2400 Mhz ) x 4        |
+| Storage    | SATA 3.0 SSD 256 GB                |
 
-gpu search
+## Sift1m
 
-| nq   | topk | total_time | avg_time |
-| ---- | ---- | ---------- | -------- |
-| 1    | 1    | 5.1387     | 5.1387   |
-| 1    | 10   | 5.0663     | 5.0663   |
-| 1    | 100  | 5.0685     | 5.0685   |
-|      |      |            |          |
-| 10   | 1    | 5.1336     | 0.5134   |
-| 10   | 10   | 5.0085     | 0.5009   |
-| 10   | 100  | 5.1068     | 0.5107   |
-|      |      |            |          |
-| 50   | 1    | 5.0067     | 0.1001   |
-| 50   | 10   | 5.0983     | 0.102    |
-| 50   | 100  | 5.0527     | 0.1011   |
-|      |      |            |          |
-| 100  | 1    | 5.1222     | 0.0512   |
-| 100  | 10   | 5.2778     | 0.0528   |
-| 100  | 100  | 4.9544     | 0.0495   |
-|      |      |            |          |
-| 500  | 1    | 5.1924     | 0.0104   |
-| 500  | 10   | 5.1253     | 0.0103   |
-| 500  | 100  | 5.1715     | 0.0103   |
-|      |      |            |          |
-| 1000 | 1    | 5.1741     | 0.0052   |
-| 1000 | 10   | 5.276      | 0.0053   |
-| 1000 | 100  | 5.4707     | 0.0055   |
+### Ivf_sq8 index
 
-### sq8h
+**Time spent building index**: 27.8 S
 
-| nq   | topk | total_time | avg_time |
-| ---- | ---- | ---------- | -------- |
-| 1    | 1    | 0.3014     | 0.3014   |
-| 1    | 10   | 0.2949     | 0.2949   |
-| 1    | 100  | 0.3146     | 0.3146   |
-|      |      |            |          |
-| 10   | 1    | 0.5546     | 0.0555   |
-| 10   | 10   | 0.5711     | 0.0571   |
-| 10   | 100  | 0.6225     | 0.0623   |
-|      |      |            |          |
-| 50   | 1    | 0.6317     | 0.0126   |
-| 50   | 10   | 0.6336     | 0.0127   |
-| 50   | 100  | 0.6788     | 0.0136   |
-|      |      |            |          |
-| 100  | 1    | 0.9978     | 0.01     |
-| 100  | 10   | 0.9975     | 0.01     |
-| 100  | 100  | 1.0336     | 0.0103   |
-|      |      |            |          |
-| 500  | 1    | 2.729      | 0.0055   |
-| 500  | 10   | 2.732      | 0.0055   |
-| 500  | 100  | 2.9172     | 0.0058   |
-|      |      |            |          |
-| 1000 | 1    | 4.7836     | 0.0048   |
-| 1000 | 10   | 4.8186     | 0.0048   |
-| 1000 | 100  | 5.1465     | 0.0051   |
+**Search parameter**: {probe: 256}
+
+**Accuracy**:
+
+In this section, 500 vectors are randomly removed from the set of vectors to be queried. The recall is taken as the average of these 500 results and tested three times in total, each time the 500 vectors taken out are not exactly the same.
+
+| accuracy(%) | first | second | third |
+| ----------- | ----- | ------ | ----- |
+| topk=1      | 98.6  | 99.2   | 98.4  |
+| topk=10     | 98.2  | 98.3   | 98.7  |
+| topk=100    | 98.6  | 98.5   | 98.6  |
+| topk=500    | 97.9  | 97.8   | 98.0  |
+
+**Performance：p99 latency**
+(use cpu search)
+
+| time(s) | topk=1  | topk=10 | topk=100 | topk=500 |
+| ------- | ------- | ------- | -------- | -------- |
+| nq=1    | 0.00370 | 0.00233 | 0.00244  | 0.00273  |
+| nq=10   | 0.0137  | 0.0151  | 0.0131   | 0.0151   |
+| nq=100  | 0.0847  | 0.0846  | 0.0887   | 0.0997   |
+| nq=500  | 0.366   | 0.366   | 0.375    | 0.419    |
+| nq=1000 | 0.689   | 0.688   | 0.699    | 0.794    |
+
+### ivf_sq8h index
+
+**Time spent building index**: 27.0 S
+
+**Search parameter**: {probe: 256}
+
+**Accuracy**:
+
+In this section, 500 vectors are randomly removed from the set of vectors to be queried. The recall is taken as the average of these 500 results and tested three times in total, each time the 500 vectors taken out are not exactly the same.
+
+| accuracy(%) | first | second | third |
+| ----------- | ----- | ------ | ----- |
+| topk=1      | 99.2  | 98.2   | 98.8  |
+| topk=10     | 98.5  | 98.7   | 98.4  |
+| topk=100    | 98.7  | 98.7   | 98.6  |
+| topk=500    | 98.2  | 98.2   | 98.1  |
+
+**Performance：p99 latency**
+(use cpu search)
+
+| time(s) | topk=1  | topk=10 | topk=100 | topk=500 |
+| ------- | ------- | ------- | -------- | -------- |
+| nq=1    | 0.00268 | 0.00269 | 0.00277  | 0.00308  |
+| nq=10   | 0.0175  | 0.0136  | 0.0132   | 0.0155   |
+| nq=100  | 0.0836  | 0.0839  | 0.0876   | 0.0981   |
+| nq=500  | 0.362   | 0.355   | 0.371    | 0.409    |
+| nq=1000 | 0.679   | 0.693   | 0.693    | 0.771    |
+
+## sift10m
+
+### ivf_sq8 index
+
+**Time spent building index**: 62.8 S
+
+**Search parameter**: {nprobe:128}
+
+**Accuracy：**
+
+In this section, 500 vectors are randomly removed from the set of vectors to be queried. The recall is taken as the average of these 500 results and tested three times in total, each time the 500 vectors taken out are not exactly the same.
+
+| accuracy(%) | first | second | third |
+| ----------- | ----- | ------ | ----- |
+| topk=1      | 97.4  | 97.0   | 97.8  |
+| topk=10     | 98.2  | 98.0   | 98.1  |
+| topk=100    | 98.1  | 98.1   | 98.3  |
+| topk=500    | 97.3  | 97.4   | 97.7  |
+
+**Performance：p99 latency**
+(use cpu search)
+
+| time(s) | topk=1(s) | topk=10(s) | topk=100(s) | topk=500(s) |
+| ------- | --------- | ---------- | ----------- | ----------- |
+| nq=1    | 0.00547   | 0.0074     | 0.0057      | 0.00626     |
+| nq=10   | 0.0569    | 0.0575     | 0.0571      | 0.0593      |
+| nq=100  | 0.398     | 0.480      | 0.464       | 0.423       |
+| nq=500  | 1.69      | 1.69       | 1.71        | 1.74        |
+| nq=1000 | 3.24      | 3.28       | 3.26        | 3.45        |
+
+### ivf_sq8h index
+
+**Time spent building index**: 59.6 S
+
+**Search parameter**: {nprobe:128}
+
+**Accuracy：**
+
+In this section, 500 vectors are randomly removed from the set of vectors to be queried. The recall is taken as the average of these 500 results and tested three times in total, each time the 500 vectors taken out are not exactly the same.
+
+| accuracy(%) | first | second | third |
+| ----------- | ----- | ------ | ----- |
+| topk=1      | 97.4  | 97.4   | 99.0  |
+| topk=10     | 98.3  | 97.8   | 98.1  |
+| topk=100    | 98.1  | 98.0   | 98.0  |
+| topk=500    | 97.5  | 97.5   | 97.5  |
+
+**Performance：p99 latency**
+
+| time(s) | topk=1  | topk=10 | topk=100 | topk=500 |
+| ------- | ------- | ------- | -------- | -------- |
+| nq=1    | 0.00574 | 0.00741 | 0.00569  | 0.00626  |
+| nq=10   | 0.0556  | 0.0555  | 0.0567   | 0.0586   |
+| nq=100  | 0.411   | 0.423   | 0.421    | 0.45     |
+| nq=500  | 1.71    | 1.74    | 1.74     | 1.77     |
+| nq=1000 | 3.25    | 3.28    | 3.26     | 3.45     |
+
+## sift100m
+
+### ivf_sq8 index
+
+**Time spent building index**: 440.1 S
+
+**Search parameter**: {nprobe:64}
+
+**Accuracy：**
+
+In this section, 500 vectors are randomly removed from the set of vectors to be queried. The recall is taken as the average of these 500 results and tested three times in total, each time the 500 vectors taken out are not exactly the same.
+
+| accuracy(%) | first | second | third |
+| ----------- | ----- | ------ | ----- |
+| topk=1      | 97.0  | 95.8   | 97.6  |
+| topk=10     | 97.4  | 97.3   | 97.4  |
+| topk=100    | 97.6  | 97.2   | 97.3  |
+| topk=500    | 97.2  | 96.4   | 96.6  |
+
+**Performance：p99 latency**
+(use cpu search)
+
+| time(s) | topk=1 | topk=10 | topk=100 | topk=500 |
+| ------- | ------ | ------- | -------- | -------- |
+| nq=1    | 0.0274 | 0.0274  | 0.0306   | 0.0334   |
+| nq=10   | 0.365  | 0.305   | 0.359    | 0.374    |
+| nq=100  | 2.20   | 2.21    | 2.23     | 2.28     |
+| nq=500  | 8.57   | 8.63    | 8.69     | 8.93     |
+| nq=1000 | 16.1   | 16.0    | 16.0     | 16.7     |
+
+### ivf_sq8h index
+
+**Time spent building index**: 468.9 S
+
+**Search parameter**: {nprobe:64}
+
+**Accuracy：**
+
+In this section, 500 vectors are randomly removed from the set of vectors to be queried. The recall is taken as the average of these 500 results and tested three times in total, each time the 500 vectors taken out are not exactly the same.
+
+| accuracy(%) | first | second | third |
+| ----------- | ----- | ------ | ----- |
+| topk=1      | 96.6  | 97.0   | 97.4  |
+| topk=10     | 97.6  | 97.1   | 97.2  |
+| topk=100    | 97.4  | 97.4   | 97.3  |
+| topk=500    | 96.8  | 96.7   | 96.6  |
+
+
+**Performance：p99 latency**
+(use cpu search)
+
+| time(s) | topk=1 | topk=10 | topk=100 | topk=500 |
+| ------- | ------ | ------- | -------- | -------- |
+| nq=1    | 0.0320 | 0.0335  | 0.0321   | 0.0375   |
+| nq=10   | 0.299  | 0.302   | 0.305    | 0.309    |
+| nq=100  | 2.25   | 2.27    | 2.29     | 2.45     |
+| nq=500  | 9.27   | 9.18    | 9.36     | 9.91     |
+| nq=1000 | 17.5   | 17.5    | 17.8     | 18.0     |

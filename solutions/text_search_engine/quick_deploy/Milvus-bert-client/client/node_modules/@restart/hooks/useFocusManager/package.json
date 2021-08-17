@@ -1,0 +1,7 @@
+{
+  "name": "@restart/hooks/useFocusManager",
+  "private": true,
+  "main": "../cjs/useFocusManager.js",
+  "module": "../esm/useFocusManager.js",
+  "types": "../esm/useFocusManager.d.ts"
+}

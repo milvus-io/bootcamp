@@ -10,13 +10,14 @@ This bootcamp includes the following:
 - [Benchmark Test](benchmark_test)
 
 - Solutions
-  - [Image Similarity Search](solutions/image_similarity_search)
+  - [Reverse Image Search](solutions/reverse_image_search)
   - [Question Answering System](solutions/question_answering_system)
   - [Recommendation System](solutions/recommendation_system)
   - [Molecular Similarity Search](solutions/molecular_similarity_search)
   - [Video Similarity Search](solutions/video_similarity_search)
   - [Audio Similarity Search](solutions/audio_similarity_search)
   - [Hybrid Search](solutions/hybrid_search)
+  - [Text Search Engine](solutions/text_search_engine)
   
 - Deployments
   - [Distributed deployment using Mishards](deployments/mishards)

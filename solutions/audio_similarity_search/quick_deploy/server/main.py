@@ -1,25 +1,23 @@
 import os
 import logging
-from audio.service.insert import do_insert_audio as audio_insert_audio
-from audio.service.search import do_search_audio as audio_search_audio
-from audio.service.count import do_count_table as audio_count_table
-from audio.service.delete import do_delete_table as audio_delete_table
-from audio.indexer.index import milvus_client as audio_milvus_client
-from audio.indexer.tools import connect_mysql as audio_connect_mysql
-from audio.common.config import UPLOAD_PATH as audio_UPLOAD_PATH
-from audio.common.config import DEFAULT_TABLE as audio_DEFAULT_TABLE
 import time
+from src.milvus_helpers import MilvusHelper
+from src.mysql_helpers import MySQLHelper
+from src.config import UPLOAD_PATH
+from src.logs import LOGGER
+from src.operations.load import do_load
+from src.operations.search import do_search
+from src.operations.count import do_count
+from src.operations.drop import do_drop
 from fastapi import FastAPI
 from fastapi import File
 from fastapi import UploadFile
+from diskcache import Cache
 import uvicorn
 from starlette.responses import FileResponse
 from starlette.requests import Request
-import zipfile
 from pathlib import Path
-import uuid
 from starlette.middleware.cors import CORSMiddleware
-import shutil
 
 app = FastAPI()
 app.add_middleware(
@@ -27,110 +25,85 @@ app.add_middleware(
     allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
-    allow_headers=["*"])
+    allow_headers=["*"]
+)
 
+MODEL = None
+MILVUS_CLI = MilvusHelper()
+MYSQL_CLI = MySQLHelper()
 
-def audio_init_conn():
-    conn = audio_connect_mysql()
-    cursor = conn.cursor()
-    index_client = audio_milvus_client()
-    return index_client, conn, cursor
+# Mkdir 'tmp/audio-data'
+if not os.path.exists(UPLOAD_PATH):
+    os.makedirs(UPLOAD_PATH)
+    LOGGER.info("mkdir the path:{} ".format(UPLOAD_PATH))
 
-
-def unzip_file(zip_src, dst_dir):
-    r = zipfile.is_zipfile(zip_src)
-    if r:
-        with zipfile.ZipFile(zip_src, 'r') as f:
-            for fn in f.namelist():
-                extracted_path = f.extract(fn, dst_dir)
-
-            return f.namelist()[0]
-    else:
-        print('This is not zip')
-        return 'This is not zip'
-
-
-@app.get('/audio/count')
-async def audio_count_table_api(table_name: str = None):
+@app.get('/data')
+def audio_path(audio_path):
+    # Get the audio file
     try:
-        index_client, conn, cursor = audio_init_conn()
-        rows_milvus, rows_mysql = audio_count_table(index_client, conn, cursor, table_name)
-        return {'status': True, 'msg': {'rows_milvus': rows_milvus, 'rows_mysql': rows_mysql}}, 200
+        LOGGER.info(("Successfully load audio: {}".format(audio_path)))
+        return FileResponse(audio_path)
     except Exception as e:
-        logging.error(e)
-        return {'status': False, 'msg':e}, 400
+        LOGGER.error("upload audio error: {}".format(e))
+        return {'status': False, 'msg': e}, 400
 
-
-@app.get('/getAudio')
-async def audio_endpoint(audio: str):
+@app.get('/progress')
+def get_progress():
+    # Get the progress of dealing with data
     try:
-        print("load audio:", audio)
-        return FileResponse(audio)
+        cache = Cache('./tmp')
+        return "current: {}, total: {}".format(cache['current'], cache['total'])
     except Exception as e:
-        logging.error(e)
-        return {'status': False, 'msg':e}, 400
+        LOGGER.error("upload data error: {}".format(e))
+        return {'status': False, 'msg': e}, 400
 
-
-@app.get('/getSpectrogram')
-async def spectrogram_endpoint(image: str):
+@app.post('/audio/load')
+async def load_audios(Table: str = None, File: str = None):
+    # Insert all the audio files under the file path to Milvus/MySQL
     try:
-        print("load img:", image)
-        return FileResponse(image)
+        total_num = do_load(Table, File, MODEL, MILVUS_CLI, MYSQL_CLI)
+        LOGGER.info("Successfully loaded data, total count: {}".format(total_num))
+        return {'status': True, 'msg': "Successfully loaded data!"}
     except Exception as e:
-        logging.error(e)
-        return {'status': False, 'msg':e}, 400
-
-
-@app.post('/audio/insert')
-async def do_insert_audio_api(file: bytes = File(...), table_name: str = None):
-    try:
-        if not table_name:
-            table_name = audio_DEFAULT_TABLE
-
-        index_client, conn, cursor = audio_init_conn()
-
-        os.makedirs(audio_UPLOAD_PATH + "/" + table_name)
-        fname_path = audio_UPLOAD_PATH + "/" + table_name + "/" + "demo_audio.zip"
-        with open(fname_path,'wb') as f:
-            f.write(file)
-
-        audio_path = unzip_file(fname_path, audio_UPLOAD_PATH + "/" + table_name)
-        os.remove(fname_path)
-
-        info = audio_insert_audio(index_client, conn, cursor, table_name, audio_UPLOAD_PATH + "/" + table_name)
-        return {'status': True, 'msg': info}, 200
-    except Exception as e:
-        logging.error(e)
-        return {'status': False, 'msg':e}, 400
-
+        LOGGER.error(e)
+        return {'status': False, 'msg': e}, 400
 
 @app.post('/audio/search')
-async def do_search_audio_api(request: Request, audio: UploadFile = File(...), table_name: str = None):
+async def search_audio(Table: str = None, Audio: str = None):
+    # Search the uploaded audio in Milvus/MySQL
     try:
-        content = await audio.read()
-        filename = audio_UPLOAD_PATH + "/" + audio.filename
-        with open(filename, "wb") as f:
-            f.write(content)
-
-        index_client, conn, cursor = audio_init_conn()
-        host = request.headers['host']
-        milvus_ids, milvus_distance, audio_ids = audio_search_audio(index_client, conn, cursor, table_name, filename)
-        
-        results = []
-        for i in range(len(milvus_ids)):
-            re = {
-                "id": milvus_ids[i],
-                "distance": milvus_distance[i],
-                "audio": "http://" + str(host) + "/getAudio?audio=" + str(audio_ids[i]),
-                "spectrogram": "http://" + str(host) + "/getSpectrogram?image=" + str(audio_ids[i]).replace('.wav', '.jpg')
-            }
-            results.append(re)
-        return {'status': True, 'msg': results}, 200
+        # Save the upload data to server.
+        ids, paths, distances = do_search(Table, Audio, MODEL, MILVUS_CLI, MYSQL_CLI)
+        res = dict(zip(paths, zip(ids, distances)))
+        # Sort results by distance metric, closest distances first
+        res = sorted(res.items(), key=lambda item: item[1][1])
+        LOGGER.info("Successfully searched similar audio!")
+        return res
     except Exception as e:
-        logging.error(e)
-        return {'status': False, 'msg':e}, 400
+        LOGGER.error(e)
+        return {'status': False, 'msg': e}, 400
 
+@app.get('/audio/count')
+async def count_audio(table_name: str = None):
+    # Returns the total number of vectors in the system
+    try:
+        num = do_count(table_name, MILVUS_CLI)
+        LOGGER.info("Successfully count the number of data!")
+        return num
+    except Exception as e:
+        LOGGER.error(e)
+        return {'status': False, 'msg': e}, 400
 
+@app.post('/audio/drop')
+async def drop_tables(table_name: str = None):
+    # Delete the collection of Milvus and MySQL
+    try:
+        status = do_drop(table_name, MILVUS_CLI, MYSQL_CLI)
+        LOGGER.info("Successfully drop tables in Milvus and MySQL!")
+        return status
+    except Exception as e:
+        LOGGER.error(e)
+        return {'status': False, 'msg': e}, 400
 
 if __name__ == '__main__':
     uvicorn.run(app=app, host='127.0.0.1', port=8002)

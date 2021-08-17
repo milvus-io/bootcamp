@@ -1,0 +1,7 @@
+{
+  "name": "@restart/hooks/useMergeState",
+  "private": true,
+  "main": "../cjs/useMergeState.js",
+  "module": "../esm/useMergeState.js",
+  "types": "../esm/useMergeState.d.ts"
+}

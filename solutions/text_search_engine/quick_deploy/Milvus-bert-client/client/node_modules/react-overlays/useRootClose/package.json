@@ -1,0 +1,6 @@
+{
+  "name": "react-overlays/useRootClose",
+  "private": true,
+  "main": "../cjs/useRootClose.js",
+  "module": "../esm/useRootClose.js"
+}

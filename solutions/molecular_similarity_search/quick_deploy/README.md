@@ -16,7 +16,7 @@ The previous configuration has been tested and this scenario is also supported i
 Data source: [ftp://ftp.ncbi.nlm.nih.gov/pubchem/Compound/CURRENT-Full/SDF](ftp://ftp.ncbi.nlm.nih.gov/pubchem/Compound/CURRENT-Full/SDF). The data source contains compressed SDF files. You need to convert these files to SMILES files. We already prepared a SMILE file containing 10,000 chemical structures [test_1w.smi](../../solutions/mols_search/smiles-data). You can use wget to download the file:
 
 ```bash
-$ wget https://raw.githubusercontent.com/milvus-io/bootcamp/0.10.0/solutions/mols_search/smiles-data/test_1w.smi
+$ wget https://raw.githubusercontent.com/milvus-io/bootcamp/1.0/solutions/mols_search/smiles-data/test_1w.smi
 ```
 
 ## Deploy
@@ -35,7 +35,7 @@ Refer to the following table for the parameter description:
 
 | Parameter                     | Description                                                      |
 | ----------------------------- | ------------------------------------------------------------ |
-| -v DATAPATH:/tmp/data       | -v specifies directory mapping between the host and the docker image. Please modify `/tmp/data` to your path of test_1w.smi. |
+| -v DATAPATH:/tmp/data       | -v specifies directory mapping between the host and the docker image. Please modify `DATAPATH` to your local path of test_1w.smi. |
 | -p 35001:5000                 | -p specifies pot mapping between the host and the image.                        |
 | -e "MILVUS_HOST=192.168.1.25" | -e specifies the system parameter mapping between the host and the image. Pease modify `192.168.1.25` to the IP address of the Milvus docker.|
 | -e "MILVUS_PORT=19530"        | Pease modify `19530` to the port of Milvus docker.           |
