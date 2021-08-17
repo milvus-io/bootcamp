@@ -15,6 +15,7 @@ Performance is correlated with nprobe. The greater the value of nprobe, the lowe
 
 Refer to [https://zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing](https://zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing) to learn how to choose indexes.
 
+Parameters for the test：`nlist` = 4096, `index_file_size` = 2048
 
 
 ## Performance result
@@ -42,7 +43,7 @@ During this test, the data was imported into milvus in batches of 100,000, and i
 
 ### Ivf_sq8 index
 
-**Time spent building index**: 27.8 S, and `nlist` = 4096.
+**Time spent building index**: 27.8 S
 
 **Search parameter**: {nprobe: 256}
 
@@ -70,7 +71,7 @@ In this section, 500 vectors are randomly removed from the set of vectors to be 
 
 ### ivf_sq8h index
 
-**Time spent building index**: 27.0 S, and `nlist` = 4096.
+**Time spent building index**: 27.0 S
 
 **Search parameter**: {nprobe: 256}
 
@@ -100,7 +101,7 @@ In this section, 500 vectors are randomly removed from the set of vectors to be 
 
 ### ivf_sq8 index
 
-**Time spent building index**: 62.8 S, and `nlist` = 4096.
+**Time spent building index**: 62.8 S
 
 **Search parameter**: {nprobe:128}
 
@@ -128,7 +129,7 @@ In this section, 500 vectors are randomly removed from the set of vectors to be 
 
 ### ivf_sq8h index
 
-**Time spent building index**: 59.6 S, and `nlist` = 4096.
+**Time spent building index**: 59.6 S
 
 **Search parameter**: {nprobe:128}
 
@@ -157,7 +158,7 @@ In this section, 500 vectors are randomly removed from the set of vectors to be 
 
 ### ivf_sq8 index
 
-**Time spent building index**: 440.1 S, and `nlist` = 4096.
+**Time spent building index**: 440.1 S
 
 **Search parameter**: {nprobe:64}
 
@@ -185,7 +186,7 @@ In this section, 500 vectors are randomly removed from the set of vectors to be 
 
 ### ivf_sq8h index
 
-**Time spent building index**: 468.9 S, and `nlist` = 4096.
+**Time spent building index**: 468.9 S
 
 **Search parameter**: {nprobe:64}
 
