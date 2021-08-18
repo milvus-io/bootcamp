@@ -12,10 +12,13 @@ def get_object_vector(model, path):
     images = os.listdir(path)
     images.sort()
     vectors = []
+    times = []
     for image in images:
         vector = model.execute(path + '/' + image)
         vectors.append(vector)
-    return vectors
+        time = image.split('-')[0]
+        times.append(time)
+    return vectors, times
 
 
 def do_search(table_name, video_path, model, milvus_client, mysql_cli):
@@ -28,7 +31,7 @@ def do_search(table_name, video_path, model, milvus_client, mysql_cli):
         paths = []
         objects = []
         run(detector, object_path)
-        vecs = get_object_vector(model, object_path + 'object')
+        vecs, times = get_object_vector(model, object_path + 'object')
         #print(len(vecs))
         results = milvus_client.search_vectors(collection_name=table_name, vectors=vecs, top_k=TOP_K)
         ids = []
@@ -38,7 +41,7 @@ def do_search(table_name, video_path, model, milvus_client, mysql_cli):
             distances.append(result[0].distance)
         paths, objects = mysql_cli.search_by_milvus_ids(ids, table_name)
         shutil.rmtree(object_path)
-        return paths, objects, distances
+        return paths, objects, distances, times
     except Exception as e:
         LOGGER.error(" Error with search : {}".format(e))
         sys.exit(1)
