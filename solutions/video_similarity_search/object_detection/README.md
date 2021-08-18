@@ -28,13 +28,27 @@ The video object detection system will use Milvus to store and search the featur
 ### 2. Start Server
 The next step is to start the system server. It provides HTTP backend services, you can run source code to start.
 
-#### 2.1 Run source code
 - **Install the Python packages**
 
   ```bash
   $ cd server
   $ pip install -r requirements.txt
   ```
+  
+- **Download Yolov3 Model**
+  ```bash
+  $ cd server/src/yolov3_detector/data
+  $ ./prepare_model.sh
+  ```
+  You will get a folder yolov3_darknet containing 3 files:
+  ```
+  ├── yolov3_darknet
+  │   ├── __model__
+  │   ├── __params__
+  │   └── yolo.yml
+  ```
+
+#### 2.1 Run source code
   
 - **Set configuration**
 
@@ -55,6 +69,9 @@ The next step is to start the system server. It provides HTTP backend services, 
   | DATA_PATH        | The folder path of known object images to insert.     | data/example_object |
   | UPLOAD_PATH      | The folder path of the video and will temporarily keep frames & object images from video. | data/example_video |
   | DISTANCE_LIMIT   | Maximum distance to return object information. If no result with smaller distance, then return Null as object information. | None |
+  
+  - DATA_PATH & UPLOAD_PATH: modify to your own paths or create folders `src/data/example_object` & `src/data/example_video` for object images & video if use default settings
+  - DISTANCE_LIMIT: change to some number so that results with smaller distances will not be shown in response
 
 - **Run the code** 
 
