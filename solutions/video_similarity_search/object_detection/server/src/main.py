@@ -110,30 +110,35 @@ async def search_images(request: Request, video: UploadFile = File(...), table_n
         with open(video_path, "wb+") as f:
             f.write(content)
         host = request.headers['host']
-        paths, objects, distances = do_search(table_name, video_path, MODEL, MILVUS_CLI, MYSQL_CLI)
+        paths, objects, distances, times = do_search(table_name, video_path, MODEL, MILVUS_CLI, MYSQL_CLI)
         res = []
         for i in range(len(paths)):
-            if DISTANCE_LIMIT:
+            if DISTANCE_LIMIT != None:
                 if float(distances[i]) < DISTANCE_LIMIT:
                     re = {
                         "object": objects[i],
                         "image": "http://" + str(host) + "/getImage?img=" + paths[i],
-                        "distance": distances[i]
+                        "distance": distances[i],
+                        "time": times[i]
                         }
                 else:
                     re = {
                         "object": None,
                         "image": None,
-                        "distance": None
+                        "distance": None,
+                        "time": None
                         }
             else:
                 re = {
                     "object": objects[i],
                     "image": "http://" + str(host) + "/getImage?img=" + paths[i],
-                    "distance": distances[i]
+                    "distance": distances[i],
+                    "time": times[i]
                     }
-            res.append(re)
+            if re["object"] != None:
+                res.append(re)
         LOGGER.info("Successfully searched similar images!")
+        #print(len(res))
         return res
     except Exception as e:
         LOGGER.error(e)

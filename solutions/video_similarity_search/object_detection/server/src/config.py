@@ -26,4 +26,4 @@ YOLO_CONFIG_PATH = os.getenv("OBJECT_PATH", "./yolov3_detector/data/yolov3_darkn
 CACHE_DIR = "./tmp"
 DATA_PATH = os.getenv("DATA_PATH", "data/example_object")
 UPLOAD_PATH = os.getenv("UPLOAD_PATH", "data/example_video")
-DISTANCE_LIMIT = None
+DISTANCE_LIMIT = os.getenv("DISTANCE_LIMIT", None)
