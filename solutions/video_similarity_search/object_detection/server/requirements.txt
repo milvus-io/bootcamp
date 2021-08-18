@@ -7,6 +7,8 @@ fastapi
 uvicorn
 pandas
 aiofiles
-pymilvus-orm==2.0.0rc2
+pymilvus-orm==2.0.0rc4
 diskcache
 python-multipart
+pyyaml
+paddlepaddle==2.1.0
