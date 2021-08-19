@@ -3,11 +3,10 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 
 import Navbar from './components/navigation/Navbar';
-import HomePage from './components/pages/HomePage/HomePage';
 import RelatedPage from './components/pages/RelatedPage/RelatedPage';
 import NotFoundPage from './components/pages/NotFoundPage';
 
-import { HOME_ROUTE, RELATED_ROUTE, SEARCH_ROUTE } from './shared/Constants';
+import { HOME_ROUTE, RELATED_ROUTE } from './shared/Constants';
 import Theme from './shared/Theme';
 import SearchPage from './components/pages/SearchPage/SearchPage';
 
