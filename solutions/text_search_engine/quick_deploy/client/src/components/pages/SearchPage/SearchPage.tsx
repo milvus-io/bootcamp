@@ -11,7 +11,6 @@ import ErrorBoundary from "react-error-boundary";
 import styled from "styled-components";
 import Loading from "../../common/Loading";
 import {
-  SEARCH_API_BASE,
   SEARCH,
   TABLET_BREAKPOINT,
 } from "../../../shared/Constants";
@@ -93,15 +92,6 @@ const SearchPage = () => {
       console.log(err);
       setLoading(false);
     }
-  };
-
-  const formatResData = (data: string[]): SearchResultView => {
-    const [title, content] = data;
-
-    return {
-      title,
-      content,
-    } as SearchResultView;
   };
 
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) =>
