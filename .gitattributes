@@ -24,7 +24,6 @@
 *.ipynb  text
 *.ts  text
 *.tsx  text
-*.js  text
 
 # To ignore it use below
 *.ipynb linguist-documentation
