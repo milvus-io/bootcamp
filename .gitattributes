@@ -25,12 +25,14 @@
 *.ts  text
 *.tsx  text
 *.js  text
+*.jsx  text
 
 # To ignore it use below
 *.ipynb linguist-documentation
 *.ts linguist-documentation
 *.tsx linguist-documentation
 *.js linguist-documentation
+*.jsx linguist-documentation
 
 # Note: .db, .p, and .pkl files are associated
 # with the python modules ``pickle``, ``dbm.*``,
