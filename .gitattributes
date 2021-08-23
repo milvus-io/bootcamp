@@ -25,7 +25,7 @@
 
 # To ignore it use below
 *.ipynb linguist-documentation
-*.ts linguist-documentation
+# *.ts linguist-documentation
 
 # Note: .db, .p, and .pkl files are associated
 # with the python modules ``pickle``, ``dbm.*``,
