@@ -21,11 +21,11 @@
 *.pyd    binary
 
 # Jupyter notebook
-*.ipynb  text
-*.ts  text
-*.tsx  text
-*.js  text
-*.jsx  text
+# *.ipynb  text
+# *.ts  text
+# *.tsx  text
+# *.js  text
+# *.jsx  text
 
 # To ignore it use below
 *.ipynb linguist-documentation
