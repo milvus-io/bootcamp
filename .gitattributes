@@ -29,9 +29,9 @@
 
 # To ignore it use below
 *.ipynb linguist-documentation
-*.ts linguist-documentation
+# *.ts linguist-documentation
 *.tsx linguist-documentation
-*.js linguist-documentation
+# *.js linguist-documentation
 *.jsx linguist-documentation
 
 # Note: .db, .p, and .pkl files are associated
