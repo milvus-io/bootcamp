@@ -113,7 +113,7 @@ $ python main.py
 
 - **API docs** 
 
-Vist 127.0.0.1:5000/docs in your browser to use all the APIs.
+Vist 127.0.0.1:5001/docs in your browser to use all the APIs.
 
 ![1](pic/1.png)
 
