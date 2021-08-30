@@ -1,16 +1,13 @@
 <!-- PROJECT LOGO -->
-<br />
 
 <p align="center">
   <a href="https://github.com/milvus-io/bootcamp">
     <img src="images/logo.png" alt="Logo">
   </a>
-  <p align="center">
-    Bootcamp for Milvus, including benchmarking, solutions, and application scenarios.
+  <p align="center" style="padding-left: 100px; padding-right: 100px">
+      The Bootcamp of Milvus, including reverse image search, audio search, molecular search, video analysis, question and answer systems, NLP and more.
     <br />
     <br />
-    <a href="https://github.com/milvus-io/bootcamp "Demo</a>
-    ·
     <a href="https://github.com/milvus-io/bootcamp/issues">Report Bug or Request Feature</a>
   </p>
 <!-- TABLE OF CONTENTS -->
@@ -20,6 +17,8 @@
     <li>
       <a href="#mega-about-milvus-bootcamp">About Milvus Bootcamp</a>
     </li>
+    <li><a href="#clapper-live-demo">Live demo</a></li>
+    <li><a href="#pencil-solutions">Solutions</a></li>
     <li>
       <a href="#mag-benchmark-tests">Benchmark Tests</a>
       <ul>
@@ -27,36 +26,60 @@
         <li><a href="#art-100-million-benchmark-testing">100 million benchmark testing</a></li>
       </ul>
     </li>
-    <li><a href="#pencil-solutions">Solutions</a></li>
-      <ul>
-        <li><a href="#icecream-run-locally">Run locally</a></li>
-        <li><a href="#clapper-live-demo">Live demo</a></li>
-      </ul>
     <li><a href="#two_women_holding_hands-collaborations">Collaborations</a></li>
       <ul>
         <li><a href="#clap-milvus_and_onnx">Milvus_and_ONNX</a></li>
       </ul>
     <li><a href="#pencil-contributing">Contributing</a></li>
     <li><a href="#fire-supports">Supports</a></li>
-  </ol>
-</details>
+    </ol>
+    </details>
+
 
 <!-- ABOUT MILVUS Bootcamp -->
 
 ## :mega: About Milvus Bootcamp
-[Milvus Bootcamp](https://github.com/milvus-io/bootcamp) is designed to expose users to both the simplicity and depth of the [**Milvus**](https://milvus.io/) vector database. Discover how to run **benchmark tests** as well as build similarity search applications spanning **chatbots**, **recommendation systems**, **reverse image search**, **molecular search**, **video search**, **audio saerch**, and more.
 
-<!-- BENCHMARK TESTS-->
+**Embedding in everything**, thanks to AI, we can use neural networks to extract feature vectors from unstructured data, such as image, audio and vide etc. Then analyse the unstructured data by calculating the feature vectors, for example calculating the Euclidean or Cosine distance of the vectors to get the similarity.
 
-## :mag: Benchmark Tests
-The [Benchmark Test](./benchmark_test) contains 1 million and 100 million vector tests that indicate how your system will react to differently sized datasets.
- ### :dart: [1 million benchmark testing](https://github.com/milvus-io/bootcamp/blob/master/benchmark_test/lab1_sift1b_1m.md)
+[Milvus Bootcamp](https://github.com/milvus-io/bootcamp) is designed to expose users to both the simplicity and depth of the [**Milvus**](https://milvus.io/) vector database. Discover how to run **benchmark tests** as well as build similarity search applications spanning **chatbots**, **recommendation systems**, **reverse image search**, **molecular search**, **video search**, **audio search**, and more.
 
-We extracted one million vectors from the [SIFT1B Dataset](http://corpus-texmex.irisa.fr/) for **accuracy tests** and **performance tests**. Through [this test](./benchmark_test/lab1_sift1b_1m.md), you can learn the basic operations of Milvus, including creating collections, inserting data, building indexes, searching, etc.
+### :clapper: Live Demo
 
- ### :art: [100 million benchmark testing](https://github.com/milvus-io/bootcamp/blob/master/benchmark_test/lab2_sift1b_100m.md)
+We have built [online demos](https://zilliz.com/milvus-demos?isZilliz=true) for reverse image search, chatbot and molecular search that everyone can have fun with.
 
-We extracted 100 million vectors from the [SIFT1B Dataset](http://corpus-texmex.irisa.fr/) for **accuracy tests** and **performance tests**. Through [this test](./benchmark_test/lab2_sift1b_100m.md), you can learn the basic operations of Milvus, including creating collections, inserting data, building indexes, searching, etc.
+<table>
+  <tr>
+    <td width="30%">
+      <a href="https://zilliz.com/milvus-demos">
+        <img src="https://zilliz-cms.s3.us-west-2.amazonaws.com/image_search_59a64e4f22.gif" />
+      </a>
+    </td>
+    <td width="30%">
+<a href="https://zilliz.com/milvus-demos">
+<img src="https://zilliz-cms.s3.us-west-2.amazonaws.com/qa_df5ee7bd83.gif" />
+</a>
+    </td>
+    <td width="30%">
+<a href="https://zilliz.com/milvus-demos">
+<img src="https://zilliz-cms.s3.us-west-2.amazonaws.com/mole_search_76f8340572.gif" />
+</a>
+    </td>
+  </tr>
+  <tr>
+    <th align="center">
+      <a href="https://zilliz.com/milvus-demos">Reverse Image search</a>
+    </th>
+    <th align="center">
+      <a href="https://zilliz.com/milvus-demos">Chatbots</a>
+    </th>
+    <th align="center">
+      <a href="https://zilliz.com/milvus-demos">Chemical structure search</a>
+    </th>
+  </tr>
+</table>
+
+
 
 <!--ALL SOLUTIONS-->
 
@@ -64,7 +87,7 @@ We extracted 100 million vectors from the [SIFT1B Dataset](http://corpus-texmex.
 
 ### :icecream: Run locally
 
-Here are several **[Milvus](https://milvus.io/)** based solutions for a wide range of scenarios. Each solution contains a Jupyter Notebook and a Docker deployable solution, meaning anyone can run it on their local machine. In addition to this there are also some related technical articles and live streams.
+Here are several solutions for a wide range of scenarios. Each solution contains a Jupyter Notebook and a Docker deployable solution, meaning anyone can run it on their local machine. In addition to this there are also some related technical articles and live streams.
 
 | <br />Solutions<img width=600/> | <br />Have fun with it<img width=300/>                    | <br />Article<img width=200/>                              | <br />Video<img width=200/>                          |
 | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------- |
@@ -77,9 +100,19 @@ Here are several **[Milvus](https://milvus.io/)** based solutions for a wide ran
 | [**Text Search Engine**](./solutions/text_search_engine)<br />Build a text search engine using Milvus and BERT model. | - [Jupyter notebook](solutions/text_search_engine/text_search_engine.ipynb)<br />- [Quick deploy](solutions/text_search_engine/quick_deploy) | - [Chinese](https://mp.weixin.qq.com/s/OUrBSCqnLuh9btyK3SxWgQ) | - [Chinese](https://www.bilibili.com/video/BV1Xi4y1E7Tb) |
 | [**DNA Sequence Classification**](./solutions/dna_sequence_classification)<br />Build a DNA sequence classification system using Milvus with k-mers & CountVectorizer. | - [Jupyter notebook](solutions/dna_sequence_classification/dna_sequence_classification.ipynb)<br />- [Quick deploy](solutions/text_search_engine/quick_deploy) | - [Chinese](https://my.oschina.net/u/4209276/blog/5191465)  |  |
 
-### :clapper: [Live demo](https://zilliz.com/milvus-demos?isZilliz=true)
+<!-- BENCHMARK TESTS-->
 
-We have built [online demos](https://zilliz.com/milvus-demos?isZilliz=true) for reverse image search, chatbot and molecular search that everyone can have fun with.
+## :mag: Benchmark Tests
+
+The [Benchmark Test](./benchmark_test) contains 1 million and 100 million vector tests that indicate how your system will react to differently sized datasets.
+
+ ### :dart: [1 million benchmark testing](https://github.com/milvus-io/bootcamp/blob/master/benchmark_test/lab1_sift1b_1m.md)
+
+We extracted one million vectors from the [SIFT1B Dataset](http://corpus-texmex.irisa.fr/) for **accuracy tests** and **performance tests**. Through [this test](./benchmark_test/lab1_sift1b_1m.md), you can learn the basic operations of Milvus, including creating collections, inserting data, building indexes, searching, etc.
+
+ ### :art: [100 million benchmark testing](https://github.com/milvus-io/bootcamp/blob/master/benchmark_test/lab2_sift1b_100m.md)
+
+We extracted 100 million vectors from the [SIFT1B Dataset](http://corpus-texmex.irisa.fr/) for **accuracy tests** and **performance tests**. Through [this test](./benchmark_test/lab2_sift1b_100m.md), you can learn the basic operations of Milvus, including creating collections, inserting data, building indexes, searching, etc.
 
 <!--THE COLLABORATIONS-->
 
