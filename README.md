@@ -39,8 +39,6 @@
     <li><a href="#fire-supports">Supports</a></li>
     </ol>
 </details>
-
-
 <table>
   <tr>
     <td width="30%">
