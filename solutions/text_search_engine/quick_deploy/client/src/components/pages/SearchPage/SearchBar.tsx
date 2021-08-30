@@ -3,10 +3,8 @@ import { Search, Plus } from "react-feather";
 import styled from "styled-components";
 import { withRouter, RouteComponentProps } from "react-router";
 import { Button } from "reakit";
-import Dialog from "../../common/uploadDialog";
 
 import {
-  SEARCH_API_BASE,
   LARGE_MOBILE_BREAKPOINT,
   DROP,
   LOAD,
@@ -29,8 +27,6 @@ const SearchBar = ({
   const [inputFocused, setInputFocused] = useState<boolean>(false);
   const [query, setQuery] = useState<string>("");
   const inputRef = useRef<HTMLInputElement>(null!);
-  const [open, setOpen] = useState<boolean>(false);
-  const [path, setPath] = useState<string>("");
 
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) =>
     setQuery(event.target.value);
@@ -113,10 +109,6 @@ const SearchBar = ({
         setLoading(false);
       }
     }
-  };
-
-  const closeDialog = () => {
-    setOpen(false);
   };
 
   useEffect(() => {
