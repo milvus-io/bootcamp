@@ -30,7 +30,7 @@ const SnackBar: React.FC<snackBarProps> = ({
         clearTimeout(timer);
       }
     };
-  }, [isActive]);
+  }, [isActive, onClose, duration]);
 
   return (
     <>
