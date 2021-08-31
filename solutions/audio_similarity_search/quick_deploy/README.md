@@ -140,7 +140,7 @@ After starting the service, Please visit 127.0.0.1:8002/docs in your browser to 
 
 ## 3. Start Client
 
-Next, start the frontend GUI. Like the system server, there are two ways to start the frontend: running with Docker or source code.
+Next, start the frontend GUI. Like the system server, there are two ways to start the frontend: running with Docker or source code(recommended).
 
 #### 3.1 Run server with Docker
 
@@ -163,7 +163,7 @@ $ export API_PORT='8002'
 First, build the docker image from the Dockerfile.
 
 ```bash
-$ cd server
+$ cd client
 $ docker build -t audio-search-client .
 ```
 
