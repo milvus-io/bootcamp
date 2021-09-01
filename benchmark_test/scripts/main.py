@@ -6,15 +6,15 @@ from milvus_helpers import MilvusHelper
 from load import insert_data, create_index
 
 
-
 def main():
     try:
         opts, args = getopt.getopt(
             sys.argv[1:],
             "hc",
-            ["help", "collection=", "dim=", "index_type=", "percentile=", "create", "insert", "create_index", "performance", "index_info", "describe",
-             "show", "has", "rows", "describe_index", "drop", "drop_index", "version", "percentile_test","release",
-             "search_param=", "recall", "partition_name=", "create_partition", "load", "load_progress", "index_progress"]
+            ["help", "collection=", "dim=", "index_type=", "percentile=", "create", "insert", "create_index",
+             "performance", "index_info", "describe", "list", "has", "rows", "describe_index", "drop", "drop_index",
+             "version", "percentile_test", "release", "search_param=", "recall", "partition_name=", "create_partition",
+             "load", "load_progress", "index_progress", "calculate"]
         )
     except getopt.GetoptError:
         print("Usage: python milvus_toolkindex_type.py -q <nq> -k <topk> -c <collection> -s")
@@ -22,7 +22,8 @@ def main():
 
     for opt_name, opt_value in opts:
         if opt_name in ("-h", "--help"):
-            print("For parameter descriptions, please refer to https://github.com/milvus-io/bootcamp/tree/master/benchmark_test/scripts")
+            print(
+                "For parameter descriptions, please refer to https://github.com/milvus-io/bootcamp/tree/master/benchmark_test/scripts")
             sys.exit(2)
 
         elif opt_name == "--collection":
@@ -34,7 +35,7 @@ def main():
 
         elif opt_name == "--search_param":
             search_param = int(opt_value)
-            
+
         elif opt_name == "--percentile":
             percentile = int(opt_value)
 
@@ -70,13 +71,13 @@ def main():
             client = MilvusHelper()
             performance(client, collection_name, search_param)
             sys.exit(2)
-            
+
         elif opt_name == "--percentile_test":
             client = MilvusHelper()
             percentile_test(client, collection_name, search_param, percentile)
             sys.exit(2)
-                    
-  
+
+
         # save search result 
         elif opt_name == "--recall":
             client = MilvusHelper()
@@ -98,13 +99,13 @@ def main():
             print(client.get_index_params(collection_name))
             sys.exit(2)
 
-        #Show if collection exists
+        # Show if collection exists
         elif opt_name == "--has":
             client = MilvusHelper()
             print(client.has_collection(collection_name))
             sys.exit(2)
 
-        #Get collection row count
+        # Get collection row count
         elif opt_name == "--rows":
             client = MilvusHelper()
             print(client.count(collection_name))
@@ -122,33 +123,35 @@ def main():
             client = MilvusHelper()
             client.delete_index(collection_name)
             sys.exit(2)
-            
+
         elif opt_name == "--load":
             client = MilvusHelper()
             client.load_data(collection_name)
             sys.exit(2)
-            
-        elif opt_name == "--show":
+
+        elif opt_name == "--list":
             client = MilvusHelper()
-            print(client.show_collection())
+            print(client.list_collection())
             sys.exit(2)
-            
+
         elif opt_name == "--index_progress":
             client = MilvusHelper()
             print(client.get_index_progress(collection_name))
             sys.exit(2)
-        
+
         elif opt_name == "--load_progress":
             client = MilvusHelper()
             print(client.get_loading_progress(collection_name))
             sys.exit(2)
-            
+
         elif opt_name == "--release":
             client = MilvusHelper()
-            print(client.release_mem(collection_name))
+            print(client.release_data(collection_name))
             sys.exit(2)
-            
-        
+
+        # elif opt_name == "--calculate":
+        #     client = MilvusHelper()
+        #     print(client.calculate_distance(vectors_left, vectors_right))
 
 
 if __name__ == '__main__':
