@@ -3,6 +3,8 @@
 
 This project combines Milvus and BERT to build a question and answer system. This aims to provide a solution to achieve semantic similarity matching with Milvus combined with AI models.
 
+> This project based Milvus2.0.0-rc5
+
 ## Data description
 
 The dataset needed for this system is a CSV format file which needs to contain a column of questions and a column of answers. 
