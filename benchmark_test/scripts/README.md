@@ -1,6 +1,7 @@
 # README
 
 ## Preparation
+This project is the benchmark test based Milvus 2.0-rc5.
 
 Before running this project script, you need to start the service of milvus 2.0.
 

@@ -1,8 +1,8 @@
 # from milvus import *
 import os
 
-MILVUS_HOST = "192.168.1.85"
-MILVUS_PORT = 19537
+MILVUS_HOST = "127.0.0.1"
+MILVUS_PORT = 19530
 
 ##################### Collection Parameters ########################################################
 
@@ -12,7 +12,7 @@ VECTOR_DIMENSION = 128
 ##################### Indexing Parameters ##########################################################
 
 # index IVF parameters
-NLIST = 2000
+NLIST = 4096
 PQ_M = 12
 
 # index NSG parameters
@@ -44,8 +44,8 @@ BASE_FILE_PATH = 'sift1m/data'
 # Does the data need to be normalized before insertion
 IF_NORMALIZE = False
 # If dealing with bvecs or fvecs files. Import chunk size must be <= 256mb
-TOTAL_VECTOR_COUNT = 20000
-IMPORT_CHUNK_SIZE = 20000
+TOTAL_VECTOR_COUNT = 1000000
+IMPORT_CHUNK_SIZE = 100000
 
 ##################### Performance Test Parameters ##################################################
 
