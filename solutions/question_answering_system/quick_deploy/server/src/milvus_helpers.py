@@ -1,11 +1,9 @@
 import sys
-from pymilvus_orm import connections
-from pymilvus_orm.types import DataType
-from pymilvus_orm.schema import FieldSchema, CollectionSchema
-from pymilvus_orm.collection import Collection
+from pymilvus import connections, FieldSchema, CollectionSchema, DataType, Collection, utility
+
 from config import MILVUS_HOST, MILVUS_PORT, VECTOR_DIMENSION, METRIC_TYPE
-from pymilvus_orm import utility
 from logs import LOGGER
+
 
 
 class MilvusHelper:
@@ -25,7 +23,7 @@ class MilvusHelper:
             else:
                 raise Exception("There has no collection named:{}".format(collection_name))
         except Exception as e:
-            LOGGER.error("Failed to load data to Milvus: {}".format(e))
+            LOGGER.error("ERROR: {}".format(e))
             sys.exit(1)
 
     # Return if Milvus has the collection
@@ -33,7 +31,7 @@ class MilvusHelper:
         try:
             return utility.has_collection(collection_name)
         except Exception as e:
-            LOGGER.error("Failed to load data to Milvus: {}".format(e))
+            LOGGER.error("Failed: {}".format(e))
             sys.exit(1)
 
     # Create milvus collection if not exists
@@ -46,6 +44,8 @@ class MilvusHelper:
                 schema = CollectionSchema(fields=[field1, field2], description="collection description")
                 self.collection = Collection(name=collection_name, schema=schema)
                 LOGGER.debug("Create Milvus collection: {}".format(self.collection))
+            else:
+                self.collection = Collection(name=collection_name)
             return "OK"
         except Exception as e:
             LOGGER.error("Failed to load data to Milvus: {}".format(e))
@@ -55,7 +55,7 @@ class MilvusHelper:
     def insert(self, collection_name, vectors):
         try:
             self.create_collection(collection_name)
-            self.collection = Collection(name=collection_name)
+            # self.collection = Collection(name=collection_name)
             data = [vectors]
             mr = self.collection.insert(data)
             ids = mr.primary_keys
