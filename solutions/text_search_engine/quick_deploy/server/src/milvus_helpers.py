@@ -28,7 +28,6 @@ class MilvusHelper:
     def has_collection(self, collection_name):
         try:
             status = utility.has_collection(collection_name)
-            print(",,,,,,,,,,,,",status)
             return status
         except Exception as e:
             LOGGER.error("Failed to load data to Milvus: {}".format(e))
