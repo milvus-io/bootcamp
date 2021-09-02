@@ -20,7 +20,7 @@ The video similarity system will use Milvus to store and search the feature vect
 
 - **Start Milvus v2.0**
 
-  First, you are supposed to refer to the Install [Milvus v2.0](https://milvus.io/docs/v2.0.0/install_standalone-docker.md) for how to run Milvus docker.
+  First, you are supposed to refer to the Install [Milvus v2.0-rc5](https://milvus.io/docs/v2.0.0/install_standalone-docker.md) for how to run Milvus docker.
   
   > Note the version of Milvus.
   
