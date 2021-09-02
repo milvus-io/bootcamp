@@ -26,7 +26,7 @@ As shown in the architecture diagram, the system will use Milvus to store and se
 
 - **Start Milvus v2.0**
 
-  First, you are supposed to refer to the Install [Milvus v2.0](milvus.io) for how to run Milvus docker.
+  First, you are supposed to refer to the Install [Milvus v2.0-rc5](milvus.io) for how to run Milvus docker.
 
 > Note the version of Milvus.
 
