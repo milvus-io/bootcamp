@@ -4,4 +4,4 @@ pymysql
 numpy
 pickle-mixin
 fastapi
-unicorn
+uvicorn
