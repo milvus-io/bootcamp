@@ -6,4 +6,4 @@ pymysql
 pandas
 aiofiles
 python-multipart
-pymilvus_orm==2.0.0rc1
+pymilvus_orm==2.0.0rc5
