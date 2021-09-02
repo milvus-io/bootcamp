@@ -49,8 +49,7 @@ def load_fvecs_data(base_len, idx, fname):
 
 
 def fvecs_to_milvus(collection_name, client):
-    filenames = os.listdir(BASE_FILE_PATH)
-    fname = os.path.join(BASE_FILE_PATH, filenames[0])
+    fname = BASE_FILE_PATH
     count = 0
     total_insert_time = 0
     while count < (TOTAL_VECTOR_COUNT // IMPORT_CHUNK_SIZE):
@@ -79,14 +78,16 @@ def npy_to_milvus(collection_name, client):
     filenames = os.listdir(BASE_FILE_PATH)
     filenames.sort()
     total_insert_time = 0
+    collection_rows = client.count(collection_name)
     for filename in filenames:
         vectors = load_npy_data(os.path.join(BASE_FILE_PATH, filename))
-        collection_rows = client.count(collection_name)
+#         collection_rows = client.count(collection_name)
         vectors_ids = [id for id in range(collection_rows, collection_rows + len(vectors))]
         time_add_start = time.time()
         ids = client.insert(collection_name, vectors, vectors_ids)
         total_insert_time = total_insert_time + time.time() - time_add_start
         print(filename, "insert rows", len(ids), " insert milvus time: ", time.time() - time_add_start)
+        collection_rows = collection_rows + len(ids)
     print("total insert time: ", total_insert_time)
 
 
@@ -103,13 +104,13 @@ def load_bvecs_data(base_len, idx, fname):
 
 
 def bvecs_to_milvus(collection_name, client):
-    filenames = os.listdir(BASE_FILE_PATH)
-    fname = os.path.join(BASE_FILE_PATH, filenames[0])
+    fname = BASE_FILE_PATH
     count = 0
     total_insert_time = 0
+    collection_rows = client.count(collection_name)
     while count < (TOTAL_VECTOR_COUNT // IMPORT_CHUNK_SIZE):
         vectors = load_bvecs_data(IMPORT_CHUNK_SIZE, count, fname)
-        collection_rows = client.count(collection_name)
+#         collection_rows = client.count(collection_name)
         vectors_ids = [id for id in range(collection_rows, collection_rows + len(vectors))]
         time_add_start = time.time()
         ids = client.insert(collection_name, vectors, vectors_ids)
@@ -117,6 +118,7 @@ def bvecs_to_milvus(collection_name, client):
               time.time() - time_add_start)
         total_insert_time = total_insert_time + time.time() - time_add_start
         count = count + 1
+        collection_rows = collection_rows + len(ids)
     print("total insert time: {}".format(total_insert_time))
 
 
