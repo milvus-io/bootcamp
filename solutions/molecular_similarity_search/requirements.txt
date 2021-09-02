@@ -1,1 +1,2 @@
 PyMySQL==1.0.2
+pymilvus==2.0.0rc-5
