@@ -17,8 +17,13 @@
     <li>
       <a href="#mega-about-milvus-bootcamp">About Milvus Bootcamp</a>
     </li>
-    <li><a href="#clapper-live-demo">Live demo</a></li>
-    <li><a href="#pencil-solutions">Solutions</a></li>
+    <li>
+      <a href="#pencil-solutions">Solutions</a>
+      <ul>
+        <li><a href="#icecream-run-locally">Run locally</a></li>
+        <li><a href="#clapper-live-demo">Live demo</a></li>
+      </ul>
+    </li>
     <li>
       <a href="#mag-benchmark-tests">Benchmark Tests</a>
       <ul>
@@ -33,21 +38,7 @@
     <li><a href="#pencil-contributing">Contributing</a></li>
     <li><a href="#fire-supports">Supports</a></li>
     </ol>
-    </details>
-
-
-<!-- ABOUT MILVUS Bootcamp -->
-
-## :mega: About Milvus Bootcamp
-
-**Embedding in everything**, thanks to AI, we can use neural networks to extract feature vectors from unstructured data, such as image, audio and vide etc. Then analyse the unstructured data by calculating the feature vectors, for example calculating the Euclidean or Cosine distance of the vectors to get the similarity.
-
-[Milvus Bootcamp](https://github.com/milvus-io/bootcamp) is designed to expose users to both the simplicity and depth of the [**Milvus**](https://milvus.io/) vector database. Discover how to run **benchmark tests** as well as build similarity search applications spanning **chatbots**, **recommendation systems**, **reverse image search**, **molecular search**, **video search**, **audio search**, and more.
-
-### :clapper: Live Demo
-
-We have built [online demos](https://zilliz.com/milvus-demos?isZilliz=true) for reverse image search, chatbot and molecular search that everyone can have fun with.
-
+</details>
 <table>
   <tr>
     <td width="30%">
@@ -78,8 +69,13 @@ We have built [online demos](https://zilliz.com/milvus-demos?isZilliz=true) for 
     </th>
   </tr>
 </table>
+<!-- ABOUT MILVUS Bootcamp -->
 
+## :mega: About Milvus Bootcamp
 
+**Embedding in everything**, thanks to AI, we can use neural networks to extract feature vectors from unstructured data, such as image, audio and vide etc. Then analyse the unstructured data by calculating the feature vectors, for example calculating the Euclidean or Cosine distance of the vectors to get the similarity.
+
+[Milvus Bootcamp](https://github.com/milvus-io/bootcamp) is designed to expose users to both the simplicity and depth of the [**Milvus**](https://milvus.io/) vector database. Discover how to run **benchmark tests** as well as build similarity search applications spanning **chatbots**, **recommendation systems**, **reverse image search**, **molecular search**, **video search**, **audio search**, and more.
 
 <!--ALL SOLUTIONS-->
 
@@ -99,6 +95,10 @@ Here are several solutions for a wide range of scenarios. Each solution contains
 | [**Audio Similarity Search**](./solutions/audio_similarity_search)<br />Build an audio search engine using Milvus paired with PANNs for audio pattern recognition. | - [Jupyter notebook](solutions/audio_similarity_search/audio_similarity_search.ipynb)<br />- [Quick deploy](solutions/audio_similarity_search/quick_deploy) | - [Chinese](https://mp.weixin.qq.com/s/PJfO71YOTW2gXO6SL-OOuA) |                                                        |
 | [**Text Search Engine**](./solutions/text_search_engine)<br />Build a text search engine using Milvus and BERT model. | - [Jupyter notebook](solutions/text_search_engine/text_search_engine.ipynb)<br />- [Quick deploy](solutions/text_search_engine/quick_deploy) | - [Chinese](https://mp.weixin.qq.com/s/OUrBSCqnLuh9btyK3SxWgQ) | - [Chinese](https://www.bilibili.com/video/BV1Xi4y1E7Tb) |
 | [**DNA Sequence Classification**](./solutions/dna_sequence_classification)<br />Build a DNA sequence classification system using Milvus with k-mers & CountVectorizer. | - [Jupyter notebook](solutions/dna_sequence_classification/dna_sequence_classification.ipynb)<br />- [Quick deploy](solutions/text_search_engine/quick_deploy) | - [Chinese](https://my.oschina.net/u/4209276/blog/5191465)  |  |
+
+### :clapper: Live Demo
+
+We have built [online demos](https://zilliz.com/milvus-demos?isZilliz=true) for reverse image search, chatbot and molecular search that everyone can have fun with.
 
 <!-- BENCHMARK TESTS-->
 
