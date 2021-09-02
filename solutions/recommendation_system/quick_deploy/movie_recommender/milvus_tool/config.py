@@ -1,5 +1,5 @@
 import os
-from pymilvus_orm import *
+from pymilvus import *
 
 
 MILVUS_HOST = 'localhost'
