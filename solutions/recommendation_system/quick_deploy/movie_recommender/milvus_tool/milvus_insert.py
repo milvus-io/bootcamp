@@ -1,4 +1,4 @@
-from pymilvus_orm import *
+from pymilvus import *
 
 # from milvus_tool.config import MILVUS_HOST, MILVUS_PORT, schema, index_param
 
