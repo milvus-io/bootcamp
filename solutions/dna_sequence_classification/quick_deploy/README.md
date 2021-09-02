@@ -21,7 +21,7 @@ Mysql stores sequence ids in Milvus and corresponding classes. It also includes 
 Refer to [Install Milvus v2.0](https://milvus.io/docs/v2.0.0/install_standalone-docker.md) for how to run Milvus docker.
 
 ```
-$ wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/docker/standalone/docker-compose.yml -O docker-compose.yml
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.0.0-rc5-hotfix1/milvus-standalone-docker-compose.yml -O docker-compose.yml
 $ sudo docker-compose up -d
 Docker Compose is now in the Docker CLI, try `docker compose up`
 Creating milvus-etcd  ... done
