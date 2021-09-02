@@ -1,6 +1,7 @@
 # README
 
 ## Preparation
+This project is the benchmark test based Milvus 2.0.0-rc5.
 
 Before running this project script, you need to start the service of milvus 2.0.
 
@@ -22,17 +23,18 @@ pip install -r requirements.txt
 | --insert           | Perform the operation of writing data. This operation needs to specify the parameter Collection |
 | --create_index     | Perform indexing operations. This operation needs to specify the parameters Collection and Index |
 | --performance      | Perform performance testing operations. This operation needs to specify the parameters Collection and Search_param |
+| --percentile_test  | Testing the performance of Milvus p99  |
 | --recall           | Perform recall test operations. This operation needs to specify the parameters Collection and Search_param |
 | --partition_name   | Specify the partition label                                  |
 | --create_partition | Perform the operation of creating a partition. This operation needs to specify the parameters Collection and Partition |
 | --index_info       | View the index information of a certain collection. This operation needs to specify the parameter Collection |
-| --describe         | View the basic information of a collection. This operation needs to specify the parameter Collection |
 | --has              | Determine whether a collection exists. This operation needs to specify the parameter Collection |
 | --rows             | View the number of vectors in a collection. This operation needs to specify the parameter Collection |
 | --drop             | Delete the specified collection. This operation needs to specify the parameter Collection |
 | --drop_index       | Delete the index of the specified collection. This operation needs to specify the parameter Collection |
 | --load             | Load the specified collection data to memory |
-
+| --list             | List all collections.|
+| --release          | Release the specified collection data from memory|
 
 
 ## Configuration File
@@ -169,3 +171,14 @@ python main.py --collection <collection_name> --drop
 python main.py --collection <collection_name> --drop_index
 ```
 
+**13. List collection**
+
+```
+python main.py --list
+```
+
+**14. p99 performance test**
+
+```
+python main.py --collection <collection_name> --search_param <search_param> --percentile 99 --percentile_test
+```
