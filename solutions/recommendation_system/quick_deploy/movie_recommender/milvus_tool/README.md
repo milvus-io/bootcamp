@@ -50,7 +50,7 @@ Milvus 2.0.0
 **安装 Milvus Python SDK**
 
 ```shell
-$ pip install pymilvus-orm==2.0.0rc1
+$ pip install pymilvus-orm==2.0.0rc5
 ```
 
 
