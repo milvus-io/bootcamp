@@ -1,12 +1,7 @@
 import sys
-from pymilvus_orm import connections
-from pymilvus_orm.types import DataType
-from pymilvus_orm.schema import FieldSchema, CollectionSchema
-from pymilvus_orm.collection import Collection
-from config import MILVUS_HOST, MILVUS_PORT, VECTOR_DIMENSION,  METRIC_TYPE
-from pymilvus_orm import utility
+from pymilvus import connections, FieldSchema, CollectionSchema, DataType, Collection, utility
+from config import MILVUS_HOST, MILVUS_PORT, VECTOR_DIMENSION, METRIC_TYPE
 from logs import LOGGER
-
 
 class MilvusHelper:
     def __init__(self):
