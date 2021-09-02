@@ -16,7 +16,8 @@ def search_in_milvus(table_name, query_sentence, milvus_cli, mysql_cli):
     try:
         kmers = build_kmers(query_sentence,KMER_K)
         query_data = [" ".join(kmers)]
-        query_list = encode_seq(query_data)
+        querys = encode_seq(query_data)
+        query_list = [list(x) for x in querys]
         LOGGER.info("Searching...")
         results = milvus_cli.search_vectors(table_name,query_list,TOP_K)
         vids = [str(x.id) for x in results[0]]
