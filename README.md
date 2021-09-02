@@ -5,7 +5,7 @@
     <img src="images/logo.png" alt="Logo">
   </a>
   <p align="center" style="padding-left: 100px; padding-right: 100px">
-      The Bootcamp of Milvus, including reverse image search, audio search, molecular search, video analysis, question and answer systems, NLP and more.
+      Dealing with all unstructured data such as reverse image search, audio search, molecular search, video analysis, question and answer systems, NLP, etc.
     <br />
     <br />
     <a href="https://github.com/milvus-io/bootcamp/issues">Report Bug or Request Feature</a>
