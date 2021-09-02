@@ -1,0 +1,8 @@
+pymilvus==2.0.0rc5
+sklearn
+pymysql
+numpy
+pickle-mixin
+fastapi
+uvicorn
+python-multipart
