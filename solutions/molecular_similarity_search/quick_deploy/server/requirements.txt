@@ -61,7 +61,7 @@ protobuf=3.17.3=pypi_0
 pycairo=1.20.1=py39hbe14034_0
 pycparser=2.20=pypi_0
 pydantic=1.8.2=pypi_0
-pymilvus=1.1.2=pypi_0
+pymilvus=2.0.0-rc5=pypi_0
 pymysql=1.0.2=pypi_0
 pyparsing=2.4.7=pyh9f0ad1d_0
 python=3.9.4=h9133fd0_0_cpython
