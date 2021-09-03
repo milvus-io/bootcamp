@@ -1,11 +1,12 @@
 import sys
 import numpy as np
 from src.config import MILVUS_HOST, MILVUS_PORT, VECTOR_DIMENSION, INDEX_FILE_SIZE, METRIC_TYPE
-from pymilvus_orm import connections
-from pymilvus_orm.types import DataType
-from pymilvus_orm.schema import FieldSchema, CollectionSchema
-from pymilvus_orm.collection import Collection
-from pymilvus_orm import utility
+#from pymilvus_orm import connections
+#from pymilvus_orm.types import DataType
+#from pymilvus_orm.schema import FieldSchema, CollectionSchema
+#from pymilvus_orm.collection import Collection
+#from pymilvus_orm import utility
+from pymilvus import connections, DataType, FieldSchema, CollectionSchema, Collection, utility
 from src.logs import LOGGER
 
 
