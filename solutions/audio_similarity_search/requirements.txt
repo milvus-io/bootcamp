@@ -1,6 +1,7 @@
-pymilvus_orm==2.0.0rc1
+pymilvus==2.0.0rc5
 redis
 librosa
 numpy
 panns_inference
 torch
+diskcache==5.2.1
