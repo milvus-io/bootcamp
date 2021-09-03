@@ -1,10 +1,7 @@
 import sys
-from pymilvus_orm import connections
-from pymilvus_orm.types import DataType
-from pymilvus_orm.schema import FieldSchema, CollectionSchema
-from pymilvus_orm.collection import Collection
+from pymilvus  import Collection, DataType, FieldSchema, CollectionSchema, connections
 from src.config import MILVUS_HOST, MILVUS_PORT, VECTOR_DIMENSION,  METRIC_TYPE
-from pymilvus_orm import utility
+from pymilvus import utility
 from src.logs import LOGGER
 
 
@@ -26,13 +23,15 @@ class MilvusHelper:
             else:
                 raise Exception("There has no collection named:{}".format(collection_name))
         except Exception as e:
-            LOGGER.error("Failed to load data to Milvus: {}".format(e))
+            LOGGER.error("Failed  to search data to Milvus: {}".format(e))
             sys.exit(1)
 
     # Return if Milvus has the collection
     def has_collection(self, collection_name):
         try:
-            return utility.has_collection(collection_name)
+            status = utility.has_collection(collection_name)
+            print(",,,,,,,,,,,,",status)
+            return status
         except Exception as e:
             LOGGER.error("Failed to load data to Milvus: {}".format(e))
             sys.exit(1)
@@ -55,9 +54,10 @@ class MilvusHelper:
     def insert(self, collection_name, vectors):
         try:
             self.create_collection(collection_name)
+            self.collection = Collection(name=collection_name)
             data = [vectors]
             mr = self.collection.insert(data)
-            ids = mr.primary_keys
+            ids =  mr.primary_keys
             self.collection.load()
             LOGGER.debug(
                     "Insert vectors to Milvus in collection: {} with {} rows".format(collection_name, len(vectors)))
@@ -95,10 +95,10 @@ class MilvusHelper:
 
     # Search vector in milvus collection
     def search_vectors(self, collection_name, vectors, top_k):
+       # status = utility.list_collections()
         try:
             self.set_collection(collection_name)
             search_params = {"metric_type":  METRIC_TYPE, "params": {"nprobe": 16}}
-           # data = [vectors]
             res=self.collection.search(vectors, anns_field="embedding", param=search_params, limit=top_k)
             print(res[0])
             LOGGER.debug("Successfully search in collection: {}".format(res))
