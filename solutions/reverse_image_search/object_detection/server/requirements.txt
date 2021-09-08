@@ -11,4 +11,4 @@ fastapi==0.65.2
 PyYAML==5.4.1
 python-multipart
 aiofiles
-pillow==8.2.0
+pillow==8.3.2
