@@ -10,35 +10,7 @@
     <br />
     <a href="https://github.com/milvus-io/bootcamp/issues">Report Bug or Request Feature</a>
   </p>
-<!-- TABLE OF CONTENTS -->
-<details open="open">
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#mega-about-milvus-bootcamp">About Milvus Bootcamp</a>
-    </li>
-    <li>
-      <a href="#pencil-solutions">Solutions</a>
-      <ul>
-        <li><a href="#icecream-run-locally">Run locally</a></li>
-        <li><a href="#clapper-live-demo">Live demo</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#mag-benchmark-tests">Benchmark Tests</a>
-      <ul>
-        <li><a href="#dart-1-million-benchmark-testing">1 million benchmark testing</a></li>
-        <li><a href="#art-100-million-benchmark-testing">100 million benchmark testing</a></li>
-      </ul>
-    </li>
-    <li><a href="#two_women_holding_hands-collaborations">Collaborations</a></li>
-      <ul>
-        <li><a href="#clap-milvus_and_onnx">Milvus_and_ONNX</a></li>
-      </ul>
-    <li><a href="#pencil-contributing">Contributing</a></li>
-    <li><a href="#fire-supports">Supports</a></li>
-    </ol>
-</details>
+<!-- DEMO -->
 <table>
   <tr>
     <td width="30%">
@@ -69,6 +41,37 @@
     </th>
   </tr>
 </table>
+
+<!-- TABLE OF CONTENTS -->
+<details open="open">
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#mega-about-milvus-bootcamp">About Milvus Bootcamp</a>
+    </li>
+    <li>
+      <a href="#pencil-solutions">Solutions</a>
+      <ul>
+        <li><a href="#icecream-run-locally">Run locally</a></li>
+        <li><a href="#clapper-live-demo">Live demo</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#mag-benchmark-tests">Benchmark Tests</a>
+      <ul>
+        <li><a href="#dart-1-million-benchmark-testing">1 million benchmark testing</a></li>
+        <li><a href="#art-100-million-benchmark-testing">100 million benchmark testing</a></li>
+      </ul>
+    </li>
+    <li><a href="#two_women_holding_hands-collaborations">Collaborations</a></li>
+      <ul>
+        <li><a href="#clap-milvus_and_onnx">Milvus_and_ONNX</a></li>
+      </ul>
+    <li><a href="#pencil-contributing">Contributing</a></li>
+    <li><a href="#fire-supports">Supports</a></li>
+    </ol>
+</details>
+
 <!-- ABOUT MILVUS Bootcamp -->
 
 ## :mega: About Milvus Bootcamp
