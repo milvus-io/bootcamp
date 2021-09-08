@@ -1,33 +1,62 @@
-import Rreact, { createContext, useState } from "react";
-import { Snackbar, Dialog } from "@material-ui/core";
+import { createContext, useState } from "react";
+import {
+  Snackbar,
+  Dialog,
+  DialogActions,
+  Button,
+  DialogTitle,
+  DialogContent,
+} from "@material-ui/core";
 import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
-import { TypeSnackbarConfig, TypeSnackbarType } from "../types";
+import { TypeSnackbarConfig, TypeSnackbarType, TypeDialogType } from "../types";
+import GlobalLoading from "../components/loading";
 
-const rootContext = {};
+const rootContent: {
+  setDialog: React.Dispatch<React.SetStateAction<any>>;
+  openSnackbar: (message: string, type: TypeSnackbarType) => void;
+  closeSnackbar: () => void;
+  setGlobalLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  closeDialog: () => void;
+} = {
+  setDialog: () => {},
+  openSnackbar: () => {},
+  closeSnackbar: () => {},
+  setGlobalLoading: () => {},
+  closeDialog: () => {},
+};
 
 function Alert(props: AlertProps) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
+const DefaultDialogConfigs: TypeDialogType = {
+  open: false,
+  bgcolor: "#fff",
+  type: "notice",
+  params: {
+    title: "",
+    component: <></>,
+    confirm: () => {},
+    cancel: () => {},
+  },
+};
+
+export const rootContext = createContext(rootContent);
+
 const RootProvider = (props: any) => {
-  const { Provider } = createContext(rootContext);
-  const [dialogController, setDialogController] = useState(false);
-  const [snackbarConfig, setSnackbarConfig] = useState<TypeSnackbarConfig>({
+  const { Provider } = rootContext;
+  const [dialog, setDialog] = useState(DefaultDialogConfigs);
+  const [snackbar, setSnackbar] = useState<TypeSnackbarConfig>({
     open: false,
     anchorOrigin: { vertical: "top", horizontal: "right" },
     message: "",
     type: "info",
   });
 
-  const openDialog = () => {
-    setDialogController(true);
-  };
-  const closeDialog = () => {
-    setDialogController(false);
-  };
+  const [globalLoading, setGlobalLoading] = useState(false);
 
   const openSnackbar = (message: string, type: TypeSnackbarType) => {
-    setSnackbarConfig({
+    setSnackbar({
       open: true,
       anchorOrigin: { vertical: "top", horizontal: "right" },
       message,
@@ -35,7 +64,7 @@ const RootProvider = (props: any) => {
     });
   };
   const closeSnackbar = () => {
-    setSnackbarConfig({
+    setSnackbar({
       open: false,
       anchorOrigin: { vertical: "top", horizontal: "right" },
       message: "",
@@ -43,25 +72,40 @@ const RootProvider = (props: any) => {
     });
   };
 
+  const closeDialog = () => {
+    setDialog(Object.assign(DefaultDialogConfigs, { open: false }));
+  };
+
   return (
     <Provider
       value={{
-        openDialog,
-        closeDialog,
+        setDialog,
         openSnackbar,
         closeSnackbar,
+        setGlobalLoading,
+        closeDialog,
       }}
     >
-      <Dialog open={dialogController}></Dialog>
-      <Snackbar
-        anchorOrigin={snackbarConfig.anchorOrigin}
-        open={snackbarConfig.open}
-      >
-        <Alert onClose={closeSnackbar} severity={snackbarConfig.type}>
-          {snackbarConfig.message}
+      <Dialog open={dialog.open} style={{ background: dialog.bgcolor }}>
+        <DialogTitle id="form-dialog-title">{dialog.params.title}</DialogTitle>
+        <DialogContent>{dialog.params.component}</DialogContent>
+
+        <DialogActions>
+          <Button onClick={dialog.params.cancel} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={dialog.params.confirm} color="primary">
+            Confirm
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Snackbar anchorOrigin={snackbar.anchorOrigin} open={snackbar.open}>
+        <Alert onClose={closeSnackbar} severity={snackbar.type}>
+          {snackbar.message}
         </Alert>
       </Snackbar>
       {props.children}
+      <GlobalLoading open={globalLoading} />
     </Provider>
   );
 };

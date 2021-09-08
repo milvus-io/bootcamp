@@ -1,14 +1,15 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import RootPrvider from "./context/rootProvider";
-import HomePage from "./pages/home";
+import Home from "./pages/home";
+import Header from "./components/header";
 
 function App() {
   return (
     <div className="App">
       <RootPrvider>
-        <HomePage />
+        <Header />
+        <Home />
       </RootPrvider>
     </div>
   );
