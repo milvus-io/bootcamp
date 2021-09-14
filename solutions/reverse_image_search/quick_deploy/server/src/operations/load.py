@@ -34,8 +34,8 @@ def extract_features(img_dir, model):
                 cache['current'] = i + 1
                 print("Extracting feature from image No. %d , %d images in total" % (i + 1, total))
             except Exception as e:
-                pass
-            continue        
+                LOGGER.error(" Error with extracting feature from image {}".format(e))
+                continue        
         return feats, names
     except Exception as e:
         LOGGER.error(" Error with extracting feature from image {}".format(e))
