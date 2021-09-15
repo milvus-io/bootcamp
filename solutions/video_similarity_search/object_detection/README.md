@@ -70,8 +70,8 @@ The next step is to start the system server. It provides HTTP backend services, 
   | UPLOAD_PATH      | The folder path of the video and will temporarily keep frames & object images from video. | data/example_video |
   | DISTANCE_LIMIT   | Maximum distance to return object information. If no result with smaller distance, then return Null as object information. | None |
   
-  - DATA_PATH & UPLOAD_PATH: modify to your own paths or create folders `src/data/example_object` & `src/data/example_video` for object images & video if use default settings
-  - DISTANCE_LIMIT: change to some number so that results with smaller distances will not be shown in response
+  - DATA_PATH & UPLOAD_PATH: modify to your own ABSOLUTE paths for object images & video respectively
+  - DISTANCE_LIMIT: change to some number so that results with larger distances will not be shown in response
 
 - **Run the code** 
 
@@ -90,7 +90,11 @@ The next step is to start the system server. It provides HTTP backend services, 
 
   > /data
   >
-  > Return the object images.
+  > Return the object image by path.
+  >
+  > /video/getVideo
+  > 
+  > Return the video by path.
   >
   > /progress
   >
@@ -102,7 +106,7 @@ The next step is to start the system server. It provides HTTP backend services, 
   > 
   > /image/load
   >
-  > Load images of known objects under the specified directory.
+  > Load images of known objects by the folder path.
   >
   >
   > /video/search
