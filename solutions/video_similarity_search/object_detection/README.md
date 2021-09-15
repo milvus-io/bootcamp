@@ -35,6 +35,11 @@ The next step is to start the system server. It provides HTTP backend services, 
   $ pip install -r requirements.txt
   ```
   
+- **Install addition package if using MacOS**
+  ```bash
+  $ brew install ffmpeg
+  ```
+  
 - **Download Yolov3 Model**
   ```bash
   $ cd server/src/yolov3_detector/data
