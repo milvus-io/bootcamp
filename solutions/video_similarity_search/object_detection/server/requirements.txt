@@ -12,3 +12,4 @@ diskcache
 python-multipart
 pyyaml
 paddlepaddle==2.1.0
+ffmpeg
