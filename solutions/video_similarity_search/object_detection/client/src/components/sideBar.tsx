@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { makeStyles, Theme } from "@material-ui/core";
 import BackupIcon from "@material-ui/icons/Backup";
 import SearchIcon from "@material-ui/icons/Search";
@@ -63,7 +62,7 @@ const SideBar = (props: Props): JSX.Element => {
           activeItem === "search" ? "active" : ""
         }`}
         onClick={() => handleClick("search")}
-        // disabled={!isDataReady}
+        disabled={!isDataReady}
       >
         <SearchIcon />
       </button>

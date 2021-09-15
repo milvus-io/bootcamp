@@ -1,5 +1,4 @@
-import { DEMOS_BASE_URL } from "../http/constants";
-import { Button, CircularProgress, makeStyles } from "@material-ui/core";
+import { Button, makeStyles } from "@material-ui/core";
 import BackupIcon from "@material-ui/icons/Backup";
 import { TypeDialogConfigs } from "../types";
 
@@ -81,16 +80,11 @@ const useStyle = makeStyles((theme) => ({
 type Props = {
   setDialog: React.Dispatch<React.SetStateAction<any>>;
   dialogConfigs: TypeDialogConfigs;
+  fileType: string;
 };
 
-const UploadData = (props: any) => {
-  const {
-    setDialog,
-    dialogConfigs,
-    fileType,
-    downloadPath,
-    checkDataReady = false,
-  } = props;
+const UploadData = (props: Props): JSX.Element => {
+  const { setDialog, dialogConfigs, fileType } = props;
   const classes = useStyle();
 
   return (
@@ -101,33 +95,18 @@ const UploadData = (props: any) => {
         </div>
         <h2>Upload Data Set</h2>
         <p>
-          Upload a zip file with <strong>{fileType}</strong> only. The maximum
-          file size is 20MB.
+          Upload a folder of <strong>{fileType}</strong> files. The maximum file
+          size is 20MB.
         </p>
         <p>This process will take about 1 minute.</p>
         <div className={classes.btnWrapper}>
-          <Button>
-            <a
-              href={`${DEMOS_BASE_URL}/${downloadPath}`}
-              className={classes.downloadBtn}
-            >
-              download an example file
-            </a>
+          <Button
+            variant="contained"
+            onClick={() => setDialog(dialogConfigs)}
+            classes={{ root: classes.uploadBtn }}
+          >
+            Upload Data Set
           </Button>
-          {!checkDataReady ? (
-            <Button
-              variant="contained"
-              onClick={() => setDialog(dialogConfigs)}
-              classes={{ root: classes.uploadBtn }}
-            >
-              Upload Data Set
-            </Button>
-          ) : (
-            <Button variant="contained" disabled>
-              <CircularProgress size={16} classes={{ root: classes.loading }} />
-              Analyzing Data
-            </Button>
-          )}
         </div>
       </div>
     </div>

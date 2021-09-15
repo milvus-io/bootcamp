@@ -30,13 +30,18 @@ export const getCount = async (): Promise<any> => {
 };
 
 export const dropTable = async (): Promise<any> => {
-  return await axiosInstance
-    .post(API.DROP, { table_name: TABLE_NAME })
-    .catch(errorParser);
+  return await axiosInstance({
+    method: "POST",
+    params: { table_name: TABLE_NAME },
+    url: API.DROP,
+  }).catch(errorParser);
 };
 
-export const videoSearch = async (): Promise<any> => {
-  return await axiosInstance
-    .post(API.SEARCH, { table_name: TABLE_NAME })
-    .catch(errorParser);
+export const videoSearch = async (video: FormData): Promise<any> => {
+  return await axiosInstance({
+    method: "POST",
+    params: { table_name: TABLE_NAME },
+    url: API.SEARCH,
+    data: video,
+  }).catch(errorParser);
 };

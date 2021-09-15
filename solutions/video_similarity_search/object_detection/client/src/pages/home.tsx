@@ -1,5 +1,5 @@
 import { rootContext } from "../context/rootProvider";
-import React, { useContext, useState, useRef } from "react";
+import { useContext, useState, useRef } from "react";
 import { useHomeStyles } from "../styles/home";
 import SideBar from "../components/sideBar";
 import UploadData from "../components/uploadData";
@@ -8,37 +8,15 @@ import { TypeDialogConfigs } from "../types";
 import { imgUpload, dropTable } from "../http/index";
 import { TextField } from "@material-ui/core";
 
-const fileType = "zip";
-
-const getObjectURL = (file: File) => {
-  let url = null;
-  if (window.webkitURL != undefined) {
-    // webkit or chrome
-    url = window.webkitURL.createObjectURL(file);
-  } else if (window.URL != undefined) {
-    // mozilla(firefox)
-    url = window.URL.createObjectURL(file);
-  }
-  return url;
-};
+const fileType = "jpg";
 
 const Home = () => {
   const classes = useHomeStyles();
-  const {
-    setDialog,
-    setGlobalLoading,
-    closeDialog,
-    openSnackbar,
-    closeSnackbar,
-  } = useContext(rootContext);
+  const { setDialog, setGlobalLoading, closeDialog, openSnackbar } =
+    useContext(rootContext);
   const [activeItem, setActiveItem] = useState<"upload" | "search">("upload"); // upload or search
   const [isDataReady, setIsDataReady] = useState(false);
   const videoUploadRef = useRef<HTMLInputElement>(null!);
-  const [filePath, setFilePath] = useState("");
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFilePath(e.target.value);
-  };
 
   const dialogConfigs: TypeDialogConfigs = {
     open: true,
@@ -63,13 +41,25 @@ const Home = () => {
   };
 
   const handleFacesUpload = async () => {
+    const filePath = videoUploadRef.current.value;
+    if (!filePath) {
+      openSnackbar("Please input file path", "error");
+      return;
+    }
     closeDialog();
     setGlobalLoading(true);
     try {
-      // await dropTable();
-      const res = await imgUpload(videoUploadRef.current.value);
-      console.log(res);
-      // openSnackbar();
+      await dropTable();
+      const {
+        data: { msg, status },
+      } = await imgUpload(filePath);
+      if (status) {
+        openSnackbar(msg, "success");
+        setIsDataReady(true);
+        setActiveItem("search");
+      } else {
+        openSnackbar("Data loading failed", "error");
+      }
     } catch (error) {
       console.log(error);
     } finally {
@@ -89,7 +79,6 @@ const Home = () => {
           <UploadData
             setDialog={setDialog}
             dialogConfigs={dialogConfigs}
-            checkDataReady={isDataReady}
             fileType={fileType}
           />
         ) : (

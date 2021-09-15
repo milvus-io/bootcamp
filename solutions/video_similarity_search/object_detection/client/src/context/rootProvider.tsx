@@ -64,12 +64,8 @@ const RootProvider = (props: any) => {
     });
   };
   const closeSnackbar = () => {
-    setSnackbar({
-      open: false,
-      anchorOrigin: { vertical: "top", horizontal: "right" },
-      message: "",
-      type: "info",
-    });
+    const value = { ...snackbar, open: false };
+    setSnackbar(value);
   };
 
   const closeDialog = () => {
@@ -99,7 +95,12 @@ const RootProvider = (props: any) => {
           </Button>
         </DialogActions>
       </Dialog>
-      <Snackbar anchorOrigin={snackbar.anchorOrigin} open={snackbar.open}>
+      <Snackbar
+        anchorOrigin={snackbar.anchorOrigin}
+        open={snackbar.open}
+        autoHideDuration={3000}
+        onClose={closeSnackbar}
+      >
         <Alert onClose={closeSnackbar} severity={snackbar.type}>
           {snackbar.message}
         </Alert>

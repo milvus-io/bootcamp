@@ -1,4 +1,4 @@
-import HourglassEmptyIcon from "@material-ui/icons/HourglassEmpty";
+import { CircularProgress } from "@material-ui/core";
 import { Typography, makeStyles, Theme } from "@material-ui/core";
 
 type PropsType = {
@@ -16,13 +16,17 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    color: "#fff",
+    color: "#12c3f4",
   },
   content: {
     textAlign: "center",
   },
   msg: {
     marginTop: theme.spacing(1),
+  },
+  loading: {
+    color: "#12c3f4",
+    marginRight: theme.spacing(1),
   },
 }));
 const GlobalLoading = (props: PropsType): JSX.Element => {
@@ -34,7 +38,7 @@ const GlobalLoading = (props: PropsType): JSX.Element => {
       {open ? (
         <div className={`${classes.loadingWrapper} ${className}`}>
           <div className={classes.content}>
-            <HourglassEmptyIcon />
+            <CircularProgress size={16} classes={{ root: classes.loading }} />
             <Typography component="p" className={classes.msg}>
               Loading...
             </Typography>

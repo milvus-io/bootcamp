@@ -1,6 +1,4 @@
-export const DEMOS_BASE_URL = "";
-
-export const TABLE_NAME = "video_Obj_Analysis";
+export const TABLE_NAME = "";
 
 export const API = {
   GET_IMAGE: "/data",
