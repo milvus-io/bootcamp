@@ -51,3 +51,10 @@ export interface IImageUpload {
   Table: string;
   File: string;
 }
+
+export interface IVideoSearchResult {
+  distance: number;
+  image: string;
+  object: string;
+  time: string;
+}

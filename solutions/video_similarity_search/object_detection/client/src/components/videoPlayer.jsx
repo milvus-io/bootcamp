@@ -54,6 +54,7 @@ const VideoPlayer = (props) => {
     player.load();
   }, [source, player]);
 
+
   return (
     <div className={classes.root}>
       {source ? (

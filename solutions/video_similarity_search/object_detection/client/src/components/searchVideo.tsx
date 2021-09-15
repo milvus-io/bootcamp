@@ -1,7 +1,9 @@
 import { Button, Grid, makeStyles, Typography, Theme } from "@material-ui/core";
 import VideoPlayer from "./videoPlayer";
-import { useState, useRef } from "react";
-import { DEMOS_BASE_URL } from "../http/constants";
+import { useState, useRef, useContext, useMemo, useEffect } from "react";
+import { videoSearch } from "../http";
+import { rootContext } from "../context/rootProvider";
+import { IVideoSearchResult } from "../types";
 
 const useStyles = makeStyles((theme: Theme) => ({
   audioWrapper: {
@@ -80,16 +82,60 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: "flex",
     justifyContent: "center",
   },
+  hiddenBtn: {
+    visibility: "hidden",
+    opacity: 0,
+    position: "absolute",
+    zIndex: -1,
+  },
 }));
 
 const SearchVideo = () => {
   const classes = useStyles();
-  const [player, setPlayer] = useState(null);
-  const videoUploadRef = useRef(null);
+  const { setGlobalLoading, openSnackbar } = useContext(rootContext);
+  const [player, setPlayer] = useState<any>(null!);
+  const videoUploadRef = useRef<HTMLInputElement>(null!);
   const [searchedVideo, setSearchedVideo] = useState("");
-  const [showResult, setShowResult] = useState([]);
+  const [searchResult, setSearchResult] = useState<IVideoSearchResult[]>([]);
+  const [currentTime, setCurrentTime] = useState(0);
 
-  const handleUploadVideo = () => {};
+  const handleUploadVideo = () => {
+    videoUploadRef.current.click();
+  };
+
+  const upload = async () => {
+    const fd = new FormData();
+    const file = videoUploadRef.current.files![0];
+    fd.append("video", file);
+    setGlobalLoading(true);
+
+    try {
+      const { data } = await videoSearch(fd);
+      setSearchResult(data.slice(1));
+      setSearchedVideo(data[0]);
+    } catch (error) {
+      console.log(error);
+      openSnackbar("Search failed", "error");
+    } finally {
+      setGlobalLoading(false);
+    }
+  };
+
+  const showResult = useMemo(() => {
+    return searchResult.filter(
+      (v) => parseInt(v.time) === Math.ceil(currentTime)
+    );
+  }, [currentTime, searchResult]);
+
+  useEffect(() => {
+    if (!player) return;
+    player.subscribeToStateChange((state: any, prevState: any) => {
+      const { currentTime } = state;
+      if (currentTime > 0) {
+        setCurrentTime(Math.ceil(currentTime));
+      }
+    });
+  }, [player]);
 
   return (
     <Grid container spacing={2} className={classes.audioWrapper}>
@@ -108,14 +154,13 @@ const SearchVideo = () => {
           <Button variant="contained" onClick={handleUploadVideo}>
             Upload a video to search
           </Button>
-          <Button>
-            <a
-              href={`${DEMOS_BASE_URL}/video2/download_obj_video`}
-              className="download-btn"
-            >
-              download an example video
-            </a>
-          </Button>
+          <input
+            type="file"
+            accept="avi"
+            ref={videoUploadRef}
+            className={classes.hiddenBtn}
+            onChange={upload}
+          />
         </div>
       </Grid>
       <Grid item xs={10} md={6} lg={7} className={classes.result}>
@@ -126,16 +171,22 @@ const SearchVideo = () => {
           <Typography variant="body1" className={classes.name}>
             Name
           </Typography>
+          <Typography variant="body1" className={classes.name}>
+            Distance
+          </Typography>
         </div>
         <div className={classes.resultWrapper}>
           {showResult.length > 0 ? (
             showResult.map((v, index) => (
               <div className={classes.resultItem} key={index}>
                 <div className={classes.image}>
-                  <img alt="face" src={v[1]}></img>
+                  <img alt="face" src={v.image}></img>
                 </div>
                 <Typography variant="body1" className={classes.name}>
-                  {v[0]}
+                  {v.object}
+                </Typography>
+                <Typography variant="body1" className={classes.name}>
+                  {v.distance.toFixed(7)}
                 </Typography>
               </div>
             ))
