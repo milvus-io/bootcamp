@@ -153,7 +153,7 @@ The next step is to start the system server. It provides HTTP backend services, 
 $ export API_URL='http://xxx.xx.xx.xx:5000' # change xxx.xx.xx.xx to your own IP address
 $ docker run -d -p 8001:80 \
 -e API_URL=${API_URL} \
-milvusbootcamp/video_object_detection
+milvusbootcamp/video_object_detect
 ```
 
 > In this command, `API_URL` means the query service address.
