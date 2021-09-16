@@ -54,7 +54,7 @@ The next step is to start the system server. It provides HTTP backend services, 
   │   └── yolo.yml
   ```
   
-- **Set parameters**
+- **Set configuration**
 
   ```bash
   $ vim server/src/config.py
@@ -79,13 +79,15 @@ The next step is to start the system server. It provides HTTP backend services, 
 
 #### 2.1 Run server with Docker
 
+- **Set Parameters**
+
   ```bash
-  $ export DATAPATH1='/image/data_path'
+  $ export DATAPATH1='/your_path'
   $ export Milvus_HOST='xxx.xxx.x.xx'
   $ export Milvus_PORT='19530'
   $ export Mysql_HOST='xxx.xxx.x.xx'
   ```
-  > Modify 'xxx.xxx.x.xx' to your own IP address, '/image/data_path' to the absolute folder path of object images, '/video/upload_path' to the absolute video path
+  > **Note:**: modify 'xxx.xxx.x.xx' to your own IP address
 
 - **Run Docker**
 
