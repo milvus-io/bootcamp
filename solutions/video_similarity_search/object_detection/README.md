@@ -4,7 +4,7 @@
 
 This demo uses **Milvus** to detect objects in a video based on a dataset of object images with known information. To get images of objects in videos, it uses OpenCV to extract video frames and then uses Yolov3 to detect objects in each frame. It uses ResNet50 to get feature vectors of images for both known objects in dataset and objects detected in video. Finally, it can detect object and get object information easily by similarity search in Milvus. Let's have fun playing with it!
 
-![](../pic/structure.png)
+<img src="pic/structure.png" width = "800" height = "350" alt="arch" align=center />
 
 
 ## How to deploy the system
@@ -93,7 +93,7 @@ The next step is to start the system server. It provides HTTP backend services, 
 
   Type localhost:5000/docs in your browser to see all the APIs.
 
-  ![](./pic/fastapi.png)
+  <img src="pic/fastapi.png" width = "700" height = "600" alt="arch" align=center  />
 
   > /data
   >
@@ -164,19 +164,19 @@ Visit  ` WEBCLIENT_IP:8001`  in the browser to open the interface for reverse im
 
 >  `WEBCLIENT_IP `specifies the IP address that runs video_object_detection client docker.
 
-<img src="pic/web1.png" width = "650" height = "500" alt="arch" align=center />
+<img src="pic/web1.png" width = "800" height = "550" alt="arch" align=center />
 
 Click `UPLOAD DATA SET` & enter the folder path of object images, then click `CONFIRM` to load the pictures. The following screenshot shows the loading process:
 
 >  Note: The path entered should be consistent with DATA_PATH in [config.py](./server/src/config.py)
 
-<img src="pic/web2.png" width = "650" height = "500" alt="arch" align=center  />
+<img src="pic/web2.png" width = "800" height = "550" alt="arch" align=center  />
 
 The loading process may take a while depending on data size. The following screenshot shows the interface with images loading in progress.
 
 > Only support **jpg** pictures.
 
-<img src="pic\web3 .png" width = "650" height = "500" />
+<img src="pic\web3 .png" width = "800" height = "550" />
 
 Then click `UPLOAD A VIDEO TO SEARCH` to upload a video to detect objects.
 
@@ -184,8 +184,8 @@ Then click `UPLOAD A VIDEO TO SEARCH` to upload a video to detect objects.
 
 > Only support **avi** video.
 
-<img src="pic/web4.png"  width = "650" height = "500" />
+<img src="pic/web4.png"  width = "800" height = "550" />
 
 The loading process may take a while. After video is successfully loaded, click Play button to play video and detected objects will be displayed on the right with its image, name, distance (A lower distance means more similarity between the object detected in video & object image stored in Milvus).
 
-<img src="pic/web5.png"  width = "650" height = "500" />
+<img src="pic/web5.png"  width = "800" height = "550" />
