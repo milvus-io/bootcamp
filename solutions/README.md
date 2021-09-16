@@ -14,11 +14,11 @@ Each solution includes a Jupyter notebook and Docker quick deployments. Along wi
    - [Quick deploy](./question_answering_system/quick_deploy)
    -  [Jupyter notebook](./question_answering_system/question_answering.ipynb)
 
-3. [**Recommendation System**](./recommendation_system), list of recommended movies based on the user.
+3. [**Recommender System**](./recommender_system), list of recommended movies based on the user.
 
-   - [Quick deploy](./recommendation_system/quick_deploy)
+   - [Quick deploy](./recommender_system/quick_deploy)
 
-   - [Jupyter notebook](./recommendation_system/recommendation_system.ipynb)
+   - [Jupyter notebook](./recommender_system/recommender_system.ipynb)
 
 4. [**Molecular Similarity Search**](./solutions/molecular_similarity_search), search for a molecular and get the similar structure.
    - [Quick deploy](./molecular_similarity_search/quick_deploy)
