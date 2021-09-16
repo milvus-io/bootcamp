@@ -4,7 +4,7 @@
 
 This demo uses **Milvus** to detect objects in a video based on a dataset of object images with known information. To get images of objects in videos, it uses OpenCV to extract video frames and then uses Yolov3 to detect objects in each frame. It uses ResNet50 to get feature vectors of images for both known objects in dataset and objects detected in video. Finally, it can detect object and get object information easily by similarity search in Milvus. Let's have fun playing with it!
 
-![](../pic/structure.png)
+<img src="pic/structure.png" width = "800" height = "350" alt="arch" align=center />
 
 
 ## How to deploy the system
@@ -15,9 +15,9 @@ The video object detection system will use Milvus to store and search the featur
 
 - **Start Milvus v2.0**
 
-  First, you are supposed to refer to the Install [Milvus v2.0-rc5](https://milvus.io/docs/v2.0.0/install_standalone-docker.md) for how to run Milvus docker.
+  First, you are supposed to refer to the Install [Milvus V2.0](https://milvus.io/docs/v2.0.0/install_standalone-docker.md) for how to run Milvus docker.
   
-  > Note the version of Milvus.
+  > Note the version of Milvus should be consistent with pymilvus in [requirements.txt](./server/requirements.txt).
   
 - **Start MySQL**
 
@@ -28,11 +28,18 @@ The video object detection system will use Milvus to store and search the featur
 ### 2. Start Server
 The next step is to start the system server. It provides HTTP backend services, you can run source code to start.
 
+#### Prepare
+
 - **Install the Python packages**
 
   ```bash
   $ cd server
   $ pip install -r requirements.txt
+  ```
+  
+- **Install addition package if using MacOS**
+  ```bash
+  $ brew install ffmpeg
   ```
   
 - **Download Yolov3 Model**
@@ -48,7 +55,7 @@ The next step is to start the system server. It provides HTTP backend services, 
   │   └── yolo.yml
   ```
 
-#### 2.1 Run source code
+#### Run source code
   
 - **Set configuration**
 
@@ -70,8 +77,8 @@ The next step is to start the system server. It provides HTTP backend services, 
   | UPLOAD_PATH      | The folder path of the video and will temporarily keep frames & object images from video. | data/example_video |
   | DISTANCE_LIMIT   | Maximum distance to return object information. If no result with smaller distance, then return Null as object information. | None |
   
-  - DATA_PATH & UPLOAD_PATH: modify to your own paths or create folders `src/data/example_object` & `src/data/example_video` for object images & video if use default settings
-  - DISTANCE_LIMIT: change to some number so that results with smaller distances will not be shown in response
+  - DATA_PATH & UPLOAD_PATH: modify to your own ABSOLUTE paths for object images & video respectively
+  - DISTANCE_LIMIT: change to some number so that results with larger distances will not be shown in response
 
 - **Run the code** 
 
@@ -86,11 +93,15 @@ The next step is to start the system server. It provides HTTP backend services, 
 
   Type localhost:5000/docs in your browser to see all the APIs.
 
-  ![](./pic/fastapi.png)
+  <img src="pic/fastapi.png" width = "700" height = "600" alt="arch" align=center  />
 
   > /data
   >
-  > Return the object images.
+  > Return the object image by path.
+  >
+  > /video/getVideo
+  > 
+  > Return the video by path.
   >
   > /progress
   >
@@ -102,21 +113,12 @@ The next step is to start the system server. It provides HTTP backend services, 
   > 
   > /image/load
   >
-  > Load images of known objects under the specified directory.
+  > Load images of known objects by the folder path.
   >
   >
   > /video/search
   >
   > Pass in an video to search for similar images of objects detected.
-  
-- **Response examples**
-  - /image/load
-  
-  ![](./pic/load.png)
-  
-  - /video/search
-  
-  ![](./pic/search.png)
   
 
 - **Code structure**
@@ -141,3 +143,49 @@ The next step is to start the system server. It provides HTTP backend services, 
   │               │   delete.py
   │               │   count.py
   ```
+
+### 3. Start Client
+
+- **Start the front-end**
+
+```bash
+# Modify API_URL to the IP address and port of the server.
+$ export API_URL='http://xxx.xx.xx.xx:5000' # change xxx.xx.xx.xx to your own IP address
+$ docker run -d -p 8001:80 \
+-e API_URL=${API_URL} \
+milvusbootcamp/video-object-detect-client:2.0
+```
+
+> In this command, `API_URL` means the query service address.
+
+- **How to use**
+
+Visit  ` WEBCLIENT_IP:8001`  in the browser to open the interface for reverse image search. 
+
+>  `WEBCLIENT_IP `specifies the IP address that runs video_object_detection client docker.
+
+<img src="pic/web1.png" width = "800" height = "550" alt="arch" align=center />
+
+Click `UPLOAD DATA SET` & enter the folder path of object images, then click `CONFIRM` to load the pictures. The following screenshot shows the loading process:
+
+>  Note: The path entered should be consistent with DATA_PATH in [config.py](./server/src/config.py)
+
+<img src="pic/web2.png" width = "800" height = "550" alt="arch" align=center  />
+
+The loading process may take a while depending on data size. The following screenshot shows the interface with images loading in progress.
+
+> Only support **jpg** pictures.
+
+<img src="pic\web3.png" width = "800" height = "550" />
+
+Then click `UPLOAD A VIDEO TO SEARCH` to upload a video to detect objects.
+
+>  Note: The video should under the UPLOAD_PATH in [config.py](./server/src/config.py)
+
+> Only support **avi** video.
+
+<img src="pic/web4.png"  width = "800" height = "550" />
+
+The loading process may take a while. After video is successfully loaded, click Play button to play video and detected objects will be displayed on the right with its image, name, distance (A lower distance means more similarity between the object detected in video & object image stored in Milvus).
+
+<img src="pic/web5.png"  width = "800" height = "550" />
