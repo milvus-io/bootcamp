@@ -1,5 +1,5 @@
 import { rootContext } from "../context/rootProvider";
-import { useContext, useState, useRef } from "react";
+import { useContext, useState, useRef, useEffect } from "react";
 import { useHomeStyles } from "../styles/home";
 import SideBar from "../components/sideBar";
 import UploadData from "../components/uploadData";
@@ -8,7 +8,8 @@ import { TypeDialogConfigs } from "../types";
 import { imgUpload, dropTable } from "../http/index";
 import { TextField } from "@material-ui/core";
 
-const fileType = "jpg";
+const FILE_TYPE = "jpg";
+const IS_DATE_READY = "isDataReady";
 
 const Home = () => {
   const classes = useHomeStyles();
@@ -57,6 +58,8 @@ const Home = () => {
         openSnackbar(msg, "success");
         setIsDataReady(true);
         setActiveItem("search");
+        window.sessionStorage.setItem(IS_DATE_READY, "true");
+        window.location.hash = "search";
       } else {
         openSnackbar("Data loading failed", "error");
       }
@@ -66,6 +69,15 @@ const Home = () => {
       setGlobalLoading(false);
     }
   };
+
+  useEffect(() => {
+    const isReady = window.sessionStorage.getItem(IS_DATE_READY) === "true";
+    const hash = window.location.hash.replace(/\#/g, "");
+    if (hash) {
+      setActiveItem(hash as "upload" | "search");
+    }
+    setIsDataReady(isReady);
+  }, []);
 
   return (
     <div className={classes.root}>
@@ -79,7 +91,7 @@ const Home = () => {
           <UploadData
             setDialog={setDialog}
             dialogConfigs={dialogConfigs}
-            fileType={fileType}
+            fileType={FILE_TYPE}
           />
         ) : (
           <SearchVideo />
