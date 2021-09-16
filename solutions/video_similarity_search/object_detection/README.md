@@ -28,8 +28,6 @@ The video object detection system will use Milvus to store and search the featur
 ### 2. Start Server
 The next step is to start the system server. It provides HTTP backend services, you can run source code to start.
 
-#### Prepare
-
 - **Install the Python packages**
 
   ```bash
@@ -43,6 +41,7 @@ The next step is to start the system server. It provides HTTP backend services, 
   ```
   
 - **Download Yolov3 Model**
+
   ```bash
   $ cd server/src/yolov3_detector/data
   $ ./prepare_model.sh
@@ -54,10 +53,8 @@ The next step is to start the system server. It provides HTTP backend services, 
   │   ├── __params__
   │   └── yolo.yml
   ```
-
-#### Run source code
   
-- **Set configuration**
+- **Set parameters**
 
   ```bash
   $ vim server/src/config.py
@@ -74,11 +71,37 @@ The next step is to start the system server. It provides HTTP backend services, 
   | MYSQL_PORT       | Port of Milvus.                                       | 3306                |
   | DEFAULT_TABLE    | The milvus and mysql default collection name.         | video_obj_det       |
   | DATA_PATH        | The folder path of known object images to insert.     | data/example_object |
-  | UPLOAD_PATH      | The folder path of the video and will temporarily keep frames & object images from video. | data/example_video |
+  | UPLOAD_PATH      | The folder path of the video. | data/example_video |
   | DISTANCE_LIMIT   | Maximum distance to return object information. If no result with smaller distance, then return Null as object information. | None |
-  
+
   - DATA_PATH & UPLOAD_PATH: modify to your own ABSOLUTE paths for object images & video respectively
   - DISTANCE_LIMIT: change to some number so that results with larger distances will not be shown in response
+
+#### 2.1 Run server with Docker
+
+  ```bash
+  $ export DATAPATH1='/image/data_path'
+  $ export Milvus_HOST='xxx.xxx.x.xx'
+  $ export Milvus_PORT='19530'
+  $ export Mysql_HOST='xxx.xxx.x.xx'
+  ```
+  > Modify 'xxx.xxx.x.xx' to your own IP address, '/image/data_path' to the absolute folder path of object images, '/video/upload_path' to the absolute video path
+
+- **Run Docker**
+
+  ```bash
+  $ docker run -d \
+  -v ${DATAPATH1}:${DATAPATH1} \
+  -p 5000:5000 \
+  -e "MILVUS_HOST=${Milvus_HOST}" \
+  -e "MILVUS_PORT=${Milvus_PORT}" \
+  -e "MYSQL_HOST=${Mysql_HOST}" \
+  milvusbootcamp/video-object-detect-server:2.0
+  ```
+
+  > **Note:** -v ${DATAPATH1}:${DATAPATH1} means that you can mount the directory into the container. If needed, you can load the parent directory or more directories.
+
+#### 2.2 OR run source code
 
 - **Run the code** 
 
@@ -93,7 +116,7 @@ The next step is to start the system server. It provides HTTP backend services, 
 
   Type localhost:5000/docs in your browser to see all the APIs.
 
-  <img src="pic/fastapi.png" width = "700" height = "600" alt="arch" align=center  />
+  <img src="pic/fastapi.png" width = "700" height = "550" alt="arch" align=center  />
 
   > /data
   >
