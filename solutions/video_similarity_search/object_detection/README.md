@@ -17,7 +17,7 @@ The video object detection system will use Milvus to store and search the featur
 
   First, you are supposed to refer to the Install [Milvus V2.0](https://milvus.io/docs/v2.0.0/install_standalone-docker.md) for how to run Milvus docker.
   
-  > Note the version of Milvus.
+  > Note the version of Milvus should be consistent with pymilvus in [requirements.txt](./server/requirements.txt).
   
 - **Start MySQL**
 
