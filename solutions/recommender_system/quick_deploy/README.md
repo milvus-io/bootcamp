@@ -1,10 +1,10 @@
 # Quick Start
 
-This project combines Milvus and [PaddleRec](https://aistudio.baidu.com/aistudio/projectdetail/1481839?channel=0&channelType=0&lang=en) to build the recall service of a movie recommendation system.
+This project combines Milvus and [PaddleRec](https://aistudio.baidu.com/aistudio/projectdetail/1481839?channel=0&channelType=0&lang=en) to build the recall service of a movie recommender system.
 
 ## Data description
 
-[MovisLens](https://grouplens.org/datasets/movielens/) is a dataset on movie ratings, with data from movie rating sites such as IMDB. The dataset contains information about users' ratings of movies, users' demographic characteristics and descriptive features of movies, which is suitable for getting started with recommendation systems.
+[MovisLens](https://grouplens.org/datasets/movielens/) is a dataset on movie ratings, with data from movie rating sites such as IMDB. The dataset contains information about users' ratings of movies, users' demographic characteristics and descriptive features of movies, which is suitable for getting started with recommender systems.
 
 In this project, we use one of the sub-datasets — [MovieLens 1M](https://grouplens.org/datasets/movielens/1m/). This dataset contains 1,000,209 anonymous ratings of approximately 3,900 movies  made by 6,040 MovieLens users. 
 
@@ -77,7 +77,7 @@ entries and/or test entries
 
    ```shell
    $ git clone https://github.com/milvus-io/bootcamp.git
-   $ cd solutions/recommendation_system
+   $ cd solutions/recommender_system
    ```
 
 3. Install requirements.
@@ -95,7 +95,7 @@ entries and/or test entries
    dim = 32
    pk = FieldSchema(name='pk', dtype=DataType.INT64, is_primary=True)
    field = FieldSchema(name='embedding', dtype=DataType.FLOAT_VECTOR, dim=dim)
-   schema = CollectionSchema(fields=[pk, field], description="movie recommendation: demo films")
+   schema = CollectionSchema(fields=[pk, field], description="movie recommender: demo films")
 
    index_param = {
        "metric_type": "L2",
