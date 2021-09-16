@@ -176,7 +176,7 @@ The loading process may take a while depending on data size. The following scree
 
 > Only support **jpg** pictures.
 
-<img src="pic\web3 .png" width = "800" height = "550" />
+<img src="pic\web3.png" width = "800" height = "550" />
 
 Then click `UPLOAD A VIDEO TO SEARCH` to upload a video to detect objects.
 
