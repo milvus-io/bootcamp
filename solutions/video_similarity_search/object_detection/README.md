@@ -28,6 +28,8 @@ The video object detection system will use Milvus to store and search the featur
 ### 2. Start Server
 The next step is to start the system server. It provides HTTP backend services, you can run source code to start.
 
+#### Prepare
+
 - **Install the Python packages**
 
   ```bash
@@ -53,7 +55,7 @@ The next step is to start the system server. It provides HTTP backend services, 
   │   └── yolo.yml
   ```
 
-#### 2.1 Run source code
+#### Run source code
   
 - **Set configuration**
 
@@ -118,15 +120,6 @@ The next step is to start the system server. It provides HTTP backend services, 
   >
   > Pass in an video to search for similar images of objects detected.
   
-- **Response examples**
-  - /image/load
-  
-  ![](./pic/load.png)
-  
-  - /video/search
-  
-  ![](./pic/search.png)
-  
 
 - **Code structure**
 
@@ -150,3 +143,49 @@ The next step is to start the system server. It provides HTTP backend services, 
   │               │   delete.py
   │               │   count.py
   ```
+
+### 3. Start Client
+
+- **Start the front-end**
+
+```bash
+# Modify API_URL to the IP address and port of the server.
+$ export API_URL='http://xxx.xx.xx.xx:5000' # change xxx.xx.xx.xx to your own IP address
+$ docker run -d -p 8001:80 \
+-e API_URL=${API_URL} \
+milvusbootcamp/video_object_detection
+```
+
+> In this command, `API_URL` means the query service address.
+
+- **How to use**
+
+Visit  ` WEBCLIENT_IP:8001`  in the browser to open the interface for reverse image search. 
+
+>  `WEBCLIENT_IP `specifies the IP address that runs video_object_detection client docker.
+
+<img src="pic/web1.png" width = "650" height = "500" alt="arch" align=center />
+
+Click `UPLOAD DATA SET` & enter the folder path of object images, then click `CONFIRM` to load the pictures. The following screenshot shows the loading process:
+
+>  Note: The path entered should be consistent with DATA_PATH in [config.py](./server/src/config.py)
+
+<img src="pic/web2.png" width = "650" height = "500" alt="arch" align=center  />
+
+The loading process may take a while depending on data size. The following screenshot shows the interface with images loading in progress.
+
+> Only support **jpg** pictures.
+
+<img src="pic\web3 .png" width = "650" height = "500" />
+
+Then click `UPLOAD A VIDEO TO SEARCH` to upload a video to detect objects.
+
+>  Note: The video should under the UPLOAD_PATH in [config.py](./server/src/config.py)
+
+> Only support **avi** video.
+
+<img src="pic/web4.png"  width = "650" height = "500" />
+
+The loading process may take a while. After video is successfully loaded, click Play button to play video and detected objects will be displayed on the right with its image, name, distance (A lower distance means more similarity between the object detected in video & object image stored in Milvus).
+
+<img src="pic/web5.png"  width = "650" height = "500" />
