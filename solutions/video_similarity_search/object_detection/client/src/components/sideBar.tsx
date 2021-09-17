@@ -46,6 +46,7 @@ const SideBar = (props: Props): JSX.Element => {
   const handleClick = (val: "upload" | "search") => {
     if (activeItem === val) return;
     setActiveItem(val);
+    window.location.hash = val;
   };
   return (
     <div className={classes.sideBarWrapper}>
