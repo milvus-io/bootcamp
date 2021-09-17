@@ -82,8 +82,8 @@ The next step is to start the system server. It provides HTTP backend services, 
 - **Set Parameters**
 
   ```bash
-  $ export DATAPATH1='/full/image/folder/path'
-  $ export DATAPATH2='/full/video/path'
+  $ export DATAPATH1='/absolute/image/folder/path'
+  $ export DATAPATH2='/absolute/video/path'
   $ export Milvus_HOST='xxx.xxx.x.xx'
   $ export Milvus_PORT='19530'
   $ export Mysql_HOST='xxx.xxx.x.xx'
@@ -94,8 +94,8 @@ The next step is to start the system server. It provides HTTP backend services, 
 
   ```bash
   $ docker run -d \
-  -v ${DATAPATH1}:${DATAPATH1} \
-  -v ${DATAPATH2}:${DATAPATH2} \
+  -v ${DATAPATH1}:/data/example_object \
+  -v ${DATAPATH2}:/data/example_video \
   -p 5000:5000 \
   -e "MILVUS_HOST=${Milvus_HOST}" \
   -e "MILVUS_PORT=${Milvus_PORT}" \
