@@ -94,8 +94,8 @@ The next step is to start the system server. It provides HTTP backend services, 
 
   ```bash
   $ docker run -d \
-  -v ${DATAPATH1}:/data/example_object \
-  -v ${DATAPATH2}:/data/example_video \
+  -v ${DATAPATH1}:${DATAPATH1} \
+  -v ${DATAPATH2}:${DATAPATH2} \
   -p 5000:5000 \
   -e "MILVUS_HOST=${Milvus_HOST}" \
   -e "MILVUS_PORT=${Milvus_PORT}" \
