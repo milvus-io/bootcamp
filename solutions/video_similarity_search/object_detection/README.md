@@ -70,9 +70,9 @@ The next step is to start the system server. It provides HTTP backend services, 
   | MYSQL_HOST       | The IP address of Mysql.                              | localhost           |
   | MYSQL_PORT       | Port of Milvus.                                       | 3306                |
   | DEFAULT_TABLE    | The milvus and mysql default collection name.         | video_obj_det       |
-  | DATA_PATH        | The folder path of known object images to insert.     | data/example_object |
-  | UPLOAD_PATH      | The folder path of the video. | data/example_video |
-  | DISTANCE_LIMIT   | Maximum distance to return object information. If no result with smaller distance, then return Null as object information. | None |
+  | DATA_PATH        | The folder path of known object images to insert.     | /data/example_object |
+  | UPLOAD_PATH      | The folder path of the video. | /data/example_video |
+  | DISTANCE_LIMIT   | Maximum distance to return object information. If set as "None", then no limit on distance. | 0.6 |
 
   - DATA_PATH & UPLOAD_PATH: modify to your own ABSOLUTE paths for object images & video respectively
   - DISTANCE_LIMIT: change to some number so that results with larger distances will not be shown in response
