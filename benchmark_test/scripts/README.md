@@ -28,6 +28,7 @@ pip install -r requirements.txt
 | --partition_name   | Specify the partition label                                  |
 | --create_partition | Perform the operation of creating a partition. This operation needs to specify the parameters Collection and Partition |
 | --index_info       | View the index information of a certain collection. This operation needs to specify the parameter Collection |
+| --index_progress   | View the index progress. This operation needs to specify the parameter Collection |
 | --has              | Determine whether a collection exists. This operation needs to specify the parameter Collection |
 | --rows             | View the number of vectors in a collection. This operation needs to specify the parameter Collection |
 | --drop             | Delete the specified collection. This operation needs to specify the parameter Collection |
@@ -181,4 +182,9 @@ python main.py --list
 
 ```
 python main.py --collection <collection_name> --search_param <search_param> --percentile 99 --percentile_test
+```
+
+**15. Collection's Index Progress**
+```
+python main.py --collection <collectoin_name> --index_progress 
 ```
