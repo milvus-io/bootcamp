@@ -5,6 +5,9 @@ from logs import LOGGER
 
 
 class MilvusHelper:
+    """
+    Helper class for Milvus
+    """
     def __init__(self):
         try:
             self.collection =None
