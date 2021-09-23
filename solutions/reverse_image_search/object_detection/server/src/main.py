@@ -36,7 +36,7 @@ class Item(BaseModel):
     Table: Optional[str] = None
     File: str
 
-
+# Define the interface to obtain raw pictures
 @app.get('/data')
 def image_path(image_path):
     # Get the image file
