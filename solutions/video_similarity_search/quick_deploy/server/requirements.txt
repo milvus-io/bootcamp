@@ -1,5 +1,5 @@
 Keras==2.4.3
-tensorflow
+tensorflow==2.6.0
 opencv-python
 Pillow==8.2.0
 pymysql
