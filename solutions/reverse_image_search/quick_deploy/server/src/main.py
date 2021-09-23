@@ -37,7 +37,7 @@ if not os.path.exists(UPLOAD_PATH):
     os.makedirs(UPLOAD_PATH)
     LOGGER.info("mkdir the path:{} ".format(UPLOAD_PATH))
 
-
+# Define the interface to obtain raw pictures 
 @app.get('/data')
 def image_path(image_path):
     # Get the image file
