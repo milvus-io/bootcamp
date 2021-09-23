@@ -1,4 +1,3 @@
-# from milvus import *
 import os
 
 MILVUS_HOST = "127.0.0.1"
@@ -11,21 +10,21 @@ VECTOR_DIMENSION = 128
 
 ##################### Indexing Parameters ##########################################################
 
-# index IVF parameters
+# Index IVF parameters
 NLIST = 4096
 PQ_M = 12
 
-# index NSG parameters
+# Index NSG parameters
 SEARCH_LENGTH = 45
 OUT_DEGREE = 50
 CANDIDATE_POOL = 300
 KNNG = 100
 
-# index HNSW parameters
+# Index HNSW parameters
 HNSW_M = 16
 EFCONSTRUCTION = 500
 
-# index ANNOY parameters
+# Index ANNOY parameters
 N_TREE = 8
 
 ##################### Insert Parameters ############################################################
@@ -87,5 +86,5 @@ GROUNDTRUTH_FILE = 'data/sift1m/gnd/ground_truth_1M.txt'
 RECALL_RES = 'recall_result'
 RECALL_RES_TOPK = 'recall_result/recall_compare_out'
 
-# the number of log files will be saved
+# The number of log files will be saved
 LOGS_NUM = 1
