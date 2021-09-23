@@ -96,7 +96,7 @@ class MilvusHelper:
             search_params = {"metric_type": METRIC_TYPE, "params": {"nprobe": 16}}
             # data = [vectors]
             res = self.collection.search(vectors, anns_field="embedding", param=search_params, limit=top_k)
-            print(res[0])
+            #print(res[0])
             LOGGER.debug("Successfully search in collection: {}".format(res))
             return res
         except Exception as e:
