@@ -47,7 +47,7 @@ $ cd server
 $ pip install -r requirements.txt
 ```
 
-- **Wget the model**
+- **Download the model**
 
 The way to install Bert-as-service is as follows. You can also refer to the official website link of the Github repository of Bert-as-service:
 
