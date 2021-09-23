@@ -23,7 +23,7 @@ import random
 # _PORT = '19530'
 # client = Milvus(_HOST, _PORT)
 #
-
+#
 #
 # if collection_name in client.list_collections():
 #     client.drop_collection(collection_name)
