@@ -1,6 +1,6 @@
 - [ ] A reference to a related issue in your repository.
   
-  Each PR is related to an issue, and you need to list that issue, like https://github.com/milvus-io/bootcamp/issues/600.
+  Each PR is related to an issue, and you need to list that issue, like #600.
 
 - [ ] A description of the changes proposed in the pull request.
 
