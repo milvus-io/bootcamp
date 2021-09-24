@@ -1,1 +1,1 @@
-pymilvus==2.0.0rc5
+pymilvus==2.0.0rc6
