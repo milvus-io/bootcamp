@@ -134,10 +134,6 @@ def insert_data(client, collection_name):
 def get_index_params(index_type):
     if index_type == 'FLAT':
         index_param = {"index_type": index_type}
-    elif index_type == 'RNSG':
-        params = {"search_length": SEARCH_LENGTH, "out_degree": OUT_DEGREE, "candidate_pool_size": CANDIDATE_POOL,
-                  "knng": KNNG}
-        index_param = {"index_type": index_type, "metric_type": METRIC_TYPE, "params": params}
     elif index_type == 'HNSW':
         params = {"M": HNSW_M, "efConstruction": EFCONSTRUCTION}
         index_param = {"index_type": index_type, "metric_type": METRIC_TYPE, "params": params}
