@@ -3,11 +3,11 @@
 
 This project combines Milvus and BERT to build a question and answer system. This aims to provide a solution to achieve semantic similarity matching with Milvus combined with AI models.
 
-> This project based Milvus2.0.0-rc5
+> This project is based on Milvus2.0.0-rc5
 
 ## Data description
 
-The dataset needed for this system is a CSV format file which needs to contain a column of questions and a column of answers. 
+The dataset needed for this system is a CSV format file which needs to contain a column of questions and a column of answers.
 
 There is a sample data in the data directory.
 
@@ -98,9 +98,9 @@ The next step is to start the system server. It provides HTTP backend services, 
   | DEFAULT_TABLE    | The milvus and mysql default collection name.         | milvus_qa           |
   | MODEL_PATH       | The path of the model `paraphrase-mpnet-base-v2`      |                     |
 
-- **Run the code** 
+- **Run the code**
 
-  Then start the server with Fastapi. 
+  Then start the server with Fastapi.
 
 ```bash
 $ cd server/src
@@ -153,16 +153,14 @@ After starting the service, Please visit `127.0.0.1:8000/docs` in your browser
 
   Enter `WEBCLIENT_IP:80` in the browser to open the interface for reverse image search.
 
-  > `WEBCLIENT_IP`specifies the IP address that runs qa-chatbot-client docker.
+  > `WEBCLIENT_IP` specifies the IP address that runs qa-chatbot-client docker.
 
   i. **Load data**: Click the `upload` button, and then select a csv Q&A data file from the local to import it into the Q&A chatbot system. For the data format, you can refer to example_data in the data directory of this project.
 
-  
+
 
   ii. **Retrieve similar questions**:  Enter a question in the dialog, and then you'll get five questions most similar to the question in the Q&A library.
 
-  
+
 
   iii. **Obtain answer**: Click any of the similar questions obtained in the previous step, and you'll get the answer.
-
-   
