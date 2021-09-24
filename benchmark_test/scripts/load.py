@@ -24,14 +24,15 @@ def csv_to_milvus(collection_name, client):
     filenames = os.listdir(BASE_FILE_PATH)
     filenames.sort()
     total_insert_time = 0
+    collection_rows = client.count(collection_name)
     for filename in filenames:
         fname = os.path.join(BASE_FILE_PATH, filename)
         vectors = load_csv_data(fname)
-        collection_rows = client.count(collection_name)
         vectors_ids = [id for id in range(collection_rows, collection_rows + len(vectors))]
         time_add_start = time.time()
         ids = client.insert(collection_name, vectors, vectors_ids)
         total_insert_time = total_insert_time + time.time() - time_add_start
+        collection_rows = collection_rows + len(ids)
         print(filename, " insert time: ", time.time() - time_add_start)
     print("total insert time: ", total_insert_time)
 
