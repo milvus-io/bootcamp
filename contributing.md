@@ -93,7 +93,7 @@ When you fixed a bug or finished an enhancement suggestion, you can submit a pul
 
 > - [ ] A reference to a related issue in your repository.
 >
-> Each PR is related to an issue, and you need to list the issue, like https://github.com/milvus-io/bootcamp/issues/600.
+> Each PR is related to an issue, and you need to list the issue, like #600.
 >
 > - [ ]  A description of the changes proposed in the pull request.
 >
