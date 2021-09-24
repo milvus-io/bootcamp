@@ -73,7 +73,6 @@ class MilvusHelper:
             self.set_collection(collection_name)
             status = self.collection.create_index(field_name="embedding", index_params=index_params)
             if not status.code:
-                self.collection.load()
                 LOGGER.debug(
                     "Successfully create index in collection:{} with param:{}".format(collection_name, index_params))
                 return status
