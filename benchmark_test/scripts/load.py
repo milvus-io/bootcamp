@@ -42,7 +42,6 @@ def load_fvecs_data(base_len, idx, fname):
     x = np.memmap(fname, dtype='uint8', mode='r')
     d = x[:4].view('int32')[0]
     data = x.view('float32').reshape(-1, d + 1)[begin_num:(begin_num + base_len), 1:]
-    # data = (data+0.5)/255
     if IF_NORMALIZE:
         data = normalize(data)
     data = data.tolist()
@@ -82,7 +81,6 @@ def npy_to_milvus(collection_name, client):
     collection_rows = client.count(collection_name)
     for filename in filenames:
         vectors = load_npy_data(os.path.join(BASE_FILE_PATH, filename))
-#         collection_rows = client.count(collection_name)
         vectors_ids = [id for id in range(collection_rows, collection_rows + len(vectors))]
         time_add_start = time.time()
         ids = client.insert(collection_name, vectors, vectors_ids)
@@ -111,7 +109,6 @@ def bvecs_to_milvus(collection_name, client):
     collection_rows = client.count(collection_name)
     while count < (TOTAL_VECTOR_COUNT // IMPORT_CHUNK_SIZE):
         vectors = load_bvecs_data(IMPORT_CHUNK_SIZE, count, fname)
-#         collection_rows = client.count(collection_name)
         vectors_ids = [id for id in range(collection_rows, collection_rows + len(vectors))]
         time_add_start = time.time()
         ids = client.insert(collection_name, vectors, vectors_ids)
