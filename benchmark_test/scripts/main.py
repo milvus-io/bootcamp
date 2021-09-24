@@ -17,7 +17,7 @@ def main():
              "load", "load_progress", "index_progress", "calculate"]
         )
     except getopt.GetoptError:
-        print("Usage: python milvus_toolkindex_type.py -q <nq> -k <topk> -c <collection> -s")
+        print("Error parameters!")
         sys.exit(2)
 
     for opt_name, opt_value in opts:
