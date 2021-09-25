@@ -1,7 +1,7 @@
 # README
 
 ## Preparation
-This project is the benchmark test based Milvus 2.0.0-rc5.
+This project is the benchmark test based Milvus 2.0.0-rc6.
 
 Before running this project script, you need to start the service of milvus 2.0.
 
@@ -187,4 +187,9 @@ python main.py --collection <collection_name> --search_param <search_param> --pe
 **15. Collection's Index Progress**
 ```
 python main.py --collection <collectoin_name> --index_progress 
+```
+
+**16. Collection's load Progress**
+```
+python main.py --collection <collectoin_name> --load_progress 
 ```
