@@ -19,5 +19,5 @@ MYSQL_DB = os.getenv("MYSQL_DB", "mysql")
 ############### Data Path ###############
 UPLOAD_PATH = os.getenv("UPLOAD_PATH", "tmp/audio-data")
 
-############### Number of log files ###############
+############### Number of Log Files ###############
 LOGS_NUM = os.getenv("logs_num", 0)
