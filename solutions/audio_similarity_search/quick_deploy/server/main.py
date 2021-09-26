@@ -35,10 +35,6 @@ MODEL = None
 MILVUS_CLI = MilvusHelper()
 MYSQL_CLI = MySQLHelper()
 
-
-
-
-
 # Mkdir 'tmp/audio-data'
 if not os.path.exists(UPLOAD_PATH):
     os.makedirs(UPLOAD_PATH)
