@@ -39,7 +39,7 @@ When it is done, there should be the following files in **milvus_sift100m**:
 
 ## 2. Create a table
 
-Make sure Milvus is already installed and started. (For details of Milvus installation, please read [Milvus Quick Start](https://milvus.io/docs/preview/install_standalone-docker.md))).
+Make sure Milvus is already installed and started. (For details of Milvus installation, please read [Milvus Quick Start](https://milvus.io/docs/v2.0.0/install_standalone-docker.md))).
 
 > Before testing, please modify the corresponding parameters according to the [script instructions](/benchmark_test/scripts/README.md)
 
