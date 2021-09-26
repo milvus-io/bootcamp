@@ -4,10 +4,6 @@ from tensorflow.keras.applications.resnet50 import preprocess_input as preproces
 from tensorflow.keras.preprocessing import image
 from numpy import linalg as LA
 
-
-# os.environ['KERAS_HOME'] = os.path.abspath(os.path.join('.', 'data'))
-
-
 class CustomOperator:
     def __init__(self):
         self.input_shape = (224, 224, 3)
