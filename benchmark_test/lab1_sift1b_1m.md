@@ -43,7 +43,7 @@ Create a folder named `milvus_sift1m` and move all downloaded files to the folde
 
 Make sure Milvus is already installed and started. (For details of Milvus installation, please read [Milvus Quick Start](https://milvus.io/docs/preview/install_standalone-docker.md)).
 
->  Before testing, please modify the corresponding parameters according to the [script instructions](/benchmark_test/scripts/EN_README.md)
+>  Before testing, please modify the corresponding parameters according to the [script instructions](/benchmark_test/scripts/README.md)
 
 
 Go to `milvus_sift1m`, and run the following command to create a table:
