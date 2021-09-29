@@ -108,5 +108,5 @@ venv.bak/
 .DS_STORE
 .DS_Store?
 
-node_modules
+*/node_modules
 solutions/text_search_engine/quick_deploy/client/node_modules
