@@ -15,10 +15,10 @@ The video object detection system will use Milvus to store and search the featur
 
 - **Start Milvus v2.0**
 
-  First, you are supposed to refer to the Install [Milvus V2.0](https://milvus.io/docs/v2.0.0/install_standalone-docker.md) for how to run Milvus docker.
-  
+  First, refer [Install Milvus 2.0](https://milvus.io/docs/v2.0.0/install_standalone-docker.md) for how to run Milvus with docker.
+
   > Note the version of Milvus should be consistent with pymilvus in [requirements.txt](./server/requirements.txt).
-  
+
 - **Start MySQL**
 
   ```bash
@@ -26,7 +26,7 @@ The video object detection system will use Milvus to store and search the featur
   ```
 
 ### 2. Start Server
-The next step is to start the system server. It provides HTTP backend services, you can run source code to start.
+The next step is to start the system server. It provides HTTP backend services, you can run source code or use docker image to start it.
 
 - **Install the Python packages**
 
@@ -34,12 +34,12 @@ The next step is to start the system server. It provides HTTP backend services, 
   $ cd server
   $ pip install -r requirements.txt
   ```
-  
+
 - **Install additional package if using MacOS**
   ```bash
   $ brew install ffmpeg
   ```
-  
+
 - **Download Yolov3 Model**
 
   ```bash
@@ -53,7 +53,7 @@ The next step is to start the system server. It provides HTTP backend services, 
   │   ├── __params__
   │   └── yolo.yml
   ```
-  
+
 - **Set configuration**
 
   ```bash
@@ -77,7 +77,7 @@ The next step is to start the system server. It provides HTTP backend services, 
   - DATA_PATH & UPLOAD_PATH: modify to your own ABSOLUTE paths for object images & video respectively
   - DISTANCE_LIMIT: change to some number so that results with larger distances will not be shown in response
 
-#### 2.1 Run server with Docker
+#### Option 1: Run server with Docker
 
 - **Set Parameters**
 
@@ -105,11 +105,11 @@ The next step is to start the system server. It provides HTTP backend services, 
 
   > **Note:** -v ${DATAPATH1}:${DATAPATH1} means that you can mount the directory into the container. If needed, you can load the parent directory or more directories.
 
-#### 2.2 OR run source code
+#### Option 2: Run source code
 
-- **Run the code** 
+- **Run the code**
 
-  Then start the server with Fastapi. 
+  Then start the server with Fastapi.
 
   ```bash
   $ cd src
@@ -127,7 +127,7 @@ The next step is to start the system server. It provides HTTP backend services, 
   > Return the object image by path.
   >
   > /video/getVideo
-  > 
+  >
   > Return the video by path.
   >
   > /progress
@@ -137,7 +137,7 @@ The next step is to start the system server. It provides HTTP backend services, 
   > /image/count
   >
   > Return the number of vectors in Milvus.
-  > 
+  >
   > /image/load
   >
   > Load images of known objects by the folder path.
@@ -146,7 +146,7 @@ The next step is to start the system server. It provides HTTP backend services, 
   > /video/search
   >
   > Pass in an video to search for similar images of objects detected.
-  
+
 
 - **Code structure**
 
@@ -187,13 +187,13 @@ milvusbootcamp/video-object-detect-client:2.0
 
 - **How to use**
 
-Visit  ` WEBCLIENT_IP:8001`  in the browser to open the interface for reverse image search. 
+Visit  ` WEBCLIENT_IP:8001`  in the browser to open the interface for reverse image search.
 
 >  `WEBCLIENT_IP `specifies the IP address that runs video_object_detection client docker.
 
 <img src="pic/web1.png" width = "800" height = "550" alt="arch" align=center />
 
-Click `UPLOAD DATA SET` & enter the folder path of object images, then click `CONFIRM` to load the pictures. The following screenshot shows the loading process:
+Click `UPLOAD DATA SET` & enter the folder path of object images, then click `CONFIRM` to insert pictures. The following screenshot shows the loading process:
 
 >  Note: The path entered should be consistent with DATA_PATH in [config.py](./server/src/config.py)
 
@@ -203,7 +203,7 @@ The loading process may take a while depending on data size. The following scree
 
 > Only support **jpg** pictures.
 
-<img src="pic\web3.png" width = "800" height = "550" />
+<img src="pic/web3.png" width = "800" height = "550" />
 
 Then click `UPLOAD A VIDEO TO SEARCH` to upload a video to detect objects.
 
@@ -213,6 +213,6 @@ Then click `UPLOAD A VIDEO TO SEARCH` to upload a video to detect objects.
 
 <img src="pic/web4.png"  width = "800" height = "550" />
 
-The loading process may take a while. After video is successfully loaded, click Play button to play video and detected objects will be displayed on the right with its image, name, distance (A lower distance means more similarity between the object detected in video & object image stored in Milvus).
+The loading process may take a while. After video is successfully loaded, click Play button to play video and detected objects will be displayed with its image, name, distance (The smaller the distance the higher similarity between the object detected in video and the object image stored in Milvus).
 
 <img src="pic/web5.png"  width = "800" height = "550" />
