@@ -5,86 +5,64 @@ from multiprocessing import Pool, cpu_count
 import time
 import logging
 import os
+import sys
 
 logging.basicConfig(filename='benchmark.log', level=logging.DEBUG)
 
-
 MILVUS_HOST = "127.0.0.1"
 MILVUS_PORT = 19530
-
 DIM = 768
-TOTAL_NUM = 100000
-BATCH_NUM = 10000
-PROCESS_NUM = 5
 
+SHARD_NUM = 5
 
-def create_collection(collection_name):
+TOTAL_NUM = 1000000
+BATCH_SIZE = 10000
+PROCESS_NUM = 10
+
+def create_collection(collection_name, dim=768):
     try:
+        connections.connect(host=MILVUS_HOST, port=MILVUS_PORT)
         if not utility.has_collection(collection_name):
             field1 = FieldSchema(name="id", dtype=DataType.INT64, descrition="int64", is_primary=True, auto_id=True)
-            field2 = FieldSchema(name="embedding", dtype=DataType.FLOAT_VECTOR, descrition="float vector", dim=DIM,
+            field2 = FieldSchema(name="embedding", dtype=DataType.FLOAT_VECTOR, descrition="float vector", dim=dim,
                                  is_primary=False)
             schema = CollectionSchema(fields=[field1, field2], description="collection description")
-            collection = Collection(name=collection_name, schema=schema)
+            collection = Collection(name=collection_name, schema=schema, shards_num=SHARD_NUM)
             print("Create Milvus collection: {}".format(collection))
-            return collection
-        else:
-            collection = Collection(collection_name)
             return collection
     except Exception as e:
         logging.error("Failed to create milvus collection: {}".format(e))
-        # sys.exit(1)
+        sys.exit(1)
 
 
-def bvecs_mmap(fname):
-    x = np.memmap(fname, dtype='uint8', mode='r')
-    d = x[:4].view('int32')[0]
-    return x.reshape(-1, d + 4)[:, 4:]
-
-
-def read_bvecs_data(base_len, idx, fname):
-    begin_num = base_len * idx
-    x = np.memmap(fname, dtype='uint8', mode='r')
-    d = x[:4].view('int32')[0]
-    data = x.reshape(-1, d + 4)[begin_num:(begin_num + base_len), 4:]
-    data = (data + 0.5) / 255
-    if IF_NORMALIZE:
-        data = normalize(data)
-    data = data.tolist()
-    return data
-
-
-def sub_insert(vec, collection, task_id):
-    print(task_id)
-    # print("sub process {} insert begin".format(os.getpid()))
+def sub_insert(task_id, col_name):
+    print("task_id {}, sub process {}".format(task_id, os.getpid()))
+    vec = np.random.random((BATCH_SIZE, DIM)).tolist()
+    connections.connect(host=MILVUS_HOST, port=MILVUS_PORT)
+    collection = Collection(name=col_name)
     time_start = time.time()
     mr = collection.insert([vec])
-    ids = mr.primary_keys
+    # ids = mr.primary_keys
     time_end = time.time()
-    print("task {} cost time: {}".format(task_id, time_end-time_start))
-    logging.info("insert number:{},insert time:{}".format(len(ids), time_end - time_start))
-    return ids
+    print("task {} cost time: {}".format(task_id, time_end - time_start))
+    logging.info("task {}, process {}, insert number:{},insert time:{}".format(task_id, os.getpid(), len(ids),
+                                                                               time_end - time_start))
 
 
-def multi_insert(collection_name):
-    connections.connect(host=MILVUS_HOST, port=MILVUS_PORT)
-    collection = create_collection(collection_name)
-    loop = TOTAL_NUM // (BATCH_NUM * PROCESS_NUM)
+def multi_insert_pool(collection_name):
+    p = Pool(PROCESS_NUM)
+    begin_time = time.time()
+    loop = TOTAL_NUM // BATCH_SIZE
+    print(loop)
     for i in range(loop):
-        print("loop: {}, begin.".format(i))
-        thread_list = []
-        vec = np.random.random((PROCESS_NUM, BATCH_NUM, DIM)).tolist()
-        begin_time = time.time()
-        for j in range(PROCESS_NUM):
-            p = Process(target=sub_insert, args=(vec[j], collection, j))
-            thread_list.append(p)
-            p.start()
-        for p in thread_list:
-            p.join()
-        print("loop {}: , total insert: {}, cost time: {}".format(i, PROCESS_NUM * BATCH_NUM, time.time() - begin_time))
-
+        p.apply_async(sub_insert, (i, collection_name,))
+    p.close()
+    p.join()
+    print("total cost time: {}".format(time.time() - begin_time))
 
 
 if __name__ == "__main__":
-    # multi_insert_pool('test8')
-    multi_insert('test')
+    # collection_name = "concurrent_insert_0"
+    collection_name = "test2"
+    # create_collection(collection_name)
+    multi_insert_pool(collection_name)
