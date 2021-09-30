@@ -1,5 +1,5 @@
 # Solutions
-Each solution includes a Jupyter notebook and Docker quick deployments. Along with the notebook is a pre-built demo server that can be run with just a few lines of code, or you can run it with Docker in three steps. If you have any questions, you can submit an [issue](https://github.com/milvus-io/bootcamp/issues/new/choose). Have fun with the solutions of Bootcamp :)
+Each solution includes a Jupyter notebook and Docker quick deployment. Along with the notebook is a pre-built demo server that can be run with just a few lines of code, or you can run it with Docker in three steps. If you have any questions, you can submit an [issue](https://github.com/milvus-io/bootcamp/issues/new/choose). Have fun with the solutions of Bootcamp :)
 
 1. [**Reverse Image Search**](./reverse_image_search), get the similar images.
 
