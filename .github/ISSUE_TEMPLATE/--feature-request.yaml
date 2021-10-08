@@ -1,0 +1,42 @@
+name: 🚀 Feature request
+description: Suggest an idea for this project
+title: "[FEATURE]: "
+body:
+- type: markdown
+  attributes:
+    value: |
+      Thanks for taking the time to request a feature for this projrct! Please fill the form in English!
+- type: checkboxes
+  attributes:
+    label: Is there an existing issue for this?
+    description: Please search to see if an issue related to this feature request already exists.
+    options:
+    - label: I have searched the existing issues
+      required: true
+- type: textarea
+  attributes:
+    label: Is your feature request related to a problem? Please describe.
+    description: |
+      A clear and concise description of what the problem is.
+      And you can take a look at the [announcement](https://github.com/milvus-io/bootcamp/issues/587).
+    placeholder: I'm always frustrated when [...]
+  validations:
+    required: false
+- type: textarea
+  attributes:
+    label: Describe the solution you'd like
+    description: A clear and concise description of what you want to happen.
+  validations:
+    required: false
+- type: textarea
+  attributes:
+    label: Describe alternatives you've considered
+    description: A clear and concise description of any alternative solutions or features you've considered.
+  validations:
+    required: false
+- type: textarea
+  attributes:
+    label: Anything else?
+    description: Add any other context, code examples, or references to existing implementations about the feature request here.
+  validations:
+    required: false
