@@ -9,11 +9,11 @@ import sys
 
 logging.basicConfig(filename='benchmark.log', level=logging.DEBUG)
 
-MILVUS_HOST = "127.0.0.1"
-MILVUS_PORT = 19530
-DIM = 768
+MILVUS_HOST = "127.0.0.1" # Milvus service address
+MILVUS_PORT = 19530       # Milvus service port
+DIM = 768 # Vector dimension
 
-SHARD_NUM = 5
+SHARD_NUM = 5 # Parameter for creating a Milvus collection, Corresponds to how many active datanodes can be used on insert 
 
 TOTAL_NUM = 1000000
 BATCH_SIZE = 10000
