@@ -1,5 +1,11 @@
 from pymilvus import connections, FieldSchema, CollectionSchema, DataType, Collection, utility
 import numpy as np
+from multiprocessing import Pool
+import time
+import logging
+import os
+import sys
+import getopt
 
 
 MILVUS_HOST = 127.0.0.1
@@ -10,6 +16,7 @@ NQ = 10
 TOP_K = 5
 
 PROCESS_NUM = 2
+LOOP = 4
 
 
 def sub_search(task_id, col_name):
@@ -25,30 +32,15 @@ def sub_search(task_id, col_name):
     logging.info("task {}, process {}, search number:{},search time:{}".format(task_id, os.getpid(), NQ, time_end - time_start))
 
 
-
-def search():
-	pass
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+def multi_search_pool(collection_name):
+	p = Pool(PROCESS_NUM)
+    begin_time = time.time()
+    for i in range(LOOP):
+        p.apply_async(sub_search, (i, collection_name,))
+    p.close()
+    p.join()
+    print("total cost time: {}".format(time.time() - begin_time))
+    logging.info("total cost time: {}".format(time.time() - begin_time))
 
 
 def main():
@@ -79,3 +71,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
