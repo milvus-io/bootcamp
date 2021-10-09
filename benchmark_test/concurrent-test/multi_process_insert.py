@@ -79,9 +79,11 @@ def main():
             sys.exit(2)
         elif opt_name in ("-n", "--name"):
             collection_name = opt_value
+	# create a collection
         elif opt_name in ("-c", "--create"):
             create_collection(collection_name)
             sys.exit(2)
+	# Insert data concurrently
         elif opt_name in ("-i", "--insert"):
             multi_insert_pool(collection_name)
             sys.exit(2)
