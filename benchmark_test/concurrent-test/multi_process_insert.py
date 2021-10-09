@@ -15,9 +15,9 @@ DIM = 768
 
 SHARD_NUM = 5
 
-TOTAL_NUM = 1000000
-BATCH_SIZE = 10000
-PROCESS_NUM = 10
+TOTAL_NUM = 1000000 # Total number of inserted vectors
+BATCH_SIZE = 10000  # The number of vectors inserted in each batch
+PROCESS_NUM = 10    # Concurrent number
 
 def create_collection(collection_name, dim=768):
     try:
