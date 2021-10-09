@@ -32,7 +32,6 @@ def sub_search(task_id, col_name):
     logging.info("task {}, process {}, search number:{},search time:{}".format(task_id, os.getpid(), NQ, time_end - time_start))
 
 
-
 def multi_search_pool(collection_name):
 	p = Pool(PROCESS_NUM)
     begin_time = time.time()
@@ -44,7 +43,32 @@ def multi_search_pool(collection_name):
     logging.info("total cost time: {}".format(time.time() - begin_time))
 
 
+def main():
+    try:
+        opts, args = getopt.getopt(
+            sys.argv[1:],
+            "hn:s",
+            ["help", "name=", "ssearch"])
+    except getopt.GetoptError:
+        print("Error parameters, See 'python main.py --help' for usage.")
+        sys.exit(2)
+
+    for opt_name, opt_value in opts:
+        if opt_name in ("-h", "--help"):
+            print(
+                "For parameter descriptions, please refer to "
+                "https://github.com/milvus-io/bootcamp/tree/master/benchmark_test/scripts")
+            sys.exit(2)
+        elif opt_name in ("-n", "--name"):
+            collection_name = opt_value
+        # elif opt_name in ("-c", "--create"):
+        #     create_collection(collection_name)
+        #     sys.exit(2)
+        elif opt_name in ("-s", "--search"):
+            multi_search_pool(collection_name)
+            sys.exit(2)
 
 
+if __name__ == "__main__":
+    main()
 
-    
