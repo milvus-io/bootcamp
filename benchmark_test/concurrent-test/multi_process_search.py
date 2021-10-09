@@ -28,3 +28,54 @@ def sub_search(task_id, col_name):
 
 def search():
 	pass
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def main():
+    try:
+        opts, args = getopt.getopt(
+            sys.argv[1:],
+            "hn:s",
+            ["help", "name=", "ssearch"])
+    except getopt.GetoptError:
+        print("Error parameters, See 'python main.py --help' for usage.")
+        sys.exit(2)
+
+    for opt_name, opt_value in opts:
+        if opt_name in ("-h", "--help"):
+            print(
+                "For parameter descriptions, please refer to "
+                "https://github.com/milvus-io/bootcamp/tree/master/benchmark_test/scripts")
+            sys.exit(2)
+        elif opt_name in ("-n", "--name"):
+            collection_name = opt_value
+        # elif opt_name in ("-c", "--create"):
+        #     create_collection(collection_name)
+        #     sys.exit(2)
+        elif opt_name in ("-s", "--search"):
+            multi_search_pool(collection_name)
+            sys.exit(2)
+
+
+if __name__ == "__main__":
+    main()
