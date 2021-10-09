@@ -6,17 +6,15 @@ This project combines Milvus and [PaddleRec](https://aistudio.baidu.com/aistudio
 
 [MovisLens](https://grouplens.org/datasets/movielens/) is a dataset on movie ratings, with data from movie rating sites such as IMDB. The dataset contains information about users' ratings of movies, users' demographic characteristics and descriptive features of movies, which is suitable for getting started with recommender systems.
 
-In this project, we use one of the sub-datasets — [MovieLens 1M](https://grouplens.org/datasets/movielens/1m/). This dataset contains 1,000,209 anonymous ratings of approximately 3,900 movies  made by 6,040 MovieLens users. 
+In this project, we use one of the sub-datasets — [MovieLens 1M](https://grouplens.org/datasets/movielens/1m/). This dataset contains 1,000,209 anonymous ratings of approximately 3,900 movies  made by 6,040 MovieLens users.
 
-The model already trained only uses  `user.dat` to query existed users. In addtition, the model generates vectors of movies in `movie.dat`, and we load these vectors into Milvus. After passing in new user information(gender, age, and occupation), the next step is to extract features and recall in Milvus. Then the system goes through positive sorting(checking movies), and sorting to recommend the most suitable movies.
+The model already trained only uses  `user.dat` to query existing users. In addition, the model generates vectors of movies in `movie.dat`, and we load these vectors into Milvus. After passing in new user information (gender, age, and occupation), the next step is to extract features and recall in Milvus. Then the system goes through positive sorting (checking movies), and sorting to recommend the most suitable movies.
 
 #### users.dat
 
 UserID::Gender::Age::Occupation::Zip-code
 
-All demographic information is provided voluntarily by the users and is
-not checked for accuracy.  Only users who have provided some demographic
-information are included in this data set.
+All demographic information is provided voluntarily by users and is not checked for accuracy. Only users who have provided some demographic information are included in this data set.
 
 - Gender is denoted by a "M" for male and "F" for female
 - Age is chosen from the following ranges:
@@ -72,7 +70,7 @@ entries and/or test entries
 ## How to start
 
 1. Start servers: milvus2.0 & redis
- 
+
 3. Pull the source code.
 
    ```shell
@@ -102,7 +100,7 @@ entries and/or test entries
        "index_type":"IVF_FLAT",
        "params":{"nlist":128}
        }
-   
+
    top_k = 10
    search_params = {
        "metric_type": "L2",
@@ -185,5 +183,3 @@ entries and/or test entries
      zipcode: "95370"
    }
    ```
-
-   
