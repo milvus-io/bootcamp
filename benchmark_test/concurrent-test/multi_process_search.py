@@ -11,9 +11,9 @@ import getopt
 MILVUS_HOST = 127.0.0.1   # Milvus service address
 MILVUS_PORT = 19530       # Milvus service port
 
-DIM = 128
-NQ = 10
-TOP_K = 5
+DIM = 128 # Vector dimension
+NQ = 10   # The number of the query vectors in each batch
+TOP_K = 5 # The number of the vectors that we want to find the nearest neighbors
 
 PROCESS_NUM = 2           # Concurrent number
 LOOP = 4                  # The number of query time
