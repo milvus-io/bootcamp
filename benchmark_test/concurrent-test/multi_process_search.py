@@ -19,6 +19,16 @@ PROCESS_NUM = 2
 LOOP = 4
 
 
+def create_index(collection_name, index_type, index_param):
+    pass
+
+
+def load_collection(collection_name):
+    connections.connect(host=MILVUS_HOST, port=MILVUS_PORT)
+    collection = Collection(name=collection_name)
+    collection.load()
+
+
 def sub_search(task_id, col_name):
 	print("task_id {}, sub process {}".format(task_id, os.getpid()))
     vec = np.random.random((NQ, DIM)).tolist()
@@ -47,8 +57,8 @@ def main():
     try:
         opts, args = getopt.getopt(
             sys.argv[1:],
-            "hn:s",
-            ["help", "name=", "ssearch"])
+            "hn:ls",
+            ["help", "name=", "load", "search"])
     except getopt.GetoptError:
         print("Error parameters, See 'python main.py --help' for usage.")
         sys.exit(2)
@@ -61,9 +71,9 @@ def main():
             sys.exit(2)
         elif opt_name in ("-n", "--name"):
             collection_name = opt_value
-        # elif opt_name in ("-c", "--create"):
-        #     create_collection(collection_name)
-        #     sys.exit(2)
+        elif opt_name in ("-l", "--load"):
+            load_collection(collection_name)
+            sys.exit(2)
         elif opt_name in ("-s", "--search"):
             multi_search_pool(collection_name)
             sys.exit(2)
