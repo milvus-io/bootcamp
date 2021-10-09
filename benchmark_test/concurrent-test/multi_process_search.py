@@ -8,15 +8,15 @@ import sys
 import getopt
 
 
-MILVUS_HOST = 127.0.0.1
-MILVUS_PORT = 19530
+MILVUS_HOST = 127.0.0.1   # Milvus service address
+MILVUS_PORT = 19530       # Milvus service port
 
 DIM = 128
 NQ = 10
 TOP_K = 5
 
-PROCESS_NUM = 2
-LOOP = 4
+PROCESS_NUM = 2           # Concurrent number
+LOOP = 4                  # The number of query time
 
 
 def sub_search(task_id, col_name):
