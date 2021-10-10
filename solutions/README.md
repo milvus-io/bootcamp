@@ -20,14 +20,14 @@ Each solution includes a Jupyter notebook and Docker quick deployment. Along wit
 
    - [Jupyter notebook](./recommender_system/recommender_system.ipynb)
 
-4. [**Molecular Similarity Search**](./solutions/molecular_similarity_search), search for a molecular and get the similar structure.
+4. [**Molecular Similarity Search**](./solutions/molecular_similarity_search), search for a molecule and get the similar structure.
    - [Quick deploy](./molecular_similarity_search/quick_deploy)
    - [Jupyter notebook](./molecular_similarity_search/molecular_search.ipynb)
 5. [**Video Similarity Search**](./video_similarity_search), search videos with image, or analyse the objects in the video.
    - [Quick deploy](./video_similarity_search/quick_deploy)
    - [Object detection](./video_similarity_search/object_detection)
    - [Jupyter notebook](./video_similarity_search/video_similarity_search.ipynb)
-6. [**Audio Similarity Search**](./audio_similarity_search), search for an sudio and return the similar results.
+6. [**Audio Similarity Search**](./audio_similarity_search), search for an audio and get the similar results.
    - [Quick deploy](./audio_similarity_search/quick_deploy)
    - [Jupyter notebook](./audio_similarity_search/audio_similarity_search.ipynb)
 7. [**Text Search Engine**](./text_search_engine), a text search engine.
