@@ -19,6 +19,7 @@ PROCESS_NUM = 2           # Concurrent number
 LOOP = 4                  # The number of query time
 
 
+#Creat IVF_FLAT index for a collection.
 def create_index(collection_name, index_type, index_param):
     pass
 
