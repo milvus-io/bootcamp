@@ -10,7 +10,7 @@ The system architecture is displayed as follows:
 
 ## Data source
 
-This demo uses the PASCAL VOC image set, which contains 17125 images with 20 categories: human; animals (birds, cats, cows, dogs, horses, sheep); transportation (planes, bikes,boats, buses, cars, motorcycles, trains); household (bottles, chairs, tables, pot plants, sofas, TVs).
+This demo uses the PASCAL VOC image set, which contains 17125 images with 20 categories: human; animals (birds, cats, cows, dogs, horses, sheep); transportation (planes, bikes, boats, buses, cars, motorcycles, trains); household (bottles, chairs, tables, pot plants, sofas, TVs).
 
 Dataset size: ~ 2 GB.
 
@@ -26,9 +26,9 @@ As shown in the architecture diagram, the system will use Milvus to store and se
 
 - **Start Milvus v2.0**
 
-  First, you are supposed to refer to the Install [Milvus v2.0-rc5](milvus.io) for how to run Milvus docker.
+  First, you are supposed to refer to the Install [Milvus v2.0](https://milvus.io/docs/install_standalone-docker.md) for how to run Milvus docker.
 
-> Note the version of Milvus.
+> Note the version of Milvus should be consistent with pymilvus version.
 
 - **Start MySQL**
 
@@ -38,9 +38,9 @@ $ docker run -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7
 
 ### 2. Start Server
 
-The next step is to start the system server. It provides HTTP backend services, and there are two ways to start: running with Docker or source code.
+The next step is to start the system server. It provides HTTP backend services, and there are two ways to start: running with Docker OR source code.
 
-#### 2.1 Run server with Docker
+#### Option 1: Run server with Docker
 
 - **Set parameters**
 
@@ -74,7 +74,7 @@ milvusbootcamp/img-search-server:2.0
 
 > **Note:** -v ${DATAPATH1}:${DATAPATH1} means that you can mount the directory into the container. If needed, you can load the parent directory or more directories.
 
-#### 2.2 Run source code
+#### Option 2: Run source code
 
 - **Install the Python packages**
 
@@ -100,9 +100,9 @@ Please modify the parameters according to your own environment. Here listing som
 | MYSQL_PORT       | Port of Milvus.                                       | 3306                |
 | DEFAULT_TABLE    | The milvus and mysql default collection name.         | milvus_img_search   |
 
-- **Run the code** 
+- **Run the code**
 
-Then start the server with Fastapi. 
+Then start the server with Fastapi.
 
 ```bash
 $ cd src
@@ -111,7 +111,7 @@ $ python main.py
 
 - **API docs**
 
-Vist 127.0.0.1:5000/docs in your browser to use all the APIs.
+Visit 127.0.0.1:5000/docs in your browser to use all the APIs.
 
 ![fastapi](pic/fastapi.png)
 
@@ -127,7 +127,7 @@ If you are interested in our code or would like to contribute code, feel free to
 │   │
 │   └───src
 │       │   config.py  # Configuration file.
-│       │   encode.py  # Covert image/video/questions/... to embeddings.
+│       │   encode.py  # Convert image/video/questions/... to embeddings.
 │       │   milvus.py  # Connect to Milvus server and insert/drop/query vectors in Milvus.
 │       │   mysql.py   # Connect to MySQL server, and add/delete/query IDs and object information.
 │       │   
@@ -152,7 +152,7 @@ milvusbootcamp/img-search-client:1.0
 
 - **How to use**
 
-Visit  ` WEBCLIENT_IP:8001`  in the browser to open the interface for reverse image search. 
+Visit  ` WEBCLIENT_IP:8001`  in the browser to open the interface for reverse image search.
 
 > `WEBCLIENT_IP `specifies the IP address that runs pic-search-webclient docker.
 
@@ -171,4 +171,3 @@ The loading process may take several minutes. The following screenshot shows the
 Select an image to search.
 
 <img src="pic/web5.png" width = "650" height = "500" alt="arch" align=center />
-
