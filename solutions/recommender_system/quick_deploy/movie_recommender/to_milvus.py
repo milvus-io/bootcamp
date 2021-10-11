@@ -112,7 +112,7 @@ except Exception as e:
 #     }
 # }
 
-#
+
 #     Now we've gotten the results, and known it's a 1 x 1 structure, how can we get ids, distances and fields?
 #     It's very simple, for every `topk_film`, it has three properties: `id, distance and entity`.
 #     All fields are stored in `entity`, so you can finally obtain these data as below:
