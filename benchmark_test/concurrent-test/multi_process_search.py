@@ -23,12 +23,14 @@ def create_index(collection_name, index_type, index_param):
     pass
 
 
+# Load a collection data from disk to memory before searching in Milvus.
 def load_collection(collection_name):
     connections.connect(host=MILVUS_HOST, port=MILVUS_PORT)
     collection = Collection(name=collection_name)
     collection.load()
 
 
+# Child process is responsible for query。
 def sub_search(task_id, col_name):
 	print("task_id {}, sub process {}".format(task_id, os.getpid()))
     vec = np.random.random((NQ, DIM)).tolist()
@@ -42,6 +44,8 @@ def sub_search(task_id, col_name):
     logging.info("task {}, process {}, search number:{},search time:{}".format(task_id, os.getpid(), NQ, time_end - time_start))
 
 
+
+# Process pool for searching.
 def multi_search_pool(collection_name):
 	p = Pool(PROCESS_NUM)
     begin_time = time.time()
@@ -51,6 +55,7 @@ def multi_search_pool(collection_name):
     p.join()
     print("total cost time: {}".format(time.time() - begin_time))
     logging.info("total cost time: {}".format(time.time() - begin_time))
+
 
 
 def main():
