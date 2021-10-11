@@ -1,6 +1,6 @@
 ## README
 
-This project builds a DNA sequence classification system with Milvus. In this project, k-mer & CountVectorizer is used to convert the original DNA sequence into a fixed-length vector and store it in Milvus. The system classifies DNA sequence entered by user through searching for most similar sequences in Milvus and recalling classes (gene family names) from Mysql.
+This project builds a DNA sequence classification system with Milvus. In this project, k-mer & CountVectorizer is used to convert the original DNA sequence into a fixed-length vector and store it in Milvus. The system classifies DNA sequence entered by user through searching for the most similar sequences in Milvus and recalling classes (gene family names) from Mysql.
 
 ### Data source
 
