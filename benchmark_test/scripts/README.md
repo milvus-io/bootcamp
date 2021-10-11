@@ -1,4 +1,4 @@
-# README
+# Scripts about Milvus
 
 ## Preparation
 This project is the benchmark test based Milvus 2.0.0-rc6.
