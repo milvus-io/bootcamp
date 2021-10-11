@@ -61,7 +61,7 @@ def fvecs_to_milvus(collection_name, client):
         print(count * IMPORT_CHUNK_SIZE, (count + 1) * IMPORT_CHUNK_SIZE, 'time:',
               time.time() - time_add_start)
         count = count + 1
-        client.count(collection_name)
+    client.count(collection_name)
     print("total insert time: ", total_insert_time)
 
 
