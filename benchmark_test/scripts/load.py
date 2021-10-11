@@ -119,6 +119,7 @@ def bvecs_to_milvus(collection_name, client):
         total_insert_time = total_insert_time + time.time() - time_add_start
         count = count + 1
         collection_rows = collection_rows + len(ids)
+    client.count(collection_name)
     print("total insert time: {}".format(total_insert_time))
 
 
