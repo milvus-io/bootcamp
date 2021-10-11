@@ -115,6 +115,18 @@ Visit 127.0.0.1:5000/docs in your browser to use all the APIs.
 
 ![fastapi](pic/fastapi.png)
 
+> /data: get image by path
+>
+> /progress: get load progress
+>
+> /img/load: load images into milvus collection
+>
+> /img/count: count rows in milvus collection
+>
+> /img/drop: drop milvus collection & corresponding Mysql table
+>
+> /img/search: search for most similar image emb in milvus collection and get image info by milvus id in Mysql
+
 - **Code  structure**
 
 If you are interested in our code or would like to contribute code, feel free to learn more about our code structure.
