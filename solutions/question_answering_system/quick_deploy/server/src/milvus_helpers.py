@@ -21,7 +21,7 @@ class MilvusHelper:
             if self.has_collection(collection_name):
                 self.collection = Collection(name=collection_name)
             else:
-                raise Exception("There has no collection named:{}".format(collection_name))
+                raise Exception("There is no collection named:{}".format(collection_name))
         except Exception as e:
             LOGGER.error("ERROR: {}".format(e))
             sys.exit(1)
