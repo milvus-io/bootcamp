@@ -66,8 +66,12 @@ def main():
     for opt_name, opt_value in opts:
         if opt_name in ("-h", "--help"):
             print(
-                "For parameter descriptions, please refer to "
-                "https://github.com/milvus-io/bootcamp/tree/master/benchmark_test/scripts")
+                "Usage: python multi_process_search.py [-h] [--help] [-n <collection_name>] [--name=<collection_name>] [-l] [-load] [-s] [--search]"
+                "Flags:"
+                "    -h, --help       Help for this script"
+                "    -n, --name       The name of Milvus collection"
+                "    -l, --load       Load data from disk to memory"
+                "    -s, --search     Search  in Milvus")
             sys.exit(2)
         elif opt_name in ("-n", "--name"):
             collection_name = opt_value
@@ -81,4 +85,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
