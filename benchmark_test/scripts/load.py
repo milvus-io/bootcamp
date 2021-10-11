@@ -34,6 +34,7 @@ def csv_to_milvus(collection_name, client):
         total_insert_time = total_insert_time + time.time() - time_add_start
         collection_rows = collection_rows + len(ids)
         print(filename, " insert time: ", time.time() - time_add_start)
+    client.count(collection_name)
     print("total insert time: ", total_insert_time)
 
 
