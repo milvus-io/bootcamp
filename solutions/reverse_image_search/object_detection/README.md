@@ -115,6 +115,18 @@ Vist 127.0.0.1:5010/docs in your browser to use all the APIs.
 
 ![fastapi](pic/fastapi.png)
 
+> /data: get image by path
+>
+> /progress: get load progress
+>
+> /img/load: load images into milvus collection
+>
+> /img/count: count rows in milvus collection
+>
+> /img/drop: drop milvus collection & corresponding Mysql table
+>
+> /img/search: search for most similar image emb in milvus collection and get image info by milvus id in Mysql
+
 - **Code  structure**
 
 If you are interested in our code or would like to contribute code, feel free to learn more about our code structure.
@@ -154,7 +166,7 @@ milvusbootcamp/img-search-client:1.0
 
 - **How to use**
 
-Visit  ` WEBCLIENT_IP:8001`  in the browser to open the interface for reverse image search. 
+Visit  ` WEBCLIENT_IP:8001`  in the browser to open the interface for reverse image search.
 
 >  `WEBCLIENT_IP `specifies the IP address that runs pic-search-webclient docker.
 
@@ -175,4 +187,3 @@ The loading process may take several minutes. The following screenshot shows the
 Select an image to search.
 
 <img src="pic/web5.png"  width = "650" height = "500" />
-
