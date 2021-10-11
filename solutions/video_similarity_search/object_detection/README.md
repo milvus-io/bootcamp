@@ -38,6 +38,8 @@ The next step is to start the system server. It provides HTTP backend services, 
 - **Install additional package if using MacOS**
   ```bash
   $ brew install ffmpeg
+  # If you are using Ubuntu, you can use 
+  # $ apt install ffmpeg
   ```
 
 - **Download Yolov3 Model**
