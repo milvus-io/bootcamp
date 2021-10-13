@@ -30,6 +30,7 @@ class MySQLHelper():
             LOGGER.error("MYSQL ERROR: {} with sql: {}".format(e, sql))
             sys.exit(1)
 
+    # Create mysql table to store dna sequence labels
     def create_class_table(self, table_name):
         self.test_connection()
         sql = "create table if not exists " + table_name + "(seq_class TEXT, gene_family TEXT);"
@@ -52,6 +53,7 @@ class MySQLHelper():
             LOGGER.error("MYSQL ERROR: {} with sql: {}".format(e, sql))
             sys.exit(1)
 
+    # Insert labels into mysql table
     def load_data_to_class(self, table_name, data):
         self.test_connection()
         sql = "insert into " + table_name + " (seq_class,gene_family) values (%s,%s);"
