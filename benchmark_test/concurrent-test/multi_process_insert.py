@@ -19,6 +19,7 @@ TOTAL_NUM = 1000000 # Total number of inserted vectors
 BATCH_SIZE = 10000  # The number of vectors inserted in each batch
 PROCESS_NUM = 10    # Concurrent number
 
+# Creat a collection in Milvus.
 def create_collection(collection_name, dim=768):
     try:
         connections.connect(host=MILVUS_HOST, port=MILVUS_PORT)
