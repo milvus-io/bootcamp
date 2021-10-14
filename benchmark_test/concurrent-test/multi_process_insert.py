@@ -35,6 +35,7 @@ def create_collection(collection_name, dim=768):
         sys.exit(1)
 
 
+# Insert data into Milvus with a sub process.
 def sub_insert(task_id, col_name):
     print("task_id {}, sub process {}".format(task_id, os.getpid()))
     vec = np.random.random((BATCH_SIZE, DIM)).tolist()
