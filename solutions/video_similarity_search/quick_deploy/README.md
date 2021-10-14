@@ -2,7 +2,7 @@
 
 ## Overview
 
-This demo uses OpenCV to extract the video frames and use ResNet50 to get the feature vector of each frame, and finally use **Milvus** to save and search the data, which makes it very easy to build a system for video similarity search. So let's have fun playing with it!
+This demo uses OpenCV to extract video frames. Then it uses ResNet50 to get the feature vector of each frame. Finally it uses **Milvus** to save and search the data, which makes it very easy to build a system for video similarity search. So let's have fun playing with it!
 
 
 ## Data source
@@ -16,14 +16,14 @@ You can download the data in google drive: https://drive.google.com/file/d/1CAt-
 
 ### 1. Start Milvus and MySQL
 
-The video similarity system will use Milvus to store and search the feature vector data, and Mysql is used to store the correspondence between the ids returned by Milvus and the image paths, then you need to start Milvus and Mysql first.
+The video similarity system will use Milvus to store and search the feature vector data, and Mysql is used to store the correspondence between the ids returned by Milvus and the image paths. You need to start Milvus and Mysql first.
 
 - **Start Milvus v2.0**
 
   First, you are supposed to refer to the Install [Milvus v2.0-rc5](https://milvus.io/docs/v2.0.0/install_standalone-docker.md) for how to run Milvus docker.
-  
+
   > Note the version of Milvus.
-  
+
 - **Start MySQL**
 
   ```bash
@@ -31,9 +31,9 @@ The video similarity system will use Milvus to store and search the feature vect
   ```
 
 ### 2. Start Server
-The next step is to start the system server. It provides HTTP backend services, and there are two ways to start, such as Docker and source code.
+The next step is to start the system server. It provides HTTP backend services. There are two ways to start: Docker or source code.
 
-#### 2.1 Run server with Docker
+#### Option 1: Run server with Docker
 
 - **Set parameters**
 
@@ -67,14 +67,14 @@ The next step is to start the system server. It provides HTTP backend services, 
 
   > **Note:** -v ${DATAPATH1}:${DATAPATH1} means that you can mount the directory into the container. If needed, you can load the parent directory or more directories.
 
-#### 2.2 Run source code
+#### Option 2: Run source code
 - **Install the Python packages**
 
   ```bash
   $ cd server
   $ pip install -r requirements.txt
   ```
-  
+
 - **Set configuration**
 
   ```bash
@@ -92,9 +92,9 @@ The next step is to start the system server. It provides HTTP backend services, 
   | MYSQL_PORT       | Port of Milvus.                                       | 3306                |
   | DEFAULT_TABLE    | The milvus and mysql default collection name.         | milvus_img_search   |
 
-- **Run the code** 
+- **Run the code**
 
-  Then start the server with Fastapi. 
+  Then start the server with Fastapi.
 
   ```bash
   $ cd src
@@ -107,7 +107,7 @@ The next step is to start the system server. It provides HTTP backend services, 
 
   ![](../pic/API_imag.png)
 
-  
+
 
   > /data
   >
@@ -166,9 +166,9 @@ The next step is to start the system server. It provides HTTP backend services, 
 
 - **How to use**
 
-  Enter `WEBCLIENT_IP:8001`  in the browser to open the interface for reverse image search. 
+  Enter `WEBCLIENT_IP:8001`  in the browser to open the interface for reverse image search.
 
-  > `WEBCLIENT_IP`specifies the IP address that runs pic-search-webclient docker.
+  > `WEBCLIENT_IP` specifies the IP address that runs pic-search-webclient docker.
 
 
   ![ ](../pic/show.png)
@@ -185,8 +185,3 @@ The next step is to start the system server. It provides HTTP backend services, 
     The loading process may take several minutes. The following screenshot shows the interface with images loaded.
 
   ![ ](../pic/search.png)
-
-
-
-
-
