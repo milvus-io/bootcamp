@@ -50,6 +50,7 @@ def sub_insert(task_id, col_name):
                                                                                time_end - time_start))
 
 
+# Use multi processes to insert data.
 def multi_insert_pool(collection_name):
     p = Pool(PROCESS_NUM)
     begin_time = time.time()
