@@ -6,6 +6,7 @@ import time
 import logging
 import os
 import sys
+import getopt
 
 logging.basicConfig(filename='benchmark.log', level=logging.DEBUG)
 
