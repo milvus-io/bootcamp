@@ -52,6 +52,7 @@ def sub_insert(task_id, col_name):
 def multi_insert_pool(collection_name):
     p = Pool(PROCESS_NUM)
     begin_time = time.time()
+    # loop represents the number of times to be inserted.
     loop = TOTAL_NUM // BATCH_SIZE
     print(loop)
     for i in range(loop):
