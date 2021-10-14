@@ -45,7 +45,7 @@ def sub_insert(task_id, col_name):
     collection = Collection(name=col_name)
     time_start = time.time()
     mr = collection.insert([vec])
-    # ids = mr.primary_keys
+    ids = mr.primary_keys
     time_end = time.time()
     print("task {} cost time: {}".format(task_id, time_end - time_start))
     logging.info("task {}, process {}, insert number:{},insert time:{}".format(task_id, os.getpid(), len(ids),
