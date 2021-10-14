@@ -11,6 +11,7 @@ class MySQLHelper():
                                     local_infile=True)
         self.cursor = self.conn.cursor()
 
+    # Test the connection, and will reconnect if disconnected
     def test_connection(self):
         try:
             self.conn.ping()
