@@ -38,7 +38,7 @@ The next step is to start the system server. It provides HTTP backend services, 
 - **Install additional package if using MacOS**
   ```bash
   $ brew install ffmpeg
-  # If you are using Ubuntu, you can use 
+  # If you are using Ubuntu, you can use
   # $ apt install ffmpeg
   ```
 
@@ -147,7 +147,7 @@ The next step is to start the system server. It provides HTTP backend services, 
   >
   > /video/search
   >
-  > Pass in an video to search for similar images of objects detected.
+  > Pass in a video to search for similar images of objects detected.
 
 
 - **Code structure**
