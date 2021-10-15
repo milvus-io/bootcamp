@@ -64,6 +64,7 @@ def multi_insert_pool(collection_name):
     p.close()
     p.join()
     print("total cost time: {}".format(time.time() - begin_time))
+    logging.info("Total cost time: {}".format(time.time() - begin_time))
 
 
 def main():
