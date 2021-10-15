@@ -74,7 +74,7 @@ def main():
             "hn:ci",
             ["help", "name=", "create", "insert"])
     except getopt.GetoptError:
-        print("Error parameters, See 'python main.py --help' for usage.")
+        print("Error parameters, See 'python multi_process_insert.py --help' for usage.")
         sys.exit(2)
 
     for opt_name, opt_value in opts:
