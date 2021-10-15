@@ -7,6 +7,7 @@ MILVUS_PORT = 19530
 
 METRIC_TYPE = 'L2'
 VECTOR_DIMENSION = 128
+SHARDS_NUM = 2
 
 ##################### Indexing Parameters ##########################################################
 
