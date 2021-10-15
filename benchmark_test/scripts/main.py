@@ -17,7 +17,7 @@ def main():
              "load", "load_progress", "index_progress", "calculate"]
         )
     except getopt.GetoptError:
-        print("Error parameters!")
+        print("Error parameters, See 'python main.py --help' for usage.")
         sys.exit(2)
 
     for opt_name, opt_value in opts:
