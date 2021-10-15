@@ -1,7 +1,7 @@
 import sys
 from pymilvus import connections, FieldSchema, CollectionSchema, DataType, Collection, utility
 
-from config import MILVUS_HOST, MILVUS_PORT, VECTOR_DIMENSION, METRIC_TYPE, NLIST
+from config import MILVUS_HOST, MILVUS_PORT, VECTOR_DIMENSION, METRIC_TYPE, NLIST, SHARDS_NUM
 from logs import LOGGER
 
 
