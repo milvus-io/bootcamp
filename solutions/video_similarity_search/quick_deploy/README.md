@@ -140,10 +140,12 @@ The next step is to start the system server. It provides HTTP backend services. 
   │   │   main.py  # File for starting the program.
   │   │
   │   └───src
-  │       │   config.py  # Configuration file.
-  │       │   encode.py  # Covert image/video/questions/... to embeddings.
-  │       │   milvus.py  # Connect to Milvus server and insert/drop/query vectors in Milvus.
-  │       │   mysql.py   # Connect to MySQL server, and add/delete/query IDs and object information.
+  │       │   config.py         # Configuration file.
+  │       │   encode.py         # Covert image/video/questions/... to embeddings.
+  │       │   frame_extract.py  # Extract the video frame with opencv.
+  │       │   logs.py           # Write logs for the system.
+  │       │   milvus_helper.py  # Connect to Milvus server and insert/drop/query vectors in Milvus.
+  │       │   mysql_helper.py   # Connect to MySQL server, and add/delete/query IDs and object information.
   │       │   
   │       └───operations # Call methods in milvus.py and mysql.py to insert/query/delete objects.
   │               │   insert.py
@@ -174,6 +176,7 @@ The next step is to start the system server. It provides HTTP backend services. 
   ![ ](../pic/show.png)
 
   1. **Load data**
+
     Enter the path of an image folder in the pic_search_webserver docker container with `${DATAPATH1}`, then click `+` to load the pictures. The following screenshot shows the loading process:
 
   ![ ](../pic/load.png)
@@ -182,6 +185,7 @@ The next step is to start the system server. It provides HTTP backend services. 
   > Note: After clicking the Load button, it will take 1 to 2 seconds for the system to response. Please do not click again.
 
   2. **Search data**
+
     The loading process may take several minutes. The following screenshot shows the interface with images loaded.
 
   ![ ](../pic/search.png)
