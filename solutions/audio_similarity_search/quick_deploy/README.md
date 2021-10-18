@@ -40,7 +40,7 @@ Modify the parameters according to your own environment. Below are the main para
 | --------------- | ----------------------------------------------------- | ---------------- |
 | **EXTERNAL_DATAPATH**   | The directory of the audio data.                     | /data/audio_path |
 | **INTERNAL_DATAPATH**   | The mount locaiton of the data within the docker container.                     | /audio_data |
-| **MILVUS_HOST** | The IP address of Milvus. Due to containers not being able to access localhost, please use the IP address of the host, you can get it by ifconfig. | 172.16.20.10     |
+| **MILVUS_HOST** | The IP address of Milvus. Due to containers not being able to access localhost, please use the IP address of the host, you can get it by `ifconfig`. | 172.16.20.10     |
 | **MILVUS_PORT** | The port of Milvus.                                   | 19530            |
 | **MYSQL_HOST**  | The IP address of MySQL, can be the same as MILVUS_HOST if running on the same system.                               | 172.16.20.10     |
 
