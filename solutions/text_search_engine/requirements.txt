@@ -1,4 +1,4 @@
-pymilvus==2.0.0rc5
+pymilvus==2.0.0rc7
 flask-cors
 numpy
 flask
