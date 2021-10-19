@@ -2,12 +2,13 @@ import uvicorn
 import os
 from diskcache import Cache
 from fastapi import FastAPI, File, UploadFile
+from fastapi.param_functions import Form
 from starlette.middleware.cors import CORSMiddleware
 from starlette.responses import FileResponse
 from encode import Resnet50
 from milvus_helpers import MilvusHelper
 from mysql_helpers import MySQLHelper
-from config import UPLOAD_PATH
+from config import TOP_K, UPLOAD_PATH
 from operations.load import do_load
 from operations.upload import do_upload
 from operations.search import do_search
@@ -98,7 +99,7 @@ async def upload_images(image: UploadFile = File(None), url: str = None, table_n
         return {'status': False, 'msg': e}, 400
 
 @app.post('/img/search')
-async def search_images(image: UploadFile = File(...), table_name: str = None):
+async def search_images(image: UploadFile = File(...), topk: int = Form(TOP_K), table_name: str = None):
     # Search the upload image in Milvus/MySQL
     try:
         # Save the upload image to server.
@@ -107,7 +108,7 @@ async def search_images(image: UploadFile = File(...), table_name: str = None):
         img_path = os.path.join(UPLOAD_PATH, image.filename)
         with open(img_path, "wb+") as f:
             f.write(content)
-        paths, distances = do_search(table_name, img_path, MODEL, MILVUS_CLI, MYSQL_CLI)
+        paths, distances = do_search(table_name, img_path, topk, MODEL, MILVUS_CLI, MYSQL_CLI)
         res = dict(zip(paths, distances))
         res = sorted(res.items(), key=lambda item: item[1])
         LOGGER.info("Successfully searched similar images!")
