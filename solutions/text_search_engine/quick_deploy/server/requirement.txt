@@ -4,7 +4,7 @@ futures==3.1.1
 cryptography
 aiofiles
 Pillow
-pymilvus==2.0.0rc5
+pymilvus==2.0.0rc7
 tensorflow == 1.13.1
 bert-serving-server
 bert-serving-client
