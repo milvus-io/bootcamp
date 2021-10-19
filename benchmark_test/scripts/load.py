@@ -142,7 +142,7 @@ def get_index_params(index_type):
         params = {"M": HNSW_M, "efConstruction": EFCONSTRUCTION}
         index_param = {"index_type": index_type, "metric_type": METRIC_TYPE, "params": params}
     elif index_type == 'ANNOY':
-        params = {"n_tress": N_TREE}
+        params = {"n_trees": N_TREE}
         index_param = {"index_type": index_type, "metric_type": METRIC_TYPE, "params": params}
     elif index_type == 'IVF_PQ':
         params = {"nlist": NLIST, "m": PQ_M}
