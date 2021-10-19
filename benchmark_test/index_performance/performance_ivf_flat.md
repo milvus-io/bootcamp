@@ -1,5 +1,5 @@
 # Milvus performance with IVF_FLAT
-This topic displays the performance of create_index & search with different indexes in Milvus1.1 for reference purposes. The test data uses 100m data from an open source dataset, sift1B, with 1 billion 128-dimensional vectors.
+This topic displays the performance of create_index & search with different index types in Milvus 1.1 for reference purposes. The test data uses 100m data from an open source dataset, sift1B, with 1 billion 128-dimensional vectors.
 
 The following table displays the terms used in this topic:
 
@@ -29,7 +29,7 @@ Refer to [scripts](https://github.com/milvus-io/bootcamp/tree/1.1/benchmark_test
 
 ## Insert
 
-During this test, the data was imported into Milvus in batches of 100,000, and it took about 1.2S to import 100,000 vectors of 128 dimensions.
+During this test, the data was imported into Milvus in batches of 100,000, and it took about 1.2s to import 100,000 vectors of 128 dimensions.
 
 ## Create Index
 
@@ -43,7 +43,7 @@ Parameters：`nlist` = 4096, `index_file_size` = 2048
 
 ## Search
 
-Search accuracy is relatively high when `nprobe` is large enough. With same parameters, search speed is slowest  among IVF indexes (but faster than FLAT). Query time increases when `nq` or `nprobe` increases.
+Search accuracy is relatively high when `nprobe` is large enough. With same parameters, search speed is slowest among IVF indexes (but faster than FLAT). Query time increases when `nq` or `nprobe` increases.
 
 ### Recall
 
@@ -52,7 +52,7 @@ Search for 500 vectors and return the accuracy in %.
 | -------------- | ------ | ------- | -------- | -------- |
 | 1              | 44.2   | 44.2    | 36.2     | 31.5     |
 | 128            | 100    | 99.8    | 99.5     | 99.1     |
-| 256m           | 100    | 100     | 99.9     | 99.9     |
+| 256            | 100    | 100     | 99.9     | 99.9     |
 
 
 ### Search performance
