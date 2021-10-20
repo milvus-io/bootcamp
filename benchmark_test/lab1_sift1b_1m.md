@@ -52,7 +52,7 @@ Go to `milvus_sift1m`, and run the following command to create a table:
 $ python3 main.py --collection ann_1m_sq8 --create
 ```
 
-Vectors are then inserted into a table named `ann_1m_sq8h`, with the index_type of `IVF_SQ8H`. 
+Vectors are then inserted into a table named `ann_1m_sq8`, with the index_type of `IVF_SQ8`. 
 
 To show the available tables and number of vectors in each table, use the following command:
 
