@@ -2,7 +2,7 @@
 
 ## Overview
 
-This demo uses OpenCV to extract video frames. Then it uses ResNet50 to get the feature vector of each frame. Finally it uses **Milvus** to save and search the data, which makes it very easy to build a system for video similarity search. So let's have fun playing with it!
+This demo uses OpenCV to extract video frames. Then it uses ResNet50 to get the feature vector of each frame. Finally, it uses **Milvus** to save and search the data, which makes it very easy to build a system for video similarity search. So let's have fun playing with it!
 
 
 ## Data source
@@ -42,7 +42,7 @@ The next step is to start the system server. It provides HTTP backend services. 
   | **Parameter**   | **Description**                                       | **example**      |
   | --------------- | ----------------------------------------------------- | ---------------- |
   | **DATAPATH1**   | The dictionary of the image path.                     | /data/image_path |
-  | **MILVUS_HOST** | The IP address of Milvus, you can get it by ifconfig. | 192.168.1.85     |
+  | **MILVUS_HOST** | The IP address of Milvus, you can get it by `ifconfig`. | 192.168.1.85     |
   | **MILVUS_PORT** | The port of Milvus.                                   | 19530            |
   | **MYSQL_HOST** | The IP address of MySQL.                               | 192.168.1.85     |
 
@@ -83,14 +83,14 @@ The next step is to start the system server. It provides HTTP backend services. 
 
   Please modify the parameters according to your own environment. Here listing some parameters that need to be set, for more information please refer to [config.py](./server/src/config.py).
 
-  | **Parameter**    | **Description**                                       | **Default setting** |
-  | ---------------- | ----------------------------------------------------- | ------------------- |
-  | MILVUS_HOST      | The IP address of Milvus, you can get it by ifconfig. | 127.0.0.1           |
-  | MILVUS_PORT      | Port of Milvus.                                       | 19530               |
-  | VECTOR_DIMENSION | Dimension of the vectors.                             | 2048                |
-  | MYSQL_HOST       | The IP address of Mysql.                              | 127.0.0.1           |
-  | MYSQL_PORT       | Port of Milvus.                                       | 3306                |
-  | DEFAULT_TABLE    | The milvus and mysql default collection name.         | milvus_img_search   |
+  | **Parameter**    | **Description**                                         | **Default setting** |
+  | ---------------- | ------------------------------------------------------- | ------------------- |
+  | MILVUS_HOST      | The IP address of Milvus, you can get it by `ifconfig`. | 127.0.0.1           |
+  | MILVUS_PORT      | Port of Milvus.                                         | 19530               |
+  | VECTOR_DIMENSION | Dimension of the vectors.                               | 2048                |
+  | MYSQL_HOST       | The IP address of Mysql.                                | 127.0.0.1           |
+  | MYSQL_PORT       | Port of Milvus.                                         | 3306                |
+  | DEFAULT_TABLE    | The milvus and mysql default collection name.           | milvus_img_search   |
 
 - **Run the code**
 
@@ -119,7 +119,7 @@ The next step is to start the system server. It provides HTTP backend services. 
   >
   > /video/count
   >
-  > Return the number of vector in Milvus.
+  > Return the number of vectors in Milvus.
   >
   > /video/load
   >
@@ -143,7 +143,7 @@ The next step is to start the system server. It provides HTTP backend services. 
   │       │   config.py  # Configuration file.
   │       │   encode.py  # Covert image/video/questions/... to embeddings.
   │       │   milvus.py  # Connect to Milvus server and insert/drop/query vectors in Milvus.
-  │       │   mysql.py   # Connect to MySQL server, and add/delete/query IDs and object information.
+  │       │   mysql.py   # Connect to MySQL server and add/delete/query IDs and object information.
   │       │   
   │       └───operations # Call methods in milvus.py and mysql.py to insert/query/delete objects.
   │               │   insert.py
@@ -174,6 +174,7 @@ The next step is to start the system server. It provides HTTP backend services. 
   ![ ](../pic/show.png)
 
   1. **Load data**
+
     Enter the path of an image folder in the pic_search_webserver docker container with `${DATAPATH1}`, then click `+` to load the pictures. The following screenshot shows the loading process:
 
   ![ ](../pic/load.png)
@@ -182,6 +183,7 @@ The next step is to start the system server. It provides HTTP backend services. 
   > Note: After clicking the Load button, it will take 1 to 2 seconds for the system to response. Please do not click again.
 
   2. **Search data**
+
     The loading process may take several minutes. The following screenshot shows the interface with images loaded.
 
   ![ ](../pic/search.png)
