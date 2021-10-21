@@ -21,7 +21,9 @@ The system will use Milvus to store and search the feature vector data, and Mysq
 
   First, you are supposed to refer to the Install [Milvus v2.0](https://milvus.io/docs/v2.0.0/install_standalone-docker.md) for how to run Milvus docker.
 
-  > Note the version of Milvus.
+  > Note:
+  >
+  > Please pay attention to the version of Milvus when installing
 
 - **Start MySQL**
 
