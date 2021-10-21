@@ -56,6 +56,8 @@ The next step is to start the system server. It provides HTTP backend services, 
 
 - **Run Docker**
 
+  > This image qa-chatbot-server:v1 is based Milvus2.0-rc3, if you want to use docker to start the Q&A server with Milvus2.0-rc5, please use the Dockerfile to build a new qa-chatbot image.
+  
   ```
   $ docker run -d \
   -p 8000:8000 \
