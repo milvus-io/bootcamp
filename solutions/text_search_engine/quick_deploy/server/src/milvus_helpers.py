@@ -36,7 +36,7 @@ class MilvusHelper:
             print(",,,,,,,,,,,,",status)
             return status
         except Exception as e:
-            LOGGER.error("Failed to load data to Milvus: {}".format(e))
+            LOGGER.error("Failed to check collection: {}".format(e))
             sys.exit(1)
 
     # Create milvus collection if not exists
