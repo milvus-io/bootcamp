@@ -48,7 +48,7 @@ class MilvusHelper:
                 self.collection = Collection(name=collection_name)
             return "OK"
         except Exception as e:
-            LOGGER.error("Failed to load data to Milvus: {}".format(e))
+            LOGGER.error("Failed to create collection: {}".format(e))
             sys.exit(1)
 
     # Batch insert vectors to milvus collection
