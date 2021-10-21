@@ -107,7 +107,7 @@ class MilvusHelper:
             LOGGER.debug("Successfully search in collection: {}".format(res))
             return res
         except Exception as e:
-            LOGGER.error("Failed to search vectors in Milvus: {}".format(e))
+            LOGGER.error("Failed to search in Milvus: {}".format(e))
             sys.exit(1)
 
     # Get the number of milvus collection
