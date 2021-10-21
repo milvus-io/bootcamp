@@ -64,7 +64,7 @@ class MilvusHelper:
                 "Insert vectors to Milvus in collection: {} with {} rows".format(collection_name, len(vectors)))
             return ids
         except Exception as e:
-            LOGGER.error("Failed to load data to Milvus: {}".format(e))
+            LOGGER.error("Failed to insert data to Milvus: {}".format(e))
             sys.exit(1)
 
     # Create IVF_FLAT index on milvus collection
