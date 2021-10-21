@@ -26,7 +26,7 @@ class MilvusHelper:
             else:
                 raise Exception("There has no collection named:{}".format(collection_name))
         except Exception as e:
-            LOGGER.error("Failed  to search data to Milvus: {}".format(e))
+            LOGGER.error("Error: {}".format(e))
             sys.exit(1)
 
     # Return if Milvus has the collection
