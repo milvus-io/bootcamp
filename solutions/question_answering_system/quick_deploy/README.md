@@ -43,13 +43,13 @@ The next step is to start the system server. It provides HTTP backend services, 
 
   | **Parameter**   | **Description**                                       | **example**  |
   | --------------- | ----------------------------------------------------- | ------------ |
-  | **MILVUS_HOST** | The IP address of Milvus, you can get it by ifconfig. | 192.168.1.85 |
+  | **MILVUS_HOST** | The IP address of Milvus, you can get it by ifconfig. | 127.0.0.1    |
   | **MILVUS_PORT** | The port of Milvus.                                   | 19530        |
   | **MYSQL_HOST**  | The IP address of MySQL.                              | 192.168.1.85 |
   | **MYSQL_PORT**  | The port of MySQL                                     | 3306         |
 
   ```
-  $ export Milvus_HOST='192.168.1.85'
+  $ export Milvus_HOST='127.0.0.1'
   $ export Milvus_PORT='19530'
   $ export Mysql_HOST='192.168.1.85'
   ```
