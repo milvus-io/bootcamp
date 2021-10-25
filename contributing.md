@@ -10,7 +10,7 @@ The following is a set of guidelines for contributing to Milvus Bootcamp. These 
 
 - Milvus Bootcamp design decision
 
-  [Milvus Bootcamp](https://github.com/milvus-io/bootcamp) is designed to expose users to both the simplicity and depth of the [**Milvus**](https://milvus.io/) vector database. Discover how to run **benchmark tests** as well as build similarity search applications spanning **chatbots**, **recommendation systems**, **reverse image search**, **molecular search**, **video search**, **audio saerch**, and more.
+  [Milvus Bootcamp](https://github.com/milvus-io/bootcamp) is designed to expose users to both the simplicity and depth of the [**Milvus**](https://milvus.io/) vector database. Discover how to run **benchmark tests** as well as build similarity search applications spanning **chatbots**, **recommendation systems**, **reverse image search**, **molecular search**, **video search**, **audio search**, and more.
 
   Each solution in Bootcamp contains a **Jupyter Notebook** and a **Docker deployable solution**, meaning anyone can run it on their local machine.
 
