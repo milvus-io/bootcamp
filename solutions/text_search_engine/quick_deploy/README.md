@@ -78,6 +78,11 @@ Please modify the parameters according to your own environment. Here listing som
 | MYSQL_PORT       | Port of Milvus.                                       | 3306                |
 | DEFAULT_TABLE    | The milvus and mysql default collection name.         | text_search         |
 
+```
+$ export Milvus_HOST='127.0.0.1'
+$ export Milvus_PORT='19530'
+$ export Mysql_HOST='127.0.0.1'
+```
 
 - **Run the code**
 
