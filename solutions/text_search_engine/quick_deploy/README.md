@@ -99,7 +99,7 @@ $ python main.py
   ```
   └───server
   │   │   Dockerfile
-  │   │   requirements.txt
+  │   │   requirement.txt # Related dependent environment
   │   │   main.py  # File for starting the program.
   │   │
   │   └───src
