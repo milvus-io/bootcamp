@@ -1,7 +1,10 @@
 # This is a workflow to checkout code with pylint
 
 name: Workflow for pylint
-on: [push, pull_request]
+on:
+  pull_request:
+    branches:
+      - main
 jobs:
   run:
     runs-on: ubuntu-latest
@@ -19,3 +22,4 @@ jobs:
       run: |
         pip install pylint==2.10.2
         pylint --rcfile=pylint.conf --output-format=colorized solutions
+        pylint --rcfile=pylint.conf --output-format=colorized benchmark_test
