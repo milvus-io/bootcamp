@@ -1,11 +1,11 @@
 PyMySQL==1.0.2
 diskcache==5.2.1
 uvicorn==0.13.4
-numpy==1.19.5
+numpy==1.21.3
 pydantic==1.8.2
 pymilvus==2.0.0rc7
-tensorflow==2.6.0
+towhee==0.1.3
 fastapi==0.65.2
-python-multipart
-pillow==8.2.0
-aiofiles
+python-multipart==0.0.5
+pillow==8.4.0
+aiofiles==0.7.0
