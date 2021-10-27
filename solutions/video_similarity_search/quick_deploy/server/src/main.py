@@ -1,6 +1,5 @@
 import os
-import uuid
-import cv2
+from typing import Optional
 import uvicorn
 from diskcache import Cache
 from fastapi import FastAPI
@@ -20,7 +19,7 @@ from logs import LOGGER
 from config import UPLOAD_PATH
 from encode import Resnet50
 from pydantic import BaseModel
-from typing import Optional
+
 
 app = FastAPI()
 app.add_middleware(
@@ -37,19 +36,17 @@ FRAME = FrameExtract()
 # Mkdir '/tmp/search-images'
 if not os.path.exists(UPLOAD_PATH):
     os.makedirs(UPLOAD_PATH)
-    LOGGER.info("mkdir the path:{} ".format(UPLOAD_PATH))
-
+    LOGGER.info(f"mkdir the path:{UPLOAD_PATH}")
 
 @app.get('/data')
 def video_path(gif_path):
     # Get the gif file
     try:
-        LOGGER.info(("Successfully load gif: {}".format(gif_path)))
+        LOGGER.info((f"Successfully load gif: {gif_path}"))
         return FileResponse(gif_path)
     except Exception as e:
-        LOGGER.error("upload image error: {}".format(e))
+        LOGGER.error(f"upload image error: {e}")
         return {'status': False, 'msg': e}, 400
-
 
 @app.get('/progress')
 def get_progress():
@@ -58,21 +55,19 @@ def get_progress():
         cache = Cache('./tmp')
         return {'current': cache['current'], 'total': cache['total']}
     except Exception as e:
-        LOGGER.error("upload image error: {}".format(e))
+        LOGGER.error(f"upload image error: {e}")
         return {'status': False, 'msg': e}, 400
-
 
 @app.post('/video/count')
 async def count_video(table_name: str = None):
     # Returns the total number of images in the system
     try:
         num = do_count(table_name, MILVUS_CLI, MYSQL_CLI)
-        LOGGER.info("Successfully count the number:{} of images!".format(num))
+        LOGGER.info(f"Successfully count the number:{num} of images!")
         return num
     except Exception as e:
         LOGGER.error(e)
         return {'status': False, 'msg': e}, 400
-
 
 @app.post('/video/drop')
 async def drop_tables(table_name: str = None):
@@ -90,17 +85,17 @@ class Item(BaseModel):
     Table: Optional[str] = None
     File: str
 
+
 @app.post('/video/load')
 async def load_video(item: Item):
     # Insert all the video under the file path to Milvus/MySQL
     try:
         total_num = do_load(item.Table, item.File, MODEL, FRAME, MILVUS_CLI, MYSQL_CLI)
-        LOGGER.info("Successfully loaded data, total count: {}".format(total_num))
+        LOGGER.info(f"Successfully loaded data, total count: {total_num}")
         return {'status': True, 'msg': "Successfully loaded data!"}
     except Exception as e:
         LOGGER.error(e)
         return {'status': False, 'msg': e}, 400
-
 
 @app.post('/video/search')
 async def search_images(request: Request, image: UploadFile = File(...), table_name: str = None):
@@ -123,7 +118,6 @@ async def search_images(request: Request, image: UploadFile = File(...), table_n
     except Exception as e:
         LOGGER.error(e)
         return {'status': False, 'msg': e}, 400
-
 
 if __name__ == '__main__':
     uvicorn.run(app=app, host='0.0.0.0', port=5000)
