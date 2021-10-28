@@ -1,11 +1,10 @@
 import librosa
-import panns_inference
-from panns_inference import AudioTagging, SoundEventDetection, labels
-import os
+from panns_inference import AudioTagging
 import numpy as np
+from logs import LOGGER
 
-# Use panns_inference model to generate feature vector of audio
 def get_audio_embedding(path):
+    # Use panns_inference model to generate feature vector of audio
     try:
         audio, _ = librosa.core.load(path, sr=32000, mono=True)
         audio = audio[None, :]
@@ -15,5 +14,5 @@ def get_audio_embedding(path):
         embedding = embedding.tolist()[0]
         return embedding
     except Exception as e:
-        print("error with embedding:", path)
+        LOGGER.error(f"Error with embedding:{e}")
         return None

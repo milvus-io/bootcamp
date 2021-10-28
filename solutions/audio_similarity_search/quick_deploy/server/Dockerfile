@@ -1,4 +1,4 @@
-From python:3.9.6-slim-buster
+FROM python:3.9.6-slim-buster
 
 RUN apt update
 RUN apt install -y libsndfile1-dev wget
