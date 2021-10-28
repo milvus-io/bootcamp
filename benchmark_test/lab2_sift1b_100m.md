@@ -17,7 +17,7 @@ The 100 million vectors used in this test are extracted from the dataset [SIFT1B
 | Memory        | 16 GB DDR4 ( 2400 Mhz ) x 2                |
 | Storage       | SATA 3.0 SSD 256 GB                  |
 
-Download the following data and scripts, and save them to a file named **milvlus_sift100m**. 
+Download the following data and scripts: 
 - [100 million vector dataset](https://pan.baidu.com/s/1N5jGKHYTGchye3qR31aNnA)
 
   Download the dataset and extract the data to **milvus_sift100M/bvecs_data/**. When the extraction is completed, there will be 1000 .npy files, each containing 100,000 vectors, in file **bvecs_data**.
@@ -28,12 +28,12 @@ Download the following data and scripts, and save them to a file named **milvlus
 
 - [Test scripts](/benchmark_test/scripts/)
 
-When it is done, there should be the following files in **milvus_sift100m**:
+Create a folder named milvus_sift100m and move all downloaded files to the folder:
 
-1. The **bvecs_data** file containing 100 million vectors
+- Unzip the 100 million test data to get the bvecs_data folder that contains 100 npy files. Each npy file contains 100,000 vectors.
 - Unzip the query data to get the query_data folder that contains query.npy, which contains 10,000 vectors to query.
-3. The **ground_truth.txt** file with the top 1000 most similar results for each query vector
-4. The test script files : `main.py`、`milvus_toolkit.py`、`milvus_load.py`、`config.py`。
+- Unzip the ground truth data to get the gnd folder with ground_truth_100M.txt, which contains the locations of top 1000 similar vectors in the query data.
+- The test script files : `main.py`, `load.py`, `milvus_helpers.py`, `config.py`, `recall_test.py`, `performance_test.py`, `logs.py`.
 
 > **Note:** Please go through the README carefully before testing with script . Make changes to the parameters in the script to match your scenario.
 
@@ -43,7 +43,7 @@ Make sure Milvus is already installed and started. (For details of Milvus instal
 
 > Before testing, please modify the corresponding parameters according to the [script instructions](/benchmark_test/scripts/README.md)
 
-Go to `milvus_sift1m`, and run the following command to create a table:
+Go to `milvus_sift100m/scripts`, and run the following command to create a table:
 
 ```bash
 $ python3 main.py --collection ann_100m_sq8 --create

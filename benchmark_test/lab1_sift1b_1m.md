@@ -33,7 +33,7 @@ Create a folder named `milvus_sift1m` and move all downloaded files to the folde
 - Unzip the 1 million test data to get the `bvecs_data` folder that contains 10 `npy` files. Each `npy` file contains 100,000 vectors.
 - Unzip the query data to get the `query_data` folder that contains `query.npy`, which contains 10,000 vectors to query.
 - Unzip the ground truth data to get the gnd folder with `ground_truth_1M.txt`, which contains the locations of top 1000 similar vectors in the query data.
-- The test script files contain the following Python scripts: `main.py`、`milvus_toolkit.py`、`milvus_load.py`、`config.py`。
+- The test script files contain the following Python scripts: `main.py`, `load.py`, `milvus_helpers.py`, `config.py`, `recall_test.py`, `performance_test.py`, `logs.py`.
 
 > **Note:** Please go through the README carefully before testing with script . Make changes to the parameters in the script to match your scenario.
 
@@ -46,7 +46,7 @@ Make sure Milvus is already installed and started. (For details of Milvus instal
 >  Before testing, please modify the corresponding parameters according to the [script instructions](/benchmark_test/scripts/README.md)
 
 
-Go to `milvus_sift1m`, and run the following command to create a table:
+Go to `milvus_sift1m/scripts`, and run the following command to create a table:
 
 ```bash
 $ python3 main.py --collection ann_1m_sq8 --create
