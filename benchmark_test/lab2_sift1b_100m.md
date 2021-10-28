@@ -32,8 +32,8 @@ Create a folder named milvus_sift100m and move all downloaded files to the folde
 
 - Unzip the 1 million test data to get the bvecs_data folder that contains 10 npy files. Each npy file contains 100,000 vectors.
 2. The **query.npy** file that has 10,000 query vectors
--  Unzip the ground truth data to get the gnd folder with ground_truth_100M.txt, which contains the locations of top 1000 similar vectors in the query data.
-4. The test script files : `main.py`, `load.py`, `milvus_helpers.py`, `config.py`, `recall_test.py`, `performance_test.py`, `logs.py`.
+- Unzip the ground truth data to get the gnd folder with ground_truth_100M.txt, which contains the locations of top 1000 similar vectors in the query data.
+- The test script files : `main.py`, `load.py`, `milvus_helpers.py`, `config.py`, `recall_test.py`, `performance_test.py`, `logs.py`.
 
 > **Note:** Please go through the README carefully before testing with script . Make changes to the parameters in the script to match your scenario.
 
