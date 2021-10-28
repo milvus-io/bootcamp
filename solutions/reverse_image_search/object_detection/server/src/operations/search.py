@@ -17,7 +17,6 @@ def get_object_vector(model, path):
         vectors.append(vector)
     return vectors
 
-
 def do_search(table_name, img_path, model, milvus_client, mysql_cli):
     try:
         if not table_name:
@@ -40,5 +39,5 @@ def do_search(table_name, img_path, model, milvus_client, mysql_cli):
         shutil.rmtree(img_path)
         return paths, distances
     except Exception as e:
-        LOGGER.error(" Error with search : {}".format(e))
+        LOGGER.error(f"Error with search : {e}")
         sys.exit(1)
