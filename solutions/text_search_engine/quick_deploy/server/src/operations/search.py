@@ -1,5 +1,3 @@
-import os
-import time
 import sys
 import numpy as np
 from bert_serving.client import BertClient
@@ -10,17 +8,15 @@ sys.path.append("..")
 from config import TOP_K, DEFAULT_TABLE
 from logs import LOGGER
 
-
-
 bc = BertClient()
 
 def normaliz_vec(vec_list):
     for i in range(len(vec_list)):
         vec = vec_list[i]
-        square_sum = reduce(lambda x,y:x+y, map(lambda x:x*x ,vec))
+        square_sum = reduce(lambda x, y: x + y, map(lambda x: x * x, vec))
         sqrt_square_sum = np.sqrt(square_sum)
-        coef = 1/sqrt_square_sum
-        vec = list(map(lambda x:x*coef, vec))
+        coef = 1 / sqrt_square_sum
+        vec = list(map(lambda x: x * coef, vec))
         vec_list[i] = vec
     return vec_list
 
@@ -29,7 +25,7 @@ def search_in_milvus(table_name, query_sentence,milvus_cli, mysql_cli):
         table_name = DEFAULT_TABLE
     try:
         query_data = [query_sentence]
-        vectors = bc.encode(query_data) 
+        vectors = bc.encode(query_data)
         query_list = normaliz_vec(vectors.tolist())
         LOGGER.info("Successfully insert query list")
         results = milvus_cli.search_vectors(table_name,query_list,TOP_K)
@@ -39,5 +35,5 @@ def search_in_milvus(table_name, query_sentence,milvus_cli, mysql_cli):
         distances = [x.distance for x in results[0]]
         return ids,title, text, distances
     except Exception as e:
-        LOGGER.error(" Error with search : {}".format(e))
+        LOGGER.error(f" Error with search : {e}")
         sys.exit(1)
