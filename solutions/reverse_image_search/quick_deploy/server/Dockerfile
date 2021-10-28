@@ -1,4 +1,4 @@
-From tensorflow/tensorflow
+FROM tensorflow/tensorflow
 
 WORKDIR /app/src
 COPY . /app

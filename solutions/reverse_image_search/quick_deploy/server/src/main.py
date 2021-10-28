@@ -36,17 +36,16 @@ MYSQL_CLI = MySQLHelper()
 # Mkdir '/tmp/search-images'
 if not os.path.exists(UPLOAD_PATH):
     os.makedirs(UPLOAD_PATH)
-    LOGGER.info("mkdir the path:{} ".format(UPLOAD_PATH))
+    LOGGER.info(f"mkdir the path:{UPLOAD_PATH}")
 
-# Define the interface to obtain raw pictures 
 @app.get('/data')
-def image_path(image_path):
+def image_path(img_path):
     # Get the image file
     try:
-        LOGGER.info(("Successfully load image: {}".format(image_path)))
-        return FileResponse(image_path)
+        LOGGER.info(f"Successfully load image: {img_path}")
+        return FileResponse(img_path)
     except Exception as e:
-        LOGGER.error("upload image error: {}".format(e))
+        LOGGER.error(f"upload image error: {e}")
         return {'status': False, 'msg': e}, 400
 
 
@@ -55,9 +54,9 @@ def get_progress():
     # Get the progress of dealing with images
     try:
         cache = Cache('./tmp')
-        return "current: {}, total: {}".format(cache['current'], cache['total'])
+        return f"current: {cache['current']}, total: {cache['total']}"
     except Exception as e:
-        LOGGER.error("upload image error: {}".format(e))
+        LOGGER.error(f"upload image error: {e}")
         return {'status': False, 'msg': e}, 400
 
 class Item(BaseModel):
@@ -69,7 +68,7 @@ async def load_images(item: Item):
     # Insert all the image under the file path to Milvus/MySQL
     try:
         total_num = do_load(item.Table, item.File, MODEL, MILVUS_CLI, MYSQL_CLI)
-        LOGGER.info("Successfully loaded data, total count: {}".format(total_num))
+        LOGGER.info(f"Successfully loaded data, total count: {total_num}")
         return "Successfully loaded data!"
     except Exception as e:
         LOGGER.error(e)
@@ -92,7 +91,7 @@ async def upload_images(image: UploadFile = File(None), url: str = None, table_n
         else:
             return {'status': False, 'msg': 'Image and url are required'}, 400
         vector_id = do_upload(table_name, img_path, MODEL, MILVUS_CLI, MYSQL_CLI)
-        LOGGER.info("Successfully uploaded data, vector id: {}".format(vector_id))
+        LOGGER.info(f"Successfully uploaded data, vector id: {vector_id}")
         return "Successfully loaded data: " + str(vector_id)
     except Exception as e:
         LOGGER.error(e)
@@ -112,7 +111,7 @@ async def search_images(image: UploadFile = File(...), topk: int = Form(TOP_K), 
         res = dict(zip(paths, distances))
         res = sorted(res.items(), key=lambda item: item[1])
         LOGGER.info("Successfully searched similar images!")
-        return res 
+        return res
     except Exception as e:
         LOGGER.error(e)
         return {'status': False, 'msg': e}, 400
