@@ -1,5 +1,3 @@
-import os
-
 MILVUS_HOST = "127.0.0.1"
 MILVUS_PORT = 19530
 

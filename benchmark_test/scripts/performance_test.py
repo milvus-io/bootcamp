@@ -1,5 +1,4 @@
 import os
-# import config
 import time
 import numpy as np
 from logs import LOGGER
@@ -22,12 +21,12 @@ def get_search_params(search_param, index_type):
     return search_params
 
 
-def get_nq_vec(nq):
+def get_nq_vec(nq_k):
     data = np.load(QUERY_FILE_PATH)
-    if len(data) > nq:
-        return data[0:nq].tolist()
+    if len(data) > nq_k:
+        return data[0:nq_k].tolist()
     else:
-        LOGGER.info('There is only {} vectors'.format(len(data)))
+        LOGGER.info(f'There is only {len(data)} vectors')
         return data.tolist()
 
 
@@ -43,11 +42,11 @@ def performance(client, collection_name, search_param):
     result_filename = collection_name + '_' + str(search_param) + '_performance.csv'
     performance_file = os.path.join(PERFORMANCE_RESULTS_PATH, result_filename)
 
-    with open(performance_file, 'w+') as f:
+    with open(performance_file, 'w+',encoding='utf-8') as f:
         f.write("nq,topk,total_time,avg_time" + '\n')
         for nq in NQ_SCOPE:
             query_list = get_nq_vec(nq)
-            LOGGER.info("begin to search, nq = {}".format(len(query_list)))
+            LOGGER.info(f"begin to search, nq = {len(query_list)}")
             for topk in TOPK_SCOPE:
                 time_start = time.time()
                 client.search_vectors(collection_name, query_list, topk, search_params)
@@ -58,9 +57,7 @@ def performance(client, collection_name, search_param):
                 f.write(line)
             f.write('\n')
     LOGGER.info("search_vec_list done !")
-    
-    
-    
+
 def percentile_test(client, collection_name, search_param, percentile):
     index_type = client.get_index_params(collection_name)
     if index_type:
@@ -75,14 +72,14 @@ def percentile_test(client, collection_name, search_param, percentile):
     result_filename = collection_name + '_' + str(search_param) + '_percentile.csv'
     performance_file = os.path.join(PERFORMANCE_RESULTS_PATH, result_filename)
 
-    with open(performance_file, 'w+') as f:
+    with open(performance_file, 'w+',encoding='utf-8') as f:
         f.write("nq,topk,total_time" + '\n')
         for nq in NQ_SCOPE:
             query_list = get_nq_vec(nq)
-            LOGGER.info("begin to search, nq = {}".format(len(query_list)))
+            LOGGER.info(f"begin to search, nq = {len(query_list)}")
             for topk in TOPK_SCOPE:
                 time_cost = []
-                for i in range(PERCENTILE_NUM):
+                for _ in range(PERCENTILE_NUM):
                     time_start = time.time()
                     client.search_vectors(collection_name, query_list, topk, search_params)
                     time_cost.append(time.time() - time_start)
