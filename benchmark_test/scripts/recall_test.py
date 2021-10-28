@@ -7,10 +7,10 @@ from config import RECALL_QUERY_FILE, RECALL_NQ, RECALL_TOPK, RECALL_RES, RECALL
     RECALL_RES_TOPK, GROUNDTRUTH_FILE
 
 
-def save_search_res(collection_name, rand, results, search_param, nq_r):
+def save_search_res(collection_name, rand, results, search_param, query):
     if not os.path.exists(RECALL_RES):
         os.mkdir(RECALL_RES)
-    file_name = os.path.join(RECALL_RES, collection_name + '_' + str(search_param) + '_' + str(nq_r) + '_recall.txt')
+    file_name = os.path.join(RECALL_RES, collection_name + '_' + str(search_param) + '_' + str(query) + '_recall.txt')
     with open(file_name, 'w',encoding='utf-8') as f:
         i = 0
         for result in results:
@@ -21,7 +21,7 @@ def save_search_res(collection_name, rand, results, search_param, nq_r):
             i = i + 1
 
 
-def compute_recall(collection_name, nq_r, results, search_param, rand):
+def compute_recall(collection_name, query, results, search_param, rand):
     ids = []
     for result in results:
         temp = []
@@ -32,21 +32,21 @@ def compute_recall(collection_name, nq_r, results, search_param, rand):
     gt_ids = load_gt_ids()
 
     for top_k in RECALL_CALC_SCOPE:
-        recalls, count_all = compare_correct(nq_r, top_k, rand, gt_ids, ids)
+        recalls, count_all = compare_correct(query, top_k, rand, gt_ids, ids)
 
         if not os.path.exists(RECALL_RES_TOPK):
             os.makedirs(RECALL_RES_TOPK)
-        fname = collection_name + '_' + str(search_param) + '_' + str(nq_r) + "_" + str(top_k) + ".csv"
+        fname = collection_name + '_' + str(search_param) + '_' + str(query) + "_" + str(top_k) + ".csv"
         fname = os.path.join(RECALL_RES_TOPK, fname)
         with open(fname, 'w',encoding='utf-8') as f:
-            f.write('nq_r,topk,recall\n')
-            for i in range(nq_r):
+            f.write('query,topk,recall\n')
+            for i in range(query):
                 line = str(i + 1) + ',' + str(top_k) + ',' + str(recalls[i] * 100) + "%"
                 f.write(line + '\n')
             f.write("max, avarage, min\n")
-            f.write(str(max(recalls) * 100) + "%," + str(round(count_all / nq_r / top_k, 3) * 100) + "%," + str(
+            f.write(str(max(recalls) * 100) + "%," + str(round(count_all / query/ top_k, 3) * 100) + "%," + str(
                 min(recalls) * 100) + "%\n")
-        print("topk=", top_k, ", total accuracy", round(count_all / nq_r / top_k, 3) * 100, "%")
+        print("topk=", top_k, ", total accuracy", round(count_all / query / top_k, 3) * 100, "%")
 
 
 def load_gt_ids():
@@ -63,10 +63,10 @@ def load_gt_ids():
     return gt_ids
 
 
-def compare_correct(nq_j, top_k, rand, gt_ids, ids):
+def compare_correct(query, top_k, rand, gt_ids, ids):
     recalls = []
     count_all = 0
-    for i in range(nq_j):
+    for i in range(query):
         milvus_results = []
         ground_truth = []
         for j in range(top_k):

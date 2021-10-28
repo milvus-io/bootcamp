@@ -21,10 +21,10 @@ def get_search_params(search_param, index_type):
     return search_params
 
 
-def get_nq_vec(nq_k):
+def get_nq_vec(query):
     data = np.load(QUERY_FILE_PATH)
-    if len(data) > nq_k:
-        return data[0:nq_k].tolist()
+    if len(data) > query:
+        return data[0:query].tolist()
     else:
         LOGGER.info(f'There is only {len(data)} vectors')
         return data.tolist()
