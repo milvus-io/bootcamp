@@ -31,7 +31,7 @@ Download the following data and scripts, and save them to a file named **milvlus
 When it is done, there should be the following files in **milvus_sift100m**:
 
 1. The **bvecs_data** file containing 100 million vectors
-2. The **query.npy** file that has 10,000 query vectors
+- Unzip the query data to get the query_data folder that contains query.npy, which contains 10,000 vectors to query.
 3. The **ground_truth.txt** file with the top 1000 most similar results for each query vector
 4. The test script files : `main.py`、`milvus_toolkit.py`、`milvus_load.py`、`config.py`。
 
