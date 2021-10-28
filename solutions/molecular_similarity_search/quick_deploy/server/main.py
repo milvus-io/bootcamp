@@ -1,7 +1,7 @@
 import uvicorn
 import os
 from diskcache import Cache
-from fastapi import FastAPI, File, UploadFile
+from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 from starlette.responses import FileResponse
 from starlette.requests import Request
@@ -31,28 +31,27 @@ MYSQL_CLI = MySQLHelper()
 # Mkdir 'tmp/mol-data'
 if not os.path.exists(UPLOAD_PATH):
     os.makedirs(UPLOAD_PATH)
-    LOGGER.info("mkdir the path:{} ".format(UPLOAD_PATH))
+    LOGGER.info(f"Mkdir the path: {UPLOAD_PATH}")
 
 
 @app.get('/data')
 def mols_img(mols_path):
     # Get the molecular image file
     try:
-        LOGGER.info(("Successfully load molecular image: {}".format(mols_path)))
+        LOGGER.info(f"Successfully load molecular image: {mols_path}")
         return FileResponse(UPLOAD_PATH + '/' + mols_path + '.png')
     except Exception as e:
-        LOGGER.error("upload image error: {}".format(e))
+        LOGGER.error("upload image error: {e}")
         return {'status': False, 'msg': e}, 400
-
 
 @app.get('/progress')
 def get_progress():
     # Get the progress of dealing with data
     try:
         cache = Cache('./tmp')
-        return "current: {}, total: {}".format(cache['current'], cache['total'])
+        return f"current: {cache['current']}, total: {cache['total']}"
     except Exception as e:
-        LOGGER.error("upload data error: {}".format(e))
+        LOGGER.error("upload data error: {e}")
         return {'status': False, 'msg': e}, 400
 
 
@@ -60,29 +59,30 @@ class Item(BaseModel):
     Table: Optional[str] = None
     File: str
 
+
 @app.post('/data/load')
 async def load_data(item: Item):
     # Insert all the data under the file path to Milvus/MySQL
     try:
-        total_num = do_load(item.Table, item.File, MODEL, MILVUS_CLI, MYSQL_CLI)
-        LOGGER.info("Successfully loaded data, total count: {}".format(total_num))
+        total_num = do_load(item.Table, item.File, MILVUS_CLI, MYSQL_CLI)
+        LOGGER.info(f"Successfully loaded data, total count: {total_num}")
         return {'status': True, 'msg': "Successfully loaded data!"}
     except Exception as e:
         LOGGER.error(e)
         return {'status': False, 'msg': e}, 400
 
 
-class Item_search(BaseModel):
+class ItemSearch(BaseModel):
     Table: Optional[str] = None
     Mol: str
     Num: Optional[int] = TOP_K
 
 @app.post('/data/search')
-async def search_data(request: Request, item: Item_search):
+async def search_data(request: Request, item: ItemSearch):
     # Search the upload image in Milvus/MySQL
     try:
         # Save the upload data to server.
-        ids, paths, distances = do_search(item.Table, item.Mol, item.Num, MODEL, MILVUS_CLI, MYSQL_CLI)
+        ids, paths, distances = do_search(item.Table, item.Mol, item.Num, MILVUS_CLI, MYSQL_CLI)
         host = request.headers['host']
         for i in range(len(ids)):
             tmp = "http://" + str(host) + "/data?mols_path=" + str(ids[i])

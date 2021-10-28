@@ -3,7 +3,7 @@ from src.logs import LOGGER
 from src.encode import smiles_to_vector
 from src.config import DEFAULT_TABLE
 
-def do_search(table_name, molecular_name, top_k, model, milvus_cli, mysql_cli):
+def do_search(table_name, molecular_name, top_k, milvus_cli, mysql_cli):
     if not table_name:
         table_name = DEFAULT_TABLE
     try:
@@ -18,5 +18,5 @@ def do_search(table_name, molecular_name, top_k, model, milvus_cli, mysql_cli):
         print(vids, smiles, distances)
         return vids, smiles, distances
     except Exception as e:
-        LOGGER.error(" Error with search : {}".format(e))
+        LOGGER.error(f"Error with search : {e}")
         sys.exit(1)

@@ -12,6 +12,13 @@ except ImportError:
 
 
 class MultiprocessHandler(logging.FileHandler):
+    """
+    Say something about the ExampleCalass...
+
+    Args:
+        args_0 (`type`):
+        ...
+    """
     def __init__(self, filename, when='D', backupCount=0, encoding=None, delay=False):
         self.prefix = filename
         self.backupCount = backupCount
@@ -30,7 +37,7 @@ class MultiprocessHandler(logging.FileHandler):
             print('The specified date interval unit is invalid: ', self.when)
             sys.exit(1)
 
-        self.filefmt = os.path.join('.', "logs", "%s-%s.log" % (self.prefix, self.suffix))
+        self.filefmt = os.path.join('.', "logs", f"{self.prefix}-{self.suffix}.log")
 
         self.filePath = datetime.datetime.now().strftime(self.filefmt)
 

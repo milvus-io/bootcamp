@@ -64,6 +64,7 @@ $ docker run -d \
 -e "MYSQL_HOST=${MYSQL_HOST}" \
 milvusbootcamp/mols-search-webserver:2.0.0
 ```
+
 #### 2.2 Run source code
 
 - **Install the Python packages**
@@ -92,16 +93,15 @@ Please modify the parameters according to your own environment. Here listing som
 | MYSQL_PORT       | Port of Milvus.                                       | 3306                |
 | DEFAULT_TABLE    | The milvus and mysql default collection name.         | milvus_img_search   |
 
-- **Run the code** 
+- **Run the code**
 
-Then start the server with Fastapi. 
+Then start the server with Fastapi.
 
 ```bash
 $ python main.py
 ```
 
 - **API docs**
-
 
 Vist 127.0.0.1:5000/docs in your browser to use all the APIs.
 
@@ -128,14 +128,11 @@ Vist 127.0.0.1:5000/docs in your browser to use all the APIs.
 >
 > Return the number of vectors in Milvus.
 
-
-
-
 - **Code  structure**
 
 If you are interested in our code or would like to contribute code, feel free to learn more about our code structure.
 
-```
+```bash
 └───server
 │   │   Dockerfile
 │   │   requirements.txt
@@ -188,7 +185,6 @@ milvusbootcamp/mols-search-webclient:1.0
   Click `CLEAR ALL` to remove all chemical structure data.
 
 ![](pic/delete_data.PNG)
-
 
 ## Conclusion
 

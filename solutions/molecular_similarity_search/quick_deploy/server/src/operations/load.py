@@ -1,35 +1,31 @@
 import sys
-import os
-
 from diskcache import Cache
 from src.logs import LOGGER
 from src.encode import smiles_to_vector
-from src.config import DEFAULT_TABLE, VECTOR_DIMENSION
+from src.config import DEFAULT_TABLE
 from src.config import UPLOAD_PATH
 from rdkit import Chem
-from rdkit.Chem import AllChem
-from rdkit import DataStructs
 from rdkit.Chem import Draw
 
-# save the molecular images
+
 def save_mols_img(milvus_ids, smiles):
+    # Save the molecular images
     for ids, mol in zip(milvus_ids, smiles):
         mol = Chem.MolFromSmiles(mol)
         sub_img = Draw.MolsToGridImage([mol], molsPerRow=1, subImgSize=(500, 500))
         sub_img.save(UPLOAD_PATH + "/" + str(ids) + ".png")
 
-
-# Extract all vectors from mol file
-def extract_features(filepath, model):
+def extract_features(filepath):
+    # Extract all vectors from mol file
     try:
         cache = Cache('./tmp')
         feats = []
         names = []
-        total = len(open(filepath,'rU').readlines())
+        total = len(open(filepath, encoding="utf8", mode='rU').readlines())
         cache['total'] = total
         current = 0
         vec = 0
-        with open(filepath, 'r') as f:
+        with open(filepath, encoding="utf8", mode='r') as f:
             for line in f:
                 current += 1
                 cache['current'] = current
@@ -40,31 +36,27 @@ def extract_features(filepath, model):
                     vec = smiles_to_vector(line)
                     feats.append(vec)
                     names.append(line.encode())
-                    print ("extracted feature from smi No. %d , %d molecular in total" %(current, total))
-                except Exception as e: 
-                    print ("failed to extract feature from smi No. %d , %d molecular in total" %(current, total), e)
-
+                    LOGGER.info(f"extracted feature from smi No.{cache['current']} , {cache['total']} molecular in total")
+                except Exception as e:
+                    LOGGER.error(f"Failed to extract fingerprint {e}")
         return feats, names
-
     except Exception as e:
-        LOGGER.error(" Error with extracting feature from image {}".format(e))
+        LOGGER.error(f"Error with extracting feature from image {e}")
         sys.exit(1)
 
-
-# Combine the id of the vector and the molecule structure into a list
 def format_data(ids, names):
+    # Combine the id of the vector and the molecule structure into a list
     data = []
     for i in range(len(ids)):
         value = (str(ids[i]), names[i])
         data.append(value)
     return data
 
-
-# Import vectors to Milvus and data to Mysql respectively
-def do_load(table_name, mol_path, model, milvus_client, mysql_cli):
+def do_load(table_name, mol_path, milvus_client, mysql_cli):
+    # Import vectors to Milvus and data to Mysql respectively
     if not table_name:
         table_name = DEFAULT_TABLE
-    vectors, names = extract_features(mol_path, model)
+    vectors, names = extract_features(mol_path)
     ids = milvus_client.insert(table_name, vectors)
     save_mols_img(ids, names)
     mysql_cli.create_mysql_table(table_name)

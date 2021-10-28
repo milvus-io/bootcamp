@@ -1,4 +1,4 @@
-From conda/miniconda3-centos7
+FROM conda/miniconda3-centos7
 
 RUN yum -y update
 RUN yum install -y libXext libSM libXrender
