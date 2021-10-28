@@ -28,7 +28,7 @@ Download the following data and scripts:
 
 - [Test scripts](/benchmark_test/scripts/)
 
-When it is done, there should be the following files in **milvus_sift100m**:
+Create a folder named milvus_sift100m and move all downloaded files to the folder:
 
 - Unzip the 1 million test data to get the bvecs_data folder that contains 10 npy files. Each npy file contains 100,000 vectors.
 2. The **query.npy** file that has 10,000 query vectors
