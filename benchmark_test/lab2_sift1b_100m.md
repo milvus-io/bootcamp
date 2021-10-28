@@ -28,7 +28,7 @@ Download the following data and scripts, and save them to a file named **milvlus
 
 - [Test scripts](/benchmark_test/scripts/)
 
-When it is done, there should be the following files in **milvus_sift100m**:
+Create a folder named milvus_sift100m and move all downloaded files to the folder:
 
 1. The **bvecs_data** file containing 100 million vectors
 2. The **query.npy** file that has 10,000 query vectors
