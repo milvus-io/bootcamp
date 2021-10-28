@@ -1,12 +1,11 @@
 import uvicorn
 import os
-from fastapi import FastAPI, File, UploadFile, Response
+from fastapi import FastAPI, File, UploadFile
 from fastapi.responses import StreamingResponse
 from diskcache import Cache
 from starlette.middleware.cors import CORSMiddleware
 from starlette.responses import FileResponse
 from starlette.requests import Request
-from subprocess import call
 from typing import Optional
 from milvus_helpers import MilvusHelper
 from mysql_helpers import MySQLHelper
@@ -15,7 +14,6 @@ from operations.search import do_search
 from operations.count import do_count
 from operations.drop import do_drop
 from encode import CustomOperator
-from frame_extract import FrameExtract
 from pydantic import BaseModel
 from logs import LOGGER
 from config import UPLOAD_PATH, DISTANCE_LIMIT, DEFAULT_TABLE
@@ -43,7 +41,7 @@ def convert_avi_to_mp4(avi_file_path):
                 input=avi_file_path, output=new_path))
         return {'status': True, 'msg': 'Successfully converted avi to mp4!'}
     except Exception as e:
-        logging.error(e)
+        LOGGER.error(e)
         return None, 200
 
 class Item(BaseModel):
@@ -52,17 +50,17 @@ class Item(BaseModel):
 
 
 @app.get('/data')
-def image_path(image_path):
+def image_path(img_path):
     # Get the image file
     try:
-        LOGGER.info(("Successfully load image: {}".format(image_path)))
-        return FileResponse(image_path)
+        LOGGER.info(f"Successfully load image: {img_path}")
+        return FileResponse(img_path)
     except Exception as e:
-        LOGGER.error("upload image error: {}".format(e))
+        LOGGER.error(f"upload image error: {e}")
         return {'status': False, 'msg': e}, 400
 
 @app.get('/video/getVideo')
-async def video_endpoint(video: str, response: Response):
+async def video_endpoint(video: str):
     try:
         filelike = open(video, mode = "rb")
         return StreamingResponse(filelike, media_type="video/mp4", headers={"Accept-Ranges": "bytes"})
@@ -75,9 +73,9 @@ def get_progress():
     # Get the progress of dealing with images
     try:
         cache = Cache('./tmp')
-        return "current: {}, total: {}".format(cache['current'], cache['total'])
+        return f"current: {cache['current']}, total: {cache['total']}"
     except Exception as e:
-        LOGGER.error("upload image error: {}".format(e))
+        LOGGER.error(f"upload image error: {e}")
         return {'status': False, 'msg': e}, 400
 
 
@@ -89,7 +87,7 @@ async def load_image(item: Item):
         FILEPATH = item.File
         #print(TABLE_NAME, FILEPATH)
         total_num = do_load(TABLE_NAME, FILEPATH, MODEL, MILVUS_CLI, MYSQL_CLI)
-        LOGGER.info("Successfully loaded data, total count: {}".format(total_num))
+        LOGGER.info(f"Successfully loaded data, total count: {total_num}")
         return {'status': True, 'msg': "Successfully loaded data!"}
     except Exception as e:
         LOGGER.error(e)
@@ -100,7 +98,7 @@ async def load_image(item: Item):
 async def count_videos(table_name: str = None):
     # Returns the total number of images in the system
     try:
-        if table_name == None:
+        if table_name is None:
             table_name = DEFAULT_TABLE
         num = do_count(table_name, MILVUS_CLI)
         LOGGER.info("Successfully count the number of images!")
@@ -114,7 +112,7 @@ async def count_videos(table_name: str = None):
 async def drop_tables(table_name: str = None):
     # Delete the collection of Milvus and MySQL
     try:
-        if table_name == None:
+        if table_name is None:
             table_name = DEFAULT_TABLE
         status = do_drop(table_name, MILVUS_CLI, MYSQL_CLI)
         LOGGER.info("Successfully drop tables in Milvus and MySQL!")
@@ -128,7 +126,7 @@ async def drop_tables(table_name: str = None):
 async def search_images(request: Request, video: UploadFile = File(...), table_name: str = None):
     # Search the upload image in Milvus/MySQL
     try:
-        if table_name == None:
+        if table_name is None:
             table_name = DEFAULT_TABLE
         # Save the upload image to server.
         content = await video.read()
@@ -141,7 +139,7 @@ async def search_images(request: Request, video: UploadFile = File(...), table_n
         res = ["http://" + str(host) + "/video/getVideo?video=" + video_path.replace(".avi", ".mp4")]
         #res = []
         for i in range(len(paths)):
-            if DISTANCE_LIMIT != None:
+            if DISTANCE_LIMIT is not None:
                 if float(distances[i]) < DISTANCE_LIMIT:
                     re = {
                         "object": objects[i],
@@ -163,7 +161,7 @@ async def search_images(request: Request, video: UploadFile = File(...), table_n
                     "distance": distances[i],
                     "time": times[i]
                     }
-            if re["object"] != None:
+            if re["object"] is not None:
                 res.append(re)
         LOGGER.info("Successfully searched similar images!")
         #print(len(res))

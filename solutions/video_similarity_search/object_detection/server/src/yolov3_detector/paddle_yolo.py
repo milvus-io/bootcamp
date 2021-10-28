@@ -1,3 +1,4 @@
+# pylint: disable=W
 import os
 import uuid
 import base64
@@ -7,7 +8,7 @@ import time
 import numpy as np
 import yaml
 import cv2
-import paddle.fluid as fluid
+from paddle import fluid
 import paddle
 from yolov3_detector.yolo_infer import offset_to_lengths
 from yolov3_detector.yolo_infer import coco17_category_info, bbox2out
@@ -19,15 +20,14 @@ from config import DATA_PATH, COCO_MODEL_PATH, YOLO_CONFIG_PATH
 paddle.enable_static()
 
 
-# def temp_directory():
-#     return os.path.abspath(os.path.join('.', 'data'))
-
-
-# COCO_MODEL_PATH = os.path.join(temp_directory(), "yolov3_darknet")
-# YOLO_CONFIG_PATH = os.path.join(COCO_MODEL_PATH, "yolo.yml")
-
-
 class BoundingBox:
+    """
+    Say something about the ExampleCalass...
+
+    Args:
+        args_0 (`type`):
+        ...
+    """
     def __init__(self, x1, y1, x2, y2, score, label=None):
         self.x1 = x1
         self.x2 = x2
@@ -52,6 +52,13 @@ def cv2base64(image, fps, path):
 
 
 class YOLO_v3:
+    """
+    Say something about the ExampleCalass...
+
+    Args:
+        args_0 (`type`):
+        ...
+    """
     def __init__(self):
         self.model_init = False
         self.fps = 0

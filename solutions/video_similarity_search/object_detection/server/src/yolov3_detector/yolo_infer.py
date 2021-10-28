@@ -1,3 +1,4 @@
+# pylint: disable=W
 import numpy as np
 import cv2
 import copy
@@ -7,7 +8,6 @@ def offset_to_lengths(lod):
     offset = lod[0]
     lengths = [offset[i + 1] - offset[i] for i in range(len(offset) - 1)]
     return [lengths]
-
 
 def get_extra_info(im, arch, shape, scale):
     info = []
@@ -48,7 +48,6 @@ class Resize(object):
             fx=im_scale_x,
             fy=im_scale_y,
             interpolation=self.interp)
-        # padding im
         if self.max_size != 0 and arch in scale_set:
             padding_im = np.zeros(
                 (self.max_size, self.max_size, im_c), dtype=np.float32)

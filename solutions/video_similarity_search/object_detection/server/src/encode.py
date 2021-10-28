@@ -5,6 +5,13 @@ from tensorflow.keras.preprocessing import image
 from numpy import linalg as LA
 
 class CustomOperator:
+    """
+    Say something about the ExampleCalass...
+
+    Args:
+        args_0 (`type`):
+        ...
+    """
     def __init__(self):
         self.input_shape = (224, 224, 3)
         self.weight = 'imagenet'
@@ -23,10 +30,3 @@ class CustomOperator:
         feat = self.model_resnet50.predict(img)
         norm_feat = feat[0] / LA.norm(feat[0])
         return norm_feat.tolist()
-
-'''
-if __name__ == '__main__':
-    model = CustomOperator()
-    x = model.execute('data/example_object/water.jpg')
-    print(x)
-'''
