@@ -3,7 +3,14 @@ from sklearn.preprocessing import normalize
 from config import MODEL_PATH
 
 
-class Sentence_model:
+class SentenceModel:
+    """
+    Say something about the ExampleCalass...
+
+    Args:
+        args_0 (`type`):
+        ...
+    """
     def __init__(self):
         self.model = SentenceTransformer(MODEL_PATH)
 
