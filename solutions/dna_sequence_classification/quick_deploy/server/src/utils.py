@@ -1,19 +1,19 @@
-from sklearn.feature_extraction.text import CountVectorizer
 from config import VECTOR_DIMENSION, MODEL_PATH
 import pickle
-from sklearn import preprocessing
+from sklearn import preprocessing, feature_extraction
 
-# Function to get k-mers for sequence s
-def build_kmers(s, k):
+
+def build_kmers(s_u, k):
+    # Function to get k-mers for sequence s
     kmers = []
-    n = len(s) - k + 1
+    n = len(s_u) - k + 1
     for i in range(n):
-        kmer = s[i : i+k].upper()
+        kmer = s_u[i : i+k].upper()
         kmers.append(kmer)
     return kmers
 
 def train_vec(data):
-    vectorizer = CountVectorizer(ngram_range=(4,4), max_features=VECTOR_DIMENSION)
+    vectorizer = feature_extraction.text.CountVectorizer(ngram_range=(4,4), max_features=VECTOR_DIMENSION)
     X = vectorizer.fit_transform(data).toarray()
     with open(MODEL_PATH,'wb') as fw:
         pickle.dump(vectorizer, fw)
