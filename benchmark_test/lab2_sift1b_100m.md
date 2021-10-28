@@ -43,7 +43,7 @@ Make sure Milvus is already installed and started. (For details of Milvus instal
 
 > Before testing, please modify the corresponding parameters according to the [script instructions](/benchmark_test/scripts/README.md)
 
-Go to `milvus_sift1m`, and run the following command to create a table:
+Go to `milvus_sift100m/scripts`, and run the following command to create a table:
 
 ```bash
 $ python3 main.py --collection ann_100m_sq8 --create
