@@ -1,5 +1,4 @@
-import os
-from pymilvus import *
+from pymilvus import FieldSchema, CollectionSchema, DataType
 
 
 MILVUS_HOST = 'localhost'
