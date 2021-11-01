@@ -1,6 +1,6 @@
 import uvicorn
 import os
-import os.path   #pylint: disable=wrong-import-position
+import os.path   
 from logs import LOGGER
 from fastapi import FastAPI, File, UploadFile
 from starlette.middleware.cors import CORSMiddleware
