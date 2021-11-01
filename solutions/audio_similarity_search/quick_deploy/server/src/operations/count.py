@@ -12,5 +12,5 @@ def do_count(table_name, milvus_cli):
         num = milvus_cli.count(table_name)
         return num
     except Exception as e:
-        LOGGER.error(" Error attempting to count table {}".format(e))
+        LOGGER.error(f"Error attempting to count table {e}")
         sys.exit(1)

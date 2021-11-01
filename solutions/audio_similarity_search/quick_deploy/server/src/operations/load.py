@@ -3,24 +3,21 @@ import os
 from diskcache import Cache
 from src.encode import get_audio_embedding
 
-
 sys.path.append("..")
 from src.config import DEFAULT_TABLE
 from src.logs import LOGGER
 
 
-# Get the path to the image
 def get_audios(path):
+    # Get the path to the image
     audios = []
     for f in os.listdir(path):
-        if (f.endswith(extension) for extension in
-             ['.wav']):
+        if f.endswith('.wav'):
             audios.append(os.path.join(path, f))
     return audios
 
-
-# Get the vector of images
-def extract_features(audio_dir, model):
+def extract_features(audio_dir):
+    # Get the vector of audio
     try:
         cache = Cache('./tmp')
         feats = []
@@ -33,27 +30,25 @@ def extract_features(audio_dir, model):
             feats.append(norm_feat)
             names.append(audio_path.encode())
             cache['current'] = i + 1
-            print("Extracting feature from audio No. %d , %d audios in total" % (i + 1, total))
+            print(f"Extracting feature from audio No. {i + 1} , {total} audios in total")
         return feats, names
     except Exception as e:
-        LOGGER.error(" Error with extracting feature from audio {}".format(e))
+        LOGGER.error(f"Error with extracting feature from audio {e}")
         sys.exit(1)
 
-
-# Combine the id of the vector and the name of the audio into a list
 def format_data(ids, names):
+    # Combine the id of the vector and the name of the audio into a list
     data = []
     for i in range(len(ids)):
         value = (str(ids[i]), names[i])
         data.append(value)
     return data
 
-
-# Import vectors to Milvus and data to Mysql respectively
-def do_load(table_name, image_dir, model, milvus_client, mysql_cli):
+def do_load(table_name, image_dir, milvus_client, mysql_cli):
+    # Import vectors to Milvus and data to Mysql respectively
     if not table_name:
         table_name = DEFAULT_TABLE
-    vectors, names = extract_features(image_dir, model)
+    vectors, names = extract_features(image_dir)
     ids = milvus_client.insert(table_name, vectors)
     milvus_client.create_index(table_name)
     mysql_cli.create_mysql_table(table_name)
