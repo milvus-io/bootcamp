@@ -14,7 +14,7 @@ class MilvusHelper:
     """
     def __init__(self):
         try:
-            self.collection =None
+            self.collection = None
             connections.connect(host=MILVUS_HOST, port=MILVUS_PORT)
             LOGGER.debug(f"Successfully connect to Milvus with IP:{MILVUS_HOST} and PORT:{MILVUS_PORT}")
         except Exception as e:
@@ -47,7 +47,7 @@ class MilvusHelper:
                 field2 = FieldSchema(name="embedding", dtype=DataType.FLOAT_VECTOR, descrition="float vector", dim=VECTOR_DIMENSION, is_primary=False)
                 schema = CollectionSchema(fields=[ field1,field2], description="collection description")
                 self.collection = Collection(name=collection_name, schema=schema)
-                LOGGER.debug(f"Create Milvus collection: {self.collection_name}")
+                LOGGER.debug(f"Create Milvus collection: {collection_name}")
             else:
                 self.set_collection(collection_name)
             return "OK"
@@ -103,7 +103,7 @@ class MilvusHelper:
         try:
             self.set_collection(collection_name)
             search_params = {"metric_type":  METRIC_TYPE, "params": {"nprobe": 16}}
-           # data = [vectors]
+            # data = [vectors]
             res=self.collection.search(vectors, anns_field="embedding", param=search_params, limit=top_k)
             print(res[0])
             LOGGER.debug(f"Successfully search in collection: {res}")
@@ -116,7 +116,7 @@ class MilvusHelper:
         # Get the number of milvus collection
         try:
             self.set_collection(collection_name)
-            num =self.collection.num_entities
+            num = self.collection.num_entities
             LOGGER.debug(f"Successfully get the num:{num} of the collection:{collection_name}")
             return num
         except Exception as e:
