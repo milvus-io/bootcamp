@@ -42,7 +42,7 @@ def performance(client, collection_name, search_param):
     result_filename = collection_name + '_' + str(search_param) + '_performance.csv'
     performance_file = os.path.join(PERFORMANCE_RESULTS_PATH, result_filename)
 
-    with open(performance_file, 'w+',encoding='utf-8') as f:
+    with open(performance_file, 'w+', encoding='utf-8') as f:
         f.write("nq,topk,total_time,avg_time" + '\n')
         for nq in NQ_SCOPE:
             query_list = get_nq_vec(nq)
@@ -72,7 +72,7 @@ def percentile_test(client, collection_name, search_param, percentile):
     result_filename = collection_name + '_' + str(search_param) + '_percentile.csv'
     performance_file = os.path.join(PERFORMANCE_RESULTS_PATH, result_filename)
 
-    with open(performance_file, 'w+',encoding='utf-8') as f:
+    with open(performance_file, 'w+', encoding='utf-8') as f:
         f.write("nq,topk,total_time" + '\n')
         for nq in NQ_SCOPE:
             query_list = get_nq_vec(nq)
