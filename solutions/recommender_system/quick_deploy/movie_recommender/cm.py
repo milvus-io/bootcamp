@@ -20,19 +20,22 @@ from concurrent import futures
 
 import grpc
 
-from proto import cm_pb2 
-from proto import cm_pb2_grpc 
-from proto import item_info_pb2 as item_info_pb2
+from proto import cm_pb2
+from proto import cm_pb2_grpc
+#from proto import item_info_pb2
 import redis
 import json
 
 class CMServerServicer(object):
+    '''
+    CMServerServicer
+    '''
     def __init__(self):
         self.redis_cli = redis.StrictRedis(host="127.0.0.1", port="6379")
 
-    def cm_call(self, request, context):
+    def cm_call(self, request):
         cm_res = cm_pb2.CMResponse()
-        item_ids = request.item_ids;
+        item_ids = request.item_ids
         for item_id in item_ids:
             redis_res = self.redis_cli.get("{}##movie_info".format(item_id))
             if redis_res is None:
@@ -58,7 +61,7 @@ class CMServer(object):
         max_workers = 40
         concurrency = 40
         port = 8920
-        
+
         server = grpc.server(
             futures.ThreadPoolExecutor(max_workers=max_workers),
             options=[('grpc.max_send_message_length', 1024 * 1024),
