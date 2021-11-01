@@ -27,7 +27,8 @@ class FrameExtract:
         images = []
         while success:
             if count % (int(framerate)/self.fps) == 0:
-                file_name = f'{DATA_PATH}/{prefix}/{frame_count+1}.jpg'
+                frames = str(frame_count+1).zfill(6)
+                file_name = f'{DATA_PATH}/{prefix}/{frames}.jpg'
                 cv2.imwrite(file_name, image)
                 frame_count += 1
                 images.append(file_name)
