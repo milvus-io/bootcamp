@@ -1,7 +1,5 @@
 import sys
-import os
 import pandas as pd
-from sklearn.preprocessing import normalize
 
 sys.path.append("..")
 from config import DEFAULT_TABLE
@@ -19,7 +17,7 @@ def extract_features(file_dir, model):
         # sentence_embeddings = normalize(sentence_embeddings).tolist()
         return question_data, answer_data, sentence_embeddings
     except Exception as e:
-        LOGGER.error(" Error with extracting feature from question {}".format(e))
+        LOGGER.error(f" Error with extracting feature from question {e}")
         sys.exit(1)
 
 

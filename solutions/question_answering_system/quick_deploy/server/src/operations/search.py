@@ -17,7 +17,7 @@ def do_search(table_name, question, model, milvus_client, mysql_cli):
         distances = [x.distance for x in results[0]]
         return questions, distances
     except Exception as e:
-        LOGGER.error(" Error with search : {}".format(e))
+        LOGGER.error(f" Error with search : {e}")
         sys.exit(1)
 
 
@@ -28,5 +28,5 @@ def do_get_answer(table_name, question, mysql_cli):
         answer = mysql_cli.search_by_question(question, table_name)
         return answer
     except Exception as e:
-        LOGGER.error(" Error with search by question : {}".format(e))
+        LOGGER.error(f" Error with search by question : {e}")
         sys.exit(1)

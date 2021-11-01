@@ -9,7 +9,7 @@ from operations.search import do_search, do_get_answer
 from operations.count import do_count
 from operations.drop import do_drop
 from logs import LOGGER
-from encode import Sentence_model
+from encode import SentenceModel
 
 
 app = FastAPI()
@@ -24,7 +24,7 @@ app.add_middleware(
 
 )
 
-MODEL = Sentence_model()
+MODEL = SentenceModel()
 MILVUS_CLI = MilvusHelper()
 MYSQL_CLI = MySQLHelper()
 
@@ -40,12 +40,12 @@ async def do_load_api(file: UploadFile = File(...), table_name: str = None):
         fname_path = os.path.join(os.getcwd(), os.path.join(dirs, fname))
         with open(fname_path, 'wb') as f:
             f.write(text)
-    except Exception as e:
+    except Exception:
         return {'status': False, 'msg': 'Failed to load data.'}
     try:
         total_num = do_load(table_name, fname_path, MODEL, MILVUS_CLI, MYSQL_CLI)
-        LOGGER.info("Successfully loaded data, total count: {}".format(total_num))
-        return {'status': True, 'msg': "Successfully loaded data: {}".format(total_num)}, 200
+        LOGGER.info(f"Successfully loaded data, total count: {total_num}")
+        return {'status': True, 'msg': f"Successfully loaded data: {total_num}"}, 200
     except Exception as e:
         LOGGER.error(e)
         return {'status': False, 'msg': e}, 400
@@ -54,7 +54,7 @@ async def do_load_api(file: UploadFile = File(...), table_name: str = None):
 @app.get('/qa/search')
 async def do_get_question_api(question: str, table_name: str = None):
     try:
-        questions, distances = do_search(table_name, question, MODEL, MILVUS_CLI, MYSQL_CLI)
+        questions, _= do_search(table_name, question, MODEL, MILVUS_CLI, MYSQL_CLI)
         #res = dict(zip(questions, distances))
         # res = sorted(res.items(), key=lambda item: item[1])
         LOGGER.info("Successfully searched similar images!")
