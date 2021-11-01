@@ -58,7 +58,7 @@ class MilvusHelper:
             LOGGER.error(f"Failed to load data to Milvus: {e}")
             sys.exit(1)
 
-    def insert(self, collection_name, vectors, ids):
+    def insert(self, collection_name, vectors, ids=None):
         # Batch insert vectors to milvus collection
         try:
             self.create_collection(collection_name)
