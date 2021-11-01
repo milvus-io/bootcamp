@@ -35,7 +35,7 @@ def get_object_vector(cache, model, path):
 def match_ids_and_imgs(imgs, obj_num):
     matched_imgs = []
     for i, num in enumerate(obj_num):
-        for k in range(num):
+        for _ in range(num):
             matched_imgs.append(imgs[i])
     return matched_imgs
 
@@ -53,7 +53,7 @@ def do_load(table_name, database_path, model, mil_cli, mysql_cli):
     if not table_name:
         table_name = DEFAULT_TABLE
     cache = Cache(CACHE_DIR)
-    result_images, object_num = run(detector, database_path)
+    _, object_num = run(detector, database_path)
     vectors = get_object_vector(cache, model, database_path + "/object")
     ids = mil_cli.insert(table_name, vectors)
     mil_cli.create_index(table_name)

@@ -109,6 +109,7 @@ Please modify the parameters according to your own environment. Here listing som
 $ cd src
 $ python main.py
 ```
+
 - **API docs**
 
 Visit 127.0.0.1:5010/docs in your browser to use all the APIs.
@@ -131,7 +132,7 @@ Visit 127.0.0.1:5010/docs in your browser to use all the APIs.
 
 If you are interested in our code or would like to contribute code, feel free to learn more about our code structure.
 
-```
+```bash
 └───server
 │   │   Dockerfile
 │   │   requirements.txt

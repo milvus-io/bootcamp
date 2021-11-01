@@ -38,13 +38,13 @@ class Item(BaseModel):
 
 # Define the interface to obtain raw pictures
 @app.get('/data')
-def image_path(image_path):
+def image_path(img_path):
     # Get the image file
     try:
-        LOGGER.info(("Successfully load image: {}".format(image_path)))
-        return FileResponse(image_path)
+        LOGGER.info(f"Successfully load image: {img_path}")
+        return FileResponse(img_path)
     except Exception as e:
-        LOGGER.error("upload image error: {}".format(e))
+        LOGGER.error(f"Upload image error: {e}")
         return {'status': False, 'msg': e}, 400
 
 
@@ -53,9 +53,9 @@ def get_progress():
     # Get the progress of dealing with images
     try:
         cache = Cache('./tmp')
-        return "current: {}, total: {}".format(cache['current'], cache['total'])
+        return f"current: {cache['current']}, total: {cache['total']}"
     except Exception as e:
-        LOGGER.error("upload image error: {}".format(e))
+        LOGGER.error(f"Error to get the progress: {e}")
         return {'status': False, 'msg': e}, 400
 
 
@@ -64,7 +64,7 @@ async def load_images(item: Item):
     # Insert all the image under the file path to Milvus/MySQL
     try:
         total_num = do_load(item.Table, item.File, MODEL, MILVUS_CLI, MYSQL_CLI)
-        LOGGER.info("Successfully loaded data, total objects: {}".format(total_num))
+        LOGGER.info(f"Successfully loaded data, total objects: {total_num}")
         return "Successfully loaded data!"
     except Exception as e:
         LOGGER.error(e)
@@ -105,7 +105,7 @@ async def search_images(image: UploadFile = File(...), table_name: str = None):
         tmp_dir = os.path.join(UPLOAD_PATH, image.filename.split('.')[0])
         if not os.path.exists(tmp_dir):
             os.makedirs(tmp_dir)
-            LOGGER.info("mkdir the path:{} ".format(tmp_dir))
+            LOGGER.info(f"Mkdir the path: {tmp_dir}")
         img_path = os.path.join(tmp_dir, image.filename.lower())
         with open(img_path, "wb+") as f:
             f.write(content)
