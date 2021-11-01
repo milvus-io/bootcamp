@@ -1,5 +1,5 @@
 import sys
-from config import MILVUS_HOST, MILVUS_PORT, VECTOR_DIMENSION,  METRIC_TYPE
+from config import MILVUS_HOST, MILVUS_PORT, VECTOR_DIMENSION, METRIC_TYPE
 from pymilvus import connections, FieldSchema, CollectionSchema, DataType, Collection, utility
 from logs import LOGGER
 
@@ -48,7 +48,7 @@ class MilvusHelper:
                                      dim=VECTOR_DIMENSION, is_primary=False)
                 schema = CollectionSchema(fields=[field1, field2], description="collection description")
                 self.collection = Collection(name=collection_name, schema=schema)
-                LOGGER.debug(f"Create Milvus collection: {self.collectio}")
+                LOGGER.debug(f"Create Milvus collection: {self.collection_name}")
             else:
                 self.set_collection(collection_name)
             return "OK"
