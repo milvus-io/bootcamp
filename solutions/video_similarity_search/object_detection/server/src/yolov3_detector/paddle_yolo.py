@@ -18,7 +18,6 @@ sys.path.append("..")
 from config import DATA_PATH, COCO_MODEL_PATH, YOLO_CONFIG_PATH
 
 paddle.enable_static()
-
 # def temp_directory():
 #     return os.path.abspath(os.path.join('.', 'data'))
 
@@ -27,13 +26,6 @@ paddle.enable_static()
 # YOLO_CONFIG_PATH = os.path.join(COCO_MODEL_PATH, "yolo.yml")
 
 class BoundingBox:
-    """
-    Say something about the ExampleCalass...
-
-    Args:
-        args_0 (`type`):
-        ...
-    """
     def __init__(self, x1, y1, x2, y2, score, label=None):
         self.x1 = x1
         self.x2 = x2
