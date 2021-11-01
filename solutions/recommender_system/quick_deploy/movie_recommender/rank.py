@@ -20,16 +20,20 @@ from concurrent import futures
 
 import grpc
 
-from proto import rank_pb2 
-from proto import rank_pb2_grpc 
-from proto import user_info_pb2 as user_info_pb2
-import redis
+from proto import rank_pb2
+from proto import rank_pb2_grpc
+#from proto import user_info_pb2
+#import redis
 import numpy as np
 from paddle_serving_app.local_predict import LocalPredictor
-def hash2(a):
-    return hash(a) % 60000000
+
+def hash2(obj):
+    return hash(obj) % 60000000
 
 class RankServerServicer(object):
+    '''
+    rank results
+    '''
     def __init__(self):
         self.ctr_client = LocalPredictor()
         self.ctr_client.load_model_config("rank_model")
@@ -37,7 +41,7 @@ class RankServerServicer(object):
     def process_feed_dict(self, user_info, item_infos):
         #" userid gender age occupation | movieid title genres"
         dic = {"userid": [], "gender": [], "age": [], "occupation": [], "movieid": [], "title": [], "genres": []}
-        batch_size = len(item_infos)
+        #batch_size = len(item_infos)
         lod = [0]
         for i, item_info in enumerate(item_infos):
             dic["movieid"].append(hash2(item_info.movie_id))
@@ -61,7 +65,7 @@ class RankServerServicer(object):
 
         return dic
 
-    def rank_predict(self, request, context):
+    def rank_predict(self, request):
         '''
         message RankRequest {
           string log_id = 1;
@@ -86,7 +90,7 @@ class RankServerServicer(object):
         dic = self.process_feed_dict(request.user_info, request.item_infos)
         fetch_map = self.ctr_client.predict(feed=dic, fetch=["save_infer_model/scale_0.tmp_0"], batch=True)
         response = rank_pb2.RankResponse()
-        
+
         #raise ValueError("UM server get user_info from redis fail. ({})".format(str(request)))
         response.error.code = 200
 
@@ -105,7 +109,7 @@ class RankServer(object):
         max_workers = 40
         concurrency = 40
         port = 8960
-        
+
         server = grpc.server(
             futures.ThreadPoolExecutor(max_workers=max_workers),
             options=[('grpc.max_send_message_length', 1024 * 1024),
