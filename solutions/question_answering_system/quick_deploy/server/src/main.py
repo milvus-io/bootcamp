@@ -40,7 +40,7 @@ async def do_load_api(file: UploadFile = File(...), table_name: str = None):
         fname_path = os.path.join(os.getcwd(), os.path.join(dirs, fname))
         with open(fname_path, 'wb') as f:
             f.write(text)
-    except Exception :
+    except Exception:
         return {'status': False, 'msg': 'Failed to load data.'}
     try:
         total_num = do_load(table_name, fname_path, MODEL, MILVUS_CLI, MYSQL_CLI)
