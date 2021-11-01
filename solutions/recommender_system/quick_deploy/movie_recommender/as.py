@@ -22,35 +22,35 @@ import grpc
 
 from proto import as_pb2
 from proto import as_pb2_grpc
-from proto import user_info_pb2 as user_info_pb2
-from proto import item_info_pb2 as item_info_pb2
-from proto import recall_pb2 as recall_pb2
-from proto import recall_pb2_grpc as recall_pb2_grpc
-from proto import rank_pb2 as rank_pb2
-from proto import rank_pb2_grpc as rank_pb2_grpc
-from proto import um_pb2 as um_pb2
-from proto import um_pb2_grpc as um_pb2_grpc
-from proto import cm_pb2 as cm_pb2
-from proto import cm_pb2_grpc as cm_pb2_grpc
-import redis
+#from proto import user_info_pb2 as user_info_pb2
+#from proto import item_info_pb2 as item_info_pb2
+from proto import recall_pb2 as RECALL_PB2
+from proto import recall_pb2_grpc as RECALL_PB2_GRPC
+from proto import rank_pb2 as RANK_PB2
+from proto import rank_pb2_grpc as RANK_PB2_GRPC
+from proto import um_pb2 as UM_PB2
+from proto import um_pb2_grpc as UM_PB2_GRPC
+from proto import cm_pb2 as CM_PB2
+from proto import cm_pb2_grpc as CM_PB2_GRPC
+#import redis
 
 def get_ums(uid):
     channel = grpc.insecure_channel('127.0.0.1:8910')
-    stub = um_pb2_grpc.UMServiceStub(channel)
-    response = stub.um_call(um_pb2.UserModelRequest(user_id=str(uid).encode(encoding='utf-8')))
+    stub = UM_PB2_GRPC.UMServiceStub(channel)
+    response = stub.um_call(UM_PB2.UserModelRequest(user_id=str(uid).encode(encoding='utf-8')))
     return response
 
 def get_recall(request):
 
     channel = grpc.insecure_channel('127.0.0.1:8950')
-    stub = recall_pb2_grpc.RecallServiceStub(channel)
+    stub = RECALL_PB2_GRPC.RecallServiceStub(channel)
     response = stub.recall(request)
     return response
 
 def get_cm(nid_list):
     channel = grpc.insecure_channel('127.0.0.1:8920')
-    stub = cm_pb2_grpc.CMServiceStub(channel)
-    cm_request = cm_pb2.CMRequest()
+    stub = CM_PB2_GRPC.CMServiceStub(channel)
+    cm_request = CM_PB2.CMRequest()
     for nid in nid_list:
         cm_request.item_ids.append(str(nid).encode(encoding='utf-8'))
     cm_response = stub.cm_call(cm_request,timeout=10)
@@ -58,15 +58,18 @@ def get_cm(nid_list):
 
 def get_rank(request):
     channel = grpc.insecure_channel('127.0.0.1:8960')
-    stub = rank_pb2_grpc.RankServiceStub(channel)
+    stub = RANK_PB2_GRPC.RankServiceStub(channel)
     response = stub.rank_predict(request)
     return response
 
 class ASServerServicer(object):
+    '''
+    ASServerServicer
+    '''
     def __init__(self):
         pass
 
-    def as_call(self, request, context):
+    def as_call(self, request):
         '''
         message ASRequest{
           string log_id = 1;
@@ -87,8 +90,8 @@ class ASServerServicer(object):
             string genre = 3;
         }
         '''
-        recall_req = recall_pb2.RecallRequest()
-        if request.user_id != "-1": 
+        recall_req = RECALL_PB2.RecallRequest()
+        if request.user_id != "-1":
             user_id = request.user_id
             um_res = get_ums(user_id)
             recall_req.user_info.CopyFrom(um_res.user_info)
@@ -96,11 +99,11 @@ class ASServerServicer(object):
             recall_req.user_info.CopyFrom(request.user_info)
         recall_res = get_recall(recall_req)
         nid_list = [x.nid for x in recall_res.score_pairs]
-        cm_res = get_cm(nid_list) 
+        cm_res = get_cm(nid_list)
         item_dict = {}
         for x in cm_res.item_infos:
             item_dict[x.movie_id] = x
-        rank_req = rank_pb2.RankRequest()
+        rank_req = RANK_PB2.RankRequest()
         rank_req.user_info.CopyFrom(um_res.user_info)
         rank_req.item_infos.extend(cm_res.item_infos)
         rank_res = get_rank(rank_req)
