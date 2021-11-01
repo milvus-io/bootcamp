@@ -10,7 +10,7 @@ class MilvusHelper:
     """
     def __init__(self):
         try:
-            self.collection =None
+            self.collection = None
             connections.connect(host=MILVUS_HOST, port=MILVUS_PORT)
             LOGGER.debug(f"Successfully connect to Milvus with IP:{MILVUS_HOST,} and PORT:{MILVUS_PORT}")
         except Exception as e:
@@ -55,7 +55,6 @@ class MilvusHelper:
         # Batch insert vectors to milvus collection
         try:
             self.create_collection(collection_name)
-            self.collection = Collection(name=collection_name)
             data = [vectors]
             mr = self.collection.insert(data)
             ids =  mr.primary_keys
