@@ -32,13 +32,13 @@ def extract_features(img_dir, model):
                 feats.append(norm_feat)
                 names.append(img_path.encode())
                 cache['current'] = i + 1
-                print("Extracting feature from image No. %d , %d images in total" % (i + 1, total))
+                print(f"Extracting feature from image No. {i + 1} , {total} images in total")
             except Exception as e:
-                LOGGER.error(" Error with extracting feature from image {}".format(e))
-                continue        
+                LOGGER.error(f"Error with extracting feature from image {e}")
+                continue
         return feats, names
     except Exception as e:
-        LOGGER.error(" Error with extracting feature from image {}".format(e))
+        LOGGER.error(f"Error with extracting feature from image {e}")
         sys.exit(1)
 
 

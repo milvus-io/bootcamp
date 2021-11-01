@@ -16,5 +16,5 @@ def do_search(table_name, img_path, top_k, model, milvus_client, mysql_cli):
         distances = [x.distance for x in vectors[0]]
         return paths, distances
     except Exception as e:
-        LOGGER.error(" Error with search : {}".format(e))
+        LOGGER.error(f"Error with search : {e}")
         sys.exit(1)
