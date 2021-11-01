@@ -4,11 +4,10 @@ import time
 from sklearn.preprocessing import normalize
 from logs import LOGGER
 from config import FILE_TYPE, BASE_FILE_PATH, IS_UINT8, IF_NORMALIZE, TOTAL_VECTOR_COUNT, IMPORT_CHUNK_SIZE, \
-    METRIC_TYPE, NLIST, PQ_M, N_TREE, EFCONSTRUCTION, HNSW_M, SEARCH_LENGTH, OUT_DEGREE, CANDIDATE_POOL, KNNG
-
+    METRIC_TYPE, NLIST, PQ_M, N_TREE, EFCONSTRUCTION, HNSW_M
+import pandas as pd
 
 def load_csv_data(filename):
-    import pandas as pd
     # filename = BASE_FILE_PATH + "/" + filename
     data = pd.read_csv(filename, header=None)
     data = np.array(data)
@@ -28,7 +27,7 @@ def csv_to_milvus(collection_name, client):
     for filename in filenames:
         fname = os.path.join(BASE_FILE_PATH, filename)
         vectors = load_csv_data(fname)
-        vectors_ids = [id for id in range(collection_rows, collection_rows + len(vectors))]
+        vectors_ids = list(id for id in range(collection_rows, collection_rows + len(vectors)))
         time_add_start = time.time()
         ids = client.insert(collection_name, vectors, vectors_ids)
         total_insert_time = total_insert_time + time.time() - time_add_start
@@ -55,9 +54,10 @@ def fvecs_to_milvus(collection_name, client):
     total_insert_time = 0
     while count < (TOTAL_VECTOR_COUNT // IMPORT_CHUNK_SIZE):
         vectors = load_fvecs_data(IMPORT_CHUNK_SIZE, count, fname)
-        vectors_ids = [id for id in range(count * IMPORT_CHUNK_SIZE, (count + 1) * IMPORT_CHUNK_SIZE)]
+        vectors_ids =  list(id for id in range(count * IMPORT_CHUNK_SIZE, (count + 1) * IMPORT_CHUNK_SIZE))
+        # vectors_ids = [id for id in range(count * IMPORT_CHUNK_SIZE, (count + 1) * IMPORT_CHUNK_SIZE)]
         time_add_start = time.time()
-        ids = client.insert(collection_name, vectors, vectors_ids)
+        _ = client.insert(collection_name, vectors, vectors_ids)
         total_insert_time = total_insert_time + time.time() - time_add_start
         print(count * IMPORT_CHUNK_SIZE, (count + 1) * IMPORT_CHUNK_SIZE, 'time:',
               time.time() - time_add_start)
@@ -83,7 +83,8 @@ def npy_to_milvus(collection_name, client):
     collection_rows = client.count(collection_name)
     for filename in filenames:
         vectors = load_npy_data(os.path.join(BASE_FILE_PATH, filename))
-        vectors_ids = [id for id in range(collection_rows, collection_rows + len(vectors))]
+        vectors_ids =list(id for id in range(collection_rows, collection_rows + len(vectors)))
+        #vectors_ids = [id for id in range(collection_rows, collection_rows + len(vectors))]
         time_add_start = time.time()
         ids = client.insert(collection_name, vectors, vectors_ids)
         total_insert_time = total_insert_time + time.time() - time_add_start
@@ -112,7 +113,8 @@ def bvecs_to_milvus(collection_name, client):
     collection_rows = client.count(collection_name)
     while count < (TOTAL_VECTOR_COUNT // IMPORT_CHUNK_SIZE):
         vectors = load_bvecs_data(IMPORT_CHUNK_SIZE, count, fname)
-        vectors_ids = [id for id in range(collection_rows, collection_rows + len(vectors))]
+        vectors_ids = list(id for id in range(collection_rows, collection_rows + len(vectors)))
+        # vectors_ids = [id for id in range(collection_rows, collection_rows + len(vectors))]
         time_add_start = time.time()
         ids = client.insert(collection_name, vectors, vectors_ids)
         print(count * IMPORT_CHUNK_SIZE, (count + 1) * IMPORT_CHUNK_SIZE, 'time:',
@@ -121,7 +123,7 @@ def bvecs_to_milvus(collection_name, client):
         count = count + 1
         collection_rows = collection_rows + len(ids)
     client.count(collection_name)
-    print("total insert time: {}".format(total_insert_time))
+    print(f"total insert time: {total_insert_time}")
 
 
 def insert_data(client, collection_name):
@@ -158,4 +160,4 @@ def create_index(client, collection_name, index_type):
     index_param = get_index_params(index_type)
     time1 = time.time()
     client.create_index(collection_name, index_param)
-    LOGGER.info("create index total cost time: {}".format(time.time() - time1))
+    LOGGER.info(f"create index total cost time: {time.time() - time1}")

@@ -1,5 +1,5 @@
-import sys, getopt
-
+import sys
+import getopt
 from performance_test import performance, percentile_test
 from recall_test import recall
 from milvus_helpers import MilvusHelper
@@ -8,7 +8,7 @@ from load import insert_data, create_index
 
 def main():
     try:
-        opts, args = getopt.getopt(
+        opts, _ = getopt.getopt(
             sys.argv[1:],
             "hc",
             ["help", "collection=", "dim=", "index_type=", "percentile=", "create", "insert", "create_index",
@@ -78,7 +78,7 @@ def main():
             sys.exit(2)
 
 
-        # save search result 
+        # save search result
         elif opt_name == "--recall":
             client = MilvusHelper()
             recall(client, collection_name, search_param)
