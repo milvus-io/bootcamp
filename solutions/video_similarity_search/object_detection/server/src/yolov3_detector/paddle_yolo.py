@@ -8,7 +8,7 @@ import time
 import numpy as np
 import yaml
 import cv2
-from paddle import fluid
+import paddle.fluid as fluid
 import paddle
 from yolov3_detector.yolo_infer import offset_to_lengths
 from yolov3_detector.yolo_infer import coco17_category_info, bbox2out
