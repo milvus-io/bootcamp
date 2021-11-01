@@ -4,7 +4,7 @@ name: Workflow for pylint
 on:
   pull_request:
     branches:
-      - main
+      - master
 jobs:
   run:
     runs-on: ubuntu-latest
