@@ -4,9 +4,9 @@ from pymilvus import FieldSchema, CollectionSchema, DataType
 MILVUS_HOST = 'localhost'
 MILVUS_PORT = 19530
 
-dim = 32
+DIM = 32
 pk = FieldSchema(name='pk', dtype=DataType.INT64, is_primary=True)
-field = FieldSchema(name='embedding', dtype=DataType.FLOAT_VECTOR, dim=dim)
+field = FieldSchema(name='embedding', dtype=DataType.FLOAT_VECTOR, dim=DIM)
 schema = CollectionSchema(fields=[pk, field], description="movie recommendation: demo films")
 
 index_param = {
@@ -15,7 +15,7 @@ index_param = {
     "params":{"nlist":128}
     }
 
-top_k = 10
+TOP_K = 10
 search_params = {
     "metric_type": "L2",
     "params": {"nprobe": 10}
