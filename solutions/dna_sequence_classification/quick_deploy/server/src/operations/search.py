@@ -1,10 +1,11 @@
 import sys
 import pandas as pd
 
+
 sys.path.append("..")
 from config import TOP_K, DEFAULT_TABLE, KMER_K, SEQ_CLASS_PATH
 from logs import LOGGER
-from utils import build_kmers,encode_seq
+from utils import build_kmers, encode_seq
 
 def search_in_milvus(table_name, query_sentence, milvus_cli, mysql_cli):
     if not table_name:
@@ -34,7 +35,7 @@ from milvus_helpers import MilvusHelper
 from mysql_helpers import MySQLHelper
 if __name__ == "__main__":
     COLLECTION_NAME = "human_dna"
-    QUERY="ACGTTA"
+    QUERY = "ACGTTA"
     MILVUS_CLI = MilvusHelper()
     MYSQL_CLI = MySQLHelper()
     search_in_milvus(COLLECTION_NAME, QUERY, MILVUS_CLI, MYSQL_CLI)
