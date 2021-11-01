@@ -1,5 +1,4 @@
 import sys
-
 sys.path.append("..")
 from config import DEFAULT_TABLE
 from logs import LOGGER
@@ -15,5 +14,5 @@ def do_drop(table_name, milvus_cli, mysql_cli):
         mysql_cli.delete_table(table_name)
         return status
     except Exception as e:
-        LOGGER.error(" Error with  drop table: {}".format(e))
+        LOGGER.error(f"Error with  drop table: {e}")
         sys.exit(1)
