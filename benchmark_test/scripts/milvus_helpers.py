@@ -49,7 +49,7 @@ class MilvusHelper:
                                      dim=VECTOR_DIMENSION, is_primary=False)
                 schema = CollectionSchema(fields=[field1, field2], description="collection description")
                 self.collection = Collection(name=collection_name, schema=schema, shards_num=SHARDS_NUM)
-                LOGGER.debug("Create Milvus collection: {}".format(self.collection))
+                LOGGER.debug("Create Milvus collection: {}".format(collection_name))
                 return "OK"
             else:
                 self.collection = Collection(collection_name)
@@ -58,7 +58,7 @@ class MilvusHelper:
             LOGGER.error(f"Failed to load data to Milvus: {e}")
             sys.exit(1)
 
-    def insert(self, collection_name, vectors):
+    def insert(self, collection_name, vectors, ids):
         # Batch insert vectors to milvus collection
         try:
             self.create_collection(collection_name)
@@ -110,7 +110,7 @@ class MilvusHelper:
         # Get the number of milvus collection
         try:
             self.set_collection(collection_name)
-            num =self.collection.num_entities
+            num = self.collection.num_entities
             LOGGER.debug(f"Successfully get the num:{num} of the collection:{collection_name}")
             return num
         except Exception as e:
