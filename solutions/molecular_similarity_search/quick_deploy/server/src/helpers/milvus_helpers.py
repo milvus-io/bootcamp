@@ -28,7 +28,7 @@ class MilvusHelper:
             else:
                 raise Exception(f"There is no collection named:{collection_name}")
         except Exception as e:
-            LOGGER.error(f"Failed to load data to Milvus: {e}")
+            LOGGER.error(f"Failed to set collection in Milvus: {e}")
             sys.exit(1)
 
     def has_collection(self, collection_name):
@@ -48,7 +48,7 @@ class MilvusHelper:
                                         dim=VECTOR_DIMENSION, is_primary=False)
                 schema = CollectionSchema(fields=[ field1,field2], description="collection description")
                 self.collection = Collection(name=collection_name, schema=schema)
-                LOGGER.debug(f"Create Milvus collection: {self.collectio}")
+                LOGGER.debug(f"Create Milvus collection: {collection_name}")
             else:
                 self.set_collection(collection_name)
             return "OK"
