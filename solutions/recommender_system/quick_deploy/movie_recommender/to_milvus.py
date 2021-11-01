@@ -64,7 +64,7 @@ def get_vectors():
         str_nums = line.split(",")
         emb = [float(x) for x in str_nums]
         embeddings0.append(emb)
-    return ids0, embeddings
+    return ids0, embeddings0
 
 
 ids, embeddings = get_vectors()
