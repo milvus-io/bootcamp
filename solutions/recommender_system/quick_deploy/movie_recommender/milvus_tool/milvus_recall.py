@@ -1,10 +1,11 @@
-from pymilvus import *
-
-# from milvus_tool.config import MILVUS_HOST, MILVUS_PORT, top_k, search_param, dim
-from milvus_tool.config import *
+from pymilvus import connections, utility, Collection
+from milvus_tool.config import MILVUS_HOST, MILVUS_PORT, search_params, TOP_K
 
 
 class RecallByMilvus():
+    """
+    Search in Milvus
+    """
     def __init__(self):
         connections.connect(host=MILVUS_HOST, port=MILVUS_PORT)
 
@@ -13,7 +14,7 @@ class RecallByMilvus():
             if utility.has_collection(collection_name):
                 collection = Collection(name = collection_name)
             collection.load()
-            res = collection.search(vectors, anns_field="embedding", limit=top_k, param=search_params)
+            res = collection.search(vectors, anns_field="embedding", limit=TOP_K, param=search_params)
             return res
         except Exception as e:
             print('Milvus recall error: ', e)
@@ -22,10 +23,10 @@ class RecallByMilvus():
 if __name__ == '__main__':
     import random
     client = RecallByMilvus()
-    collection_name = 'test1'
-    partition_name = 'partition_3'
+    COLLECTION_NAME = 'test1'
+    PARTITION_NAME = 'partition_3'
     embeddings = [[random.random() for _ in range(32)] for _ in range(2)]
-    res = client.search(collection_name=collection_name, vectors=embeddings)
-    for x in res:
+    test_res = client.search(collection_name=COLLECTION_NAME, vectors=embeddings)
+    for x in test_res:
         for y in x:
             print(y.id, y.distance)
