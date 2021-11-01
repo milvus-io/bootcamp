@@ -4,13 +4,11 @@
 
 This demo uses OpenCV to extract video frames. Then it uses ResNet50 to get the feature vector of each frame. Finally, it uses **Milvus** to save and search the data, which makes it very easy to build a system for video similarity search. So let's have fun playing with it!
 
-
 ## Data source
 
 This article uses Tumblr's approximately 100 animated gifs as an example to build an end-to-end solution that uses video search video. Readers can use their own video files to build the system.
 
 You can download the data in google drive: https://drive.google.com/file/d/1CAt-LsF-2gpAMnw5BM75OjCxiR2daulU/view?usp=sharing, then please unzip it.
-
 
 ## How to deploy the system
 
@@ -31,6 +29,7 @@ The video similarity system will use Milvus to store and search the feature vect
   ```
 
 ### 2. Start Server
+
 The next step is to start the system server. It provides HTTP backend services. There are two ways to start: Docker or source code.
 
 #### Option 1: Run server with Docker
@@ -68,6 +67,7 @@ The next step is to start the system server. It provides HTTP backend services. 
   > **Note:** -v ${DATAPATH1}:${DATAPATH1} means that you can mount the directory into the container. If needed, you can load the parent directory or more directories.
 
 #### Option 2: Run source code
+
 - **Install the Python packages**
 
   ```bash
@@ -107,8 +107,6 @@ The next step is to start the system server. It provides HTTP backend services. 
 
   ![](../pic/API_imag.png)
 
-
-
   > /data
   >
   > Return the video files.
@@ -133,7 +131,7 @@ The next step is to start the system server. It provides HTTP backend services. 
 
   If you are interested in our code or would like to contribute code, feel free to learn more about our code structure.
 
-  ```
+  ```bash
   └───server
   │   │   Dockerfile
   │   │   requirements.txt
@@ -158,7 +156,7 @@ The next step is to start the system server. It provides HTTP backend services. 
 
 - **Start the front-end**
 
-  ```
+  ```bash
   # Please modify API_URL to the IP address and port of the server.
   $ export API_URL='http://192.168.1.85:5000'
   $ docker run -d -p 8001:80 \
@@ -172,7 +170,6 @@ The next step is to start the system server. It provides HTTP backend services. 
 
   > `WEBCLIENT_IP` specifies the IP address that runs pic-search-webclient docker.
 
-
   ![ ](../pic/show.png)
 
   1. **Load data**
@@ -180,7 +177,6 @@ The next step is to start the system server. It provides HTTP backend services. 
     Enter the path of an image folder in the pic_search_webserver docker container with `${DATAPATH1}`, then click `+` to load the pictures. The following screenshot shows the loading process:
 
   ![ ](../pic/load.png)
-
 
   > Note: After clicking the Load button, it will take 1 to 2 seconds for the system to response. Please do not click again.
 

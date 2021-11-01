@@ -6,6 +6,13 @@ from numpy import linalg as LA
 
 
 class Resnet50:
+    """
+    Say something about the ExampleCalass...
+
+    Args:
+        args_0 (`type`):
+        ...
+    """
     def __init__(self):
         self.input_shape = (224, 224, 3)
         self.weight = 'imagenet'

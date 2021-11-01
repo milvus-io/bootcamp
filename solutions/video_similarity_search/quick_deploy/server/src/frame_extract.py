@@ -1,10 +1,17 @@
-import cv2
-import uuid
 import os
+import uuid
+from cv2 import cv2
 from config import DATA_PATH
 
 
 class FrameExtract:
+    """
+    Say something about the ExampleCalass...
+
+    Args:
+        args_0 (`type`):
+        ...
+    """
     def __init__(self, fps=1):
         self.fps = fps
 
@@ -13,15 +20,15 @@ class FrameExtract:
         count, frame_count = 0, 0
         cap = cv2.VideoCapture(file_path)
         framerate = cap.get(cv2.CAP_PROP_FPS)
-        allframes = int(cv2.VideoCapture.get(cap, int(cv2.CAP_PROP_FRAME_COUNT)))
+        # allframes = int(cv2.VideoCapture.get(cap, int(cv2.CAP_PROP_FRAME_COUNT)))
         success, image = cap.read()
-        # print(DATA_PATH + '/' + prefix)
         if not os.path.exists(DATA_PATH + '/' + prefix):
             os.mkdir(DATA_PATH + '/' + prefix)
         images = []
         while success:
             if count % (int(framerate)/self.fps) == 0:
-                file_name = "%s/%s/" % (DATA_PATH, prefix) + '%06d' % (frame_count+1) + '.jpg'
+                frames = str(frame_count+1).zfill(6)
+                file_name = f'{DATA_PATH}/{prefix}/{frames}.jpg'
                 cv2.imwrite(file_name, image)
                 frame_count += 1
                 images.append(file_name)
@@ -36,7 +43,6 @@ def main():
     fe = FrameExtract()
     images = fe.extract_frame(avi)
     print("images:", images)
-
 
 if __name__ == '__main__':
     main()

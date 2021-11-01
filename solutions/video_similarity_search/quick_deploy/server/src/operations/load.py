@@ -7,8 +7,8 @@ sys.path.append("..")
 from config import DEFAULT_TABLE
 
 
-# Get the path to the image
 def get_video(path):
+    # Get the path to the image
     video = []
     for f in os.listdir(path):
         if ((f.endswith(extension) for extension in
@@ -16,9 +16,8 @@ def get_video(path):
             video.append(os.path.join(path, f))
     return video
 
-
-# Get the vector of images
 def extract_features(video_dir, model, frame):
+    # Get the vector of images
     try:
         cache = Cache('./tmp')
         feats = []
@@ -33,14 +32,14 @@ def extract_features(video_dir, model, frame):
                 feats.append(norm_feat)
                 names.append(video_path.encode())
             cache['current'] = i + 1
-            print("%d video in total, extracting feature from video No. %d , and the video has %d frames." % (i + 1, total, len(imgs)))
+            print(f"{i + 1} video in total, extracting feature from video No. {total} , and the video has {len(imgs)} frames.")
         return feats, names
     except Exception as e:
-        LOGGER.error(" Error with extracting feature from image {}".format(e))
+        LOGGER.error(f"Error with extracting feature from image {e}")
         sys.exit(1)
 
-# Combine the id of the vector and the name of the image into a list
 def format_data(ids, names):
+    # Combine the id of the vector and the name of the image into a list
     data = []
     for i in range(len(ids)):
         value = (str(ids[i]), names[i])
