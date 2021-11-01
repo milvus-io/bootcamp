@@ -80,12 +80,10 @@ class MySQLHelper():
         try:
             self.cursor.execute(sql)
             results = self.cursor.fetchall()
-            results = [res[0] for res in results]
-            LOGGER.debug("MYSQL search by milvus id.")
-            return results
-        except Exception as e:
-            LOGGER.error(f"MYSQL ERROR: {e} with sql: {sql}")
-            sys.exit(1)
+            results_id = [res[0] for res in results]
+            results_class = [res[1] for res in results]
+            LOGGER.debug(f"MYSQL search by milvus id.")
+            return results_id, results_class
 
     def delete_table(self, table_name):
         # Delete mysql table if exists
