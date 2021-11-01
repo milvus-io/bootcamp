@@ -10,7 +10,7 @@ DEFAULT_TABLE = os.getenv("DEFAULT_TABLE", "test_table")
 TOP_K = int( os.getenv("TOP_K", "9"))
 
 ############### MySQL Configuration ###############
-MYSQL_HOST = os.getenv("MYSQL_HOST", "192.168.1.85")
+MYSQL_HOST = os.getenv("MYSQL_HOST", "127.0.0.1")
 MYSQL_PORT = int( os.getenv("MYSQL_PORT", "3306"))
 MYSQL_USER = os.getenv("MYSQL_USER", "root")
 MYSQL_PWD = os.getenv("MYSQL_PWD", "123456")
