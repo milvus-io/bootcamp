@@ -19,6 +19,12 @@ from config import DATA_PATH, COCO_MODEL_PATH, YOLO_CONFIG_PATH
 
 paddle.enable_static()
 
+# def temp_directory():
+#     return os.path.abspath(os.path.join('.', 'data'))
+
+
+# COCO_MODEL_PATH = os.path.join(temp_directory(), "yolov3_darknet")
+# YOLO_CONFIG_PATH = os.path.join(COCO_MODEL_PATH, "yolo.yml")
 
 class BoundingBox:
     """
@@ -52,13 +58,6 @@ def cv2base64(image, fps, path):
 
 
 class YOLO_v3:
-    """
-    Say something about the ExampleCalass...
-
-    Args:
-        args_0 (`type`):
-        ...
-    """
     def __init__(self):
         self.model_init = False
         self.fps = 0
