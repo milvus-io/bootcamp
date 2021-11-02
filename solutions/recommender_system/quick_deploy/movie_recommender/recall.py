@@ -14,28 +14,24 @@
 
 # !/bin/env python
 from __future__ import unicode_literals
-
 from concurrent import futures
-
 import grpc
-
 from proto import recall_pb2
 from proto import recall_pb2_grpc
-from proto import user_info_pb2 as user_info_pb2
-import redis
-from pymilvus_orm import *
+#from proto import user_info_pb2
+#import redis
+#from pymilvus import *
 from paddle_serving_app.local_predict import LocalPredictor
 import numpy as np
-
-import sys
-sys.path.append("milvus_tool")
-sys.path.append("..")
 from milvus_tool.milvus_recall import RecallByMilvus
 
-def hash2(a):
-    return hash(a) % 1000000
+def hash2(obj):
+    return hash(obj) % 1000000
 
 class RecallServerServicer(object):
+    '''
+    recall results
+    '''
     def __init__(self):
         self.uv_client = LocalPredictor()
         self.uv_client.load_model_config("user_vector_model/serving_server_dir")
@@ -64,7 +60,7 @@ class RecallServerServicer(object):
         fetch_map = self.uv_client.predict(feed=dic, fetch=["save_infer_model/scale_0.tmp_1"], batch=True)
         return fetch_map["save_infer_model/scale_0.tmp_1"].tolist()[0]
 
-    def recall(self, request, context):
+    def recall(self, request):
         '''
     message RecallRequest{
         string log_id = 1;
@@ -96,7 +92,7 @@ class RecallServerServicer(object):
                 recall_res.error.text = "Recall server get milvus fail. ({})".format(str(request))
                 return recall_res
             for topk_film in entities:
-                current_entity = topk_film.id
+                #current_entity = topk_film.id
                 score_pair = recall_res.score_pairs.add()
                 score_pair.nid = str(topk_film.id)
                 score_pair.score = float(topk_film.distance)
