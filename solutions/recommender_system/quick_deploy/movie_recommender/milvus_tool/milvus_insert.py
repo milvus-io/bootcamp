@@ -1,15 +1,15 @@
-from pymilvus import *
-
-# from milvus_tool.config import MILVUS_HOST, MILVUS_PORT, schema, index_param
-
-from milvus_tool.config import *
+from pymilvus import connections, utility, Collection
+from milvus_tool.config import MILVUS_HOST, MILVUS_PORT, schema, index_param, DIM
 
 
 class VecToMilvus():
+    """
+    Insert vectors to Milvus
+    """
     def __init__(self):
         try:
             connections.connect(host=MILVUS_HOST, port=MILVUS_PORT)
-            collection = None
+            #collection = None
         except Exception as e:
             print("Fail to connect Milvus:", e)
 
@@ -26,13 +26,13 @@ class VecToMilvus():
             else:
                 print('No collection {}'.format(collection_name))
         except Exception as e:
-                print('Milvus set collection error:', e)
+            print('Milvus set collection error:', e)
 
     def creat_collection(self, collection_name):
         try:
             self.collection = Collection(name=collection_name, schema=schema)
             print("Create collection {} successfully".format(collection_name))
-            return collection
+            return self.collection
         except Exception as e:
             print("Milvus create collection error:", e)
 
@@ -61,10 +61,10 @@ class VecToMilvus():
         except Exception as e:
             print("Milvus create partition error:", e)
 
-    def drop():
+    def drop(self, collection_name):
         try:
             self.set_collection(collection_name)
-            collection.drop()
+            self.collection.drop()
             print("Drop collection {}".format(collection_name))
         except Exception as e:
             print("Milvus drop collection error", e)
@@ -87,12 +87,11 @@ class VecToMilvus():
 
 if __name__ == '__main__':
     import random
-
     client = VecToMilvus()
-    collection_name = 'test1'
-    partition_name = 'partition_1'
-    ids = [random.randint(0, 1000) for _ in range(100)]
-    embeddings = [[random.random() for _ in range(dim)] for _ in range(100)]
-    mr = client.insert(ids=ids, vectors=embeddings, collection_name=collection_name, partition_name=partition_name)
-    print(mr)
+    COLLECTION_NAME = 'test1'
+    PARTITION_NAME = 'partition_1'
+    IDS = [random.randint(0, 1000) for _ in range(100)]
+    embeddings = [[random.random() for _ in range(DIM)] for _ in range(100)]
+    res = client.insert(ids=IDS, vectors=embeddings, collection_name=COLLECTION_NAME, partition_name=PARTITION_NAME)
+    print(res)
     # print(ids)
