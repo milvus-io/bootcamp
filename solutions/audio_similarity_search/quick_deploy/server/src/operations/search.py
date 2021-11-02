@@ -1,7 +1,7 @@
 import sys
-from src.logs import LOGGER
-from src.config import TOP_K, DEFAULT_TABLE
-from src.encode import get_audio_embedding
+from logs import LOGGER
+from config import TOP_K, DEFAULT_TABLE
+from encode import get_audio_embedding
 
 def do_search(host,table_name, audio_path, milvus_client, mysql_cli):
     try:
