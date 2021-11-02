@@ -26,44 +26,44 @@ import proto.recall_pb2 as recall_pb2
 import proto.recall_pb2_grpc as recall_pb2_grpc
 import proto.as_pb2 as as_pb2
 import proto.as_pb2_grpc as as_pb2_grpc
-import json
-from google.protobuf.json_format import MessageToJson, Parse
+#import json
+#from google.protobuf.json_format import MessageToJson, Parse
 
 
-def get_ums(uid):
+def get_ums(u_id):
     channel = grpc.insecure_channel('127.0.0.1:8910')
     stub = um_pb2_grpc.UMServiceStub(channel)
-    request = um_pb2.UserModelRequest()
-    request.user_id = str(uid)
+    um_request = um_pb2.UserModelRequest()
+    um_request.user_id = str(u_id)
     response = stub.um_call(request)
     return response
 
-def get_recall(request):
+def get_recall(recall_request):
     channel = grpc.insecure_channel('127.0.0.1:8950')
     stub = recall_pb2_grpc.RecallServiceStub(channel)
-    response = stub.recall(request)
+    response = stub.recall(recall_request)
     return response
 
-def get_cm(nid_list):
+def get_cm(cm_nid_list):
     channel = grpc.insecure_channel('127.0.0.1:8920')
     stub = cm_pb2_grpc.CMServiceStub(channel)
     cm_request = cm_pb2.CMRequest()
-    for nid in nid_list:
+    for nid in cm_nid_list:
         cm_request.item_ids.append(str(nid).encode(encoding='utf-8'))
     cm_response = stub.cm_call(cm_request,timeout=10)
     return cm_response
 
-def get_rank(request):
+def get_rank(rank_request):
     channel = grpc.insecure_channel('127.0.0.1:8960')
     stub = rank_pb2_grpc.RankServiceStub(channel)
-    response = stub.rank_predict(request)
+    response = stub.rank_predict(rank_request)
     return response
 
 
-def get_as(request):
+def get_as(as_request):
     channel = grpc.insecure_channel("127.0.0.1:8930")
     stub = as_pb2_grpc.ASServiceStub(channel)
-    response = stub.as_call(request)
+    response = stub.as_call(as_request)
     return response
 
 
@@ -77,7 +77,7 @@ if __name__ == "__main__":
             gender = sys.argv[2]
             age = int(sys.argv[3])
             job = sys.argv[4]
-            req.user_info.user_id, req.user_info.gender, req.user_info.age, req.user_info.job = "0", gender, age, job 
+            req.user_info.user_id, req.user_info.gender, req.user_info.age, req.user_info.job = "0", gender, age, job
         print(get_as(req))
     if sys.argv[1] == 'um':
         uid = sys.argv[2]
