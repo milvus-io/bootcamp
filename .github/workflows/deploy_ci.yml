@@ -1,0 +1,42 @@
+name: Deploy CI Test
+
+on:
+  pull_request:
+    branches:
+      - main
+    types: [ labeled ]
+    paths:
+      - 'solutions/**/server/**'
+
+jobs:
+  CI-Deploy-Test:
+    # Example label: audio_similarity_search/quick_deploy
+    if: contains(github.event.label.name, '/quick_deploy') || contains(github.event.label.name, '/object_detection')
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@master
+    - name: Setup Python3.8
+      uses: actions/setup-python@master
+      with:
+        python-version: 3.8
+    - name: Insatll libsndfile
+      run: sudo apt-get install -y libsndfile1
+    - name: Install pip packeages
+      run: |
+        python -m pip install --upgrade pip
+        pip install pytest
+        pip install gdown
+
+    - name: Start Milvus
+      run: |
+        wget https://github.com/milvus-io/milvus/releases/download/v2.0.0-rc7/milvus-standalone-docker-compose.yml -O docker-compose.yml
+        docker-compose up -d
+    - name: Start MySQL
+      run: docker run -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7
+    
+    - name: Test main server
+      run: |
+        cd solutions/${{github.event.label.name}}/server
+        pip install -r requirements.txt
+        cd src && pytest
