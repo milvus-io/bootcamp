@@ -1,12 +1,12 @@
 import os
-from src.milvus_helpers import MilvusHelper
-from src.mysql_helpers import MySQLHelper
-from src.config import UPLOAD_PATH
-from src.logs import LOGGER
-from src.operations.load import do_load
-from src.operations.search import do_search
-from src.operations.count import do_count
-from src.operations.drop import do_drop
+from milvus_helpers import MilvusHelper
+from mysql_helpers import MySQLHelper
+from config import UPLOAD_PATH
+from logs import LOGGER
+from operations.load import do_load
+from operations.search import do_search
+from operations.count import do_count
+from operations.drop import do_drop
 from fastapi import FastAPI
 from fastapi import File
 from fastapi import UploadFile
@@ -80,6 +80,24 @@ async def search_audio(request: Request, table_name: str = None, audio: UploadFi
         query_audio_path = os.path.join(UPLOAD_PATH, audio.filename)
         with open(query_audio_path, "wb+") as f:
             f.write(content)
+        host = request.headers['host']
+        _, paths, distances= do_search(host, table_name, query_audio_path, MILVUS_CLI, MYSQL_CLI)
+        names=[]
+        for i in paths:
+            names.append(os.path.basename(i))
+        res = dict(zip(paths, zip(names, distances)))
+        # Sort results by distance metric, closest distances first
+        res = sorted(res.items(), key=lambda item: item[1][1])
+        LOGGER.info("Successfully searched similar audio!")
+        return res
+    except Exception as e:
+        LOGGER.error(e)
+        return {'status': False, 'msg': e}, 400
+
+@app.post('/audio/search/local')
+async def search_local_audio(request: Request, query_audio_path: str, table_name: str = None):
+    # Search the uploaded audio in Milvus/MySQL
+    try:
         host = request.headers['host']
         _, paths, distances= do_search(host, table_name, query_audio_path, MILVUS_CLI, MYSQL_CLI)
         names=[]

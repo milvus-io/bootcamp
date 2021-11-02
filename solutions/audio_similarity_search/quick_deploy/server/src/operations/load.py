@@ -1,11 +1,11 @@
 import sys
 import os
 from diskcache import Cache
-from src.encode import get_audio_embedding
+from encode import get_audio_embedding
 
 sys.path.append("..")
-from src.config import DEFAULT_TABLE
-from src.logs import LOGGER
+from config import DEFAULT_TABLE
+from logs import LOGGER
 
 
 def get_audios(path):
