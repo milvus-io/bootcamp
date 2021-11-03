@@ -6,3 +6,4 @@ fastapi
 python-multipart
 pandas
 sentence_transformers==1.2.0
+gdown
