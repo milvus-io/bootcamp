@@ -1,0 +1,46 @@
+name: Jupyter CI Test
+on:
+  pull_request:
+    branches:
+      - master
+    types: [ labeled ]
+    paths:
+      - '**.ipynb'
+
+jobs:
+  CI-Deploy-Test:
+    if: github.event.label.name == 'jupyter'
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Setup Python3.8
+      uses: actions/setup-python@master
+      with:
+        python-version: 3.8
+    - name: Install pip packeages
+      run: |
+        python -m pip install --upgrade pip
+        pip install gdown
+        pip install pytest nbmake
+    - name: Insatll libsndfile
+      run: sudo apt-get install -y libsndfile1
+    - name: Start Milvus
+      run: |
+        wget https://github.com/milvus-io/milvus/releases/download/v2.0.0-rc7/milvus-standalone-docker-compose.yml -O docker-compose.yml
+        docker-compose up -d
+
+    - name: Get all added and modified files as CSV
+      id: files
+      uses: Ana06/get-changed-files@v2.0.0
+      with:
+        format: 'csv'
+    - name: Get Notebook and test with nbmake
+      run: |
+        mapfile -d ',' -t added_modified_files < <(printf '%s,' '${{ steps.files.outputs.added_modified }}')
+        for added_modified_file in "${added_modified_files[@]}"; do
+          if [[ ${added_modified_file} = *.ipynb ]]; then
+            pytest --nbmake ${added_modified_file}
+          fi
+        done
+            
+    
