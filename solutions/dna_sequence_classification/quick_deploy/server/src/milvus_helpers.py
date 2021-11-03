@@ -47,7 +47,7 @@ class MilvusHelper:
                 field2 = FieldSchema(name="embedding", dtype=DataType.FLOAT_VECTOR, descrition="float vector", dim=VECTOR_DIMENSION, is_primary=False)
                 schema = CollectionSchema(fields=[ field1,field2], description="collection description")
                 self.collection = Collection(name=collection_name, schema=schema)
-                LOGGER.debug(f"Create Milvus collection: {self.collectio}")
+                LOGGER.debug(f"Create Milvus collection: {self.collection}")
             else:
                 self.set_collection(collection_name)
             return "OK"
