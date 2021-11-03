@@ -21,9 +21,8 @@ class SentenceModel:
         if not os.path.exists("./paraphrase-mpnet-base-v2.zip"):
             url = 'https://public.ukp.informatik.tu-darmstadt.de/reimers/sentence-transformers/v0.2/paraphrase-mpnet-base-v2.zip'
             gdown.download(url)
-        if not os.path.getsize(MODEL_PATH):
-            with zipfile.ZipFile('paraphrase-mpnet-base-v2.zip', 'r') as zip_ref:
-                zip_ref.extractall('MODEL_PATH')
+        with zipfile.ZipFile('paraphrase-mpnet-base-v2.zip', 'r') as zip_ref:
+            zip_ref.extractall(MODEL_PATH)
         self.model = SentenceTransformer(MODEL_PATH)
 
     def sentence_encode(self, data):
