@@ -10,6 +10,7 @@ client = TestClient(app)
 def download_audio_data():
     url = 'https://drive.google.com/uc?id=1bKu21JWBfcZBuEuzFEvPoAX6PmRrgnUp'
     gdown.download(url)
+    
     with zipfile.ZipFile('example_audio.zip', 'r') as zip_ref:
         zip_ref.extractall('./example_audio')
 
