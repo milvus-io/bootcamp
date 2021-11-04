@@ -40,4 +40,4 @@ jobs:
       run: |
         cd solutions/${{github.event.label.name}}/server
         pip install -r requirements.txt
-        cd src && pytest
+        cd src && python -m pytest
