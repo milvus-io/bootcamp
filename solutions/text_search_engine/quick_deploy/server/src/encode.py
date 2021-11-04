@@ -1,7 +1,9 @@
 from sentence_transformers import SentenceTransformer
 from sklearn.preprocessing import normalize
 from config import MODEL_PATH
-
+import gdown
+import zipfile
+import os
 
 class SentenceModel:
     """
