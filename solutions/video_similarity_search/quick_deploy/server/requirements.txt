@@ -1,4 +1,4 @@
-Keras==2.4.3
+Keras==2.6.0
 tensorflow==2.6.0
 opencv-python
 Pillow==8.2.0
@@ -7,6 +7,6 @@ fastapi
 uvicorn
 pandas
 aiofiles
-pymilvus==2.0.0rc5
+pymilvus==2.0.0rc7
 diskcache
 python-multipart
