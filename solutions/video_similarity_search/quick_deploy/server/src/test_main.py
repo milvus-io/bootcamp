@@ -30,7 +30,7 @@ def test_load():
 def test_progress():
     response = client.get("/progress")
     assert response.status_code == 200
-    assert response.json() == "current: 100, total: 100"
+    assert response.json() == {'current': 100, 'total': 100} 
 
 def test_count():
     response = client.post("video/count")
