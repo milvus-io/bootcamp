@@ -1,6 +1,6 @@
 import sys
 from pymilvus import connections, FieldSchema, CollectionSchema, DataType, Collection, utility
-from config import MILVUS_HOST, MILVUS_PORT, VECTOR_DIMENSION, METRIC_TYPE,SHARDS_NUM
+from config import MILVUS_HOST, MILVUS_PORT, VECTOR_DIMENSION, METRIC_TYPE, SHARDS_NUM
 from logs import LOGGER
 
 
@@ -12,9 +12,10 @@ class MilvusHelper:
         args_0 (`type`):
         ...
     """
+
     def __init__(self):
         try:
-            self.collection =None
+            self.collection = None
             connections.connect(host=MILVUS_HOST, port=MILVUS_PORT)
             LOGGER.debug(f"Successfully connect to Milvus with IP:{MILVUS_HOST} and PORT:{MILVUS_PORT}")
         except Exception as e:
@@ -50,10 +51,11 @@ class MilvusHelper:
                 schema = CollectionSchema(fields=[field1, field2], description="collection description")
                 self.collection = Collection(name=collection_name, schema=schema, shards_num=SHARDS_NUM)
                 LOGGER.debug("Create Milvus collection: {}".format(collection_name))
-                return "OK"
+                return True
             else:
                 self.collection = Collection(collection_name)
-                return f"collection {collection_name} exists"
+                LOGGER.debug(f"collection {collection_name} exists")
+                return True
         except Exception as e:
             LOGGER.error(f"Failed to load data to Milvus: {e}")
             sys.exit(1)
@@ -83,10 +85,10 @@ class MilvusHelper:
                 raise Exception(status.message)
         except Exception as e:
             LOGGER.error(f"Failed to create index: {e}")
-            sys.exit(1) 
-            
+            sys.exit(1)
+
     def delete_collection(self, collection_name):
-         # Delete Milvus collection
+        # Delete Milvus collection
         try:
             utility.drop_collection(collection_name)
             LOGGER.debug("Successfully drop collection!")
@@ -94,7 +96,7 @@ class MilvusHelper:
         except Exception as e:
             LOGGER.error("Failed to drop collection: {}".format(e))
             sys.exit(1)
-             
+
     def search_vectors(self, collection_name, vectors, top_k, search_params):
         # Search vector in milvus collection
         try:
@@ -137,9 +139,13 @@ class MilvusHelper:
         self.collection.drop_index()
 
     def load_data(self, collection_name):
-        # load data from disk to memory
-        self.set_collection(collection_name)
-        self.collection.load()
+        # load data from disk to
+        try:
+            self.set_collection(collection_name)
+            self.collection.load()
+        except Exception as e:
+            LOGGER.error(f"Failed load data: {e}")
+            sys.exit(1)
 
     def list_collection(self):
         # List all collections.
@@ -155,8 +161,12 @@ class MilvusHelper:
 
     def release_data(self, collection_name):
         # release collection data from memory
-        self.set_collection(collection_name)
-        return self.collection.release()
+        try:
+            self.set_collection(collection_name)
+            self.collection.release()
+        except Exception as e:
+            LOGGER.error(f"Failed release data: {e}")
+            sys.exit(1)
 
     def calculate_distance(self, vectors_left, vectors_right):
         # Calculate distance between two vector arrays.
