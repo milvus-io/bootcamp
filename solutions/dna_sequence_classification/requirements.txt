@@ -1,7 +1,8 @@
-pymilvus==2.0.0rc5
+pymilvus==2.0.0rc7
 sklearn
 pymysql
 numpy
 pickle-mixin
 fastapi
 uvicorn
+Python-multipart
