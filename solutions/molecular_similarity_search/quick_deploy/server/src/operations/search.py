@@ -1,7 +1,7 @@
 import sys
-from src.logs import LOGGER
-from src.encode import smiles_to_vector
-from src.config import DEFAULT_TABLE
+from logs import LOGGER
+from encode import smiles_to_vector
+from config import DEFAULT_TABLE
 
 def do_search(table_name, molecular_name, top_k, milvus_cli, mysql_cli):
     if not table_name:

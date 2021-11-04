@@ -5,15 +5,15 @@ from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 from starlette.responses import FileResponse
 from starlette.requests import Request
-from src.helpers.milvus_helpers import MilvusHelper
-from src.helpers.mysql_helpers import MySQLHelper
-from src.config import UPLOAD_PATH
-from src.operations.load import do_load
-from src.operations.search import do_search
-from src.operations.count import do_count
-from src.operations.drop import do_drop
-from src.config import TOP_K
-from src.logs import LOGGER
+from helpers.milvus_helpers import MilvusHelper
+from helpers.mysql_helpers import MySQLHelper
+from config import UPLOAD_PATH
+from operations.load import do_load
+from operations.search import do_search
+from operations.count import do_count
+from operations.drop import do_drop
+from config import TOP_K
+from logs import LOGGER
 from pydantic import BaseModel
 from typing import Optional
 
@@ -24,7 +24,7 @@ app.add_middleware(
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"])
-MODEL = None
+
 MILVUS_CLI = MilvusHelper()
 MYSQL_CLI = MySQLHelper()
 
