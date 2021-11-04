@@ -52,4 +52,4 @@ def test_data():
     response = client.get(
         "/data?gif_path=.%2Fexamle-gif%2F100-gif%2Ftumblr_ldhw4mUPJB1qcuqc7o1_250.gif"
     )
-    assert response.status_code == 200
+    assert response.status_code == 200 
