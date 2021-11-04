@@ -6,10 +6,12 @@ from fastapi import FastAPI, File, UploadFile
 from starlette.middleware.cors import CORSMiddleware
 from milvus_helpers import MilvusHelper
 from mysql_helpers import MySQLHelper
-from operations.load import import_data
+from operations.load import do_load
 from operations.search import search_in_milvus
 from operations.count import do_count
 from operations.drop import do_drop
+from logs import LOGGER
+from encode import SentenceModel
 from pydantic import BaseModel
 from typing import Optional
 
@@ -22,6 +24,8 @@ app.add_middleware(
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"])
+    
+MODEL = SentenceModel()
 MILVUS_CLI = MilvusHelper()
 MYSQL_CLI = MySQLHelper()
 
@@ -68,7 +72,7 @@ async def load_text(file: UploadFile = File(...), table_name: str = None):
         return {'status': False, 'msg': 'Failed to load data.'}
     # Insert all the image under the file path to Milvus/MySQL
     try:
-        total_num = import_data(table_name, fname_path ,MILVUS_CLI, MYSQL_CLI)
+        total_num = do_load(table_name, fname_path,MODEL ,MILVUS_CLI, MYSQL_CLI)
         LOGGER.info(f"Successfully loaded data, total count: {total_num}")
         return "Successfully loaded data!"
     except Exception as e:
@@ -79,7 +83,7 @@ async def load_text(file: UploadFile = File(...), table_name: str = None):
 @app.get('/text/search')
 async def do_search_api(table_name: str = None, query_sentence: str = None):
     try:
-        _, title, text, _ = search_in_milvus(table_name,query_sentence, MILVUS_CLI, MYSQL_CLI)
+        _, title, text, _ = search_in_milvus(table_name,query_sentence,MODEL, MILVUS_CLI, MYSQL_CLI)
         res = []
         for p, d in zip(title, text):
             dicts = {'title': p, 'content':d}
@@ -92,4 +96,4 @@ async def do_search_api(table_name: str = None, query_sentence: str = None):
 
 
 if __name__ == "__main__":
-    uvicorn.run(app=app, host='0.0.0.0', port=5001)
+    uvicorn.run(app=app, host='172.16.70.1', port=5001)
