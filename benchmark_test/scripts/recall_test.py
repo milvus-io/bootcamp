@@ -30,7 +30,7 @@ def compute_recall(collection_name, query, results, search_param, rand):
         ids.append(temp)
 
     gt_ids = load_gt_ids()
-
+    recall_res = []
     for top_k in RECALL_CALC_SCOPE:
         recalls, count_all = compare_correct(query, top_k, rand, gt_ids, ids)
 
@@ -47,6 +47,8 @@ def compute_recall(collection_name, query, results, search_param, rand):
             f.write(str(max(recalls) * 100) + "%," + str(round(count_all / query/ top_k, 3) * 100) + "%," + str(
                 min(recalls) * 100) + "%\n")
         print("topk=", top_k, ", total accuracy", round(count_all / query / top_k, 3) * 100, "%")
+        recall_res.append(round(count_all / query / top_k, 3))
+    return recall_res
 
 
 def load_gt_ids():
@@ -102,4 +104,5 @@ def recall(client, collection_name, search_param):
     time_cost = time.time() - time_start
     print("time_search = ", time_cost)
     save_search_res(collection_name, rand, results, search_param, RECALL_NQ)
-    compute_recall(collection_name, RECALL_NQ, results, search_param, rand)
+    recall_res = compute_recall(collection_name, RECALL_NQ, results, search_param, rand)
+    return recall_res
