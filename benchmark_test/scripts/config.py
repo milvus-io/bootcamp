@@ -1,6 +1,9 @@
 MILVUS_HOST = "127.0.0.1"
 MILVUS_PORT = 19530
 
+# MILVUS_HOST = "172.16.70.1"
+# MILVUS_PORT = 19536
+
 ##################### Collection Parameters ########################################################
 
 METRIC_TYPE = 'L2'
@@ -37,7 +40,7 @@ FILE_TYPE = [
 ]
 
 # Point to directory of file data.
-BASE_FILE_PATH = 'sift1m/data'
+BASE_FILE_PATH = 'sift_data/milvus_sift1m'
 
 # Does the data need to be normalized before insertion
 IF_NORMALIZE = False
@@ -48,7 +51,7 @@ IMPORT_CHUNK_SIZE = 100000
 ##################### Performance Test Parameters ##################################################
 
 # Location of the query files
-QUERY_FILE_PATH = 'data/query.npy'
+QUERY_FILE_PATH = 'sift_data/query_data/query.npy'
 
 # Path to put performance results to, based on current directory.
 PERFORMANCE_RESULTS_PATH = 'performance'
@@ -73,13 +76,13 @@ RECALL_TOPK = 500
 RECALL_CALC_SCOPE = [1, 10, 100, 500]
 
 # Location of query file, if it is a csv, and if it is stored as UINT8
-RECALL_QUERY_FILE = 'data/query.npy'
+RECALL_QUERY_FILE = 'sift_data/query_data/query.npy'
 
 IS_CSV = False
 IS_UINT8 = False
 
 # Location of ground truth file
-GROUNDTRUTH_FILE = 'data/sift1m/gnd/ground_truth_1M.txt'
+GROUNDTRUTH_FILE = 'sift_data/gnd/ground_truth_1M.txt'
 
 # Result locations
 RECALL_RES = 'recall_result'
