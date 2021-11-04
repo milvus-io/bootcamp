@@ -19,7 +19,7 @@ def test_drop():
     assert response.status_code == 200
 
 def test_load():
-    download_audio_data()
+    download_video_data()
     response = client.post(
         "/video/load",
         json={"File": "./examle-gif/100-gif"}
