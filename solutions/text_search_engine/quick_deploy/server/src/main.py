@@ -96,4 +96,4 @@ async def do_search_api(table_name: str = None, query_sentence: str = None):
 
 
 if __name__ == "__main__":
-    uvicorn.run(app=app, host='172.16.70.1', port=5001)
+    uvicorn.run(app=app, host='0.0.0.0', port=5001)
