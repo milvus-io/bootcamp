@@ -7,7 +7,7 @@ from main import app
 client = TestClient(app)
 
 
-def download_audio_data():
+def download_video_data():
     url = 'https://drive.google.com/u/0/uc?export=download&confirm=mZQR&id=1CAt-LsF-2gpAMnw5BM75OjCxiR2daulU'
     gdown.download(url)
 
