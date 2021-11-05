@@ -63,7 +63,10 @@ class MilvusHelper:
     def insert(self, collection_name, vectors, ids=None):
         # Batch insert vectors to milvus collection
         try:
-            self.create_collection(collection_name)
+            if not self.has_collection(collection_name):
+                self.create_collection(collection_name)
+            else:
+                self.collection = Collection(collection_name)
             self.collection.insert([ids, vectors])
             LOGGER.debug(
                 f"Insert vectors to Milvus in collection: {collection_name} with {len(vectors)} rows")
