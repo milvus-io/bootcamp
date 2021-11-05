@@ -73,6 +73,6 @@ def test_drop_index():
     assert index_info == []
 
 
-# def test_drop_collection():
-#     client.delete_collection(collection_name)
-#     assert client.has_collection(collection_name) == False
+def test_drop_collection():
+    client.delete_collection(collection_name)
+    assert client.has_collection(collection_name) == False
