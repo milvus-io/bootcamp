@@ -5,10 +5,6 @@ from main import app
 client = TestClient(app)
 
 
-def test_drop():
-    response = client.post("/data/drop")
-    assert response.status_code == 200
-
 def test_load():
     response = client.post(
         "/data/load",
@@ -34,3 +30,7 @@ def test_search():
     )
     assert response.status_code == 200
     assert len(response.json()) == 10
+
+def test_drop():
+    response = client.post("/data/drop")
+    assert response.status_code == 200
