@@ -43,7 +43,6 @@ def main():
         # create collection
         elif opt_name in ("-c", "--create"):
             client = MilvusHelper()
-            # collection_name = 'bench_test1'
             print(client.create_collection(collection_name))
             sys.exit(2)
 
@@ -146,7 +145,7 @@ def main():
 
         elif opt_name == "--release":
             client = MilvusHelper()
-            print(client.release_data(collection_name))
+            client.release_data(collection_name)
             sys.exit(2)
 
         # elif opt_name == "--calculate":

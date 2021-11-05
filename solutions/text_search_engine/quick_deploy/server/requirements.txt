@@ -5,10 +5,8 @@ cryptography
 aiofiles
 Pillow
 pymilvus==2.0.0rc7
-tensorflow == 1.13.1
-bert-serving-server
-bert-serving-client
-pymysql
-fastapi  
+fastapi
 uvicorn
 python-multipart
+PyMySQL
+sentence_transformers==1.2.0

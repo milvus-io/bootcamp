@@ -18,3 +18,6 @@ MYSQL_DB = os.getenv("MYSQL_DB", "mysql")
 
 ############### Number of log files ###############
 LOGS_NUM = int(os.getenv("logs_num", "0"))
+
+############## Model path #################
+MODEL_PATH = 'model/paraphrase-mpnet-base-v2'

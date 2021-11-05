@@ -1,34 +1,20 @@
 import sys
 import numpy as np
-from bert_serving.client import BertClient
-from functools import reduce
 
 
 sys.path.append("..")
 from config import TOP_K, DEFAULT_TABLE
 from logs import LOGGER
 
-bc = BertClient()
 
-def normaliz_vec(vec_list):
-    for i in range(len(vec_list)):
-        vec = vec_list[i]
-        square_sum = reduce(lambda x, y: x + y, map(lambda x: x * x, vec))
-        sqrt_square_sum = np.sqrt(square_sum)
-        coef = 1 / sqrt_square_sum
-        vec = list(map(lambda x: x * coef, vec))
-        vec_list[i] = vec
-    return vec_list
 
-def search_in_milvus(table_name, query_sentence,milvus_cli, mysql_cli):
+def search_in_milvus(table_name, query_sentence,model,milvus_cli, mysql_cli):
     if not table_name:
         table_name = DEFAULT_TABLE
     try:
-        query_data = [query_sentence]
-        vectors = bc.encode(query_data)
-        query_list = normaliz_vec(vectors.tolist())
+        vectors = model.sentence_encode([query_sentence])
         LOGGER.info("Successfully insert query list")
-        results = milvus_cli.search_vectors(table_name,query_list,TOP_K)
+        results = milvus_cli.search_vectors(table_name,vectors,TOP_K)
         vids = [str(x.id) for x in results[0]]
         print("-----------------", vids)
         ids,title,text= mysql_cli.search_by_milvus_ids(vids, table_name)

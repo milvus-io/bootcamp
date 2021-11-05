@@ -1,24 +1,24 @@
 import sys
 import numpy as np
-from bert_serving.client import BertClient
-from functools import reduce
 import pandas as pd
 
 sys.path.append("..")
 from config import DEFAULT_TABLE
+from logs import LOGGER
 
 
-bc = BertClient()
+# Get the vector of question
+def extract_features(file_dir, model):
+    try:
+        data = pd.read_csv(file_dir)
+        title_data = data['title'].tolist()
+        text_data = data['text'].tolist()
+        sentence_embeddings = model.sentence_encode(title_data)
+        return title_data, text_data, sentence_embeddings
+    except Exception as e:
+        LOGGER.error(f" Error with extracting feature from question {e}")
+        sys.exit(1)
 
-def normaliz_vec(vec_list):
-    for i in range(len(vec_list)):
-        vec = vec_list[i]
-        square_sum = reduce(lambda x, y: x + y, map(lambda x: x * x, vec))
-        sqrt_square_sum = np.sqrt(square_sum)
-        coef = 1 / sqrt_square_sum
-        vec = list(map(lambda x: x * coef, vec))
-        vec_list[i] = vec
-    return vec_list
 
 def format_data(ids, title_data, text_data):
     # Combine the id of the vector and the question data into a list
@@ -28,17 +28,15 @@ def format_data(ids, title_data, text_data):
         data.append(value)
     return data
 
-def import_data(collection_name, file_dir,milvus_cli, mysql_cli):
-    # Import vectors to Milvus and data to Mysql respectively
+
+
+# Import vectors to Milvus and data to Mysql respectively
+def do_load(collection_name, file_dir, model, milvus_client, mysql_cli):
     if not collection_name:
         collection_name = DEFAULT_TABLE
-    data = pd.read_csv(file_dir)
-    title_data = data['title'].tolist()
-    text_data = data['text'].tolist()
-    vectors = bc.encode(title_data)
-    title_vectors = normaliz_vec(vectors.tolist())
-    ids = milvus_cli.insert(collection_name, title_vectors)
-    milvus_cli.create_index(collection_name)
+    title_data, text_data, sentence_embeddings = extract_features(file_dir, model)
+    ids = milvus_client.insert(collection_name, sentence_embeddings)
+    milvus_client.create_index(collection_name)
     mysql_cli.create_mysql_table(collection_name)
     mysql_cli.load_data_to_mysql(collection_name, format_data(ids, title_data, text_data))
     return len(ids)
