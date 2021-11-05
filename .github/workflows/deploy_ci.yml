@@ -2,8 +2,8 @@ name: Deploy CI Test
 
 on:
   pull_request:
-    # branches:
-    #   - master
+    branches:
+      - master
     types: [ labeled ]
 
 jobs:
