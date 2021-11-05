@@ -1,9 +1,9 @@
 import sys
 from diskcache import Cache
-from src.logs import LOGGER
-from src.encode import smiles_to_vector
-from src.config import DEFAULT_TABLE
-from src.config import UPLOAD_PATH
+from logs import LOGGER
+from encode import smiles_to_vector
+from config import DEFAULT_TABLE
+from config import UPLOAD_PATH
 from rdkit import Chem
 from rdkit.Chem import Draw
 

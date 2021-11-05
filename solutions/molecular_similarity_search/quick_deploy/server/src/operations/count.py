@@ -1,6 +1,6 @@
 import sys
-from src.logs import LOGGER
-from src.config import DEFAULT_TABLE
+from logs import LOGGER
+from config import DEFAULT_TABLE
 
 
 def do_count(table_name, milvus_cli, mysql_cli):

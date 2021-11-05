@@ -1,6 +1,6 @@
 from rdkit import DataStructs, Chem
 from rdkit.Chem import AllChem
-from src.config import VECTOR_DIMENSION
+from config import VECTOR_DIMENSION
 
 
 def smiles_to_vector(smiles):
