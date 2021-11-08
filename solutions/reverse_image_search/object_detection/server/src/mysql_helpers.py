@@ -52,12 +52,13 @@ class MySQLHelper():
     def search_by_milvus_ids(self, ids, table_name):
         # Get the img_path according to the milvus ids
         self.test_connection()
-        str_ids = str(ids).replace('[', '').replace(']', '')
-        sql = "select image_path from " + table_name + " where milvus_id in (" + str_ids + ") order by field (milvus_id," + str_ids + ");"
         try:
-            self.cursor.execute(sql)
-            results = self.cursor.fetchall()
-            results = [res[0] for res in results]
+            results = []
+            for x in ids:
+                sql = "select image_path from " + table_name + " where milvus_id='" + str(x) + "';"
+                self.cursor.execute(sql)
+                res = self.cursor.fetchall()
+                results.append(res[0][0])
             LOGGER.debug("MYSQL search by milvus id.")
             return results
         except Exception as e:
