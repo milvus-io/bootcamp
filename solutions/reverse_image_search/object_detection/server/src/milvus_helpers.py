@@ -48,7 +48,7 @@ class MilvusHelper:
                                      dim=VECTOR_DIMENSION, is_primary=False)
                 schema = CollectionSchema(fields=[field1, field2], description="collection description")
                 self.collection = Collection(name=collection_name, schema=schema)
-                LOGGER.debug(f"Create Milvus collection: {self.collection_name}")
+                LOGGER.debug(f"Create Milvus collection: {collection_name}")
             else:
                 self.set_collection(collection_name)
             return "OK"
@@ -106,7 +106,7 @@ class MilvusHelper:
             search_params = {"metric_type": METRIC_TYPE, "params": {"nprobe": 16}}
             # data = [vectors]
             res = self.collection.search(vectors, anns_field="embedding", param=search_params, limit=top_k)
-            print(res[0])
+            #print(res[0])
             LOGGER.debug(f"Successfully search in collection: {res}")
             return res
         except Exception as e:

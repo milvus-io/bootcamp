@@ -38,11 +38,11 @@ class Item(BaseModel):
 
 # Define the interface to obtain raw pictures
 @app.get('/data')
-def image_path(img_path):
+def image_path(image_path):
     # Get the image file
     try:
-        LOGGER.info(f"Successfully load image: {img_path}")
-        return FileResponse(img_path)
+        LOGGER.info(f"Successfully load image: {image_path}")
+        return FileResponse(image_path)
     except Exception as e:
         LOGGER.error(f"Upload image error: {e}")
         return {'status': False, 'msg': e}, 400
@@ -109,7 +109,10 @@ async def search_images(image: UploadFile = File(...), table_name: str = None):
         img_path = os.path.join(tmp_dir, image.filename.lower())
         with open(img_path, "wb+") as f:
             f.write(content)
-        paths, distances = do_search(table_name, tmp_dir, MODEL, MILVUS_CLI, MYSQL_CLI)
+        img_name = os.listdir(tmp_dir)[0]
+        search_img = os.path.join(tmp_dir, img_name)
+        paths, distances = do_search(table_name, search_img, MODEL, MILVUS_CLI, MYSQL_CLI)
+        #print(paths, distances)
         res = dict(zip(paths, distances))
         res = sorted(res.items(), key=lambda item: item[1])
         LOGGER.info("Successfully searched similar images!")
