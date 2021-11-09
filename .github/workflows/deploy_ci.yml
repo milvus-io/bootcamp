@@ -44,7 +44,7 @@ jobs:
       if: github.event.label.name == 'audio_similarity_search/quick_deploy'
       run: sudo apt-get install -y libsndfile1
     - name: Install ffmpeg
-      if: github.event.label.name == 'video_similarity_search/object_detection'
+      if: github.event.label.name == 'video_similarity_search/object_detection' || github.event.label.name == 'video_similarity_search/quick_deploy'
       run: sudo apt-get install -y ffmpeg
     - name: Start MySQL
       if: contains(github.event.label.name, '/quick_deploy') || contains(github.event.label.name, '/object_detection')
