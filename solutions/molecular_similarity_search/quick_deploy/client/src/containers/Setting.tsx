@@ -163,7 +163,7 @@ const Setting = (props: any) => {
     : "No Molecular Formula in this set";
 
   const _search = ({ topK, Molecular }: any) => {
-    if (total === 0) {
+    if (totalNum === 0) {
       showNote("There has no table!");
       return;
     }
@@ -183,7 +183,7 @@ const Setting = (props: any) => {
   const _changeFormula = (e: any) => {
     const val = e.target.value;
     setMolecular(val);
-    if (total === 0) {
+    if (totalNum === 0) {
       showNote("There has no table!");
       return;
     }
@@ -245,7 +245,7 @@ const Setting = (props: any) => {
   };
 
   const clear = () => {
-    if (total === 0) {
+    if (totalNum === 0) {
       showNote("There has no table");
       return;
     }
@@ -328,7 +328,7 @@ const Setting = (props: any) => {
       <div className={classes.imageSet}>
         <div className={classes.counts}>
           <p style={{ color: loading ? baseColor : "#fff" }}>{setText}</p>
-          <h3 className={classes.currTotal}>{`${current}/${total}`}</h3>
+          <h3 className={classes.currTotal}>{`${current}/${totalNum}`}</h3>
         </div>
         <div className={classes.setPath}>
           <TextField
