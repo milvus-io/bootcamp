@@ -1,8 +1,8 @@
 name: Docker Compose CI Test
 on:
   pull_request:
-    # branches:
-    #   - master
+    branches:
+      - master
     types: [ labeled ]
     paths:
       - '**docker-compose.yaml'
@@ -58,5 +58,3 @@ jobs:
             python -m pytest test_docker_compose.py
           fi
         done
-            
-    
