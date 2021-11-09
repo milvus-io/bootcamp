@@ -54,7 +54,7 @@ jobs:
             echo cd `dirname ${added_modified_file}`
             docker-compose -f ${added_modified_file} up -d
             cd `dirname ${added_modified_file}`
-            pip install -r requirements.txt
+            pip install -r server/requirements.txt
             python -m pytest test_docker_compose.py
           fi
         done
