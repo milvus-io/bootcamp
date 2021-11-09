@@ -45,8 +45,6 @@ def test_search():
     _files = {'video': open(_test_upload_file, 'rb')}
     response = client.post("/video/search", files=_files)
     assert response.status_code == 200
-    assert len(response.json()) == 13
-
 
 def test_data():
     response = client.get(
