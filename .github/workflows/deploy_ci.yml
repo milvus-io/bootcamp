@@ -40,10 +40,10 @@ jobs:
         wget https://github.com/milvus-io/milvus/releases/download/v2.0.0-rc7/milvus-standalone-docker-compose.yml -O docker-compose.yml
         docker-compose up -d
 
-    - name: Insatll libsndfile
+    - name: Install libsndfile
       if: github.event.label.name == 'audio_similarity_search/quick_deploy'
       run: sudo apt-get install -y libsndfile1
-    - name: Insatll ffmpeg
+    - name: Install ffmpeg
       if: github.event.label.name == 'video_similarity_search/object_detection'
       run: sudo apt-get install -y ffmpeg
     - name: Start MySQL
