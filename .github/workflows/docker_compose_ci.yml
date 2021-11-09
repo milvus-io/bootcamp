@@ -44,6 +44,7 @@ jobs:
       with:
         format: 'csv'
     - name: Run test with docker-compose
+      shell: bash -l {0}
       run: |
         mapfile -d ',' -t added_modified_files < <(printf '%s,' '${{ steps.files.outputs.added_modified }}')
         for added_modified_file in "${added_modified_files[@]}"; do
@@ -51,7 +52,9 @@ jobs:
           if [[ ${added_modified_file} = *docker-compose.yaml ]]; then
             echo if ${added_modified_file}
             echo cd `dirname ${added_modified_file}`
+            docker-compose -f ${added_modified_file} up -d
             cd `dirname ${added_modified_file}`
+            pip install -r requirements.txt
             python -m pytest test_docker_compose.py
           fi
         done
