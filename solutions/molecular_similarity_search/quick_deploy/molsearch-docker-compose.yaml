@@ -81,7 +81,7 @@ services:
 
   webclient:
     container_name: molsearch-webclient
-    image: milvusbootcamp/mols-search-webclient:1.0
+    image: milvusbootcamp/mols-search-webclient:2.0
     networks:
       app_net:
         ipv4_address: 172.16.238.13
