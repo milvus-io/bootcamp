@@ -43,6 +43,9 @@ jobs:
     - name: Insatll libsndfile
       if: github.event.label.name == 'audio_similarity_search/quick_deploy'
       run: sudo apt-get install -y libsndfile1
+    - name: Insatll ffmpeg
+      if: github.event.label.name == 'video_similarity_search/object_detection'
+      run: sudo apt-get install -y ffmpeg
     - name: Start MySQL
       if: contains(github.event.label.name, '/quick_deploy') || contains(github.event.label.name, '/object_detection')
       run: docker run -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7
