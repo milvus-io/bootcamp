@@ -30,7 +30,6 @@ jobs:
     - name: Insatll libsndfile
       run: sudo apt-get install -y libsndfile1
     - name: Insatll ffmpeg
-      if: github.event.label.name == 'video_similarity_search/object_detection'
       run: sudo apt-get install -y ffmpeg
     - name: Install pip packeages
       shell: bash -l {0}
@@ -51,8 +50,8 @@ jobs:
           echo all ${added_modified_file}
           if [[ ${added_modified_file} = *docker-compose.yaml ]]; then
             echo if ${added_modified_file}
-            echo ${dirname ${added_modified_file}}
-            cd ${dirname ${added_modified_file}}
+            echo cd `dirname ${added_modified_file}`
+            cd `dirname ${added_modified_file}`
             python -m pytest test_docker_compose.py
           fi
         done
