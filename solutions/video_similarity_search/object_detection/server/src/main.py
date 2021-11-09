@@ -50,11 +50,11 @@ class Item(BaseModel):
 
 
 @app.get('/data')
-def image_path(img_path):
+def get_image(image_path):
     # Get the image file
     try:
-        LOGGER.info(f"Successfully load image: {img_path}")
-        return FileResponse(img_path)
+        LOGGER.info(f"Successfully load image: {image_path}")
+        return FileResponse(image_path)
     except Exception as e:
         LOGGER.error(f"upload image error: {e}")
         return {'status': False, 'msg': e}, 400
@@ -137,7 +137,6 @@ async def search_images(request: Request, video: UploadFile = File(...), table_n
         host = request.headers['host']
         paths, objects, distances, times = do_search(table_name, video_path, MODEL, MILVUS_CLI, MYSQL_CLI)
         res = ["http://" + str(host) + "/video/getVideo?video=" + video_path.replace(".avi", ".mp4")]
-        #res = []
         for i in range(len(paths)):
             if DISTANCE_LIMIT is not None:
                 if float(distances[i]) < DISTANCE_LIMIT:

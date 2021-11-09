@@ -1,7 +1,5 @@
-Keras==2.6.0
-tensorflow==2.6.0
 opencv-python
-Pillow==8.2.0
+Pillow==8.3.1
 pymysql
 fastapi
 uvicorn
@@ -13,3 +11,8 @@ python-multipart
 pyyaml
 paddlepaddle==2.1.0
 ffmpeg
+matplotlib
+seaborn
+torchvision==0.10.0
+torch==1.9.0
+towhee==0.2.0
