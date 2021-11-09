@@ -50,6 +50,6 @@ def test_search():
 
 def test_data():
     response = client.get(
-        "/data?img_path=.%2Fdata%2Fexample_object%2Fcola.jpg"
+        "/data?image_path=.%2Fdata%2Fexample_object%2Fcola.jpg"
     )
     assert response.status_code == 200
