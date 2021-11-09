@@ -2,7 +2,7 @@
 
 ## Overview
 
-This demo uses the YOLOv3 model to detect objects in images and the ResNet-50 model to extract feature vectors of images, and then uses Milvus to build an image similarity search system.
+This demo uses the towhee pipelines to detect objects in images and extract feature vectors of images, and then uses Milvus to build an image similarity search system.
 
 The following is the system diagram.
 
@@ -91,17 +91,14 @@ $ vim server/src/config.py
 
 Please modify the parameters according to your own environment. Here listing some parameters that need to be set, for more information please refer to [config.py](./server/src/config.py).
 
-> If the YOLO model is not downloaded automatically, you should switch to the **server/src/yolov3_detector/data/** path and **run the `./prepare_model.sh` command.**
-
 | Parameter        | Description                                   | Default setting                       |
 | ---------------- | --------------------------------------------- | ------------------------------------- |
 | MILVUS_HOST      | milvus IP address                             | 127.0.0.1                             |
 | MILVUS_PORT      | milvus service port                           | 19530                                 |
-| VECTOR_DIMENSION | Dimensionality of the vectors                 | 2048                                  |
+| VECTOR_DIMENSION | Dimensionality of the vectors                 | 1000                                  |
 | MYSQL_HOST       | The IP address of Mysql.                      | 127.0.0.1                             |
 | MYSQL_PORT       | Port of Milvus.                               | 3306                                  |
 | DEFAULT_TABLE    | The milvus and mysql default collection name. | milvus_obj_det                        |
-| COCO_MODEL_PATH  | Path to the YOLO detection model              | ./yolov3_detector/data/yolov3_darknet |
 
 - **Run the code**
 

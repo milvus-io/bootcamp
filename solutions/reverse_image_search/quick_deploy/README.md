@@ -1,8 +1,8 @@
-# Reverse Image Search Based on Milvus and ResNet50
+# Reverse Image Search Based on Milvus and Towhee( Resnet50)
 
 ## Overview
 
-This demo uses ResNet50, an image feature extraction model, and Milvus to build a system that can perform reverse image search.
+This demo uses the towhee pipeline (ResNet50) to extract image features, and uses Milvus to build a system that can perform reverse image search.
 
 The system architecture is displayed as follows:
 
@@ -95,7 +95,7 @@ Please modify the parameters according to your own environment. Here listing som
 | ---------------- | ----------------------------------------------------- | ------------------- |
 | MILVUS_HOST      | The IP address of Milvus, you can get it by ifconfig. | 127.0.0.1           |
 | MILVUS_PORT      | Port of Milvus.                                       | 19530               |
-| VECTOR_DIMENSION | Dimension of the vectors.                             | 2048                |
+| VECTOR_DIMENSION | Dimension of the vectors.                             | 1000                |
 | MYSQL_HOST       | The IP address of Mysql.                              | 127.0.0.1           |
 | MYSQL_PORT       | Port of Milvus.                                       | 3306                |
 | DEFAULT_TABLE    | The milvus and mysql default collection name.         | milvus_img_search   |
@@ -139,7 +139,7 @@ If you are interested in our code or would like to contribute code, feel free to
 │   │
 │   └───src
 │       │   config.py  # Configuration file.
-│       │   encode.py  # Convert image/video/questions/... to embeddings.
+│       │   encode.py  # Convert image to embeddings using towhee pipeline (resnet50-image-embedding).
 │       │   milvus.py  # Connect to Milvus server and insert/drop/query vectors in Milvus.
 │       │   mysql.py   # Connect to MySQL server, and add/delete/query IDs and object information.
 │       │   
