@@ -6,11 +6,7 @@ cd ..
 
 cd ../server/data
 
-mkdir models
-cd models
-gdown "https://drive.google.com/uc?id=1t5jyJ4Ktmlck6GYhNTPVTFZuRP7wPUYq"
 
-cd ..
 gdown "https://drive.google.com/uc?id=1nWD8lwlgpA-qOEadkzkxjB1iRCl9nA9u"
 
 gdown "https://drive.google.com/uc?id=14fGV3GYcsJR_78XHrxISoceB5bmffkHL"

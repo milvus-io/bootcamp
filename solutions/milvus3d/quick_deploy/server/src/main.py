@@ -1,6 +1,7 @@
 import os
 from typing import Optional
 
+import gdown
 import torch
 import torch.nn as nn
 import uvicorn
@@ -32,6 +33,13 @@ app.add_middleware(
     allow_headers=["*"],
 
 )
+weights_dir = "../data/models/"
+weights = "MeshNet_best_9192.pkl"
+if not os.path.exists(weights_dir):
+    os.mkdir(weights_dir)
+    if not os.path.exists(weights_dir + weights):
+        gdown.download("https://drive.google.com/uc?id=1t5jyJ4Ktmlck6GYhNTPVTFZuRP7wPUYq", weights_dir + weights)
+
 
 os.environ['CUDA_VISIBLE_DEVICES'] = CUDA_DEVICE
 

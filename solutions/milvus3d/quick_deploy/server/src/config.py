@@ -33,5 +33,5 @@ MAX_FACES = 1024
 NUM_KERNEL = 64
 SIGMA = 0.2
 AGGREGATION_METHOD = 'Concat' # Concat/Max/Average
-WEIGHTS = '/Users/sida/Desktop/projects/3d_search/models/MeshNet_best_9192.pkl'
+WEIGHTS = '../data/models/MeshNet_best_9192.pkl'
 CUDA_DEVICE = '0'
