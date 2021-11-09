@@ -49,16 +49,14 @@ $ pip install -r requirement.txt
 
 - **Download the model**
 
-The way to install Bert-as-service is as follows. You can also refer to the official website link of the Github repository of Bert-as-service:
-
-https://github.com/hanxiao/bert-as-service
+Install the sentence-transformers model as follows
 
 ```
 # Download model
-$ cd model
-$ wget https://storage.googleapis.com/bert_models/2018_11_03/uncased_L-12_H-768_A-12.zip
-# start service
-$ bert-serving-start -model_dir uncased_L-12_H-768_A-12/ -num_worker=2
+$ cd server/src/model
+$ wget https://public.ukp.informatik.tu-darmstadt.de/reimers/sentence-transformers/v0.2/paraphrase-mpnet-base-v2.zip
+$ unzip paraphrase-mpnet-base-v2.zip -d paraphrase-mpnet-base-v2/
+
 ```
 
 - **Set configuration**
@@ -104,6 +102,7 @@ $ python main.py
   │   │
   │   └───src
   │       │   config.py  # Configuration file.
+  │       │   encode.py  # Convert image/video/questions/... to embeddings.
   │       │   milvus_helpers.py  # Connect to Milvus server and insert/drop/query vectors in Milvus.
   │       │   mysql_helpers.py   # Connect to MySQL server, and add/delete/query IDs and object information.
   │       │   
