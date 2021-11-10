@@ -37,11 +37,11 @@ if not os.path.exists(UPLOAD_PATH):
     LOGGER.info(f"Mkdir the path: {UPLOAD_PATH}")
 
 @app.get('/data')
-def audio_path(audio_file_path):
+def audio_path(audio_path):
     # Get the audio file
     try:
-        LOGGER.info(f"Successfully load audio: {audio_file_path}")
-        return FileResponse(audio_file_path)
+        LOGGER.info(f"Successfully load audio: {audio_path}")
+        return FileResponse(audio_path)
     except Exception as e:
         LOGGER.error(f"upload audio error: {e}")
         return {'status': False, 'msg': e}, 400
