@@ -8,8 +8,6 @@ sys.path.append("..")
 
 from src.config import SEARCH_FEATURE_PATH, LOAD_FEATURE_PATH, DATA_PATH
 
-from src.logs import LOGGER
-
 
 def process(data_root, out_root, file_name):
     """
@@ -35,7 +33,7 @@ def process(data_root, out_root, file_name):
                     data = pre_process(data=data)
                     write_file(data=data,out_path=in_path)
         except Exception as e:
-            LOGGER.error(" Error with check off file: {}".format(e))
+            print(" Error with check off file: {}".format(e))
             sys.exit(1)
     else:
         in_path = os.path.join(data_root, file_name)
@@ -53,7 +51,7 @@ def process(data_root, out_root, file_name):
         ms.save_current_mesh(out_path, save_face_color=False)
 
     except Exception as e:
-        LOGGER.error("Error with compressing off file: {}".format(e))
+        print("Error with compressing off file: {}".format(e))
         sys.exit(1)
 
 
