@@ -47,9 +47,3 @@ def test_search():
     assert len(response.json()) == 10
 
 
-# def test_data():
-#     response = client.get(
-#         "/data?img_file_path=.%2Fexample_audio%2Ftest.wav"
-#     )
-#     assert response.status_code == 200
-

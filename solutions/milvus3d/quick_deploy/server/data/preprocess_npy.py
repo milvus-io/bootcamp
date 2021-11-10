@@ -4,7 +4,10 @@ import pymesh
 import traceback
 import sys
 import getopt
-from config import SEARCH_FEATURE_PATH, LOAD_FEATURE_PATH
+sys.path.append("..")
+
+from src.config import SEARCH_FEATURE_PATH, LOAD_FEATURE_PATH, DATA_PATH
+from src.logs import LOGGER
 
 
 def find_neighbor(faces, faces_contain_this_vertex, vf1, vf2, except_face):

@@ -3,9 +3,10 @@ from collections import deque
 import pymeshlab as ml
 import getopt
 import sys
-from config import SEARCH_FEATURE_PATH, LOAD_FEATURE_PATH, DATA_PATH
 
 sys.path.append("..")
+
+from src.config import SEARCH_FEATURE_PATH, LOAD_FEATURE_PATH, DATA_PATH
 
 from src.logs import LOGGER
 

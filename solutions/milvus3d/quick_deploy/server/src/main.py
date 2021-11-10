@@ -9,7 +9,6 @@ from diskcache import Cache
 from fastapi import FastAPI
 from pydantic import BaseModel
 from starlette.middleware.cors import CORSMiddleware
-from starlette.responses import FileResponse
 
 from milvus3d.MeshNet import MeshNet
 from config import UPLOAD_PATH
@@ -84,16 +83,16 @@ LOGGER.info(
 )
 
 
-# Define the interface to obtain raw pictures 
-@app.get('/data')
-def get_model(model_path):
-    # Get the image file
-    try:
-        LOGGER.info(("Successfully load model: {}".format(model_path)))
-        return FileResponse(model_path)
-    except Exception as e:
-        LOGGER.error("upload model error: {}".format(e))
-        return {'status': False, 'msg': e}, 400
+# # Define the interface to obtain raw pictures
+# @app.get('/data')
+# def get_model(model_path):
+#     # Get the image file
+#     try:
+#         LOGGER.info(("Successfully load model: {}".format(model_path)))
+#         return FileResponse(model_path)
+#     except Exception as e:
+#         LOGGER.error("upload model error: {}".format(e))
+#         return {'status': False, 'msg': e}, 400
 
 
 @app.get('/progress')
@@ -126,6 +125,7 @@ async def load_models(item: Item):
 
 @app.post('/img/search')
 async def search_images(model_path: str, table_name: str = None):
+    # Search the upload image in Milvus/MySQL
     # Search the upload image in Milvus/MySQL
     try:
         paths, distances = do_search(table_name, model_path, transformer, MILVUS_CLI, MYSQL_CLI)
