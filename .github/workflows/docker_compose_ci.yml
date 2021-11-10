@@ -34,7 +34,7 @@ jobs:
         mapfile -d ',' -t added_modified_files < <(printf '%s,' '${{ steps.files.outputs.added_modified }}')
         for added_modified_file in "${added_modified_files[@]}"; do
           if [[ ${added_modified_file} = *docker-compose.yaml ]]; then
-            mkdir `dirname ${added_modified_file}`/data
+            mkdir -p `dirname ${added_modified_file}`/data
             docker-compose -f ${added_modified_file} up -d
             cd `dirname ${added_modified_file}`
             pip install -r server/requirements.txt
