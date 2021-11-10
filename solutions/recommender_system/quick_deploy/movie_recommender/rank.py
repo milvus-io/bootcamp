@@ -65,7 +65,7 @@ class RankServerServicer(object):
 
         return dic
 
-    def rank_predict(self, request):
+    def rank_predict(self, request, context):
         '''
         message RankRequest {
           string log_id = 1;
