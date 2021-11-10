@@ -44,14 +44,7 @@ The next step is to start the system server. It provides HTTP backend services, 
 
 - **Set parameters**
 
-Modify the parameters according to your own environment. Here listing some parameters that need to be set, for more information please refer to [config.py](./server/src/config.py).
-
-| **Parameter**   | **Description**                                       | **example**      |
-| --------------- | ----------------------------------------------------- | ---------------- |
-| **DATAPATH1**   | The dictionary of the image path.                     | /data/image_path |
-| **MILVUS_HOST** | The IP address of Milvus, you can get it by ifconfig. | 172.16.20.10     |
-| **MILVUS_PORT** | The port of Milvus.                                   | 19530            |
-| **MYSQL_HOST**  | The IP address of MySQL                               | 172.16.20.10     |
+Modify the parameters according to your own environment:
 
 ```bash
 $ export DATAPATH1='/data/image_path'
@@ -72,7 +65,11 @@ $ docker run -d \
 milvusbootcamp/img-search-server:2.0
 ```
 
-> **Note:** -v ${DATAPATH1}:${DATAPATH1} means that you can mount the directory into the container. If needed, you can load the parent directory or more directories.
+> **Note:**
+>
+> This docker image is large and may take time to pull image.
+>
+> -v ${DATAPATH1}:${DATAPATH1} means that you can mount the directory into the container. If needed, you can load the parent directory or more directories.
 
 #### Option 2: Run source code
 
@@ -174,7 +171,7 @@ Enter the path of an image folder in the pic_search_webserver docker container w
 
 <img src="pic/web2.png" width = "650" height = "500" alt="arch" align=center />
 
-> Note: After clicking the Load button, it will take 1 to 2 seconds for the system to response. Please do not click again.
+> Note: After clicking the Load (+) button, the first time load will take longer time since it needs time to download and prepare models. Please do not click again. You can check backend status for progress (check in terminal if using source code / check docker logs of the server container if using docker)
 
 The loading process may take several minutes. The following screenshot shows the interface with images loaded.
 
