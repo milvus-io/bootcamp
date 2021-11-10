@@ -62,7 +62,7 @@ $ docker run -d \
 -e "MILVUS_HOST=${Milvus_HOST}" \
 -e "MILVUS_PORT=${Milvus_PORT}" \
 -e "MYSQL_HOST=${Mysql_HOST}" \
-milvusbootcamp/img-search-server:2.0
+milvusbootcamp/img-search-server:towhee
 ```
 
 > **Note:**
