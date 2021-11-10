@@ -34,7 +34,7 @@ def test_count():
     assert response.status_code == 200
 
 def test_get_img():
-    response = client.get('/data?img_path=.%2Fexample_img%2Ftest.jpg')
+    response = client.get('/data?image_path=.%2Fexample_img%2Ftest.jpg')
     assert response.status_code == 200
 
 def test_upload_img():
