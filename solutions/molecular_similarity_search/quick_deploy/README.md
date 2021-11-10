@@ -13,7 +13,7 @@ Download location: [https://ftp.ncbi.nlm.nih.gov/pubchem/Compound/CURRENT-Full/S
 
 ## Deploy the system with Docker Compose
 
-The molecular similarity search system requires [**Milvus**](https://milvus.io/docs/v2.0.0/install_standalone-docker.md), MySQL, Webserver and Webclient services. We can start these containers with one click through [docker-compose.yaml](./audiosearch-docker-compose.yaml), so please make sure you have  [installed Docker Engine](https://docs.docker.com/engine/install/) and [Docker Compose](https://docs.docker.com/compose/install/) before running.
+The molecular similarity search system requires [**Milvus**](https://milvus.io/docs/v2.0.0/install_standalone-docker.md), MySQL, Webserver and Webclient services. We can start these containers with one click through [docker-compose.yaml](./molsearch-docker-compose.yaml), so please make sure you have  [installed Docker Engine](https://docs.docker.com/engine/install/) and [Docker Compose](https://docs.docker.com/compose/install/) before running.
 
 ```bash
 $ git clone https://github.com/milvus-io/bootcamp.git
@@ -155,9 +155,11 @@ The system provides front-end services. You can enter `127.0.0.1:801` in the bro
 ![](pic/init_status.PNG)
 
 - Load chemical structures
-  1. In `path/to/your/data`, enter the location of the smi file. For example, `/mols_data/test_1w.smi`, if you run the service from source code, you need to fill in the path of the molecule file.
+  1. In `path/to/your/data`, enter the location of the smi file. For example, `/mols_data/test_1w.smi`, if you run the service from source code, you need to fill in [the path of the molecule file](../smiles-data/test_100.smi).
   2. Click `+` to load.
   3. You can see the number of chemical structures have changed: 10000 Molecular Formula in this set
+
+  > The [directory](../smiles-data/test_100.smi) is the path where the data is locally mounted to the webserver docker, and **/mols_data/test_1w.smi** is the path inside the docker, so we are supposed to fill in the path in the docker, namely `/mols_data/test_1w.smi`.
 
 ![](pic/load_data.PNG)
 
