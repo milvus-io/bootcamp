@@ -2,7 +2,7 @@
 
 ## Overview
 
-This demo uses OpenCV to extract video frames. Then it uses ResNet50 to get the feature vector of each frame. Finally, it uses **Milvus** to save and search the data, which makes it very easy to build a system for video similarity search. So let's have fun playing with it!
+This demo uses OpenCV to extract video frames. Then it uses towhee image-embedding pipeline (ResNet50) to get the feature vector of each frame. Finally, it uses **Milvus** to save and search the data, which makes it very easy to build a system for video similarity search. So let's have fun playing with it!
 
 ## Data source
 
@@ -18,9 +18,9 @@ The video similarity system will use Milvus to store and search the feature vect
 
 - **Start Milvus v2.0**
 
-  First, you are supposed to refer to the Install [Milvus v2.0-rc5](https://milvus.io/docs/v2.0.0/install_standalone-docker.md) for how to run Milvus docker.
+  First, you are supposed to refer to the Install [Milvus v2.0](https://milvus.io/docs/v2.0.0/install_standalone-docker.md) for how to run Milvus docker.
 
-  > Note the version of Milvus.
+  > Note the version of Milvus should match the pymilvus version in config.
 
 - **Start MySQL**
 
@@ -41,15 +41,15 @@ The next step is to start the system server. It provides HTTP backend services. 
   | **Parameter**   | **Description**                                       | **example**      |
   | --------------- | ----------------------------------------------------- | ---------------- |
   | **DATAPATH1**   | The dictionary of the image path.                     | /data/image_path |
-  | **MILVUS_HOST** | The IP address of Milvus, you can get it by `ifconfig`. | 192.168.1.85     |
+  | **MILVUS_HOST** | The IP address of Milvus, you can get it by `ifconfig`. | 127.0.0.1      |
   | **MILVUS_PORT** | The port of Milvus.                                   | 19530            |
-  | **MYSQL_HOST** | The IP address of MySQL.                               | 192.168.1.85     |
+  | **MYSQL_HOST** | The IP address of MySQL.                               | 127.0.0.1        |
 
   ```bash
   $ export DATAPATH1='/data/video_path'
-  $ export Milvus_HOST='192.168.1.85'
+  $ export Milvus_HOST='127.0.0.1'
   $ export Milvus_PORT='19530'
-  $ export Mysql_HOST='192.168.1.85'
+  $ export Mysql_HOST='127.0.0.1'
   ```
 
 - **Run Docker**
@@ -87,7 +87,7 @@ The next step is to start the system server. It provides HTTP backend services. 
   | ---------------- | ------------------------------------------------------- | ------------------- |
   | MILVUS_HOST      | The IP address of Milvus, you can get it by `ifconfig`. | 127.0.0.1           |
   | MILVUS_PORT      | Port of Milvus.                                         | 19530               |
-  | VECTOR_DIMENSION | Dimension of the vectors.                               | 2048                |
+  | VECTOR_DIMENSION | Dimension of the vectors.                               | 1000                |
   | MYSQL_HOST       | The IP address of Mysql.                                | 127.0.0.1           |
   | MYSQL_PORT       | Port of Milvus.                                         | 3306                |
   | DEFAULT_TABLE    | The milvus and mysql default collection name.           | milvus_img_search   |
@@ -139,7 +139,7 @@ The next step is to start the system server. It provides HTTP backend services. 
   │   │
   │   └───src
   │       │   config.py         # Configuration file.
-  │       │   encode.py         # Covert image/video/questions/... to embeddings.
+  │       │   encode.py         # Get image embeddings by towhee pipeline.
   │       │   frame_extract.py  # Extract the video frame with opencv.
   │       │   logs.py           # Write logs for the system.
   │       │   milvus_helper.py  # Connect to Milvus server and insert/drop/query vectors in Milvus.
@@ -157,8 +157,8 @@ The next step is to start the system server. It provides HTTP backend services. 
 - **Start the front-end**
 
   ```bash
-  # Please modify API_URL to the IP address and port of the server.
-  $ export API_URL='http://192.168.1.85:5000'
+  # Please modify API_URL to the IP address and port of the server, change to your host & port.
+  $ export API_URL='http://127.0.0.1:5000'
   $ docker run -d -p 8001:80 \
   -e API_URL=${API_URL} \
   milvusbootcamp/video-search-client:1.0
