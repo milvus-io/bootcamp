@@ -1,4 +1,4 @@
-FROM python:3.7
+FROM python:3.7-slim-buster
 
 RUN apt update
 RUN apt install -y libsndfile1-dev wget
