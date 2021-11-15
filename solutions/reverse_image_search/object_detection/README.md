@@ -87,7 +87,7 @@ $ docker run -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d --name qa_mysql mysql
 ```
 ### 2. Start API Server
 
-The next step is to start the system server. It provides HTTP backend services, and there are two ways to start: running with Docker OR source code.
+The next step is to start the system server. It provides HTTP backend services.
 
 - **Install the Python packages**
 
@@ -156,7 +156,6 @@ milvusbootcamp/img-search-client:1.0
 
 Navigate to `127.0.0.1:8001` in your browser to access the front-end interface.
 
-<img src="pic/web4.png" width = "650" height = "500" alt="arch" align=center />
 
 ### 1. Insert Data
 
@@ -164,17 +163,17 @@ Enter `/data` in `path/to/your/images`, then click `+` to load the pictures. The
 
 >  Note: After clicking the Load button, it will take 1 to 2 seconds for the system to response. Please do not click again.
 
-<img src="pic/web0.png" width = "650" height = "500" alt="arch" align=center  />
+<img src="pic/web4.png" width = "700" height = "500" alt="arch" align=center />
 
 The loading process may take several minutes. The following screenshot shows the interface with images loaded.
 
 > Only support **jpg** pictures.
 
-<img src="pic\web3 .png" width = "650" height = "500" />
+<img src="pic/web0.png" width = "700" height = "500" alt="arch" align=center  />
 
 ### 2. Select an image to search.
 
-<img src="pic/web5.png"  width = "650" height = "500" />
+<img src="pic/web5.png"  width = "700" height = "500" />
 
 ## Code structure
 ```bash
