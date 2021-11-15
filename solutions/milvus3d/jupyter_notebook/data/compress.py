@@ -6,7 +6,7 @@ import sys
 
 sys.path.append("..")
 
-from config import SEARCH_FEATURE_PATH, LOAD_FEATURE_PATH, DATA_PATH, UPLOAD_PATH
+from notebook_config import SEARCH_FEATURE_PATH, LOAD_FEATURE_PATH, UPLOAD_PATH
 
 
 def process(data_root, out_root, file_name):

@@ -5,7 +5,7 @@ from torch.nn.parameter import Parameter
 import sys
 sys.path.append("..")
 
-from config import AGGREGATION_METHOD, NUM_KERNEL, SIGMA
+from notebook_config import AGGREGATION_METHOD, NUM_KERNEL, SIGMA
 
 
 class FaceRotateConvolution(nn.Module):
