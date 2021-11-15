@@ -44,7 +44,7 @@ The next step is to start the system server. It provides HTTP backend services, 
 
 ```
 $ cd server
-$ pip install -r requirement.txt
+$ pip install -r requirements.txt
 ```
 
 - **Download the model**
