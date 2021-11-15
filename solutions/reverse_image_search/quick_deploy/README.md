@@ -1,6 +1,6 @@
 # Reverse Image Search Based on Milvus & Towhee
 
-This demo uses towhee pipeline (image-embedding) to extract image features by ResNet50, and uses Milvus to build a system that can perform reverse image search.
+This demo uses [towhee](https://github.com/towhee-io/towhee) pipeline (image-embedding) to extract image features by ResNet50, and uses Milvus to build a system that can perform reverse image search.
 
 The system architecture is as below:
 
@@ -72,7 +72,19 @@ cc6b473d905d   quay.io/coreos/etcd:v3.5.0                    "etcd -advertise-cl
 
 We recommend using Docker Compose to deploy the reverse image search system. However, you also can run from source code, you need to manually start [Milvus](https://milvus.io/docs/v2.0.0/install_standalone-docker.md) and [Mysql](https://dev.mysql.com/doc/mysql-installation-excerpt/5.7/en/docker-mysql-getting-started.html). Next show you how to run the API server and Client.
 
-### 1. Start API Server
+### 1. Start Milvus & Mysql
+
+First, you need to start Milvus & Mysql servers.
+
+Refer [Milvus Standalone](https://milvus.io/docs/v2.0.0/install_standalone-docker.md) for how to install Milvus. Please note the Milvus version should match pymilvus version in [config.py](./server/src/config.py).
+
+There are several ways to start Mysql. One option is using docker to create a container:
+```bash
+$ docker run -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d --name qa_mysql mysql:5.7
+```
+
+
+### 2. Start API Server
 
 Then to start the system server, and it provides HTTP backend services.
 
@@ -127,30 +139,7 @@ After starting the service, Please visit `127.0.0.1:5000/docs` in your browser t
 >
 > /img/search: search for most similar image emb in milvus collection and get image info by milvus id in Mysql
 
-- **Code  structure**
-
-If you are interested in our code or would like to contribute code, feel free to learn more about our code structure.
-
-```bash
-└───server
-│   │   Dockerfile
-│   │   requirements.txt
-│   │   main.py  # File for starting the program.
-│   │
-│   └───src
-│       │   config.py  # Configuration file.
-│       │   encode.py  # Convert image to embeddings using towhee pipeline (resnet50-image-embedding).
-│       │   milvus.py  # Connect to Milvus server and insert/drop/query vectors in Milvus.
-│       │   mysql.py   # Connect to MySQL server, and add/delete/query IDs and object information.
-│       │   
-│       └───operations # Call methods in milvus.py and mysql.py to insert/query/delete objects.
-│               │   insert.py
-│               │   query.py
-│               │   delete.py
-│               │   count.py
-```
-
-### 2. Start Client
+### 3. Start Client
 
 Next, start the frontend GUI.
 
@@ -179,13 +168,11 @@ $ docker run -d \
  milvusbootcamp/img-search-client:1.0
 ```
 
-> Refer to the instructions in the [Client Readme](./client/README.md).
-
 ## How to use front-end
 
 Navigate to `127.0.0.1:8001` in your browser to access the front-end interface.
 
-- **Insert data**
+### 1. Insert data
 
 Enter `/data` in `path/to/your/images`, then click `+` to load the pictures. The following screenshot shows the loading process:
 
@@ -201,7 +188,7 @@ The loading process may take several minutes. The following screenshot shows the
 
 <img src="pic/web3.png" width = "650" height = "500" alt="arch" align=center />
 
-- **Search for similar images**
+### 2.Search for similar images
 
 Select an image to search.
 
