@@ -33,7 +33,7 @@ class Item(BaseModel):
     Table: Optional[str] = None
     File:str
 
-@app.post('/text/count')
+@app.post('/count')
 async def count_text(table_name: str = None):
     # Returns the total number of titles in the system
     try:
@@ -45,7 +45,7 @@ async def count_text(table_name: str = None):
         return {'status': False, 'msg': e}, 400
 
 
-@app.post('/text/drop')
+@app.post('/drop')
 async def drop_tables(table_name: str = None):
     # Delete the collection of Milvus and MySQL
     try:
@@ -57,7 +57,7 @@ async def drop_tables(table_name: str = None):
         return {'status': False, 'msg': e}, 400
 
 
-@app.post('/text/load')
+@app.post('/load')
 async def load_text(file: UploadFile = File(...), table_name: str = None):
     try:
         text = await file.read()
@@ -80,7 +80,7 @@ async def load_text(file: UploadFile = File(...), table_name: str = None):
         return {'status': False, 'msg': e}, 400
 
 
-@app.get('/text/search')
+@app.get('/search')
 async def do_search_api(table_name: str = None, query_sentence: str = None):
     try:
         _, title, text, _ = search_in_milvus(table_name,query_sentence,MODEL, MILVUS_CLI, MYSQL_CLI)
@@ -96,4 +96,4 @@ async def do_search_api(table_name: str = None, query_sentence: str = None):
 
 
 if __name__ == "__main__":
-    uvicorn.run(app=app, host='0.0.0.0', port=5001)
+    uvicorn.run(app=app, host='0.0.0.0', port=5000)
