@@ -1,5 +1,7 @@
 # Molecular Similarity Search
 
+[TOC]
+
 ## Overview
 
 This demo uses RDKit, a cheminformatics software, and Milvus to build a system that can perform similarity searches on molecular compounds. 
