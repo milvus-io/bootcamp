@@ -1,4 +1,4 @@
-pymilvus==2.0.0rc7
+pymilvus==2.0.0rc8
 sklearn
 pymysql
 numpy
