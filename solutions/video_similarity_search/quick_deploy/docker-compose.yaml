@@ -63,7 +63,7 @@ services:
 
   webserver:
     container_name: video-webserver
-    image: video:v1
+    image: milvusbootcamp/video_search_webserver:towhee
     networks:
       app_net:
         ipv4_address: 172.16.238.12
