@@ -130,10 +130,15 @@ async def search_images(request: Request, video: UploadFile = File(...), table_n
             table_name = DEFAULT_TABLE
         # Save the upload image to server.
         content = await video.read()
-        video_path = os.path.join(UPLOAD_PATH, video.filename)
-        convert_avi_to_mp4(video_path)
+        print('Read video successfully.')
+        tmp_dir = os.path.join(UPLOAD_PATH, video.filename.split('.')[0])
+        if not os.path.exists(tmp_dir):
+            os.makedirs(tmp_dir)
+            LOGGER.info(f"Mkdir the path: {tmp_dir}")
+        video_path = os.path.join(tmp_dir, video.filename.lower())
         with open(video_path, "wb+") as f:
             f.write(content)
+        convert_avi_to_mp4(video_path)
         host = request.headers['host']
         paths, objects, distances, times = do_search(table_name, video_path, MODEL, MILVUS_CLI, MYSQL_CLI)
         res = ["http://" + str(host) + "/video/getVideo?video=" + video_path.replace(".avi", ".mp4")]
