@@ -18,21 +18,7 @@ jobs:
       uses: actions/setup-python@master
       with:
         python-version: 3.7
-    - uses: conda-incubator/setup-miniconda@v2
-      with:
-        auto-update-conda: true
-        python-version: 3.7
-    - name: Conda install RDKit
-      shell: bash -l {0}
-      run: |
-        conda info
-        conda install -c rdkit rdkit -y
-    - name: Insatll libsndfile
-      run: sudo apt-get install -y libsndfile1
-    - name: Insatll ffmpeg
-      run: sudo apt-get install -y ffmpeg
     - name: Install pip packeages
-      shell: bash -l {0}
       run: |
         python -m pip install --upgrade pip
         pip install pytest
@@ -44,11 +30,11 @@ jobs:
       with:
         format: 'csv'
     - name: Run test with docker-compose
-      shell: bash -l {0}
       run: |
         mapfile -d ',' -t added_modified_files < <(printf '%s,' '${{ steps.files.outputs.added_modified }}')
         for added_modified_file in "${added_modified_files[@]}"; do
           if [[ ${added_modified_file} = *docker-compose.yaml ]]; then
+            mkdir -p `dirname ${added_modified_file}`/data
             docker-compose -f ${added_modified_file} up -d
             cd `dirname ${added_modified_file}`
             pip install -r server/requirements.txt
