@@ -71,7 +71,7 @@ services:
       MILVUS_HOST: '172.16.238.10'
       MYSQL_HOST: '172.16.238.11'
     volumes:
-      - ./data:/data/video_path
+      - ./data:/data
     restart: always
     depends_on:
       - standalone
