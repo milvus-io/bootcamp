@@ -26,7 +26,7 @@ $ docker-compose up -d
 Then you will see the that all containers are created.
 
 ```bash
-Creating network "img_object_detection_app_net" with driver "bridge"
+Creating network "host" with driver "bridge"
 Creating milvus-etcd           ... done
 Creating text-search-mysql     ... done
 Creating text-search-webclient ... done
