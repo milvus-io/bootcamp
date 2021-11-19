@@ -16,6 +16,7 @@ $ git clone https://github.com/milvus-io/bootcamp.git
 $ cd solutions/video_similarity_search/object_detection/
 $ vim docker-compose.yaml
 ```
+> Change line 73: `./data:/data` --> `your_data_path:/data`
 
 - Create containers & start servers with docker-compose.yaml
 ```bash
@@ -65,7 +66,7 @@ The video object detection system will use Milvus to store and search the featur
   $ docker run -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7
   ```
 
-### 2. Start Server
+### 2. Start  API Server
 The next step is to start the system server. It provides HTTP backend services, you can run source code or use docker image to start it.
 
 - **Install the Python packages**
@@ -105,52 +106,6 @@ The next step is to start the system server. It provides HTTP backend services, 
   - DATA_PATH & UPLOAD_PATH: modify to your own ABSOLUTE paths for object images & video respectively
   - DISTANCE_LIMIT: change to some number so that results with larger distances will not be shown in response
   - VECTOR_DIMENSION: 1000 if using source code to run server; 2048 if using docker to run server
-
-#### Option 1: Run server with Docker
-
-- **Download Yolov3 Model**
-
-  Download YOLOv3 model if using docker to start
-
-  ```bash
-  $ cd server/src/yolov3_detector/data
-  $ ./prepare_model.sh
-  ```
-  You will get a folder yolov3_darknet containing 3 files:
-  ```
-  ├── yolov3_darknet
-  │   ├── __model__
-  │   ├── __params__
-  │   └── yolo.yml
-  ```
-
-- **Set Parameters**
-
-  ```bash
-  $ export DATAPATH1='/absolute/image/folder/path'
-  $ export DATAPATH2='/absolute/video/path'
-  $ export Milvus_HOST='xxx.xxx.x.xx'
-  $ export Milvus_PORT='19530'
-  $ export Mysql_HOST='xxx.xxx.x.xx'
-  ```
-  > **Note:**: modify 'xxx.xxx.x.xx' to your own IP address
-
-- **Run Docker**
-
-  ```bash
-  $ docker run -d \
-  -v ${DATAPATH1}:${DATAPATH1} \
-  -v ${DATAPATH2}:/data/example_video \
-  -p 5000:5000 \
-  -e "MILVUS_HOST=${Milvus_HOST}" \
-  -e "MILVUS_PORT=${Milvus_PORT}" \
-  -e "MYSQL_HOST=${Mysql_HOST}" \
-  milvusbootcamp/video-object-detect-server:2.0
-  ```
-
-  > **Note:** -v ${DATAPATH1}:${DATAPATH1} means that you can mount the directory into the container. If needed, you can load the parent directory or more directories.
-
-#### Option 2: Run source code
 
 - **Run the code**
 
