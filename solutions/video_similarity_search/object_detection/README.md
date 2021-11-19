@@ -34,7 +34,7 @@ Creating milvus-standalone          ... done
 Creating video-object-detect-server ... done
 ```
 
-And show all containers with `docker ps`, and you can use `docker logs img-search-webserver` to get the logs of **server** container.
+And show all containers with `docker ps`, and you can use `docker logs video-object-detect-server` to get the logs of **server** container.
 
 ```bash
 CONTAINER ID   IMAGE                                         COMMAND                  CREATED          STATUS                             PORTS                               NAMES
