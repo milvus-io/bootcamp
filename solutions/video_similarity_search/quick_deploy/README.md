@@ -74,7 +74,6 @@ The video similarity system will use Milvus to store and search the feature vect
 
 The next step is to start the system server. It provides HTTP backend services. There are two ways to start: Docker or source code.
 
-#### Option 1: Run server with Docker
 
 - **Set parameters**
 
@@ -87,28 +86,6 @@ The next step is to start the system server. It provides HTTP backend services. 
   | **MILVUS_PORT** | The port of Milvus.                                   | 19530            |
   | **MYSQL_HOST** | The IP address of MySQL.                               | 127.0.0.1        |
 
-  ```bash
-  $ export DATAPATH1='/data/video_path'
-  $ export Milvus_HOST='127.0.0.1'
-  $ export Milvus_PORT='19530'
-  $ export Mysql_HOST='127.0.0.1'
-  ```
-
-- **Run Docker**
-
-  ```bash
-  $ docker run -d \
-  -v ${DATAPATH1}:${DATAPATH1} \
-  -p 5000:5000 \
-  -e "MILVUS_HOST=${Milvus_HOST}" \
-  -e "MILVUS_PORT=${Milvus_PORT}" \
-  -e "MYSQL_HOST=${Mysql_HOST}" \
-  milvusbootcamp/video-search-server:2.0
-  ```
-
-  > **Note:** -v ${DATAPATH1}:${DATAPATH1} means that you can mount the directory into the container. If needed, you can load the parent directory or more directories.
-
-#### Option 2: Run source code
 
 - **Install the Python packages**
 
