@@ -6,7 +6,48 @@ This project uses Milvus and Bert to build a Text Search Engine. In this project
 
 The dataset needed for this system is a **CSV** format file which needs to contain a column of titles and a column of texts.
 
-## How to deploy the system
+## Option 1: Deploy with Docker Compose
+
+The text search engine with Milvus, MySQL, WebServer and WebClient services. We can start these containers with one click through [docker-compose.yaml](./docker-compose.yaml).
+
+- Modify docker-compose.yaml to map your data directory to the docker container of WebServer
+```bash
+$ git clone https://github.com/milvus-io/bootcamp.git
+$ cd solutions/text_search_engine/quick_deploy/
+$ vim docker-compose.yaml
+```
+
+- Create containers & start servers with docker-compose.yaml
+```bash
+$ docker-compose up -d
+```
+
+Then you will see the that all containers are created.
+
+```bash
+Creating network "host" with driver "bridge"
+Creating milvus-etcd           ... done
+Creating text-search-mysql     ... done
+Creating text-search-webclient ... done
+Creating milvus-minio          ... done
+Creating milvus-standalone     ... done
+Creating text-search-webserver ... done
+```
+
+And show all containers with `docker ps`, and you can use `docker logs text-search-webserver` to get the logs of **server** container.
+
+```bash
+CONTAINER ID   IMAGE                                         COMMAND                  CREATED          STATUS                             PORTS                               NAMES
+4cc6e60eb295   milvusbootcamp/text-search-webserver:new   "/bin/sh -c 'python3…"   56 seconds ago   Up 55 seconds                      0.0.0.0:5010->5010/tcp                 text-search-webserver
+40f4ea99fd22   milvusdb/milvus:v2.0.0-rc8-20211104-d1f4106   "/tini -- milvus run…"   57 seconds ago   Up 55 seconds                      0.0.0.0:19530->19530/tcp  milvus-standalone
+60ed080afac1   minio/minio:RELEASE.2020-12-03T00-03-10Z      "/usr/bin/docker-ent…"   57 seconds ago   Up 56 seconds (healthy)            9000/tcp                            milvus-minio
+5d9cdfba872b   mysql:5.7                                     "docker-entrypoint.s…"   57 seconds ago   Up 56 seconds                      0.0.0.0:3306->3306/tcp, 33060/tcp   text-search-mysql
+56a2922b5c00   milvusbootcamp/text-search-webclient:2.0          "/bin/bash -c '/usr/…"   57 seconds ago   Up 56 seconds (health: starting)   0.0.0.0:8001->80/tcp     text-search-webclient
+647d848989e4   quay.io/coreos/etcd:v3.5.0                    "etcd -advertise-cli…"   57 seconds ago   Up 56 seconds                      2379-2380/tcp                       milvus-etcd
+```
+
+
+## Option 2: Deploy with Source code
 
 ### 1. Start Milvus and MySQL
 
