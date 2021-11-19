@@ -35,7 +35,7 @@ def test_count():
 
 def test_get_img():
     response = requests.get(
-        'http://127.0.0.1:5000/data?gif_path=%2Fdata%2F100-git%2tumblr_l3x3x5EH061qa4rk1o1_250.gif'
+        'http://127.0.0.1:5000/data?gif_path=%2Fdata%2F100-gif%2Ftumblr_ku4lzkM5fg1qa47qco1_250.gif'
         )
     assert response.status_code == 200
 
