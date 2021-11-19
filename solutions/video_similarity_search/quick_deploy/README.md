@@ -10,7 +10,49 @@ This article uses Tumblr's approximately 100 animated gifs as an example to buil
 
 You can download the data in google drive: https://drive.google.com/file/d/1CAt-LsF-2gpAMnw5BM75OjCxiR2daulU/view?usp=sharing, then please unzip it.
 
-## How to deploy the system
+
+## Option 1: Deploy with Docker Compose
+
+The video search system  with Milvus, MySQL, WebServer and WebClient services. We can start these containers with one click through [docker-compose.yaml](./docker-compose.yaml).
+
+- Modify docker-compose.yaml to map your data directory to the docker container of WebServer
+```bash
+$ git clone https://github.com/milvus-io/bootcamp.git
+$ cd solutions/video_similarity_search/quick_deploy/
+$ vim docker-compose.yaml
+```
+
+- Create containers & start servers with docker-compose.yaml
+```bash
+$ docker-compose up -d
+```
+
+Then you will see the that all containers are created.
+
+```bash
+Creating network "default" with driver "bridge"
+Creating milvus-etcd           ... done
+Creating video-mysql           ... done
+Creating video-webserver       ... done
+Creating milvus-minio          ... done
+Creating milvus-standalone     ... done
+Creating video-webclient       ... done
+```
+
+And show all containers with `docker ps`, and you can use `docker logs text-search-webserver` to get the logs of **server** container.
+
+```bash
+CONTAINER ID   IMAGE                                         COMMAND                  CREATED          STATUS                             PORTS                               NAMES
+af9e959e3e71   milvusbootcamp/video_search_webserver:towhee   "/bin/sh -c 'python3…"   20 minutes ago   Up 20 minutes               0.0.0.0:5000->5000/tcp              video-webserver
+ca3dd84b133d   milvusdb/milvus:v2.0.0-rc8-20211104-d1f4106        "/tini -- milvus run…"   20 minutes ago   Up 20 minutes               0.0.0.0:19530->19530/tcp            milvus-standalone
+202eed71044b   minio/minio:RELEASE.2020-12-03T00-03-10Z           "/usr/bin/docker-ent…"   20 minutes ago   Up 20 minutes (healthy)     9000/tcp                            milvus-minio
+ca7cb1b230ad   quay.io/coreos/etcd:v3.5.0                         "etcd -advertise-cli…"   20 minutes ago   Up 20 minutes               2379-2380/tcp                       milvus-etcd
+7d588e515bc3   mysql:5.7                                          "docker-entrypoint.s…"   20 minutes ago   Up 20 minutes               0.0.0.0:3306->3306/tcp, 33060/tcp   video-mysql
+d5c4b837363d   milvusbootcamp/video-search-client:1.0      "/bin/bash -c '/usr/…"   20 minutes ago   Up 20 minutes (healthy)           0.0.0.0:8001->80/tcp                video-webclient
+```
+
+
+## Option 2: Deploy with Source code
 
 ### 1. Start Milvus and MySQL
 
