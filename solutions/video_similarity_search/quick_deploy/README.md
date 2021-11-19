@@ -21,7 +21,7 @@ $ git clone https://github.com/milvus-io/bootcamp.git
 $ cd solutions/video_similarity_search/quick_deploy/
 $ vim docker-compose.yaml
 ```
-
+> Change line 74: `./data:/data` --> `your_data_path:/data`
 - Create containers & start servers with docker-compose.yaml
 ```bash
 $ docker-compose up -d
