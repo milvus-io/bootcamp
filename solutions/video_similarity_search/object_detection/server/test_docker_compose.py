@@ -13,16 +13,16 @@ def get_file():
     url2 = 'https://drive.google.com/uc?id=17Nh8FULhtJUIZnpZwefKExVzjqlNuUqU'
     gdown.download(url2)
     with zipfile.ZipFile('example_object.zip', 'r') as zip_ref:
-        zip_ref.extractall('./data/example_object')
+        zip_ref.extractall('./data')
     with zipfile.ZipFile('example.zip', 'r') as zip_ref2:
-        zip_ref2.extractall('./data')
+        zip_ref2.extractall('./video')
 
 
 def test_load():
     get_file()
     response = requests.post(
         "http://127.0.0.1:5000/image/load",
-        json={"File": "/data/example_object"}
+        json={"File": "/data"}
     )
     assert response.status_code == 200
     assert response.json() == {'status': True, 'msg': "Successfully loaded data!"}
@@ -39,13 +39,13 @@ def test_count():
 
 def test_get_img():
     response = requests.get(
-        'http://127.0.0.1:5000/data?image_path=%2Fdata%2Fexample_obj%2Fcola.jpg'
+        'http://127.0.0.1:5000/data?image_path=%2Fdata%2Fcola.jpg'
         )
     assert response.status_code == 200
 
 def test_search():
-    _test_upload_file = './data/example_object_video.avi'
-    _files = {'image': open(_test_upload_file, 'rb')}
+    _test_upload_file = './video/example_object_video.avi'
+    _files = {'video': open(_test_upload_file, 'rb')}
     response = requests.post(
         'http://127.0.0.1:5000/video/search',
         files = _files
