@@ -6,8 +6,48 @@ This demo uses **Milvus** to detect objects in a video based on a dataset of obj
 
 <img src="pic/structure.png" width = "800" height = "350" alt="arch" align=center />
 
+## Option 1: Deploy with Docker Compose
 
-## How to deploy the system
+The video similarity search  with Milvus, MySQL, WebServer and WebClient services. We can start these containers with one click through [docker-compose.yaml](./docker-compose.yaml).
+
+- Modify docker-compose.yaml to map your data directory to the docker container of WebServer
+```bash
+$ git clone https://github.com/milvus-io/bootcamp.git
+$ cd solutions/video_similarity_search/object_detection/
+$ vim docker-compose.yaml
+```
+
+- Create containers & start servers with docker-compose.yaml
+```bash
+$ docker-compose up -d
+```
+
+Then you will see the that all containers are created.
+
+```bash
+Creating network "object_detection_app_net" with driver "bridge"
+Creating milvus-etcd                ... done
+Creating mysql                      ... done
+Creating video-object-detect-client ... done
+Creating milvus-minio               ... done
+Creating milvus-standalone          ... done
+Creating video-object-detect-server ... done
+```
+
+And show all containers with `docker ps`, and you can use `docker logs video-object-detect-server` to get the logs of **server** container.
+
+```bash
+CONTAINER ID   IMAGE                                         COMMAND                  CREATED          STATUS                             PORTS                               NAMES
+af9e959e3e71   milvusbootcamp/video-object-detect-server:towhee   "/bin/sh -c 'python3…"   20 minutes ago   Up 20 minutes               0.0.0.0:5000->5000/tcp              videoobj-search-webserver
+ca3dd84b133d   milvusdb/milvus:v2.0.0-rc8-20211104-d1f4106        "/tini -- milvus run…"   20 minutes ago   Up 20 minutes               0.0.0.0:19530->19530/tcp            milvus-standalone
+202eed71044b   minio/minio:RELEASE.2020-12-03T00-03-10Z           "/usr/bin/docker-ent…"   20 minutes ago   Up 20 minutes (healthy)     9000/tcp                            milvus-minio
+ca7cb1b230ad   quay.io/coreos/etcd:v3.5.0                         "etcd -advertise-cli…"   20 minutes ago   Up 20 minutes               2379-2380/tcp                       milvus-etcd
+7d588e515bc3   mysql:5.7                                          "docker-entrypoint.s…"   20 minutes ago   Up 20 minutes               0.0.0.0:3306->3306/tcp, 33060/tcp   video-search-mysql
+d5c4b837363d   milvusbootcamp/video-object-detect-client:2.0      "/bin/bash -c '/usr/…"   20 minutes ago   Up 20 minutes (unhealthy)   0.0.0.0:8001->80/tcp                videoobj-search-webclient
+
+```
+
+## Option 2: Deploy with Source code
 
 ### 1. Start Milvus and MySQL
 
