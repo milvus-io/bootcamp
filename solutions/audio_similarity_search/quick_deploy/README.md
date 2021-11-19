@@ -2,15 +2,17 @@
 
 This project uses [PANNs](https://github.com/qiuqiangkong/audioset_tagging_cnn)(Large-Scale Pretrained Audio Neural Networks) for Audio Pattern Recognition to perform audio tagging and sound event detection, finally obtaining audio embeddings. Then this project uses [Milvus](https://milvus.io/docs/v2.0.0/overview.md) to search for similar audio clips.
 
+   * [Local Deployment](#local-deployment)
+      * [Deploy with Docker Compose](#deploy-with-docker-compose)
+      * [Deploy with source code](#deploy-with-source-code)
+         * [1. Start API Server](#1-start-api-server)
+         * [2. Start Client](#2-start-client)
+   * [How to use front-end](#how-to-use-front-end)
+   * [Code  structure](#code--structure)
+
 ## Local Deployment
 
-### Requirements
-
-- [Milvus 2.0](https://milvus.io/docs/v2.0.0/install_standalone-docker.md)
-- [MySQL](https://hub.docker.com/r/mysql/mysql-server)
-- [Python3](https://www.python.org/downloads/)
-
-## Deploy with Docker Compose
+### Deploy with Docker Compose
 
 The molecular similarity search system requires [**Milvus**](https://milvus.io/docs/v2.0.0/install_standalone-docker.md), MySQL, Webserver and Webclient services. We can start these containers with one click through [docker-compose.yaml](./audiosearch-docker-compose.yaml), so please make sure you have [installed Docker Engine](https://docs.docker.com/engine/install/) and [Docker Compose](https://docs.docker.com/compose/install/) before running.
 
@@ -44,11 +46,11 @@ a8428e99f49d   milvusbootcamp/audio-search-server:2.0        "/bin/sh -c 'python
 f4a6b30f5840   milvusbootcamp/audio-search-client:2.0        "/bin/bash -c '/usr/…"   38 seconds ago   Up 31 seconds (health: starting)   0.0.0.0:801->80/tcp, :::801->80/tcp                    audio-webclient
 ```
 
-## Deploy with source code
+### Deploy with source code
 
 Actually we recommend using Docker Compose to deploy the audio similarity search system. If you want to run from source code, you must manually start [Milvus](https://milvus.io/docs/v2.0.0/install_standalone-docker.md) and [Mysql](https://dev.mysql.com/doc/mysql-installation-excerpt/5.7/en/docker-mysql-getting-started.html). Next show you how to run the API server and Client.
 
-### 1. Start API Server
+#### 1. Start API Server
 
 Then to start the system server, and it provides HTTP backend services.
 
@@ -115,7 +117,7 @@ After starting the service, Please visit `127.0.0.1:8002/docs` in your browser t
 >
 > Drops Milvus and MySQL tables, removing loaded data.
 
-### 2. Start Client
+#### 2. Start Client
 
 Next, start the frontend GUI.
 

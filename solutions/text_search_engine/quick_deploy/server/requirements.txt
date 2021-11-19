@@ -3,6 +3,7 @@ numpy
 futures==3.1.1
 cryptography
 aiofiles
+gdown
 Pillow
 pymilvus==2.0.0rc7
 fastapi

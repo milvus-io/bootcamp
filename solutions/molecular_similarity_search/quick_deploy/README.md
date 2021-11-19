@@ -1,6 +1,13 @@
 # Molecular Similarity Search
 
-[TOC]
+   * [Overview](#overview)
+   * [Data source](#data-source)
+   * [Deploy the system with Docker Compose](#deploy-the-system-with-docker-compose)
+   * [Deploy the system with source code](#deploy-the-system-with-source-code)
+      * [Run webserver](#run-webserver)
+      * [Run Webclient](#run-webclient)
+   * [How to use](#how-to-use)
+   * [Conclusion](#conclusion)
 
 ## Overview
 
