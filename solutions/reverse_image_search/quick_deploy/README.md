@@ -110,7 +110,7 @@ Modify the parameters according to your own environment. Here listing some param
 | MILVUS_PORT      | Port of Milvus.                                       | 19530               |
 | VECTOR_DIMENSION | Dimension of the vectors.                             | 1000                |
 | MYSQL_HOST       | The IP address of Mysql.                              | 127.0.0.1           |
-| MYSQL_PORT       | Port of Milvus.                                       | 3306                |
+| MYSQL_PORT       | Port of Mysql.                                        | 3306                |
 | DEFAULT_TABLE    | The milvus and mysql default collection name.         | milvus_img_search   |
 
 - **Run the code**
