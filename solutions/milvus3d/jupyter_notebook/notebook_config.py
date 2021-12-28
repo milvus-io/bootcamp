@@ -5,6 +5,7 @@ import os
 SEARCH_FEATURE_PATH = 'search_feature'
 LOAD_FEATURE_PATH = 'load_feature'
 UPLOAD_PATH = 'test_data'
+# UPLOAD_PATH = 'ModelNet40'
 
 ############### Milvus Configuration ###############
 MILVUS_HOST = os.getenv("MILVUS_HOST", "localhost")
