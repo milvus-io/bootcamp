@@ -58,6 +58,8 @@ services:
         ipv4_address: 172.16.23.11
     environment:
       - MYSQL_ROOT_PASSWORD=123456
+    volumes:
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/mysql:/var/lib/mysql
     ports:
       - "3306:3306"
 
