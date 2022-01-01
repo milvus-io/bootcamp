@@ -9,7 +9,7 @@ from logs import LOGGER
 
 
 def get_audios(path):
-    # List all wav and aif files recursively under the path folder 
+    # List all wav and aif files recursively under the path folder.
     supported_formats = [".wav", ".aif", ".mp3", ".ogg", ".flac", ".m4a"]
     return [ item for sublist in [ [ os.path.join(dir, file) for file in files ] for dir, _, files in list(os.walk(path)) ] 
         for item in sublist if os.path.splitext(item)[1] in supported_formats ]
