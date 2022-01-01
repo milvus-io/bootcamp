@@ -90,7 +90,7 @@ services:
     ports:
       - "801:80"
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://127.0.0.1:801"]
+      test: ["CMD", "curl", "-f", "http://127.0.0.1"]
       interval: 30s
       timeout: 20s
       retries: 3
