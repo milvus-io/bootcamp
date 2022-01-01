@@ -27,6 +27,8 @@ def extract_features(audio_dir):
         cache['total'] = total
         for i, audio_path in enumerate(audio_list):
             norm_feat = get_audio_embedding(audio_path)
+            if norm_feat is None:
+                continue
             feats.append(norm_feat)
             names.append(audio_path.encode())
             cache['current'] = i + 1
