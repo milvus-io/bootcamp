@@ -24,8 +24,8 @@ WORKDIR /usr/share/nginx/html
 COPY ./env.sh .
 COPY .env .
 
-# Add bash
-RUN apk add --no-cache bash
+# Add bash, curl
+RUN apk add --no-cache bash curl
 
 # Make our shell script executable
 RUN chmod +x env.sh
