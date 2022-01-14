@@ -22,8 +22,14 @@ jobs:
         python -m pip install --upgrade pip
         pip install gdown
         pip install pytest nbmake
-    - name: Insatll libsndfile
+
+    - name: Install libsndfile
       run: sudo apt-get install -y libsndfile1
+    - name: Install libglu
+      run: sudo apt-get install -y libglu1-mesa
+    - name: Install libopengl
+      run: sudo apt install -y libopengl0
+
     - name: Start Milvus
       run: |
         wget https://github.com/milvus-io/milvus/releases/download/v2.0.0-rc7/milvus-standalone-docker-compose.yml -O docker-compose.yml

@@ -69,7 +69,7 @@ class ASServerServicer(object):
     def __init__(self):
         pass
 
-    def as_call(self, request):
+    def as_call(self, request, context):
         '''
         message ASRequest{
           string log_id = 1;

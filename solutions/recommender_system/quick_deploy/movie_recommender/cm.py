@@ -33,7 +33,7 @@ class CMServerServicer(object):
     def __init__(self):
         self.redis_cli = redis.StrictRedis(host="127.0.0.1", port="6379")
 
-    def cm_call(self, request):
+    def cm_call(self, request, context):
         cm_res = cm_pb2.CMResponse()
         item_ids = request.item_ids
         for item_id in item_ids:

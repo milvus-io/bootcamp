@@ -6,7 +6,66 @@ This project uses Milvus and Bert to build a Text Search Engine. In this project
 
 The dataset needed for this system is a **CSV** format file which needs to contain a column of titles and a column of texts.
 
-## How to deploy the system
+## Deployment
+
+This project can be deployed in two ways:
+* Deploying with Docker Compose
+* Deploying with Source Code
+
+## Option 1: Deploying with Docker Compose
+
+The text search engine with Milvus, MySQL, WebServer and WebClient services. We can start these containers with one click through [docker-compose.yaml](./docker-compose.yaml).
+
+- Modify docker-compose.yaml to map your data directory to the docker container of WebServer
+```bash
+$ git clone https://github.com/milvus-io/bootcamp.git
+$ cd solutions/text_search_engine/quick_deploy/
+$ vim docker-compose.yaml
+```
+
+- Create containers & start servers with docker-compose.yaml
+```bash
+$ docker-compose up -d
+```
+
+Containers will be created after a while.
+
+```bash
+Creating network "host" with driver "bridge"
+Creating milvus-etcd           ... done
+Creating text-search-mysql     ... done
+Creating text-search-webclient ... done
+Creating milvus-minio          ... done
+Creating milvus-standalone     ... done
+Creating text-search-webserver ... done
+```
+
+You can list all containers with `docker ps`.
+
+```bash
+CONTAINER ID   IMAGE                                         COMMAND                  CREATED          STATUS                             PORTS                               NAMES
+4cc6e60eb295   milvusbootcamp/text-search-webserver:new   "/bin/sh -c 'python3…"   56 seconds ago   Up 55 seconds                      0.0.0.0:5000->5000/tcp                 text-search-webserver
+40f4ea99fd22   milvusdb/milvus:v2.0.0-rc8-20211104-d1f4106   "/tini -- milvus run…"   57 seconds ago   Up 55 seconds                      0.0.0.0:19530->19530/tcp  milvus-standalone
+60ed080afac1   minio/minio:RELEASE.2020-12-03T00-03-10Z      "/usr/bin/docker-ent…"   57 seconds ago   Up 56 seconds (healthy)            9000/tcp                            milvus-minio
+5d9cdfba872b   mysql:5.7                                     "docker-entrypoint.s…"   57 seconds ago   Up 56 seconds                      0.0.0.0:3306->3306/tcp, 33060/tcp   text-search-mysql
+56a2922b5c00   milvusbootcamp/text-search-webclient:2.0          "/bin/bash -c '/usr/…"   57 seconds ago   Up 56 seconds (health: starting)   0.0.0.0:8001->80/tcp     text-search-webclient
+647d848989e4   quay.io/coreos/etcd:v3.5.0                    "etcd -advertise-cli…"   57 seconds ago   Up 56 seconds                      2379-2380/tcp                       milvus-etcd
+```
+
+You can also, for example, get the logs of **server** container with:
+
+```docker logs text-search-webserver```
+
+If everything goes well, your web server will be available at:
+
+<http://0.0.0.0:5000>
+
+and your web UI client:
+
+<http://0.0.0.0:8001>
+
+
+## Option 2: Deploying with Source code
 
 ### 1. Start Milvus and MySQL
 
@@ -44,21 +103,19 @@ The next step is to start the system server. It provides HTTP backend services, 
 
 ```
 $ cd server
-$ pip install -r requirement.txt
+$ pip install -r requirements.txt
 ```
 
 - **Download the model**
 
-The way to install Bert-as-service is as follows. You can also refer to the official website link of the Github repository of Bert-as-service:
-
-https://github.com/hanxiao/bert-as-service
+Install the sentence-transformers model as follows
 
 ```
 # Download model
-$ cd model
-$ wget https://storage.googleapis.com/bert_models/2018_11_03/uncased_L-12_H-768_A-12.zip
-# start service
-$ bert-serving-start -model_dir uncased_L-12_H-768_A-12/ -num_worker=2
+$ cd server/src/model
+$ wget https://public.ukp.informatik.tu-darmstadt.de/reimers/sentence-transformers/v0.2/paraphrase-mpnet-base-v2.zip
+$ unzip paraphrase-mpnet-base-v2.zip -d paraphrase-mpnet-base-v2/
+
 ```
 
 - **Set configuration**
@@ -104,6 +161,7 @@ $ python main.py
   │   │
   │   └───src
   │       │   config.py  # Configuration file.
+  │       │   encode.py  # Convert image/video/questions/... to embeddings.
   │       │   milvus_helpers.py  # Connect to Milvus server and insert/drop/query vectors in Milvus.
   │       │   mysql_helpers.py   # Connect to MySQL server, and add/delete/query IDs and object information.
   │       │   
@@ -117,50 +175,51 @@ $ python main.py
 
 - **API docs** 
 
-Vist 127.0.0.1:5001/docs in your browser to use all the APIs.
+Visit 127.0.0.1:5001/docs in your browser to use all the APIs.
 
 ![1](pic/1.png)
 
 **/text/load_data**
 
-This API is used to import datasets into the system.
+This API imports datasets into the system.
 
 **/text/search**
 
-This API is used to get similar texts in the system.
+This API gets similar texts in the system.
 
 **/text/count**
 
-This API is used to get the number of the titles in the system.
+This API gets the number of the titles in the system.
 
 **/text/drop**
 
-This API is used to delete a specified collection.
+This API deletes a specified collection.
 
 
-3、Start the UI client
-----------------------  
-Install  [Node.js 12+](https://nodejs.org/en/download/) and [Yarn](https://classic.yarnpkg.com/en/docs/install/).
+### 3. Start the UI client
+
+* Check `Constants.ts` and make sure that `let endpoint` points to the correct Milvus server endpoint.
+
+* Install  [Node.js 12+](https://nodejs.org/en/download/) and [Yarn](https://classic.yarnpkg.com/en/docs/install/).
 
 ```
 $ cd client 
-# Install dependencies
-$ yarn install 
-#start yarn 
-$ yarn start   
-open localhost:3000
+$ yarn install    # install dependencies
+$ yarn start      # start yarn 
 ```
 
+The UI client will be available at <http://localhost:3000>.
 
-4、The interface display
----------------------- 
+### 4. The interface display
 
-Enter 127.0.0.1:3000 in the browser to open the search page and enter the search text.Upload a **csv** file of the title and text
+* Upload a **csv** file that contains a list of titles and texts. You may use the `example.csv` file in `text_search_engine/data`.
+
+
+* Visit the search page on 127.0.0.1:3000 and enter the search query.
+
 
 ![1](./pic/3.png)
 
-Get the search results of the input text, as shown in the figure
+* Get the search results of the input text, as shown in the figure below.
 
 ![2](./pic/2.png)
-
-

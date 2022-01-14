@@ -46,6 +46,6 @@ def test_search():
 
 def test_data():
     response = client.get(
-        "/data?audio_file_path=.%2Fexample_audio%2Ftest.wav"
+        "/data?audio_path=.%2Fexample_audio%2Ftest.wav"
     )
     assert response.status_code == 200

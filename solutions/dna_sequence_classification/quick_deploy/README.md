@@ -20,8 +20,8 @@ Mysql stores sequence ids in Milvus and corresponding classes. It also includes 
 
 Refer to [Install Milvus v2.0](https://milvus.io/docs/v2.0.0/install_standalone-docker.md) for how to run Milvus docker.
 
-```
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.0.0-rc5-hotfix1/milvus-standalone-docker-compose.yml -O docker-compose.yml
+```bash
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.0.0-rc8/milvus-standalone-docker-compose.yml -O docker-compose.yml
 $ sudo docker-compose up -d
 Docker Compose is now in the Docker CLI, try `docker compose up`
 Creating milvus-etcd  ... done
@@ -34,7 +34,7 @@ Creating milvus-standalone ... done
 
 - **Start MySQL**
 
-```
+```bash
 $ docker run -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7
 ```
 
@@ -46,14 +46,14 @@ The next step is to start the system server. It provides HTTP backend services, 
 
 - **Install the Python packages**
 
-```
+```bash
 $ cd server
 $ pip install -r requirements.txt
 ```
 
 - **Set configuration**
 
-```
+```bash
 $ vim server/src/config.py
 ```
 
@@ -76,7 +76,7 @@ Please modify the parameters according to your own environment. Here listing som
 
 Start the server with Fastapi.
 
-```
+```bash
 $ cd src
 $ python main.py
 ```
@@ -84,7 +84,7 @@ $ python main.py
 
   If you are interested in our code or would like to contribute code, feel free to learn more about our code structure.
 
-  ```
+  ```bash
   └───server
   │   │   Dockerfile
   │   │   requirements.txt
@@ -104,7 +104,7 @@ $ python main.py
   ```
 
 
-- **API docs** 
+- **API docs**
 
 Vist localhost:5001/docs in your browser to use all the APIs.
 
@@ -117,7 +117,7 @@ A successful import will have
 - a Milvus collection with vectors & auto_ids
 - a Mysql table with milvus_ids & classes
 - a pickle file saved for fitted vectorizer
-    
+
 ![2](pic/2.png)
 
 **/text/search**
@@ -135,6 +135,3 @@ This API is used to get the number of the DNA sequences in the system.
 **/text/drop**
 
 This API is used to delete a specified collection.
-
-
-

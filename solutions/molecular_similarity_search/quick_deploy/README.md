@@ -1,5 +1,14 @@
 # Molecular Similarity Search
 
+   * [Overview](#overview)
+   * [Data source](#data-source)
+   * [Deploy the system with Docker Compose](#deploy-the-system-with-docker-compose)
+   * [Deploy the system with source code](#deploy-the-system-with-source-code)
+      * [Run webserver](#run-webserver)
+      * [Run Webclient](#run-webclient)
+   * [How to use](#how-to-use)
+   * [Conclusion](#conclusion)
+
 ## Overview
 
 This demo uses RDKit, a cheminformatics software, and Milvus to build a system that can perform similarity searches on molecular compounds. 
@@ -11,75 +20,61 @@ This demo uses data that comes in the form of SMILES files. The main data source
 
 Download location: [https://ftp.ncbi.nlm.nih.gov/pubchem/Compound/CURRENT-Full/SDF/](https://ftp.ncbi.nlm.nih.gov/pubchem/Compound/CURRENT-Full/SDF/)
 
+## Deploy the system with Docker Compose
 
-## How to deploy the system
-
-### 1. Start Milvus and MySQL
-
-The system will use Milvus to store and search the vector data, and Mysql is used to store the correspondence between the ids returned by Milvus and the molecule structures.
-
-- **Start Milvus**
-With Milvus v2.0 currently available, please take a look [here](https://milvus.io/docs/v2.0.0/install_standalone-docker.md) on how to start the Milvus instance.
-
-- **Start MySQL**
+The molecular similarity search system requires [**Milvus**](https://milvus.io/docs/v2.0.0/install_standalone-docker.md), MySQL, Webserver and Webclient services. We can start these containers with one click through [docker-compose.yaml](./molsearch-docker-compose.yaml), so please make sure you have  [installed Docker Engine](https://docs.docker.com/engine/install/) and [Docker Compose](https://docs.docker.com/compose/install/) before running.
 
 ```bash
-$ docker run -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7
+$ git clone https://github.com/milvus-io/bootcamp.git
+$ cd solutions/molecular_similarity_search/quick_deploy
+$ docker-compose -f molsearch-docker-compose.yaml up -d
 ```
 
-### 2. Start Server
-
-The next step is to start the system server. It provides HTTP backend services, and there are two ways to start: running with Docker or source code.
-
-#### 2.1 Run server with Docker
-
-- **Set parameters**
-
-Modify the parameters according to your own environment. Below are the main parameters that you will need to setup, for more information please refer to [config.py](./server/src/config.py).
-
-| **Parameter**   | **Description**                                       | **example**      |
-| --------------- | ----------------------------------------------------- | ---------------- |
-| **EXTERNAL_DATAPATH**   | The directory of the SMILES data.                     | /data/smiles_path |
-| **INTERNAL_DATAPATH**   | The mount locaiton of the data within the docker container.                     | /mols_data |
-| **MILVUS_HOST** | The IP address of Milvus. Due to containers not being able to access localhost, please use the IP address of the host, you can get it by ifconfig. | 172.16.20.10     |
-| **MILVUS_PORT** | The port of Milvus.                                   | 19530            |
-| **MYSQL_HOST**  | The IP address of MySQL, can be the same as MILVUS_HOST if running on the same system.                               | 172.16.20.10     |
+Then you will see the that all containers are created.
 
 ```bash
-$ export EXTERNAL_DATAPATH='/data/smiles_path'
-$ export INTERNAL_DATAPATH='/mols_data'
-$ export MILVUS_HOST='172.16.20.10'
-$ export MILVUS_PORT='19530'
-$ export MYSQL_HOST='172.16.20.10'
+Creating network "quick_deploy_app_net" with driver "bridge"
+Creating milvus-minio        ... done
+Creating milvus-etcd         ... done
+Creating molsearch-webclient ... done
+Creating molsearch-mysql     ... done
+Creating milvus-standalone   ... done
+Creating molsearch-webserver ... done
 ```
 
-- **Run Docker**
+And show all containers with `docker ps`, and you can use `docker logs molsearch-webserver` to get the logs of **webserver** container.
 
 ```bash
-$ docker run -d \
--v ${EXTERNAL_DATAPATH}:${INTERNAL_DATAPATH} \
--p 5000:5000 \
--e "MILVUS_HOST=${MILVUS_HOST}" \
--e "MILVUS_PORT=${MILVUS_PORT}" \
--e "MYSQL_HOST=${MYSQL_HOST}" \
-milvusbootcamp/mols-search-webserver:2.0.0
+CONTAINER ID   IMAGE                                         COMMAND                  CREATED         STATUS                     PORTS                                                  NAMES
+9e47f3239c05   milvusbootcamp/mols-search-webserver:2.0      "/bin/sh -c 'python3…"   2 minutes ago   Up 2 minutes               0.0.0.0:5000->5000/tcp, :::5000->5000/tcp              molsearch-webserver
+e1782cf73606   milvusdb/milvus:v2.0.0-rc8-20211104-d1f4106   "/tini -- milvus run…"   2 minutes ago   Up 2 minutes               0.0.0.0:19530->19530/tcp, :::19530->19530/tcp          milvus-standalone
+74e51c7c27c0   minio/minio:RELEASE.2020-12-03T00-03-10Z      "/usr/bin/docker-ent…"   2 minutes ago   Up 2 minutes (healthy)     9000/tcp                                               milvus-minio
+2df1375da43e   quay.io/coreos/etcd:v3.5.0                    "etcd -advertise-cli…"   2 minutes ago   Up 2 minutes               2379-2380/tcp                                          milvus-etcd
+cc76e7bc542e   mysql:5.7                                     "docker-entrypoint.s…"   2 minutes ago   Up 2 minutes               0.0.0.0:3306->3306/tcp, :::3306->3306/tcp, 33060/tcp   molsearch-mysql
+6dfda3a3cc3d   milvusbootcamp/mols-search-webclient:2.0      "/bin/bash -c '/usr/…"   2 minutes ago   Up 2 minutes (unhealthy)   0.0.0.0:801->80/tcp, :::801->80/tcp                    molsearch-webclient
 ```
 
-#### 2.2 Run source code
+## Deploy the system with source code
+
+Actually we recommend using Docker Compose to deploy the molecular similarity search system. If you want to run from source code, you must manually start [Milvus](https://milvus.io/docs/v2.0.0/install_standalone-docker.md) and [Mysql](https://dev.mysql.com/doc/mysql-installation-excerpt/5.7/en/docker-mysql-getting-started.html). Next show you how to run the Webserver and Webclient.
+
+### Run webserver
+
+Before running the code, please install the packages and modify your own environment parameters. Then run `main.py`, and finally get the API with **fastapi**.
 
 - **Install the Python packages**
 
 ```bash
-$ cd server
+$ git clone https://github.com/milvus-io/bootcamp.git
+$ cd solutions/molecular_similarity_search/quick_deploy/server
 $ conda install -c rdkit rdkit -y
 $ pip install -r requirements.txt
-$ pip install --extra-index-url https://test.pypi.org/simple/  pymilvus-orm==2.0a1.dev43
 ```
 
 - **Set configuration**
 
 ```bash
-$ vim server/src/config.py
+$ vim src/config.py
 ```
 
 Please modify the parameters according to your own environment. Here listing some parameters that need to be set, for more information please refer to [config.py](./server/src/config.py).
@@ -98,18 +93,18 @@ Please modify the parameters according to your own environment. Here listing som
 Then start the server with Fastapi.
 
 ```bash
-$ python main.py
+$ python src/main.py
 ```
 
 - **API docs**
 
-Vist 127.0.0.1:5000/docs in your browser to use all the APIs.
+Vist **127.0.0.1:5000/docs** in your browser to use all the APIs.
 
 ![](pic/api.PNG)
 
 > /data
 >
-> Return the molecules.
+> Return the images of the molecule formula.
 >
 > /progress
 >
@@ -117,16 +112,15 @@ Vist 127.0.0.1:5000/docs in your browser to use all the APIs.
 >
 > /data/load
 >
-> Load the molecules in the specified file.
+> Load the molecules with a specified path.
 >
 > /data/search
 >
-> Pass in a molecule to search for similar molecules 
-> in the system.
->  
-> /data/count
->
-> Return the number of vectors in Milvus.
+> Pass in a molecule to search for similar molecules in the system.
+> 
+>  /data/count
+> 
+>Return the number of data in Milvus.
 
 - **Code  structure**
 
@@ -136,41 +130,45 @@ If you are interested in our code or would like to contribute code, feel free to
 └───server
 │   │   Dockerfile
 │   │   requirements.txt
-│   │   main.py  # File for starting the program.
-│   │
 │   └───src
+│       │   main.py  # File for starting the program.
+│       │   test_main.py  # File to test the program with Pytest.
 │       │   config.py  # Configuration file.
 │       │   encode.py  # Covert image/video/questions/... to embeddings.
-│       │   milvus.py  # Connect to Milvus server and insert/drop/query vectors in Milvus.
-│       │   mysql.py   # Connect to MySQL server, and add/delete/query IDs and object information.
-│       │   
-│       └───operations # Call methods in milvus.py and mysql.py to insert/query/delete objects.
+│       └───operations # Call methods to insert/query/delete objects.
 │               │   insert.py
 │               │   query.py
 │               │   delete.py
 │               │   count.py
+│       └───helpers # The code to run milvus and mysql server.
+│               │   milvus_helpers.py
+│               │   mysql_helpers.py
 ```
 
-### 3. Start Client
+### Run Webclient
 
-- **Start the front-end**
+Finally to start the front-end service.
 
 ```bash
 # Modify API_URL to the IP address and port of the server.
-$ export API_URL='http://172.16.20.10:5000'
-$ docker run -d -p 8001:80 \
+$ export API_URL='http://127.0.0.1:5000'
+$ docker run -d -p 801:80 \
 -e API_URL=${API_URL} \
-milvusbootcamp/mols-search-webclient:1.0
+milvusbootcamp/mols-search-webclient:2.0
 ```
 
-- **How to use**
+## How to use
+
+The system provides front-end services. You can enter `127.0.0.1:801` in the browser to insert and search molecular data.
 
 ![](pic/init_status.PNG)
 
 - Load chemical structures
-  1. In `path/to/your/data`, enter the location of the smi file. For example, `${INTERNAL_DATAPATH/test_1w.smi`.
+  1. In `path/to/your/data`, enter the location of the smi file. For example, `/mols_data/test_1w.smi`, if you run the service from source code, you need to fill in [the path of the molecule file](../smiles-data/test_100.smi).
   2. Click `+` to load.
   3. You can see the number of chemical structures have changed: 10000 Molecular Formula in this set
+
+  > The [directory](../smiles-data/test_100.smi) is the path where the data is locally mounted to the webserver docker, and **/mols_data/test_1w.smi** is the path inside the docker, so we are supposed to fill in the path in the docker, namely `/mols_data/test_1w.smi`.
 
 ![](pic/load_data.PNG)
 

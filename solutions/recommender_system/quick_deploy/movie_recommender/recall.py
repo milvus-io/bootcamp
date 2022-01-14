@@ -60,7 +60,7 @@ class RecallServerServicer(object):
         fetch_map = self.uv_client.predict(feed=dic, fetch=["save_infer_model/scale_0.tmp_1"], batch=True)
         return fetch_map["save_infer_model/scale_0.tmp_1"].tolist()[0]
 
-    def recall(self, request):
+    def recall(self, request, context):
         '''
     message RecallRequest{
         string log_id = 1;

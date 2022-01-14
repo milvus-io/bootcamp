@@ -2,12 +2,53 @@
 
 ## Overview
 
-This demo uses **Milvus** to detect objects in a video based on a dataset of object images with known information. To get images of objects in videos, it uses OpenCV to extract video frames and then uses Yolov3 to detect objects in each frame. It uses ResNet50 to get feature vectors of images for both known objects in dataset and objects detected in video. Finally, it can detect object and get object information easily by similarity search in Milvus. Let's have fun playing with it!
+This demo uses **Milvus** to detect objects in a video based on a dataset of object images with known information. To get images of objects in videos, it uses OpenCV to extract video frames and then uses towhee pipelines to detect objects in each frame. It uses YOLOV5 to detect objects in images and ResNet50 to get feature vectors of images. Finally, it can detect object and get object information easily by similarity search in Milvus. Let's have fun playing with it!
 
 <img src="pic/structure.png" width = "800" height = "350" alt="arch" align=center />
 
+## Option 1: Deploy with Docker Compose
 
-## How to deploy the system
+The video similarity search  with Milvus, MySQL, WebServer and WebClient services. We can start these containers with one click through [docker-compose.yaml](./docker-compose.yaml).
+
+- Modify docker-compose.yaml to map your data directory to the docker container of WebServer
+```bash
+$ git clone https://github.com/milvus-io/bootcamp.git
+$ cd solutions/video_similarity_search/object_detection/
+$ vim docker-compose.yaml
+```
+> Change line 73: `./data:/data` --> `your_data_path:/data`
+
+- Create containers & start servers with docker-compose.yaml
+```bash
+$ docker-compose up -d
+```
+
+Then you will see the that all containers are created.
+
+```bash
+Creating network "object_detection_app_net" with driver "bridge"
+Creating milvus-etcd                ... done
+Creating mysql                      ... done
+Creating video-object-detect-client ... done
+Creating milvus-minio               ... done
+Creating milvus-standalone          ... done
+Creating video-object-detect-server ... done
+```
+
+And show all containers with `docker ps`, and you can use `docker logs video-object-detect-server` to get the logs of **server** container.
+
+```bash
+CONTAINER ID   IMAGE                                         COMMAND                  CREATED          STATUS                             PORTS                               NAMES
+af9e959e3e71   milvusbootcamp/video-object-detect-server:towhee   "/bin/sh -c 'python3…"   20 minutes ago   Up 20 minutes               0.0.0.0:5000->5000/tcp              videoobj-search-webserver
+ca3dd84b133d   milvusdb/milvus:v2.0.0-rc8-20211104-d1f4106        "/tini -- milvus run…"   20 minutes ago   Up 20 minutes               0.0.0.0:19530->19530/tcp            milvus-standalone
+202eed71044b   minio/minio:RELEASE.2020-12-03T00-03-10Z           "/usr/bin/docker-ent…"   20 minutes ago   Up 20 minutes (healthy)     9000/tcp                            milvus-minio
+ca7cb1b230ad   quay.io/coreos/etcd:v3.5.0                         "etcd -advertise-cli…"   20 minutes ago   Up 20 minutes               2379-2380/tcp                       milvus-etcd
+7d588e515bc3   mysql:5.7                                          "docker-entrypoint.s…"   20 minutes ago   Up 20 minutes               0.0.0.0:3306->3306/tcp, 33060/tcp   video-search-mysql
+d5c4b837363d   milvusbootcamp/video-object-detect-client:2.0      "/bin/bash -c '/usr/…"   20 minutes ago   Up 20 minutes (unhealthy)   0.0.0.0:8001->80/tcp                videoobj-search-webclient
+
+```
+
+## Option 2: Deploy with Source code
 
 ### 1. Start Milvus and MySQL
 
@@ -25,7 +66,7 @@ The video object detection system will use Milvus to store and search the featur
   $ docker run -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7
   ```
 
-### 2. Start Server
+### 2. Start  API Server
 The next step is to start the system server. It provides HTTP backend services, you can run source code or use docker image to start it.
 
 - **Install the Python packages**
@@ -42,20 +83,6 @@ The next step is to start the system server. It provides HTTP backend services, 
   # $ apt install ffmpeg
   ```
 
-- **Download Yolov3 Model**
-
-  ```bash
-  $ cd server/src/yolov3_detector/data
-  $ ./prepare_model.sh
-  ```
-  You will get a folder yolov3_darknet containing 3 files:
-  ```
-  ├── yolov3_darknet
-  │   ├── __model__
-  │   ├── __params__
-  │   └── yolo.yml
-  ```
-
 - **Set configuration**
 
   ```bash
@@ -68,7 +95,7 @@ The next step is to start the system server. It provides HTTP backend services, 
   | ---------------- | ----------------------------------------------------- | ------------------- |
   | MILVUS_HOST      | The IP address of Milvus, you can get it by ifconfig. | localhost           |
   | MILVUS_PORT      | Port of Milvus.                                       | 19530               |
-  | VECTOR_DIMENSION | Dimension of the vectors.                             | 2048                |
+  | VECTOR_DIMENSION | Dimension of the vectors                              | 1000                |
   | MYSQL_HOST       | The IP address of Mysql.                              | localhost           |
   | MYSQL_PORT       | Port of Milvus.                                       | 3306                |
   | DEFAULT_TABLE    | The milvus and mysql default collection name.         | video_obj_det       |
@@ -78,36 +105,7 @@ The next step is to start the system server. It provides HTTP backend services, 
 
   - DATA_PATH & UPLOAD_PATH: modify to your own ABSOLUTE paths for object images & video respectively
   - DISTANCE_LIMIT: change to some number so that results with larger distances will not be shown in response
-
-#### Option 1: Run server with Docker
-
-- **Set Parameters**
-
-  ```bash
-  $ export DATAPATH1='/absolute/image/folder/path'
-  $ export DATAPATH2='/absolute/video/path'
-  $ export Milvus_HOST='xxx.xxx.x.xx'
-  $ export Milvus_PORT='19530'
-  $ export Mysql_HOST='xxx.xxx.x.xx'
-  ```
-  > **Note:**: modify 'xxx.xxx.x.xx' to your own IP address
-
-- **Run Docker**
-
-  ```bash
-  $ docker run -d \
-  -v ${DATAPATH1}:${DATAPATH1} \
-  -v ${DATAPATH2}:/data/example_video \
-  -p 5000:5000 \
-  -e "MILVUS_HOST=${Milvus_HOST}" \
-  -e "MILVUS_PORT=${Milvus_PORT}" \
-  -e "MYSQL_HOST=${Mysql_HOST}" \
-  milvusbootcamp/video-object-detect-server:2.0
-  ```
-
-  > **Note:** -v ${DATAPATH1}:${DATAPATH1} means that you can mount the directory into the container. If needed, you can load the parent directory or more directories.
-
-#### Option 2: Run source code
+  - VECTOR_DIMENSION: 1000 if using source code to run server; 2048 if using docker to run server
 
 - **Run the code**
 
@@ -162,7 +160,7 @@ The next step is to start the system server. It provides HTTP backend services, 
   │   │
   │   └───src
   │       │   config.py   # Configuration file.
-  │       │   encode.py   # Covert image/video/questions/... to embeddings.
+  │       │   encode.py   # Include towhee pipelines: detect object and get image embeddings
   │       │   milvus_helpers.py   # Connect to Milvus server and insert/drop/query vectors in Milvus.
   │       │   mysql_helpers.py    # Connect to MySQL server, and add/delete/query IDs and object information.
   │       │   
