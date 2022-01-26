@@ -1,2 +1,2 @@
-pymilvus==2.0.0rc9
+pymilvus==2.0.0
 sklearn
