@@ -5,7 +5,7 @@ cryptography
 aiofiles
 gdown
 Pillow
-pymilvus==2.0.0rc9
+pymilvus==2.0.0
 fastapi
 uvicorn
 python-multipart

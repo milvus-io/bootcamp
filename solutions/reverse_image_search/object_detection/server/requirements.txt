@@ -1,4 +1,4 @@
-pymilvus==2.0.0rc9
+pymilvus==2.0.0
 diskcache==5.2.1
 uvicorn==0.13.4
 PyMySQL==1.0.2
