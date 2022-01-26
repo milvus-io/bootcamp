@@ -7,6 +7,6 @@ fastapi
 uvicorn
 pandas
 aiofiles
-pymilvus==2.0.0rc9
+pymilvus==2.0.0
 diskcache
 python-multipart
