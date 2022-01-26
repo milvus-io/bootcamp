@@ -1,0 +1,13 @@
+fastapi==0.65.2
+python-multipart
+aiofiles
+pydantic==1.8.2
+pymilvus==2.0.0rc8
+PyMySQL==1.0.2
+diskcache==5.2.1
+uvicorn==0.13.4
+torch==1.4.0 
+torchvision==0.5.0
+pymeshlab==0.2.1
+gdown
+pytest

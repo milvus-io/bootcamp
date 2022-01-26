@@ -6,3 +6,11 @@ pickle-mixin
 fastapi
 uvicorn
 python-multipart
+
+sklearn
+pymysql
+numpy
+pickle-mixin
+fastapi
+uvicorn
+python-multipart

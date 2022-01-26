@@ -1,92 +1,71 @@
-# Audio search system with Milvus
+# Audio search system
 
 This project uses [PANNs](https://github.com/qiuqiangkong/audioset_tagging_cnn)(Large-Scale Pretrained Audio Neural Networks) for Audio Pattern Recognition to perform audio tagging and sound event detection, finally obtaining audio embeddings. Then this project uses [Milvus](https://milvus.io/docs/v2.0.0/overview.md) to search for similar audio clips.
 
+   * [Local Deployment](#local-deployment)
+      * [Deploy with Docker Compose](#deploy-with-docker-compose)
+      * [Deploy with source code](#deploy-with-source-code)
+         * [1. Start API Server](#1-start-api-server)
+         * [2. Start Client](#2-start-client)
+   * [How to use front-end](#how-to-use-front-end)
+   * [Code  structure](#code--structure)
+
 ## Local Deployment
 
-### Requirements
+### Deploy with Docker Compose
 
-- [Milvus 2.0](https://milvus.io/docs/v2.0.0/install_standalone-docker.md)
-- [MySQL](https://hub.docker.com/r/mysql/mysql-server)
-- [Python3](https://www.python.org/downloads/)
-
-### 1. Start Milvus and MySQL
-
-The system will use Milvus to store and search the feature vector data, and Mysql is used to store the correspondence between the ids returned by Milvus and the questions data set, then you need to start Milvus and Mysql first.
-
-- **Start Milvus v2.0**
-
-  First, you are supposed to refer to the Install [Milvus v2.0](https://milvus.io/docs/v2.0.0/install_standalone-docker.md) for how to run Milvus docker.
-
-  > Note the version of Milvus.
-
-- **Start MySQL**
+The molecular similarity search system requires [**Milvus**](https://milvus.io/docs/v2.0.0/install_standalone-docker.md), MySQL, Webserver and Webclient services. We can start these containers with one click through [docker-compose.yaml](./audiosearch-docker-compose.yaml), so please make sure you have [installed Docker Engine](https://docs.docker.com/engine/install/) and [Docker Compose](https://docs.docker.com/compose/install/) before running.
 
 ```bash
-$ docker run -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7
+$ git clone https://github.com/milvus-io/bootcamp.git
+$ cd solutions/audio_similarity_search/quick_deploy
+$ docker-compose -f audiosearch-docker-compose.yaml up -d
 ```
 
-### 2. Start API Server
-
-The next step is to start the system server. It provides HTTP backend services, and there are two ways to start: running with Docker or source code.
-
-#### 2.1 Run server with Docker
-
-- **Set parameters**
-
-Modify the parameters according to your own environment. Below are the main parameters that you will need to setup, for more information please refer to [config.py](./server/src/config.py).
-
-| **Parameter**   | **Description**                                       | **example**      |
-| --------------- | ----------------------------------------------------- | ---------------- |
-| **EXTERNAL_DATAPATH**   | The directory of the audio data.                     | /data/audio_path |
-| **INTERNAL_DATAPATH**   | The mount locaiton of the data within the docker container.                     | /audio_data |
-| **MILVUS_HOST** | The IP address of Milvus. Due to containers not being able to access localhost, please use the IP address of the host, you can get it by `ifconfig`. | 172.16.20.10     |
-| **MILVUS_PORT** | The port of Milvus.                                   | 19530            |
-| **MYSQL_HOST**  | The IP address of MySQL, can be the same as MILVUS_HOST if running on the same system.                               | 172.16.20.10     |
+Then you will see the that all containers are created.
 
 ```bash
-$ export EXTERNAL_DATAPATH='/data/audio_path'
-$ export INTERNAL_DATAPATH='/audio_data'
-$ export Milvus_HOST='172.16.20.10'
-$ export Milvus_PORT='19530'
-$ export Mysql_HOST='172.16.20.10'
+Creating network "quick_deploy_app_net" with driver "bridge"
+Creating milvus-minio    ... done
+Creating audio-webclient   ... done
+Creating milvus-etcd     ... done
+Creating audio-mysql       ... done
+Creating milvus-standalone ... done
+Creating audio-webserver   ... done
 ```
 
-- **Run Docker**
-
-First, build the docker image from the Dockerfile.
+And show all containers with `docker ps`, and you can use `docker logs audio-webserver` to get the logs of **server** container.
 
 ```bash
-$ cd server
-$ docker build -t audio-search-webserver .
+CONTAINER ID   IMAGE                                         COMMAND                  CREATED          STATUS                             PORTS                                                  NAMES
+a8428e99f49d   milvusbootcamp/audio-search-server:2.0        "/bin/sh -c 'python3…"   28 seconds ago   Up 24 seconds                      0.0.0.0:8002->8002/tcp, :::8002->8002/tcp              audio-webserver
+5391a8ebc3a0   milvusdb/milvus:v2.0.0-rc8-20211104-d1f4106   "/tini -- milvus run…"   33 seconds ago   Up 28 seconds                      0.0.0.0:19530->19530/tcp, :::19530->19530/tcp          milvus-standalone
+1d1f70f98735   minio/minio:RELEASE.2020-12-03T00-03-10Z      "/usr/bin/docker-ent…"   38 seconds ago   Up 33 seconds (healthy)            9000/tcp                                               milvus-minio
+8f4cfeba5953   quay.io/coreos/etcd:v3.5.0                    "etcd -advertise-cli…"   38 seconds ago   Up 33 seconds                      2379-2380/tcp                                          milvus-etcd
+209563de4c12   mysql:5.7                                     "docker-entrypoint.s…"   38 seconds ago   Up 29 seconds                      0.0.0.0:3306->3306/tcp, :::3306->3306/tcp, 33060/tcp   audio-mysql
+f4a6b30f5840   milvusbootcamp/audio-search-client:2.0        "/bin/bash -c '/usr/…"   38 seconds ago   Up 31 seconds (health: starting)   0.0.0.0:801->80/tcp, :::801->80/tcp                    audio-webclient
 ```
 
+### Deploy with source code
 
-```bash
-$ docker run -d \
--v ${EXTERNAL_DATAPATH}:${INTERNAL_DATAPATH} \
--p 8002:8002 \
--e "MILVUS_HOST=${Milvus_HOST}" \
--e "MILVUS_PORT=${Milvus_PORT}" \
--e "MYSQL_HOST=${Mysql_HOST}" \
-audio-search-webserver
-```
+Actually we recommend using Docker Compose to deploy the audio similarity search system. If you want to run from source code, you must manually start [Milvus](https://milvus.io/docs/v2.0.0/install_standalone-docker.md) and [Mysql](https://dev.mysql.com/doc/mysql-installation-excerpt/5.7/en/docker-mysql-getting-started.html). Next show you how to run the API server and Client.
 
-Note: The first time you run the container, it may take a while to become usable as models must be downloaded.
+#### 1. Start API Server
 
-#### 2.2 Run source code
+Then to start the system server, and it provides HTTP backend services.
 
 - **Install the Python packages**
 
 ```bash
-$ cd server
+$ git clone https://github.com/milvus-io/bootcamp.git
+$ cd solutions/audio_similarity_search/quick_deploy/server
 $ pip install -r requirements.txt
 ```
 
 - **Set configuration**
 
 ```bash
-$ vim server/src/config.py
+$ vim src/config.py
 ```
 
 Modify the parameters according to your own environment. Here listing some parameters that need to be set, for more information please refer to [config.py](./server/src/config.py).
@@ -105,12 +84,12 @@ Modify the parameters according to your own environment. Here listing some param
 Then start the server with Fastapi.
 
 ```bash
-$ python main.py
+$ python src/main.py
 ```
 
-### 2.3 API Docs
+- **API Docs**
 
-After starting the service, Please visit 127.0.0.1:8002/docs in your browser to view all the APIs.
+After starting the service, Please visit `127.0.0.1:8002/docs` in your browser to view all the APIs.
 
 ![](./pic/allapi.png)
 
@@ -138,11 +117,9 @@ After starting the service, Please visit 127.0.0.1:8002/docs in your browser to 
 >
 > Drops Milvus and MySQL tables, removing loaded data.
 
-## 3. Start Client
+#### 2. Start Client
 
-Next, start the frontend GUI. Like the system server, there are two ways to start the frontend: running with Docker or source code(recommended).
-
-#### 3.1 Run server with Docker
+Next, start the frontend GUI.
 
 - **Set parameters**
 
@@ -163,38 +140,33 @@ $ export API_PORT='8002'
 First, build the docker image from the Dockerfile.
 
 ```bash
-$ cd client
-$ docker build -t audio-search-client .
-```
-
-```bash
 $ docker run -d \
 -p 80:80 \
 -e "API_URL=http://${API_HOST}:${API_PORT}" \
-audio-search-client
+ milvusbootcamp/audio-search-client:2.0
 ```
 
-#### 3.2 Run source code
+> Refer to the instructions in the [Client Readme](./client/README.md).
 
-Refer to the instructions in the [Client Readme](./client/README.md).
-
-### 3.3 How to use front-end
+## How to use front-end
 
 Navigate to `127.0.0.1:80` in your browser to access the front-end interface.
 
-- Insert data.
+- **Insert data**
 
-Download and extract .wav sound files to the "EXTERNAL_DATAPATH" directory specified earlier. Next, input the path to the "INTERNAL_DATAPATH" in the frontend GUI to initiate the upload.
+Download and unzip the [extract .wav sound files](https://drive.google.com/uc?id=1bKu21JWBfcZBuEuzFEvPoAX6PmRrgnUp) to the specified [data directory](./data). Next, enter the path **/audio_data** in the frontend GUI to initiate the upload.
+
+> The **data** directory is the path where the data is locally mounted to the webserver docker, and **/audio_data** is the path inside the docker, so we are supposed to fill in the path in the docker, namely `/audio_data`.
 
 ![](./pic/insertgui.png)
 
-- Search for similar audio clips.
+- **Search for similar audio clips**
 
 Select the magnifying glass icon on the left side of the interface. Then, press the "Default Target Audio File" button and upload a .wav sound file you'd like to search. Results will be displayed.
 
 ![](./pic/searchgui.png)
 
-- **Code  structure**
+## Code  structure
 
 If you are interested in our code or would like to contribute code, feel free to learn more about our code structure.
 

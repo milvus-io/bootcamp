@@ -4,5 +4,10 @@ pymysql
 numpy
 pickle-mixin
 fastapi
+sklearn
+pymysql
+numpy
+pickle-mixin
+fastapi
 uvicorn
 Python-multipart

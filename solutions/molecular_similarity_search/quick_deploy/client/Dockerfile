@@ -1,5 +1,5 @@
 # => Build container
-FROM node:alpine as builder
+FROM node:14.18.1-alpine3.12 as builder
 WORKDIR /app
 COPY package.json .
 RUN yarn
@@ -24,8 +24,8 @@ WORKDIR /usr/share/nginx/html
 COPY ./env.sh .
 COPY .env .
 
-# Add bash
-RUN apk add --no-cache bash
+# Add bash, curl
+RUN apk add --no-cache bash curl
 
 # Make our shell script executable
 RUN chmod +x env.sh

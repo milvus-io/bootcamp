@@ -32,7 +32,7 @@ def extract_features(video_dir, model, frame):
                 feats.append(norm_feat)
                 names.append(video_path.encode())
             cache['current'] = i + 1
-            print(f"{i + 1} video in total, extracting feature from video No. {total} , and the video has {len(imgs)} frames.")
+            print(f"{total} video in total, extracting feature from video No. {i + 1} , and the video has {len(imgs)} frames.")
         return feats, names
     except Exception as e:
         LOGGER.error(f"Error with extracting feature from image {e}")

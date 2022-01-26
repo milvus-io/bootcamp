@@ -6,7 +6,10 @@ from logs import LOGGER
 def get_audio_embedding(path):
     # Use panns_inference model to generate feature vector of audio
     try:
-        audio, _ = librosa.core.load(path, sr=32000, mono=True)
+        RESAMPLE_RATE=32000
+        audio, _ = librosa.core.load(path, sr=RESAMPLE_RATE, mono=True)
+        if audio.size < RESAMPLE_RATE:
+            audio = np.pad(audio, (0, RESAMPLE_RATE-audio.size), 'constant', constant_values=(0, 0))
         audio = audio[None, :]
         at = AudioTagging(checkpoint_path=None, device='cuda')
         _, embedding = at.inference(audio)

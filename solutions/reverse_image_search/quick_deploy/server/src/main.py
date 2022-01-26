@@ -39,13 +39,13 @@ if not os.path.exists(UPLOAD_PATH):
     LOGGER.info(f"mkdir the path:{UPLOAD_PATH}")
 
 @app.get('/data')
-def image_path(img_path):
+def get_img(image_path):
     # Get the image file
     try:
-        LOGGER.info(f"Successfully load image: {img_path}")
-        return FileResponse(img_path)
+        LOGGER.info(f"Successfully load image: {image_path}")
+        return FileResponse(image_path)
     except Exception as e:
-        LOGGER.error(f"upload image error: {e}")
+        LOGGER.error(f"Get image error: {e}")
         return {'status': False, 'msg': e}, 400
 
 

@@ -35,7 +35,7 @@ def get_ums(u_id):
     stub = um_pb2_grpc.UMServiceStub(channel)
     um_request = um_pb2.UserModelRequest()
     um_request.user_id = str(u_id)
-    response = stub.um_call(request)
+    response = stub.um_call(um_request)
     return response
 
 def get_recall(recall_request):
