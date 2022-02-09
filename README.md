@@ -14,30 +14,30 @@
 <table>
   <tr>
     <td width="30%">
-      <a href="https://zilliz.com/milvus-demos">
+      <a href="https://milvus.io/milvus-demos/">
         <img src="https://zilliz-cms.s3.us-west-2.amazonaws.com/image_search_59a64e4f22.gif" />
       </a>
     </td>
     <td width="30%">
-<a href="https://zilliz.com/milvus-demos">
+<a href="https://milvus.io/milvus-demos/">
 <img src="https://zilliz-cms.s3.us-west-2.amazonaws.com/qa_df5ee7bd83.gif" />
 </a>
     </td>
     <td width="30%">
-<a href="https://zilliz.com/milvus-demos">
+<a href="https://milvus.io/milvus-demos/">
 <img src="https://zilliz-cms.s3.us-west-2.amazonaws.com/mole_search_76f8340572.gif" />
 </a>
     </td>
   </tr>
   <tr>
     <th align="center">
-      <a href="https://zilliz.com/milvus-demos">Reverse Image search</a>
+      <a href="https://milvus.io/milvus-demos/">Reverse Image search</a>
     </th>
     <th align="center">
-      <a href="https://zilliz.com/milvus-demos">Chatbots</a>
+      <a href="https://milvus.io/milvus-demos/">Chatbots</a>
     </th>
     <th align="center">
-      <a href="https://zilliz.com/milvus-demos">Chemical structure search</a>
+      <a href="https://milvus.io/milvus-demos/">Chemical structure search</a>
     </th>
   </tr>
 </table>
@@ -101,7 +101,7 @@ Here are several solutions for a wide range of scenarios. Each solution contains
 
 ### :clapper: Live Demo
 
-We have built [online demos](https://zilliz.com/milvus-demos?isZilliz=true) for reverse image search, chatbot and molecular search that everyone can have fun with.
+We have built [online demos](https://milvus.io/milvus-demos/) for reverse image search, chatbot and molecular search that everyone can have fun with.
 
 <!-- BENCHMARK TESTS-->
 
