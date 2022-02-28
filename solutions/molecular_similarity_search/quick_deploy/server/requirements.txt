@@ -3,7 +3,7 @@ pymysql
 fastapi
 uvicorn
 diskcache==5.2.1
-pymilvus==2.0.0
+pymilvus==2.0.1
 python-multipart
 typing
 starlette
