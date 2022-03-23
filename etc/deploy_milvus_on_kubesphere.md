@@ -42,7 +42,7 @@ After you make sure your machine meets the conditions, perform the following ste
 
 1. Log in to the console as `admin`. Click **Platform** in the top-left corner and select **Cluster Management**.
 2. Click **CRDs** and enter `clusterconfiguration` in the search bar. Click the result to view its detail page.
-3. In **Resource List**, click ![three-dots.png](https://kubesphere.io/images/docs/enable-pluggable-components/kubesphere-app-store/three-dots.png) on the right of `ks-installer` and select **Edit YAML**.
+3. In **Resource List**, click <img src="https://kubesphere.io/images/docs/enable-pluggable-components/kubesphere-app-store/three-dots.png" alt="three-dots.png" style="zoom:67%;" /> on the right of `ks-installer` and select **Edit YAML**.
 4. In this YAML file, navigate to `openpitrix` and change `false` to `true` for `enabled`. After you finish, click **Update** in the bottom-right corner to save the configuration.
 
 ```yaml
@@ -57,15 +57,15 @@ The multi-tenant system of KubeSphere features three levels of hierarchical stru
 
 1. **Create a User**： Click **Platform** in the upper-left corner, and then select **Access Control**. In the left nevigation pane, select **Users**, and click **Create**. In the displayed dialog box, provide all the necessary information (marked with *) and select `platform-regular` for **Role**. Refer to the following image as an example.
 
-![image-20220318172633333](/Users/bennu/Library/Application Support/typora-user-images/image-20220318172633333.png)
+<img src="pic/image-20220318172633333.png" alt="image-20220318172633333" style="zoom:50%;" />
 
 2. **Create a workspace**: Select **workspace** in the navigation bar at Access Control, then click **create**, and set the user `milvus-manager` as the workspace Administrator.
 
-![image-20220318172745769](/Users/bennu/Library/Application Support/typora-user-images/image-20220318172745769.png)
+<img src="pic/image-20220318172745769.png" alt="image-20220318172745769" style="zoom:50%;" />
 
 3. **Create a project**: Log in to KubeSphere as `milvus-manager` which has the permission to manage the workspace `milvus-ws`. In **Projects**, click **Create**. (A project in KubeSphere is a Kubernetes namespace)
 
-![image-20220318172913153](/Users/bennu/Library/Application Support/typora-user-images/image-20220318172913153.png)
+<img src="pic/image-20220318172913153.png" alt="image-20220318172913153" style="zoom:67%;" />
 
 ## Step5: Add Milvus to KubeSphere app repository
 
@@ -83,7 +83,7 @@ The multi-tenant system of KubeSphere features three levels of hierarchical stru
 
 4. Click **install**, a n d under **Basic Information**, set a name for the app. Check the app version and the deployment location, and then click **Next**.
 
-![image-20220318175622525](/Users/bennu/Library/Application Support/typora-user-images/image-20220318175622525.png)
+<img src="pic/image-20220318175622525.png" alt="image-20220318175622525" style="zoom:80%;" />
 
-6. Under **App Settings**, you can edit the configuration file or directly click **Install**.
+6. Under **App Settings**, you can edit the configuration file and then directly click **Install**.
 
