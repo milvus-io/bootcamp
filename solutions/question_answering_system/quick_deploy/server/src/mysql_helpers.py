@@ -42,6 +42,7 @@ class MySQLHelper():
         # Batch insert (Milvus_ids, img_path) to mysql
         self.test_connection()
         sql = "insert into " + table_name + " (milvus_id,question,answer) values (%s,%s,%s);"
+        self.cursor.execute('SET character_set_connection=utf8;')
         try:
             self.cursor.executemany(sql, data)
             self.conn.commit()
