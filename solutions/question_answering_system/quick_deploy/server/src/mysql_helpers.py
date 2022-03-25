@@ -72,7 +72,10 @@ class MySQLHelper():
             self.cursor.execute(sql)
             results = self.cursor.fetchall()
             LOGGER.debug("MYSQL search by question.")
-            return results[0][0]
+            if results:
+                return results[0][0]
+            else:
+                return results
         except Exception as e:
             LOGGER.error(f"MYSQL ERROR: {e} with sql: {sql}".format(e, sql))
             sys.exit(1)
