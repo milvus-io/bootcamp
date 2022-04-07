@@ -42,6 +42,7 @@ class MySQLHelper():
         # Batch insert (Milvus_ids, img_path) to mysql
         self.test_connection()
         sql = "insert into " + table_name + " (milvus_id,question,answer) values (%s,%s,%s);"
+        self.cursor.execute('SET character_set_connection=utf8;')
         try:
             self.cursor.executemany(sql, data)
             self.conn.commit()
@@ -71,7 +72,10 @@ class MySQLHelper():
             self.cursor.execute(sql)
             results = self.cursor.fetchall()
             LOGGER.debug("MYSQL search by question.")
-            return results[0][0]
+            if results:
+                return results[0][0]
+            else:
+                return results
         except Exception as e:
             LOGGER.error(f"MYSQL ERROR: {e} with sql: {sql}".format(e, sql))
             sys.exit(1)
