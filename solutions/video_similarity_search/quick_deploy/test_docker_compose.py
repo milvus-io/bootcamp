@@ -40,7 +40,7 @@ def test_get_img():
     assert response.status_code == 200
 
 def test_search():
-    _test_upload_file = './data/100-gif/tumblr_l3x3x5EH061qa4rk1o1_250.gif'
+    _test_upload_file = '../pic/show.png'
     _files = {'image': open(_test_upload_file, 'rb')}
     response = requests.post(
         'http://127.0.0.1:5000/video/search',

@@ -2,7 +2,7 @@
 
 ## Overview
 
-This demo uses OpenCV to extract video frames. Then it uses towhee image-embedding pipeline (ResNet50) to get the feature vector of each frame. Finally, it uses **Milvus** to save and search the data, which makes it very easy to build a system for video similarity search. So let's have fun playing with it!
+This demo uses OpenCV to extract video frames. Then it uses [**Towhee**](https://towhee.io/) image-embedding (ResNet50)  opeator to get the feature vector of each frame. Finally, it uses [**Milvus**](https://milvus.io/) to save and search the data, which makes it very easy to build a system for video similarity search. So let's have fun playing with it!
 
 ## Data source
 

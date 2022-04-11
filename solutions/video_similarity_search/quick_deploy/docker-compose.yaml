@@ -33,7 +33,7 @@ services:
 
   standalone:
     container_name: milvus-standalone
-    image: milvusdb/milvus:v2.0.0-rc8-20211104-d1f4106
+    image: milvusdb/milvus:v2.0.2
     networks:
       app_net:
         ipv4_address: 172.16.238.10
@@ -63,7 +63,7 @@ services:
 
   webserver:
     container_name: video-webserver
-    image: milvusbootcamp/video_search_webserver:towhee
+    image: milvusbootcamp/video-search-server:towhee0.6
     networks:
       app_net:
         ipv4_address: 172.16.238.12

@@ -38,7 +38,7 @@ def test_count():
     #assert response.json() == 346
 
 def test_search():
-    _test_upload_file = './examle-gif/100-gif/tumblr_ku4lzkM5fg1qa47qco1_250.gif'
+    _test_upload_file = '../../../pic/show.png'
     _files = {'image': open(_test_upload_file, 'rb')}
     response = client.post("/video/search", files=_files)
     # response = client.post(

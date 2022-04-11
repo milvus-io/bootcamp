@@ -2,7 +2,7 @@
 
 ## Overview
 
-This demo uses **Milvus** to detect objects in a video based on a dataset of object images with known information. To get images of objects in videos, it uses OpenCV to extract video frames and then uses towhee pipelines to detect objects in each frame. It uses YOLOV5 to detect objects in images and ResNet50 to get feature vectors of images. Finally, it can detect object and get object information easily by similarity search in Milvus. Let's have fun playing with it!
+This demo uses [**Milvus**](https://milvus.io/) to detect objects in a video based on a dataset of object images with known information. To get images of objects in videos, it uses OpenCV to extract video frames and then uses [**Towhee**](https://towhee.io/) to detect objects in each frame. It uses YOLOV5 to detect objects in images and ResNet50 to get feature vectors of images. Finally, it can detect object and get object information easily by similarity search in Milvus. Let's have fun playing with it!
 
 <img src="pic/structure.png" width = "800" height = "350" alt="arch" align=center />
 
@@ -118,7 +118,7 @@ The next step is to start the system server. It provides HTTP backend services, 
 
 - **The API docs**
 
-  Type localhost:5000/docs in your browser to see all the APIs.
+  Type `127.0.0.1:5000/docs` in your browser to see all the APIs.
 
   <img src="pic/fastapi.png" width = "700" height = "550" alt="arch" align=center  />
 

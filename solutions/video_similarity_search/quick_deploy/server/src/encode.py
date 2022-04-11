@@ -1,4 +1,4 @@
-from towhee import pipeline
+import towhee
 from PIL import Image
 from numpy import linalg as LA
 
@@ -11,12 +11,12 @@ class Resnet50:
         args_0 (`type`):
         ...
     """
-    def __init__(self):
-        self.img_embedding = pipeline('image-embedding')
 
     def resnet50_extract_feat(self, img_path):
-        # Return the normalized embedding of the images
-        img = Image.open(img_path)
-        feat = self.img_embedding(img)
+        feat = towhee.glob(img_path) \
+                .image_decode() \
+                .image_embedding.timm(model_name='resnet50') \
+                .to_list()
+        # Return the normalized embedding([[vec]]) of image
         norm_feat = feat / LA.norm(feat)
-        return norm_feat.tolist()[0][0]
+        return norm_feat.tolist()[0]

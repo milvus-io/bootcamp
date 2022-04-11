@@ -2,11 +2,6 @@ import requests
 import gdown
 import zipfile
 
-def test_drop():
-    response = requests.post("http://127.0.0.1:5000/image/drop")
-    assert response.status_code == 200
-
-
 def get_file():
     url = 'https://drive.google.com/uc?id=12AzMujXPw_UjnS63LuwwCOyjkZYVEp3Y'
     gdown.download(url)
@@ -51,3 +46,8 @@ def test_search():
         files = _files
     )
     assert response.status_code == 200
+
+def test_drop():
+    response = requests.post("http://127.0.0.1:5000/image/drop")
+    assert response.status_code == 200
+    
