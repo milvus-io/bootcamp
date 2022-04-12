@@ -2,7 +2,7 @@
 
 ## Overview
 
-This demo uses the [towhee](https://github.com/towhee-io/towhee) pipelines to detect objects in images and extract feature vectors of images, and then uses Milvus to build an image similarity search system.
+This demo uses the [towhee](https://github.com/towhee-io/towhee) operators to detect objects in images and extract feature vectors of images, and then uses Milvus to build an image similarity search system.
 
 The following is the system diagram.
 
@@ -61,7 +61,7 @@ And show all containers with `docker ps`, and you can use `docker logs img-searc
 
 ```bash
 CONTAINER ID   IMAGE                                         COMMAND                  CREATED          STATUS                             PORTS                               NAMES
-4cc6e60eb295   milvusbootcamp/imgsearch-with-objdet:towhee   "/bin/sh -c 'python3…"   56 seconds ago   Up 55 seconds                      0.0.0.0:5010->5010/tcp              img-obj-det-webserver
+4cc6e60eb295   milvusbootcamp/imgsearch-with-objdet:towhee   "/bin/sh -c 'python3…"   56 seconds ago   Up 55 seconds                      0.0.0.0:5000->5000/tcp              img-obj-det-webserver
 40f4ea99fd22   milvusdb/milvus:v2.0.0-rc8-20211104-d1f4106   "/tini -- milvus run…"   57 seconds ago   Up 55 seconds                      0.0.0.0:19530->19530/tcp            milvus-standalone
 60ed080afac1   minio/minio:RELEASE.2020-12-03T00-03-10Z      "/usr/bin/docker-ent…"   57 seconds ago   Up 56 seconds (healthy)            9000/tcp                            milvus-minio
 5d9cdfba872b   mysql:5.7                                     "docker-entrypoint.s…"   57 seconds ago   Up 56 seconds                      0.0.0.0:3306->3306/tcp, 33060/tcp   img-obj-det-mysql
@@ -122,7 +122,7 @@ $ python main.py
 
 - **API docs**
 
-Visit 127.0.0.1:5010/docs in your browser to use all the APIs.
+Visit `127.0.0.1:5000/docs` in your browser to use all the APIs.
 
 ![fastapi](pic/fastapi.png)
 
@@ -144,7 +144,7 @@ Visit 127.0.0.1:5010/docs in your browser to use all the APIs.
 
 ```bash
 # Modify API_URL to the IP address and port of the server.
-$ export API_URL='http://127.0.0.1:5010'
+$ export API_URL='http://127.0.0.1:5000'
 $ docker run -d -p 8001:80 \
 -e API_URL=${API_URL} \
 milvusbootcamp/img-search-client:1.0

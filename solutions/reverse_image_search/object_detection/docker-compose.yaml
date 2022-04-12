@@ -33,7 +33,7 @@ services:
 
   standalone:
     container_name: milvus-standalone
-    image: milvusdb/milvus:v2.0.0-rc8-20211104-d1f4106
+    image: milvusdb/milvus:v2.0.2
     networks:
       app_net:
         ipv4_address: 172.16.238.10
@@ -62,7 +62,7 @@ services:
 
   webserver:
     container_name: img-obj-det-webserver
-    image: milvusbootcamp/imgsearch-with-objdet:towhee
+    image: milvusbootcamp/img-search-with-object:towhee0.6
     networks:
       app_net:
         ipv4_address: 172.16.238.12
@@ -76,7 +76,7 @@ services:
       - standalone
       - mysql
     ports:
-      - "5010:5010"
+      - "5000:5000"
 
   webclient:
     container_name: img-obj-det-webclient
@@ -85,7 +85,7 @@ services:
       app_net:
         ipv4_address: 172.16.238.13
     environment:
-      API_URL: 'http://127.0.0.1:5010'
+      API_URL: 'http://127.0.0.1:5000'
     ports:
       - "8001:80"
     healthcheck:

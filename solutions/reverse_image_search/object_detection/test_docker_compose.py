@@ -12,24 +12,24 @@ def get_file():
 def test_load_img():
     get_file()
     response = requests.post(
-        "http://127.0.0.1:5010/img/load",
+        "http://127.0.0.1:5000/img/load",
         json={"File": "/data/example_img"}
     )
     assert response.status_code == 200
     assert response.json() == "Successfully loaded data!"
 
 def test_progress():
-    response = requests.get("http://127.0.0.1:5010/progress")
+    response = requests.get("http://127.0.0.1:5000/progress")
     assert response.status_code == 200
     assert response.json() == "current: 20, total: 20"
 
 def test_count():
-    response = requests.post("http://127.0.0.1:5010/img/count")
+    response = requests.post("http://127.0.0.1:5000/img/count")
     assert response.status_code == 200
 
 def test_get_img():
     response = requests.get(
-        'http://127.0.0.1:5010/data?image_path=%2Fdata%2Fexample_img%2Ftest.jpg'
+        'http://127.0.0.1:5000/data?image_path=%2Fdata%2Fexample_img%2Ftest.jpg'
         )
     assert response.status_code == 200
 
@@ -37,12 +37,12 @@ def test_search():
     _test_upload_file = './data/example_img/test.jpg'
     _files = {'image': open(_test_upload_file, 'rb')}
     response = requests.post(
-        'http://127.0.0.1:5010/img/search',
+        'http://127.0.0.1:5000/img/search',
         files = _files
     )
     assert response.status_code == 200
 
 
 def test_drop():
-    response = requests.post("http://127.0.0.1:5010/img/drop")
+    response = requests.post("http://127.0.0.1:5000/img/drop")
     assert response.status_code == 200
