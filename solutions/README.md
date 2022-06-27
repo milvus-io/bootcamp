@@ -7,32 +7,46 @@ Each solution includes a Jupyter notebook and Docker quick deployment. Along wit
 
    - [Object detection](./reverse_image_search/object_detection)
 
-   - [Jupyter notebook](./reverse_image_search/reverse_image_search.ipynb)
+   - [Jupyter notebook](./reverse_image_search/1_build_image_search_engine.ipynb)
 
 2. [**Question Answering System**](./question_answering_system), a chatbot to get the similar questions and get the answer.
 
    - [Quick deploy](./question_answering_system/quick_deploy)
-   -  [Jupyter notebook](./question_answering_system/question_answering.ipynb)
+   -  [Jupyter notebook](./question_answering_system/1_build_question_answering_engine.ipynb)
 
-3. [**Recommender System**](./recommender_system), list of recommended movies based on the user.
+3. [**Text Image Search**](./text_image_search), search for matched or related images given an input text.
+   - [Jupyter notebook](./text_image_search/1_build_text_image_search_engine.ipynb)
+
+4. [**Recommender System**](./recommender_system), list of recommended movies based on the user.
 
    - [Quick deploy](./recommender_system/quick_deploy)
-
    - [Jupyter notebook](./recommender_system/recommender_system.ipynb)
 
-4. [**Molecular Similarity Search**](./solutions/molecular_similarity_search), search for a molecule and get the similar structure.
+5. [**Molecular Similarity Search**](./solutions/molecular_similarity_search), search for a molecule and get the similar structure.
    - [Quick deploy](./molecular_similarity_search/quick_deploy)
    - [Jupyter notebook](./molecular_similarity_search/molecular_search.ipynb)
-5. [**Video Similarity Search**](./video_similarity_search), search videos with image, or analyze the objects in the video.
+
+6. [**Video Similarity Search**](./video_similarity_search), search videos with image, or analyze the objects in the video.
    - [Quick deploy](./video_similarity_search/quick_deploy)
    - [Object detection](./video_similarity_search/object_detection)
-   - [Jupyter notebook](./video_similarity_search/video_similarity_search.ipynb)
-6. [**Audio Similarity Search**](./audio_similarity_search), search for audio and get the similar results.
+   - [Jupyter notebook](./video_similarity_search/1_reverse_video_search_engine.ipynb)
+
+7. [**Video Tagging**](./video_classification), produce a label that is relevant to the video given its frames.
+   - [Jupyter notebook](./video_classification/1_video_classification.ipynb)
+
+8. [Text Video Search](./text_video_search),Search for similar or related videos with the input text.
+   - [Jupyter notebook](./text_video_search/1_text_video_retrieval_engine.ipynb)
+
+9. [**Audio Similarity Search**](./audio_similarity_search), search for audio and get the similar results.
    - [Quick deploy](./audio_similarity_search/quick_deploy)
    - [Jupyter notebook](./audio_similarity_search/audio_similarity_search.ipynb)
-7. [**Text Search Engine**](./text_search_engine), a text search engine.
-   - [Quick deploy](./text_search_engine/quick_deploy)
-   - [Jupyter notebook](./text_search_engine/text_search_engine.ipynb)
-8. [**DNA Sequence Classification**](./dna_sequence_classification), a DNA sequence classification system.
-   - [Quick deploy](./text_search_engine/quick_deploy)
-   - [Jupyter notebook](./dna_sequence_classification/dna_sequence_classification.ipynb)
+10. [**Text Search Engine**](./text_search_engine), a text search engine.
+    - [Quick deploy](./text_search_engine/quick_deploy)
+    - [Jupyter notebook](./text_search_engine/text_search_engine.ipynb)
+11. [**DNA Sequence Classification**](./dna_sequence_classification), a DNA sequence classification system.
+      - [Quick deploy](./text_search_engine/quick_deploy)
+      - [Jupyter notebook](./dna_sequence_classification/dna_sequence_classification.ipynb)
+
+12. [**Molecular Search**](./molecular_search), search for similar molecular formulas based on the Tanimoto metric, and also supports searching for substructures and superstructures.
+
+      - [Jupyter notebook](./molecular_search/1_build_molecular_search_engine.ipynb)

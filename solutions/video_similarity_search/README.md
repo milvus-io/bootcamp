@@ -2,7 +2,8 @@
 
 ## Try notebook
 
-- In this [notebook](video_similarity_search.ipynb) we will be going over the code required to perform similar video search. This example uses a VGG model to extract image features that are then used with Milvus to build a system that can perform the searches. 
+- In this [notebook](1_reverse_video_search_engine.ipynb) we will be going over the code required to perform similar video search. This example uses Towhee to extract video features that are then used with Milvus to build a system that can perform the searches. 
+If you want to learn how to reduce resource usage, speed up system, and ensure stability, you can refer [this link](https://github.com/towhee-io/examples/blob/main/video/reverse_video_search/2_deep_dive_reverse_video_search.ipynb)
 
 ## How to Deploy
 
