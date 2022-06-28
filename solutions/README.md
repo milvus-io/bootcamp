@@ -24,29 +24,24 @@ Each solution includes a Jupyter notebook and Docker quick deployment. Along wit
 
 5. [**Molecular Similarity Search**](./solutions/molecular_similarity_search), search for a molecule and get the similar structure.
    - [Quick deploy](./molecular_similarity_search/quick_deploy)
-   - [Jupyter notebook](./molecular_similarity_search/molecular_search.ipynb)
+   - [Jupyter notebook](./molecular_similarity_search/1_build_molecular_search_engine.ipynb)
 
 6. [**Video Similarity Search**](./video_similarity_search), search videos with image, or analyze the objects in the video.
    - [Quick deploy](./video_similarity_search/quick_deploy)
    - [Object detection](./video_similarity_search/object_detection)
    - [Jupyter notebook](./video_similarity_search/1_reverse_video_search_engine.ipynb)
 
-7. [**Video Tagging**](./video_classification), produce a label that is relevant to the video given its frames.
-   - [Jupyter notebook](./video_classification/1_video_classification.ipynb)
-
-8. [Text Video Search](./text_video_search),Search for similar or related videos with the input text.
+7. [**Text Video Search**](./text_video_search),search for similar or related videos with the input text.
    - [Jupyter notebook](./text_video_search/1_text_video_retrieval_engine.ipynb)
 
-9. [**Audio Similarity Search**](./audio_similarity_search), search for audio and get the similar results.
+8. [**Audio Similarity Search**](./audio_similarity_search), search for audio and get the similar results.
    - [Quick deploy](./audio_similarity_search/quick_deploy)
    - [Jupyter notebook](./audio_similarity_search/audio_similarity_search.ipynb)
-10. [**Text Search Engine**](./text_search_engine), a text search engine.
+9. [**Text Search Engine**](./text_search_engine), a text search engine.
     - [Quick deploy](./text_search_engine/quick_deploy)
     - [Jupyter notebook](./text_search_engine/text_search_engine.ipynb)
-11. [**DNA Sequence Classification**](./dna_sequence_classification), a DNA sequence classification system.
+10. [**DNA Sequence Classification**](./dna_sequence_classification), a DNA sequence classification system.
       - [Quick deploy](./text_search_engine/quick_deploy)
       - [Jupyter notebook](./dna_sequence_classification/dna_sequence_classification.ipynb)
 
-12. [**Molecular Search**](./molecular_search), search for similar molecular formulas based on the Tanimoto metric, and also supports searching for substructures and superstructures.
 
-      - [Jupyter notebook](./molecular_search/1_build_molecular_search_engine.ipynb)
