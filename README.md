@@ -88,6 +88,8 @@
 
 Here are several solutions for a wide range of scenarios. Each solution contains a Jupyter Notebook and a Docker deployable solution, meaning anyone can run it on their local machine. In addition to this there are also some related technical articles and live streams.
 
+> You can also refer to the [Bootcamp FAQ](./bootcamp_faq.md) for troubleshooting, and if you have any ideas or suggestions, you are more than welcome to [submit an issue](https://github.com/milvus-io/bootcamp/issues).
+
 | <br />Solutions<img width=600/> | <br />Have fun with it<img width=300/>                    | <br />Article<img width=200/>                              | <br />Video<img width=200/>                          |
 | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------- |
 | [**Reverse Image Search**](./solutions/reverse_image_search)<br />Build a reverse image search system using Milvus paired with Towhee for feature extraction. | - [Jupyter notebook](solutions/reverse_image_search/1_build_image_search_engine.ipynb)<br />- [Quick deploy](solutions/reverse_image_search/quick_deploy)<br />- [Object detection](solutions/reverse_image_search/object_detection) | - [中文](https://mp.weixin.qq.com/s/7lNuaI-eL3lsQlOq0eolkw)<br />- [English](https://blog.milvus.io/milvus-application-1-building-a-reverse-image-search-system-based-on-milvus-and-vgg-aed4788dd1ea) | - [中文](https://www.bilibili.com/video/BV1SN411o79n) |
