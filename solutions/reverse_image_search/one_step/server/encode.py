@@ -12,3 +12,7 @@ class ResNet50:
       
     def resnet50_extract_feat(self, img_path):
         return self.pipe(img_path)
+
+
+if __name__ == "__main__":
+    ResNet50().resnet50_extract_feat('https://github.com/towhee-io/towhee/raw/main/towhee_logo.png')
