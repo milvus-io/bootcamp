@@ -4,7 +4,10 @@ RUN sed -i -E "s/\w+.debian.org/mirrors.tuna.tsinghua.edu.cn/g" /etc/apt/sources
 RUN apt-get update && apt-get install -y upx
 WORKDIR /app
 COPY --from=Assets /assets      /app/assets
-COPY docker/standalone/main.go  ./
+COPY docker/standalone/*  ./
+ENV GO111MODULE=on
+ENV CGO_ENABLED=0
+ENV GOPROXY=https://goproxy.cn
 RUN go build -ldflags "-w -s" -o web main.go && \
     upx -9 -o web.minify web
 
