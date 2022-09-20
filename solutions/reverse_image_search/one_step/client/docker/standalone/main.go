@@ -14,7 +14,7 @@ import (
 //go:embed assets
 var assets embed.FS
 
-var GLOBAL_API_URL = "http://192.168.1.85:5000"
+var GLOBAL_API_URL = "http://127.0.0.1:5000"
 
 func getConfig(w http.ResponseWriter, r *http.Request) {
 	w.Header().Add("Content-Type", "application/javascript")
@@ -37,7 +37,7 @@ func main() {
 	mutex.Handle("/", http.FileServer(http.FS(md)))
 	mutex.HandleFunc("/env-config.js", getConfig)
 
-	err := http.ListenAndServe(":3080", mutex)
+	err := http.ListenAndServe(":80", mutex)
 	if err != nil {
 		log.Fatal(err)
 	}
