@@ -4,7 +4,7 @@
 ## Play with Docker
 
 ```bash
-
+docker run --rm -it -v `pwd`/images:/images -p 8080:8080 -p 5000:5000 milvusbootcamp/one-step-img-search:2.1.0
 ```
 
 ## How to build docker images
@@ -22,5 +22,5 @@ docker build -t milvusbootcamp/one-step-img-search:client-2.1.0 . -f docker/Dock
 cd ..
 
 # build finial image
-docker build -t milvusbootcamp/one-step-img-search:all-2.1.0 . -f docker/Dockerfile
+docker build -t milvusbootcamp/one-step-img-search:2.1.0 . -f docker/Dockerfile
 ```
