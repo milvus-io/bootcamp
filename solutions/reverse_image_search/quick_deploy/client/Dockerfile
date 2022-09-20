@@ -1,13 +1,15 @@
 # => Build container
-FROM node:alpine as builder
+FROM node:18-alpine as builder
+ENV NODE_ENV=production
+ENV NODE_OPTIONS="--openssl-legacy-provider"
 WORKDIR /app
-COPY package.json .
-RUN yarn
+COPY package*.json ./
+RUN npm install
 COPY . .
-RUN yarn build
+RUN npm run build
 
 # => Run container
-FROM nginx:1.17-alpine
+FROM nginx:1.23.1-alpine
 
 # Nginx config
 RUN rm -rf /etc/nginx/conf.d
