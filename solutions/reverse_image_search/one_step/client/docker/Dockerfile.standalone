@@ -1,0 +1,14 @@
+FROM milvusbootcamp/img-search-client:assets-1.1 AS Assets
+FROM "golang:1.19.0-alpine3.16" AS GoBuilder
+COPY --from=Assets /assets/* /app/assets/
+COPY docker/standalone/main.go /app
+RUN apk add git bash gcc musl-dev upx
+WORKDIR /app
+RUN go build -ldflags "-w -s" -o web main.go && \
+    apk add upx && \
+    upx -9 -o web.minify web
+
+FROM "alpine:3.16.0"
+COPY --from=GoBuilder /app/web.minify /bin/web
+EXPOSE 80
+CMD ["web"]
