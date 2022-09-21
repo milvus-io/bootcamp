@@ -4,8 +4,11 @@
 ## Play with Docker
 
 ```bash
-docker run --rm -it -v `pwd`/images:/images -p 8000:80 milvusbootcamp/one-step-img-search:2.1.0
++docker run --rm -it -v `pwd`/images:/images -p 8000:80 -p 8080:8080 milvusbootcamp/one-step-img-search:2.1.0
 ```
+
+- 8000: App
+- 8000: Log Viewer
 
 ## How to build docker images
 
