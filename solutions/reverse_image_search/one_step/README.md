@@ -4,23 +4,23 @@
 ## Play with Docker
 
 ```bash
-docker run --rm -it -v `pwd`/images:/images -p 8080:8080 -p 5000:5000 milvusbootcamp/one-step-img-search:2.1.0
+docker run --rm -it -v `pwd`/images:/images -p 8000:80 milvusbootcamp/one-step-img-search:2.1.0
 ```
 
 ## How to build docker images
 
 ```bash
-# build base
+# step1: build base
 docker build -t milvusbootcamp/one-step-img-search:milvus-2.1.0 . -f docker/Dockerfile.milvus
-# build server
+
+# step2: build server and client
 docker build -t milvusbootcamp/one-step-img-search:server-2.1.0 . -f docker/Dockerfile.server
 
+# step2: build server and client
 cd client
-# build front-end assets
-docker build -t milvusbootcamp/one-step-img-search:assets-1.1 . -f docker/Dockerfile.base
-docker build -t milvusbootcamp/one-step-img-search:client-2.1.0 . -f docker/Dockerfile.debian
+docker build -t milvusbootcamp/one-step-img-search:client-2.1.0 . -f docker/Dockerfile
 cd ..
 
-# build finial image
+# step3: build finial image
 docker build -t milvusbootcamp/one-step-img-search:2.1.0 . -f docker/Dockerfile
 ```
