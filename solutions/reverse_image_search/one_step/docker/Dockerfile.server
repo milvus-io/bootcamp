@@ -1,6 +1,5 @@
 FROM milvusbootcamp/one-step-img-search:milvus-2.1.0
 WORKDIR /app
-COPY server /app
 RUN pip install \
 aiofiles==0.7.0 \
 certifi==2022.9.14 \
@@ -31,4 +30,5 @@ tqdm==4.64.1 \
 typing_extensions==4.3.0 \
 urllib3==1.26.12 \
 uvicorn==0.13.4
+COPY server /app
 RUN python encode.py
