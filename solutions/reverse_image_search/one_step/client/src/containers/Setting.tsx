@@ -315,8 +315,7 @@ const Setting = (props: any) => {
                 notchedOutline: classes.notchedOutline,
                 root: classes.formLabel,
               },
-              placeholder: "path/to/your/images",
-              value: "/images"
+              placeholder: "/images",
             }}
           />
           <Fab
