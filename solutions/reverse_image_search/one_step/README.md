@@ -14,6 +14,7 @@ There are two open source datasets ([coco-images.zip](https://github.com/milvus-
 $ wget https://github.com/milvus-io/bootcamp/releases/download/v2.0.2/coco-images.zip
 ```
 ## Deployment
+There are two methods to run the reverse image search system, it is more recommended to run one step with docker.
 ### One step with Docker
 
 ```bash
