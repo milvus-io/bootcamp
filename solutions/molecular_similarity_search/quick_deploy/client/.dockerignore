@@ -1,2 +1,5 @@
+build
 node_modules
-yarn-error.log
+Dockerfile
+.gitignore
+.dockerignore
