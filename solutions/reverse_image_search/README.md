@@ -10,7 +10,7 @@ If you want to learn how to use various models and evaluate recall metrics, also
 
 
 ## How to Deploy
-Here is the [quick start](./quick_deploy) for a deployable version of a reverse image search.
+Here is the [quick start](./quick_deploy) for a deployable version of a reverse image search. And you can also run with Docker in [one step](./one_step).
 
 In addition, there is [quick start](object_detection) about image similarity search with object detection.
 
