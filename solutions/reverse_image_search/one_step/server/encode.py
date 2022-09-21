@@ -1,5 +1,5 @@
 import towhee
-
+from towhee.functional.option import _Reason
 
 class ResNet50:
     def __init__(self):
@@ -11,7 +11,10 @@ class ResNet50:
         )
       
     def resnet50_extract_feat(self, img_path):
-        return self.pipe(img_path)
+        feat = self.pipe(img_path)
+        if isinstance(feat, _Reason):
+            raise _Reason.exception
+        return feat
 
 
 if __name__ == "__main__":

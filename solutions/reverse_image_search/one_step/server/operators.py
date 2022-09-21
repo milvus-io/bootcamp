@@ -23,6 +23,8 @@ def extract_features(img_dir, model):
     for path in ['/*.png', '/*.jpg', '/*.jpeg', '/*.PNG', '/*.JPG', '/*.JPEG']:
         img_list.extend(glob(img_dir+path))
     try:
+        if len(img_list) == 0:
+            raise FileNotFoundError(f"There is no image file in {img_dir} and endswith ['/*.png', '/*.jpg', '/*.jpeg', '/*.PNG', '/*.JPG', '/*.JPEG']")
         cache = Cache('./tmp')
         feats = []
         names = []
@@ -36,7 +38,7 @@ def extract_features(img_dir, model):
                 cache['current'] = i + 1
                 print(f"Extracting feature from image No. {i + 1} , {total} images in total")
             except Exception as e:
-                LOGGER.error(f"Error with extracting feature from image {e}")
+                LOGGER.error(f"Error with extracting feature from image:{img_path}, error: {e}")
                 continue
         return feats, names
     except Exception as e:
