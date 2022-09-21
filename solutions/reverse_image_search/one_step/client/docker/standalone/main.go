@@ -26,6 +26,7 @@ var HomePage []byte
 var Assets embed.FS
 
 var GLOBAL_API_URL = "http://127.0.0.1:5000"
+var GLOBAL_CONSOLE_URL = "http://127.0.0.1:8090"
 
 func init() {
 	apiUrlFromEnv := strings.ToLower(strings.TrimSpace(os.Getenv("API_URL")))
@@ -37,8 +38,26 @@ func init() {
 	}
 }
 
-func proxy(c *gin.Context) {
+func proxyAPI(c *gin.Context) {
 	remote, err := url.Parse(GLOBAL_API_URL)
+	if err != nil {
+		panic(err)
+	}
+
+	proxy := httputil.NewSingleHostReverseProxy(remote)
+	proxy.Director = func(req *http.Request) {
+		req.Header = c.Request.Header
+		req.Host = remote.Host
+		req.URL.Scheme = remote.Scheme
+		req.URL.Host = remote.Host
+		req.URL.Path = c.Param("proxyPath")
+	}
+
+	proxy.ServeHTTP(c.Writer, c.Request)
+}
+
+func proxyConsole(c *gin.Context) {
+	remote, err := url.Parse(GLOBAL_CONSOLE_URL)
 	if err != nil {
 		panic(err)
 	}
@@ -99,6 +118,7 @@ func main() {
 		c.Data(http.StatusOK, "application/javascript; charset=utf-8", []byte(`window._env_ = {API_URL: "/api"}`))
 		c.Abort()
 	})
-	r.Any("/api/*proxyPath", proxy)
+	r.Any("/api/*proxyPath", proxyAPI)
+	r.Any("/console/*proxyPath", proxyConsole)
 	r.Run(":80")
 }

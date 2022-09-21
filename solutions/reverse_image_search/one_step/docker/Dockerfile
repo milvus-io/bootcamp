@@ -25,7 +25,7 @@ file=/var/run/supervisor.sock \n\
 chmod=0700 \n\
 
 [inet_http_server] \n\
-port=0.0.0.0:8090 \n\
+port=0.0.0.0:8080 \n\
 
 [supervisord] \n\
 nodaemon=true \n\
@@ -50,7 +50,7 @@ command=python main.py \n\
 command=/app/client/web \n\
 
 [program:console] \n\
-command=/app/console/ttyd --port=8080 bash \n\
+command=/app/console/ttyd --port=8090 bash \n\
 
 '> /etc/supervisor/supervisord.conf
 
