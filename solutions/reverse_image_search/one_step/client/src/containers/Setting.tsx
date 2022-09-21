@@ -232,13 +232,21 @@ const Setting = (props: any) => {
     });
   };
   const uploadImgPath = () => {
-    train({ File: inputs }).then((res: any) => {
+    setLoading(true);
+
+    if (inputs.trim() === '') {
+      setInputs("/images");
+    }
+
+    train({ File: (inputs || "/images") }).then((res: any) => {
       if (res.status === 200) {
-        setLoading(true);
         setTimeout(() => {
           setInputs("");
           _keepProcess();
-        }, 1000);
+        }, 500);
+      } else {
+        setLoading(false);
+        _keepProcess();
       }
     });
   };
@@ -308,6 +316,7 @@ const Setting = (props: any) => {
                 root: classes.formLabel,
               },
               placeholder: "path/to/your/images",
+              value: "/images"
             }}
           />
           <Fab
