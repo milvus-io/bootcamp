@@ -1,19 +1,21 @@
 FROM milvusbootcamp/one-step-img-search:server-2.1.0 AS Server
 FROM milvusbootcamp/one-step-img-search:client-2.1.0 AS Client
 
-FROM milvusbootcamp/one-step-img-search:milvus-2.1.0
+FROM tsl0922/ttyd:latest AS Console
 
+FROM milvusbootcamp/one-step-img-search:milvus-2.1.0
 RUN apt update && apt install supervisor -y && \
     apt-get remove --purge -y && rm -rf /var/lib/apt/lists/*
 RUN apt-get update && \
     apt-get install ffmpeg libsm6 libxext6  -y && \
     apt-get remove --purge -y && \
     rm -rf /var/lib/apt/lists/*
-COPY --from=Client /web                                     /app/client/
-COPY --from=Server /app                                     /app/server
-COPY --from=Server /usr/local/lib/python3.9/site-packages   /usr/local/lib/python3.9/
-COPY --from=Server /root/.cache/torch                       /root/.cache/torch
-COPY --from=Server /root/.towhee                            /root/.towhee
+COPY --from=Client  /web                                     /app/client/
+COPY --from=Server  /app                                     /app/server
+COPY --from=Console /usr/bin/ttyd                            /app/console/ttyd
+COPY --from=Server  /usr/local/lib/python3.9/site-packages   /usr/local/lib/python3.9/
+COPY --from=Server  /root/.cache/torch                       /root/.cache/torch
+COPY --from=Server  /root/.towhee                            /root/.towhee
 
 SHELL ["/bin/bash", "-c"]
 
@@ -23,7 +25,7 @@ file=/var/run/supervisor.sock \n\
 chmod=0700 \n\
 
 [inet_http_server] \n\
-port=0.0.0.0:8080 \n\
+port=0.0.0.0:8090 \n\
 
 [supervisord] \n\
 nodaemon=true \n\
@@ -46,6 +48,9 @@ command=python main.py \n\
 
 [program:client] \n\
 command=/app/client/web \n\
+
+[program:console] \n\
+command=/app/console/ttyd --port=8080 bash \n\
 
 '> /etc/supervisor/supervisord.conf
 
