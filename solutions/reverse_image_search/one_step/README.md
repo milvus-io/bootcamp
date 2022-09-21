@@ -12,6 +12,7 @@ There are two open source datasets ([coco-images.zip](https://github.com/milvus-
 
 ```bash
 $ wget https://github.com/milvus-io/bootcamp/releases/download/v2.0.2/coco-images.zip
+$ unzip -q coco-images.zip
 ```
 ## Deployment
 There are two methods to run the reverse image search system, it is more recommended to run one step with docker.
@@ -19,10 +20,10 @@ There are two methods to run the reverse image search system, it is more recomme
 
 ```bash
 # $ docker run -td -v <your-data-path>:/data -p 8001:80 -p 8002:8080 milvusbootcamp/one-step-img-search:2.1.0
-$ docker run -td -v ./coco-images:/data -p 8001:80 -p 8002:8080 milvusbootcamp/one-step-img-search:2.1.0
+$ docker run -td -v `pwd`/coco-images:/data -p 8001:80 -p 8002:8080 milvusbootcamp/one-step-img-search:2.1.0
 ```
 
-- -v: mount the path, you can pass your path to data, or using the downloaded `./coco-images`
+- -v: mount the path, you can pass your path to data, or using the downloaded "\`pwd\`/coco-images"
 - -p: map the port, 80 is the port of Web Console in container and 8080 is for  Log Viewer, and we map it with 8001 and 8002 in local.
 
 ### Run with source code
@@ -38,11 +39,13 @@ $ python3 main.py
 
 ## How to use front-end
 
-Navigate to `127.0.0.1:8001` in your browser to access the front-end interface, and `127.0.0.1:8002` show the logs.
+Pass `127.0.0.1:8001` in your browser to access the front-end interface, and `127.0.0.1:8002`  show the logs.
+
+> `http://127.0.0.1:8002/logtail/server` shows the server logs.
 
 ### 1. Insert data
 
-Enter `/data`(or `/data/<your-image-dir>`) in `path/to/your/images`, then click `+` to load the pictures. The following screenshot shows the loading process:
+Enter `/data`(or `/data/<your-image-dir>`) in `/images`, then click `+` to load the pictures. The following screenshot shows the loading process:
 
 <img src="../quick_deploy/pic/web2.png" width = "650" height = "500" alt="arch" align=center />
 
