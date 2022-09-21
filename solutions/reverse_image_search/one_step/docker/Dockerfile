@@ -5,7 +5,10 @@ FROM milvusbootcamp/one-step-img-search:milvus-2.1.0
 
 RUN apt update && apt install supervisor -y && \
     apt-get remove --purge -y && rm -rf /var/lib/apt/lists/*
-
+RUN apt-get update && \
+    apt-get install ffmpeg libsm6 libxext6  -y && \
+    apt-get remove --purge -y && \
+    rm -rf /var/lib/apt/lists/*
 COPY --from=Client /web                                     /app/client/
 COPY --from=Server /app                                     /app/server
 COPY --from=Server /usr/local/lib/python3.9/site-packages   /usr/local/lib/python3.9/

@@ -30,5 +30,9 @@ tqdm==4.64.1 \
 typing_extensions==4.3.0 \
 urllib3==1.26.12 \
 uvicorn==0.13.4
+RUN apt-get update && \
+    apt-get install ffmpeg libsm6 libxext6  -y && \
+    apt-get remove --purge -y && \
+    rm -rf /var/lib/apt/lists/*
 COPY server /app
 RUN python encode.py
