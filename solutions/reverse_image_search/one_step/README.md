@@ -29,7 +29,6 @@ $ docker run -td -v ./coco-images:/data -p 8001:80 -p 8002:8080 milvusbootcamp/o
 > Please [Install Milvus](https://milvus.io/docs/v2.1.x/install_standalone-docker.md) before running it.
 
 ```bash
-<<<<<<< HEAD
 $ git clone https://github.com/milvus-io/bootcamp.git
 $ cd bootcamp/solutions/reverse_image_search/one_step/server
 $ pip3 install -r requirements.txt
@@ -57,13 +56,6 @@ The loading process may take several minutes. The following screenshot shows the
 ### 2.Search for similar images
 
 <img src="../quick_deploy/pic/web5.png" width = "650" height = "400" alt="arch" align=center />
-=======
-+docker run --rm -it -v `pwd`/images:/images -p 8000:80 -p 8080:8080 milvusbootcamp/one-step-img-search:2.1.0
-```
-
-- 8000: App
-- 8080: Log Viewer (optional)
->>>>>>> b225ac6f795fa59b90bb9e0f3661d7837d5c3300
 
 ## How to build docker images
 
@@ -80,4 +72,3 @@ $ cd ..
 
 # step3: build all-in-one image
 $ docker build -t milvusbootcamp/one-step-img-search:2.1.0 . -f docker/Dockerfile
-```
