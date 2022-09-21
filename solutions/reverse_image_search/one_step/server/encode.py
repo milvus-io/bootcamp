@@ -13,7 +13,7 @@ class ResNet50:
     def resnet50_extract_feat(self, img_path):
         feat = self.pipe(img_path)
         if isinstance(feat, _Reason):
-            raise _Reason.exception
+            raise feat.exception
         return feat
 
 
