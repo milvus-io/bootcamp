@@ -22,6 +22,9 @@ RUN echo $' \n\
 file=/var/run/supervisor.sock \n\
 chmod=0700 \n\
 
+[inet_http_server] \n\
+port=0.0.0.0:8080 \n\
+
 [supervisord] \n\
 nodaemon=true \n\
 logfile=/var/log/supervisor/supervisord.log \n\
@@ -45,5 +48,11 @@ command=python main.py \n\
 command=/app/client/web \n\
 
 '> /etc/supervisor/supervisord.conf
+
+COPY client/src/containers/Logo.svg /usr/lib/python2.7/dist-packages/supervisor/ui/images/logo.svg
+RUN sed -i -E "s/\"images\/supervisor.gif\"/\"images\/logo.svg\"/g" /usr/lib/python2.7/dist-packages/supervisor/ui/status.html
+RUN sed -i -E "s/alt=\"Supervisor status\"/style=\"width: 120px;\"/g" /usr/lib/python2.7/dist-packages/supervisor/ui/status.html
+RUN sed -i -E "s/<body>/<body style=\"background: #212121;\">/g" /usr/lib/python2.7/dist-packages/supervisor/ui/status.html
+RUN sed -i -E "s/tailbody.content(tail)/tail.decode(encoding=\"utf8\",errors=\"ignore\")/g" /usr/lib/python2.7/dist-packages/supervisor/web.py
 
 CMD ["/usr/bin/supervisord","-c","/etc/supervisor/supervisord.conf"]
