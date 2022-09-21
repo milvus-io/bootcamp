@@ -2,9 +2,12 @@ FROM milvusbootcamp/img-search-client:assets-1.1 AS Assets
 FROM golang:1.19.0-buster AS GoBuilder
 RUN sed -i -E "s/\w+.debian.org/mirrors.tuna.tsinghua.edu.cn/g" /etc/apt/sources.list
 RUN apt-get update && apt-get install -y upx
-COPY --from=Assets /assets/* /app/assets/
-COPY client/docker/standalone/main.go /app
 WORKDIR /app
+COPY --from=Assets /assets      /app/assets
+COPY docker/standalone/*  ./
+ENV GO111MODULE=on
+ENV CGO_ENABLED=0
+ENV GOPROXY=https://goproxy.cn
 RUN go build -ldflags "-w -s" -o web main.go && \
     upx -9 -o web.minify web
 

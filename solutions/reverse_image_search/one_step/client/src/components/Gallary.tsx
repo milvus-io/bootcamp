@@ -102,7 +102,7 @@ const Gallary = (props: any) => {
           })
         : placeHolderImges.map((item: any, index: number) => (
             <div className={classes.imageContainer} key={index}>
-              <p className={classes.child}>{index < 12 ? index + 1 : ""}</p>
+              <p className={classes.child}>{index < 20 ? index + 1 : ""}</p>
             </div>
           ))}
     </div>
