@@ -100,5 +100,5 @@ func main() {
 		c.Abort()
 	})
 	r.Any("/api/*proxyPath", proxy)
-	r.Run(":8080")
+	r.Run(":80")
 }
