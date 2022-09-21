@@ -276,7 +276,7 @@ const Setting = (props: any) => {
     <div className={classes.setting}>
       <div className={classes.header}>
         <img src={Logo} width="150px" alt="logo" />
-        <p>Image Search Demo [<a href="/console" style={{ color: "gold" }}>console</a>]</p>
+        <p>Image Search Demo [<a href="/console" style={{ color: "gold" }} target="_blank">console</a>]</p>
       </div>
       <div className={classes.configHead}>
         <h4 className={classes.config}>Config</h4>
