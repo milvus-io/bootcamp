@@ -33,7 +33,7 @@ The face recognition bootcamp system requires Milvus, MySQL, WebServer and WebCl
 
 - Modify docker-compose.yaml to map your data directory to the docker container of WebServer
 ```bash
-$ git clone https://github.com/milvus-io/bootcamp.git
+$ git clone https://github.com/Spnetic-5/bootcamp.git
 $ cd solutions/face_recognition_system/quick_deploy
 $ vim docker-compose.yaml
 ```
@@ -109,7 +109,8 @@ Then to start the system server, and it provides HTTP backend services.
 - **Install the Python packages**
 
 ```bash
-$ git clone https://github.com/milvus-io/bootcamp.git
+$ git clone https://github.com/Spnetic-5/bootcamp.git
+$ cd solutions/face_recognition_system/quick_deploy/server
 $ pip install -m requirements.txt
 ```
 
@@ -129,7 +130,7 @@ Modify the parameters according to your own environment. Here listing some param
  **Prepare the dataset for Milvus Search Engine**
 
 ```bash
-python3 quick_deploy/server/src/prepare_data.py
+python3 src/prepare_data.py
 ```
 
 - **Run the code**
@@ -137,7 +138,7 @@ python3 quick_deploy/server/src/prepare_data.py
 Then start the server.
 - Replace test.jpg with <image_path>
 ```bash
-python3 quick_deploy/server/src/search_face.py test.jpg
+python3 src/search_face.py test.jpg
 ```
 
 ## Code structure
