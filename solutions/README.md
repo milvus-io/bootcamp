@@ -43,5 +43,8 @@ Each solution includes a Jupyter notebook and Docker quick deployment. Along wit
 10. [**DNA Sequence Classification**](./dna_sequence_classification), a DNA sequence classification system.
       - [Quick deploy](./text_search_engine/quick_deploy)
       - [Jupyter notebook](./dna_sequence_classification/dna_sequence_classification.ipynb)
+11. [**Face Recognition System**](./face_recognition_system), a Face Recognition Pipeline.
+- [Quick deploy](./face_recognition_system/quick_deploy/)
+- [Jupyter notebook](./face_recognition_system/face_recognition_bootcamp.ipynb)
 
 
