@@ -35,9 +35,7 @@ The face recognition bootcamp system requires Milvus, MySQL, WebServer and WebCl
 ```bash
 $ git clone https://github.com/Spnetic-5/bootcamp.git
 $ cd solutions/face_recognition_system/quick_deploy
-$ vim docker-compose.yaml
 ```
-> Change line 32: `./standalone:/image` --> `milvusdb:/your_milvus_version`
 
 - Create containers & start servers with docker-compose.yaml
 ```bash
@@ -69,10 +67,10 @@ Then you will see the that all containers are created.
 And show all containers with `docker ps`, and you can use `docker logs img-search-webserver` to get the logs of **server** container.
 
 ```bash
-CONTAINER ID   IMAGE                                      COMMAND                  CREATED         STATUS                   PORTS                                           NAMES
-3c8d3ceab1ab   milvusdb/milvus:v1.1.0                     "/tini -- milvus run…"   4 minutes ago   Up 4 minutes             0.0.0.0:19530->19530/tcp, :::19530->19530/tcp   milvus-standalone
-43c1353b98a2   minio/minio:RELEASE.2020-12-03T00-03-10Z   "/usr/bin/docker-ent…"   4 minutes ago   Up 4 minutes (healthy)   9000/tcp                                        milvus-minio
-ab2c1c06ea1e   quay.io/coreos/etcd:v3.5.0                 "etcd -advertise-cli…"   4 minutes ago   Up 4 minutes             2379-2380/tcp                                   milvus-etcd
+CONTAINER ID   IMAGE                                      COMMAND                  CREATED          STATUS                    PORTS                                           NAMES
+47952d6972fb   milvusdb/milvus:v2.0.2                     "/tini -- milvus run…"   38 minutes ago   Up 38 minutes             0.0.0.0:19530->19530/tcp, :::19530->19530/tcp   milvus-standalone
+870d464532e1   quay.io/coreos/etcd:v3.5.0                 "etcd -advertise-cli…"   38 minutes ago   Up 38 minutes             2379-2380/tcp                                   milvus-etcd
+0b0219549307   minio/minio:RELEASE.2020-12-03T00-03-10Z   "/usr/bin/docker-ent…"   38 minutes ago   Up 38 minutes (healthy)   9000/tcp                                        milvus-minio
 ```
 
 
@@ -80,7 +78,7 @@ ab2c1c06ea1e   quay.io/coreos/etcd:v3.5.0                 "etcd -advertise-cli�
 
 We recommend using Docker Compose to deploy the face recognition bootcamp. However, you also can run from source code, you need to manually start [Milvus](https://milvus.io/docs/v2.0.0/install_standalone-docker.md) and [SQLite](https://dev.mysql.com/doc/mysql-installation-excerpt/5.7/en/docker-mysql-getting-started.html). Next show you how to run the API server and Client.
 
-### 1. Start Milvus
+### 1. Start Milvus `(For milvus-v1)`
 
 First, you need to start Milvus & SQLite servers.
 
@@ -102,7 +100,7 @@ $ sudo docker run -d --name milvus_cpu_1.1.0 -p 19530:19530 -p 19121:19121 -v /h
 ```
 
 
-### 2. Start API Server
+### 2. Start API Server & Run the code
 
 Then to start the system server, and it provides HTTP backend services.
 
@@ -112,6 +110,16 @@ Then to start the system server, and it provides HTTP backend services.
 $ git clone https://github.com/Spnetic-5/bootcamp.git
 $ cd solutions/face_recognition_system/quick_deploy/server
 $ pip install -m requirements.txt
+```
+
+- **For Milvus v1.1.0**
+```bash
+$ pip3 install pymilvus==1.1.0
+```
+
+- **For Milvus v1.1.0**
+```bash
+$ pip3 install pymilvus==2.1.3
 ```
 
 - **Set configuration**
@@ -156,6 +164,8 @@ server
     ├── encoded_save.npy # Convert an image to embedding (ResNet50)
     ├── example.py # Milvus starter example
     ├── search_face.py # Source code to start webserver
+    ├── search_face_milvusv1.py # Source code to start webserver with Milvus v1.1.0
+    ├── search_face_milvusv2.py # Source code to start webserver with Milvus v2.1.0
     ├── id_to_class
     ├── identity_CelebA.txt
     ├── identity_save.npy

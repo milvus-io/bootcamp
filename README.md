@@ -242,7 +242,7 @@ Here are several solutions for a wide range of scenarios. Each solution contains
         <p>Build a Face Recognition Pipeline using Milvus Vector Database to store face embeddings & perform face similaity search. </p>
      </td>
       <td>
-        <p>- <a href="./solutions/face_recognition_system/face_recognition_bootcamp.ipynb">Jupyter notebook </a></p>
+        <p>- <a href="./solutions/face_recognition_system/face_recognition_bootcamp_milvusv1.ipynb">Jupyter notebook </a></p>
         <p>- <a href="./solutions/face_recognition_system/quick_deploy">Quick deploy </a></p>
       </td>
       <td></td>
