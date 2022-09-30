@@ -23,7 +23,7 @@ This demo uses the dataset of around 800k images consisting of 1100 Famous Celeb
 ### Requirements
 
 - [Milvus](https://milvus.io/docs/v2.0.0/install_standalone-docker.md)
-- [SQLite](https://hub.docker.com/r/mysql/mysql-server)
+- [MySQL](https://hub.docker.com/r/mysql/mysql-server)
 - [Python3](https://www.python.org/downloads/)
 - [Docker](https://docs.docker.com/engine/install/)
 
@@ -76,11 +76,11 @@ CONTAINER ID   IMAGE                                      COMMAND               
 
 ## Option 2: Deploy with source code
 
-We recommend using Docker Compose to deploy the face recognition bootcamp. However, you also can run from source code, you need to manually start [Milvus](https://milvus.io/docs/v2.0.0/install_standalone-docker.md) and [SQLite](https://dev.mysql.com/doc/mysql-installation-excerpt/5.7/en/docker-mysql-getting-started.html). Next show you how to run the API server and Client.
+We recommend using Docker Compose to deploy the face recognition bootcamp. However, you also can run from source code, you need to manually start [Milvus](https://milvus.io/docs/v2.0.0/install_standalone-docker.md) and [MySQL](https://dev.mysql.com/doc/mysql-installation-excerpt/5.7/en/docker-mysql-getting-started.html). Next show you how to run the API server and Client.
 
-### 1. Start Milvus `(For milvus-v1)`
+### 1. **Start Milvus** [Only for Milvus v1.1.0]
 
-First, you need to start Milvus & SQLite servers.
+First, you need to start Milvus & MySQL servers.
 
 Refer [Milvus Standalone](https://milvus.io/docs/v2.0.0/install_standalone-docker.md) for how to install Milvus. Please note the Milvus version should match pymilvus version in [config.py](./server/src/config.py).
 
@@ -100,7 +100,7 @@ $ sudo docker run -d --name milvus_cpu_1.1.0 -p 19530:19530 -p 19121:19121 -v /h
 ```
 
 
-### 2. Start API Server & Run the code
+### 2. **Start API Server & Run the code**
 
 Then to start the system server, and it provides HTTP backend services.
 
@@ -117,7 +117,7 @@ $ pip install -m requirements.txt
 $ pip3 install pymilvus==1.1.0
 ```
 
-- **For Milvus v1.1.0**
+- **For Milvus v2.1.0**
 ```bash
 $ pip3 install pymilvus==2.1.3
 ```
