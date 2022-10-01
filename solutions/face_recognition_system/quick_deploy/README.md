@@ -64,7 +64,7 @@ Then you will see the that all containers are created.
  ⠿ Container milvus-standalone  Started  
 ```
 
-And show all containers with `docker ps`, and you can use `docker logs img-search-webserver` to get the logs of **server** container.
+And show all containers with `docker ps`:
 
 ```bash
 CONTAINER ID   IMAGE                                      COMMAND                  CREATED          STATUS                    PORTS                                           NAMES
