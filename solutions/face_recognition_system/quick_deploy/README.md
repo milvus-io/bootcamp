@@ -29,9 +29,9 @@ This demo uses the dataset of around 800k images consisting of 1100 Famous Celeb
 
 ## Option 1: Deploy with Docker Compose
 
-The face recognition bootcamp system requires Milvus, MySQL, WebServer and WebClient services. We can start these containers with one click through [docker-compose.yaml](./docker-compose.yaml).
+The face recognition bootcamp system requires Milvus. We can start these containers with one click through [docker-compose.yaml](./docker-compose.yaml).
 
-- Modify docker-compose.yaml to map your data directory to the docker container of WebServer
+- Modify docker-compose.yaml to map your data directory to the docker container
 ```bash
 $ git clone https://github.com/Spnetic-5/bootcamp.git
 $ cd solutions/face_recognition_system/quick_deploy
