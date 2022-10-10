@@ -236,6 +236,18 @@ Here are several solutions for a wide range of scenarios. Each solution contains
       <td>- <a href="https://my.oschina.net/u/4209276/blog/5191465">中文 </a></td>
       <td></td>
    </tr>
+   <tr>
+      <td>
+        <p><a href="./solutions/face_recognition_system">Face Recognition System</a></p>
+        <p>Build a Face Recognition Pipeline using Milvus Vector Database to store face embeddings & perform face similaity search. </p>
+     </td>
+      <td>
+        <p>- <a href="./solutions/face_recognition_system/face_recognition_bootcamp.ipynb">Jupyter notebook </a></p>
+        <p>- <a href="./solutions/face_recognition_system/quick_deploy">Quick deploy </a></p>
+      </td>
+      <td></td>
+      <td></td>
+   </tr>
 </table>
 
 ### :clapper: Live Demo
