@@ -1,0 +1,4 @@
+.drag-enter {
+  border: 1px solid rgba(63, 156, 209, 1) !important;
+  color: rgba(63, 156, 209, 1) !important;
+}

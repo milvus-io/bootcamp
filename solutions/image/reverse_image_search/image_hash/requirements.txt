@@ -1,0 +1,7 @@
+pymilvus==2.0.0rc5
+redis
+pdqhash
+matplotlib
+pillow
+numpy
+gdown

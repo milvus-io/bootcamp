@@ -1,0 +1,7 @@
+pymilvus==2.0.1
+redis
+librosa
+numpy
+panns_inference
+torch
+diskcache==5.2.1

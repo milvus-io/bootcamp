@@ -1,0 +1,5 @@
+PyMySQL
+numpy
+pymilvus==2.0.0rc5
+pandas
+sentence_transformers==1.2.0

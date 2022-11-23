@@ -1,4 +1,0 @@
-pymilvus==2.0.0rc8
-paddle_serving_app==0.6.3
-paddlepaddle==2.1.0
-redis==3.5.3

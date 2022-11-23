@@ -1,0 +1,7 @@
+pymilvus==2.0.1
+flask-cors
+numpy
+flask
+flask_restful
+psycopg2-binary
+sentence_transformers
