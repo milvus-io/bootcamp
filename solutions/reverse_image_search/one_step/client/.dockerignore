@@ -1,5 +1,0 @@
-build
-node_modules
-yarn-error.log
-docker/Dockerfile.*
-docker/standalone/assets
