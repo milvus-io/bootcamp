@@ -5,7 +5,7 @@ In this solution we will be creating a question answering system that deals with
 
 ## Try notebook
 
-In this [notebook](1_build_question_answering_engine.ipynb) we will be going over the code required to create a question-answering system. This example uses Towhee to extract features of questions that are then used with Milvus to find similar questions and answers.
+In this [notebook](https://github.com/towhee-io/examples/tree/main/nlp/question_answering) we will be going over the code required to create a question-answering system. This example uses Towhee to extract features of questions that are then used with Milvus to find similar questions and answers.
 If you want to learn how to improve system stability, you can refer [this link](https://github.com/towhee-io/examples/blob/main/nlp/question_answering/2_deep_dive_question_answering.ipynb)
 
 ## How to deploy

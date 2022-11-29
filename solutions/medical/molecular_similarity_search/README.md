@@ -3,6 +3,6 @@ Drug discovery, as the source of medical innovation, is an important part of new
 
 In order to discover available compounds in the fragment space from billion-scale compound libraries, chemical fingerprint is usually retrieved for substructure search and similarity search.
 ## Try notebook
-In this [notebook](./1_build_molecular_search_engine.ipynb) we will be going over the code required to perform molecular search. This example uses RDKit to generate fingerprint then used Milvus and Towhee to build a system that can perform the searches.
+In this [notebook](https://github.com/towhee-io/examples/tree/main/medical/molecular_search) we will be going over the code required to perform molecular search. This example uses RDKit to generate fingerprint then used Milvus and Towhee to build a system that can perform the searches.
 ## How to deploy
 Here is the [quick start](./quick_deploy) for a deployable version of molecular search. The code for the system is in the `quick_deploy/server` and `quick_deploy/client` directories.
