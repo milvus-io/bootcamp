@@ -26,7 +26,7 @@ The molecular similarity search system requires [**Milvus**](https://milvus.io/d
 
 ```bash
 $ git clone https://github.com/milvus-io/bootcamp.git
-$ cd solutions/molecular_similarity_search/quick_deploy
+$ cd solutions/medical/molecular_similarity_search/quick_deploy
 $ docker-compose -f molsearch-docker-compose.yaml up -d
 ```
 

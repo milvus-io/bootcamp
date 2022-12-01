@@ -18,7 +18,7 @@ The video search system  with Milvus, MySQL, WebServer and WebClient services. W
 - Modify docker-compose.yaml to map your data directory to the docker container of WebServer
 ```bash
 $ git clone https://github.com/milvus-io/bootcamp.git
-$ cd solutions/video_similarity_search/quick_deploy/
+$ cd solutions/video/video_similarity_search/quick_deploy/
 $ vim docker-compose.yaml
 ```
 > Change line 74: `./data:/data` --> `your_data_path:/data`

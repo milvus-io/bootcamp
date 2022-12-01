@@ -75,7 +75,7 @@ entries and/or test entries
 
    ```shell
    $ git clone https://github.com/milvus-io/bootcamp.git
-   $ cd solutions/recommender_system
+   $ cd solutions/nlp/recommender_system
    ```
 
 3. Install requirements.

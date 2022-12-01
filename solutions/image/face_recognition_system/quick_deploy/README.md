@@ -34,7 +34,7 @@ The face recognition bootcamp system requires Milvus. We can start these contain
 - Modify docker-compose.yaml to map your data directory to the docker container
 ```bash
 $ git clone https://github.com/Spnetic-5/bootcamp.git
-$ cd solutions/face_recognition_system/quick_deploy
+$ cd solutions/image/face_recognition_system/quick_deploy
 ```
 
 - Create containers & start servers with docker-compose.yaml
