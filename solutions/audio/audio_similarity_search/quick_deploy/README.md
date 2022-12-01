@@ -18,7 +18,7 @@ The molecular similarity search system requires [**Milvus**](https://milvus.io/d
 
 ```bash
 $ git clone https://github.com/milvus-io/bootcamp.git
-$ cd solutions/audio_similarity_search/quick_deploy
+$ cd solutions/audio/audio_similarity_search/quick_deploy
 $ docker-compose -f audiosearch-docker-compose.yaml up -d
 ```
 

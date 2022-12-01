@@ -34,7 +34,7 @@ The reverse image search system requires Milvus, MySQL, WebServer and WebClient 
 - Modify docker-compose.yaml to map your data directory to the docker container of WebServer
 ```bash
 $ git clone https://github.com/milvus-io/bootcamp.git
-$ cd solutions/reverse_image_search/quick_deploy
+$ cd solutions/image/reverse_image_search/quick_deploy
 $ vim docker-compose.yaml
 ```
 > Change line 73: `./data:/data` --> `your_data_path:/data`

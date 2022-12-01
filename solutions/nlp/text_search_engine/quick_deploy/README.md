@@ -19,7 +19,7 @@ The text search engine with Milvus, MySQL, WebServer and WebClient services. We 
 - Modify docker-compose.yaml to map your data directory to the docker container of WebServer
 ```bash
 $ git clone https://github.com/milvus-io/bootcamp.git
-$ cd solutions/text_search_engine/quick_deploy/
+$ cd solutions/nlp/text_search_engine/quick_deploy/
 $ vim docker-compose.yaml
 ```
 
