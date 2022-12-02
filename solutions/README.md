@@ -56,7 +56,7 @@ Have fun with Bootcamp solutions :)
         </td>
     </tr>
     <tr>
-        <td rowspan="4">Video</td>
+        <td rowspan="3">Video</td>
         <td >
             <a href="./video/video_similarity_search">Reverse Video Search</a>
             <p>Search for similar videos given a video input.</p>
@@ -65,16 +65,6 @@ Have fun with Bootcamp solutions :)
             <li><a href="./video/video_similarity_search/quick_deploy">Quick deploy</a></li>
             <li><a href="https://github.com/towhee-io/examples/tree/main/video/reverse_video_search">Jupyter notebook</a></li>
             <li><a href="./video/video_similarity_search/object_detection">Object detection</a></li>
-        </td>
-    </tr>
-    <tr>
-        <td >
-            <a href="">Video Tagging</a>
-            <p>Recognize label/class/category of the given video.</p>
-        </td>
-        <td>
-            <!--li><a href="">Quick deploy</a></li-->
-            <li><a href="https://github.com/towhee-io/examples/tree/main/video/video_tagging">Jupyter notebook</a></li>
         </td>
     </tr>
     <tr>
