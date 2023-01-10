@@ -118,7 +118,7 @@ Have fun with Bootcamp solutions :)
         </td>
     </tr>
     <tr>
-        <td rowspan="3">NLP</td>
+        <td rowspan="4">NLP</td>
         <td >
             <a href="./nlp/text_search">Text Search</a>
             <p>Search for similar text content given a text input.</p>
@@ -146,6 +146,15 @@ Have fun with Bootcamp solutions :)
         <td>
             <li><a href="./nlp/recommender_system/quick_deploy">Quick deploy</a></li>
             <li><a href="./nlp/recommender_system/recommender_system.ipynb">Jupyter notebook</a></li>
+        </td>
+    </tr>
+     <tr>
+        <td >
+            <a href="./nlp/OpenAI">OpenAI Text Search</a>
+            <p>Text search using OpenAI embeddings.</p>
+        </td>
+        <td>
+            <li><a href=https://github.com/milvus-io/bootcamp/tree/master/solutions/nlp/OpenAI/openai_text_search.ipynb>Jupyter notebook</a></li>
         </td>
     </tr>
     <tr>
