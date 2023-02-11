@@ -118,7 +118,7 @@ Have fun with Bootcamp solutions :)
         </td>
     </tr>
     <tr>
-        <td rowspan="4">NLP</td>
+        <td rowspan="5">NLP</td>
         <td >
             <a href="./nlp/text_search">Text Search</a>
             <p>Search for similar text content given a text input.</p>
@@ -155,6 +155,16 @@ Have fun with Bootcamp solutions :)
         </td>
         <td>
             <li><a href=https://github.com/milvus-io/bootcamp/tree/master/solutions/nlp/OpenAI/openai_text_search.ipynb>Jupyter notebook</a></li>
+        </td>
+    </tr>
+    <tr>
+        <td >
+            <a href="./nlp/HuggingFace">HuggingFace Text Search</a>
+            <p>Text search using Hugging Face Bert embeddings.</p>
+        </td>
+        <td>
+            <li><a href=https://github.com/milvus-io/bootcamp/tree/master/solutions/nlp/HuggingFace/milvus.ipynb>Jupyter notebook without Towhee</a></li>
+            <li><a href=https://github.com/milvus-io/bootcamp/tree/master/solutions/nlp/HuggingFace/towhee.ipynb>Jupyter notebook with Towhee</a></li>
         </td>
     </tr>
     <tr>
