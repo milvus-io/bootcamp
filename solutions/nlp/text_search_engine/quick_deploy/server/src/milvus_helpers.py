@@ -59,7 +59,6 @@ class MilvusHelper:
             data = [vectors]
             mr = self.collection.insert(data)
             ids =  mr.primary_keys
-            self.collection.load()
             LOGGER.debug(f"Insert vectors to Milvus in collection: {collection_name} with {len(vectors)} rows")
             return ids
         except Exception as e:
@@ -80,6 +79,15 @@ class MilvusHelper:
                 raise Exception(status.message)
         except Exception as e:
             LOGGER.error(f"Failed to create index: {e}")
+            sys.exit(1)
+
+    def load(self, collection_name):
+        # Load Milvus collection into RAM
+        try:
+            self.set_collection(collection_name)
+            self.collection.load()
+        except Exception as e:
+            LOGGER.error(f"Failed to load data into RAM: {e}")
             sys.exit(1)
 
     def delete_collection(self, collection_name):
