@@ -37,6 +37,10 @@ def do_load(collection_name, file_dir, model, milvus_client, mysql_cli):
     title_data, text_data, sentence_embeddings = extract_features(file_dir, model)
     ids = milvus_client.insert(collection_name, sentence_embeddings)
     milvus_client.create_index(collection_name)
+
+    # Load the collection data into RAM just AFTER creating index
+    milvus_client.load(collection_name)
+
     mysql_cli.create_mysql_table(collection_name)
     mysql_cli.load_data_to_mysql(collection_name, format_data(ids, title_data, text_data))
     return len(ids)
