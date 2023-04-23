@@ -79,7 +79,8 @@ The next step is to start the system server. It provides HTTP backend services, 
 - **wget the model**
 
   ```bash
-  $ cd server/src/model
+  $ mkdir -p server/src/models
+  $ cd server/src/models
   $ wget https://public.ukp.informatik.tu-darmstadt.de/reimers/sentence-transformers/v0.2/paraphrase-mpnet-base-v2.zip
   $ unzip paraphrase-mpnet-base-v2.zip -d paraphrase-mpnet-base-v2/
   ```
@@ -99,7 +100,7 @@ The next step is to start the system server. It provides HTTP backend services, 
   | VECTOR_DIMENSION | Dimension of the vectors.                             | 768                 |
   | MYSQL_HOST       | The IP address of Mysql.                              | 127.0.0.1           |
   | MYSQL_PORT       | Port of Milvus.                                       | 3306                |
-  | DEFAULT_TABLE    | The milvus and mysql default collection name.         | milvus_qa           |
+  | DEFAULT_TABLE    | The milvus and mysql default collection name.         | milvus_qa_search_1  |
   | MODEL_PATH       | The path of the model `paraphrase-mpnet-base-v2`      |                     |
 
 - **Run the code**
