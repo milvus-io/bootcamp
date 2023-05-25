@@ -55,6 +55,7 @@ class MilvusHelper:
         # Batch insert vectors to milvus collection
         try:
             self.create_collection(collection_name)
+            self.create_index(collection_name)
             data = [vectors]
             self.set_collection(collection_name)
             mr = self.collection.insert(data)
