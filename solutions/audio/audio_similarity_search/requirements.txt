@@ -5,3 +5,4 @@ numpy
 panns_inference
 torch
 diskcache
+gdown
