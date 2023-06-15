@@ -1,6 +1,6 @@
 import os
 import uuid
-from cv2 import cv2
+import cv2
 from config import DATA_PATH
 
 
