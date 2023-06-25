@@ -1,8 +1,0 @@
-facenet_pytorch
-matplotlib
-numpy
-pandas
-Pillow
-torch
-torchvision
-pymilvus
