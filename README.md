@@ -243,7 +243,6 @@ Here are several solutions for a wide range of scenarios. Each solution contains
         <p>Build a molecular similarity search system using Milvus paired with RDKit for cheminformatics. </p>
      </td>
       <td><p>- <a href="https://github.com/towhee-io/examples/tree/main/medical/molecular_search">Jupyter notebook</a></p>
-          <p>- <a href="solutions/medical/molecular_similarity_search/quick_deploy">Quick deploy</a></p>
       </td>
       <td>- <a href="https://mp.weixin.qq.com/s/ZIH_zYltT6aJNQYMhOSsAg">Milvus 赋能 AI 药物研发</a></td>
       <td>- <a href="https://www.bilibili.com/video/BV1dD4y1D7zS">中文</a></td>
@@ -273,9 +272,6 @@ Here are several solutions for a wide range of scenarios. Each solution contains
       <td></td>
    </tr>
 </table>
-
-
-
 ### :clapper: Live Demo
 
 We have built [online demos](https://milvus.io/milvus-demos/) for reverse image search, chatbot and molecular search that everyone can have fun with.
