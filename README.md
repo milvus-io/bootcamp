@@ -217,18 +217,6 @@ Here are several solutions for a wide range of scenarios. Each solution contains
    </tr>
    <tr>
       <td>
-        <p><a href="./solutions/audio/audio_similarity_search">Audio Similarity Search</a> </p>
-        <p>Build an audio search engine using Milvus paired with PANNs for audio pattern recognition. </p>
-     </td>
-      <td>
-        <p>- <a href="solutions/audio/audio_similarity_search/audio_similarity_search.ipynb">Jupyter notebook </a></p>
-        <p>- <a href="solutions/audio/audio_similarity_search/quick_deploy">Quick deploy </a></p>
-     </td>
-      <td>- <a href="https://mp.weixin.qq.com/s/PJfO71YOTW2gXO6SL-OOuA">基于 Milvus 的音频检索系统</a></td>
-      <td></td>
-   </tr>
-   <tr>
-      <td>
         <p><a href="./solutions/audio/audio_classification">Audio Classification</a></p>
         <p>Build an audio classification engine using Milvus & Towhee to classify audio.</p>
      </td>
@@ -285,6 +273,8 @@ Here are several solutions for a wide range of scenarios. Each solution contains
       <td></td>
    </tr>
 </table>
+
+
 
 ### :clapper: Live Demo
 
