@@ -1,4 +1,4 @@
-pymilvus
+pymilvus==2.2.11
 redis
 librosa
 numpy
