@@ -81,7 +81,6 @@ async def upload_images(image: UploadFile = File(None), url: str = None, table_n
         # Save the upload image to server.
         if image is not None:
             content = await image.read()
-            print('read pic succ')
             img_path = os.path.join(UPLOAD_PATH, image.filename)
             with open(img_path, "wb+") as f:
                 f.write(content)
@@ -103,7 +102,6 @@ async def search_images(image: UploadFile = File(...), topk: int = Form(TOP_K), 
     try:
         # Save the upload image to server.
         content = await image.read()
-        print('read pic succ')
         img_path = os.path.join(UPLOAD_PATH, image.filename)
         with open(img_path, "wb+") as f:
             f.write(content)

@@ -8,5 +8,6 @@ WORKDIR /app/src
 COPY . /app
 
 RUN pip3 install -r /app/requirements.txt
+RUN python3 encode.py
 
 CMD python3 main.py

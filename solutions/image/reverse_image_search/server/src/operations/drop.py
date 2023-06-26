@@ -1,11 +1,11 @@
 import sys
-
-sys.path.append("..")
 from config import DEFAULT_TABLE
 from logs import LOGGER
+from milvus_helpers import MilvusHelper
+from mysql_helpers import MySQLHelper
 
 
-def do_drop(table_name, milvus_cli, mysql_cli):
+def do_drop(table_name: str, milvus_cli: MilvusHelper, mysql_cli: MySQLHelper):
     if not table_name:
         table_name = DEFAULT_TABLE
     try:

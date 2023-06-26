@@ -1,11 +1,12 @@
 import sys
-
-sys.path.append("..")
 from config import DEFAULT_TABLE
 from logs import LOGGER
+from milvus_helpers import MilvusHelper
+from mysql_helpers import MySQLHelper
+from encode import Resnet50
 
 
-def do_search(table_name, img_path, top_k, model, milvus_client, mysql_cli):
+def do_search(table_name: str, img_path: str, top_k: int, model: Resnet50, milvus_client: MilvusHelper, mysql_cli: MySQLHelper):
     try:
         if not table_name:
             table_name = DEFAULT_TABLE

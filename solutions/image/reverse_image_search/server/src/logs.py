@@ -127,9 +127,3 @@ def write_log():
 
 
 LOGGER = write_log()
-# if __name__ == "__main__":
-#     message = 'test writing logs'
-#     logger = write_log()
-#     logger.info(message)
-#     logger.debug(message)
-#     logger.error(message)

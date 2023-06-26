@@ -14,3 +14,9 @@ class Resnet50:
     def resnet50_extract_feat(self, img_path):
         feat = self.image_embedding_pipe(img_path)
         return feat.get()[0]
+
+
+if __name__ == '__main__':
+    MODEL = Resnet50()
+    # Warm up the model to build image
+    MODEL.resnet50_extract_feat('https://raw.githubusercontent.com/towhee-io/towhee/main/towhee_logo.png')

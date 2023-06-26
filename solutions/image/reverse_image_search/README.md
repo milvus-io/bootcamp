@@ -4,7 +4,7 @@ This demo uses [towhee](https://github.com/towhee-io/towhee) image embedding ope
 
 The system architecture is as below:
 
-<img src="pic/demo.jpg" width = "450" height = "600" alt="system_arch" align=center />
+<img src="pic/workflow.png" height = "500" alt="arch" align=center />
 
 
 ## Data Source
@@ -21,7 +21,8 @@ Download location: https://drive.google.com/file/d/1n_370-5Stk4t0uDV1QqvYkcvyV8r
 
 ### Requirements
 
-- [Milvus 2.0](https://milvus.io/docs/v2.0.0/install_standalone-docker.md)
+- [Milvus 2.2.10](https://milvus.io/)
+- [Towhee](https://towhee.io/)
 - [MySQL](https://hub.docker.com/r/mysql/mysql-server)
 - [Python3](https://www.python.org/downloads/)
 - [Docker](https://docs.docker.com/engine/install/)
@@ -33,11 +34,10 @@ The reverse image search system requires Milvus, MySQL, WebServer and WebClient 
 
 - Modify docker-compose.yaml to map your data directory to the docker container of WebServer
 ```bash
-$ git clone https://github.com/milvus-io/bootcamp.git
-$ cd solutions/image/reverse_image_search/quick_deploy
+$ wget https://raw.githubusercontent.com/milvus-io/bootcamp/master/solutions/image/reverse_image_search/docker-compose.yaml
 $ vim docker-compose.yaml
 ```
-> Change line 73: `./data:/data` --> `your_data_path:/data`
+**Then to change line 75:** `./data:/data` --> `your_data_path:/data`
 
 - Create containers & start servers with docker-compose.yaml
 ```bash
@@ -59,28 +59,33 @@ Creating img-search-webserver ... done
 And show all containers with `docker ps`, and you can use `docker logs img-search-webserver` to get the logs of **server** container.
 
 ```bash
-CONTAINER ID   IMAGE                                         COMMAND                  CREATED              STATUS                             PORTS                               NAMES
-25b4c8e13590   milvusbootcamp/img-search-server:towhee       "/bin/sh -c 'python3…"   59 seconds ago       Up 49 seconds                      0.0.0.0:5000->5000/tcp              img-search-webserver
-ae9a9a783952   milvusdb/milvus:v2.0.0-rc8-20211104-d1f4106   "/tini -- milvus run…"   59 seconds ago       Up 58 seconds                      0.0.0.0:19530->19530/tcp            milvus-standalone
-7e88bdf66d96   minio/minio:RELEASE.2020-12-03T00-03-10Z      "/usr/bin/docker-ent…"   About a minute ago   Up 59 seconds (healthy)            9000/tcp                            milvus-minio
-4a3ea5fff0f9   mysql:5.7                                     "docker-entrypoint.s…"   About a minute ago   Up 59 seconds                      0.0.0.0:3306->3306/tcp, 33060/tcp   img-search-mysql
-f3c7440d5dc4   milvusbootcamp/img-search-client:1.0          "/bin/bash -c '/usr/…"   About a minute ago   Up 59 seconds (health: starting)   0.0.0.0:8001->80/tcp                img-search-webclient
-cc6b473d905d   quay.io/coreos/etcd:v3.5.0                    "etcd -advertise-cli…"   About a minute ago   Up 59 seconds                      2379-2380/tcp                       milvus-etcd
+CONTAINER ID   IMAGE                                      COMMAND                  CREATED          STATUS                      PORTS                                                                                      NAMES
+f24ddb15a529   milvusbootcamp/img-search-server:2.2.10    "/bin/sh -c 'python3…"   35 minutes ago   Up 34 minutes               0.0.0.0:5000->5000/tcp, :::5000->5000/tcp                                                  img-search-webserver
+d26b5cf21822   milvusdb/milvus:v2.2.10                    "/tini -- milvus run…"   35 minutes ago   Up 35 minutes               0.0.0.0:9091->9091/tcp, :::9091->9091/tcp, 0.0.0.0:19530->19530/tcp, :::19530->19530/tcp   milvus-standalone
+1e9254f56006   minio/minio:RELEASE.2023-03-20T20-16-18Z   "/usr/bin/docker-ent…"   35 minutes ago   Up 35 minutes (healthy)     9000/tcp                                                                                   milvus-minio
+445cef3fe474   milvusbootcamp/img-search-client:2.2.10    "/docker-entrypoint.…"   35 minutes ago   Up 35 minutes (unhealthy)   0.0.0.0:8001->80/tcp, :::8001->80/tcp                                                      img-search-webclient
+d9bbab39f325   mysql:5.7                                  "docker-entrypoint.s…"   35 minutes ago   Up 35 minutes               33060/tcp, 0.0.0.0:3306->3306/tcp, :::3306->3306/tcp                                       img-search-mysql
+807c2ace0b28   quay.io/coreos/etcd:v3.5.5                 "etcd -advertise-cli…"   35 minutes ago   Up 35 minutes               2379-2380/tcp                                                                              milvus-etcd
 ```
 
 ## Option 2: Deploy with source code
 
-We recommend using Docker Compose to deploy the reverse image search system. However, you also can run from source code, you need to manually start [Milvus](https://milvus.io/docs/v2.0.0/install_standalone-docker.md) and [Mysql](https://dev.mysql.com/doc/mysql-installation-excerpt/5.7/en/docker-mysql-getting-started.html). Next show you how to run the API server and Client.
+We recommend using Docker Compose to deploy the reverse image search system. However, you also can run from source code, you need to manually start [Milvus](https://milvus.io) and [Mysql](https://dev.mysql.com/doc/mysql-installation-excerpt/5.7/en/docker-mysql-getting-started.html). Next show you how to run the API server and Client.
 
 ### 1. Start Milvus & Mysql
 
 First, you need to start Milvus & Mysql servers.
 
-Refer [Milvus Standalone](https://milvus.io/docs/v2.0.0/install_standalone-docker.md) for how to install Milvus. Please note the Milvus version should match pymilvus version in [config.py](./server/src/config.py).
+Refer [Milvus Standalone](https://milvus.io/docs/install_standalone-docker.md) for how to install Milvus.
+
+```bash
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.2.10/milvus-standalone-docker-compose.yml -O docker-compose.yml
+$ sudo docker-compose up -d
+```
 
 There are several ways to start Mysql. One option is using docker to create a container:
 ```bash
-$ docker run -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d --name qa_mysql mysql:5.7
+$ docker run -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d --name image_search_mysql mysql:5.7
 ```
 
 
@@ -90,9 +95,11 @@ Then to start the system server, and it provides HTTP backend services.
 
 - **Install the Python packages**
 
+> Please note the Milvus version should [match pymilvus](https://milvus.io/docs/release_notes.md#Release-Notes) version in [requirements.txt](./server/requirements.txt). And this tutorial uses [milvus 2.2.10](https://milvus.io/docs/v2.2.x/install_standalone-docker.md) and [pymilvus 2.2.11](https://milvus.io/docs/release_notes.md#2210).
+
 ```bash
 $ git clone https://github.com/milvus-io/bootcamp.git
-$ cd solutions/reverse_image_search/quick_deploy/server
+$ cd bootcamp/solutions/image/reverse_image_search/server
 $ pip install -r requirements.txt
 ```
 
@@ -165,7 +172,7 @@ First, build a container by pulling docker image.
 $ docker run -d \
 -p 8001:80 \
 -e "API_URL=http://${API_HOST}:${API_PORT}" \
- milvusbootcamp/img-search-client:1.0
+ milvusbootcamp/img-search-client:2.2.10
 ```
 
 ## How to use front-end
@@ -199,24 +206,22 @@ Select an image to search.
 If you are interested in our code or would like to contribute code, feel free to learn more about our code structure.
 
 ```bash
-server
-├── Dockerfile
-├── requirements.txt
-└── src
-    ├── __init__.py
-    ├── config.py # Configuration file
-    ├── encode.py # Convert an image to embedding using towhee pipeline (ResNet50)
-    ├── encode_tf_resnet50.py # Old encoder file using ResNet50 by tensorflow
-    ├── logs.py
-    ├── main.py # Source code to start webserver
-    ├── milvus_helpers.py # Connect to Milvus server and insert/drop/query vectors in Milvus.
-    ├── mysql_helpers.py # Connect to MySQL server, and add/delete/query IDs and object information.
-    ├── operations
-    │   ├── __init__.py
-    │   ├── count.py
-    │   ├── drop.py
-    │   ├── load.py
-    │   ├── search.py
-    │   └── upload.py
-    └── test_main.py # Pytest file for main.py
+Dockerfile
+requirements.txt
+src
+├── __init__.py
+├── config.py # Configuration file
+├── encode.py # Convert an image to embedding using towhee pipeline (ResNet50)
+├── logs.py
+├── main.py # Source code to start webserver
+├── milvus_helpers.py # Connect to Milvus server and insert/drop/query vectors in Milvus.
+├── mysql_helpers.py # Connect to MySQL server, and add/delete/query IDs and object information.
+├── operations
+│   ├── __init__.py
+│   ├── count.py
+│   ├── drop.py
+│   ├── load.py
+│   ├── search.py
+│   └── upload.py
+└── test_main.py # Pytest file for main.py
 ```
