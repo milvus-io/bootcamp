@@ -97,7 +97,7 @@ And more solutions you can refer to the [**Examples**](https://github.com/towhee
      </td>
       <td>
         <p>- <a href="https://github.com/towhee-io/examples/tree/main/image/reverse_image_search">Jupyter notebook</a></p>
-        <p>- <a href="solutions/image/reverse_image_search/quick_deploy">Quick deploy</a></p>
+        <p>- <a href="solutions/image/reverse_image_search">Quick deploy</a></p>
      </td>
       <td>
         <p>- <a href="https://zhuanlan.zhihu.com/p/517360724">10 行代码搞定以图搜图</a></p>
@@ -125,7 +125,7 @@ And more solutions you can refer to the [**Examples**](https://github.com/towhee
      </td>
       <td>
         <p>-<a href="https://github.com/towhee-io/examples/tree/main/nlp/question_answering"> Jupyter notebook</a></p>
-        <p>-<a href="solutions/nlp/question_answering_system/quick_deploy"> Quick deploy</a></p>
+        <p>-<a href="solutions/nlp/question_answering_system"> Quick deploy</a></p>
      </td>
       <td>
           <p>-<a href="https://mp.weixin.qq.com/s/BZp4CMv2yuVb0oEyuDKNkw">快速搭建对话机器人，就用这一招！</a></p>
@@ -238,7 +238,6 @@ And more solutions you can refer to the [**Examples**](https://github.com/towhee
       <td>- <a href="https://www.bilibili.com/video/BV1dD4y1D7zS">中文</a></td>
    </tr>
 </table>
-
 ### :clapper: Live Demo
 
 We have built [online demos](https://milvus.io/milvus-demos/) for reverse image search, chatbot and molecular search that everyone can have fun with.
