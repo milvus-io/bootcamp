@@ -1,9 +1,9 @@
-PyMySQL
+PyMySQL==1.0.2
 uvicorn
 numpy
-pymilvus==2.0.1
+pymilvus==2.2.11
+towhee==1.1.0
+towhee.models==1.1.0
 fastapi
 python-multipart
 pandas
-sentence_transformers==1.2.0
-gdown
