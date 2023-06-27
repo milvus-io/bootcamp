@@ -1,15 +1,12 @@
-# Quick Start
+# QA System Based on Milvus & Towhee
 
+This project combines [Milvus](https://milvus.io/) and [Towhee](https://towhee.io/) to build a question and answer system. This aims to provide a solution to achieve semantic similarity matching with Milvus combined with AI models.
 
-This project combines Milvus and BERT to build a question and answer system. This aims to provide a solution to achieve semantic similarity matching with Milvus combined with AI models.
-
-> This project is based on Milvus2.0.0-rc5
+More example about LLM(ChatGPT etc.) for chatbot, you can refer to the [**Enhanced QA**](https://towhee.io/tasks/detail/pipeline/retrieval-augmented-generation).
 
 ## Data description
 
-The dataset needed for this system is a CSV format file which needs to contain a column of questions and a column of answers.
-
-There is a sample data in the data directory.
+The dataset for this system is a CSV format file which needs to contain a column of questions and a column of answers. And there is a sample data in the [data](./data) directory.
 
 ## How to deploy the system
 
@@ -17,13 +14,14 @@ There is a sample data in the data directory.
 
 The system will use Milvus to store and search the feature vector data, and Mysql is used to store the correspondence between the ids returned by Milvus and the questions data set, then you need to start Milvus and Mysql first.
 
-- **Start Milvus v2.0**
+- **Start Milvus v2.2.10**
 
-  First, you are supposed to refer to the Install [Milvus v2.0](https://milvus.io/docs/v2.0.0/install_standalone-docker.md) for how to run Milvus docker.
+First, you are supposed to refer to the Install [Milvus v2.2.10](https://milvus.io/docs/install_standalone-docker.md) for how to run Milvus docker.
 
-  > Note:
-  >
-  > Please pay attention to the version of Milvus when installing
+```bash
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.2.10/milvus-standalone-docker-compose.yml -O docker-compose.yml
+$ sudo docker-compose up -d
+```
 
 - **Start MySQL**
 
@@ -48,23 +46,24 @@ The next step is to start the system server. It provides HTTP backend services, 
   | **MYSQL_HOST**  | The IP address of MySQL.                              | 127.0.0.1    |
   | **MYSQL_PORT**  | The port of MySQL                                     | 3306         |
 
-  ```
-  $ export Milvus_HOST='127.0.0.1'
-  $ export Milvus_PORT='19530'
-  $ export Mysql_HOST='127.0.0.1'
+  Please use **your IP address** to instead of '127.0.0.1'.
+  ```bash
+  $ export MILVUS_HOST='<your-ip>'
+  $ export MILVUS_PORT='19530'
+  $ export MYSQL_HOST='<your-ip>'
   ```
 
 - **Run Docker**
 
   > This image qa-chatbot-server:v1 is based Milvus2.0-rc3, if you want to use docker to start the Q&A server with Milvus2.0-rc5, please use the Dockerfile to build a new qa-chatbot image.
   
-  ```
+  ```bash
   $ docker run -d \
   -p 8000:8000 \
-  -e "MILVUS_HOST=${Milvus_HOST}" \
-  -e "MILVUS_PORT=${Milvus_PORT}" \
-  -e "MYSQL_HOST=${Mysql_HOST}" \
-  milvusbootcamp/qa-chatbot-server:v1
+  -e "MILVUS_HOST=${MILVUS_HOST}" \
+  -e "MILVUS_PORT=${MILVUS_PORT}" \
+  -e "MYSQL_HOST=${MYSQL_HOST}" \
+  milvusbootcamp/qa-chatbot-server:2.2.10
   ```
 
 #### 2.2 Run source code
@@ -72,23 +71,15 @@ The next step is to start the system server. It provides HTTP backend services, 
 - **Install the Python packages**
 
   ```shell
-  $ cd server
+  $ git clone https://github.com/milvus-io/bootcamp.git
+  $ cd bootcamp/solutions/nlp/question_answering_system/server
   $ pip install -r requirements.txt
-  ```
-
-- **wget the model**
-
-  ```bash
-  $ mkdir -p server/src/models
-  $ cd server/src/models
-  $ wget https://public.ukp.informatik.tu-darmstadt.de/reimers/sentence-transformers/v0.2/paraphrase-mpnet-base-v2.zip
-  $ unzip paraphrase-mpnet-base-v2.zip -d paraphrase-mpnet-base-v2/
   ```
 
 - **Set configuration**
 
   ```bash
-  $ vim server/src/config.py
+  $ vim src/config.py
   ```
 
   Please modify the parameters according to your own environment. Here listing some parameters that need to be set, for more information please refer to [config.py](./server/src/config.py).
@@ -97,19 +88,18 @@ The next step is to start the system server. It provides HTTP backend services, 
   | ---------------- | ----------------------------------------------------- | ------------------- |
   | MILVUS_HOST      | The IP address of Milvus, you can get it by ifconfig. | 127.0.0.1           |
   | MILVUS_PORT      | Port of Milvus.                                       | 19530               |
-  | VECTOR_DIMENSION | Dimension of the vectors.                             | 768                 |
+  | VECTOR_DIMENSION | Dimension of the vectors.                             | 384                 |
   | MYSQL_HOST       | The IP address of Mysql.                              | 127.0.0.1           |
   | MYSQL_PORT       | Port of Milvus.                                       | 3306                |
-  | DEFAULT_TABLE    | The milvus and mysql default collection name.         | milvus_qa_search_1  |
-  | MODEL_PATH       | The path of the model `paraphrase-mpnet-base-v2`      |                     |
+  | DEFAULT_TABLE    | The milvus and mysql default collection name.         | qa_search           |
+
 
 - **Run the code**
 
   Then start the server with Fastapi.
 
 ```bash
-$ cd server/src
-$ python main.py
+$ python src/main.py
 ```
 
 #### 2.3 API docs
@@ -151,12 +141,12 @@ After starting the service, Please visit `127.0.0.1:8000/docs` in your browser
   $ export API_URL='http://127.0.0.1:8000'
   $ docker run -d -p 80:80 \
   -e API_URL=${API_URL} \
-  milvusbootcamp/qa-chatbot-client:v1
+  milvusbootcamp/qa-chatbot-client:2.2.10
   ```
 
 - **How to use**
 
-  Enter `WEBCLIENT_IP:80` in the browser to open the interface for reverse image search.
+  Enter `127.0.0.1:80` in the browser to open the interface for reverse image search.
 
   > `WEBCLIENT_IP` specifies the IP address that runs qa-chatbot-client docker.
 

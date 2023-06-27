@@ -1,11 +1,10 @@
 import sys
-
-sys.path.append("..")
 from config import DEFAULT_TABLE
 from logs import LOGGER
+from milvus_helpers import MilvusHelper
 
 
-def do_count(table_name, milvus_cli):
+def do_count(table_name: str, milvus_cli: MilvusHelper):
     if not table_name:
         table_name = DEFAULT_TABLE
     try:
