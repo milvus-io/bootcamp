@@ -4,7 +4,7 @@
     "cpus": 4
   },
   "waitFor": "onCreateCommand",
-  "updateContentCommand": "python -m pip install -r .devcontainer/requirements.txt",
+  "updateContentCommand": "pip install -r .devcontainer/requirements.txt",
   "postCreateCommand": "",
   "customizations": {
     "codespaces": {
