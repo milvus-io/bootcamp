@@ -4,11 +4,16 @@
     "cpus": 4
   },
   "waitFor": "onCreateCommand",
-  "updateContentCommand": "python3 -m pip install -r .devcontainer/requirements.txt",
+  "updateContentCommand": "python -m pip install -r .devcontainer/requirements.txt",
   "postCreateCommand": "",
   "customizations": {
     "codespaces": {
-      "openFiles": []
+      "openFiles": [
+        "notebooks/llms/langchain/lc_vectorstore_conv_mem.ipynb",
+        "notebooks/llms/llamaindex/multi_doc_qa.ipynb",
+        "notebooks/text/white_house_speeches.ipynb",
+        "notebooks/vision/reverse_painting_search.ipynb"
+      ]
     },
     "vscode": {
       "extensions": [

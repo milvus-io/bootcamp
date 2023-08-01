@@ -1,3 +1,4 @@
+ipykernel
 llama-index
 nltk
 milvus
