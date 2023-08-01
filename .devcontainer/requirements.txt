@@ -1,9 +1,10 @@
 llama-index
 nltk
 milvus
-pymilvus=2.2.5
+pymilvus==2.2.5
 torch
-torchvision tqdm
+torchvision
+tqdm
 sentence-transformers
 gdown
 langchain
