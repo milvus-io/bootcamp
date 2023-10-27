@@ -1,0 +1,1170 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>milvus.client.stub &mdash; pymilvus 1.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script type="text/javascript" src="../../../_static/clipboard.min.js"></script>
+        <script type="text/javascript" src="../../../_static/copybutton.js"></script>
+        <script async="async" type="text/javascript" src="https://assets.readthedocs.org/static/javascript/readthedocs-doc-embed.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+
+<!-- RTD Extra Head -->
+
+<link rel="stylesheet" href="https://assets.readthedocs.org/static/css/readthedocs-doc-embed.css" type="text/css" />
+
+<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": false, "api_host": "https://readthedocs.org", "build_date": "2021-03-26T03:06:15Z", "builder": "sphinx", "canonical_url": null, "commit": "26c94265", "docroot": "/docs/source/", "features": {"docsearch_disabled": false}, "global_analytics_code": "UA-17997319-1", "language": "en", "page": "_modules/milvus/client/stub", "programming_language": "py", "project": "pymilvus", "proxied_api_host": "/_", "source_suffix": ".rst", "subprojects": {}, "theme": "sphinx_rtd_theme", "user_analytics_code": "", "version": "1.0"}</script>
+
+<!--
+Using this variable directly instead of using `JSON.parse` is deprecated.
+The READTHEDOCS_DATA global variable will be removed in the future.
+-->
+<script type="text/javascript">
+READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerHTML);
+</script>
+
+<script type="text/javascript" src="https://assets.readthedocs.org/static/javascript/readthedocs-analytics.js" async="async"></script>
+
+<!-- end RTD <extrahead> -->
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> pymilvus
+          
+
+          
+          </a>
+
+          
+            
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html">API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../param.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../results.html">Search results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changes.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contribute.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../about.html">About this documentation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">pymilvus</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>milvus.client.stub</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+
+           <div itemprop="articleBody">
+            
+  <h1>Source code for milvus.client.stub</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: UTF-8 -*-</span>
+
+<span class="kn">import</span> <span class="nn">collections</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">import</span> <span class="nn">functools</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">urlparse</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">__version__</span>
+<span class="kn">from</span> <span class="nn">.types</span> <span class="kn">import</span> <span class="n">IndexType</span><span class="p">,</span> <span class="n">MetricType</span><span class="p">,</span> <span class="n">Status</span>
+<span class="kn">from</span> <span class="nn">.check</span> <span class="kn">import</span> <span class="n">check_pass_param</span><span class="p">,</span> <span class="n">is_legal_host</span><span class="p">,</span> <span class="n">is_legal_port</span>
+<span class="kn">from</span> <span class="nn">.pool</span> <span class="kn">import</span> <span class="n">ConnectionPool</span><span class="p">,</span> <span class="n">SingleConnectionPool</span><span class="p">,</span> <span class="n">SingletonThreadPool</span>
+<span class="kn">from</span> <span class="nn">.exceptions</span> <span class="kn">import</span> <span class="n">ParamError</span><span class="p">,</span> <span class="n">DeprecatedError</span>
+
+<span class="kn">from</span> <span class="nn">..settings</span> <span class="kn">import</span> <span class="n">DefaultConfig</span> <span class="k">as</span> <span class="n">config</span>
+
+<span class="n">LOGGER</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">deprecated</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="nd">@functools</span><span class="o">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">error_str</span> <span class="o">=</span> <span class="s2">&quot;Function </span><span class="si">{}</span><span class="s2"> has been deprecated&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+        <span class="n">LOGGER</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">error_str</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">DeprecatedError</span><span class="p">(</span><span class="n">error_str</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">inner</span>
+
+
+<span class="k">def</span> <span class="nf">check_connect</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="nd">@functools</span><span class="o">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">inner</span>
+
+
+<span class="k">def</span> <span class="nf">_pool_args</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">pool_kwargs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;pool_size&quot;</span><span class="p">,</span> <span class="s2">&quot;wait_timeout&quot;</span><span class="p">,</span> <span class="s2">&quot;handler&quot;</span><span class="p">,</span> <span class="s2">&quot;try_connect&quot;</span><span class="p">,</span> <span class="s2">&quot;pre_ping&quot;</span><span class="p">,</span> <span class="s2">&quot;max_retry&quot;</span><span class="p">):</span>
+            <span class="n">pool_kwargs</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+
+    <span class="k">return</span> <span class="n">pool_kwargs</span>
+
+
+<span class="k">def</span> <span class="nf">_set_uri</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">uri</span><span class="p">,</span> <span class="n">handler</span><span class="o">=</span><span class="s2">&quot;GRPC&quot;</span><span class="p">):</span>
+    <span class="n">default_port</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">GRPC_PORT</span> <span class="k">if</span> <span class="n">handler</span> <span class="o">==</span> <span class="s2">&quot;GRPC&quot;</span> <span class="k">else</span> <span class="n">config</span><span class="o">.</span><span class="n">HTTP_PORT</span>
+    <span class="n">default_uri</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">GRPC_URI</span> <span class="k">if</span> <span class="n">handler</span> <span class="o">==</span> <span class="s2">&quot;GRPC&quot;</span> <span class="k">else</span> <span class="n">config</span><span class="o">.</span><span class="n">HTTP_URI</span>
+
+    <span class="k">if</span> <span class="n">host</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">_port</span> <span class="o">=</span> <span class="n">port</span> <span class="k">if</span> <span class="n">port</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">default_port</span>
+        <span class="n">_host</span> <span class="o">=</span> <span class="n">host</span>
+        <span class="k">if</span> <span class="n">handler</span> <span class="o">==</span> <span class="s2">&quot;HTTP&quot;</span><span class="p">:</span>
+            <span class="n">_proto</span> <span class="o">=</span> <span class="s2">&quot;https&quot;</span> <span class="k">if</span> <span class="n">_port</span> <span class="o">==</span> <span class="mi">443</span> <span class="k">else</span> <span class="s2">&quot;http&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">_proto</span> <span class="o">=</span> <span class="s2">&quot;tcp&quot;</span>
+    <span class="k">elif</span> <span class="n">port</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">_uri</span> <span class="o">=</span> <span class="n">urlparse</span><span class="p">(</span><span class="n">uri</span><span class="p">)</span> <span class="k">if</span> <span class="n">uri</span> <span class="k">else</span> <span class="n">urlparse</span><span class="p">(</span><span class="n">default_uri</span><span class="p">)</span>
+            <span class="n">_host</span> <span class="o">=</span> <span class="n">_uri</span><span class="o">.</span><span class="n">hostname</span>
+            <span class="n">_port</span> <span class="o">=</span> <span class="n">_uri</span><span class="o">.</span><span class="n">port</span>
+            <span class="n">_proto</span> <span class="o">=</span> <span class="n">_uri</span><span class="o">.</span><span class="n">scheme</span>
+        <span class="k">except</span> <span class="p">(</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ParamError</span><span class="p">(</span><span class="s2">&quot;uri is illegal: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">ParamError</span><span class="p">(</span><span class="s2">&quot;Param is not complete. Please invoke as follow:</span><span class="se">\n</span><span class="s2">&quot;</span>
+                         <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">(host = $</span><span class="si">{HOST}</span><span class="s2">, port = $</span><span class="si">{PORT}</span><span class="s2">)</span><span class="se">\n</span><span class="s2">&quot;</span>
+                         <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">(uri = $</span><span class="si">{URI}</span><span class="s2">)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">is_legal_host</span><span class="p">(</span><span class="n">_host</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">is_legal_port</span><span class="p">(</span><span class="n">_port</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">ParamError</span><span class="p">(</span><span class="s2">&quot;host </span><span class="si">{}</span><span class="s2"> or port </span><span class="si">{}</span><span class="s2"> is illegal&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_host</span><span class="p">,</span> <span class="n">_port</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">://</span><span class="si">{}</span><span class="s2">:</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">_proto</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">_host</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">_port</span><span class="p">))</span>
+
+
+<div class="viewcode-block" id="Milvus"><a class="viewcode-back" href="../../../api.html#milvus.Milvus">[docs]</a><span class="k">class</span> <span class="nc">Milvus</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">handler</span><span class="o">=</span><span class="s2">&quot;GRPC&quot;</span><span class="p">,</span> <span class="n">pool</span><span class="o">=</span><span class="s2">&quot;SingletonThread&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Constructor method</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_uri</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_status</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_connected</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_handler</span> <span class="o">=</span> <span class="n">handler</span>
+
+        <span class="c1">#</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_conn</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="n">_uri</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;uri&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">pool_uri</span> <span class="o">=</span> <span class="n">_set_uri</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">_uri</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handler</span><span class="p">)</span>
+        <span class="n">pool_kwargs</span> <span class="o">=</span> <span class="n">_pool_args</span><span class="p">(</span><span class="n">handler</span><span class="o">=</span><span class="n">handler</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="c1"># self._pool = SingleConnectionPool(pool_uri, **pool_kwargs)</span>
+        <span class="k">if</span> <span class="n">pool</span> <span class="o">==</span> <span class="s2">&quot;QueuePool&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_pool</span> <span class="o">=</span> <span class="n">ConnectionPool</span><span class="p">(</span><span class="n">pool_uri</span><span class="p">,</span> <span class="o">**</span><span class="n">pool_kwargs</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">pool</span> <span class="o">==</span> <span class="s2">&quot;SingletonThread&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_pool</span> <span class="o">=</span> <span class="n">SingletonThreadPool</span><span class="p">(</span><span class="n">pool_uri</span><span class="p">,</span> <span class="o">**</span><span class="n">pool_kwargs</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">pool</span> <span class="o">==</span> <span class="s2">&quot;Singleton&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_pool</span> <span class="o">=</span> <span class="n">SingleConnectionPool</span><span class="p">(</span><span class="n">pool_uri</span><span class="p">,</span> <span class="o">**</span><span class="n">pool_kwargs</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ParamError</span><span class="p">(</span><span class="s2">&quot;Unknown pool value: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pool</span><span class="p">))</span>
+
+        <span class="c1"># store extra key-words arguments</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_kw</span> <span class="o">=</span> <span class="n">kwargs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_hooks</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">defaultdict</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_conn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pool</span><span class="o">.</span><span class="n">fetch</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_val</span><span class="p">,</span> <span class="n">exc_tb</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_conn</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="fm">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_connection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pool</span><span class="o">.</span><span class="n">fetch</span><span class="p">()</span>
+
+    <span class="nd">@deprecated</span>
+    <span class="k">def</span> <span class="nf">set_hook</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Deprecated</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># TODO: may remove it.</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stub</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_stub</span><span class="o">.</span><span class="n">set_hook</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_hooks</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">handler</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handler</span>
+
+    <span class="nd">@deprecated</span>
+    <span class="k">def</span> <span class="nf">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">uri</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Deprecated</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">connected</span><span class="p">()</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connected</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Status</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;You have already connected </span><span class="si">{}</span><span class="s2"> !&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_uri</span><span class="p">),</span>
+                          <span class="n">code</span><span class="o">=</span><span class="n">Status</span><span class="o">.</span><span class="n">CONNECT_FAILED</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stub</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_init</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">uri</span><span class="p">,</span> <span class="n">handler</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_handler</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ping</span><span class="p">(</span><span class="n">timeout</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_status</span> <span class="o">=</span> <span class="n">Status</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;Connected&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_connected</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_status</span>
+
+        <span class="k">return</span> <span class="n">Status</span><span class="p">()</span>
+
+    <span class="nd">@deprecated</span>
+    <span class="k">def</span> <span class="nf">connected</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Deprecated</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_status</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_status</span><span class="o">.</span><span class="n">OK</span><span class="p">()</span>
+
+    <span class="nd">@deprecated</span>
+    <span class="k">def</span> <span class="nf">disconnect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Deprecated</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Close client instance</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pool</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">client_version</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the version of the client.</span>
+
+<span class="sd">        :return: Version of the client.</span>
+
+<span class="sd">        :rtype: (str)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">__version__</span>
+
+    <span class="k">def</span> <span class="nf">server_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the status of the Milvus server.</span>
+
+<span class="sd">        :return:</span>
+<span class="sd">            Status: Whether the operation is successful.</span>
+
+<span class="sd">            str : Status of the Milvus server.</span>
+
+<span class="sd">        :rtype: (Status, str)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cmd</span><span class="p">(</span><span class="s2">&quot;status&quot;</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">server_version</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the version of the Milvus server.</span>
+
+<span class="sd">        :return:</span>
+<span class="sd">           Status: Whether the operation is successful.</span>
+
+<span class="sd">           str : Version of the Milvus server.</span>
+
+<span class="sd">        :rtype: (Status, str)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cmd</span><span class="p">(</span><span class="s2">&quot;version&quot;</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span>
+
+    <span class="nd">@check_connect</span>
+    <span class="k">def</span> <span class="nf">_cmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cmd</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
+        <span class="n">check_pass_param</span><span class="p">(</span><span class="n">cmd</span><span class="o">=</span><span class="n">cmd</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span><span class="p">()</span> <span class="k">as</span> <span class="n">handler</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">handler</span><span class="o">.</span><span class="n">_cmd</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Milvus.create_collection"><a class="viewcode-back" href="../../../api.html#milvus.Milvus.create_collection">[docs]</a>    <span class="nd">@check_connect</span>
+    <span class="k">def</span> <span class="nf">create_collection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a collection.</span>
+
+<span class="sd">        :type  param: dict</span>
+<span class="sd">        :param param: Information needed to create a collection. It contains items:</span>
+
+<span class="sd">            * *collection_name* (``str``) -- Collection name.</span>
+<span class="sd">            * *dimension* (``int``) -- Dimension of embeddings stored in collection.</span>
+<span class="sd">            * *index_file_size* (``int``) -- Segment size. See</span>
+<span class="sd">              `Storage Concepts &lt;https://milvus.io/docs/v1.0.0/storage_concept.md&gt;`_.</span>
+<span class="sd">            * *metric_type* (``MetricType``) -- Distance Metrics type. Valued form</span>
+<span class="sd">              :class:`~milvus.MetricType`. See</span>
+<span class="sd">              `Distance Metrics &lt;https://milvus.io/docs/v1.0.0/metric.md&gt;`_.</span>
+
+
+<span class="sd">            A demo is as follow:</span>
+
+<span class="sd">            .. code-block:: python</span>
+
+<span class="sd">                param={&#39;collection_name&#39;: &#39;name&#39;,</span>
+<span class="sd">                   &#39;dimension&#39;: 16,</span>
+<span class="sd">                   &#39;index_file_size&#39;: 1024 # Optional, default 1024，</span>
+<span class="sd">                   &#39;metric_type&#39;: MetricType.L2 # Optional, default MetricType.L2</span>
+<span class="sd">                  }</span>
+
+
+<span class="sd">        :param timeout: An optional duration of time in seconds to allow for the RPC. When timeout</span>
+<span class="sd">                        is set to None, client waits until server responses or error occurs.</span>
+<span class="sd">        :type  timeout: float</span>
+
+<span class="sd">        :return: The operation status. Succeed if `Status.OK()` is `True`.</span>
+<span class="sd">        :rtype: Status</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">ParamError</span><span class="p">(</span><span class="s1">&#39;Param type incorrect, expect </span><span class="si">{}</span><span class="s1"> but get </span><span class="si">{}</span><span class="s1"> instead&#39;</span>
+                             <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="nb">dict</span><span class="p">),</span> <span class="nb">type</span><span class="p">(</span><span class="n">param</span><span class="p">)))</span>
+
+        <span class="n">collection_param</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">param</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="s1">&#39;collection_name&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">collection_param</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ParamError</span><span class="p">(</span><span class="s1">&#39;collection_name is required&#39;</span><span class="p">)</span>
+        <span class="n">collection_name</span> <span class="o">=</span> <span class="n">collection_param</span><span class="p">[</span><span class="s2">&quot;collection_name&quot;</span><span class="p">]</span>
+        <span class="n">collection_param</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;collection_name&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="s1">&#39;dimension&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">collection_param</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ParamError</span><span class="p">(</span><span class="s1">&#39;dimension is required&#39;</span><span class="p">)</span>
+        <span class="n">dim</span> <span class="o">=</span> <span class="n">collection_param</span><span class="p">[</span><span class="s2">&quot;dimension&quot;</span><span class="p">]</span>
+        <span class="n">collection_param</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;dimension&quot;</span><span class="p">)</span>
+
+        <span class="n">index_file_size</span> <span class="o">=</span> <span class="n">collection_param</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;index_file_size&#39;</span><span class="p">,</span> <span class="mi">1024</span><span class="p">)</span>
+        <span class="n">collection_param</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;index_file_size&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+        <span class="n">metric_type</span> <span class="o">=</span> <span class="n">collection_param</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;metric_type&#39;</span><span class="p">,</span> <span class="n">MetricType</span><span class="o">.</span><span class="n">L2</span><span class="p">)</span>
+        <span class="n">collection_param</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;metric_type&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+        <span class="n">check_pass_param</span><span class="p">(</span><span class="n">collection_name</span><span class="o">=</span><span class="n">collection_name</span><span class="p">,</span> <span class="n">dimension</span><span class="o">=</span><span class="n">dim</span><span class="p">,</span>
+                         <span class="n">index_file_size</span><span class="o">=</span><span class="n">index_file_size</span><span class="p">,</span> <span class="n">metric_type</span><span class="o">=</span><span class="n">metric_type</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span><span class="p">()</span> <span class="k">as</span> <span class="n">handler</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">handler</span><span class="o">.</span><span class="n">create_collection</span><span class="p">(</span><span class="n">collection_name</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">index_file_size</span><span class="p">,</span>
+                                             <span class="n">metric_type</span><span class="p">,</span> <span class="n">collection_param</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Milvus.has_collection"><a class="viewcode-back" href="../../../api.html#milvus.Milvus.has_collection">[docs]</a>    <span class="nd">@check_connect</span>
+    <span class="k">def</span> <span class="nf">has_collection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">collection_name</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Checks whether a collection exists.</span>
+
+<span class="sd">        :param collection_name: Name of the collection to check.</span>
+<span class="sd">        :type  collection_name: str</span>
+<span class="sd">        :param timeout: An optional duration of time in seconds to allow for the RPC. When timeout</span>
+<span class="sd">                        is set to None, client waits until server responses or error occurs.</span>
+<span class="sd">        :type  timeout: float</span>
+
+<span class="sd">        :return: The operation status and the flag indicating if collection exists. Succeed</span>
+<span class="sd">                 if `Status.OK()` is `True`. If status is not OK, the flag is always `False`.</span>
+<span class="sd">        :rtype: Status, bool</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">check_pass_param</span><span class="p">(</span><span class="n">collection_name</span><span class="o">=</span><span class="n">collection_name</span><span class="p">)</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span><span class="p">()</span> <span class="k">as</span> <span class="n">handler</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">handler</span><span class="o">.</span><span class="n">has_collection</span><span class="p">(</span><span class="n">collection_name</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Milvus.get_collection_info"><a class="viewcode-back" href="../../../api.html#milvus.Milvus.get_collection_info">[docs]</a>    <span class="nd">@check_connect</span>
+    <span class="k">def</span> <span class="nf">get_collection_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">collection_name</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns information of a collection.</span>
+
+<span class="sd">        :type  collection_name: str</span>
+<span class="sd">        :param collection_name: Name of the collection to describe.</span>
+<span class="sd">        :param timeout: An optional duration of time in seconds to allow for the RPC. When timeout</span>
+<span class="sd">                        is set to None, client waits until server responses or error occurs.</span>
+<span class="sd">        :type  timeout: float</span>
+
+<span class="sd">        :return: The operation status and collection information. Succeed if `Status.OK()`</span>
+<span class="sd">                 is `True`. If status is not OK, the returned information is always `None`.</span>
+<span class="sd">        :rtype: Status, CollectionSchema</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">check_pass_param</span><span class="p">(</span><span class="n">collection_name</span><span class="o">=</span><span class="n">collection_name</span><span class="p">)</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span><span class="p">()</span> <span class="k">as</span> <span class="n">handler</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">handler</span><span class="o">.</span><span class="n">describe_collection</span><span class="p">(</span><span class="n">collection_name</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Milvus.count_entities"><a class="viewcode-back" href="../../../api.html#milvus.Milvus.count_entities">[docs]</a>    <span class="nd">@check_connect</span>
+    <span class="k">def</span> <span class="nf">count_entities</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">collection_name</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the number of vectors in a collection.</span>
+
+<span class="sd">        :type  collection_name: str</span>
+<span class="sd">        :param collection_name: target table name.</span>
+<span class="sd">        :param timeout: An optional duration of time in seconds to allow for the RPC. When timeout</span>
+<span class="sd">                        is set to None, client waits until server responses or error occurs.</span>
+<span class="sd">        :type  timeout: float</span>
+
+<span class="sd">        :return: The operation status and row count. Succeed if `Status.OK()` is `True`.</span>
+<span class="sd">                 If status is not OK, the returned value of is always `None`.</span>
+<span class="sd">        :rtype: Status, int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">check_pass_param</span><span class="p">(</span><span class="n">collection_name</span><span class="o">=</span><span class="n">collection_name</span><span class="p">)</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span><span class="p">()</span> <span class="k">as</span> <span class="n">handler</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">handler</span><span class="o">.</span><span class="n">count_collection</span><span class="p">(</span><span class="n">collection_name</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Milvus.list_collections"><a class="viewcode-back" href="../../../api.html#milvus.Milvus.list_collections">[docs]</a>    <span class="nd">@check_connect</span>
+    <span class="k">def</span> <span class="nf">list_collections</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns collection list.</span>
+
+<span class="sd">        :param timeout: An optional duration of time in seconds to allow for the RPC. When timeout</span>
+<span class="sd">                        is set to None, client waits until server responses or error occurs.</span>
+<span class="sd">        :type  timeout: float</span>
+
+<span class="sd">        :return: The operation status and collection name list. Succeed if `Status.OK()` is `True`.</span>
+<span class="sd">                 If status is not OK, the returned name list is always `[]`.</span>
+<span class="sd">        :rtype: Status, list[str]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span><span class="p">()</span> <span class="k">as</span> <span class="n">handler</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">handler</span><span class="o">.</span><span class="n">show_collections</span><span class="p">(</span><span class="n">timeout</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Milvus.get_collection_stats"><a class="viewcode-back" href="../../../api.html#milvus.Milvus.get_collection_stats">[docs]</a>    <span class="nd">@check_connect</span>
+    <span class="k">def</span> <span class="nf">get_collection_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">collection_name</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Returns collection statistics information.</span>
+
+<span class="sd">        :type  collection_name: str</span>
+<span class="sd">        :param collection_name: target table name.</span>
+<span class="sd">        :param timeout: An optional duration of time in seconds to allow for the RPC. When timeout</span>
+<span class="sd">                        is set to None, client waits until server responses or error occurs.</span>
+<span class="sd">        :type  timeout: float</span>
+
+<span class="sd">        :return: The operation status and collection statistics information. Succeed</span>
+<span class="sd">                 if `Status.OK()` is `True`. If status is not OK, the returned information</span>
+<span class="sd">                 is always `[]`.</span>
+<span class="sd">        :rtype: Status, dict</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">check_pass_param</span><span class="p">(</span><span class="n">collection_name</span><span class="o">=</span><span class="n">collection_name</span><span class="p">)</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span><span class="p">()</span> <span class="k">as</span> <span class="n">handler</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">handler</span><span class="o">.</span><span class="n">show_collection_info</span><span class="p">(</span><span class="n">collection_name</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Milvus.load_collection"><a class="viewcode-back" href="../../../api.html#milvus.Milvus.load_collection">[docs]</a>    <span class="nd">@check_connect</span>
+    <span class="k">def</span> <span class="nf">load_collection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">collection_name</span><span class="p">,</span> <span class="n">partition_tags</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Loads a collection for caching.</span>
+
+<span class="sd">        :param collection_name: collection to load</span>
+<span class="sd">        :type collection_name: str</span>
+<span class="sd">        :param partition_tags: partition tag list. `None` indicates to load whole collection,</span>
+<span class="sd">                               otherwise to load specified partitions.</span>
+<span class="sd">        :param timeout: An optional duration of time in seconds to allow for the RPC. When timeout</span>
+<span class="sd">                        is set to None, client waits until server responses or error occurs.</span>
+<span class="sd">        :type  timeout: float</span>
+
+<span class="sd">        :return: The operation status. Succeed if `Status.OK()` is `True`.</span>
+<span class="sd">        :rtype: Status</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">check_pass_param</span><span class="p">(</span><span class="n">collection_name</span><span class="o">=</span><span class="n">collection_name</span><span class="p">)</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span><span class="p">()</span> <span class="k">as</span> <span class="n">handler</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">handler</span><span class="o">.</span><span class="n">preload_collection</span><span class="p">(</span><span class="n">collection_name</span><span class="p">,</span> <span class="n">partition_tags</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span></div>
+
+    <span class="nd">@check_connect</span>
+    <span class="k">def</span> <span class="nf">reload_segments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">collection_name</span><span class="p">,</span> <span class="n">segment_ids</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reloads segment DeletedDocs data to cache. This API is not recommended for users.</span>
+
+<span class="sd">        :param collection_name: Name of the collection being deleted</span>
+<span class="sd">        :type  collection_name: str</span>
+<span class="sd">        :param segment_ids: Segment IDs.</span>
+<span class="sd">        :type segment_ids: list[str]</span>
+<span class="sd">        :param timeout: An optional duration of time in seconds to allow for the RPC. When timeout</span>
+<span class="sd">                        is set to None, client waits until server responses or error occurs.</span>
+<span class="sd">        :type  timeout: float</span>
+
+<span class="sd">        :return: The operation status. Succeed if `Status.OK()` is `True`.</span>
+<span class="sd">        :rtype: Status</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">check_pass_param</span><span class="p">(</span><span class="n">collection_name</span><span class="o">=</span><span class="n">collection_name</span><span class="p">)</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span><span class="p">()</span> <span class="k">as</span> <span class="n">handler</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">handler</span><span class="o">.</span><span class="n">reload_segments</span><span class="p">(</span><span class="n">collection_name</span><span class="p">,</span> <span class="n">segment_ids</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Milvus.drop_collection"><a class="viewcode-back" href="../../../api.html#milvus.Milvus.drop_collection">[docs]</a>    <span class="nd">@check_connect</span>
+    <span class="k">def</span> <span class="nf">drop_collection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">collection_name</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Deletes a collection by name.</span>
+
+<span class="sd">        :param collection_name: Name of the collection being deleted</span>
+<span class="sd">        :type  collection_name: str</span>
+<span class="sd">        :param timeout: An optional duration of time in seconds to allow for the RPC. When timeout</span>
+<span class="sd">                        is set to None, client waits until server responses or error occurs.</span>
+<span class="sd">        :type  timeout: float</span>
+
+<span class="sd">        :return: The operation status. Succeed if `Status.OK()` is `True`.</span>
+<span class="sd">        :rtype: Status</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">check_pass_param</span><span class="p">(</span><span class="n">collection_name</span><span class="o">=</span><span class="n">collection_name</span><span class="p">)</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span><span class="p">()</span> <span class="k">as</span> <span class="n">handler</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">handler</span><span class="o">.</span><span class="n">drop_collection</span><span class="p">(</span><span class="n">collection_name</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Milvus.insert"><a class="viewcode-back" href="../../../api.html#milvus.Milvus.insert">[docs]</a>    <span class="nd">@check_connect</span>
+    <span class="k">def</span> <span class="nf">insert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">collection_name</span><span class="p">,</span> <span class="n">records</span><span class="p">,</span> <span class="n">ids</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">partition_tag</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+               <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Insert vectors to a collection.</span>
+
+<span class="sd">        :type  collection_name: str</span>
+<span class="sd">        :param collection_name: Name of the collection to insert vectors to.</span>
+<span class="sd">        :param ids: ID list. `None` indicates ID is generated by server system. Note that if the</span>
+<span class="sd">                    first time when insert() is invoked ids is not passed into this method, each</span>
+<span class="sd">                    of the rest time when inset() is invoked ids is not permitted to pass,</span>
+<span class="sd">                    otherwise server will return an error and the insertion process will fail.</span>
+<span class="sd">                    And vice versa.</span>
+<span class="sd">        :type  ids: list[int]</span>
+<span class="sd">        :param records: List of vectors to insert.</span>
+<span class="sd">        :type  records: list[list[float]]</span>
+<span class="sd">        :param partition_tag: Tag of a partition.</span>
+<span class="sd">        :type partition_tag: str or None. If partition_tag is None, vectors will be inserted to the</span>
+<span class="sd">                             default partition `_default`.</span>
+<span class="sd">        :param params: Insert param. Reserved.</span>
+<span class="sd">        :type params: dict</span>
+<span class="sd">        :param timeout: An optional duration of time in seconds to allow for the RPC. When timeout</span>
+<span class="sd">                        is set to None, client waits until server responses or error occurs.</span>
+<span class="sd">        :type  timeout: float</span>
+<span class="sd">        :param kwargs:</span>
+<span class="sd">            * *_async* (``bool``) --</span>
+<span class="sd">              Indicate if invoke asynchronously. When value is true, method returns a InsertFuture</span>
+<span class="sd">              object; otherwise, method returns results from server.</span>
+<span class="sd">            * *_callback* (``function``) --</span>
+<span class="sd">              The callback function which is invoked after server response successfully. It only</span>
+<span class="sd">              takes effect when _async is set to True.</span>
+
+<span class="sd">        :return: The operation status and IDs of inserted entities. Succeed if `Status.OK()`</span>
+<span class="sd">                 is `True`. If status is not OK, the returned IDs is always `[]`.</span>
+<span class="sd">        :rtype: Status, list[int]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;insert_param&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span><span class="p">()</span> <span class="k">as</span> <span class="n">handler</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">handler</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="n">check_pass_param</span><span class="p">(</span><span class="n">collection_name</span><span class="o">=</span><span class="n">collection_name</span><span class="p">,</span> <span class="n">records</span><span class="o">=</span><span class="n">records</span><span class="p">)</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">partition_tag</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">check_pass_param</span><span class="p">(</span><span class="n">partition_tag</span><span class="o">=</span><span class="n">partition_tag</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ids</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">check_pass_param</span><span class="p">(</span><span class="n">ids</span><span class="o">=</span><span class="n">ids</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">records</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ids</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="n">ParamError</span><span class="p">(</span><span class="s2">&quot;length of vectors do not match that of ids&quot;</span><span class="p">)</span>
+
+        <span class="n">params</span> <span class="o">=</span> <span class="n">params</span> <span class="ow">or</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">ParamError</span><span class="p">(</span><span class="s2">&quot;Params must be a dictionary type&quot;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span><span class="p">()</span> <span class="k">as</span> <span class="n">handler</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">handler</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">collection_name</span><span class="p">,</span> <span class="n">records</span><span class="p">,</span> <span class="n">ids</span><span class="p">,</span> <span class="n">partition_tag</span><span class="p">,</span>
+                                  <span class="n">params</span><span class="p">,</span> <span class="n">timeout</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Milvus.get_entity_by_id"><a class="viewcode-back" href="../../../api.html#milvus.Milvus.get_entity_by_id">[docs]</a>    <span class="k">def</span> <span class="nf">get_entity_by_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">collection_name</span><span class="p">,</span> <span class="n">ids</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns raw vectors according to ids.</span>
+
+<span class="sd">        :param collection_name: Name of the collection</span>
+<span class="sd">        :type collection_name: str</span>
+
+<span class="sd">        :param ids: list of vector id</span>
+<span class="sd">        :type ids: list</span>
+<span class="sd">        :param timeout: An optional duration of time in seconds to allow for the RPC. When timeout</span>
+<span class="sd">                        is set to None, client waits until server responses or error occurs.</span>
+<span class="sd">        :type  timeout: float</span>
+
+<span class="sd">        :return: The operation status and entities. Succeed if `Status.OK()` is `True`.</span>
+<span class="sd">                 If status is not OK, the returned entities is always `[]`.</span>
+<span class="sd">        :rtype: Status, list[list[float]]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">check_pass_param</span><span class="p">(</span><span class="n">collection_name</span><span class="o">=</span><span class="n">collection_name</span><span class="p">,</span> <span class="n">ids</span><span class="o">=</span><span class="n">ids</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span><span class="p">()</span> <span class="k">as</span> <span class="n">handler</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">handler</span><span class="o">.</span><span class="n">get_vectors_by_ids</span><span class="p">(</span><span class="n">collection_name</span><span class="p">,</span> <span class="n">ids</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Milvus.list_id_in_segment"><a class="viewcode-back" href="../../../api.html#milvus.Milvus.list_id_in_segment">[docs]</a>    <span class="nd">@check_connect</span>
+    <span class="k">def</span> <span class="nf">list_id_in_segment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">collection_name</span><span class="p">,</span> <span class="n">segment_name</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get IDs of entity stored in the specified segment.</span>
+
+<span class="sd">        :param collection_name: Collection the segment belongs to.</span>
+<span class="sd">        :type collection_name: str</span>
+<span class="sd">        :param segment_name: Segment name.</span>
+<span class="sd">        :type segment_name: str</span>
+<span class="sd">        :param timeout: An optional duration of time in seconds to allow for the RPC. When timeout</span>
+<span class="sd">                        is set to None, client waits until server responses or error occurs.</span>
+<span class="sd">        :type  timeout: float</span>
+
+<span class="sd">        :return: The operation status and entity IDs. Succeed if `Status.OK()` is `True`.</span>
+<span class="sd">                 If status is not OK, the returned IDs is always `[]`.</span>
+<span class="sd">        :rtype: Status, list[int]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">check_pass_param</span><span class="p">(</span><span class="n">collection_name</span><span class="o">=</span><span class="n">collection_name</span><span class="p">)</span>
+        <span class="n">check_pass_param</span><span class="p">(</span><span class="n">collection_name</span><span class="o">=</span><span class="n">segment_name</span><span class="p">)</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span><span class="p">()</span> <span class="k">as</span> <span class="n">handler</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">handler</span><span class="o">.</span><span class="n">get_vector_ids</span><span class="p">(</span><span class="n">collection_name</span><span class="p">,</span> <span class="n">segment_name</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Milvus.create_index"><a class="viewcode-back" href="../../../api.html#milvus.Milvus.create_index">[docs]</a>    <span class="nd">@check_connect</span>
+    <span class="k">def</span> <span class="nf">create_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">collection_name</span><span class="p">,</span> <span class="n">index_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates index for a collection.</span>
+
+<span class="sd">        :param collection_name: Collection used to create index.</span>
+<span class="sd">        :type collection_name: str</span>
+<span class="sd">        :param index_type: index params. See `index params &lt;param.html&gt;`_ for supported indexes.</span>
+<span class="sd">        :type index_type: IndexType</span>
+<span class="sd">        :param params: Index param. See `index params &lt;param.html&gt;`_ for detailed index param of</span>
+<span class="sd">                       supported indexes.</span>
+<span class="sd">        :type params: dict</span>
+<span class="sd">        :param timeout: An optional duration of time in seconds to allow for the RPC. When timeout</span>
+<span class="sd">                        is set to None, client waits until server responses or error occurs.</span>
+<span class="sd">        :type  timeout: float</span>
+<span class="sd">        :param kwargs:</span>
+<span class="sd">            * *_async* (``bool``) --</span>
+<span class="sd">              Indicate if invoke asynchronously. When value is true, method returns a IndexFuture</span>
+<span class="sd">              object; otherwise, method returns results from server.</span>
+<span class="sd">            * *_callback* (``function``) --</span>
+<span class="sd">              The callback function which is invoked after server response successfully. It only</span>
+<span class="sd">              takes effect when _async is set to True.</span>
+
+<span class="sd">        :return: The operation status. Succeed if `Status.OK()` is `True`.</span>
+<span class="sd">        :rtype: Status</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">_index_type</span> <span class="o">=</span> <span class="n">IndexType</span><span class="o">.</span><span class="n">FLAT</span> <span class="k">if</span> <span class="n">index_type</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">index_type</span>
+        <span class="n">check_pass_param</span><span class="p">(</span><span class="n">collection_name</span><span class="o">=</span><span class="n">collection_name</span><span class="p">,</span> <span class="n">index_type</span><span class="o">=</span><span class="n">_index_type</span><span class="p">)</span>
+
+        <span class="n">params</span> <span class="o">=</span> <span class="n">params</span> <span class="ow">or</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">ParamError</span><span class="p">(</span><span class="s2">&quot;Params must be a dictionary type&quot;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span><span class="p">()</span> <span class="k">as</span> <span class="n">handler</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">handler</span><span class="o">.</span><span class="n">create_index</span><span class="p">(</span><span class="n">collection_name</span><span class="p">,</span> <span class="n">_index_type</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">timeout</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Milvus.get_index_info"><a class="viewcode-back" href="../../../api.html#milvus.Milvus.get_index_info">[docs]</a>    <span class="nd">@check_connect</span>
+    <span class="k">def</span> <span class="nf">get_index_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">collection_name</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Show index information of a collection.</span>
+
+<span class="sd">        :type collection_name: str</span>
+<span class="sd">        :param collection_name: table name been queried</span>
+<span class="sd">        :param timeout: An optional duration of time in seconds to allow for the RPC. When timeout</span>
+<span class="sd">                        is set to None, client waits until server responses or error occurs.</span>
+<span class="sd">        :type  timeout: float</span>
+
+<span class="sd">        :return: The operation status and index info. Succeed if `Status.OK()` is `True`.</span>
+<span class="sd">                 If status is not OK, the returned index info is always `None`.</span>
+<span class="sd">        :rtype: Status, IndexParam</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">check_pass_param</span><span class="p">(</span><span class="n">collection_name</span><span class="o">=</span><span class="n">collection_name</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span><span class="p">()</span> <span class="k">as</span> <span class="n">handler</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">handler</span><span class="o">.</span><span class="n">describe_index</span><span class="p">(</span><span class="n">collection_name</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Milvus.drop_index"><a class="viewcode-back" href="../../../api.html#milvus.Milvus.drop_index">[docs]</a>    <span class="nd">@check_connect</span>
+    <span class="k">def</span> <span class="nf">drop_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">collection_name</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Removes an index.</span>
+
+<span class="sd">        :param collection_name: target collection name.</span>
+<span class="sd">        :type collection_name: str</span>
+<span class="sd">        :param timeout: An optional duration of time in seconds to allow for the RPC. When timeout</span>
+<span class="sd">                        is set to None, client waits until server responses or error occurs.</span>
+<span class="sd">        :type  timeout: float</span>
+
+<span class="sd">        :return: The operation status. Succeed if `Status.OK()` is `True`.</span>
+<span class="sd">        :rtype: Status</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">check_pass_param</span><span class="p">(</span><span class="n">collection_name</span><span class="o">=</span><span class="n">collection_name</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span><span class="p">()</span> <span class="k">as</span> <span class="n">handler</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">handler</span><span class="o">.</span><span class="n">drop_index</span><span class="p">(</span><span class="n">collection_name</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Milvus.create_partition"><a class="viewcode-back" href="../../../api.html#milvus.Milvus.create_partition">[docs]</a>    <span class="nd">@check_connect</span>
+    <span class="k">def</span> <span class="nf">create_partition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">collection_name</span><span class="p">,</span> <span class="n">partition_tag</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        create a partition for a collection.</span>
+
+<span class="sd">        :param collection_name: Name of the collection.</span>
+<span class="sd">        :type  collection_name: str</span>
+<span class="sd">        :param partition_tag: Name of the partition tag.</span>
+<span class="sd">        :type  partition_tag: str</span>
+<span class="sd">        :param timeout: An optional duration of time in seconds to allow for the RPC. When timeout</span>
+<span class="sd">                        is set to None, client waits until server responses or error occurs.</span>
+<span class="sd">        :type  timeout: float</span>
+
+<span class="sd">        :return: The operation status. Succeed if `Status.OK()` is `True`.</span>
+<span class="sd">        :rtype: Status</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">check_pass_param</span><span class="p">(</span><span class="n">collection_name</span><span class="o">=</span><span class="n">collection_name</span><span class="p">,</span> <span class="n">partition_tag</span><span class="o">=</span><span class="n">partition_tag</span><span class="p">)</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span><span class="p">()</span> <span class="k">as</span> <span class="n">handler</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">handler</span><span class="o">.</span><span class="n">create_partition</span><span class="p">(</span><span class="n">collection_name</span><span class="p">,</span> <span class="n">partition_tag</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Milvus.has_partition"><a class="viewcode-back" href="../../../api.html#milvus.Milvus.has_partition">[docs]</a>    <span class="nd">@check_connect</span>
+    <span class="k">def</span> <span class="nf">has_partition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">collection_name</span><span class="p">,</span> <span class="n">partition_tag</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Check if specified partition exists.</span>
+
+<span class="sd">        :param collection_name: target table name.</span>
+<span class="sd">        :type  collection_name: str</span>
+<span class="sd">        :param partition_tag: partition tag.</span>
+<span class="sd">        :type  partition_tag: str</span>
+<span class="sd">        :param timeout: An optional duration of time in seconds to allow for the RPC. When timeout</span>
+<span class="sd">                        is set to None, client waits until server responses or error occurs.</span>
+<span class="sd">        :type  timeout: float</span>
+
+<span class="sd">        :returns: The operation status and a flag indicating if partition exists. Succeed</span>
+<span class="sd">                  if `Status.OK()` is `True`. If status is not ok, the flag is always `False`.</span>
+<span class="sd">        :rtype: Status, bool</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">check_pass_param</span><span class="p">(</span><span class="n">collection_name</span><span class="o">=</span><span class="n">collection_name</span><span class="p">,</span> <span class="n">partition_tag</span><span class="o">=</span><span class="n">partition_tag</span><span class="p">)</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span><span class="p">()</span> <span class="k">as</span> <span class="n">handler</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">handler</span><span class="o">.</span><span class="n">has_partition</span><span class="p">(</span><span class="n">collection_name</span><span class="p">,</span> <span class="n">partition_tag</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Milvus.list_partitions"><a class="viewcode-back" href="../../../api.html#milvus.Milvus.list_partitions">[docs]</a>    <span class="nd">@check_connect</span>
+    <span class="k">def</span> <span class="nf">list_partitions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">collection_name</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Show all partitions in a collection.</span>
+
+<span class="sd">        :param collection_name: target table name.</span>
+<span class="sd">        :type  collection_name: str</span>
+<span class="sd">        :param timeout: An optional duration of time in seconds to allow for the RPC. When timeout</span>
+<span class="sd">                        is set to None, client waits until server responses or error occurs.</span>
+<span class="sd">        :type  timeout: float</span>
+
+<span class="sd">        :returns: The operation status and partition list. Succeed if `Status.OK()` is `True`.</span>
+<span class="sd">                  If status is not OK, returned partition list is `[]`.</span>
+<span class="sd">        :rtype: Status, list[PartitionParam]</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">check_pass_param</span><span class="p">(</span><span class="n">collection_name</span><span class="o">=</span><span class="n">collection_name</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span><span class="p">()</span> <span class="k">as</span> <span class="n">handler</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">handler</span><span class="o">.</span><span class="n">show_partitions</span><span class="p">(</span><span class="n">collection_name</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Milvus.drop_partition"><a class="viewcode-back" href="../../../api.html#milvus.Milvus.drop_partition">[docs]</a>    <span class="nd">@check_connect</span>
+    <span class="k">def</span> <span class="nf">drop_partition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">collection_name</span><span class="p">,</span> <span class="n">partition_tag</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Deletes a partition in a collection.</span>
+
+<span class="sd">        :param collection_name: Collection name.</span>
+<span class="sd">        :type  collection_name: str</span>
+<span class="sd">        :param partition_tag: Partition name.</span>
+<span class="sd">        :type  partition_tag: str</span>
+<span class="sd">        :param timeout: An optional duration of time in seconds to allow for the RPC. When timeout</span>
+<span class="sd">                        is set to None, client waits until server responses or error occurs.</span>
+<span class="sd">        :type  timeout: float</span>
+
+<span class="sd">        :return: The operation status. Succeed if `Status.OK()` is `True`.</span>
+<span class="sd">        :rtype: Status</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">check_pass_param</span><span class="p">(</span><span class="n">collection_name</span><span class="o">=</span><span class="n">collection_name</span><span class="p">,</span> <span class="n">partition_tag</span><span class="o">=</span><span class="n">partition_tag</span><span class="p">)</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span><span class="p">()</span> <span class="k">as</span> <span class="n">handler</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">handler</span><span class="o">.</span><span class="n">drop_partition</span><span class="p">(</span><span class="n">collection_name</span><span class="p">,</span> <span class="n">partition_tag</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Milvus.search"><a class="viewcode-back" href="../../../api.html#milvus.Milvus.search">[docs]</a>    <span class="nd">@check_connect</span>
+    <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">collection_name</span><span class="p">,</span> <span class="n">top_k</span><span class="p">,</span> <span class="n">query_records</span><span class="p">,</span> <span class="n">partition_tags</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+               <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Search vectors in a collection.</span>
+
+<span class="sd">        :param collection_name: Name of the collection.</span>
+<span class="sd">        :type  collection_name: str</span>
+<span class="sd">        :param top_k: number of vectors which is most similar with query vectors</span>
+<span class="sd">        :type  top_k: int</span>
+<span class="sd">        :param query_records: vectors to query</span>
+<span class="sd">        :type  query_records: list[list[float32]]</span>
+<span class="sd">        :param partition_tags: tags to search. `None` indicates to search in whole collection.</span>
+<span class="sd">        :type  partition_tags: list</span>
+<span class="sd">        :param params: Search params. The params is related to index type the collection is built.</span>
+<span class="sd">                       See `index params &lt;param.html&gt;`_ for more detailed information.</span>
+<span class="sd">        :type  params: dict</span>
+<span class="sd">        :param timeout: An optional duration of time in seconds to allow for the RPC. When timeout</span>
+<span class="sd">                        is set to None, client waits until server responses or error occurs.</span>
+<span class="sd">        :type  timeout: float</span>
+<span class="sd">        :param kwargs:</span>
+<span class="sd">            * *_async* (``bool``) --</span>
+<span class="sd">              Indicate if invoke asynchronously. When value is true, method returns a SearchFuture</span>
+<span class="sd">              object; otherwise, method returns results from server.</span>
+<span class="sd">            * *_callback* (``function``) --</span>
+<span class="sd">              The callback function which is invoked after server response successfully. It only</span>
+<span class="sd">              takes effect when _async is set to True.</span>
+
+<span class="sd">        :returns: The operation status and search result. See &lt;a&gt;here&lt;/a&gt; to find how to handle</span>
+<span class="sd">                  search result. Succeed if `Status.OK()` is `True`. If status is not OK,</span>
+<span class="sd">                  results is always `None`.</span>
+<span class="sd">        :rtype: Status, TopKQueryResult</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">check_pass_param</span><span class="p">(</span><span class="n">collection_name</span><span class="o">=</span><span class="n">collection_name</span><span class="p">,</span> <span class="n">topk</span><span class="o">=</span><span class="n">top_k</span><span class="p">,</span> <span class="n">records</span><span class="o">=</span><span class="n">query_records</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">partition_tags</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">check_pass_param</span><span class="p">(</span><span class="n">partition_tag_array</span><span class="o">=</span><span class="n">partition_tags</span><span class="p">)</span>
+
+        <span class="n">params</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span> <span class="k">if</span> <span class="n">params</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">params</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">ParamError</span><span class="p">(</span><span class="s2">&quot;Params must be a dictionary type&quot;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span><span class="p">()</span> <span class="k">as</span> <span class="n">handler</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">handler</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">collection_name</span><span class="p">,</span> <span class="n">top_k</span><span class="p">,</span> <span class="n">query_records</span><span class="p">,</span>
+                                  <span class="n">partition_tags</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">timeout</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+    <span class="nd">@check_connect</span>
+    <span class="k">def</span> <span class="nf">search_in_segment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">collection_name</span><span class="p">,</span> <span class="n">file_ids</span><span class="p">,</span> <span class="n">query_records</span><span class="p">,</span> <span class="n">top_k</span><span class="p">,</span>
+                          <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Searches for vectors in specific segments of a collection.</span>
+<span class="sd">        This API is not recommended for users.</span>
+
+<span class="sd">        The Milvus server stores vector data into multiple files. Searching for vectors in specific</span>
+<span class="sd">        files is a method used in Mishards. Obtain more detail about Mishards, see</span>
+<span class="sd">        `Mishards &lt;https://github.com/milvus-io/milvus/tree/master/shards&gt;`_.</span>
+
+<span class="sd">        :param collection_name: table name been queried</span>
+<span class="sd">        :type  collection_name: str</span>
+<span class="sd">        :param file_ids: Specified files id array</span>
+<span class="sd">        :type  file_ids: list[str] or list[int]</span>
+<span class="sd">        :param query_records: all vectors going to be queried</span>
+<span class="sd">        :type  query_records: list[list[float]]</span>
+<span class="sd">        :param top_k: how many similar vectors will be searched</span>
+<span class="sd">        :type  top_k: int</span>
+<span class="sd">        :param params: Search params. The params is related to index type the collection is built.</span>
+<span class="sd">                       See &lt;a&gt;&lt;/a&gt; for more detailed information.</span>
+<span class="sd">        :type  params: dict</span>
+<span class="sd">        :param timeout: An optional duration of time in seconds to allow for the RPC. When timeout</span>
+<span class="sd">                        is set to None, client waits until server responses or error occurs.</span>
+<span class="sd">        :type  timeout: float</span>
+<span class="sd">        :param kwargs:</span>
+<span class="sd">            * *_async* (``bool``) --</span>
+<span class="sd">              Indicate if invoke asynchronously. When value is true, method returns a SearchFuture</span>
+<span class="sd">              object; otherwise, method returns results from server.</span>
+<span class="sd">            * *_callback* (``function``) --</span>
+<span class="sd">              The callback function which is invoked after server response successfully. It only</span>
+<span class="sd">              takes effect when _async is set to True.</span>
+
+<span class="sd">        :returns: The operation status and search result. See &lt;a&gt;here&lt;/a&gt; to find how to handle</span>
+<span class="sd">                  search result. Succeed if `Status.OK()` is `True`. If status is not OK, results</span>
+<span class="sd">                  is always `None`.</span>
+<span class="sd">        :rtype: Status, TopKQueryResult</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">check_pass_param</span><span class="p">(</span><span class="n">collection_name</span><span class="o">=</span><span class="n">collection_name</span><span class="p">,</span> <span class="n">topk</span><span class="o">=</span><span class="n">top_k</span><span class="p">,</span>
+                         <span class="n">records</span><span class="o">=</span><span class="n">query_records</span><span class="p">,</span> <span class="n">ids</span><span class="o">=</span><span class="n">file_ids</span><span class="p">)</span>
+
+        <span class="n">params</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span> <span class="k">if</span> <span class="n">params</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">params</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">ParamError</span><span class="p">(</span><span class="s2">&quot;Params must be a dictionary type&quot;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span><span class="p">()</span> <span class="k">as</span> <span class="n">handler</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">handler</span><span class="o">.</span><span class="n">search_in_files</span><span class="p">(</span><span class="n">collection_name</span><span class="p">,</span> <span class="n">file_ids</span><span class="p">,</span>
+                                           <span class="n">query_records</span><span class="p">,</span> <span class="n">top_k</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">timeout</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Milvus.delete_entity_by_id"><a class="viewcode-back" href="../../../api.html#milvus.Milvus.delete_entity_by_id">[docs]</a>    <span class="nd">@check_connect</span>
+    <span class="k">def</span> <span class="nf">delete_entity_by_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">collection_name</span><span class="p">,</span> <span class="n">id_array</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Deletes vectors in a collection by vector ID.</span>
+
+<span class="sd">        :param collection_name: Name of the collection.</span>
+<span class="sd">        :type  collection_name: str</span>
+<span class="sd">        :param id_array: list of vector id</span>
+<span class="sd">        :type  id_array: list[int]</span>
+<span class="sd">        :param timeout: An optional duration of time in seconds to allow for the RPC. When timeout</span>
+<span class="sd">                        is set to None, client waits until server responses or error occurs.</span>
+<span class="sd">        :type  timeout: float</span>
+
+<span class="sd">        :returns: The operation status. If the specified ID doesn&#39;t exist, Milvus server skip it</span>
+<span class="sd">                  and try to delete next entities, which is regard as one successful operation.</span>
+<span class="sd">                  Succeed if `Status.OK()` is `True`.</span>
+<span class="sd">        :rtype: Status</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">check_pass_param</span><span class="p">(</span><span class="n">collection_name</span><span class="o">=</span><span class="n">collection_name</span><span class="p">,</span> <span class="n">ids</span><span class="o">=</span><span class="n">id_array</span><span class="p">)</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span><span class="p">()</span> <span class="k">as</span> <span class="n">handler</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">handler</span><span class="o">.</span><span class="n">delete_by_id</span><span class="p">(</span><span class="n">collection_name</span><span class="p">,</span> <span class="n">id_array</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Milvus.flush"><a class="viewcode-back" href="../../../api.html#milvus.Milvus.flush">[docs]</a>    <span class="nd">@check_connect</span>
+    <span class="k">def</span> <span class="nf">flush</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">collection_name_array</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Flushes vector data in one collection or multiple collections to disk.</span>
+
+<span class="sd">        :type  collection_name_array: list</span>
+<span class="sd">        :param collection_name_array: Name of one or multiple collections to flush.</span>
+<span class="sd">        :param timeout: An optional duration of time in seconds to allow for the RPC. When timeout</span>
+<span class="sd">                        is set to None, client waits until server responses or error occurs.</span>
+<span class="sd">        :type  timeout: float</span>
+<span class="sd">        :param kwargs:</span>
+<span class="sd">            * *_async* (``bool``) --</span>
+<span class="sd">              Indicate if invoke asynchronously. When value is true, method returns a FlushFuture</span>
+<span class="sd">              object; otherwise, method returns results from server.</span>
+<span class="sd">            * *_callback* (``function``) --</span>
+<span class="sd">              The callback function which is invoked after server response successfully. It only</span>
+<span class="sd">              takes effect when _async is set to True.</span>
+
+<span class="sd">        :returns: The operation status. Succeed if `Status.OK()` is `True`.</span>
+<span class="sd">        :rtype: Status</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">collection_name_array</span> <span class="ow">in</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="p">[]):</span>
+            <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span><span class="p">()</span> <span class="k">as</span> <span class="n">handler</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">handler</span><span class="o">.</span><span class="n">flush</span><span class="p">([],</span> <span class="n">timeout</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">collection_name_array</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">ParamError</span><span class="p">(</span><span class="s2">&quot;Collection name array must be type of list&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">collection_name_array</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ParamError</span><span class="p">(</span><span class="s2">&quot;Collection name array is not allowed to be empty&quot;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">collection_name_array</span><span class="p">:</span>
+            <span class="n">check_pass_param</span><span class="p">(</span><span class="n">collection_name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span><span class="p">()</span> <span class="k">as</span> <span class="n">handler</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">handler</span><span class="o">.</span><span class="n">flush</span><span class="p">(</span><span class="n">collection_name_array</span><span class="p">,</span> <span class="n">timeout</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Milvus.compact"><a class="viewcode-back" href="../../../api.html#milvus.Milvus.compact">[docs]</a>    <span class="nd">@check_connect</span>
+    <span class="k">def</span> <span class="nf">compact</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">collection_name</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compacts segments in a collection. This function is recommended after deleting vectors.</span>
+
+<span class="sd">        :type  collection_name: str</span>
+<span class="sd">        :param collection_name: Name of the collections to compact.</span>
+<span class="sd">        :param timeout: An optional duration of time in seconds to allow for the RPC. When timeout</span>
+<span class="sd">                        is set to None, client waits until server responses or error occurs.</span>
+<span class="sd">        :type  timeout: float</span>
+<span class="sd">        :param kwargs:</span>
+<span class="sd">            * *_async* (``bool``) --</span>
+<span class="sd">              Indicate if invoke asynchronously. When value is true, method returns a CompactFuture</span>
+<span class="sd">              object; otherwise, method returns results from server.</span>
+<span class="sd">            * *_callback* (``function``) --</span>
+<span class="sd">              The callback function which is invoked after server response successfully. It only</span>
+<span class="sd">              takes effect when _async is set to True.</span>
+
+<span class="sd">        :returns: The operation status. Succeed if `Status.OK()` is `True`.</span>
+<span class="sd">        :rtype: Status</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">check_pass_param</span><span class="p">(</span><span class="n">collection_name</span><span class="o">=</span><span class="n">collection_name</span><span class="p">)</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span><span class="p">()</span> <span class="k">as</span> <span class="n">handler</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">handler</span><span class="o">.</span><span class="n">compact</span><span class="p">(</span><span class="n">collection_name</span><span class="p">,</span> <span class="n">timeout</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">get_config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent_key</span><span class="p">,</span> <span class="n">child_key</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets Milvus configurations.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cmd</span> <span class="o">=</span> <span class="s2">&quot;get_config </span><span class="si">{}</span><span class="s2">.</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">parent_key</span><span class="p">,</span> <span class="n">child_key</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cmd</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">set_config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent_key</span><span class="p">,</span> <span class="n">child_key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets Milvus configurations.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cmd</span> <span class="o">=</span> <span class="s2">&quot;set_config </span><span class="si">{}</span><span class="s2">.</span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">parent_key</span><span class="p">,</span> <span class="n">child_key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cmd</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+    <a href="https://github.com/milvus-io/pymilvus">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_green_007200.png?resize=149%2C149" class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1">
+    </a>
+
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019-2021 Zilliz. All rights reserved.
+      
+        <span class="commit">
+          Revision <code>26c94265</code>.
+        </span>
+      
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: 1.0
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Versions</dt>
+        
+          <dd><a href="/en/latest/">latest</a></dd>
+        
+          <dd><a href="/en/stable/">stable</a></dd>
+        
+          <dd><a href="/en/1.0/">1.0</a></dd>
+        
+          <dd><a href="/en/0.4.0/">0.4.0</a></dd>
+        
+          <dd><a href="/en/0.3.0/">0.3.0</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="//pymilvus.readthedocs.io/_/downloads/en/1.0/pdf/">pdf</a></dd>
+        
+          <dd><a href="//pymilvus.readthedocs.io/_/downloads/en/1.0/htmlzip/">html</a></dd>
+        
+          <dd><a href="//pymilvus.readthedocs.io/_/downloads/en/1.0/epub/">epub</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>On Read the Docs</dt>
+          <dd>
+            <a href="//readthedocs.org/projects/pymilvus/?fromdocs=pymilvus">Project Home</a>
+          </dd>
+          <dd>
+            <a href="//readthedocs.org/builds/pymilvus/?fromdocs=pymilvus">Builds</a>
+          </dd>
+      </dl>
+      <hr/>
+      Free document hosting provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+
+    </div>
+  </div>
+
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+   
+
+</body>
+</html>
