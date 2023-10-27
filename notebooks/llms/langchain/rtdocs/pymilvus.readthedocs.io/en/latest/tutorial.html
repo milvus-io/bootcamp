@@ -1,0 +1,620 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Tutorial &mdash; pymilvus 1.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script type="text/javascript" src="_static/clipboard.min.js"></script>
+        <script type="text/javascript" src="_static/copybutton.js"></script>
+        <script async="async" type="text/javascript" src="https://assets.readthedocs.org/static/javascript/readthedocs-doc-embed.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="API reference" href="api.html" />
+    <link rel="prev" title="Installation" href="install.html" /> 
+
+<!-- RTD Extra Head -->
+
+<link rel="stylesheet" href="https://assets.readthedocs.org/static/css/readthedocs-doc-embed.css" type="text/css" />
+
+<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": false, "api_host": "https://readthedocs.org", "build_date": "2021-06-09T09:23:42Z", "builder": "sphinx", "canonical_url": null, "commit": "73155ea1", "docroot": "/docs/source/", "features": {"docsearch_disabled": false}, "global_analytics_code": "UA-17997319-1", "language": "en", "page": "tutorial", "programming_language": "py", "project": "pymilvus", "proxied_api_host": "/_", "source_suffix": ".rst", "subprojects": {}, "theme": "sphinx_rtd_theme", "user_analytics_code": "", "version": "latest"}</script>
+
+<!--
+Using this variable directly instead of using `JSON.parse` is deprecated.
+The READTHEDOCS_DATA global variable will be removed in the future.
+-->
+<script type="text/javascript">
+READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerHTML);
+</script>
+
+<script type="text/javascript" src="https://assets.readthedocs.org/static/javascript/readthedocs-analytics.js" async="async"></script>
+
+<!-- end RTD <extrahead> -->
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> pymilvus
+          
+
+          
+          </a>
+
+          
+            
+            
+            
+              <div class="version">
+                latest
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#connect-to-milvus">Connect to Milvus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#collection">Collection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#create-collection">Create Collection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#create-partition">Create Partition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#entities">Entities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#insert-entities">Insert Entities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#flush">Flush</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#get-detailed-information">Get Detailed information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#count-entities">Count Entities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#get">Get</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#get-entities-by-id">Get Entities by ID</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#search">Search</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#search-entities-by-vector-similarity">Search Entities by Vector Similarity</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#deletion">Deletion</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#delete-entities-by-id">Delete Entities by id</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#drop-a-partition">Drop a Partition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#drop-a-collection">Drop a Collection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="param.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="results.html">Search results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changes.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribute.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About this documentation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pymilvus</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Tutorial</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/milvus-io/pymilvus/blob/1.x/docs/source/tutorial.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+
+           <div itemprop="articleBody">
+            
+  <div class="section" id="tutorial">
+<h1>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h1>
+<p>This is a basic introduction to Milvus by PyMilvus.</p>
+<p>For a runnable python script,
+checkout <a class="reference external" href="https://github.com/milvus-io/pymilvus/blob/1.1/examples/example.py">example.py</a> on PyMilvus Github,
+or <a class="reference external" href="https://www.milvus.io/docs/example_code.md">hello milvus</a> on Milvus official website. It’s a good recommended
+start to get started with Milvus and PyMilvus as well.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Here we use float vectors as example vector field data, if you want to learn example about binary vectors, see
+<a class="reference external" href="https://github.com/milvus-io/pymilvus/blob/1.1/examples/example_binary.py">binary vector example</a>.</p>
+</div>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<p>Before we start, there are some prerequisites.</p>
+<p>Make sure that:</p>
+<ul class="simple">
+<li><p>You have a running Milvus instance.</p></li>
+<li><p>PyMilvus is correctly <a class="reference external" href="https://pymilvus.readthedocs.io/en/1.1/install.html">installed</a>.</p></li>
+</ul>
+</div>
+<div class="section" id="connect-to-milvus">
+<h2>Connect to Milvus<a class="headerlink" href="#connect-to-milvus" title="Permalink to this headline">¶</a></h2>
+<p>First of all, we need to import PyMilvus.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">milvus</span> <span class="kn">import</span> <span class="n">Milvus</span><span class="p">,</span> <span class="n">DataType</span><span class="p">,</span> <span class="n">MetricType</span>
+</pre></div>
+</div>
+<p>Then, we can make connection with Milvus server.
+By default Milvus runs on localhost in port 19530, so you can use default value to connect to Milvus.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">host</span> <span class="o">=</span> <span class="s1">&#39;127.0.0.1&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">port</span> <span class="o">=</span> <span class="s1">&#39;19530&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">Milvus</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>After connecting, we can communicate with Milvus in the following ways. If you are confused about the
+terminology, see <a class="reference external" href="https://milvus.io/docs/terms.md">Milvus Terminology</a> for explanations.</p>
+</div>
+<div class="section" id="collection">
+<h2>Collection<a class="headerlink" href="#collection" title="Permalink to this headline">¶</a></h2>
+<p>Now let’s create a new collection. Before we start, we can list all the collections already exist. For a brand
+new Milvus running instance, the result should be empty.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">list_collections</span><span class="p">()</span>
+<span class="go">(Status(code=0, message=&#39;Show collections successfully!&#39;), [])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="create-collection">
+<h2>Create Collection<a class="headerlink" href="#create-collection" title="Permalink to this headline">¶</a></h2>
+<p>To create collection, we need to provide collection parameters.
+<code class="docutils literal notranslate"><span class="pre">collection_param</span></code> consists of 4 components, they are <code class="docutils literal notranslate"><span class="pre">collection_name</span></code>, <code class="docutils literal notranslate"><span class="pre">dimension</span></code>, <code class="docutils literal notranslate"><span class="pre">index_file_size</span></code>
+and <code class="docutils literal notranslate"><span class="pre">metric_type</span></code>.</p>
+<dl class="simple">
+<dt>collection_name:</dt><dd><p>The name of collection should be a unique string to collections already exist.</p>
+</dd>
+<dt>dimension:</dt><dd><p>For a float vector, dimension should be equal to the length of a vector; for a binary vector, dimension should
+be equal to bit size of a vector.</p>
+</dd>
+<dt>index_file_size:</dt><dd><p>Milvus controls the size of data segment according to the <cite>index_file_size</cite>, you can refer to
+<a class="reference external" href="https://milvus.io/docs/storage_concept.md">Storage Concepts</a> for more information about segments and <cite>index_file_size</cite>.</p>
+</dd>
+<dt>metric_type:</dt><dd><p>Milvus compute distance between two vectors, you can refer to <a class="reference external" href="https://milvus.io/docs/metric.md">Distance Metrics</a>
+for more information.</p>
+</dd>
+</dl>
+<p>Now we can create a collection:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collection_name</span> <span class="o">=</span> <span class="s1">&#39;demo_film_tutorial&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection_param</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>    <span class="s2">&quot;collection_name&quot;</span><span class="p">:</span> <span class="n">collection_name</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">&quot;dimension&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">&quot;index_file_size&quot;</span><span class="p">:</span> <span class="mi">2048</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">&quot;metric_type&quot;</span><span class="p">:</span> <span class="n">MetricType</span><span class="o">.</span><span class="n">L2</span>
+<span class="gp">... </span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">create_collection</span><span class="p">(</span><span class="n">collection_param</span><span class="p">)</span>
+<span class="go">Status(code=0, message=&#39;Create collection successfully!&#39;)</span>
+</pre></div>
+</div>
+<p>Then you can list collections and ‘demo_film_tutorial’ will be in the result.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">list_collections</span><span class="p">()</span>
+<span class="go">(Status(code=0, message=&#39;Show collections successfully!&#39;), [&#39;demo_film_tutorial&#39;])</span>
+</pre></div>
+</div>
+<p>You can also get info of the collection.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">status</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_collection_info</span><span class="p">(</span><span class="n">collection_name</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">info</span>
+<span class="go">CollectionSchema(collection_name=&#39;demo_film_tutorial&#39;, dimension=8, index_file_size=2048, metric_type=&lt;MetricType: L2&gt;)</span>
+</pre></div>
+</div>
+<p>The attributes of collection can be extracted from <cite>info</cite>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">info</span><span class="o">.</span><span class="n">collection_name</span>
+<span class="go">&#39;demo_film_tutorial&#39;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">info</span><span class="o">.</span><span class="n">dimension</span>
+<span class="go">8</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">info</span><span class="o">.</span><span class="n">index_file_size</span>
+<span class="go">2048</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">info</span><span class="o">.</span><span class="n">metric_type</span>
+<span class="go">&lt;MetricType: L2&gt;</span>
+</pre></div>
+</div>
+<p>This tutorial is a basic intro tutorial, building index won’t be covered by this tutorial.
+If you want to go further into Milvus with indexes, it’s recommended to check our
+<a class="reference external" href="https://github.com/milvus-io/pymilvus/tree/1.1/examples/indexes">index examples</a>.</p>
+<p>If you’re already known about indexes from <code class="docutils literal notranslate"><span class="pre">index</span> <span class="pre">examples</span></code>, and you want a full lists of params supported
+by PyMilvus, you check out <a class="reference external" href="https://pymilvus.readthedocs.io/en/1.1/param.html">Index</a>
+chapter of the PyMilvus documentation.</p>
+<p>Further more, if you want to get a thorough view of indexes, check our official website for
+<a class="reference external" href="https://milvus.io/docs/index.md">Vector Index</a>.</p>
+</div>
+<div class="section" id="create-partition">
+<h2>Create Partition<a class="headerlink" href="#create-partition" title="Permalink to this headline">¶</a></h2>
+<p>If you don’t create a partition, there will be a default one called “<code class="docutils literal notranslate"><span class="pre">_default</span></code>”, all the entities will be
+inserted into the “<code class="docutils literal notranslate"><span class="pre">_default</span></code>” partition. You can check it by <code class="docutils literal notranslate"><span class="pre">list_partitions()</span></code></p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">list_partitions</span><span class="p">(</span><span class="n">collection_name</span><span class="p">)</span>
+<span class="go">(Status(code=0, message=&#39;Success&#39;), [(collection_name=&#39;demo_film_tutorial&#39;, tag=&#39;_default&#39;)])</span>
+</pre></div>
+</div>
+<p>You can provide a partition tag to create a new partition.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">create_partition</span><span class="p">(</span><span class="n">collection_name</span><span class="p">,</span> <span class="s2">&quot;films&quot;</span><span class="p">)</span>
+<span class="go">Status(code=0, message=&#39;OK&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">list_partitions</span><span class="p">(</span><span class="n">collection_name</span><span class="p">)</span>
+<span class="go">(Status(code=0, message=&#39;Success&#39;), [(collection_name=&#39;demo_film_tutorial&#39;, tag=&#39;_default&#39;), (collection_name=&#39;demo_film_tutorial&#39;, tag=&#39;films&#39;)])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="entities">
+<h2>Entities<a class="headerlink" href="#entities" title="Permalink to this headline">¶</a></h2>
+<p>An entity is a group of fields that corresponds to real world objects. In current version, Milvus only contains a vector field.
+Here is an example of 3 entities structured in list of list.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">random</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">entities</span> <span class="o">=</span> <span class="p">[[</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="insert-entities">
+<h2>Insert Entities<a class="headerlink" href="#insert-entities" title="Permalink to this headline">¶</a></h2>
+<p>&gt;&gt;&gt;&gt; status, ids = client.insert(collection_name, entities)</p>
+<p>If the entities inserted successfully, <code class="docutils literal notranslate"><span class="pre">ids</span></code> we provided will be returned.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ids</span>
+<span class="go">[1615279498011637000, 1615279498011637001, 1615279498011637002]</span>
+</pre></div>
+</div>
+<p>Or you can also provide entity ids</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">entity_ids</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">status</span><span class="p">,</span> <span class="n">ids</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">collection_name</span><span class="p">,</span> <span class="n">entities</span><span class="p">,</span> <span class="n">entity_ids</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If the first time when <cite>insert()</cite> is invoked <cite>ids</cite> is not passed into this method, each of the rest time
+when <cite>inset()</cite> is invoked <cite>ids</cite> is not permitted to pass, otherwise server will return an error and the
+insertion process will fail. And vice versa.</p>
+</div>
+</div>
+<div class="section" id="flush">
+<h2>Flush<a class="headerlink" href="#flush" title="Permalink to this headline">¶</a></h2>
+<p>After successfully inserting 3 entities into Milvus, we can <code class="docutils literal notranslate"><span class="pre">Flush</span></code> data from memory to disk so that we can
+retrieve them. Milvus also performs an automatic flush with a fixed interval(configurable, default 1 second),
+see <a class="reference external" href="https://milvus.io/docs/flush_python.md">Data Flushing</a>.</p>
+<p>You can flush multiple collections at one time, so be aware the parameter is a list.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">flush</span><span class="p">([</span><span class="n">collection_name</span><span class="p">])</span>
+<span class="go">Status(code=0, message=&#39;OK&#39;)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="get-detailed-information">
+<h2>Get Detailed information<a class="headerlink" href="#get-detailed-information" title="Permalink to this headline">¶</a></h2>
+<p>After insertion, we can get the detail of collection statistics information by <code class="docutils literal notranslate"><span class="pre">get_collection_stats()</span></code></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For a better output format, we are using <code class="docutils literal notranslate"><span class="pre">pprint</span></code> to provide a better format.</p>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">status</span><span class="p">,</span> <span class="n">stats</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_collection_stats</span><span class="p">(</span><span class="n">collection_name</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pprint</span><span class="p">(</span><span class="n">stats</span><span class="p">)</span>
+<span class="go">{&#39;partitions&#39;: [{&#39;row_count&#39;: 3,</span>
+<span class="go">                 &#39;segments&#39;: [{&#39;data_size&#39;: 120,</span>
+<span class="go">                               &#39;index_name&#39;: &#39;IDMAP&#39;,</span>
+<span class="go">                               &#39;name&#39;: &#39;1615279498038473000&#39;,</span>
+<span class="go">                               &#39;row_count&#39;: 3}],</span>
+<span class="go">                 &#39;tag&#39;: &#39;_default&#39;},</span>
+<span class="go">                {&#39;row_count&#39;: 0, &#39;segments&#39;: None, &#39;tag&#39;: &#39;films&#39;}],</span>
+<span class="go"> &#39;row_count&#39;: 3}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="count-entities">
+<h2>Count Entities<a class="headerlink" href="#count-entities" title="Permalink to this headline">¶</a></h2>
+<p>We can also count how many entities are there in the collection.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">count_entities</span><span class="p">(</span><span class="n">collection_name</span><span class="p">)</span>
+<span class="go">(Status(code=0, message=&#39;Success!&#39;), 3)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="get">
+<h2>Get<a class="headerlink" href="#get" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="get-entities-by-id">
+<h3>Get Entities by ID<a class="headerlink" href="#get-entities-by-id" title="Permalink to this headline">¶</a></h3>
+<p>You can get entities by their ids.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">status</span><span class="p">,</span> <span class="n">films</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_entity_by_id</span><span class="p">(</span><span class="n">collection_name</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1615279498011637001</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">films</span>
+<span class="go">[[], [0.8309633731842041, 0.7896093726158142, 0.09463301301002502, 0.7827594876289368, 0.5261889100074768, 0.8051634430885315, 0.18777835369110107, 0.28041353821754456]]</span>
+</pre></div>
+</div>
+<p>If id exists, an entity will be returned. If id doesn’t exist, <code class="docutils literal notranslate"><span class="pre">[]</span></code> will be return. For the example above,
+the result <code class="docutils literal notranslate"><span class="pre">films</span></code> will only have one entity, the other is <code class="docutils literal notranslate"><span class="pre">[]</span></code>. Because vector id are generated by server, so the value of id may differ.</p>
+</div>
+</div>
+<div class="section" id="search">
+<h2>Search<a class="headerlink" href="#search" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="search-entities-by-vector-similarity">
+<h3>Search Entities by Vector Similarity<a class="headerlink" href="#search-entities-by-vector-similarity" title="Permalink to this headline">¶</a></h3>
+<p>You can get entities by vector similarity. Assuming we have a <code class="docutils literal notranslate"><span class="pre">film_A</span></code> like below, and we want to get top 2 films
+that are most similar with it.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">film_A</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">status</span><span class="p">,</span> <span class="n">results</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">collection_name</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="n">film_A</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the collection is index-built, user need to specify search param, and pass parameter <cite>params</cite> like: <cite>client.search(…, params={…})</cite>.
+You can refer to <a class="reference external" href="https://pymilvus.readthedocs.io/en/1.1/param.html">Index params</a> for more details.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If parameter <cite>partition_tags</cite> is specified, milvus executes search request on these partition instead of whole collection.</p>
+</div>
+<p>The returned <code class="docutils literal notranslate"><span class="pre">results</span></code> is a 2-D like structure, 1 for 1 entity querying, 2 for top 2. For more clarity, we obtain
+the film as below. If you want to know how to deal with search result in a better way, you can refer to
+<a class="reference external" href="https://pymilvus.readthedocs.io/en/1.1/results.html">search result</a> in PyMilvus doc.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">film_1</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">film_2</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Then how do we get ids, distances and fields? It’s as below.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Because vectors are randomly generated, so the retrieved vector id and distance may differ.</p>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">film_1</span><span class="o">.</span><span class="n">id</span>  <span class="c1"># id</span>
+<span class="go">1615279498011637002</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">film_1</span><span class="o">.</span><span class="n">distance</span>  <span class="c1"># distance</span>
+<span class="go">1.0709768533706665</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="deletion">
+<h2>Deletion<a class="headerlink" href="#deletion" title="Permalink to this headline">¶</a></h2>
+<p>Finally, let’s move on to deletion in Milvus.
+We can delete entities by ids, drop a whole partition, or drop the entire collection.</p>
+<div class="section" id="delete-entities-by-id">
+<h3>Delete Entities by id<a class="headerlink" href="#delete-entities-by-id" title="Permalink to this headline">¶</a></h3>
+<p>You can delete entities by their ids.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">delete_entity_by_id</span><span class="p">(</span><span class="n">collection_name</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1615279498011637002</span><span class="p">])</span>
+<span class="go">Status(code=0, message=&#39;OK&#39;)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If one entity corresponding to a specified id doesn’t exist, milvus ignore it and execute next deletion.
+In this case, client always return ok status except any exception occurs.</p>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">count_entities</span><span class="p">(</span><span class="n">collection_name</span><span class="p">)</span>
+<span class="go">(Status(code=0, message=&#39;Success!&#39;), 2)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="drop-a-partition">
+<h3>Drop a Partition<a class="headerlink" href="#drop-a-partition" title="Permalink to this headline">¶</a></h3>
+<p>You can also drop a partition.</p>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p>Once you drop a partition, all the data in this partition will be deleted too.</p>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">drop_partition</span><span class="p">(</span><span class="n">collection_name</span><span class="p">,</span> <span class="s2">&quot;films&quot;</span><span class="p">)</span>
+<span class="go">Status(code=0, message=&#39;OK&#39;)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="drop-a-collection">
+<h3>Drop a Collection<a class="headerlink" href="#drop-a-collection" title="Permalink to this headline">¶</a></h3>
+<p>Finally, you can drop an entire collection.</p>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p>Once you drop a collection, all the data in this collection will be deleted too.</p>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">drop_collection</span><span class="p">(</span><span class="n">collection_name</span><span class="p">)</span>
+<span class="go">Status(code=0, message=&#39;OK&#39;)</span>
+</pre></div>
+</div>
+<p><em>Section author: <a class="reference external" href="https://github.com/XuanYang-cn">Yangxuan&#64;milvus</a></em></p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+    <a href="https://github.com/milvus-io/pymilvus">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_green_007200.png?resize=149%2C149" class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1">
+    </a>
+
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="api.html" class="btn btn-neutral float-right" title="API reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="install.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019-2021 Zilliz. All rights reserved.
+      
+        <span class="commit">
+          Revision <code>73155ea1</code>.
+        </span>
+      
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: latest
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Versions</dt>
+        
+          <dd><a href="/en/latest/">latest</a></dd>
+        
+          <dd><a href="/en/1.1/">1.1</a></dd>
+        
+          <dd><a href="/en/1.0/">1.0</a></dd>
+        
+          <dd><a href="/en/0.4.0/">0.4.0</a></dd>
+        
+          <dd><a href="/en/0.3.0/">0.3.0</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="//pymilvus.readthedocs.io/_/downloads/en/latest/pdf/">pdf</a></dd>
+        
+          <dd><a href="//pymilvus.readthedocs.io/_/downloads/en/latest/htmlzip/">html</a></dd>
+        
+          <dd><a href="//pymilvus.readthedocs.io/_/downloads/en/latest/epub/">epub</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>On Read the Docs</dt>
+          <dd>
+            <a href="//readthedocs.org/projects/pymilvus/?fromdocs=pymilvus">Project Home</a>
+          </dd>
+          <dd>
+            <a href="//readthedocs.org/builds/pymilvus/?fromdocs=pymilvus">Builds</a>
+          </dd>
+      </dl>
+      <hr/>
+      Free document hosting provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+
+    </div>
+  </div>
+
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+   
+
+</body>
+</html>
