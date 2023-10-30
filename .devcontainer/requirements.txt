@@ -1,0 +1,14 @@
+ipykernel
+llama-index
+nltk
+milvus
+pymilvus==2.2.5
+torch
+torchvision
+tqdm
+sentence-transformers
+gdown
+langchain
+openai
+python-dotenv
+requests

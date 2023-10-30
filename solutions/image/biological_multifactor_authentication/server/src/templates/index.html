@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<title></title>
+	<link rel="stylesheet" href="static/css/index.css" />
+	<script type="text/javascript" src="static/js/jquery-1.11.0.js"></script>
+	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+	<script src="https://cdn.webrtc-experiment.com/MediaStreamRecorder.js"> </script>
+	<script type="text/javascript" src="static/js/index.js"></script>
+
+</head>
+
+<body>
+
+	<body>
+		<div class="mainbody middle">
+			<div class="form-box">
+				<div class="rol_left">
+					<form class="front">
+						<div class="content">
+							<div class="logo">
+								<h1>欢迎登录</h1>
+							</div>
+							<p>基于Milvus多生物认证系统</p>
+						</div>
+						<div style="display: flex;">
+							<input type="button" name="" value="开始录像" id="startBtn1">
+							<input type="button" name="" value="停止录像" id="stopBtn1">
+						</div>
+						<style>
+							a {
+								text-decoration: none
+							}
+						</style>
+						<p style="margin-top: 40px">If you don't have account.Please</p>
+						<p>Click here to <a id="signup">注册</a></p>
+						<p id="output1"></p>
+					</form>
+					<form class="back">
+						<input id="input-normal" type="text" placeholder="UserAccount" />
+						<div style="display: flex;">
+							<input type="button" name="" value="开始录像" id="startBtn2">
+							<input type="button" name="" value="停止录像" id="stopBtn2">
+						</div>
+						<p style="margin-top: 40px">Have a account ? You can</p>
+						<p>Click here to <a id="login">登陆</a></p>
+						<p id="output2"></p>
+					</form>
+				</div>
+				<div class="rol_right">
+					<video id="video" width="640" height="480" controls autoplay>
+						您的浏览器不支持 video 标签。
+					</video>
+				</div>
+			</div>
+		</div>
+	</body>
+</body>
+
+</html>

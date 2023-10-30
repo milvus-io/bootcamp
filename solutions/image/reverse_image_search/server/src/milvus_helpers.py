@@ -35,8 +35,8 @@ class MilvusHelper:
     def create_collection(self, collection_name):
         # Create milvus collection if not exists
         try:
-            field1 = FieldSchema(name="id", dtype=DataType.INT64, descrition="int64", is_primary=True, auto_id=True)
-            field2 = FieldSchema(name="embedding", dtype=DataType.FLOAT_VECTOR, descrition="float vector",
+            field1 = FieldSchema(name="id", dtype=DataType.INT64, description="int64", is_primary=True, auto_id=True)
+            field2 = FieldSchema(name="embedding", dtype=DataType.FLOAT_VECTOR, description="float vector",
                                     dim=VECTOR_DIMENSION, is_primary=False)
             schema = CollectionSchema(fields=[field1, field2], description="collection description")
             self.collection = Collection(name=collection_name, schema=schema)
