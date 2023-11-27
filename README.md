@@ -83,11 +83,11 @@
 
 ### :icecream: Run locally
 
-Here are several applications for a wide range of scenarios. Each solution contains a Jupyter Notebook or a Docker deployable solution, meaning anyone can run it on their local machine. In addition to this there are also some related technical articles and live streams.
+Here are several applications for a wide range of scenarios. Each application contains a Jupyter Notebook or a Docker deployable solution, meaning anyone can run it on their local machine. In addition to this there are also some related technical articles and live streams.
 
 Look here for more application [**Examples**](https://github.com/towhee-io/examples).
 
-💡 Please refer to the [Bootcamp FAQ](applications/applications_faq.md) for troubleshooting.
+💡 Please refer to the [Bootcamp FAQ](applications/applications_faq.md) for troubleshooting.<br>
 💡 For Chinese links below, try using Google Translate.
 
 <table>
