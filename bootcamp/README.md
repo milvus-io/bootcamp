@@ -1,4 +1,4 @@
-### 📖 Outline of Notebooks
+### 📖 Tutorial Notebooks
 
 | Notebook | Description | Video
 |:-----------|:---------------------------|:------------|

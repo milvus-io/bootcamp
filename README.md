@@ -47,7 +47,7 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/README.md">Bootcamp tutorials</a>
+      <a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp">Bootcamp tutorials</a>
     </li>
     <ul>
         <li><a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/Retrieval/">Retrieval</a></li>
