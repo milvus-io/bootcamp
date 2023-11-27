@@ -1,4 +1,4 @@
-# Bootcamp FAQ
+# Applications FAQ
 
 ## Deployment
 
