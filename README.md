@@ -47,13 +47,12 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      Tutorials
+      <a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials_README.md">Bootcamp tutorials</a>
     </li>
     <ul>
-        <li>Connect to Milvus/Zilliz</li>
-        <li>Retrieval</li>
-        <li>RAG</li>
-        <li>OpenAIAssistants</li>
+        <li><a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/Retrieval/">Retrieval</a></li>
+        <li><a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/RAG/">RAG</a></li>
+        <li><a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/OpenAIAssistants/">OpenAIAssistants</a></li>
       </ul>
     <li>
       <a href="#pencil-applications">Applications</a>
@@ -66,7 +65,7 @@
       <a href="#mag-benchmark-tests">Benchmark Tests</a>
     </li>
     <li><a href="#pencil-contributing">Contributing</a></li>
-    <li><a href="#fire-supports">Supports</a></li>
+    <li><a href="#fire-community">Community</a></li>
     </ol>
 </details>
 
@@ -259,6 +258,12 @@ The [VectorDBBench](https://github.com/zilliztech/VectorDBBench) is not just an 
 Contributions to Milvus Bootcamp are welcome from everyone. See [Guidelines for Contributing](./contributing.md) for details. 
 
 
-## :fire: Supports
+## :fire: Community
 
-Join the Milvus community on [Slack](https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ) to give feedback, ask for advice, and direct questions to our engineering team. We also have a [WeChat group](images/wechat_group.png).
+- 🤖 Join the Milvus community on [Discord](https://discord.gg/8uyFbECzPX) to chat with the Milvus team and community.
+
+- #️⃣ Enterprise Zilliz customers, join us on Slack (ask your Zilliz contact for an invitation) for technical support.
+
+- 😺 For all other open source Milvus technical support, to discuss, and report bugs, join us on [GitHub Discussions](https://github.com/milvus-io/milvus/discussions).
+
+- 🧧 We also have a [Chinese WeChat group](images/wechat_group.png).
