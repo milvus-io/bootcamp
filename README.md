@@ -88,7 +88,7 @@ Here are several applications for a wide range of scenarios. Each solution conta
 
 Look here for more application [**Examples**](https://github.com/towhee-io/examples).
 
-💡 Please refer to the [Bootcamp FAQ](./bootcamp_faq.md) for troubleshooting.
+💡 Please refer to the [Bootcamp FAQ](applications/applications_faq.md) for troubleshooting.
 💡 For Chinese links below, try using Google Translate.
 
 <table>
