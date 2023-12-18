@@ -1,5 +1,3 @@
-
-
 ##########
 # Functions to process Milvus Search API responses.
 ##########
@@ -23,36 +21,29 @@ def assemble_answer_sources(answer, context_metadata):
     return grounded_answer
 
 # Stuff answers into a context string and stuff metadata into a list of dicts.
-def assemble_retrieved_context(retrieved_results, num_shot_answers=3):
+def assemble_retrieved_context(retrieved_results, metadata_fields=[], num_shot_answers=3):
     
     # Assemble the context as a stuffed string.
-    context = ""
-    i = 1
-    for r in retrieved_results[0]:
-        text = r.entity.text
-        if i <= num_shot_answers:  # only first n results
-            context += f"{text} "
-        i += 1
-    print(f"Length of context: {len(context)}")
-
     # Also save the context metadata to retrieve along with the answer.
+    context = []
     context_metadata = []
     i = 1
     for r in retrieved_results[0]:
         if i <= num_shot_answers:
-            context_metadata.append({
-                "h1": r.entity.h1,
-                "h2": r.entity.h2,
-                "source": r.entity.source,
-            })
+            if len(metadata_fields) > 0:
+                metadata = {}
+                for field in metadata_fields:
+                    metadata[field] = getattr(r.entity, field, None)
+                context_metadata.append(metadata)
+            context.append(r.entity.text)
         i += 1
 
     return context, context_metadata
 
-
 ##########
 # Functions to make OpenAI API calls and process responses.
 ##########
+import openai
 
 # Parse out the answer from an OpenAI API response.
 def prepare_response(response):
