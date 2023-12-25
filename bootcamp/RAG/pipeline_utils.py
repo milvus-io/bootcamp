@@ -2,6 +2,11 @@ import requests
 
 
 class BasePipeline:
+    """
+    Base class for zilliz pipelines.
+    https://docs.zilliz.com/docs/pipelines
+    """
+
     def __init__(self):
         self.cloud_region = None
         self.cluster_id = None
@@ -23,6 +28,11 @@ class BasePipeline:
 
 
 class IngestionPipeline(BasePipeline):
+    """
+    Ingestion pipeline.
+    https://docs.zilliz.com/docs/create-piplines-rest#create-an-ingestion-pipeline
+    """
+
     def __init__(self, cloud_region, cluster_id, api_key, collection_name, pipeline_name, functions,
                  description="A pipeline that splits a text file into chunks and generates embeddings"):
         super().__init__()
@@ -48,6 +58,10 @@ class IngestionPipeline(BasePipeline):
         self.pipe_id = response.json()["data"]["pipelineId"]
 
     def run(self, gcs_url, **kwargs):
+        """
+        Run Ingestion pipeline.
+        https://docs.zilliz.com/docs/run-pipelines
+        """
         data = {
             "data":
                 {
@@ -63,6 +77,11 @@ class IngestionPipeline(BasePipeline):
 
 
 class SearchPipeline(BasePipeline):
+    """
+    Search pipeline.
+    https://docs.zilliz.com/docs/create-piplines-rest#create-a-search-pipeline
+    """
+
     def __init__(self, cloud_region, api_key, pipeline_name, functions,
                  description="A pipeline that receives text and search for semantically similar doc chunks"):
         super().__init__()
@@ -85,6 +104,10 @@ class SearchPipeline(BasePipeline):
         self.pipe_id = response.json()["data"]["pipelineId"]
 
     def run(self, question, top_k=2, other_output_fields=[], filter=None):
+        """
+        Run Search pipeline.
+        https://docs.zilliz.com/docs/run-pipelines
+        """
         params = {
             "limit": top_k,
             "offset": 0,
