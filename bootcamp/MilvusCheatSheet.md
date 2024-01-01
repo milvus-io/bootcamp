@@ -219,7 +219,7 @@ fields = [
 - If [strong "read-after-write"](https://github.com/milvus-io/milvus/blob/f3f46d3bb2dcae2de0bdb7bc0f7b20a72efceaab/docs/developer_guides/how-guarantee-ts-works.md) consistency is required, insert data using the [upsert](https://milvus.io/docs/upsert_entities.md#Upsert-Entities) feature with [ignore_growing segments](https://milvus.io/docs/search.md#Prepare-search-parameters) set to True. <br><br>
 
 <a class="anchor" id="insert-data"></a>
-1. **[Insert data](https://milvus.io/docs/insert_data.md) into the collection.** 
+8. **[Insert data](https://milvus.io/docs/insert_data.md) into the collection.** 
 
 - Milvus supports loading data from:
   - pandas dataframes, or 
@@ -312,7 +312,7 @@ print(f"type: {type(results[0])}, count: {len(results[0])}")
 - When dealing with large datasets that do not fit in memory, Milvus offers [DiskANN](https://zilliz.com/learn/DiskANN-and-the-Vamana-Algorithm).<br><br>
 
 <a class="anchor" id="upsert"></a>
-10.   **Update data using "upsert" operation.**  Either insert a new vector if it does not already exist or update data that already exists in the database.  
+10.   **Update data using ["upsert"](https://milvus.io/docs/upsert_entities.md) operation.**  Either insert a new vector if it does not already exist or update data that already exists in the database.  
 
 - Upsert support began with milvus v2.3.  
 
