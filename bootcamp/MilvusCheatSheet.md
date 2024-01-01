@@ -5,7 +5,7 @@
     - [Quick Start](#quick-start)
     - [Architecture](#architecture)
     - [Documentation & Releases](#documentation--releases)
-  - [Getting Started with Milvus Best Practices and Tutorial](#getting-started-with-milvus-best-practices-and-tutorial)
+  - [Getting Started with Milvus Tutorial](#getting-started-with-milvus-tutorial)
     - [Connecting to Milvus](#start-up-milvus-server)
     - [Chunking & Embedding](#chunking--embedding)
     - [Collections, Schema, & Partitions](#collections-schema--partitions)
@@ -79,7 +79,7 @@ Milvus uses a shared-storage [architecture](https://milvus.io/docs/architecture_
 
 <br>
 
-## Getting Started with Milvus Best Practices and Tutorial
+## Getting Started with Milvus Tutorial
 
 Following are Best Practices for getting your data into Milvus so you can start developing AI applications.
 
