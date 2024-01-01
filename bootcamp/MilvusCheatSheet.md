@@ -32,9 +32,9 @@
 
 1. **Successful AI applications start with good data.**  🗂️📷 Corporate data is often drastically different from general Internet data, which is what most foundation models are trained on. Data prep for AI applications is still necessary, but different from traditional data science steps for structured data.  
 
-2. **Once you convert your unstructured data into tensors, persist your tensors in Milvus.**  🤖  The AI jargon term for this is *vector database*. 
+2. **Unstructured data is tokenized into tensors, then the tensors can be persisted in Milvus.**  🤖  The AI jargon term for this is [*vector database*](https://www.infoworld.com/article/3711281/how-to-evaluate-a-vector-database.html). 
 
-3. **Tensors in Milvus can be used for search or in downstream AI applications.**
+3. **Tensors in Milvus are used for search or in downstream AI applications.**
 
 **Integrations** for Zilliz include AWS, GCP, and Azure clouds.  [Milvus](https://github.com/milvus-io/milvus) philosophy is to be a low-level "shovel" in the AI stack.  🦙✨𑗗🤗 You should be able to choose independently for yourself which embedding, fusion, LLM, or generation models you want.  🦜⛓️ Milvus is also agnostic to the choice of integration software, such as LlamaIndex or LangChain.  
 
@@ -45,7 +45,7 @@
 - OSS embedding model *[bge-large-en-v1.5](https://huggingface.co/BAAI/bge-large-en-v1.5)* available on HuggingFace
 - Max-sequence-length chunking strategy
 - Default schema
-- HNSW index 
+- [AUTOINDEX](https://docs.zilliz.com/docs/autoindex-explained), Zilliz proprietary 
 - Eventually consistent
 
 ### Architecture   
@@ -204,13 +204,22 @@ fields = [
 <a class="anchor" id="consistency"></a>
 7. **Choose the [consistency level](https://milvus.io/docs/consistency.md).**  
    
-- 💡👉🏼For typical useage (e.g. tables updated every 30 minutes or longer), use **"Eventually"** for fastest performance. 
+- 💡👉🏼**For typical useage (e.g. tables updated every 30 minutes or longer), use "Eventually" for fastest performance.**
+  
+- The 4 available levels of consistency:
+  - Strong - Real-time everyone sees the same thing.
+  - Eventually - Very soon everyone sees the same thing.
+  - Session - Per session, data is up to date with all writes within session.
+  - Bounded - Within a shorter amount of time than eventually, everyone sees the same thing.
 
-- Real-time "read-after-write" [consistency](https://milvus.io/docs/consistency.md) is possible.
-  - If the strongest consistency is required, insert data using the [upsert](https://milvus.io/docs/upsert_entities.md#Upsert-Entities) feature with [ignore_growing segments](https://milvus.io/docs/search.md#Prepare-search-parameters) set to True. <br><br>
+- You specify consistency in 2 places:
+  - In collection.create_collection()
+  - In collection.search()
+  
+- If [strong "read-after-write"](https://github.com/milvus-io/milvus/blob/f3f46d3bb2dcae2de0bdb7bc0f7b20a72efceaab/docs/developer_guides/how-guarantee-ts-works.md) consistency is required, insert data using the [upsert](https://milvus.io/docs/upsert_entities.md#Upsert-Entities) feature with [ignore_growing segments](https://milvus.io/docs/search.md#Prepare-search-parameters) set to True. <br><br>
 
 <a class="anchor" id="insert-data"></a>
-8. **[Insert data](https://milvus.io/docs/insert_data.md) into the collection.** 
+1. **[Insert data](https://milvus.io/docs/insert_data.md) into the collection.** 
 
 - Milvus supports loading data from:
   - pandas dataframes, or 
