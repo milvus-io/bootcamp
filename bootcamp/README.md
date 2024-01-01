@@ -2,8 +2,8 @@
 
 This bootcamp is designed to accelerate users of Milvus on their AI journey.
 
-Three ways to use this.
-1. **Self-service training.** You can bring your own data, and follow along in the ["Cheat Sheet"](MilvusCheatSheet.md), starting with the "Getting Started with Milvus Tutorial". Best Practice theory is mixed-in along with Tutorial instructions.  You'll need time to customize the notebooks below to your data.
+Three ways to use this bootcamp.
+1. **Self-service training.** You can bring your own data, and follow along in the ["Cheat Sheet"](MilvusCheatSheet.md), starting with "Getting Started with Milvus Tutorial". Best Practice theory (watch for 💡👉🏼 pointers) is mixed-in along with Tutorial instructions.  You'll need time to customize the notebooks below to your data.
 2. **Zilliz-led hands-on, training.**  For best results, we will ask for a sample of your anonymized POC data at least 1 week in advance.
 3. **Milvus Starling Hero-led hands-on, training.** See the separate instructions. For best results, ask for a sample of anonymized POC data at least 1 week in advance. You'll need time to customize the notebooks to their data.
 

@@ -104,9 +104,9 @@ Following are Best Practices for getting your data into Milvus so you can start 
   - In LangChain, see [ParentDocumentRetriever](https://python.langchain.com/docs/modules/data_connection/retrievers/parent_document_retriever) and HTMLHeaderTextSplitter.  
   - In LlamaIndex, see [AutoMergingRetriever](https://docs.llamaindex.ai/en/latest/examples/retrievers/auto_merging_retriever.html) and HierarchicalNodeParser.<br><br>
 
-3. **Use 1 embedding model per collection.** The collection's vector space often comes from the next-to-last hidden layer of a deep neural network model.  The weights (numbers) from this layer are used as a transformation function to map your input unstructured data to a vector of numbers (often 768 dimensions).  In order for vector similarity to work, all the data, including the questions need to be tokenized (mapped inputs to outputs) into the same vector space.  That way concepts in that space can be searched.  For this reason, it is best practice to use just 1 embedding model per collection.
+3. **Use 1 embedding model per collection.** The collection's vector space often comes from the next-to-last hidden layer of a deep neural network model.  The weights (numbers) from this layer are used as a transformation function to map your input unstructured data to a vector of numbers (often 1024 dimensions).  In order for vector similarity to work, all the data, including the questions need to be tokenized (mapped inputs to outputs) into the same vector space.  That way concepts in that space can be searched.  For this reason, it is best practice to use just 1 embedding model per collection.
 
-- 💡👉🏼**Open source embedding models perform on par with commercial embedding models.** OSS models have the benefits of high recall and free access to your own data.  For example, to use the [MTEB leaderboard](https://huggingface.co/spaces/mteb/leaderboard) > sort descending by column "Retrieval Average". Notice *[bge-large-en-v1.5](https://huggingface.co/BAAI/bge-large-en-v1.5)* is ranked 4th best and takes only 1.34 MB memory.  Compar this to OpenAI's *ada-002* which is ranked 23rd.
+- 💡👉🏼**Open source embedding models perform on par with commercial embedding models.** OSS models have the benefits of high recall and free access to your own data.  For example, to use the [MTEB leaderboard](https://huggingface.co/spaces/mteb/leaderboard) > sort descending by column "Retrieval Average". Notice *[UAE-Large-V1](https://huggingface.co/WhereIsAI/UAE-Large-V1)* is ranked 4th best and takes only 1.34 MB memory.  Compare this to OpenAI's *ada-002* which is ranked 25th.  (website accessed on Dec 30, 2023.)
   
 - Fine-tune your embedding model using your data and your task for potentially 10-15% improved retrieval.  Only OSS embedding models can be tuned.<br><br>
 
@@ -119,6 +119,10 @@ Following are Best Practices for getting your data into Milvus so you can start 
 
 ```python
 from pymilvus import MilvusClient
+
+COLLECTION_NAME = "MilvusDocs"
+EMBEDDING_LENGTH = 1024
+
 INDEX_PARAMS = dict({
     'M': 16,               
     "efConstruction": M * 2 })
@@ -140,7 +144,7 @@ if has:
     drop_result = utility.drop_collection(COLLECTION_NAME)
 
 # Create the collection.
-mc.create_collection("MilvusDocs", 
+mc.create_collection(COLLECTION_NAME, 
                      EMBEDDING_LENGTH,
                      consistency_level="Eventually", 
                      auto_id=True,  
@@ -159,7 +163,7 @@ print(mc.describe_collection(COLLECTION_NAME))
     - embeddings *usually called "vector"), type list of `numpy.ndarray` of `numpy.float32` numbers
     - Strings, type VARCHAR, Max Length 65535 characters.  Best practice: Use max length in schema.  Actual data won't use that much space.
 ```python
-EMBEDDING_LENGTH = 768
+EMBEDDING_LENGTH = 1024
 MAX_LENGTH = 65535
 fields = [
   FieldSchema("pk", DataType.INT64, is_primary=True, auto_id=True), 
@@ -208,15 +212,13 @@ fields = [
   
 - The 4 available levels of consistency:
   - Strong - Real-time everyone sees the same thing.
-  - Eventually - Very soon everyone sees the same thing.
+  - Eventually - Soon everyone sees the same thing.
   - Session - Per session, data is up to date with all writes within session.
   - Bounded - Within a shorter amount of time than eventually, everyone sees the same thing.
 
 - You specify consistency in 2 places:
-  - In collection.create_collection()
-  - In collection.search()
-  
-- If [strong "read-after-write"](https://github.com/milvus-io/milvus/blob/f3f46d3bb2dcae2de0bdb7bc0f7b20a72efceaab/docs/developer_guides/how-guarantee-ts-works.md) consistency is required, insert data using the [upsert](https://milvus.io/docs/upsert_entities.md#Upsert-Entities) feature with [ignore_growing segments](https://milvus.io/docs/search.md#Prepare-search-parameters) set to True. <br><br>
+  - In collection.create_collection() - Set the default value.
+  - In collection.search() - Possible to override the default value.<br><br>
 
 <a class="anchor" id="insert-data"></a>
 8. **[Insert data](https://milvus.io/docs/insert_data.md) into the collection.** 
@@ -318,10 +320,13 @@ print(f"type: {type(results[0])}, count: {len(results[0])}")
 
 - AutoID [cannot be True](https://milvus.io/docs/upsert_entities.md#Limits)!  Your pk must be manual, that is:
 id_field = FieldSchema(name="id", dtype=DataType.INT64, is_primary=True, auto_id=False,)
-- The data you upsert must have new, unique pks, otherwise the upserted data will [overwrite existing data if the pks match](https://github.com/milvus-io/milvus/discussions/28744).<br><br>
+
+- The data you upsert must have new, unique pks, otherwise the upserted data will [overwrite existing data if the pks match](https://github.com/milvus-io/milvus/discussions/28744).
+  
+- If [Strong "read-after-write"](https://github.com/milvus-io/milvus/blob/f3f46d3bb2dcae2de0bdb7bc0f7b20a72efceaab/docs/developer_guides/how-guarantee-ts-works.md) consistency is required, [upsert](https://milvus.io/docs/upsert_entities.md#Upsert-Entities) with [ignore_growing segments](https://milvus.io/docs/search.md#Prepare-search-parameters) set to True. <br><br>
 
 <a class="anchor" id="query"></a>
-11.  **["Query"](https://milvus.io/docs/query.md) operation does not use fuzzy search (semantic search).**  
+11.    **["Query"](https://milvus.io/docs/query.md) operation does not use fuzzy search (semantic search).**  
 
 - Example you want to see if a certain productID already exists. 
 res = collection.query(expr = "ProductID == 100")
