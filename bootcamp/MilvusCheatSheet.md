@@ -172,14 +172,15 @@ fields = [
 ]
 ```
 
-- Partitions are meant to isolate entities in different physical paths and control the search scope.  
-  - 💡👉🏼**Best practice is leave it to Milvus to automatically partition data, unless you can guarantee the amount of data per manual partition will be 20-100K vectors.**
-  - For now, RBAC is only at the collection or project level, so the only reason to use manual partitions is because you know you can get your data manually balanced.
-  - BEST PRACTICE:  Aim for 20K-100K entities per partition.
-  - REASON: Milvus does not build an index for tiny segments (<1024 entities).  
-  - ANTI-PATTERN: 1 million entities in 1000 partitions.  Then no index is built.  Then search is brute-force.  Then search is slow!
-  - REFER TO APIs when creating the collection and searching to refer to manual partitions.
-  - Behind the scenes, Milvus supports 2 types of partitions.  **Both types are equally as fast!  So the choice is up to you!** <br><br>1. MANUAL - only use this if you are sure each partition will be about equally full 20-100K entities each.  Create using `collection.create_partition()`.  Users can add or delete a partition at any time. Users specify the partition name in their search.  Partition number max limit: 4096.<br><br>2. AUTOMATIC - number of partitions cannot be changed after the collection is created. Milvus automatically distributes entities into different partitions to optimize search speed. No need to specify partition name when searching, milvus will automatically translate where to find data from your metadata filter expression. <br><br>
+- **Partitions** are meant to isolate entities in different physical paths to restrict search scope.
+
+- **Milvus supports 2 types of partitions. Both types are equally as fast! So the choice is up to you!** <br><br>a) MANUAL - only use this if you can ensure approximately equal 20-100K rows per partition. Users specify which entity belongs to which partition.  Partitions can be added or deleted at any time. Partition name needs to be included as a search parameter.<br><br>b) AUTOMATIC - Milvus automatically distributes entities into different partitions. No need to specify partition name when searching, milvus will automatically translate your metadata filter expression to find data from paritions.
+
+- Partitioning Tips:
+  - 💡👉🏼 Best practice is leave it to Milvus to automatically partition data and translate metadata filters into search mappings.
+  - For now, RBAC is only at the collection or project level, so it is not possible to control visibility of partitions to different users.
+  - For manual partitions, 20-100K rows per partition is recommended, otherwise search speed will be slower than with automatic partitions.
+  - The max number of partitions in a collection is 4096.<br><br>
 
 <a class="anchor" id="index"></a>
 5. **[Build an index](https://milvus.io/docs/build_index.md) (i.e. search algorithm used to find nearest-neighbors across tensors).**  Data is saved in data structures according to the particular [search algorithm index](https://milvus.io/docs/index.md) - hashes, trees, or graphs.<br>
@@ -203,7 +204,7 @@ fields = [
   
 - For more speed, fine tune your search index parameters.
   
-- For more speed with big data, choose an index with vector compression, search here for ["quantization"](https://milvus.io/docs/index.md).<br><br>
+- For more speed with big data, choose an index with vector compression, search 'Quantization-based index' on the [index doc page](https://milvus.io/docs/index.md).<br><br>
 
 <a class="anchor" id="consistency"></a>
 7. **Choose the [consistency level](https://milvus.io/docs/consistency.md).**  
@@ -280,7 +281,7 @@ results = mc.search(
     search_params=SEARCH_PARAMS,
     output_fields=OUTPUT_FIELDS, 
     # Milvus can utilize metadata in boolean expressions to filter search.
-    # expr="",
+    # filter="pk >= 0",
     limit=3,  # Default top_k = 10
     consistency_level="Eventually"
     )
