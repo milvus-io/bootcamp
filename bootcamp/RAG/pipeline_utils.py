@@ -33,17 +33,19 @@ class IngestionPipeline(BasePipeline):
     https://docs.zilliz.com/docs/create-piplines-rest#create-an-ingestion-pipeline
     """
 
-    def __init__(self, cloud_region, cluster_id, api_key, collection_name, pipeline_name, functions,
+    def __init__(self, cloud_region, cluster_id, api_key, project_id, collection_name, pipeline_name, functions,
                  description="A pipeline that splits a text file into chunks and generates embeddings"):
         super().__init__()
         self.cloud_region = cloud_region
         self.cluster_id = cluster_id
         self.api_key = api_key
+        self.project_id = project_id
         self.collection_name = collection_name
         self.pipeline_name = pipeline_name
         self.functions = functions
         self.description = description
         data = {
+            "projectId": self.project_id,
             "name": self.pipeline_name,
             "description": self.description,
             "type": "INGESTION",
@@ -82,15 +84,17 @@ class SearchPipeline(BasePipeline):
     https://docs.zilliz.com/docs/create-piplines-rest#create-a-search-pipeline
     """
 
-    def __init__(self, cloud_region, api_key, pipeline_name, functions,
+    def __init__(self, cloud_region, api_key, project_id, pipeline_name, functions,
                  description="A pipeline that receives text and search for semantically similar doc chunks"):
         super().__init__()
         self.cloud_region = cloud_region
         self.api_key = api_key
+        self.project_id = project_id
         self.pipeline_name = pipeline_name
         self.functions = functions
         self.description = description
         data = {
+            "projectId": self.project_id,
             "name": self.pipeline_name,
             "description": self.description,
             "type": "SEARCH",
