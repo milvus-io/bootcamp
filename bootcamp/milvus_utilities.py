@@ -136,16 +136,17 @@ def recursive_splitter_wrapper(text, chunk_size, chunk_overlap):
 # Functions to process Milvus Client API responses.
 ##########
 
-def client_assemble_retrieved_context(retrieved_results, metadata_fields=[], num_shot_answers=3):
-    
-    # Results returned from MilvusClient are in the form list of lists of dicts.
+def client_assemble_retrieved_context(retrieved_top_k, metadata_fields=[], num_shot_answers=3):
+    """ 
+    For each question, assemble the context and metadata from the retrieved_top_k chunks.
+    retrieved_top_k: list of dicts
+    """
     # Assemble the context as a stuffed string.
-    # Also save the context metadata to retrieve along with the answer.
     distances = []
     context = []
     context_metadata = []
     i = 1
-    for r in retrieved_results[0]:
+    for r in retrieved_top_k[0]:
         distances.append(r['distance'])
         if i <= num_shot_answers:
             if len(metadata_fields) > 0:
@@ -157,8 +158,8 @@ def client_assemble_retrieved_context(retrieved_results, metadata_fields=[], num
         i += 1
 
     # Assemble formatted results in a zipped list.
-    formatted_results = list(zip(distances, context_metadata, context))
-
+    formatted_results = list(zip(distances, context, context_metadata))
+    # Return all the things for convenience.
     return formatted_results, context, context_metadata
 
 
