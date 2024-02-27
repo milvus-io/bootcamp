@@ -1,0 +1,212 @@
+In this paper, we present a new embedding model, called M3-Embedding, which is distinguished for its versatility in Multi-Linguality, Multi-Functionality, and Multi-Granularity.
+It can support more than 100 working languages, leading to new state-of-the-art performances on multi-lingual and cross-lingual retrieval tasks.
+It can simultaneously perform the three common retrieval functionalities of embedding model: dense retrieval, multi-vector retrieval, and sparse retrieval, which provides a unified model foundation for real-world IR applications.
+It is able to process inputs of different granularities, spanning from short sentences to long documents of up to 8192 tokens.
+The effective training of M3-Embedding involves the following technical contributions.
+We propose a novel self-knowledge distillation approach, where the relevance scores from different retrieval functionalities can be integrated as the teacher signal to enhance the training quality.
+We also optimize the batching strategy, enabling a large batch size and high training throughput to ensure the discriminativeness of embeddings.
+To the best of our knowledge, M3-Embedding is the first embedding model which realizes such a strong versatility.
+The model and code will be publicly available at https://github.com/FlagOpen/FlagEmbedding.
+Embedding models are a critical form of DNN application in natural language processing.
+They encode the textual data in the latent space, where the underlying semantics of the data can be expressed by the output embeddings (Reimers and Gurevych, 2019; Ni et al., 2021).
+With the advent of pretrained language models, the quality of text embeddings have been substantially improved, making them imperative components for information retrieval (IR).
+Figure 1: Characters of M3-Embedding.
+One common form of embeddingbased IR is dense retrieval, where relevant answers to the query can be retrieved based on the embedding similarity (Karpukhin et al., 2020; Xiong et al., 2020; Neelakantan et al., 2022; Wang et al., 2022; Xiao et al., 2023).
+Besides, the embedding model can also be applied to other IR tasks, such as multivector retrieval where the fine-grained relevance between query and document is computed based on the interaction score of multiple embeddings (Khattab and Zaharia, 2020), and sparse or lexical retrieval where the importance of each term is estimated by its output embedding (Gao et al., 2021a; Lin and Ma, 2021; Dai and Callan, 2020).
+Despite the widespread popularity of text embeddings, the existing methods are still limited in versatility.
+First of all, most of the embedding models are tailored only for English, leaving few viable options for the other languages.
+Secondly, the existing embedding models are usually trained for one single retrieval functionality.
+However, typical IR systems call for the compound workflow of multiple retrieval methods.
+Thirdly, it is challenging to train a competitive long-document retriever due to the overwhelming training cost, where most of the embedding models can only support short inputs.
+To address the above challenges, we introduce M3-Embedding, which is pronounced for its breakthrough of versatility in working languages, retrieval functionalities, and input granularities.
+Particularly, M3-Embedding is proficient in multilinguality, which is able to support more than 100 world languages.
+By learning a common semantic space for different languages, enables both multilingual retrieval within each language and crosslingual retrieval between different languages.
+Besides, it is able to generate versatile embeddings to support different retrieval functionalities, not just dense retrieval, but also sparse retrieval and multivector retrieval.
+Finally, M3-Embedding is learned to process different input granularities, spanning from short inputs like sentences and passages, to long documents of up to 8,192 input tokens.
+The effective training of such a versatile embedding model poses a significant challenge.
+In our work, the following technical contributions are made to optimize the training quality.
+Firstly, we propose a novel self-knowledge distillation framework, where the multiple retrieval functionalities can be jointly learned and mutually reinforced.
+In M3-Embedding, the [CLS] embedding is used for dense retrieval, while embeddings from other tokens are used for sparse retrieval and multi-vector retrieval.
+Based on the principle of ensemble learning (Bühlmann, 2012), such heterogenous predictors can be combined as a stronger predictor.
+Thus, we integrate the relevance scores from different retrieval functions as the teacher signal, which is used to enhance the learning process via knowledge distillation.
+Secondly, we optimize the batching strategy to achieve a large batch size and high training throughput, which substantially contributes to the discriminativeness of embeddings.
+Last but not least, we perform comprehensive and high-quality data curation.
+Our dataset consists of three sources: 1) the extraction of unsupervised data from massive multi-lingual corpora, 2) the integration of closely related supervised data, 3) the synthesization of scarce training data.
+The three sources of data are complement to each other and applied to different stages of the training process, which lays foundation for the versatile text embeddings.
+M3-Embedding exhibits remarkable versatility in our experiments.
+It achieves superior retrieval quality for a variety of languages, leading to state-of-the-art performances on popular multilingual and cross-lingual benchmarks like MIRACL (Zhang et al., 2023c) and MKQA (Longpre et al., 2021).
+It effectively learns the three retrieval functionalities, which can not only work individ- ually but also work together for an even stronger retrieval quality.
+It also well preserves its superior capability across different input granularities within 8192 tokens, which outperforms the existing methods by a notable advantage.
+Our work makes the following contributions.
+1) We present M3-Embedding, which is the first model which supports multi-linguality, multifunctionality, and multi-granularity.
+2) We propose a novel training framework of self-knowledge distillation and efficient batching strategy.
+And we also perform high-quality curation of training data.
+3) Our model, code, and data will all be publicly available, which provides critical resources for both direct usage and future development of text embeddings.
+The related works are reviewed from three aspects: general text embeddings, embedding models for neural retrieval, embeddings of multi-linguality.
+In the past few years, substantial progress has been achieved in the field of text embedding.
+One major driving force is the popularity of pre-trained language models, where the underlying semantic of the data can be effectively encoded by such powerful text encoders (Reimers and Gurevych, 2019; Karpukhin et al., 2020; Ni et al., 2021).
+In addition, the progress of contrastive learning is another critical factor, especially the improvement of negative sampling (Xiong et al., 2020; Qu et al., 2020) and the exploitation of knowledge distillation (Hofstätter et al., 2021; Ren et al., 2021; Zhang et al., 2021a).
+On top of these well-established techniques, it becomes increasingly popular to learn versatile embedding models, which are able to uniformly support a variety of application scenarios.
+So far, there have been many impactful methods in the direction, like Contriever (Izacard et al., 2022), LLM-Embedder (Zhang et al., 2023a), E5 (Wang et al., 2022), BGE (Xiao et al., 2023), SGPT (Muennighoff, 2022), and Open Text Embedding (Neelakantan et al., 2022), which significantly advance the usage of text embeddings for general tasks.
+One major application of embedding models is neural retrieval (Lin et al., 2022).
+By measuring the semantic relationship with the text embeddings, the relevant answers to the input query can be retrieved based on the embedding similarity.
+The most common form of embedding-based retrieval method is dense retrieval (Karpukhin et al., 2020), where the text encoder's outputs are aggregated (e.g., via [CLS] or mean-pooling) to compute the embedding similarity.
+Another common alternative is known as multi-vecor retrieval (Khattab and Zaharia, 2020; Humeau et al., 2020), which applies fine-grained interactions for the text encoder's outputs to compute the embedding similarity.
+Finally, the text embeddings can also be transformed into term weights, which facilitates sparse or lexical retrieval (Luan et al., 2021; Dai and Callan, 2020; Lin and Ma, 2021).
+Typically, the above retrieval methods are realized by different embedding models.
+To the best of our knowledge, no existing method is able to unify all these functionalities.
+Despite the substantial technical advancement, most of the existing text embeddings are developed only for English, where other languages are lagging behind.
+To mitigate this problem, continual efforts are presented from multiple directions.
+One is the development of pre-trained multi-lingual text encoders, such as mBERT (Pires et al., 2019), mT5 (Xue et al., 2020), XLM-R (Conneau et al., 2020).
+Another one is the curation of training and evaluation data for multi-lingual text embeddings, e.g., MIRACL (Zhang et al., 2023c), mMARCO (Bonifacio et al., 2021), Mr. TyDi (Zhang et al., 2021b), MKQA (Longpre et al., 2021).
+At the same time, the multi-lingual text embeddings are continually developed from the community, e.g., mDPR (Zhang et al., 2023b), mContriever (Izacard et al., 2022), mE5 (Wang et al., 2022), etc.
+However, the current progress is still far from enough given the notable gap with English models and the huge imbalance between different languages.
+M3-Embedding realizes three-fold versatility.
+It supports a wide variety of languages and handles input data of different granularities.
+Besides, it unifies the common retrieval functionalities of text embeddings.
+Formally, given a query $q$ in an arbitrary language $x$, it is able to retrieve document $d$ in language $y$ from the corpus $D^{y}: d^{y} \leftarrow \mathrm{fn}^{*}\left(q^{x}, D^{y}\right)$.
+In this place, $\mathrm{fn}^{*}(\cdot)$ belongs to any of the functions: dense, sparse/lexical, or multi-vector retrieval; $y$ can be another language or the same language as $x$.
+The training of M3-Embedding calls for a largescale and diverse multi-lingual dataset.
+In this   Table 1: Specification of training data.
+work, we perform comprehensive data collection from three sources: the unsupervised data from unlabeled corpora, the fine-tuning data from labeled corpora, and the fine-tuning data via synthesization (shown as Table 1).
+The three data sources complement to each other, which are applied to different stages of the training process.
+particularly, the unsupervised data is curated by extracting the rich-semantic structures, e.g., titlebody, title-abstract, instruction-output, etc., within a wide variety of multi-lingual corpora, including wikipedia, s2orc (lo et al., 2020), xp3 (muennighoff et al., 2022), mc4 (raffel et al., 2019), and cc-news (hamborg et al., 2017).
+Besides, the well-curated data from MTP (Xiao et al., 2023) is directly incorporated.
+To learn the unified embedding space for cross-lingual semantic matching, the parallel sentences are introduced from two translation datasets, NLLB (NLLB Team et al., 2022) and CCMatrix (Schwenk et al., 2021).
+The raw data is filtered to remove potential bad contents and lowrelevance samples.
+In total, it brings in 1.2 billion text pairs of 194 languages and 2655 cross-lingual correspondences.
+In addition, we collect relatively small but diverse and high-quality fine-tuning data from labeled corpora.
+For English, we incorporate eight datasets, including HotpotQA (Yang et al., 2018), TriviaQA (Joshi et al., 2017), NQ (Kwiatkowski et al., 2019), MS MARCO (Nguyen et al., 2016),   Figure 2: Multi-stage training process of M3-Embedding with self-knowledge distillation.
+COLIEE (Kim et al., 2022), PubMedQA (Jin et al., 2019), SQuAD (Rajpurkar et al., 2016), and NLI data collected by SimCSE (Gao et al., 2021b).
+For Chinese, we incorporate seven datasets, including DuReader (He et al., 2017), mMARCO-ZH (Bonifacio et al., 2021), $\mathrm{T}^{2}$-Ranking (Xie et al., 2023), LawGPT ${ }^{1}$, CMedQAv2 (Zhang et al., 2018), NLI$\mathrm{zh}^{2}$, and LeCaRDv2 (Li et al., 2023).
+For other languages, we leverage the training data from $\mathrm{Mr}$.
+Tydi (Zhang et al., 2021b) and MIRACL (Zhang et al., 2023c).
+Finally, we generate synthetic data to mitigate the shortage of long document retrieval tasks and introduce extra multi-lingual fine-tuning data (denoted as MultiLongDoc).
+Specifically, we sample lengthy articles from Wiki and MC4 datasets and randomly choose paragraphs from them.
+Then we use GPT-3.5 to generate questions based on these paragraphs.
+The generated question and the sampled article constitute a new text pair to the finetuning data.
+Detailed specifications are presented in Appendix A.2.
+M3-Embedding unifies all three common retrieval functionalities of the embedding model, i.e.
+dense retrieval, lexical (sparse) retrieval, and multi-vector retrieval.
+The formulations are presented as follows.
+- Dense retrieval.
+The input query $q$ is transformed into the hidden states $\mathbf{H}_{\mathbf{q}}$ based on a text encoder.
+We use the normalized hidden state of the special token "[CLS]" for the representation of the query: $e_{q}=\operatorname{norm}\left(\mathbf{H}_{\mathbf{q}}[0]\right)$.
+Similarly, we can get the embedding of passage $p$ as $e_{p}=\operatorname{norm}\left(\mathbf{H}_{\mathbf{p}}[0]\right)$.
+Thus, the relevance score between query and passage is measured by the inner product between the two embeddings $e_{q}$ and $e_{p}: s_{\text {dense }} \leftarrow\left\langle e_{p}, e_{q}\right\rangle$.
+- Lexical Retrieval.
+The output embeddings are also used to estimate the importance of each term to facilitate lexical retrieval.
+For each term $t$ within the query (a term is corresponding to a token in our work), the term weight is computed as $\left.w_{q_{t}} \leftarrow \operatorname{Relu}\left(\mathbf{W}_{\text {lex }}^{T} \mathbf{H}_{\mathbf{q}}[i]\right)\right)$, where $\mathbf{W}_{\text {lex }} \in \mathcal{R}^{d \times 1}$ is the matrix mapping the hidden state to a float number.
+If a term $t$ appears multiple times in the query, we only retain its max weight.
+We use the same way to compute the weight of each term in the passage.
+Based on the estimation term weights, the relevance score between query and passage is computed by the joint importance of the co-existed terms (denoted as $q \cap p$ ) within the query and passage: $s_{\text {lex }} \leftarrow \sum_{t \in q \cap p}\left(w_{q_{t}} * w_{p_{t}}\right)$.
+- Multi-Vector Retrieval.
+As an extension of dense retrieval, the multi-vector method makes use of the entire output embeddings for the representation of query and passage: $E_{q}=$ $\operatorname{norm}\left(\mathbf{W}_{m u l}^{T} \mathbf{H}_{\mathbf{q}}\right), E_{p}=\operatorname{norm}\left(\mathbf{W}_{m u l}^{T} \mathbf{H}_{\mathbf{p}}\right)$, where $\mathbf{W}_{m u l} \in \mathbb{R}^{d \times d}$ is the learnable projection matrix.
+Following ColBert(Khattab and Zaharia, 2020), we use late-interaction to compute the fine-grained relevance score: $s_{m u l} \leftarrow$ $\frac{1}{N} \sum_{i=1}^{N} \max _{j=1}^{M} E_{q}[i] \cdot E_{p}^{T}[j] ; N$ and $M$ are the lengths of query and passage.
+Thanks to the multi-functionality of the embedding model, the retrieval process can be conducted in a hybrid process.
+First of all, the candidate results can be individually retrieved by each of the methods (the multi-vector method can be exempted from this step due to its heavy cost).
+Then, the final retrieval result is re-ranked based on the integrated relevance score: $s_{\text {rank }} \leftarrow s_{\text {dense }}+s_{\text {lex }}+s_{\text {mul }}$.
+The embedding model is trained to discriminate the positive samples from the negative ones.
+For each of the retrieval methods, it is expected to assign a higher score for the query's positive samples compared with the negative ones.
+Therefore, the training process is conducted to minimize the InfoNCE loss, whose general form is presented by the following loss function:   $$ \begin{equation*} \mathcal{L}=-\log \frac{\exp \left(s\left(q, p^{*}\right) / \tau\right)}{\sum_{p \in\left\{p^{*}, P^{\prime}\right\}} \exp (s(q, p) / \tau)} \tag{1} \end{equation*} $$   Here, $p^{*}$ and $P^{\prime}$ stand for the positive and negative samples to the query $q ; s(\cdot)$ is any of the functions within $\left\{s_{\text {dense }}(\cdot), s_{\text {lex }}(\cdot), s_{\text {mul }}(\cdot)\right\}$.
+The training objectives of different retrieval methods can be mutually conflicting with each their.
+Therefore, the native multi-objective training can be unfavorable to the embedding's quality.
+To facilitate the optimization of multiple retrieval functions, we propose to unify the training process on top of self-knowledge distillation.
+Particularly, based on the principle of ensemble learning (Bühlmann, 2012), the predictions from different retrieval methods can be integrated as a more accurate relevance score given their heterogeneous nature.
+In the simplest form, the integration can just be the sum-up of different prediction scores:   $$ \begin{equation*} s_{\text {inter }} \leftarrow s_{\text {dense }}+s_{\text {lex }}+s_{\text {mul }} .
+\tag{2} \end{equation*} $$   In previous studies, the training quality of embedding model can benefit from knowledge distillation, which takes advantage of fine-grained soft labels from another ranking model (Hofstätter et al., 2021).
+In this place, we simply employ the integration score $s_{\text {inter }}$ as the teacher, where the loss function of each retrieval method is modified as:   $$ \begin{equation*} \mathcal{L}_{*}^{\prime} \leftarrow-p\left(s_{\text {inter }}\right) * \log p\left(s_{*}\right) .
+\tag{3} \end{equation*} $$   Here, $p(\cdot)$ is the softmax activation; $s_{*}$ is any of the members within $s_{\text {dense }}, s_{l e x}$, and $s_{m u l}$.
+We further integrate and normalize the modified loss function:   $$ \begin{equation*} \mathcal{L}^{\prime} \leftarrow\left(\mathcal{L}_{\text {dense }}^{\prime}+\mathcal{L}_{\text {lex }}^{\prime}+\mathcal{L}_{\text {mul }}^{\prime}\right) / 3 \tag{4} \end{equation*} $$   Finally, we derive the final loss function for selfknowledge distillation with the linear combination of $\mathcal{L}$ and $\mathcal{L}^{\prime}: \mathcal{L}_{\text {final }} \leftarrow \mathcal{L}+\mathcal{L}^{\prime}$.
+The overall training process is a multi-stage workflow (Figure 2).
+We use an XLMRoBERTa (Conneau et al., 2020) model pre-trained   Figure 3: Efficient Batching.
+(Data is grouped and sampled by length.
+Gradient-checkpointing and crossGPU broadcasting are enabled to save memory.)
+further through the RetroMAE (Xiao et al., 2022) method as the base text encoder.
+Firstly, the text encoder is pre-trained with the massive unsupervised data, where only the dense retrieval is trained in the basic form of contrastive learning.
+The selfknowledge distillation is applied to the second stage, where the embedding model is fine-tuned to establish the three retrieval functionalities.
+Both labeled and synthetic data are used in this stage, where hard negative samples are introduced for each query following the ANCE method (Xiong et al., 2020).
+Detailed processing is presented in Appendix B.1.
+The embedding model needs to learn from diverse and massive multi-lingual data to fully capture the general semantic of different languages.
+It also needs to keep the batch size as large as possible (where a huge amount of in-batch negatives can be leveraged) so as to ensure the discriminativeness of text embeddings.
+Given the limitations on GPU's memory and computation power, people usually truncate the input data into short sequences for high throughput of training and a large batch size.
+However, the common practice is not a feasible option for M3-Embedding because it needs to learn from both short and long-sequence data to effectively handle the input of different granularities.
+In our work, we improve the training efficiency by optimizing the batching strategy, which enables high training throughput and large batch sizes.
+Particularly, the training data is pre-processed by being grouped by sequence length.
+When producing a mini-batch, the training instances are sampled from the same group.
+Due to the similar sequence lengths, it significantly reduces sequence padding (marked in red) and facilitates a more effective utilization of GPUs.
+Besides, when sampling the   Table 2: Multi-lingual retrieval performance on the MIRACL dev set (measured by nDCG@ 10).
+training data for different GPUs, the random seed is always fixed, which ensures the load balance and minimizes the waiting time in each training step.
+Besides, when handling long-sequence training data, the mini-batch is further divided into subbatches, which takes less memory footprint.
+We iteratively encode each sub-batch using gradient checkpointing (Chen et al., 2016) and gather all generated embeddings.
+This method can significantly increase the batch size.
+For example, when processing text with a length of 8192, the batch size can be increased by more than 20 times.
+For more details please refer to Appendx B.3.
+Finally, the embeddings from different GPUs are broadcasted, allowing each device to obtain all embeddings in the distributed environment, which notably expands the scale of in-bath negative samples.
+However, users may lack sufficient computational resources or data to train a long-text model.
+Therefore, we also propose an MCLS strategy to enhance the model's long-text capabilities without the need for training.
+This strategy leverages multiple CLS tokens to capture text semantics, applied during inference.
+Refer to Appendix B.
+2 for more details.
+In the following part, we evaluate our model on three tasks: multi-lingual retrieval, cross-lingual retrieval, and long-doc retrieval.
+We evaluate the multi-lingual retrieval performance with MIRACL (Zhang et al., 2023c), which consists of ad-hoc retrieval tasks in 18 languages.
+Each task is made up of query and passage presented in the same language.
+Following the of- ficial benchmark, we evaluate our method using Pyserini (Lin et al., 2021), and use nDCG@ 10 as the primary evaluation metric (Recall@ 100 is also measured and reported in Appendix C.1).
+We incorporate the following baselines in our experiment: the lexical retrieval method: BM25 (Robertson and Zaragoza, 2009); the dense retrieval methods: $\mathrm{mDPR}^{3}$ (Zhang et al., 2023b), mContriever ${ }^{4}$ (Izacard et al., 2022), $m E 5_{\text {large }}$ (Wang et al., 2022) and $\mathrm{E} 5_{\text {mistral-7b (Wang et al., 2023).
+To make the BM25 }}$ and M3 more comparable, in the experiment, we use the same tokenizer as M3 (i.e., the tokenizer of XLM-Roberta) for BM25.
+Using the same vocabulary from XLM-Roberta can also ensure that both approaches have the same retrieval latency.
+The results of BM25 with different tokenizers are shown in Appendix C.2.
+We also make a comparison with Text-Embedding-3-Large(abbreviated as OpenAI$3)$, which was recently released by OpenAI 5 .
+We can make the following observations according to the experiment result in Table 2.
+Firstly, M3Embedding already achieves a superior retrieval performance with only its dense retrieval functionality (denoted as $\underline{\text { Dense).
+It not only outperforms }}$ other baseline methods in the average performance, but also maintains a consistent empirical advantage in most of individual languages.
+Even compared with $\mathrm{E} 5_{\text {mistral-7b }}$, which leverages a much larger Mistral-7B model as the text encoder and specifically trained with English data, our method is able to produce a similar result in English and notably higher results in the other languages.
+Besides, the sparse retrieval functionality (denoted as Sparse) is also effectively trained by M3-Embedding, as[^1]   Table 3: Cross-lingual retrieval performance on MKQA (measured by Recall@ 100).
+it outperforms the typical BM25 methods in all languages.
+We can also observe the additional improvement from multi-vector retrieval ${ }^{6}$ (denoted as Mult-vec), which relies on fine-grained interactions between query and passage's embeddings to compute the relevance score.
+Finally, the collaboration of dense and sparse method, e.g., Dense+Sparse ${ }^{7}$, leads to a further improvement over each individual method; and the collaboration of all three methods ${ }^{8}$ (denoted as $\underline{A l l}$ ) brings forth the best performance.
+We make evaluation for the cross-lingual retrieval performance with the MKQA benchmark (Longpre et al., 2021), which includes queries in 25 nonEnglish languages.
+For each query, it needs to retrieve the ground-truth passage from the English Wikipedia corpus.
+In our experiment, we make use of the well-processed corpus offered by the BEIR $^{9}$ (Thakur et al., 2021).
+Following the previous study (Karpukhin et al., 2020), we report Recall@ 100 as the primary metric (Recall@20 is reported as an auxiliary metric in the Appendix).
+The experiment result is shown in Table 3.
+Similar to our observation in multi-lingual retrieval, M3-Embedding continues to produce a superior performance, where it notably outperforms other baseline methods purely with its dense retrieval functionality (Dense).
+The collaboration of different retrieval methods brings in further improvements, leading to the best empirical performance of cross-lingual retrieval.
+Besides, we can also observe the following interesting results which are unique to this benchmark.
+Firstly, the performance gaps are not as significant as MIRACL, where competitive baselines like $\mathrm{E} 5_{\text {mistral-7b }}$ is able to produce similar or even better results on some of the testing languages.
+However, the baselines are prone to bad performances in many other languages, especially the low-resource languages, such as ar, km, he, etc.
+In contrast, M3-Embedding maintains relatively stable performances in all languages, which can largely be attributed to its pre-training over comprehensive unsupervised data.
+Secondly, although M3Embedding (Sparse) is still better than BM25, it performs badly compared with other methods.
+This   Table 4: Evaluation of multilingual long-doc retrieval on the MLDR test set (measured by nDCG@ 10).
+Table 5: Evaluation on NarrativeQA (nDCG@10).
+is because there are only very limited co-existed terms for cross-lingual retrieval as the query and passage are presented in different languages.
+We evaluate the retrieval performance with longer sequences with two benchmarks: MLDR (Multilingual Long-Doc Retrieval), which is curated by the multilingual articles from Wikipedia, Wudao and mC4 (see Table 8), and NarrativeQA ${ }^{10}$ (s Ko` ciský et al., 2018; Günther et al., 2024), which is only for English.
+In addition to the previous baselines, we further introduce JinaEmbeddingv $2^{11}$ (Günther et al., 2024), text-embedding-ada-002 and textembedding-3-large from OpenAI given their outstanding long-doc retrieval capability.
+The evaluation result on MLDR is presented in Table 4.
+Interestingly, M3 (Sparse) turns out to be a more effective method for long document retrieval, which achieves another about 10 points improvement over the dense method.
+Besides, the multivector retrieval is also impressive, which brings 5.1+ points improvement over M3 (Dense).
+Finally, the combination of different retrieval methods leads to a remarkable average performance of 65.0 .
+Figure 4: NarrativeQA with variant sequence length.
+To explore the reason for M3-Embedding's competitiveness in long-document retrieval, we perform the ablation study by removing the long document data from the fine-tuning stage (denoted as w.o.
+long).
+After this modification, the dense method, i.e.
+Dense-w.o.long, can still outperform the majority of baselines, which indicates that its empirical advantage has been well established during the pre-training stage.
+We also propose a simple strat-   Table 6: Ablation study of self-knowledge distillation with MIRACL (nDCG@ 10).
+egy, MCLS, to address this situation (no data or no GPU resource for document-retrieval fine-tuning).
+Experimental results indicate that MCLS can significantly improve the performance of document retrieval without training $(41.2 \rightarrow 45.0)$.
+We make further analysis with NarrativeQA (Table 5), where we have similar observations as MLDR.
+Besides, with the growing of sequence length, our method gradually expands its advantage over baseline (Figure 4), which reflects its proficiency in handling long inputs.
+Self-knowledge distillation This ablation study is performed to analyze the impact of selfknowledge distillation (skd).
+Particularly, we disable the distillation processing and have each retrieval method trained independently (denoted as M3-w.o.skd).
+According to our evaluation on MIRACL (Table 6), the original method, i.e.
+M3 w.skd, brings in better performances than the ablation method in all settings, i.e., Dense, Sparse, Multivec.
+Notably, the impact is more pronounced for sparse retrieval, which indicates the incompatibility between dense and sparse retrieval methods.
+Impact of multi-stage training We also conducted experiments to explore the impact of different stages.
+Fine-tuning indicates fine-tuning directly from the xlm-roberta (Conneau et al., 2020) model, and RetroMAE+Fine-tuning refers to finetuning on a model trained with RetroMAE (Xiao et al., 2022).
+Meanwhile, RetroMAE+Unsup+Finetuning involves fine-tuning on a model trained with RetroMAE and then pre-trained on unsupervised data.
+The results are summarized in Table 7.
+We can see that RetroMAE can significantly improve retrieval performance, and pre-training on unsupervised data can further enhance the retrieval ability of the embedding model.
+Table 7: Ablation study of multi-stage training with MIRACL (nDCG@10).
+In this paper, we present M3-Embedding, which achieves notable versatility in supporting multilingual retrieval, handling input of diverse granularities, and unifying different retrieval functionalities.
+We perform comprehensive and high-quality curation of training data, optimize the learning process with self-knowledge distillation, and improve the training through and batch size with efficient batching.
+The effectiveness of M3-Embedding is verified by our experimental studies, where it leads to superior performances on multi-lingual retrieval, crosslingual retrieval, and multi-lingual long-document retrieval tasks.
