@@ -25,12 +25,12 @@
 #     http://127.0.0.1:8265/#/cluster
 ######################################################
 import ray, os, pprint, time, uuid
-from ray.data import read_parquet
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 import pandas as pd
 import numpy as np
 
 # Get the embedding model function.
+# Milvus docs: https://milvus.io/docs/embed-with-bgm-m3.md
 import pymilvus
 print(pymilvus.__version__) # must be >= 2.4.0
 from pymilvus.model.hybrid import BGEM3EmbeddingFunction
@@ -92,7 +92,7 @@ class ComputeEmbeddings:
 
 if __name__ == "__main__":
 
-    FILE_PATH = "local://./data/kaggle_imdb_small.parquet"
+    FILE_PATH = "local://./data/kaggle_imdb.parquet"
 
     # Load and transform data.
     ds = ray.data.read_parquet(FILE_PATH)
@@ -113,6 +113,9 @@ if __name__ == "__main__":
     # print(f"Number rows after: {embeddings_ds.count()}")
     print(embeddings_ds.schema())
     # pprint.pprint(embeddings_ds.take_batch(1))
+
+    # Save the embeddings to a parquet file.
+    embeddings_ds.write_parquet("local://./data/kaggle_imdb_embeddings.parquet")
 
 
 #### TOTAL JOB DURATION:  18 seconds #####################
