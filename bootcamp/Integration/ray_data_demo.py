@@ -1,7 +1,13 @@
 # script.py
 ######################################################
 # Install Ray.
-# !pip install -U "ray[data,train,tune,serve,default]"
+# !pip install -U "ray[data,default]"
+
+# Install Pymilvus.
+# !pip install pymilvus "pymilvus[model]"
+
+# Install other dependencies.
+# !pip install pandas numpy langchain boto3
 #
 # Start Ray headnode local cluster.
 # This will print out the Ray cluster address, which can be passed to start the worker nodes.
@@ -31,30 +37,35 @@ import numpy as np
 
 # Get the embedding model function.
 # Milvus docs: https://milvus.io/docs/embed-with-bgm-m3.md
-import pymilvus
-print(pymilvus.__version__) # must be >= 2.4.0
+import pymilvus, boto3
+print(f"Pymilvus: {pymilvus.__version__}") # must be >= 2.4.0
 from pymilvus.model.hybrid import BGEM3EmbeddingFunction
+from pymilvus import ( RemoteBulkWriter, BulkFileType )
+s3 = boto3.client('s3')
 
-# Define regular python functions.
-def chunk_row(row):
-    # Default chunk size 512 and overlap 10% chunk_size.
-    chunk_size = 512
-    chunk_overlap = np.round(chunk_size * 0.10, 0)
+# Default chunk size 512 and overlap 10% chunk_size.
+chunk_size = 512
+chunk_overlap = np.round(chunk_size * 0.10, 0)
 
-    # Copy the row columns into metadata.
+# Define a LangChain text splitter.
+text_splitter = RecursiveCharacterTextSplitter(
+    chunk_size=chunk_size,
+    chunk_overlap=chunk_overlap,
+    length_function=len)
+
+# Define a regular python function for chunking.
+def chunk_row(row, splitter=text_splitter):
+
+    # Copy all columns into metadata.
     metadata = row.copy()
-    del metadata['text'] # Remove text from metadata
+    del metadata['text'] # Remove text from metadata to avoid duplication
 
     # Split the text into chunks.
-    text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=chunk_size,
-        chunk_overlap=chunk_overlap,
-        length_function=len)
-    chunks = text_splitter.create_documents(
+    chunks = splitter.create_documents(
         texts=[row["text"]], 
         metadatas=[metadata])
     chunk_list = [{
-        "id": str(uuid.uuid4()),
+        # "id": str(uuid.uuid4()),
         "text": chunk.page_content,
         **chunk.metadata} for chunk in chunks]
 
@@ -92,33 +103,28 @@ class ComputeEmbeddings:
 
 if __name__ == "__main__":
 
-    FILE_PATH = "local://./data/kaggle_imdb.parquet"
+    # FILE_PATH = "local://./data/kaggle_imdb_small.parquet"
+    FILE_PATH = "s3://zilliz/kaggle_imdb.parquet"
 
     # Load and transform data.
     ds = ray.data.read_parquet(FILE_PATH)
-    # print(f"Number rows before: {ds.count()}")
-    # print(ds.schema())
 
-    # chunk the input text
+    # Chunk the input text.
     chunked_ds = ds.flat_map(chunk_row)
 
-    # Row count is not correctly displayed.
-    # print(f"Number rows after: {chunked_ds.count()}")
-    # print(chunked_ds.schema())
-
-    # compute embeddings with a class that calls the embeddings model
-    embeddings_ds = chunked_ds.map_batches(ComputeEmbeddings, concurrency=4)
-
-    # print(embeddings_ds.materialize())
-    # print(f"Number rows after: {embeddings_ds.count()}")
+    # Compute embeddings with a class that calls the embeddings model.
+    embeddings_ds = \
+        chunked_ds.map_batches(ComputeEmbeddings, concurrency=4)
+    
+    # Careful with print schema, it will cause a blocking operation!
     print(embeddings_ds.schema())
-    # pprint.pprint(embeddings_ds.take_batch(1))
 
-    # Save the embeddings to a parquet file.
-    embeddings_ds.write_parquet("local://./data/kaggle_imdb_embeddings.parquet")
+    # Save the embeddings to a parquet file locally or cloud.
+    embeddings_ds.write_parquet('s3://zilliz/kaggle_imdb_embeddings2')
 
 
-#### TOTAL JOB DURATION:  18 seconds #####################
+#### OUTPUT FROM RUNNING ON THE SMALL PARQUET FILE ######
+#### TOTAL JOB DURATION:  18 seconds ####################
 
 # -------------------------------------------------------
 # Job 'raysubmit_PfAxdkNLbv2rDNaW' submitted successfully
@@ -147,65 +153,17 @@ if __name__ == "__main__":
 # Fetching 23 files:   0%|          | 0/23 [00:00<?, ?it/s]
 # Fetching 23 files: 100%|██████████| 23/23 [00:00<00:00, 181332.69it/s]
 
-
-# - ReadParquet->SplitBlocks(20) 1:   0%|          | 0/1 [00:00<?, ?it/s]
-
-# - FlatMap(chunk_row)->MapBatches(ComputeEmbeddings) 2:   0%|          | 0/1 [00:Running 0:   0%|          | 0/1 [00:00<?, ?it/s]
-
-                                                                       
-
-
-                                                                                            
-
-                                                
-# (_MapWorker pid=88058) dense_dim: 1024            
-
-
-# - ReadParquet->SplitBlocks(20) 1:   0%|          | 0/1 [00:00<?, ?it/s]
-
-# - FlatMap(chunk_row)->MapBatches(ComputeEmbeddings) 2:   0%|          | 0/1 [00:Running 0:   0%|          | 0/1 [00:00<?, ?it/s]
-
-                                                                       
-
-
-                                                                                            
-
-                                                
-# (_MapWorker pid=88058) sparse_dim: 250002         
-
-
 # - ReadParquet->SplitBlocks(20) 1:   0%|          | 0/1 [00:00<?, ?it/s]
 
 # - FlatMap(chunk_row)->MapBatches(ComputeEmbeddings) 2:   0%|          | 0/1 [00:Running 0:   0%|          | 0/1 [00:00<?, ?it/s]
 # Running: 4/10.0 CPU, 0/0.0 GPU, 512.1MB/1.0GB object_store_memory:   0%|          | 0/1 [00:01<?, ?it/s]    | 0/1 [00:00<?, ?it/s]
 
-# - ReadParquet->SplitBlocks(20): 0 active, 0 queued, [cpu: 0.0, objects: 121.3KB]:   0%|          | 0/1 [00:01<?, ?it/s]
-# - ReadParquet->SplitBlocks(20): 0 active, 0 queued, [cpu: 0.0, objects: 121.3KB]:   0%|          | 0/20 [00:01<?, ?it/s]
-# - ReadParquet->SplitBlocks(20): 0 active, 0 queued, [cpu: 0.0, objects: 121.3KB]: 100%|██████████| 20/20 [00:01<00:00, 18.39it/s]
-
-# - FlatMap(chunk_row)->MapBatches(ComputeEmbeddings): 3 active, 17 queued, [cpu: 4.0, objects: 768.0MB], 4 actors [locality off]:   0%|          | 0/1 [00:01<?, ?it/s]
-# - FlatMap(chunk_row)->MapBatches(ComputeEmbeddings): 3 active, 17 queued, [cpu: 4.0, objects: 768.0MB], 4 actors [locality off]:   0%|          | 0/20 [00:03<?, ?it/s]
-# - FlatMap(chunk_row)->MapBatches(ComputeEmbeddings): 3 active, 17 queued, [cpu: Running: 4/10.0 CPU, 0/0.0 GPU, 31.7MB/1.0GB object_store_memory:   0%|          | 0/1 [00:03<?, ?it/s] 
-
-# - ReadParquet->SplitBlocks(20): 0 active, 0 queued, [cpu: 0.0, objects: 115.1KB]: 100%|██████████| 20/20 [00:03<00:00, 18.39it/s]
-
-#                                                                                                        queued, [cpu: 0.0, objects: 981.0KB]:   0%|          | 0/1 [00:03<?, ?it/s]
-#                                                  2024-04-01 19:16:18,252       WARNING actor_pool_map_operator.py:294 -- To ensure full parallelization across an actor pool of size 4, the Dataset should consist of at least 4 distinct blocks. Consider increasing the parallelism when creating the Dataset.
-
-
-
-#                                                                                                                                                                                   Column         Type
-# ------         ----
-# id             int64                                                            text           string
-# url            string
-# Name           string
+# Column         Type
+# ------         ----                                                             
+# id             string                                                           
+# text           string
+# movie_id       int64
 # PosterLink     string
-# Director       string
-# RatingValue    double
-# ReviewAurthor  string
-# ReviewDate     string
-# duration       string
-# MovieYear      string
 # vector_dense   numpy.ndarray(shape=(1024,), dtype=float)
 # vector_sparse  numpy.ndarray(shape=(250002,), dtype=float)
 # (MapWorker(FlatMap(chunk_row)->MapBatches(ComputeEmbeddings)) pid=88058) /opt/miniconda3/envs/py311-ray/lib/python3.11/multiprocessing/resource_tracker.py:254: UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown
