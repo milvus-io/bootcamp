@@ -51,7 +51,8 @@ chunk_overlap = np.round(chunk_size * 0.10, 0)
 text_splitter = RecursiveCharacterTextSplitter(
     chunk_size=chunk_size,
     chunk_overlap=chunk_overlap,
-    length_function=len)
+    length_function=len,  # using built-in Python len function
+    )
 
 # Define a regular python function for chunking.
 def chunk_row(row, splitter=text_splitter):
