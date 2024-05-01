@@ -58,7 +58,6 @@ def evaluate_ragas_model(pandas_eval_df,
 
     score = -1.0
     if what_to_evaluate == "CONTEXTS":
-
         print(f"Chunking to evaluate: {chunking_to_evaluate}")
         # Calculate context F1 scores.
         temp['context_f1'] = 2.0 * temp.context_precision * temp.context_recall \
@@ -68,10 +67,9 @@ def evaluate_ragas_model(pandas_eval_df,
         score = avg_retrieval_f1
 
     elif what_to_evaluate == "ANSWERS":
-
         print(f"LLM to evaluate: {llm_to_evaluate}")
-        # Evaluate the generated LLM answers.
-        temp['avg_answer_score'] = (temp.answer_relevancy + temp.answer_similarity + temp.answer_correctness + temp.faithfulness) / 4
+        # Calculate avg LLM answer scores across all floating point number scores between 0 and 1.
+        temp['avg_answer_score'] = (temp.answer_relevancy + temp.answer_similarity + temp.answer_correctness) / 3
         avg_answer_score = np.round(temp.avg_answer_score.mean(),4)
         score = avg_answer_score
 
