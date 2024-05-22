@@ -21,12 +21,12 @@ class RerankerRunnable(Runnable):
 
     def invoke(self, input: Input, config: Optional[RunnableConfig] = None) -> Output:
         milvus_retrieved_doc: List[Document] = input.get("milvus_retrieved_doc")
-        mb25_retrieved_doc: List[Document] = input.get("mb25_retrieved_doc")
+        bm25_retrieved_doc: List[Document] = input.get("bm25_retrieved_doc")
         query: str = input.get("query")
         print(f"len(milvus_retrieved_doc) = {len(milvus_retrieved_doc)}")
-        print(f"len(mb25_retrieved_doc) = {len(mb25_retrieved_doc)}")
+        print(f"len(bm25_retrieved_doc) = {len(bm25_retrieved_doc)}")
         unique_documents = self._remove_duplicates(
-            milvus_retrieved_doc + mb25_retrieved_doc
+            milvus_retrieved_doc + bm25_retrieved_doc
         )
         print(f"len(unique_documents) = {len(unique_documents)}")
         result = self.compressor.compress_documents(unique_documents, query)
