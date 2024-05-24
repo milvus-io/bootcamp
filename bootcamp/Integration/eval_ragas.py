@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 import ragas, datasets
 
 # 1. Define function to create a RAGAS dataset.
@@ -32,45 +33,66 @@ def assemble_ragas_dataset(input_df):
 # 2. Define function to evaluate RAGAS model.
 def evaluate_ragas_model(pandas_eval_df, 
                          ragas_eval_metrics, 
-                         llm_to_evaluate,
-                         chunking_to_evaluate=None,
-                         what_to_evaluate=None):
+                         what_to_evaluate='CONTEXTS',
+                         cols_to_evaluate=['Custom_RAG_context', 'simple_context']):
     """Evaluate the RAGAS model using the input pandas df."""
 
-    # Replace the Custom_RAG_answer with the LLM_to_evaluate.
     temp_df = pandas_eval_df.copy()
-    if llm_to_evaluate != 'Custom_RAG_answer':
-        temp_df['Custom_RAG_answer'] = temp_df[llm_to_evaluate]
+    ragas_results_df_list = []
+    scores = []
 
-    # Replace the Custom_RAG_context with the chunks to evaluate.
-    if chunking_to_evaluate != 'Custom_RAG_context':
-        temp_df['Custom_RAG_context'] = temp_df[chunking_to_evaluate]
+    # Loop through cols_to_evaluate and evaluate each one.
+    for col in cols_to_evaluate:
 
-    # Assemble the RAGAS dataset.
-    ragas_eval_ds = assemble_ragas_dataset(temp_df)
+        # Replace the Custom_RAG_context with the chunks to evaluate.
+        if what_to_evaluate == "CONTEXTS":
+            # Keep the Custom_RAG_answer as is.
+            # Replace the Custom_RAG_context with the col context.
+            temp_df['Custom_RAG_context'] = temp_df[col]
 
-    # Evaluate the RAGAS model.
-    ragas_results = ragas.evaluate(ragas_eval_ds, metrics=ragas_eval_metrics)
+        # Replace the Custom_RAG_answer with the LLM answer to evaluate.
+        elif what_to_evaluate == "ANSWERS":
+            # Keep the Custom_RAG_context as is.
+            # Replace the Custom_RAG_answer with the col answer.
+            temp_df['Custom_RAG_answer'] = temp_df[col]
 
-    # Return evaluations as pandas df.
-    ragas_output_df = ragas_results.to_pandas()
-    temp = ragas_output_df.fillna(0.0)
+        # Assemble the RAGAS dataset.
+        ragas_eval_ds = assemble_ragas_dataset(temp_df)
 
-    score = -1.0
-    if what_to_evaluate == "CONTEXTS":
-        print(f"Chunking to evaluate: {chunking_to_evaluate}")
-        # Calculate context F1 scores.
-        temp['context_f1'] = 2.0 * temp.context_precision * temp.context_recall \
-                            / (temp.context_precision + temp.context_recall)
-        # Calculate Retrieval average score.
-        avg_retrieval_f1 = np.round(temp.context_f1.mean(),2)
-        score = avg_retrieval_f1
+        # Evaluate the RAGAS model.
+        ragas_results = ragas.evaluate(ragas_eval_ds, metrics=ragas_eval_metrics)
 
-    elif what_to_evaluate == "ANSWERS":
-        print(f"LLM to evaluate: {llm_to_evaluate}")
-        # Calculate avg LLM answer scores across all floating point number scores between 0 and 1.
-        temp['avg_answer_score'] = (temp.answer_relevancy + temp.answer_similarity + temp.answer_correctness) / 3
-        avg_answer_score = np.round(temp.avg_answer_score.mean(),4)
-        score = avg_answer_score
+        # Return evaluations as pandas df.
+        temp = ragas_results.to_pandas()
 
-    return temp, score
+        temp_score = -1.0
+        if what_to_evaluate == "CONTEXTS":
+            print(f"Evaluate chunking: {col}, ",end="")
+            # Calculate context F1 scores.
+            temp['context_f1'] = \
+                2.0 * temp.context_precision * temp.context_recall \
+                / (temp.context_precision + temp.context_recall)
+            temp = temp.fillna(0.0)
+            # Calculate Retrieval average score.
+            avg_retrieval_f1 = np.round(temp.context_f1.mean(),2)
+            temp_score = avg_retrieval_f1
+
+        elif what_to_evaluate == "ANSWERS":
+            print(f"Evaluate LLM: {col}, ",end="")
+            # Calculate avg LLM answer scores across all floating point number scores between 0 and 1.
+            temp['avg_answer_score'] = (temp.answer_relevancy + temp.answer_similarity + temp.answer_correctness) / 3
+            avg_answer_score = np.round(temp.avg_answer_score.mean(),4)
+            temp_score = avg_answer_score
+        print(f"avg_score: {temp_score}")
+
+        # Add column what was evaluated.
+        temp['evaluated'] = col
+        # Append temp to the list of results.
+        ragas_results_df_list.append(temp)
+        
+        # Append dictionary of scores to scores list.
+        scores.append({f"{col}": temp_score})
+
+    # Return concantenated results and scores.
+    ragas_results_df = pd.concat(ragas_results_df_list, ignore_index=True)
+    return ragas_results_df, scores
