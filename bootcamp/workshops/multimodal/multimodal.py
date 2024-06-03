@@ -3,8 +3,6 @@ from uform import get_model, Modality
 import requests
 from io import BytesIO
 from PIL import Image
-import torch
-import torch.nn.functional as F
 import numpy as np
 
 import pymilvus, time
@@ -48,6 +46,7 @@ class ComputeEmbeddings:
             # Process the images into embeddings.
             image_data = self.processor_image(batch_images)
             image_embeddings = self.model_image.encode(image_data, return_features=False)
+            image_embeddings = np.array(image_embeddings / np.linalg.norm(image_embeddings))
 
             # Milvus requires list of `np.ndarray` arrays of `np.float32` numbers.
             img_converted_values = list(map(np.float32, image_embeddings))
@@ -59,19 +58,57 @@ class ComputeEmbeddings:
         if len(batch_texts) > 0:
 
             # Process the texts into embeddings.
-            text_data = self.processor_text(batch_texts)
-            text_embeddings = self.model_text.encode(text_data, return_features=False)
+            try:
+                text_data = self.processor_text(batch_texts)
+            except:
+                text_data = None
 
-            # Milvus requires list of `np.ndarray` arrays of `np.float32` numbers.
-            text_converted_values = list(map(np.float32, text_embeddings))
-            assert isinstance(text_converted_values, list)
-            assert isinstance(text_converted_values[0], np.ndarray)
-            assert isinstance(text_converted_values[0][0], np.float32)
+            if text_data is not None:    
+                text_embeddings = self.model_text.encode(text_data, return_features=False)
+                text_embeddings = np.array(text_embeddings / np.linalg.norm(text_embeddings))
+
+                # Milvus requires list of `np.ndarray` arrays of `np.float32` numbers.
+                text_converted_values = list(map(np.float32, text_embeddings))
+                assert isinstance(text_converted_values, list)
+                assert isinstance(text_converted_values[0], np.ndarray)
+                assert isinstance(text_converted_values[0][0], np.float32)
         
         return img_converted_values, text_converted_values
+    
+# Matplotlib function to display images.
+def display_images(results, num_rows, num_cols, 
+                   fig_size, text_only, image_only, 
+                   query_text):
+    
+    already_displayed_images = set()
+    plt.figure(figsize=fig_size)
+
+    for i, result in enumerate(results):
+        # Skip already displayed images.
+        if result.entity.image_filepath in already_displayed_images:
+            continue
+
+        # Otherwise print matching images.
+        with Image.open(f"./images/{result.entity.image_filepath}.jpg") as img:
+            plt.subplot(num_rows, num_cols, i+1)
+            plt.imshow(img)
+            plt.title(f"COSINE distance: {round(result.distance,4)}")
+            plt.axis('off')
+
+        # Add the image to the set of displayed images.
+        already_displayed_images.add(result.entity.image_filepath)
+
+    # Display a super title across images.
+    if text_only:
+        plt.suptitle(f"Query: {query_text}")
+    elif image_only:
+        plt.suptitle(f"Query: using image on the left")
+    else:
+        plt.suptitle(f"Query: {query_text} AND image on the left")
+    plt.show();
 
 
-# Define a convenience search function.
+# Define a search function.
 def multi_modal_search(query_text, query_image,
                        embedding_model, col,
                        output_fields,
@@ -134,33 +171,13 @@ def multi_modal_search(query_text, query_image,
     # hybrid search queries in the same call.
     results = results[0]
 
-    # Display the images 2x2.
-    if text_only:
-        plt.suptitle(f"Query: {query_text}")
-    elif image_only:
-        plt.suptitle(f"Query: using image on the left")
-    else:
-        plt.suptitle(f"Query: {query_text} AND image on the right")
-
     # Display 2x2 grid of images.
     num_rows = int(round(top_k/2,0))
     if top_k == 2:
-        plt.figure(figsize=(10,5))
-        for i, result in enumerate(results):
-            with Image.open(f"./images/{result.entity.image_filepath}.jpg") as img:
-                plt.subplot(1, 2, i+1)
-                plt.imshow(img)
-                plt.title(f"COSINE distance: {round(result.distance,4)}")
-                plt.axis('off')
+        display_images(results, 1, 2, (10,5), 
+                       text_only, image_only, query_text)
     else:
-        plt.figure(figsize=(10,10))
-        for i, result in enumerate(results):
-            with Image.open(f"./images/{result.entity.image_filepath}.jpg") as img:
-                plt.subplot(num_rows, 2, i+1)
-                plt.imshow(img)
-                plt.title(f"COSINE distance: {round(result.distance,4)}")
-                plt.axis('off')
-    plt.tight_layout()
-    plt.show()
+        display_images(results, num_rows, 2, (10,10), 
+                       text_only, image_only, query_text)
 
     return results
