@@ -6,6 +6,8 @@ In this example, we're going to use MemGPT to chat with a custom data source whi
 
 ### Configuration
 
+To run MemGPT, you should make sure the Python version >= 3.10.
+
 To enable the Milvus backend, make sure to install the required dependencies with:
 
 ```shell
