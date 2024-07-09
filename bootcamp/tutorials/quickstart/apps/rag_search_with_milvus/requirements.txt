@@ -1,0 +1,8 @@
+os
+urllib3
+openai
+pymilvus
+tqdm
+streamlit
+certifi
+ssl 
