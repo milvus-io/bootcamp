@@ -2,13 +2,11 @@ import streamlit as st
 from streamlit_cropper import st_cropper
 import streamlit_cropper
 from PIL import Image
-import logging
 
 st.set_page_config(layout="wide")
 
-from insert import download
 from encoder import load_model
-from milvus_utils import db_exists_check
+from milvus_utils import get_db
 
 
 def _recommended_box2(img: Image, aspect_ratio: tuple = None) -> dict:
@@ -23,14 +21,8 @@ def _recommended_box2(img: Image, aspect_ratio: tuple = None) -> dict:
 
 streamlit_cropper._recommended_box = _recommended_box2
 
-# Configure logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
-logger.info("Logging is configured and working.")
-
-root = "./train"
 extractor = load_model("resnet34")
-client = db_exists_check()
+client = get_db()
 
 # Logo
 st.sidebar.image("./pics/Milvus_Logo_Official.png", width=200)
@@ -74,7 +66,6 @@ if uploaded_file is not None:
 
     @st.cache_resource
     def get_image_embedding(image_path):
-        logger.info("Extracting image features")
         return extractor(image_path)
 
     image_embedding = get_image_embedding(cropped_img)

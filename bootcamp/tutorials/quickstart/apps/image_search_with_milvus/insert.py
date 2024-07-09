@@ -2,6 +2,8 @@ import requests
 import zipfile
 import certifi
 import os
+from encoder import load_model
+from PIL import Image
 
 
 def download_file(url, dest):
@@ -17,3 +19,20 @@ if not os.path.exists(zip_path):
     download_file(url, zip_path)
     with zipfile.ZipFile(zip_path, "r") as zip_ref:
         zip_ref.extractall(".")
+
+extractor = load_model("resnet34")
+
+
+def insert_embeddings(client):
+    global extractor
+    root = "./train"
+    for dirpath, foldername, filenames in os.walk(root):
+        for filename in filenames:
+            if filename.endswith(".JPEG"):
+                filepath = os.path.join(dirpath, filename)
+                img = Image.open(filepath)
+                image_embedding = extractor(img)
+                client.insert(
+                    "image_embeddings",
+                    {"vector": image_embedding, "filename": filepath},
+                )

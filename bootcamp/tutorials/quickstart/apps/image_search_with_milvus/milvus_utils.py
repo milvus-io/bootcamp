@@ -2,25 +2,7 @@ import streamlit as st
 from pymilvus import MilvusClient
 import os
 from PIL import Image
-from encoder import load_model
-
-extractor = load_model("resnet34")
-
-
-def insert_embeddings(client):
-    print("inserting")
-    global extractor
-    root = "./train"
-    for dirpath, foldername, filenames in os.walk(root):
-        for filename in filenames:
-            if filename.endswith(".JPEG"):
-                filepath = os.path.join(dirpath, filename)
-                img = Image.open(filepath)
-                image_embedding = extractor(img)
-                client.insert(
-                    "image_embeddings",
-                    {"vector": image_embedding, "filename": filepath},
-                )
+from insert import insert_embeddings
 
 
 @st.cache_resource
@@ -29,7 +11,7 @@ def get_milvus_client(uri):
 
 
 @st.cache_resource
-def db_exists_check():
+def get_db():
     if not os.path.exists("example.db"):
         client = get_milvus_client(uri="example.db")
         client.create_collection(

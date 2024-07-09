@@ -8,7 +8,7 @@ This demo implements an image similarity search application using Streamlit, Mil
 - Search for similar images using Milvus for efficient similarity search.
 - Display search results along with similarity scores.
 
-## Demo Structure
+## Code Structure
 ```text
 image_search_with_milvus/
 │
@@ -45,7 +45,8 @@ cd bootcamp/bootcamp/tutorials/quickstart/app/image_search_with_milvus
 ```
 
 ### Dataset Preparation
-We need to load the dataset and unextract it for further processing.
+We are using a diverse dataset for this demo, which includes approximately 200 categories with images of animals, objects, buildings, and more: <https://github.com/milvus-io/pymilvus-assets/releases/download/imagedata/reverse_image_search.zip>. <br>
+We will load and unzip the dataset for further processing by running the `insert.py` file.
 ```sh
 python3 insert.py
 ```
