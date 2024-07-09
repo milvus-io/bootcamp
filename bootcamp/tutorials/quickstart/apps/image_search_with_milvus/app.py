@@ -1,6 +1,6 @@
 import streamlit as st
 from streamlit_cropper import st_cropper
-import streamlit_cropper 
+import streamlit_cropper
 from PIL import Image
 import logging
 
@@ -10,9 +10,17 @@ from insert import download
 from encoder import load_model
 from milvus_utils import db_exists_check
 
+
 def _recommended_box2(img: Image, aspect_ratio: tuple = None) -> dict:
     width, height = img.size
-    return {'left': int(0), 'top': int(0), 'width': int(width-2), 'height': int(height-2)}
+    return {
+        "left": int(0),
+        "top": int(0),
+        "width": int(width - 2),
+        "height": int(height - 2),
+    }
+
+
 streamlit_cropper._recommended_box = _recommended_box2
 
 # Configure logging
@@ -20,15 +28,12 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 logger.info("Logging is configured and working.")
 
-# Download image files
-download()
-
 root = "./train"
 extractor = load_model("resnet34")
 client = db_exists_check()
 
 # Logo
-st.sidebar.image("Milvus_Logo_Official.png", width=200)
+st.sidebar.image("./pics/Milvus_Logo_Official.png", width=200)
 
 # Title
 st.title("Image Similarity Search :frame_with_picture: ")
@@ -50,26 +55,34 @@ if uploaded_file is not None:
     new_height = int((new_width / width) * height)
     uploaded_img = uploaded_img.resize((new_width, new_height))
 
-    st.sidebar.text('Query Image', help="Edit the bounding box to change the ROI (Region of Interest).")
+    st.sidebar.text(
+        "Query Image",
+        help="Edit the bounding box to change the ROI (Region of Interest).",
+    )
     with st.sidebar.empty():
-        cropped_img = st_cropper(uploaded_img, box_color="#4fc4f9", realtime_update=True, aspect_ratio=(16,9))
+        cropped_img = st_cropper(
+            uploaded_img,
+            box_color="#4fc4f9",
+            realtime_update=True,
+            aspect_ratio=(16, 9),
+        )
 
     show_distance = st.sidebar.toggle("Show Distance")
 
     # top k value slider
-    value = st.sidebar.slider("Select top k results shown", 10, 100, 20, step = 1)
-    
+    value = st.sidebar.slider("Select top k results shown", 10, 100, 20, step=1)
+
     @st.cache_resource
     def get_image_embedding(image_path):
         logger.info("Extracting image features")
         return extractor(image_path)
-    
+
     image_embedding = get_image_embedding(cropped_img)
 
     results = client.search(
         "image_embeddings",
         data=[extractor(cropped_img)],
-        limit = value,
+        limit=value,
         output_fields=["filename"],
         search_params={"metric_type": "COSINE"},
     )

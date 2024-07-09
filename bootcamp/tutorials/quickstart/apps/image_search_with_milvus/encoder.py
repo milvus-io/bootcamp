@@ -13,17 +13,20 @@ MODEL_PATH = os.path.join(documents_dir, folder_name, "feature_extractor_model.p
 # Ensure the directory exists
 os.makedirs(os.path.dirname(MODEL_PATH), exist_ok=True)
 
+
 class FeatureExtractor:
     def __init__(self, modelname):
-        self.model = timm.create_model(modelname, pretrained=True, num_classes=0, global_pool="avg")
+        self.model = timm.create_model(
+            modelname, pretrained=True, num_classes=0, global_pool="avg"
+        )
         self.model.eval()
         self.input_size = self.model.default_cfg["input_size"]
         config = resolve_data_config({}, model=modelname)
         self.preprocess = create_transform(**config)
-    
+
     def save(self, path):
         torch.save(self.model.state_dict(), path)
-    
+
     @staticmethod
     def load(path, modelname):
         model = FeatureExtractor(modelname)

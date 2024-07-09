@@ -44,6 +44,12 @@ git clone <https://github.com/milvus-io/bootcamp.git>
 cd bootcamp/bootcamp/tutorials/quickstart/app/image_search_with_milvus
 ```
 
+### Dataset Preparation
+We need to load the dataset and unextract it for further processing.
+```sh
+python3 insert.py
+```
+
 ### Usage
 #### Run the Streamlit application
 ```sh

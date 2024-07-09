@@ -6,8 +6,9 @@ from encoder import load_model
 
 extractor = load_model("resnet34")
 
+
 def insert_embeddings(client):
-    print('inserting')
+    print("inserting")
     global extractor
     root = "./train"
     for dirpath, foldername, filenames in os.walk(root):
@@ -21,9 +22,11 @@ def insert_embeddings(client):
                     {"vector": image_embedding, "filename": filepath},
                 )
 
+
 @st.cache_resource
 def get_milvus_client(uri):
     return MilvusClient(uri=uri)
+
 
 @st.cache_resource
 def db_exists_check():
@@ -38,7 +41,7 @@ def db_exists_check():
             metric_type="COSINE",
         )
         insert_embeddings(client)
-    
+
     else:
         client = get_milvus_client(uri="example.db")
     return client
