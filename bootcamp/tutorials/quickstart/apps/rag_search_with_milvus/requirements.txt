@@ -1,0 +1,5 @@
+openai
+pymilvus>=2.4.4
+tqdm
+streamlit
+certifi
