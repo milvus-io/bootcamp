@@ -1,3 +1,4 @@
+import os
 import streamlit as st
 from streamlit_cropper import st_cropper
 import streamlit_cropper
@@ -5,11 +6,20 @@ from PIL import Image
 
 st.set_page_config(layout="wide")
 
-from encoder import load_model
-from milvus_utils import get_db
+from encoder import FeatureExtractor
+from milvus_utils import get_milvus_client, get_search_results
+
+from dotenv import load_dotenv
+
+load_dotenv()
+
+COLLECTION_NAME = os.getenv("COLLECTION_NAME")
+MILVUS_ENDPOINT = os.getenv("MILVUS_ENDPOINT")
+MILVUS_TOKEN = os.getenv("MILVUS_TOKEN")
+MODEL_NAME = os.getenv("MODEL_NAME")
 
 
-def _recommended_box2(img: Image, aspect_ratio: tuple = None) -> dict:
+def _recommended_box2(img: Image, aspect_ratio: tuple) -> dict:
     width, height = img.size
     return {
         "left": int(0),
@@ -21,8 +31,10 @@ def _recommended_box2(img: Image, aspect_ratio: tuple = None) -> dict:
 
 streamlit_cropper._recommended_box = _recommended_box2
 
-extractor = load_model("resnet34")
-client = get_db()
+
+# Get client and model ready
+milvus_client = get_milvus_client(uri=MILVUS_ENDPOINT, token=MILVUS_TOKEN)
+image_encoder = FeatureExtractor(MODEL_NAME)
 
 # Logo
 st.sidebar.image("./pics/Milvus_Logo_Official.png", width=200)
@@ -65,17 +77,14 @@ if uploaded_file is not None:
     value = st.sidebar.slider("Select top k results shown", 10, 100, 20, step=1)
 
     @st.cache_resource
-    def get_image_embedding(image_path):
-        return extractor(image_path)
+    def get_image_embedding(image: Image):
+        return image_encoder(image)
 
-    image_embedding = get_image_embedding(cropped_img)
-
-    results = client.search(
-        "image_embeddings",
-        data=[extractor(cropped_img)],
-        limit=value,
+    results = get_search_results(
+        milvus_client=milvus_client,
+        collection_name=COLLECTION_NAME,
+        query_vector=get_image_embedding(cropped_img),
         output_fields=["filename"],
-        search_params={"metric_type": "COSINE"},
     )
     search_results = results[0]
 

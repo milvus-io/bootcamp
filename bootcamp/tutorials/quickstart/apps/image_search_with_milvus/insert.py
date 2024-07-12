@@ -1,38 +1,48 @@
-import requests
-import zipfile
-import certifi
 import os
-from encoder import load_model
-from milvus_utils import get_db
+import sys
+from glob import glob
 from PIL import Image
+from tqdm import tqdm
 
+from encoder import FeatureExtractor
+from milvus_utils import get_milvus_client, create_collection
 
-def download_file(url, dest):
-    response = requests.get(url, verify=certifi.where())
-    with open(dest, "wb") as f:
-        f.write(response.content)
+from dotenv import load_dotenv
 
+load_dotenv()
 
-# Download and unzip data if not already done
-zip_path = "reverse_image_search.zip"
-if not os.path.exists(zip_path):
-    url = "https://github.com/milvus-io/pymilvus-assets/releases/download/imagedata/reverse_image_search.zip"
-    download_file(url, zip_path)
-    with zipfile.ZipFile(zip_path, "r") as zip_ref:
-        zip_ref.extractall(".")
+COLLECTION_NAME = os.getenv("COLLECTION_NAME")
+MILVUS_ENDPOINT = os.getenv("MILVUS_ENDPOINT")
+MILVUS_TOKEN = os.getenv("MILVUS_TOKEN")
+MODEL_NAME = os.getenv("MODEL_NAME")
+MODEL_DIM = os.getenv("MODEL_DIM")
 
-extractor = load_model("resnet34")
+data_dir = sys.argv[-1]
+image_encoder = FeatureExtractor(MODEL_NAME)
+milvus_client = get_milvus_client(uri=MILVUS_ENDPOINT, token=MILVUS_TOKEN)
 
+# Create collection
+create_collection(
+    milvus_client=milvus_client, collection_name=COLLECTION_NAME, dim=MODEL_DIM
+)
 
-root = "./train"
-client = get_db()
-for dirpath, foldername, filenames in os.walk(root):
-    for filename in filenames:
-        if filename.endswith(".JPEG"):
-            filepath = os.path.join(dirpath, filename)
-            img = Image.open(filepath)
-            image_embedding = extractor(img)
-            client.insert(
-                "image_embeddings",
-                {"vector": image_embedding, "filename": filepath},
-            )
+# Load images from directory and generate embeddings
+image_paths = glob(os.path.join(data_dir, "**/*.JPEG"))
+data = []
+for i, filepath in enumerate(tqdm(image_paths, desc="Generating embeddings ...")):
+    try:
+        image = Image.open(filepath)
+        image_embedding = image_encoder(image)
+        data.append({"vector": image_embedding, "filename": filepath})
+    except Exception as e:
+        print(
+            f"Skipping file: {filepath} due to an error occurs during the embedding process:\n{e}"
+        )
+        continue
+
+# Insert data into Milvus
+mr = milvus_client.insert(
+    collection_name=COLLECTION_NAME,
+    data=data,
+)
+print("Total number of inserted entities/images:", mr["insert_count"])

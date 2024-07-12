@@ -1,25 +1,35 @@
 import streamlit as st
 from pymilvus import MilvusClient
-import os
 
 
 @st.cache_resource
-def get_milvus_client(uri):
-    return MilvusClient(uri=uri)
+def get_milvus_client(uri: str, token: str = None) -> MilvusClient:
+    return MilvusClient(uri=uri, token=token)
 
 
-@st.cache_resource
-def get_db():
-    if not os.path.exists("example.db"):
-        client = get_milvus_client(uri="example.db")
-        client.create_collection(
-            collection_name="image_embeddings",
-            vector_field_name="vector",
-            dimension=512,
-            auto_id=True,
-            enable_dynamic_field=True,
-            metric_type="COSINE",
+def create_collection(
+    milvus_client: MilvusClient, collection_name: str, dim: int, drop_old: bool = True
+):
+    if milvus_client.has_collection(collection_name) and drop_old:
+        milvus_client.drop_collection(collection_name)
+    if milvus_client.has_collection(collection_name):
+        raise RuntimeError(
+            f"Collection {collection_name} already exists. Set drop_old=True to create a new one instead."
         )
-    else:
-        client = get_milvus_client(uri="example.db")
-    return client
+    return milvus_client.create_collection(
+        collection_name=collection_name,
+        dimension=dim,
+        metric_type="COSINE",
+        consistency_level="Strong",
+        auto_id=True,
+    )
+
+
+def get_search_results(milvus_client, collection_name, query_vector, output_fields):
+    search_res = milvus_client.search(
+        collection_name=collection_name,
+        data=[query_vector],
+        search_params={"metric_type": "COSINE", "params": {}},
+        output_fields=output_fields,
+    )
+    return search_res
