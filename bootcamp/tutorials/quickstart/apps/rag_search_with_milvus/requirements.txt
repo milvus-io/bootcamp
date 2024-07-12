@@ -1,8 +1,5 @@
-os
-urllib3
 openai
-pymilvus
+pymilvus>=2.4.4
 tqdm
 streamlit
 certifi
-ssl 

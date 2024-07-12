@@ -1,9 +1,0 @@
-streamlit
-streamlit-cropper
-torch
-timm
-Pillow
-scikit-learn
-pymilvus
-certifi
-requests

@@ -1,9 +1,20 @@
+import os
 import streamlit as st
 
 st.set_page_config(layout="wide")
 
-from milvus_utils import get_collection_name, get_milvus_client, get_search_results
-from ask_llm import get_azure_client, get_llm_answer
+from encoder import emb_text
+from milvus_utils import get_milvus_client, get_search_results
+from ask_llm import get_llm_answer, OpenAI
+
+from dotenv import load_dotenv
+
+
+load_dotenv()
+COLLECTION_NAME = os.getenv("COLLECTION_NAME")
+MILVUS_ENDPOINT = os.getenv("MILVUS_ENDPOINT")
+MILVUS_TOKEN = os.getenv("MILVUS_TOKEN")
+
 
 # Logo
 st.image("./pics/Milvus_Logo_Official.png", width=200)
@@ -33,8 +44,9 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-client = get_azure_client()
-milvus_client = get_milvus_client(uri="./milvus_demo.db")
+# Get clients
+milvus_client = get_milvus_client(uri=MILVUS_ENDPOINT, token=MILVUS_TOKEN)
+openai_client = OpenAI()
 
 retrieved_lines_with_distances = []
 
@@ -44,10 +56,10 @@ with st.form("my_form"):
     submitted = st.form_submit_button("Submit")
 
     if question and submitted:
+        # Generate query embedding
+        query_vector = emb_text(openai_client, question)
         # Search in Milvus collection
-        search_res = get_search_results(
-            milvus_client, client, get_collection_name(), question
-        )
+        search_res = get_search_results(milvus_client, COLLECTION_NAME, query_vector, ["text"])
 
         # Retrieve lines and distances
         retrieved_lines_with_distances = [
@@ -61,7 +73,7 @@ with st.form("my_form"):
                 for line_with_distance in retrieved_lines_with_distances
             ]
         )
-        answer = get_llm_answer(client, context, question)
+        answer = get_llm_answer(openai_client, context, question)
 
         # Display the question and response in a chatbot-style box
         st.chat_message("user").write(question)

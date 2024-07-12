@@ -1,21 +1,7 @@
-import os
-from openai import AzureOpenAI
-
-# fetch the API key and endpoint
-api_key = os.getenv("AZURE_OPENAI_API_KEY")
-azure_endpoint = os.getenv("AZURE_OPENAI_ENDPOINT")
-deployment = os.getenv("AZURE_DEPLOYMENT")
+from openai import OpenAI
 
 
-# Initialize the AzureOpenAI client
-def get_azure_client():
-    client = AzureOpenAI(
-        api_key=api_key, api_version="2024-02-01", azure_endpoint=azure_endpoint
-    )
-    return client
-
-
-def get_llm_answer(client, context, question):
+def get_llm_answer(client: OpenAI, context: str, question: str, model: str = "gpt-4o"):
     # Define system and user prompts
     SYSTEM_PROMPT = """
     Human: You are an AI assistant. You are able to find answers to the questions from the contextual passage snippets provided.
@@ -31,7 +17,7 @@ def get_llm_answer(client, context, question):
     """
 
     response = client.chat.completions.create(
-        model=deployment,
+        model=model,
         messages=[
             {"role": "system", "content": SYSTEM_PROMPT},
             {"role": "user", "content": USER_PROMPT},
