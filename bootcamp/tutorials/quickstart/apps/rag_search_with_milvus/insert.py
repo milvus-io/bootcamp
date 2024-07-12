@@ -24,7 +24,7 @@ def get_text(data_dir):
         A dictionary of text chunks with the filepath as key value.
     """
     text_dict = {}
-    for file_path in glob(os.path.join(data_dir, '**/*.md'), recursive=True):
+    for file_path in glob(os.path.join(data_dir, "**/*.md"), recursive=True):
         if file_path.endswith(".md"):
             with open(file_path, "r") as file:
                 file_text = file.read().strip()
@@ -58,7 +58,9 @@ for i, filepath in enumerate(tqdm(text_dict, desc="Creating embeddings")):
             data.append({"vector": vector, "text": line})
             count += 1
         except Exception as e:
-            print(f"Skipping file: {filepath} due to an error occurs during the embedding process:\n{e}" )
+            print(
+                f"Skipping file: {filepath} due to an error occurs during the embedding process:\n{e}"
+            )
             continue
 print("Total number of loaded documents:", count)
 

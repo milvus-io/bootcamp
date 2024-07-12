@@ -59,7 +59,9 @@ with st.form("my_form"):
         # Generate query embedding
         query_vector = emb_text(openai_client, question)
         # Search in Milvus collection
-        search_res = get_search_results(milvus_client, COLLECTION_NAME, query_vector, ["text"])
+        search_res = get_search_results(
+            milvus_client, COLLECTION_NAME, query_vector, ["text"]
+        )
 
         # Retrieve lines and distances
         retrieved_lines_with_distances = [

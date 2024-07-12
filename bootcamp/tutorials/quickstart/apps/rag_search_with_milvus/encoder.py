@@ -1,6 +1,7 @@
 import streamlit as st
 from openai import OpenAI
 
+
 # Cache for embeddings
 @st.cache_resource
 def get_embedding_cache():
