@@ -1,5 +1,11 @@
 # Build RAG with Milvus
 
+<div style="text-align: center;">
+  <figure>
+    <img src="./pics/rag_demo.png" alt="Description of Image" width="700"/>
+  </figure>
+</div>
+
 This demo shows you how to build a RAG (Retrieval-Augmented Generation) pipeline with Milvus.<br>
 
 The RAG system combines a retrieval system with a generative model to generate new text based on a given prompt. The system first retrieves relevant documents from a corpus using Milvus, and then uses a generative model to generate new text based on the retrieved documents.
