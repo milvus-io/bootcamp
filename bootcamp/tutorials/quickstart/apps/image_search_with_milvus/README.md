@@ -1,5 +1,11 @@
 # Image Similarity Search with Milvus 🖼️
 
+<div style="text-align: center;">
+  <figure>
+    <img src="./pics/image_search_demo.png" alt="Description of Image" width="700"/>
+  </figure>
+</div>
+
 This demo implements an image similarity search application using Streamlit, Milvus, and a pre-trained ResNet model. Users can upload an image, crop it to focus on the region of interest, and search for similar images from a pre-built database.
 
 ## Features
