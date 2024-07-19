@@ -1,0 +1,5 @@
+pandas
+numpy
+pymilvus
+pymilvus[model]
+streamlit
