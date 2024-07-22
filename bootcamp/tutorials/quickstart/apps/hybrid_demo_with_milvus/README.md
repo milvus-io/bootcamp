@@ -2,7 +2,7 @@
 
 <div style="text-align: center;">
   <figure>
-    <img src="./pics/demo.jpg" alt="Description of Image" width="700"/>
+    <img src="./pics/demo.png" alt="Description of Image" width="700"/>
   </figure>
 </div>
 
@@ -47,6 +47,13 @@ wget http://qim.fs.quoracdn.net/quora_duplicate_questions.tsv
 
 Credit for the dataset: [First Quora Dataset Release: Question Pairs](https://quoradata.quora.com/First-Quora-Dataset-Release-Question-Pairs)
 
+**4. Load Data and Create Embeddings**
+
+Create a collection and load data from the downloaded dataset to get the knowledge ready by running the [index.py](/index.py).
+
+```bash
+$ python index.py
+```
 
 ### Start Service
 

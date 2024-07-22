@@ -30,7 +30,7 @@ def search_from_source(source, query):
     return [f"{source} Result {i+1} for {query}" for i in range(5)]
 
 
-st.title("Milvus Hybird Search Demo")
+st.title("Milvus Hybrid Search Demo")
 
 query = st.text_input("Enter your search query:")
 search_button = st.button("Search")
