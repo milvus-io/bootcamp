@@ -6,7 +6,7 @@
   </figure>
 </div>
 
-This multi-modal RAG (Retrieval-Augmented Generation) demo showcases the integration of Milvus with [MagicLens](https://open-vision-language.github.io/MagicLens/) and [GPT-4o](https://openai.com/index/hello-gpt-4o/) for advanced image searching based on user instructions. Users can upload an image and edit instructions, which are processed by MagicLens's composed retrieval model to search for candidate images. GPT-4o then acts as a reranker, selecting the most suitable image and providing the rationale behind the choice. This powerful combination enables a seamless and intuitive image search experience.
+This multi-modal RAG (Retrieval-Augmented Generation) demo showcases the integration of Milvus with [MagicLens](https://open-vision-language.github.io/MagicLens/) and [GPT-4o mini](https://openai.com/index/gpt-4o-mini-advancing-cost-efficient-intelligence/) for advanced image searching based on user instructions. Users can upload an image and edit instructions, which are processed by MagicLens's composed retrieval model to search for candidate images. GPT-4o mini then acts as a reranker, selecting the most suitable image and providing the rationale behind the choice. This powerful combination enables a seamless and intuitive image search experience.
 
 ## Quick Deploy
 
@@ -36,7 +36,7 @@ $ cd bootcamp/bootcamp/tutorials/quickstart/app/multimodal_rag_with_milvus
 
   ```bash
   # Fill out and keep the following if using OpenAI service
-  API_KEY=**************
+  OPENAI_API_KEY=**************
 
   # Fill out and keep the following if using Azure OpenAI service
   AZURE_OPENAI_API_KEY=**************
@@ -120,7 +120,7 @@ There have some options you can set in `cfg.py`.
   </figure>
 </div>
 
-**Step 3:** Click on the 'Ask GPT' button to get the best item chosen by GPT-4o after reranking along with detailed explanation.
+**Step 3:** Click on the 'Ask GPT' button to get the best item chosen by GPT-4o mini after reranking along with detailed explanation.
 
 <div style="text-align: center;">
   <figure>
