@@ -97,6 +97,21 @@ Run the Streamlit application:
 $ streamlit run app.py
 ```
 
+**Optional: Deploy with Docker Image**
+
+You are also able to deploy the application using the docker image:
+
+```bash
+$ docker run -itd \
+  -p 5005:5005 \
+  -e ZILLIZ_URI="YOUR_MILVUS_OR_ZILLIZ_ENDPOINT" \
+  -e ZILLIZ_TOKEN="YOUR_MILVUS_OR_ZILLIZ_TOKEN" \
+  -e OPENAI_API_KEY="YOUR_OPENAI_API_KEY" \
+  towhee/milvus_rag:v0.1
+```
+
+With the service up, you should be able to visit it in browser with http://localhost:5005
+
 ### Example Usage
 
 **Step 1:** Enter your question in the chat and click on 'submit' button.
