@@ -1,8 +1,8 @@
 # Build RAG on Arm Architecture
 
-[Arm](https://www.arm.com/) CPUs are extensively utilized across a wide range of applications, including traditional machine learning (ML) and artificial intelligence (AI) scenarios. 
+[Arm](https://www.arm.com/) CPUs are extensively utilized across a wide range of applications, including traditional machine learning (ML) and artificial intelligence (AI) use cases. 
 
-In this tutorial, you learn how to build a Retrieval-Augmented Generation (RAG) application on Arm-based infrastructures. For vector storage, we utilize [Zilliz](https://zilliz.com/cloud), the fully-managed Milvus cloud service built on Arm architecture. For LLM, we use the `Llama-3.1-8B` model on the AWS Arm-based server CPU using `llama.cpp`. 
+In this tutorial, you learn how to build a Retrieval-Augmented Generation (RAG) application on Arm-based infrastructures. For vector storage, we utilize [Zilliz Cloud](https://zilliz.com/cloud), the fully-managed Milvus vector database. Zilliz Cloud is available on major cloud such as AWS, GCP and Azure. In this demo we use Zilliz Cloud deployed on AWS with Arm machines. For LLM, we use the `Llama-3.1-8B` model on the AWS Arm-based server CPU using `llama.cpp`. 
 
 
 ## Prerequisite
@@ -37,7 +37,7 @@ pip install --upgrade pymilvus openai requests langchain-huggingface huggingface
 
 
 ### Create the Collection
-We use [Zilliz Cloud](https://zilliz.com/cloud), which is a high-performance fully managed Milvus service deployed on Arm architecture, to store and retrieve the vector data.
+We use [Zilliz Cloud](https://zilliz.com/cloud) deployed on AWS with Arm-based machines to store and retrieve the vector data.
 
 We set the `uri` and `token` as the [Public Endpoint and Api key](https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details) in Zilliz Cloud.
 ```python
