@@ -73,7 +73,7 @@
 
 ## :mega: About Milvus Bootcamp
 
-**Embed everything**, thanks to AI, we can use neural networks to extract feature vectors from unstructured data, such as image, audio and vide etc. Then analyse the unstructured data by calculating the feature vectors, for example calculating the Euclidean or Cosine distance of the vectors to get the similarity.
+**Embed everything**, thanks to AI, we can use neural networks to extract feature vectors from unstructured data, such as image, audio and video etc. Then analyse the unstructured data by calculating the feature vectors, for example calculating the Euclidean or Cosine distance of the vectors to get the similarity.
 
 [Milvus Bootcamp](https://github.com/milvus-io/bootcamp) is designed to expose users to both the simplicity and depth of the [**Milvus**](https://milvus.io/) vector database. Discover how to run **benchmark tests** as well as build similarity search applications like **chatbots**, **recommender systems**, **reverse image search**, **molecular search**, **video search**, **audio search**, and more.
 
