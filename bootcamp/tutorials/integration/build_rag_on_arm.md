@@ -37,7 +37,9 @@ pip install --upgrade pymilvus openai requests langchain-huggingface huggingface
 
 
 ### Create the Collection
-We use [Zilliz Cloud](https://zilliz.com/cloud) deployed on AWS with Arm-based machines to store and retrieve the vector data.
+We use [Zilliz Cloud](https://zilliz.com/cloud) deployed on AWS with Arm-based machines to store and retrieve the vector data. To quick start, simply [register an account](https://docs.zilliz.com/docs/register-with-zilliz-cloud) on Zilliz Cloud for free.
+
+> In addition to Zilliz Cloud, self-hosted Milvus is also a (more complicated to set up) option. We can also deploy [Milvus Standalone](https://milvus.io/docs/install_standalone-docker-compose.md) and [Kubernetes](https://milvus.io/docs/install_cluster-milvusoperator.md) on ARM-based machines. For more information about Milvus installation, please refer to the [installation documentation](https://milvus.io/docs/install-overview.md).
 
 We set the `uri` and `token` as the [Public Endpoint and Api key](https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details) in Zilliz Cloud.
 ```python
@@ -66,6 +68,7 @@ milvus_client.create_collection(
     consistency_level="Strong",  # Strong consistency level
 )
 ```
+We use inner product distance as the default metric type. For more information about distance types, you can refer to [Similarity Metrics page](https://milvus.io/docs/metric.md?tab=floating)
 
 ### Prepare the data
 
@@ -94,6 +97,13 @@ for file_path in glob("milvus_docs/en/faq/*.md", recursive=True):
 ```
 
 ### Insert data
+We prepare a simple but efficient embedding model [all-MiniLM-L6-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2) that can convert text into embedding vectors.
+```python
+from langchain_huggingface import HuggingFaceEmbeddings
+
+embedding_model = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+```
+
 Iterate through the text lines, create embeddings, and then insert the data into Milvus.
 
 Here is a new field `text`, which is a non-defined field in the collection schema. It will be automatically added to the reserved JSON dynamic field, which can be treated as a normal field at a high level.
@@ -205,6 +215,8 @@ Start the server from the command line, and it listens on port 8080:
 
 You can also adjust the parameters of the launched LLM to adapt it to your server hardware to obtain ideal performance. For more parameter information, see the `llama-server --help` command.
 
+If you struggle to perform this step, you can refer to the [official documents](https://learn.arm.com/learning-paths/servers-and-cloud-computing/llama-cpu/llama-chatbot/) for more information.
+
 You have started the LLM service on your Arm-based CPU. Next, we directly interact with the service using the OpenAI SDK.
 
 
@@ -215,17 +227,11 @@ You have started the LLM service on your Arm-based CPU. Next, we directly intera
 We initialize the LLM client and prepare the embedding model.
 
 For the LLM, we use the OpenAI SDK to request the Llama service launched before. We don't need to use any API key because it is actually our local llama.cpp service.
-For the embedding model, we use a simple model [all-MiniLM-L6-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2).
 
 ```python
 from openai import OpenAI
 
 llm_client = OpenAI(base_url="http://localhost:8080/v1", api_key="no-key")
-
-
-from langchain_huggingface import HuggingFaceEmbeddings
-
-embedding_model = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 ```
 Generate a test embedding and print its dimension and first few elements.
 
