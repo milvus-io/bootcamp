@@ -63,7 +63,7 @@ If we don't specify any field information, Milvus will automatically create a de
 ```python
 milvus_client.create_collection(
     collection_name=collection_name,
-    dimension=embedding_dim,
+    dimension=384,
     metric_type="IP",  # Inner product distance
     consistency_level="Strong",  # Strong consistency level
 )
