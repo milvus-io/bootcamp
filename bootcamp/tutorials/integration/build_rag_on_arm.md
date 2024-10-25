@@ -37,11 +37,11 @@ pip install --upgrade pymilvus openai requests langchain-huggingface huggingface
 
 
 ### Create the Collection
-We use [Zilliz Cloud](https://zilliz.com/cloud) deployed on AWS with Arm-based machines to store and retrieve the vector data. To quick start, simply [register an account](https://docs.zilliz.com/docs/register-with-zilliz-cloud) on Zilliz Cloud for free.
+We use [Zilliz Cloud](https://zilliz.com/cloud?utm_source=partner&utm_medium=referral&utm_campaign=2024-10-24_web_arm-dev-hub-data-loading_arm) deployed on AWS with Arm-based machines to store and retrieve the vector data. To quick start, simply [register an account](https://docs.zilliz.com/docs/register-with-zilliz-cloud?utm_source=partner&utm_medium=referral&utm_campaign=2024-10-24_web_arm-dev-hub-data-loading_arm) on Zilliz Cloud for free.
 
-> In addition to Zilliz Cloud, self-hosted Milvus is also a (more complicated to set up) option. We can also deploy [Milvus Standalone](https://milvus.io/docs/install_standalone-docker-compose.md) and [Kubernetes](https://milvus.io/docs/install_cluster-milvusoperator.md) on ARM-based machines. For more information about Milvus installation, please refer to the [installation documentation](https://milvus.io/docs/install-overview.md).
+> In addition to Zilliz Cloud, self-hosted Milvus is also a (more complicated to set up) option. We can also deploy [Milvus Standalone](https://milvus.io/docs/install_standalone-docker-compose.md?utm_source=partner&utm_medium=referral&utm_campaign=2024-10-24_web_arm-dev-hub-data-loading_arm) and [Kubernetes](https://milvus.io/docs/install_cluster-milvusoperator.md?utm_source=partner&utm_medium=referral&utm_campaign=2024-10-24_web_arm-dev-hub-data-loading_arm) on ARM-based machines. For more information about Milvus installation, please refer to the [installation documentation](https://milvus.io/docs/install-overview.md?utm_source=partner&utm_medium=referral&utm_campaign=2024-10-24_web_arm-dev-hub-data-loading_arm).
 
-We set the `uri` and `token` as the [Public Endpoint and Api key](https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details) in Zilliz Cloud.
+We set the `uri` and `token` as the [Public Endpoint and Api key](https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details?utm_source=partner&utm_medium=referral&utm_campaign=2024-10-24_web_arm-dev-hub-data-loading_arm) in Zilliz Cloud.
 ```python
 from pymilvus import MilvusClient
 
@@ -68,7 +68,7 @@ milvus_client.create_collection(
     consistency_level="Strong",  # Strong consistency level
 )
 ```
-We use inner product distance as the default metric type. For more information about distance types, you can refer to [Similarity Metrics page](https://milvus.io/docs/metric.md?tab=floating)
+We use inner product distance as the default metric type. For more information about distance types, you can refer to [Similarity Metrics page](https://milvus.io/docs/metric.md?tab=floating?utm_source=partner&utm_medium=referral&utm_campaign=2024-10-24_web_arm-dev-hub-data-loading_arm)
 
 ### Prepare the data
 
