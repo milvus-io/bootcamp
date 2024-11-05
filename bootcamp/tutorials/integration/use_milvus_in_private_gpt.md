@@ -33,12 +33,15 @@ choco install make
 
 
 ## Install Available Modules
-PrivateGPT allows customization of the setup. We need to specify some modules settings. In this tutorial, we will use the following modules:
+PrivateGPT allows customization of the setup for some modules e.g. LLM, Embeddings, Vector Stores, UI.
+
+In this tutorial, we will use the following modules:
 - **LLM**: Ollama
 - **Embeddings**: Ollama
 - **Vector Stores**: Milvus
 - **UI**: Gradio
 
+Run the following command to use poetry to install the required module dependencies:
 ```shell
 poetry install --extras "llms-ollama embeddings-ollama vector-stores-milvus ui"
 ```
@@ -54,7 +57,7 @@ Now, start Ollama service (it will start a local inference server, serving both 
 ollama serve
 ```
 
-Install the models to be used, the default `settings-ollama.yaml` is configured to user llama3.1 8b LLM (~4GB) and nomic-embed-text Embeddings (~275MB)
+Install the models to be used, the default `settings-ollama.yaml` is configured to user `llama3.1` 8b LLM (~4GB) and `nomic-embed-text` Embeddings (~275MB)
 
 By default, PrivateGPT will automatically pull models as needed. This behavior can be changed by modifying the `ollama.autopull_models` property.
 
@@ -84,7 +87,7 @@ The available configuration options are:
 
 | Field Option | Description                          |
 |----------------------|--------------------------------------|
-| uri                  | Default is set to “local_data/private_gpt/milvus/milvus_local.db” as a local file; you can also set up a more performant Milvus server on docker or k8s e.g.http://localhost:19530, as your uri; To use Zilliz Cloud, adjust the uri and token to Endpoint and Api key in Zilliz Cloud.   |
+| uri                  | Default is set to “local_data/private_gpt/milvus/milvus_local.db” as a local file; you can also set up a more performant Milvus server on docker or k8s e.g.http://localhost:19530, as your uri; To use [Zilliz Cloud](https://zilliz.com/cloud), adjust the uri and token to [Public Endpoint and API key](https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details) in Zilliz Cloud.   |
 | token                | Pair with Milvus server on docker or k8s or zilliz cloud api key.|
 | collection_name      | The name of the collection, set to default “milvus_db”. |
 | overwrite            | Overwrite the data in collection if it existed, set to default as True. |
@@ -92,14 +95,15 @@ The available configuration options are:
 
  ## Start PrivateGPT
 
-Once all settings are done, you can run PrivateGPT with a gradio UI.
+Once all settings are done, you can run PrivateGPT with a Gradio UI.
 
 ```shell
 PGPT_PROFILES=ollama make run
 ```
-The UI will be available at`http://0.0.0.0:8001`.
+The UI will be available at `http://0.0.0.0:8001`.
 
 ![](../../../images/private_gpt_ui.png)
 
 You can play around with the UI and ask questions about your documents.
 
+For further details, please refer to the [PrivateGPT](https://docs.privategpt.dev/) official documentation.
