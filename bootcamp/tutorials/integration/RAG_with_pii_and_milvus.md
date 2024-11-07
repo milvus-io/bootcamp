@@ -4,8 +4,7 @@ PII (Personally Identifiable Information) is a type of sensitive data that can b
 
 [PII Masker](https://github.com/HydroXai/pii-masker-v1/tree/main), developed by [HydroX AI](https://www.hydrox.ai/), is an advanced open-source tool designed to protect your sensitive data by leveraging cutting-edge AI models. Whether you're handling customer data, performing data analysis, or ensuring compliance with privacy regulations, PII Masker provides a robust, scalable solution to keep your information secure.
 
-In this tutorial, we will show you how to build a RAG(Retrieval-Augmented Generation) pipeline with Milvus and PII Masker. 
-This effectively protects PII data.
+In this tutorial, we will show how to use PII Masker with Milvus to protect private data in RAG(Retrieval-Augmented Generation) applications. By combining the strengths of PII Masker's data masking capabilities with Milvus's efficient data retrieval, you can create secure, privacy-compliant pipelines for handling sensitive information with confidence. This approach ensures your applications are equipped to meet privacy standards and protect user data effectively.
 
 ## Preparation
 
