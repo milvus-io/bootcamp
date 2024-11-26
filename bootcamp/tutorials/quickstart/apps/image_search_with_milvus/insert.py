@@ -23,7 +23,7 @@ milvus_client = get_milvus_client(uri=MILVUS_ENDPOINT, token=MILVUS_TOKEN)
 
 # Create collection
 create_collection(
-    milvus_client=milvus_client, collection_name=COLLECTION_NAME, dim=MODEL_DIM
+    milvus_client=milvus_client, collection_name=COLLECTION_NAME, dim=int(MODEL_DIM)
 )
 
 # Load images from directory and generate embeddings
