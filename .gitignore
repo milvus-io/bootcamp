@@ -110,3 +110,5 @@ venv.bak/
 
 */node_modules
 solutions/text_search_engine/quick_deploy/client/node_modules
+
+bootcamp/tutorials/quickstart/apps/image_search_with_milvus/reverse_image_search*

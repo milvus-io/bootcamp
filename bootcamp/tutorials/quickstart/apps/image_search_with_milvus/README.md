@@ -24,7 +24,7 @@ Follow these steps to quickly deploy the application locally:
 
 **1. Download Codes**
 ```bash
-$ git clone <https://github.com/milvus-io/bootcamp.git>
+$ git clone https://github.com/milvus-io/bootcamp.git
 $ cd bootcamp/bootcamp/tutorials/quickstart/app/image_search_with_milvus
 ```
 

@@ -93,6 +93,6 @@ if uploaded_file is not None:
         imgName = img_info["filename"]
         score = info["distance"]
         img = Image.open(imgName)
-        cols[i % 5].image(img, use_column_width=True)
+        cols[i % 5].image(img, use_container_width=True)
         if show_distance:
             cols[i % 5].write(f"Score: {score:.3f}")
