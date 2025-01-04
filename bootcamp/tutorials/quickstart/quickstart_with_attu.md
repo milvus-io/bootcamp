@@ -21,8 +21,16 @@ sudo xattr -rd com.apple.quarantine /Applications/attu.app
 ```
 
 ---
+## 3. Connect to Milvus
+Attu supports connecting to both **Milvus Standalone** and **Zilliz Cloud**, providing flexibility to work with local or cloud-hosted databases.
 
-## 3. Connect to Zilliz Cloud
+### 3.1 Connect to Milvus Standalone:
+To use Milvus Standalone locally:
+1. Start Milvus Standalone by following the [Milvus installation guide](https://milvus.io/docs/install_standalone-docker.md).
+2. Open Attu and enter the connection information:
+   - Milvus Address: http://localhost:19530
+3. Click Connect to access your database.
+### 3.2 Connect to Zilliz Cloud
 To use [Zilliz Cloud](https://zilliz.com/cloud), the fully managed cloud service for Milvus:
 
 1. Create a collection in Zilliz Cloud.
@@ -30,7 +38,7 @@ To use [Zilliz Cloud](https://zilliz.com/cloud), the fully managed cloud service
 3. Open Attu and enter these credentials in the connection interface:
    - Milvus Address: `<ZILLIZ_CLOUD_URI>`
    - Token: `<ZILLIZ_CLOUD_TOKEN>`
-4. Click **Connect** to access your database.
+4. Click  to access your database.
 
 <p align="center">
   <img src="../../../images/attu_login_page.png" alt="Attu Login Page" width="80%">
@@ -88,8 +96,11 @@ Connect to Zilliz Cloud and create a collection:
 ```python
 from pymilvus import MilvusClient
 
+# Connect to Milvus Standalone
+client = MilvusClient(uri="http://localhost:19530")
+
 # Connect to Zilliz Cloud
-client = MilvusClient(uri="ZILLIZ_CLOUD_URI", token="ZILLIZ_CLOUD_TOKEN")
+# client = MilvusClient(uri="MILVUS_URI", token="MILVUS_TOKEN")
 
 collection_name = "attu_tutorial"
 
