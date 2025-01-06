@@ -24,20 +24,14 @@ sudo xattr -rd com.apple.quarantine /Applications/attu.app
 ## 3. Connect to Milvus
 Attu supports connecting to both **Milvus Standalone** and **Zilliz Cloud**, providing flexibility to work with local or cloud-hosted databases.
 
-### 3.1 Connect to Milvus Standalone:
 To use Milvus Standalone locally:
 1. Start Milvus Standalone by following the [Milvus installation guide](https://milvus.io/docs/install_standalone-docker.md).
 2. Open Attu and enter the connection information:
-   - Milvus Address: http://localhost:19530
+   - Milvus Address: Your Milvus Standalone server URI, e.g. http://localhost:19530
+   - Other optional settings: You can set them depending on your Milvus configurations or just leave them as default.
 3. Click Connect to access your database.
-### 3.2 Connect to Zilliz Cloud
-To use [Zilliz Cloud](https://zilliz.com/cloud), the fully managed cloud service for Milvus:
+> You can also connect the fully managed Milvus on [Zilliz Cloud](https://zilliz.com/cloud). Simply set the `Milvus Address` and `token` to the [Public Endpoint and API key](https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details) of your Zilliz Cloud instance.
 
-1. Create a collection in Zilliz Cloud.
-2. Find the corresponding **Public Endpoint** and **Token** in the Zilliz Cloud console.
-3. Open Attu and enter these credentials in the connection interface:
-   - Milvus Address: `<ZILLIZ_CLOUD_URI>`
-   - Token: `<ZILLIZ_CLOUD_TOKEN>`
 4. Click  to access your database.
 
 <p align="center">
@@ -92,15 +86,12 @@ print(test_embedding[:10])
 ---
 
 ### 4.3 Create Collection
-Connect to Zilliz Cloud and create a collection:
+Connect to Milvus and create a collection:
 ```python
 from pymilvus import MilvusClient
 
 # Connect to Milvus Standalone
 client = MilvusClient(uri="http://localhost:19530")
-
-# Connect to Zilliz Cloud
-# client = MilvusClient(uri="MILVUS_URI", token="MILVUS_TOKEN")
 
 collection_name = "attu_tutorial"
 
