@@ -1,3 +1,5 @@
+# (Note) Zilliz Cloud Pipelines is about to deprecate. Please stay tuned for detailed instructions on alternative solutions.
+
 import requests
 
 
