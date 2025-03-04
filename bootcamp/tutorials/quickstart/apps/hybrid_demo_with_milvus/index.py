@@ -6,7 +6,7 @@ You can optionally use the BGE-M3 model to embed text into dense and sparse vect
 Additionally, you can rerank the search results using the BGE CrossEncoder model.
 
 Prerequisites:
-- Milvus 2.4.0 or higher (sparse vector search is available only in these versions). 
+- Milvus 2.4.0 or higher (sparse vector search is available only in these versions).
   Follow this guide to set up Milvus: https://milvus.io/docs/install_standalone-docker.md
 - pymilvus Python client library to connect to the Milvus server.
 - Optional `model` module in pymilvus for BGE-M3 model.
