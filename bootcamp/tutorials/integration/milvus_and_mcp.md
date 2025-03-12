@@ -3,7 +3,7 @@
 # **MCP + Milvus: Connecting AI with Vector Databases**
 
 ## **Introduction**
-The **Model Context Protocol (MCP)** is an open protocol that enables AI applications, such as Claude and Cursor, to interact with external data sources and tools seamlessly. Whether you're building custom AI applications, integrating AI workflows, or enhancing chat interfaces, MCP provides a **standardized way to connect large language models (LLMs) with relevant contextual data**.
+The **Model Context Protocol (MCP)** is an open protocol that enables AI applications, such as Claude and Cursor, to interact with external data sources and tools seamlessly. Whether you're building custom AI applications, integrating AI workflows, or enhancing chat interfaces, MCP provides a standardized way to connect large language models (LLMs) with relevant contextual data.
 
 
 This tutorial walks you through **setting up an MCP server for Milvus**, allowing AI applications to perform vector searches, manage collections, and retrieve data using **natural language commands**—without writing custom database queries.
@@ -167,14 +167,6 @@ To run the server directly:
 uv run server.py --milvus-uri http://localhost:19530
 ```
 
-## Development
-
-To run the server directly:
-
-```bash
-uv run server.py --milvus-uri http://localhost:19530
-```
-
 ## **Examples**
 
 ### **Using Claude Desktop**
@@ -280,6 +272,4 @@ If you continue to experience issues:
 3. File a new issue with detailed information about your problem
 
 ## **Conclusion**
-By following this tutorial, you now have an **MCP server** running, enabling **AI-powered vector search** in Milvus. Whether you're using **Claude Desktop** or **Cursor**, you can now query, manage, and search your Milvus database using **natural language commands**—without writing database code!
-
-🚀 **Now, let AI handle your vector searches effortlessly!** 🎯
+By following this tutorial, you now have an **MCP server** running, enabling AI-powered vector search in Milvus. Whether you're using **Claude Desktop** or **Cursor**, you can now query, manage, and search your Milvus database using **natural language commands**—without writing database code!
