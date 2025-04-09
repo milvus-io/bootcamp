@@ -1,269 +1,96 @@
-<!-- PROJECT LOGO -->
+<img src="images/logo.png" alt="milvus bootcamp banner">
 
-<p align="center">
-  <a href="https://github.com/milvus-io/bootcamp">
-    <img src="images/logo.png" alt="Logo">
-  </a>
-  <p align="center" style="padding-left: 100px; padding-right: 100px">
-      Working with all unstructured data, such as reverse image search, audio search, molecular search, video analysis, question and answer systems, NLP, etc.
-    <br />
-    <br />
-    <a href="https://github.com/milvus-io/bootcamp/issues">Report Bug or Request Feature</a>
-  </p>
-<!-- DEMO -->
+<div class="column" align="middle">
+  <a href="https://github.com/milvus-io/bootcamp/blob/master/LICENSE"><img height="20" src="https://img.shields.io/github/license/milvus-io/bootcamp" alt="license"/></a>
+  <a href="https://milvus.io"><img src="https://img.shields.io/badge/milvus-blue" alt="milvus"/></a>
+  <a href="https://cloud.zilliz.com/signup?utm_source=partner&utm_medium=referral&utm_campaign=2024-11-04_web_github-readme_global"><img src="https://img.shields.io/badge/zilliz-green" alt="fully-managed-milvus"/></a>
+  <a href="https://discord.gg/mKc3R95yE5"><img height="20" src="https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white" alt="discord"/></a>
+  <a href="https://x.com/milvusio"><img src="https://img.shields.io/twitter/follow/milvusio" alt="twitter"/></a>
+</div>
+
+## :bird: What You Can Do
+
+Begin an interactive journey to master [Milvus](https://milvus.io), enhancing your projects with seamless integration and optimization tools.
+
+- **Explore Tutorials:** Dive into notebooks that walk you through diverse Milvus use cases.
+
+- **Deploy Demos:** Build your own demo to see Milvus in action.
+
+- **Discover Use Cases:** Learn how Milvus integrates with other tools and frameworks through practical examples.
+
+- **Expand Your Skills:** Apply evaluation methods to test and optimize your applications.
+
+## :pencil: Examples
+
+You can explore a comprehensive [Tutorials Overview](https://milvus.io/docs/tutorials-overview.md) covering topics such as Retrieval-Augmented Generation (RAG), Semantic Search, Hybrid Search, Question Answering, Recommendation Systems, and various quick-start guides. These resources are designed to help you get started quickly and efficiently.
+
 <table>
   <tr>
     <td width="30%">
-      <a href="https://milvus.io/milvus-demos/">
-        <img src="https://zilliz-cms.s3.us-west-2.amazonaws.com/image_search_59a64e4f22.gif" />
+      <a href="https://milvus.io/milvus-demos">
+        <img src="https://assets.zilliz.com/image_search_59a64e4f22.gif" />
       </a>
     </td>
     <td width="30%">
-<a href="https://milvus.io/milvus-demos/">
-<img src="https://zilliz-cms.s3.us-west-2.amazonaws.com/qa_df5ee7bd83.gif" />
+<a href="https://milvus.io/milvus-demos">
+<img src="https://assets.zilliz.com/qa_df5ee7bd83.gif" />
 </a>
     </td>
     <td width="30%">
-<a href="https://milvus.io/milvus-demos/">
-<img src="https://zilliz-cms.s3.us-west-2.amazonaws.com/mole_search_76f8340572.gif" />
+<a href="https://milvus.io/milvus-demos">
+<img src="https://assets.zilliz.com/mole_search_76f8340572.gif" />
 </a>
     </td>
   </tr>
   <tr>
-    <th align="center">
-      <a href="https://milvus.io/milvus-demos/">Reverse Image search</a>
+    <th>
+      <a href="https://milvus.io/milvus-demos">Image Search</a>
     </th>
-    <th align="center">
-      <a href="https://milvus.io/milvus-demos/">Chatbots</a>
+    <th>
+      <a href="https://milvus.io/milvus-demos">RAG</a>
     </th>
-    <th align="center">
-      <a href="https://milvus.io/milvus-demos/">Chemical structure search</a>
+    <th>
+      <a href="https://milvus.io/milvus-demos">Drug Discovery</a>
     </th>
   </tr>
 </table>
 
-<!-- TABLE OF CONTENTS -->
-<details open="open">
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp">Bootcamp tutorials</a>
-    </li>
-    <ul>
-        <li><a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/Retrieval/">Retrieval</a></li>
-        <li><a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/RAG/">RAG</a></li>
-        <li><a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/OpenAIAssistants/">OpenAIAssistants</a></li>
-      </ul>
-    <li>
-      <a href="#pencil-applications">Applications</a>
-      <ul>
-        <li><a href="#icecream-run-locally">Run locally</a></li>
-        <li><a href="#clapper-live-demo">Live demo</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#mag-benchmark-tests">Benchmark Tests</a>
-    </li>
-    <li><a href="#pencil-contributing">Contributing</a></li>
-    <li><a href="#fire-community">Community</a></li>
-    </ol>
-</details>
 
-<!-- ABOUT MILVUS Bootcamp -->
+Here is a selection of demos and tutorials to show how to build various types of AI applications made with Milvus:
 
-## :mega: About Milvus Bootcamp
-
-**Embed everything**, thanks to AI, we can use neural networks to extract feature vectors from unstructured data, such as image, audio and video etc. Then analyse the unstructured data by calculating the feature vectors, for example calculating the Euclidean or Cosine distance of the vectors to get the similarity.
-
-[Milvus Bootcamp](https://github.com/milvus-io/bootcamp) is designed to expose users to both the simplicity and depth of the [**Milvus**](https://milvus.io/) vector database. Discover how to run **benchmark tests** as well as build similarity search applications like **chatbots**, **recommender systems**, **reverse image search**, **molecular search**, **video search**, **audio search**, and more.
-
-<!--ALL APPLICATIONS-->
-
-## :pencil: Applications
-
-### :icecream: Run locally
-
-Here are several applications for a wide range of scenarios. Each application contains a Jupyter Notebook or a Docker deployable solution, meaning anyone can run it on their local machine. In addition to this there are also some related technical articles and live streams.
-
-Look here for more application [**Examples**](https://github.com/towhee-io/examples).
-
-💡 Please refer to the [Bootcamp FAQ](applications/applications_faq.md) for troubleshooting.<br>
-💡 For Chinese links below, try using Google Translate.
-
-<table>
-   <tr>
-        <td width="40%"><b>Applications</b></td>
-     		<td><b>Have fun with it</b></td>
-        <td><b>Article</b></td>
-        <td><b>Video</b></td>
-   </tr>
-   <tr>
-     <td><b>Reverse Image Search using Images</b>
-        <p>Build a reverse image search system using Milvus paired with Towhee for feature extraction.</p>
-     </td>
-      <td>
-        <p>- <a href="https://github.com/towhee-io/examples/tree/main/image/reverse_image_search">Jupyter notebook</a></p>
-        <p>- <a href="applications/image/reverse_image_search">Quick deploy</a></p>
-     </td>
-      <td>
-        <p>- <a href="https://zhuanlan.zhihu.com/p/517360724">10 lines of code for reverse image search</a></p>
-        <p>- <a href="https://milvus.io/blog/building-a-search-by-image-shopping-experience-with-vova-and-milvus.md">Reverse Image Search Shopping Experience with VOVA and Milvus</a></p>
-     </td>
-     <td>
-        <p>- <a href="https://www.bilibili.com/video/BV1SN411o79n">VOVA video demo (in Chinese)</a></p>
-     </td>
-   </tr>
-   <tr>
-      <td>
-        <p><b>Reverse Image Search using Text</b></p>
-        <p>Using Milvus and Towhee. </p></td>
-      <td>- <a href="https://github.com/towhee-io/examples/tree/main/image/text_image_search">Jupyter notebook</a></td>
-      <td>
-        <p>- <a href="https://zhuanlan.zhihu.com/p/531951677">1. CLIP text-based image search）</a></p>
-        <p>- <a href="https://zhuanlan.zhihu.com/p/537123858">2. Implement the prototype in 5 minutes</a></p>
-      </td>
-      <td></td>
-   </tr>
-   <tr>
-      <td rowspan="2">
-        <p><b>RAG</b></p>
-        <p>Question answering chatbot using Milvus and Towhee for natural language processing (NLP).</p>
-     </td>
-      <td>
-        <p>-<a href="https://github.com/towhee-io/examples/tree/main/nlp/question_answering"> Jupyter notebook</a></p>
-        <p>-<a href="applications/nlp/question_answering_system"> Quick deploy</a></p>
-     </td>
-      <td>
-          <p>-<a href="https://mp.weixin.qq.com/s/BZp4CMv2yuVb0oEyuDKNkw">Quickly build a conversational chatbot</a></p>
-        <p>-<a href="https://medium.com/voice-tech-podcast/building-an-intelligent-qa-system-with-nlp-and-milvus-75b496702490">Building an Intelligent QA System with NLP and Milvus</a></p>
-     </td>
-     <td>
-        <p>-<a href="https://www.bilibili.com/video/BV1ki4y1t72o">video demo (in Chinese)</a></p>
-     </td>
-   </tr>
-   <tr>
-      <td>
-        <p>-<a href="https://github.com/PaddlePaddle/PaddleNLP/tree/develop/pipelines/examples/question-answering">PaddlePaddle (Chinese bot)</a></p>
-        <p>-<a href="https://github.com/PaddlePaddle/PaddleNLP/tree/develop/pipelines/examples/FAQ">PaddlePaddle FAQ (in Chinese)</a></p>
-     </td>
-      <td></td>
-      <td></td>
-   </tr>
-   <tr>
-      <td rowspan="2">
-        <p><b>Retrieval</b></p>
-        <p>Build a text search engine using Milvus and BERT model. </p>
-     </td>
-      <td>
-        <p>- <a href="https://github.com/towhee-io/examples/tree/main/nlp/text_search">Jupyter notebook</a></p>
-     </td>
-      <td>- <a href="https://mp.weixin.qq.com/s/OUrBSCqnLuh9btyK3SxWgQ">Using Milvus and BERT</a></td>
-      <td>- <a href="https://www.bilibili.com/video/BV1Xi4y1E7Tb">video demo (in Chinese)</a></td>
-   </tr>
-     <tr>
-      <td>
-        <p>- <a href="https://github.com/PaddlePaddle/PaddleNLP/tree/develop/applications/neural_search">PaddlePaddle Hybrid Search with neural cross-encoder (in Chinese)</a></p>
-     </td>
-      <td></td>
-      <td></td>
-   </tr>
-   <tr>
-      <td>
-        <p><b>Recommender System </b></p>
-        <p>Build an AI-powered movie recommender system using Milvus paired with PaddlePaddle’s deep learning framework. </p>
-     </td>
-      <td>
-        <p>- <a href="applications/nlp/recommender_system/recommender_system.ipynb">Jupyter notebook</a></p>
-      </td>
-      <td>- <a href="https://mp.weixin.qq.com/s/nAr45u-ruvhWQ8LcVxbhOg">Milvus and PaddlePaddle (in Chinese)</a></td>
-      <td></td>
-   </tr>
-   <tr>
-      <td><p><b>Video Search by Image</b></p>
-        <p>Build a video similarity search engine using Milvus and Towhee. </p>
-     </td>
-      <td>
-        <p>- <a href="https://github.com/towhee-io/examples/tree/main/video/reverse_video_search">Jupyter notebook</a></p>
-     </td>
-      <td>
-        <p>- <a href="https://mp.weixin.qq.com/s/DOfiGP5BG_9sD7zZair4ew">Milvus video search by image</a></p>
-  		<p>- <a href="https://milvus.io/blog/2021-10-10-milvus-helps-analyze-videos.md">Building a Video Analysis System with Milvus Vector Database</a></p>
-	  </td>
-	  <td></td>
-   </tr>
-   <tr>
-      <td>
-        <p><b>Video Deduplication</b></p>
-        <p>Build a video deduplication system to detect copied video sharing duplicate segments.</p>
-     </td>
-     <td>
-        <p>- <a href="https://github.com/towhee-io/examples/tree/main/video/video_copy_detection">Jupyter notebook</a></p>
-      </td>
-      <td></td>
-      <td></td>
-   </tr>
-   <tr>
-      <td>
-        <p><b>Video Search by Text</b></p>
-        <p>Search for matched or related videos given an input text.  Uses Milvus and Towhee. </p>
-     </td>
-      <td>- <a href="https://github.com/towhee-io/examples/tree/main/video/text_video_retrieval">Jupyter notebook</a></td>
-      <td>- <a href="https://zhuanlan.zhihu.com/p/584641533">Implement video search in 5 minutes no tags required</a></td>
-      <td></td>
-   </tr>
-   <tr>
-      <td>
-        <p><b>Audio Classification</b></p>
-        <p>Build an audio classification engine using Milvus & Towhee to classify audio.</p>
-     </td>
-      <td>
-        <p>- <a href="https://github.com/towhee-io/examples/tree/main/audio/audio_classification">Jupyter notebook</a></p>
-     </td>
-      <td></td>
-      <td></td>
-   </tr>
-   <tr>
-      <td>
-        <p><b>Audio Fingerprinting</b> </p>
-        <p>Build engines based on audio fingerprints using Milvus & Towhee, such as music detection system.</p>
-     </td>
-      <td>
-        <p>- <a href="https://github.com/towhee-io/examples/tree/main/audio/audio_fingerprint">Jupyter notebook</a></p>
-     </td>
-      <td></td>
-      <td></td>
-   </tr>
-   <tr>
-      <td>
-        <p><b>Molecular Similarity Search </b></p>
-        <p>Build a molecular similarity search system using Milvus paired with RDKit for cheminformatics. </p>
-     </td>
-      <td><p>- <a href="https://github.com/towhee-io/examples/tree/main/medical/molecular_search">Jupyter notebook</a></p>
-      </td>
-      <td>- <a href="https://mp.weixin.qq.com/s/ZIH_zYltT6aJNQYMhOSsAg">Milvus powers AI drug research (in Chinese)</a></td>
-      <td>- <a href="https://www.bilibili.com/video/BV1dD4y1D7zS">demo video (in Chinese)</a></td>
-   </tr>
-</table>
-
-### :clapper: Live Demo
-
-We have built [online demos](https://milvus.io/milvus-demos/) for reverse image search, chatbot and molecular search that everyone can have fun with.
-
-## :mag: Benchmark Tests
-
-The [VectorDBBench](https://github.com/zilliztech/VectorDBBench) is not just an offering of benchmark results for mainstream vector databases and cloud services, it's your go-to tool for the ultimate performance and cost-effectiveness comparison.
-
-## :pencil: Contributing
-
-Contributions to Milvus Bootcamp are welcome from everyone. See [Guidelines for Contributing](./contributing.md) for details. 
+| Tutorial | Use Case | Related Milvus Features |
+| ----------- | -------- | -------- |
+| [Build RAG with Milvus](https://milvus.io/docs/build-rag-with-milvus.md) |  RAG | vector search |
+| [Advanced RAG Optimizations](https://milvus.io/docs/how_to_enhance_your_rag.md) | RAG | vector search, full text search |
+| [Full Text Search with Milvus](https://milvus.io/docs/full_text_search_with_milvus.md) | Text Search | full text search |
+| [Hybrid Search with Milvus](https://milvus.io/docs/hybrid_search_with_milvus.md) | Hybrid Search | hybrid search, multi vector, dense embedding, sparse embedding |
+| [Image Search with Milvus](https://milvus.io/docs/image_similarity_search.md) | Semantic Search | vector search, dynamic field |
+| [Multimodal Search using Multi Vectors](https://milvus.io/docs/multimodal_rag_with_milvus.md) | Semantic Search | multi vector, hybrid search |
+| [Movie Recommendation with Milvus](https://milvus.io/docs/movie_recommendation_with_milvus.md) | Recommendation System | vector search |
+| [Graph RAG with Milvus](https://milvus.io/docs/graph_rag_with_milvus.md) | RAG | graph search |
+| [Use Milvus as a LangChain Vector Store](https://milvus.io/docs/basic_usage_langchain.md) | RAG | vector search |
+| [RAG with Milvus and LlamaIndex](https://milvus.io/docs/integrate_with_llamaindex.md) | RAG | vector search |
+| [Contextual Retrieval with Milvus](https://milvus.io/docs/contextual_retrieval_with_milvus.md) | Quickstart | vector search |
+| [Vector Visualization](https://milvus.io/docs/vector_visualization.md) | Quickstart | vector search |
+| [HDBSCAN Clustering with Milvus](https://milvus.io/docs/hdbscan_clustering_with_milvus.md) | Quickstart | vector search |
+| [Use ColPali for Multi-Modal Retrieval with Milvus](https://milvus.io/docs/use_ColPali_with_milvus.md) | Quickstart | vector search |
 
 
 ## :fire: Community
 
-- 🤖 Join the Milvus community on [Discord](https://discord.gg/8uyFbECzPX) to chat with the Milvus team and community.
+Join the Milvus community on [Discord](https://discord.gg/8uyFbECzPX) to share your suggestions, advice, and questions with our engineering team.
 
-- #️⃣ Enterprise Zilliz customers, join us on Slack (ask your Zilliz contact for an invitation) for technical support.
+To learn latest news about Milvus, follow us on social media:
 
-- 😺 For all other open source Milvus technical support, to discuss, and report bugs, join us on [GitHub Discussions](https://github.com/milvus-io/milvus/discussions).
+- [X](https://twitter.com/milvusio)
+- [LinkedIn](https://www.linkedin.com/company/the-milvus-project)
+- [Youtube](https://www.youtube.com/channel/UCMCo_F7pKjMHBlfyxwOPw-g)
+- [Medium](https://medium.com/@milvusio)
 
-- 🧧 We also have a [Chinese WeChat group](images/wechat_group.png).
+You can also check out our [FAQ page](https://milvus.io/docs/performance_faq.md) to discover solutions or answers to your issues or questions, and subscribe to Milvus mailing lists:
+
+- [Technical Steering Committee](https://lists.lfai.foundation/g/milvus-tsc)
+- [Technical Discussions](https://lists.lfai.foundation/g/milvus-technical-discuss)
+- [Announcement](https://lists.lfai.foundation/g/milvus-announce)
+
+Let's accelerate your Milvus journey together!
