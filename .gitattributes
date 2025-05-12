@@ -19,9 +19,9 @@
 *.pyd    binary
 
 # To ignore it use below
-*.ipynb linguist-documentation
-*.tsx linguist-documentation
-*.jsx linguist-documentation
+# *.ipynb linguist-documentation
+# *.tsx linguist-documentation
+# *.jsx linguist-documentation
 
 # Note: .db, .p, and .pkl files are associated
 # with the python modules ``pickle``, ``dbm.*``,
