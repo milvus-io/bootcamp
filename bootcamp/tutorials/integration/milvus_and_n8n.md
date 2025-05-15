@@ -1,13 +1,15 @@
 
 # Getting Started with Milvus and n8n  
 
-## Introduction to n8n
 
-[n8n](https://n8n.io/) is a powerful open-source workflow automation platform that allows you to connect various applications, services, and APIs together to create automated workflows without coding. With its node-based visual interface, n8n enables users to build complex automation processes by simply connecting nodes that represent different services or actions. n8n differentiates itself from other automation tools by being self-hostable, highly extensible, and offering both fair-code and enterprise licensing options.
+## Introduction to n8n and the Milvus Vector Store Node
 
-## Milvus Vector Store Node in n8n
 
-The Milvus Vector Store node in n8n enables seamless integration of Milvus vector database capabilities into the automation workflows. This integration allows leveraging Milvus's high-performance vector search capabilities within n8n's workflow ecosystem, making it ideal for building AI-powered applications, retrieval-augmented generation (RAG) systems, and semantic search solutions. 
+[n8n](https://n8n.io/) is a powerful open-source workflow automation platform that allows you to connect various applications, services, and APIs together to create automated workflows without coding. With its node-based visual interface, n8n enables users to build complex automation processes by simply connecting nodes that represent different services or actions. It is self-hostable, highly extensible, and supports both fair-code and enterprise licensing.
+
+The **Milvus Vector Store** node in n8n integrates [Milvus](https://milvus.io/) into your automation workflows. This allows you to perform semantic search, power retrieval-augmented generation (RAG) systems, and build intelligent AI applications—all within the n8n ecosystem.
+
+> This documentation is primarily based on the official [n8n Milvus Vector Store documentation](https://docs.n8n.io/integrations/builtin/cluster-nodes/root-nodes/n8n-nodes-langchain.vectorstoremilvus/). If you find any outdated or inconsistent content, please prioritize the official documentation and feel free to raise an issue for us.
 
 
 
@@ -21,8 +23,6 @@ With the Milvus Vector Store node in n8n, you can:
 - Retrieve documents to provide them to a retriever connected to a [chain](https://docs.n8n.io/glossary/#ai-chain)
 - Connect directly to an [agent](https://docs.n8n.io/glossary/#ai-agent) as a [tool](https://docs.n8n.io/glossary/#ai-tool)
 - Filter documents based on metadata
-
-
 
 
 ## Node Usage Patterns
@@ -59,13 +59,15 @@ Another pattern uses the [Vector Store Question Answer Tool](/integrations/built
 The connections flow would look like this: AI agent (tools connector) -> Vector Store Question Answer Tool (Vector Store connector) -> Milvus Vector store.
 
 
+
 ## Node Configuration and Operation Modes
 
-The Milvus Vector Store node supports multiple operation modes, each tailored for different workflow use cases. Understanding the configuration and available options for each mode is essential to use the node effectively.
 
+The Milvus Vector Store node supports multiple operation modes, each tailored for different workflow use cases. Understanding these modes helps design more effective workflows.
 
-> This section is primarily based on the official documentation of the [n8n Milvus Vector Store node](https://docs.n8n.io/integrations/builtin/cluster-nodes/root-nodes/n8n-nodes-langchain.vectorstoremilvus/). If you find any part outdated or inconsistent, please prioritize the official documentation and feel free to raise an issue in this tutorial’s repository.
+We will provide a high-level overview of the available operation modes and options below. For a complete list of input parameters and configuration options for each mode, please refer to the [official documentation](https://docs.n8n.io/integrations/builtin/cluster-nodes/root-nodes/n8n-nodes-langchain.vectorstoremilvus/).
 
+---
 
 ### Operation Modes Overview
 
@@ -76,56 +78,14 @@ The Milvus Vector Store node supports four distinct modes:
 * **Retrieve Documents (As Vector Store for Chain/Tool)**: Use the node as a retriever within a chain-based system.
 * **Retrieve Documents (As Tool for AI Agent)**: Use the node as a tool resource for an AI agent during question-answering tasks.
 
-### Get Many Mode
-
-* **Purpose**: Fetches the most similar documents to a given prompt using vector search.
-* **Inputs**:
-
-  * `Milvus Collection`: Specify the collection to query.
-  * `Prompt`: The query string to embed and search with.
-  * `Limit`: Maximum number of results to retrieve.
-  * `Metadata Filter` (optional): Apply filters based on document metadata (uses AND logic across fields).
-
-* **Use Case**: Ideal for semantic retrieval to pass relevant context to downstream nodes or agents.
-
-### Insert Documents Mode
-
-* **Purpose**: Adds new documents to a specified Milvus collection.
-* **Inputs**:
-
-  * `Milvus Collection`: The target collection to store the documents.
-  * `Clear Collection`: Whether to clear existing data before insertion.
-* **Use Case**: Used during data ingestion or re-indexing workflows.
-
-### Retrieve Documents (As Vector Store for Chain/Tool)
-
-* **Purpose**: Integrate document retrieval into a vector-based QA or chain node system.
-* **Inputs**:
-
-  * `Milvus Collection`: Select or specify the collection to retrieve from.
-* **Use Case**: Commonly used in RAG pipelines or when working with the Vector Store Retriever node.
-
-### Retrieve Documents (As Tool for AI Agent)
-
-* **Purpose**: Enables the vector store to serve as an agent tool for contextual document retrieval.
-* **Inputs**:
-
-  * `Name`: Tool name exposed to the agent.
-  * `Description`: Describe the tool’s capability (important for accurate invocation).
-  * `Milvus Collection`: Specify the target collection.
-  * `Limit`: How many results to return.
-* **Use Case**: Useful when the LLM dynamically chooses tools based on task description.
-
 ### Additional Node Options
 
 * **Metadata Filter** (Get Many mode only): Filter results based on custom metadata keys. Multiple fields apply an AND condition.
 * **Clear Collection** (Insert Documents mode only): Remove existing documents from the collection prior to inserting new ones.
 
----
 
 ### Related Resources
 
 * [n8n Milvus Integration Documentation](https://docs.n8n.io/integrations/builtin/cluster-nodes/root-nodes/n8n-nodes-langchain.vectorstoremilvus/)
-
 * [LangChain Milvus Documentation](https://js.langchain.com/docs/integrations/vectorstores/milvus/)
 * [n8n Advanced AI Documentation](https://docs.n8n.io/advanced-ai/)
