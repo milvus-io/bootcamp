@@ -60,7 +60,7 @@ The connections flow would look like this: AI agent (tools connector) -> Vector 
 
 
 
-## Node Configuration and Operation Modes
+## Node Operation Modes
 
 
 The Milvus Vector Store node supports multiple operation modes, each tailored for different workflow use cases. Understanding these modes helps design more effective workflows.
