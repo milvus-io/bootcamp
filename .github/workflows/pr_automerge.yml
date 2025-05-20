@@ -1,0 +1,45 @@
+# .github/workflows/auto-merge-on-lgtm.yml
+name: Auto-Merge on LGTM Label
+
+on:
+  pull_request:
+    types: [labeled]
+
+jobs:
+  auto-merge:
+    if: github.event.label.name == 'lgtm'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Check if label was added by a maintainer
+        uses: actions/github-script@v7
+        id: check_maintainer
+        with:
+          script: |
+            const labeler = context.payload.sender.login;
+            const repo = context.repo.repo;
+            const owner = context.repo.owner;
+
+            const { data: collaborators } = await github.rest.repos.listCollaborators({
+              owner,
+              repo,
+              affiliation: 'direct',
+            });
+
+            const isMaintainer = collaborators.some(
+              (user) => user.login === labeler && ['admin', 'maintain', 'write'].includes(user.permissions.push ? 'write' : 'read')
+            );
+
+            if (!isMaintainer) {
+              core.setFailed(`Label was added by ${labeler}, who is not a maintainer.`);
+            }
+
+      - name: Enable auto-merge
+        if: success()
+        uses: peter-evans/enable-pull-request-automerge@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          merge-method: rebase  # "squash", "merge", or "rebase"

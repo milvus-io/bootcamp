@@ -1,11 +1,47 @@
-<!-- If there are many commits but not yours, please re-Fork Bootcamp repo and submit a PR again.-->
+## 📌 Description
 
-- [ ] A reference to a related issue in your repository.
-  
-  Each PR is related to an issue, and you need to list that issue.
+<!-- Describe what this PR does and why it's needed -->
+Closes #[issue_number]
 
-- [ ] A description of the changes proposed in the pull request.
+## ✅ Changes
 
-  A brief introduction to this PR.
+- [ ] Feature added: ...
+- [ ] Bug fixed: ...
+- [ ] Refactor: ...
+- [ ] Other (explain): ...
 
-- [ ] Add delight to the experience when all tasks are complete :tada:
+## 🔬 How to Test
+
+<!-- Provide steps to manually test or describe how it was tested -->
+1. ...
+2. ...
+
+## 📝 Checklist
+
+- [ ] Code compiles and runs
+- [ ] Linting passes (Check jupyter notebooks: `pip install "black[jupyter]"` > `black {file_or_directory}`)
+- [ ] PR includes relevant docs or comments
+- [ ] Rebased on the latest `main` (no merge commits or conflicts)
+
+## 🧼 Commit Hygiene
+
+✔️ Follow best practices:
+- Small, focused commits with clear messages
+- Group related changes together
+- Avoid large monolithic commits
+- Use meaningful commit messages (e.g., `fix:`, `feat:`, `refactor:`)
+
+## 👀 Reviewer Notes
+
+<!-- Any context or areas of focus for reviewers -->
+- Please focus on ...
+- Watch out for ...
+
+---
+
+### 📎 Related Issues, PRs, or Docs
+
+- Related PR: #
+- Issue: #
+
+---
