@@ -1,0 +1,37 @@
+name: Close Stale Issues and PRs
+
+on:
+  schedule:
+    - cron: '0 1 * * *'  # Runs daily at 01:00 UTC
+
+permissions:
+  issues: write
+  pull-requests: write
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/stale@v9
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+          # ⏱ Time before marking as stale
+          days-before-stale: 90
+          days-before-close: 5
+
+          # 🏷 Stale label (added automatically)
+          stale-issue-label: 'stale'
+          stale-pr-label: 'stale'
+
+          # 💬 Messages for stale warnings
+          stale-issue-message: 'This issue has been automatically marked as stale due to 90 days of inactivity. It will be closed in 5 days if no further activity occurs.'
+          close-issue-message: 'Closing this issue due to prolonged inactivity. Please reopen if needed or add new context.'
+
+          stale-pr-message: 'This pull request has been automatically marked as stale due to 90 days of inactivity. It will be closed in 5 days if no further activity occurs.'
+          close-pr-message: 'Closing this pull request due to prolonged inactivity. Please reopen if needed or add updates.'
+
+          # ⚙ Behavior
+          remove-stale-when-updated: true
+          exempt-issue-labels: 'keep-open,security'
+          exempt-pr-labels: 'do-not-close'
