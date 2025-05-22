@@ -10,5 +10,5 @@ jobs:
       - uses: psf/black@stable
         with:
           options: "--check --diff --verbose"
-          src: "./bootcamp/tutorials"
+          src: "./tutorials"
           jupyter: true
