@@ -1,6 +1,14 @@
 name: Workflow for Black
 
-on: [push, pull_request]
+on:
+  push:
+    paths:
+      - "integration/**"
+      - "tutorials/**"
+  pull_request:
+    paths:
+      - "integration/**"
+      - "tutorials/**"
 
 jobs:
   Black-Check:
