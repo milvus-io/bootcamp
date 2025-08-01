@@ -104,7 +104,8 @@ client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type="IP",  # Inner product distance
-    consistency_level="Strong"
+    # Strong consistency waits for all loads to complete, adding latency with large datasets
+    # consistency_level="Strong"
 )
 ```
 
