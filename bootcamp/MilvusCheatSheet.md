@@ -21,7 +21,7 @@
   - [Community & Help](#community--help)
 
 <div>
-<img src="../images/milvus_zilliz_overview.png" width="90%"/>
+<img src="../pics/milvus_zilliz_overview.png" width="90%"/>
 </div>
 
 ## Milvus Introduction
@@ -53,7 +53,7 @@
 Milvus uses a shared-storage [architecture](https://milvus.io/docs/architecture_overview.md) with 4  layers which are mutually independent for scaling or disaster recovery: 1)access layer, 2)coordinator service, 3)worker nodes, and 4)storage. Milvus also includes data sharding, logs-as-data persistence, and streaming data ingestion.  
 
 <div>
-<img src="../images/oss_zilliz_architecture.png" width="90%"/>
+<img src="../pics/oss_zilliz_architecture.png" width="90%"/>
 </div>
 
 ### Documentation & Releases

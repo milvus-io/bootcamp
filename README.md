@@ -1,4 +1,4 @@
-<img src="images/logo.png" alt="milvus bootcamp banner">
+<img src="pics/logo.png" alt="milvus bootcamp banner">
 
 <div class="column" align="middle">
   <a href="https://github.com/milvus-io/bootcamp/blob/master/LICENSE"><img height="20" src="https://img.shields.io/github/license/milvus-io/bootcamp" alt="license"/></a>

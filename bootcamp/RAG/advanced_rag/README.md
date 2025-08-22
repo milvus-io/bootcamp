@@ -9,7 +9,7 @@ It's important to note that we'll only provide a high-level exploration of these
 
 The diagram below shows the most straightforward vanilla RAG pipeline. First, document chunks are loaded into a vector store (such as [Milvus](https://milvus.io/docs) or [Zilliz cloud](https://zilliz.com/cloud)). Then, the vector store retrieves the Top-K most relevant chunks related to the query. These relevant chunks are then injected into the [LLM](https://zilliz.com/glossary/large-language-models-\(llms\))'s context prompt, and finally, the LLM returns the final answer. 
 
-![](../../../images/advanced_rag/vanilla_rag.png)
+![](../../../pics/advanced_rag/vanilla_rag.png)
 
 ## Various Types of RAG Enhancement Techniques 
 
@@ -31,7 +31,7 @@ Let's explore four effective methods to enhance your query experience: Hypotheti
 
 Creating hypothetical questions involves utilizing an LLM to generate multiple questions that users might ask about the content within each document chunk. Before the user's actual query reaches the LLM, the vector store retrieves the most relevant hypothetical questions related to the real query, along with their corresponding document chunks, and forwards them to the LLM.
 
-![](../../../images/advanced_rag/hypothetical_question.png)
+![](../../../pics/advanced_rag/hypothetical_question.png)
 
 This methodology bypasses the cross-domain asymmetry problem in the vector search process by directly engaging in query-to-query searches, alleviating the burden on vector searches. However, it introduces additional overhead and uncertainty in generating hypothetical questions.
 
@@ -39,7 +39,7 @@ This methodology bypasses the cross-domain asymmetry problem in the vector searc
 
 HyDE stands for Hypothetical Document Embeddings. It leverages an LLM to craft a "***Hypothetical Document***" or a ***fake*** answer in response to a user query devoid of contextual information. This fake answer is then converted into vector embeddings and employed to query the most relevant document chunks within a vector database. Subsequently, the vector database retrieves the Top-K most relevant document chunks and transmits them to the LLM and the original user query to generate the final answer.
 
-![](../../../images/advanced_rag/hyde.png)
+![](../../../pics/advanced_rag/hyde.png)
 
 This method is similar to the hypothetical question technique in addressing cross-domain asymmetry in vector searches. However, it also has drawbacks, such as the added computational costs and uncertainties of generating fake answers.
 
@@ -56,7 +56,7 @@ Imagine a user asking: "***What are the differences in features between Milvus a
 
 Once we have these sub-queries, we send them all to the vector database after converting them into vector embeddings. The vector database then finds the Top-K document chunks most relevant to each sub-query. Finally, the LLM uses this information to generate a better answer.
 
-![](../../../images/advanced_rag/sub_query.png)
+![](../../../pics/advanced_rag/sub_query.png)
 
 By breaking down the user query into sub-queries, we make it easier for our system to find relevant information and provide accurate answers, even to complex questions.
 
@@ -72,7 +72,7 @@ To simplify this user query, we can use an LLM to generate a more straightforwar
 
 ***Stepback Question: "What is the dataset size limit that Milvus can handle?"***
 
-![](../../../images/advanced_rag/stepback.png)
+![](../../../pics/advanced_rag/stepback.png)
 
 This method can help us get better and more accurate answers to complex queries. It breaks down the original question into a simpler form, making it easier for our system to find relevant information and provide accurate responses.
 
@@ -84,7 +84,7 @@ Enhancing indexing is another strategy for enhancing the performance of your RAG
 
 When building an index, we can employ two granularity levels: child chunks and their corresponding parent chunks. Initially, we search for child chunks at a finer level of detail. Then, we apply a merging strategy: if a specific number, ***n***, of child chunks from the first ***k*** child chunks belong to the same parent chunk, we provide this parent chunk to the LLM as contextual information. 
 
-![](../../../images/advanced_rag/merge_chunks.png)
+![](../../../pics/advanced_rag/merge_chunks.png)
 
 This methodology has been implemented in [LlamaIndex](https://docs.llamaindex.ai/en/stable/examples/retrievers/recursive_retriever_nodes.html).
 
@@ -92,7 +92,7 @@ This methodology has been implemented in [LlamaIndex](https://docs.llamaindex.ai
 
 When creating indices for documents, we can establish a two-level index: one for document summaries and another for document chunks. The vector search process comprises two stages: initially, we filter relevant documents based on the summary, and subsequently, we retrieve corresponding document chunks exclusively within these relevant documents.
 
-![](../../../images/advanced_rag/hierarchical_index.png)
+![](../../../pics/advanced_rag/hierarchical_index.png)
 
 This approach proves beneficial in situations involving extensive data volumes or instances where data is hierarchical, such as content retrieval within a library collection.
 
@@ -102,7 +102,7 @@ The Hybrid Retrieval and Reranking technique integrates one or more supplementar
 
 Common supplementary retrieval algorithms include lexical frequency-based methods like [BM25](https://milvus.io/docs/embed-with-bm25.md) or big models utilizing sparse embeddings like [Splade](https://zilliz.com/learn/discover-splade-revolutionize-sparse-data-processing). Re-ranking algorithms include RRF or more sophisticated models such as [Cross-Encoder](https://www.sbert.net/examples/applications/cross-encoder/README.html), which resembles BERT-like architectures.
 
-![](../../../images/advanced_rag/hybrid_and_rerank.png)
+![](../../../pics/advanced_rag/hybrid_and_rerank.png)
 
 This approach leverages diverse retrieval methods to improve retrieval quality and address potential gaps in vector recall.
 
@@ -114,7 +114,7 @@ Refinement of the retriever component within the RAG system can also improve RAG
 
 In a basic RAG system, the document chunk given to the LLM is a larger window encompassing the retrieved embedding chunk. This ensures that the information provided to the LLM includes a broader range of contextual details, minimizing information loss. The Sentence Window Retrieval technique decouples the document chunk used for embedding retrieval from the chunk provided to the LLM. 
 
-![](../../../images/advanced_rag/sentence_window.png)
+![](../../../pics/advanced_rag/sentence_window.png)
 
 However, expanding the window size may introduce additional interfering information. We can adjust the size of the window expansion based on the specific business needs.
 
@@ -122,7 +122,7 @@ However, expanding the window size may introduce additional interfering informat
 
 To ensure more precise answers, we can refine the retrieved documents by filtering metadata like time and category before passing them to the LLM. For instance, if financial reports spanning multiple years are retrieved, filtering based on the desired year will refine the information to meet specific requirements. This method proves effective in situations with extensive data and detailed metadata, such as content retrieval in library collections.
 
-![](../../../images/advanced_rag/metadata_filtering.png)
+![](../../../pics/advanced_rag/metadata_filtering.png)
 
 ## Generator Enhancement
 
@@ -132,7 +132,7 @@ Let’s explore more RAG optimizing techniques by improving the generator within
 
 The noise information within retrieved document chunks can significantly impact the accuracy of RAG's final answer. The limited prompt window in LLMs also presents a hurdle for more accurate answers. To address this challenge, we can compress irrelevant details, emphasize key paragraphs, and reduce the overall context length of retrieved document chunks. 
 
-![](../../../images/advanced_rag/compress_prompt.png)
+![](../../../pics/advanced_rag/compress_prompt.png)
 
 This approach is similar to the earlier discussed hybrid retrieval and reranking method, wherein a reranker is utilized to sift out irrelevant document chunks.
 
@@ -142,7 +142,7 @@ In the paper "[Lost in the middle](https://arxiv.org/abs/2307.03172)," researche
 
 Based on this observation, we can adjust the order of retrieved chunks to improve the answer quality: when retrieving multiple knowledge chunks, chunks with relatively low confidence are placed in the middle, and chunks with relatively high confidence are positioned at both ends. 
 
-![](../../../images/advanced_rag/adjust_order.png)
+![](../../../pics/advanced_rag/adjust_order.png)
 
 ## RAG Pipeline Enhancement
 
@@ -156,7 +156,7 @@ Some initially retrieved Top-K document chunks are ambiguous and may not answer 
 
 We can conduct the reflection using efficient reflection methods such as Natural Language Inference(NLI) models or additional tools like internet searches for verification. 
 
-![](../../../images/advanced_rag/self_reflection.png)
+![](../../../pics/advanced_rag/self_reflection.png)
 
 This concept of self-reflection has been explored in several papers or projects, including [Self-RAG](https://arxiv.org/pdf/2310.11511.pdf), [Corrective RAG](https://arxiv.org/pdf/2401.15884.pdf), [LangGraph](https://github.com/langchain-ai/langgraph/blob/main/examples/reflexion/reflexion.ipynb), etc. 
 
@@ -164,8 +164,8 @@ This concept of self-reflection has been explored in several papers or projects,
 
 Sometimes, we don’t have to use a RAG system to answer simple questions as it might result in more misunderstanding and inference from misleading information. In such cases, we can use an agent as a router at the querying stage. This agent assesses whether the query needs to go through the RAG pipeline. If it does, the subsequent RAG pipeline is initiated; otherwise, the LLM directly addresses the query. 
 
-![](../../../images/advanced_rag/query_routing.png)
-![](../../../images/advanced_rag/query_routing_with_sub_query.png)
+![](../../../pics/advanced_rag/query_routing.png)
+![](../../../pics/advanced_rag/query_routing_with_sub_query.png)
 
 The agent could take various forms, including an LLM, a small classification model, or even a set of rules. 
 
