@@ -9,7 +9,6 @@ from ask_llm import get_llm_answer, OpenAI
 
 from dotenv import load_dotenv
 
-
 load_dotenv()
 COLLECTION_NAME = os.getenv("COLLECTION_NAME")
 MILVUS_ENDPOINT = os.getenv("MILVUS_ENDPOINT")
