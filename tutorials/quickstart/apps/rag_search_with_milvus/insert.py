@@ -10,7 +10,6 @@ from milvus_utils import get_milvus_client, create_collection
 
 from dotenv import load_dotenv
 
-
 load_dotenv()
 COLLECTION_NAME = os.getenv("COLLECTION_NAME")
 MILVUS_ENDPOINT = os.getenv("MILVUS_ENDPOINT")
