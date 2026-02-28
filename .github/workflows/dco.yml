@@ -1,0 +1,18 @@
+name: DCO Check
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  check-dco:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: DCO Signoff Verification
+        uses: actions/dco@v3
+        with:
+          commit-msg: 'Signed-off-by:' # default check string
+          fail-on-error: true         # fail workflow if missing
