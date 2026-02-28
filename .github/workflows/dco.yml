@@ -1,19 +1,10 @@
 name: DCO Check
-
-on:
-  pull_request:
-    types: [opened, synchronize, reopened]
-
-permissions:
-  contents: read
+on: [pull_request]
 
 jobs:
-  dco-check:
+  dco:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - uses: christophebedard/dco-check@v0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: DCO check
+        uses: sigstore/dco-action@v2
