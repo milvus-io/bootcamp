@@ -74,7 +74,6 @@ Here is a selection of demos and tutorials to show how to build various types of
 | [Contextual Retrieval with Milvus](https://milvus.io/docs/contextual_retrieval_with_milvus.md) | Quickstart | vector search |
 | [Vector Visualization](https://milvus.io/docs/vector_visualization.md) | Quickstart | vector search |
 | [HDBSCAN Clustering with Milvus](https://milvus.io/docs/hdbscan_clustering_with_milvus.md) | Quickstart | vector search |
-| [Use ColPali for Multi-Modal Retrieval with Milvus](https://milvus.io/docs/use_ColPali_with_milvus.md) | Quickstart | vector search |
 
 
 ## :fire: Community
