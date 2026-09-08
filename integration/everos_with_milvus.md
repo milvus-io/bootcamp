@@ -2,7 +2,7 @@
 
 [EverOS](https://github.com/EverMind-AI/EverOS) is a Markdown-first memory system for AI agents. It extracts durable memories from conversations, keeps Markdown as the source of truth, and builds a searchable derived index.
 
-In this tutorial, we will build a project assistant that remembers release decisions across separate conversations. We will add two conversations about the Project Atlas launch and eight unrelated conversations about other projects. EverOS will use an LLM to extract the memories, while [Milvus](https://milvus.io/) stores the BM25 and vector indexes used for hybrid search.
+In this tutorial, we will build a project assistant that remembers release decisions across separate conversations. We will add conversations about the Project Atlas launch alongside unrelated conversations about other projects. EverOS will use an LLM to extract the memories, while [Milvus](https://milvus.io/) stores the BM25 and vector indexes used for hybrid search.
 
 ```text
 Conversations
@@ -23,10 +23,10 @@ You need:
 
 - Python 3.12 or later
 - [`uv`](https://docs.astral.sh/uv/)
-- A running Milvus Server
+- A running [Milvus Server](https://milvus.io/docs/install-overview.md)
 - An [OpenAI API key](https://platform.openai.com/api-keys)
 
-This tutorial connects to Milvus Server at `http://localhost:19530`. EverOS also supports Zilliz Cloud through the same URI and token settings. Its Milvus backend expects a remote endpoint and does not accept a Milvus Lite file path.
+This tutorial connects to Milvus Server at `http://localhost:19530`. EverOS also supports [Zilliz Cloud](https://zilliz.com/cloud) through the same URI and token settings. Its Milvus backend expects a remote endpoint and does not accept a Milvus Lite file path.
 
 ## Install EverOS
 
@@ -588,4 +588,8 @@ The exact number of atomic facts may vary with the LLM output. The ten episode r
 
 ## Use another Milvus deployment
 
-To use another Milvus Server endpoint or Zilliz Cloud, update `EVEROS_MILVUS__URI`. Set `EVEROS_MILVUS__TOKEN` when the endpoint requires authentication. The ingestion and search code remains unchanged.
+To use another Milvus Server endpoint or [Zilliz Cloud](https://zilliz.com/cloud), update `EVEROS_MILVUS__URI`. Set `EVEROS_MILVUS__TOKEN` when the endpoint requires authentication. The ingestion and search code remains unchanged.
+
+## Conclusion
+
+By combining EverOS with Milvus, you can turn conversations into durable memories and retrieve them through keyword and semantic signals. You can adapt the same pattern to give assistants and other agentic applications long-term memory for your own users, projects, and workflows.
