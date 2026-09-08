@@ -26,7 +26,7 @@ You need:
 - A running Milvus Server
 - An [OpenAI API key](https://platform.openai.com/api-keys)
 
-This tutorial connects to Milvus Server at `http://localhost:19530`. EverOS also supports Zilliz Cloud through the same URI and token settings; the selected database must allow EverOS to create seven collections. Its Milvus backend expects a remote endpoint and does not accept a Milvus Lite file path.
+This tutorial connects to Milvus Server at `http://localhost:19530`. EverOS also supports Zilliz Cloud through the same URI and token settings. Its Milvus backend expects a remote endpoint and does not accept a Milvus Lite file path.
 
 ## Install EverOS
 
@@ -63,7 +63,7 @@ export EVEROS_INDEX__BACKEND="milvus"
 export EVEROS_MILVUS__URI="$MILVUS_URI"
 export EVEROS_MILVUS__COLLECTION_PREFIX="everos_bootcamp"
 
-export EVEROS_LLM__MODEL="gpt-4.1-mini"
+export EVEROS_LLM__MODEL="gpt-5.4-mini"
 export EVEROS_LLM__API_KEY="$OPENAI_API_KEY"
 export EVEROS_LLM__BASE_URL="https://api.openai.com/v1"
 
@@ -75,7 +75,7 @@ export EVEROS_EMBEDDING__DIMENSIONS="1024"
 export EVEROS_MEMORIZE__MODE="chat"
 ```
 
-EverOS uses OpenAI for both memory extraction and embeddings. The embedding dimension is set to `1024` to match the Milvus schemas managed by EverOS.
+EverOS uses OpenAI for both memory extraction and embeddings. `text-embedding-3-small` returns `1536` dimensions by default, but EverOS forwards the configured `dimensions` value to OpenAI. This tutorial requests `1024` dimensions to match the Milvus schemas managed by EverOS.
 
 The `chat` memory mode keeps this example focused on user memories. EverOS manages the Milvus collections and their schemas, so you do not need to create them yourself.
 
