@@ -24,13 +24,14 @@ Clone the repository and open `bootcamp/RAG/search_with_jev`. The examples are t
 
 ```bash
 uv sync --python 3.12
-export TYPESAFE_API_KEY=your_key
+export GEMINI_API_KEY=your_gemini_key
+export TYPESAFE_API_KEY=your_typesafe_key
 uv run jupyter lab
 ```
 
-Alternatively, use the Colab badge in an individual notebook and uncomment its dependency installation cell. Obtain a TypeSafe API key from [TypeSafe](https://console.typesafe.ai/). The examples pin `jev-1.13.0`; set `JEV_MODEL` if your account needs another supported version. Calls use credits and send the displayed sample data to TypeSafe.
+Alternatively, use the Colab badge in an individual notebook and uncomment its dependency installation cell. Obtain a Gemini API key from [Google AI Studio](https://aistudio.google.com/apikey) and a TypeSafe API key from [TypeSafe](https://console.typesafe.ai/). The examples pin `jev-1.13.0`; set `JEV_MODEL` if your account needs another supported version. Gemini receives sample documents and queries for embedding; TypeSafe receives the evidence and judgment questions. Both services require API access and may consume credits.
 
-The small TF-IDF encoder avoids a GPU, an embedding-model download and a second API key. Replace it with your preferred dense embedding model for real semantic retrieval. Metadata constraints and authorization remain in application code; Jev evaluates the semantic conditions after those boundaries are applied.
+The notebooks use `gemini-embedding-2` with 768-dimensional vectors for semantic retrieval. Documents and queries follow Google's retrieval input formats and use the same model and dimension. Each document is embedded separately to avoid aggregating multiple documents into a single vector. Milvus retrieves candidates by cosine similarity, then Jev evaluates their text. Metadata constraints and authorization remain in application code; Jev evaluates the semantic conditions after those boundaries are applied.
 
 Edit the `.ipynb` files directly in JupyterLab; each tutorial has a single Notebook source. Example outputs vary by model version. An HTTP or response-validation error stops execution; production applications should define an explicit fallback.
 
@@ -50,5 +51,6 @@ The linked studies have different tasks, datasets and comparison methods. Their 
 ## References
 
 - [TypeSafe primitives and independent batched questions](https://docs.typesafe.ai/primitives)
+- [Gemini Embedding 2 and retrieval input formats](https://ai.google.dev/gemini-api/docs/embeddings)
 - [Milvus Lite](https://milvus.io/docs/milvus_lite.md)
 - [Zilliz Cloud](https://zilliz.com/cloud)
