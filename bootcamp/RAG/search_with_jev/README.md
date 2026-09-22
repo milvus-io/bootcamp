@@ -40,10 +40,10 @@ These projects provide larger examples beyond the synthetic notebooks. Follow ea
 
 | Project | Search use case | Jev work |
 | --- | --- | --- |
-| [MemSearch](https://github.com/zilliztech/memsearch) | Persistent Markdown memory for coding agents | [Merged reranker and bilingual evaluation](https://github.com/zilliztech/memsearch/pull/758) |
-| [Vector Graph RAG](https://github.com/zilliztech/vector-graph-rag) | Vector and graph retrieval for multi-hop questions | [Merged relationship reranking and evaluation](https://github.com/zilliztech/vector-graph-rag/pull/48) |
-| [DeepSearcher](https://github.com/zilliztech/deep-searcher) | Iterative search over private knowledge | [Search-stopping experiment on a personal fork](https://github.com/zc277584121/deep-searcher/tree/experiment/jev-search-stopping/evaluation/jev_stopping), not an upstream feature |
-| [GPTCache](https://github.com/zilliztech/GPTCache) | Reuse answers to compatible requests | [Jev implementation PR](https://github.com/zilliztech/GPTCache/pull/701) and [cache-compatibility benchmark PR](https://github.com/zilliztech/GPTCache/pull/702) |
+| [MemSearch](https://github.com/zilliztech/memsearch) | Persistent Markdown memory for coding agents | [Jev implementation](https://github.com/zilliztech/memsearch/blob/main/src/memsearch/jev_reranker.py) · [Evaluation](https://github.com/zilliztech/memsearch/blob/main/evaluation/reranking-evaluation.md) |
+| [Vector Graph RAG](https://github.com/zilliztech/vector-graph-rag) | Vector and graph retrieval for multi-hop questions | [Jev implementation](https://github.com/zilliztech/vector-graph-rag/blob/main/src/vector_graph_rag/llm/jev.py) · [Evaluation](https://github.com/zilliztech/vector-graph-rag/blob/main/evaluation/jev/README.md) |
+| [DeepSearcher](https://github.com/zilliztech/deep-searcher) | Iterative search over private knowledge | [Experiment runner](https://github.com/zilliztech/deep-searcher/blob/master/evaluation/jev_stopping/run_full100.py) · [Search-stopping evaluation](https://github.com/zilliztech/deep-searcher/blob/master/evaluation/jev_stopping/README.md) (standalone experiment) |
+| [GPTCache](https://github.com/zilliztech/GPTCache) | Reuse answers to compatible requests | [Jev implementation](https://github.com/zilliztech/GPTCache/blob/main/gptcache/similarity_evaluation/jev.py) · [Evaluation](https://github.com/zilliztech/GPTCache/blob/main/examples/benchmark/reuse_compatibility/README.md) |
 
 The linked studies have different tasks, datasets and comparison methods. Their results are not scores for these notebooks. Some studies use private data and publish aggregates rather than a fully reproducible public corpus. API estimates and simulated animations should not be interpreted as controlled end-to-end speed measurements.
 
