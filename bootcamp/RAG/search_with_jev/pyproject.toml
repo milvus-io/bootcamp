@@ -1,0 +1,14 @@
+[project]
+name = "milvus-search-with-jev"
+version = "0.1.0"
+requires-python = ">=3.10"
+dependencies = [
+  "pymilvus>=2.5,<2.6.10",
+  "milvus-lite>=2.5,<3",
+  "setuptools<71",
+  "scikit-learn>=1.4,<2",
+  "requests>=2.32,<3",
+  "jupyterlab>=4,<5",
+  "nbconvert>=7,<8",
+  "ipykernel>=6,<7",
+]

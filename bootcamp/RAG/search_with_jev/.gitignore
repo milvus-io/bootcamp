@@ -1,0 +1,5 @@
+.venv/
+.ipynb_checkpoints/
+*.db
+*.db.*
+*.bak
