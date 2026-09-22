@@ -32,7 +32,7 @@ Alternatively, use the Colab badge in an individual notebook and uncomment its d
 
 The small TF-IDF encoder avoids a GPU, an embedding-model download and a second API key. Replace it with your preferred dense embedding model for real semantic retrieval. Metadata constraints and authorization remain in application code; Jev evaluates the semantic conditions after those boundaries are applied.
 
-Markdown files are the editable source. Regenerate notebooks with `uv run python sync_notebooks.py`, then verify them with `uv run python sync_notebooks.py --check`. This wraps `jupyter-switch` while preserving Markdown line breaks and saved outputs for unchanged code. Example outputs vary by model version. An HTTP or response-validation error stops execution; production applications should define an explicit fallback.
+Edit the `.ipynb` files directly in JupyterLab; each tutorial has a single Notebook source. Example outputs vary by model version. An HTTP or response-validation error stops execution; production applications should define an explicit fallback.
 
 ## Related projects and experiments
 
