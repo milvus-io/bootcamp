@@ -41,12 +41,12 @@ Edit the `.env` file with the following Milvus configuration:
 ```
 VECTOR_STORE=milvus
 MILVUS_URI=http://host.docker.internal:19530
-MILVUS_TOKEN=
+MILVUS_TOKEN=root:Milvus
 ```
 
 > **Note**: 
 > - The `MILVUS_URI` uses `host.docker.internal:19530` which allows Docker containers to access Milvus running on the host machine through Docker's internal network.
-> - `MILVUS_TOKEN` can be left empty for local Milvus deployments.
+> - Dify's Docker Compose configuration enables Milvus authentication by default. Set `MILVUS_TOKEN` to `username:password`; `root:Milvus` uses the initial credentials. If you have changed the credentials, replace this value accordingly.
 
 ### Start the Docker Containers
 
